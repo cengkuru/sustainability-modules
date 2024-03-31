@@ -10,7 +10,9 @@ import {NgxEchartsModule} from "ngx-echarts";
   ],
   imports: [
     CommonModule,
-    NgxEchartsModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    }),
     VisualizationRoutingModule
   ]
 })

@@ -162,6 +162,10 @@
             </h3>
           </div>
 
+          <div class="chart-container">
+            <div echarts class="chart" [options]="costBenefitAnalysisOptions" ></div>
+          </div>
+
         </div>
 
         <!-- Other charts -->
@@ -171,6 +175,10 @@
               <i class="bi bi-bar-chart-fill text-green-500 mr-2"></i>
               Return on Investment Analysis
             </h3>
+          </div>
+
+          <div class="chart-container">
+            <div echarts class="chart" [options]="roiAnalysisOptions" ></div>
           </div>
 
         </div>
@@ -274,6 +282,10 @@
             </h3>
           </div>
 
+          <div class="chart-container">
+            <div echarts class="chart" [options]="carbonFootprintOptions" ></div>
+          </div>
+
         </div>
 
         <div class="bg-white rounded-lg shadow-md p-6 mb-8">
@@ -282,6 +294,10 @@
               <i class="bi bi-lightning-charge-fill text-green-500 mr-2"></i>
               Energy Efficiency
             </h3>
+          </div>
+
+          <div class="chart-container">
+            <div echarts class="chart" [options]="energyEfficiencyOptions" ></div>
           </div>
 
         </div>
@@ -296,6 +312,10 @@
             </h3>
           </div>
 
+          <div class="chart-container">
+            <div echarts class="chart" [options]="waterConsumptionOptions" ></div>
+          </div>
+
         </div>
 
         <div class="bg-white rounded-lg shadow-md p-6 mb-8">
@@ -304,6 +324,10 @@
               <i class="bi bi-tree-fill text-yellow-500 mr-2"></i>
               Biodiversity Impact
             </h3>
+          </div>
+
+          <div class="chart-container">
+            <div echarts class="chart" [options]="biodiversityImpactOptions" ></div>
           </div>
 
         </div>
@@ -402,6 +426,10 @@
             </h3>
           </div>
 
+          <div class="chart-container">
+            <div echarts class="chart" [options]="communityEngagementOptions" ></div>
+          </div>
+
         </div>
 
         <div class="bg-white rounded-lg shadow-md p-6 mb-8">
@@ -410,6 +438,10 @@
               <i class="bi bi-universal-access text-blue-500 mr-2"></i>
               Inclusive Design
             </h3>
+          </div>
+
+          <div class="chart-container">
+            <div echarts class="chart" [options]="inclusiveDesignOptions" ></div>
           </div>
 
         </div>
@@ -424,6 +456,10 @@
             </h3>
           </div>
 
+          <div class="chart-container">
+            <div echarts class="chart" [options]="laborStandardsComplianceOptions" ></div>
+          </div>
+
         </div>
 
         <div class="bg-white rounded-lg shadow-md p-6 mb-8">
@@ -432,6 +468,10 @@
               <i class="bi bi-tools text-purple-500 mr-2"></i>
               Jobs Created
             </h3>
+          </div>
+
+          <div class="chart-container">
+            <div echarts class="chart" [options]="jobsCreatedOptions" ></div>
           </div>
 
         </div>
@@ -530,6 +570,10 @@
             </h3>
           </div>
 
+          <div class="chart-container">
+            <div echarts class="chart" [options]="policyCoherenceOptions" ></div>
+          </div>
+
         </div>
 
         <div class="bg-white rounded-lg shadow-md p-6 mb-8">
@@ -538,6 +582,10 @@
               <i class="bi bi-shield-check text-yellow-500 mr-2"></i>
               Anti-Corruption Certifications
             </h3>
+          </div>
+
+          <div class="chart-container">
+            <div echarts class="chart" [options]="antiCorruptionCertificationsOptions" ></div>
           </div>
 
         </div>
@@ -552,6 +600,10 @@
             </h3>
           </div>
 
+          <div class="chart-container">
+            <div echarts class="chart" [options]="transparencyScoreOptions" ></div>
+          </div>
+
         </div>
 
         <div class="bg-white rounded-lg shadow-md p-6 mb-8">
@@ -560,6 +612,10 @@
               <i class="bi bi-eye-fill text-green-500 mr-2"></i>
               Independent Monitoring Reports
             </h3>
+          </div>
+
+          <div class="chart-container">
+            <div echarts class="chart" [options]="independentMonitoringReportsOptions" ></div>
           </div>
 
         </div>
@@ -659,29 +715,14 @@
               </h3>
             </div>
 
-          </div>
-
-          <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="text-lg font-bold text-gray-800 flex items-center">
-                <i class="bi bi-graph-up-arrow text-green-500 mr-2"></i>
-                Carbon Efficiency over Time
-              </h3>
-            </div>
+            <div echarts [options]="climateFinanceInvestmentChartOptions" class="chart"></div>
 
           </div>
+
         </div>
 
         <div>
-          <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="text-lg font-bold text-gray-800 flex items-center">
-                <i class="bi bi-globe text-blue-500 mr-2"></i>
-                Climate Finance Investment by Country
-              </h3>
-            </div>
 
-          </div>
 
           <div class="bg-white rounded-lg shadow-md p-6 mb-8">
             <div class="flex items-center justify-between mb-4">
@@ -689,6 +730,10 @@
                 <i class="bi bi-bar-chart-fill text-yellow-500 mr-2"></i>
                 Climate Finance Investment by Sector
               </h3>
+            </div>
+
+            <div class="chart-container">
+              <div echarts class="chart" [options]="climateFinanceInvestmentBySectorOptions" ></div>
             </div>
 
           </div>
