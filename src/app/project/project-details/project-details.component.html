@@ -1,0 +1,985 @@
+
+
+
+
+<div class="bg-gray-100">
+<div class="flex flex-col md:flex-row md:min-h-screen py-12 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+  <aside class="bg-white shadow-lg md:w-64">
+    <div class="px-4 py-6">
+      <h1 class="text-2xl font-semibold text-gray-800">Project Explorer</h1>
+    </div>
+    <nav class="space-y-2">
+      <a href="javascript:void(0);" (click)="setActiveSection('project-overview')" [class.active]="activeSection === 'project-overview'" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100">
+        <i class="bi-eye"></i>
+        <span class="ml-2">Project Overview</span>
+      </a>
+      <a href="javascript:void(0);" (click)="setActiveSection('project-details')" [class.active]="activeSection === 'project-details'" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100">
+        <i class="bi-info-circle"></i>
+        <span class="ml-2">Project Details</span>
+      </a>
+      <a href="javascript:void(0);" (click)="setActiveSection('project-identification')" [class.active]="activeSection === 'project-identification'" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100">
+        <i class="bi-search"></i>
+        <span class="ml-2">Project Identification</span>
+      </a>
+      <a href="javascript:void(0);" (click)="setActiveSection('project-preparation')" [class.active]="activeSection === 'project-preparation'" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100">
+        <i class="bi-clipboard-data"></i>
+        <span class="ml-2">Project Preparation</span>
+      </a>
+      <a href="javascript:void(0);" (click)="setActiveSection('project-implementation')" [class.active]="activeSection === 'project-implementation'" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100">
+        <i class="bi-hammer"></i>
+        <span class="ml-2">Implementation</span>
+      </a>
+      <a href="javascript:void(0);" (click)="setActiveSection('project-completion')" [class.active]="activeSection === 'project-completion'" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100">
+        <i class="bi-check-circle-fill"></i>
+        <span class="ml-2">Completion</span>
+      </a>
+      <a href="javascript:void(0);" (click)="setActiveSection('project-decommissioning')" [class.active]="activeSection === 'project-decommissioning'" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100">
+        <i class="bi-x-octagon-fill"></i>
+        <span class="ml-2">Decommissioning</span>
+      </a>
+
+      <div class="mt-4 py-2 bg-blue-50 rounded-lg">
+        <span class="flex px-4 py-3 text-blue-700 text-sm font-semibold">New Sustainability Sections</span>
+        <a href="javascript:void(0);" (click)="setActiveSection('economic-financial-sustainability')" [class.active]="activeSection === 'economic-financial-sustainability'" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100">
+          <i class="bi-cash-stack"></i>
+          <span class="ml-2 font-semibold">Economic and Financial Sustainability</span>
+        </a>
+        <a href="javascript:void(0);" (click)="setActiveSection('environmental-climate-resilience')" [class.active]="activeSection === 'environmental-climate-resilience'" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100">
+          <i class="bi-globe"></i>
+          <span class="ml-2 font-semibold">Environmental and Climate Resilience</span>
+        </a>
+        <a href="javascript:void(0);" (click)="setActiveSection('social-sustainability')" [class.active]="activeSection === 'social-sustainability'" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100">
+          <i class="bi-people-fill"></i>
+          <span class="ml-2 font-semibold">Social Sustainability</span>
+        </a>
+        <a href="javascript:void(0);" (click)="setActiveSection('institutional-sustainability')" [class.active]="activeSection === 'institutional-sustainability'" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100">
+          <i class="bi-bank2"></i>
+          <span class="ml-2 font-semibold">Institutional Sustainability</span>
+        </a>
+        <a href="javascript:void(0);" (click)="setActiveSection('climate-finance')" [class.active]="activeSection === 'climate-finance'" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100">
+          <i class="bi-cloud-lightning-rain-fill"></i>
+          <span class="ml-2 font-semibold">Climate Finance</span>
+        </a>
+      </div>
+      <a href="https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/1584349/3c6b4964-ffe4-4a57-9d73-d66639465b05/CoST%20IDS_OC4IDS%20review%20report_19%20Feb_clean.pdf" target="_blank" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100">
+        <i class="bi-file-pdf"></i>
+        <span class="ml-2">CoST IDS_OC4IDS review report</span>
+      </a>
+    </nav>
+
+  </aside>
+  <main class="flex-1 p-6">
+    <h1 class="text-3xl font-semibold text-gray-800 mb-6">Worked Example</h1>
+    <div *ngIf="activeSection === 'project-overview'" id="project-overview" class="bg-white shadow-lg rounded-lg p-8">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+        <i class="bi-eye text-indigo-400 mr-2"></i> Project Overview
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+            <i class="bi-list-ul text-green-400 mr-2"></i> Project Details
+          </h3>
+          <div class="bg-green-50 text-green-800 rounded-lg px-6 py-4 mb-6">
+            <p class="font-semibold text-lg mb-2">{{ project.name }}</p>
+            <p class="text-base">{{ project.description }}</p>
+          </div>
+          <div class="">
+            <div>
+              <p class="text-gray-600 mb-2 flex items-center">
+                <i class="bi-geo-alt-fill text-blue-400 mr-2"></i>
+                <span class="font-semibold">Country:</span> {{ project.country }}
+              </p>
+              <p class="text-gray-600 mb-2 flex items-center">
+                <i class="bi-lightbulb-fill text-yellow-400 mr-2"></i>
+                <span class="font-semibold">Sector:</span> {{ project.sector }}
+              </p>
+              <p class="text-gray-600 mb-2 flex items-center">
+                <i class="bi-hourglass-split text-red-400 mr-2"></i>
+                <span class="font-semibold">Status:</span>
+                <span class="bg-yellow-50 text-yellow-800 text-sm font-semibold px-2 py-1 rounded-full ml-2">{{ project.status }}</span>
+              </p>
+            </div>
+            <div>
+              <p class="text-gray-600 mb-2 flex items-center">
+                <i class="bi-currency-dollar text-green-400 mr-2"></i>
+                <span class="font-semibold">Budget:</span> ${{ project.budget | number }} ({{ project.currency }})
+              </p>
+              <p class="text-gray-600 mb-2 flex items-center">
+                <i class="bi-wind text-purple-400 mr-2"></i>
+                <span class="font-semibold">Sub-Sector:</span> {{ project.subSector }}
+              </p>
+              <p class="text-gray-600 mb-2 flex items-center">
+                <i class="bi-tree-fill text-green-400 mr-2"></i>
+                <span class="font-semibold">Purpose:</span> {{ project.purpose }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+            <i class="bi-pin-map-fill text-blue-400 mr-2"></i> Project Location
+          </h3>
+          <div class="bg-blue-50 text-blue-800 rounded-lg px-6 py-4 mb-6">
+            <p class="font-semibold text-lg mb-2">{{ project.location.description }}</p>
+            <p class="text-base">Coordinates: {{ project.location.geometry.coordinates[0] }}, {{ project.location.geometry.coordinates[1] }}</p>
+          </div>
+          <div class="bg-gray-50 rounded-lg p-6">
+            <p class="text-gray-600 mb-4 flex items-center">
+              <i class="bi-clipboard-check text-green-400 mr-2"></i>
+              <span class="font-semibold">Environmental Impact Assessment:</span> {{ project.projectIdentification.environmentalImpactAssessment }}
+            </p>
+            <p class="text-gray-600 flex items-center">
+              <i class="bi-people-fill text-orange-400 mr-2"></i>
+              <span class="font-semibold">Social Impact Assessment:</span> {{ project.projectIdentification.socialImpactAssessment }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="activeSection === 'project-details'" id="project-details" class="bg-white shadow-lg rounded-lg p-8 mt-8">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+        <i class="bi-info-circle text-blue-400 mr-2"></i> Project Details
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <div class="bg-green-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-diagram-3-fill text-green-400 mr-2"></i> Project Scope
+            </h3>
+            <p class="text-gray-600">{{ project.projectPreparation.projectScope }}</p>
+          </div>
+
+          <div class="bg-yellow-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-exclamation-triangle-fill text-yellow-400 mr-2"></i> Risk Assessments
+            </h3>
+            <ul class="list-disc list-inside text-gray-600">
+              <li *ngFor="let risk of project.projectPreparation.riskAssessments">{{ risk }}</li>
+            </ul>
+          </div>
+
+          <div class="bg-purple-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-cart-fill text-purple-400 mr-2"></i> Procurement Plan
+            </h3>
+            <p class="text-gray-600">{{ project.projectPreparation.procurementPlan }}</p>
+          </div>
+        </div>
+        <div>
+          <div class="bg-red-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-cash-stack text-red-400 mr-2"></i> Project Budget
+            </h3>
+            <p class="text-gray-600">
+              <span class="font-semibold">Preparation:</span> ${{ project.economicAndFinancial.budgetPreparation | number }}<br>
+              <span class="font-semibold">Implementation:</span> ${{ project.economicAndFinancial.budgetImplementation | number }}<br>
+              <span class="font-semibold">Maintenance:</span> ${{ project.economicAndFinancial.budgetMaintenance | number }}<br>
+              Detailed budget planning ensures project feasibility and sustainability.
+            </p>
+          </div>
+
+          <div class="bg-green-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-bank2 text-green-400 mr-2"></i> Funding Sources
+            </h3>
+            <ul class="list-disc list-inside text-gray-600">
+              <li *ngFor="let source of project.projectPreparation.fundingSources">{{ source }}</li>
+            </ul>
+          </div>
+
+          <div class="bg-orange-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-people-fill text-orange-400 mr-2"></i> Public Consultations
+            </h3>
+            <div class=" rounded-lg px-6 py-4">
+              <p class="font-semibold text-lg mb-2">Engagement Success</p>
+              <p class="text-base">Conducted {{ project.projectPreparation.publicConsultations.length }} meetings, reaching over {{ getTotalParticipants() }} community members to gather feedback and build consensus.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="activeSection === 'project-identification'" id="project-identification" class="bg-white shadow-lg rounded-lg p-8 mt-8">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+        <i class="bi-search text-teal-500 mr-2"></i> Project Identification
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-green-50 rounded-lg p-6">
+          <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+            <i class="bi-clipboard-check text-green-500 mr-2"></i> Environmental Impact Assessment
+          </h3>
+          <div class="bg-green-100 text-green-800 rounded-lg px-6 py-4 mb-6">
+            <p class="font-semibold text-lg">{{ project.projectIdentification.environmentalImpactAssessment }}</p>
+          </div>
+          <p class="text-gray-600 text-base">
+            The environmental impact assessment has been <span class="font-semibold">{{ project.projectIdentification.environmentalImpactAssessment | lowercase }}</span>, ensuring compliance with regulatory standards and environmental protection guidelines.
+          </p>
+          <div class="mt-6">
+            <h4 class="text-lg font-semibold text-gray-700 mb-2">Key Findings</h4>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+              <li>Minimal impact on local flora and fauna</li>
+              <li>Sustainable construction practices employed</li>
+              <li>Renewable energy sources utilized</li>
+            </ul>
+          </div>
+        </div>
+        <div class="bg-purple-50 rounded-lg p-6">
+          <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+            <i class="bi-people text-purple-500 mr-2"></i> Social Impact Assessment
+          </h3>
+          <div class="bg-purple-100 text-purple-800 rounded-lg px-6 py-4 mb-6">
+            <p class="font-semibold text-lg">{{ project.projectIdentification.socialImpactAssessment }}</p>
+          </div>
+          <p class="text-gray-600 text-base">
+            A thorough social impact assessment was performed to ensure the project positively affects local communities and mitigates any adverse effects.
+          </p>
+          <div class="mt-6">
+            <h4 class="text-lg font-semibold text-gray-700 mb-2">Community Benefits</h4>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+              <li>Creation of local job opportunities</li>
+              <li>Improved access to essential services</li>
+              <li>Enhanced community infrastructure</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="activeSection === 'project-preparation'" id="project-preparation" class="bg-white shadow-lg rounded-lg p-8 mt-8">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+        <i class="bi-clipboard-data text-blue-500 mr-2"></i> Project Preparation
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <div class="bg-green-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-diagram-3-fill text-green-500 mr-2"></i> Project Scope
+            </h3>
+            <p class="text-gray-600 text-base">{{ project.projectPreparation.projectScope }}</p>
+          </div>
+
+          <div class="bg-yellow-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-shield-shaded text-yellow-500 mr-2"></i> Risk Assessments
+            </h3>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+              <li *ngFor="let risk of project.projectPreparation.riskAssessments" class="text-base">{{ risk }}</li>
+            </ul>
+          </div>
+
+          <div class="bg-purple-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-handshake text-purple-500 mr-2"></i> Procurement Plan
+            </h3>
+            <p class="text-gray-600 text-base">{{ project.projectPreparation.procurementPlan }}</p>
+          </div>
+        </div>
+        <div>
+          <div class="bg-red-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-wallet2 text-red-500 mr-2"></i> Project Budget
+            </h3>
+            <p class="text-gray-600 text-base">
+              <span class="font-semibold">Preparation:</span> ${{ project.projectPreparation.budget | number }}<br>
+              <!-- Implementation and Maintenance budget can be included based on your project object's structure -->
+              Total budget consideration for a comprehensive execution plan.
+            </p>
+          </div>
+
+          <div class="bg-green-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-bank text-green-500 mr-2"></i> Funding Sources
+            </h3>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+              <li *ngFor="let source of project.projectPreparation.fundingSources" class="text-base">{{ source }}</li>
+            </ul>
+          </div>
+
+          <div class="bg-orange-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-people-fill text-orange-500 mr-2"></i> Public Consultations
+            </h3>
+            <div class="bg-green-100 text-green-800 rounded-lg px-6 py-4">
+              <p class="font-semibold text-lg mb-2">{{ project.projectPreparation.publicConsultations.length }} meetings held</p>
+              <p class="text-base">Engaging over {{ getTotalParticipants() }} stakeholders to ensure community input and support.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="activeSection === 'project-implementation'" id="project-implementation" class="bg-white shadow-lg rounded-lg p-8 mt-8">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+        <i class="bi-hammer text-orange-500 mr-2"></i> Project Implementation
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <div class="bg-blue-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-calendar-event-fill text-blue-500 mr-2"></i> Contract Milestones
+            </h3>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+              <li *ngFor="let milestone of project.projectImplementation.contractMilestones" class="text-base">
+                <span class="font-semibold">{{ milestone.name }}:</span> Due by {{ milestone.dueDate | date: 'mediumDate' }}
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-yellow-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-arrow-left-right text-yellow-500 mr-2"></i> Variations
+            </h3>
+            <div class="bg-yellow-100 text-yellow-800 rounded-lg px-6 py-4 mb-4" *ngFor="let variation of project.projectImplementation.variations">
+              <p class="font-semibold text-lg mb-2">{{ variation.type }} Variation</p>
+              <p class="text-base">{{ variation.description }}, valued at ${{ variation.value | number }}, to {{ variation.reason }}.</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="bg-purple-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-file-earmark-text-fill text-purple-500 mr-2"></i> Tenders and Contracts
+            </h3>
+            <div class="bg-purple-100 text-purple-800 rounded-lg px-6 py-4 mb-4">
+              <p class="font-semibold text-lg mb-2">Tenders:</p>
+              <p class="text-base">{{ project.projectProcurement.numBidders }} bidders participated in the competitive bidding process.</p>
+            </div>
+            <div class="bg-purple-100 text-purple-800 rounded-lg px-6 py-4">
+              <p class="font-semibold text-lg mb-2">Contract Awarded:</p>
+              <p class="text-base">To {{ project.projectProcurement.awardDetails.supplier }} on {{ project.projectProcurement.awardDetails.date | date: 'mediumDate' }}, for ${{ project.projectProcurement.awardDetails.value | number }}.</p>
+            </div>
+          </div>
+
+          <div class="bg-green-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-graph-up text-green-500 mr-2"></i> Progress Reports
+            </h3>
+            <div class="bg-green-100 text-green-800 rounded-lg px-6 py-4 mb-4" *ngFor="let report of project.projectImplementation.progressReports">
+              <p class="font-semibold text-lg mb-2">{{ report.date | date: 'mediumDate' }}</p>
+              <p class="text-base">Progress at {{ report.progress }}%, with {{ report.notes }}.</p>
+            </div>
+          </div>
+
+          <div class="bg-blue-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-clipboard-check-fill text-blue-500 mr-2"></i> Supervisor Reports
+            </h3>
+            <div class="bg-blue-100 text-blue-800 rounded-lg px-6 py-4 mb-4" *ngFor="let report of project.projectImplementation.supervisorReports">
+              <p class="font-semibold text-lg mb-2">{{ report.date | date: 'mediumDate' }}</p>
+              <p class="text-base">{{ report.notes }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="activeSection === 'project-completion'" id="project-completion" class="bg-white shadow-lg rounded-lg p-8 mt-8">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+        <i class="bi-check-circle-fill text-green-500 mr-2"></i> Project Completion
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <div class="bg-orange-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-diagram-3-fill text-orange-500 mr-2"></i> Final Scope
+            </h3>
+            <p class="text-gray-600 text-base">{{ project.projectCompletion.finalScope }}</p>
+          </div>
+
+          <div class="bg-blue-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-cash-stack text-blue-500 mr-2"></i> Final Cost
+            </h3>
+            <p class="text-gray-600 text-base">$ {{ project.projectCompletion.finalCost | number }}, within the projected budget constraints.</p>
+          </div>
+
+          <div class="bg-yellow-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-clock-history text-yellow-500 mr-2"></i> Delay Reasons
+            </h3>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+              <li *ngFor="let reason of project.projectCompletion.delayReasons" class="text-base">{{ reason }}</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="bg-green-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-file-earmark-text-fill text-green-500 mr-2"></i> Completion Reports
+            </h3>
+            <div class="bg-green-100 text-green-800 rounded-lg px-6 py-4 mb-4" *ngFor="let report of project.projectCompletion.completionReports">
+              <p class="font-semibold text-lg mb-2">{{ report.date | date: 'mediumDate' }}</p>
+              <p class="text-base">Summary: {{ report.notes }}</p>
+            </div>
+          </div>
+
+          <div class="bg-blue-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-hand-thumbs-up-fill text-blue-500 mr-2"></i> Handover and Acceptance
+            </h3>
+            <div class="bg-blue-100 text-blue-800 rounded-lg px-6 py-4" *ngIf="project.projectCompletion.completionReports && project.projectCompletion.completionReports.length > 0">
+              <p class="font-semibold text-lg mb-2">{{ project.projectCompletion.completionReports[0].date | date: 'mediumDate' }}</p>
+              <p class="text-base">The project was successfully handed over and accepted by the client, marking the official completion.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="activeSection === 'project-decommissioning'" id="project-decommissioning" class="bg-white shadow-lg rounded-lg p-8 mt-8">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+        <i class="bi-x-octagon-fill text-red-500 mr-2"></i>
+        <span class="text-red-600">Project Decommissioning</span>
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <div class="bg-green-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-recycle text-green-500 mr-2"></i>
+              <span>Decommissioning Plan</span>
+            </h3>
+            <p class="text-gray-600 text-base">
+              {{ project.decommissioning.planDescription }}
+            </p>
+          </div>
+
+          <div class="bg-purple-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-person-lines-fill text-purple-500 mr-2"></i>
+              <span>Decommissioning Contractor</span>
+            </h3>
+            <div class="bg-purple-100 text-purple-800 rounded-lg px-6 py-4 flex items-center">
+              <i class="bi-building text-purple-900 mr-2"></i>
+              <span class="font-semibold text-lg">{{ project.decommissioning.contractor.name }}</span>
+              <span class="ml-2">Contract value: ${{ project.decommissioning.contractor.value | number }} over {{ project.decommissioning.contractor.duration }} years.</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="bg-blue-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-calendar-check-fill text-blue-500 mr-2"></i>
+              <span>Decommissioning Schedule</span>
+            </h3>
+            <div class="bg-blue-100 text-blue-800 rounded-lg px-6 py-4">
+              <span class="font-semibold text-lg">Start:</span> {{ project.decommissioning.schedule.start | date: 'mediumDate' }},
+              <span class="font-semibold text-lg ml-2">End:</span> {{ project.decommissioning.schedule.end | date: 'mediumDate' }}.
+            </div>
+          </div>
+
+          <div class="bg-yellow-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-cash-stack text-yellow-500 mr-2"></i>
+              <span>Decommissioning Cost Forecast</span>
+            </h3>
+            <p class="text-gray-600 text-base">$ {{ project.decommissioning.costForecast | number }} expected expenditure.</p>
+          </div>
+
+          <div class="bg-green-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-cloud-arrow-down-fill text-green-500 mr-2"></i>
+              <span>Environmental Impact</span>
+            </h3>
+            <div class="bg-green-100 text-green-800 rounded-lg px-6 py-4">
+              <p class="text-base">Projected carbon savings of {{ project.decommissioning.environmentalImpact.carbonSavings }} tonnes CO2 equivalent, reinforcing the project's commitment to sustainability.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="activeSection === 'economic-financial-sustainability'" id="economic-financial" class="bg-white shadow-lg rounded-lg p-8 mt-8">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+        <span class="text-green-600 mr-2">#</span> Economic and Financial Sustainability
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <div class="bg-green-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Procurement Strategy</h3>
+            <p class="text-gray-600 text-base">{{ project.economicAndFinancial.procurementStrategy }}</p>
+          </div>
+          <div class="bg-blue-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Life Cycle Cost</h3>
+            <p class="text-gray-600 text-base">$ {{ project.economicAndFinancial.lifeCycleCost | number }}</p>
+          </div>
+          <div class="bg-yellow-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Life Cycle Cost Calculation Method</h3>
+            <p class="text-gray-600 text-base">{{ project.economicAndFinancial.lifeCycleCostCalculationMethod }}</p>
+          </div>
+          <div class="bg-purple-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Funding Sources</h3>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+              <li class="text-base">Preparation: {{ project.economicAndFinancial.fundingSourcePreparation }}</li>
+              <li class="text-base">Implementation: {{ project.economicAndFinancial.fundingSourceImplementation }}</li>
+              <li class="text-base">Maintenance: {{ project.economicAndFinancial.fundingSourceMaintenance }}</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="bg-red-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Budget Allocation</h3>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+              <li class="text-base">Preparation: $ {{ project.economicAndFinancial.budgetPreparation | number }}</li>
+              <li class="text-base">Implementation: $ {{ project.economicAndFinancial.budgetImplementation | number }}</li>
+              <li class="text-base">Maintenance: $ {{ project.economicAndFinancial.budgetMaintenance | number }}</li>
+            </ul>
+          </div>
+          <div class="bg-orange-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Cost-Benefit Analysis</h3>
+            <p class="text-gray-600 text-base">{{ project.economicAndFinancial.costBenefitAnalysis }}</p>
+          </div>
+          <div class="bg-teal-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Value for Money</h3>
+            <p class="text-gray-600 text-base">{{ project.economicAndFinancial.valueForMoney }}</p>
+          </div>
+          <div class="bg-indigo-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Asset Lifetime</h3>
+            <p class="text-gray-600 text-base">{{ project.economicAndFinancial.assetLifetime }} years</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="activeSection === 'environmental-climate-resilience'" id="environmental-climate-resilience" class="bg-white shadow-lg rounded-lg p-8 mt-8">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+        <i class="bi-globe text-blue-500 mr-2"></i>
+        <span class="text-blue-600">Environmental and Climate Resilience</span>
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <div class="bg-green-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-tree-fill text-green-500 mr-2"></i>
+              <span>Environmental Impact</span>
+            </h3>
+            <p class="text-gray-600 text-base">
+              Category {{ project.environmentalAndClimate.environmentalImpactCategory }} - {{ project.environmentalAndClimate.environmentalMeasures }}. Environmental impact assessment {{ project.environmentalAndClimate.environmentalLicensesAndExemptions }}, pursuing {{ project.environmentalAndClimate.environmentalCertifications }}.
+            </p>
+          </div>
+          <div class="bg-teal-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-shield-fill-plus text-teal-500 mr-2"></i>
+              <span>Conservation Measures</span>
+            </h3>
+            <p class="text-gray-600 text-base">{{ project.environmentalAndClimate.conservationMeasures }}</p>
+          </div>
+        </div>
+        <div>
+          <div class="bg-blue-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-cloud-rain-heavy-fill text-blue-500 mr-2"></i>
+              <span>Climate Resilience Measures</span>
+            </h3>
+            <p class="text-gray-600 text-base">{{ project.environmentalAndClimate.climateMeasures }}</p>
+          </div>
+          <div class="bg-indigo-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-cloud-arrow-down-fill text-indigo-500 mr-2"></i>
+              <span>Greenhouse Gas Emissions</span>
+            </h3>
+            <p class="text-gray-600 text-base">
+              Estimated to reduce greenhouse gas emissions by {{ project.environmentalAndClimate.greenhouseGasEmissionsEstimate | number }} tonnes, contributing to national and global efforts to combat climate change.
+            </p>
+          </div>
+          <div class="bg-purple-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-recycle text-purple-500 mr-2"></i>
+              <span>Decommissioning Plans</span>
+            </h3>
+            <p class="text-gray-600 text-base">{{ project.environmentalAndClimate.decomissioningPlans }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="activeSection === 'social-sustainability'" id="social-sustainability" class="bg-white shadow-lg rounded-lg p-8 mt-8">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+        <i class="bi-people-fill text-purple-500 mr-2"></i>
+        <span class="text-purple-600">Social Sustainability</span>
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <div class="bg-red-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-person-check-fill text-red-500 mr-2"></i>
+              <span>Community Engagement</span>
+            </h3>
+            <p class="text-gray-600 text-base">Total number of participants: 20</p>
+          </div>
+          <div class="bg-pink-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-house-heart-fill text-pink-500 mr-2"></i>
+              <span>Inclusive Design</span>
+            </h3>
+            <p class="text-gray-600 text-base">{{ project.social.inclusiveDesignAndImplementation }}</p>
+          </div>
+          <div class="bg-orange-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-geo-alt-fill text-orange-500 mr-2"></i>
+              <span>Indigenous Land Consideration</span>
+            </h3>
+            <p class="text-gray-600 text-base">{{ project.social.indigenousLand ? 'Yes' : 'No' }}</p>
+          </div>
+        </div>
+        <div>
+          <div class="bg-yellow-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-briefcase-fill text-yellow-500 mr-2"></i>
+              <span>Labor Standards and Safety</span>
+            </h3>
+            <p class="text-gray-600 text-base">{{ project.social.laborObligations }} Health and safety management is certified with ISO 45001 by the contractor.</p>
+          </div>
+          <div class="bg-green-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-globe2 text-green-500 mr-2"></i>
+              <span>Beneficiary Impact</span>
+            </h3>
+            <p class="text-gray-600 text-base">Aiming to positively impact {{ project.social.numberOfBeneficiaries | number }} individuals by providing access to clean, sustainable energy, enhancing quality of life and socio-economic development.</p>
+          </div>
+        </div>
+        <div class="col-span-2">
+          <div class="bg-teal-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-cash-coin text-teal-500 mr-2"></i>
+              <span>Land Compensation and Labor Budget</span>
+            </h3>
+            <p class="text-gray-600 text-base">Land Compensation Budget: ${{ project.social.landCompensationBudget | number }}</p>
+            <p class="text-gray-600 text-base mt-2">Labor Budget: ${{ project.social.laborBudget | number }}</p>
+          </div>
+          <div class="bg-amber-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-exclamation-diamond-fill text-amber-500 mr-2"></i>
+              <span>Workers' Accidents</span>
+            </h3>
+            <p class="text-gray-600 text-base">Accidents reported: {{ project.social.workersAccidents }}</p>
+          </div>
+          <div class="bg-blue-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-tools text-blue-500 mr-2"></i>
+              <span>Jobs Generated</span>
+            </h3>
+            <p class="text-gray-600 text-base">Construction jobs: {{ project.social.jobsGenerated.construction }}</p>
+            <p class="text-gray-600 text-base mt-2">Operational jobs: {{ project.social.jobsGenerated.operations }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section *ngIf="activeSection === 'institutional-sustainability'" id="institutional-sustainability" class="bg-white shadow-lg rounded-lg p-8 mt-8">
+      <header>
+        <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+          <i class="bi-bank2 text-orange-500 mr-2"></i>
+          <span class="text-orange-600">Institutional Sustainability</span>
+        </h2>
+      </header>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <section>
+          <div class="bg-teal-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-file-text-fill text-teal-500 mr-2"></i>
+              <span>Policy Coherence</span>
+            </h3>
+            <p class="text-gray-600 text-base">Ensures alignment with national and international sustainability goals.</p>
+          </div>
+
+          <div class="bg-teal-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-patch-check-fill text-teal-500 mr-2"></i>
+              <span>Freedom-of-Information Requests and Answers</span>
+            </h3>
+            <p class="text-gray-600 text-base">Demonstrates transparency and openness in project operations and decisions.</p>
+          </div>
+
+          <div class="bg-teal-100 text-teal-800 rounded-lg p-6">
+            <h3 class="text-xl font-semibold mb-4 flex items-center">
+              <i class="bi-megaphone-fill text-teal-500 mr-2"></i>
+              <span>Lobbying Transparency</span>
+            </h3>
+            <p class="text-base">Ensures ethical advocacy efforts, avoiding conflicts of interest.</p>
+          </div>
+        </section>
+
+        <section>
+          <div class="bg-teal-100 text-teal-800 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold mb-4 flex items-center">
+              <i class="bi-people-fill text-teal-500 mr-2"></i>
+              <span>Beneficial Ownership</span>
+            </h3>
+            <p class="text-base">Clarifies the project's ownership structure, promoting accountability.</p>
+          </div>
+
+          <div class="bg-teal-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-check2-circle text-teal-500 mr-2"></i>
+              <span>Sustainability Criteria</span>
+            </h3>
+            <p class="text-gray-600 text-base">Incorporates environmental, social, and governance (ESG) standards into project evaluation and selection.</p>
+          </div>
+
+          <div class="bg-teal-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-shield-fill-check text-teal-500 mr-2"></i>
+              <span>Anti-corruption Certifications</span>
+            </h3>
+            <p class="text-gray-600 text-base">Holds certifications indicating adherence to anti-corruption policies and practices.</p>
+          </div>
+        </section>
+
+        <section class="col-span-2">
+          <div class="bg-teal-100 text-teal-800 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold mb-4 flex items-center">
+              <i class="bi-globe text-teal-500 mr-2"></i>
+              <span>Transparency and Accountability</span>
+            </h3>
+            <p class="text-base">Commits to clear reporting and stakeholder engagement, ensuring project integrity.</p>
+          </div>
+
+          <div class="bg-teal-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-graph-up text-teal-500 mr-2"></i>
+              <span>Performance Monitoring</span>
+            </h3>
+            <p class="text-gray-600 text-base">Tracks project outcomes against stated objectives and metrics.</p>
+          </div>
+
+          <div class="bg-teal-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-exclamation-triangle-fill text-teal-500 mr-2"></i>
+              <span>Risk Management Plans</span>
+            </h3>
+            <p class="text-gray-600 text-base">Identifies potential project risks and outlines strategies to mitigate them.</p>
+          </div>
+
+          <div class="bg-teal-50 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-trees text-teal-500 mr-2"></i>
+              <span>Sustainable Subsectors</span>
+            </h3>
+            <p class="text-gray-600 text-base">Focuses on industries that contribute positively to environmental sustainability.</p>
+          </div>
+
+          <div class="bg-teal-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+              <i class="bi-eye-fill text-teal-500 mr-2"></i>
+              <span>Independent Monitoring</span>
+            </h3>
+            <p class="text-gray-600 text-base">Engages third-party entities to ensure unbiased project evaluation and compliance.</p>
+          </div>
+        </section>
+      </div>
+    </section>
+    <section *ngIf="activeSection === 'climate-finance'" id="climate-finance" class="bg-white shadow-lg rounded-lg p-6 mt-6">
+      <header>
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">
+          <i class="bi-gem text-cyan-500"></i>
+          <span class="ml-2 text-cyan-600">Climate Finance</span>
+        </h2>
+      </header>
+
+      <div class="">
+        <section class="p-8">
+          <div class="mb-8 bg-green-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Project Overview</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-globe2 text-green-500 mr-2"></i>
+                <span>Objective: {{ project.climateFinance.climateObjective }}</span>
+              </p>
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-cash-coin text-yellow-500 mr-2"></i>
+                <span>Financial Instrument: {{ project.climateFinance.financialInstrument.type }} - ${{ project.climateFinance.financialInstrument.amount | number }}</span>
+              </p>
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-lightning-charge-fill text-blue-500 mr-2"></i>
+                <span>Transformation: {{ project.climateFinance.climateTransformation }}</span>
+              </p>
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-globe text-blue-500 mr-2"></i>
+                <span>Decision Making: {{ project.climateFinance.climateFinanceDecisionMaking }}</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="mb-8 bg-red-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Alignment</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-flag-fill text-red-500 mr-2"></i>
+                <span>NDCs: {{ project.climateFinance.nationallyDeterminedContributions }}</span>
+              </p>
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-hand-thumbs-up-fill text-orange-500 mr-2"></i>
+                <span>Paris Agreement: {{ project.climateFinance.parisAgreement }}</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="mb-8 bg-purple-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Beneficiaries</h3>
+            <p class="text-gray-600 flex items-center">
+              <i class="bi-people-fill text-purple-500 mr-2"></i>
+              <span>Beneficiaries: {{ project.climateFinance.beneficiaries.number }} - {{ project.climateFinance.beneficiaries.description }}</span>
+            </p>
+          </div>
+
+          <div class="mb-8 bg-blue-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Funding</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-currency-dollar text-green-500 mr-2"></i>
+                <span>Investment Amount: ${{ project.climateFinance.investmentAmount | number }}</span>
+              </p>
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-bank2 text-blue-500 mr-2"></i>
+                <span>Funding Source: {{ project.climateFinance.fundingSource.join(', ') }}</span>
+              </p>
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-award-fill text-yellow-500 mr-2"></i>
+                <span>GCF Accredited Entity: {{ project.climateFinance.greenClimateFundAccreditedEntity ? 'Yes' : 'No' }}</span>
+              </p>
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-badge-cc-fill text-cyan-500 mr-2"></i>
+                <span>Accredited Entity Type: {{ project.climateFinance.accreditedEntityType }}</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="mb-8 bg-yellow-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Project Preparation</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-calendar-event-fill text-purple-500 mr-2"></i>
+                <span>Project Preparation Costs: ${{ project.climateFinance.projectPreparationCosts | number }}</span>
+              </p>
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-calendar-range-fill text-red-500 mr-2"></i>
+                <span>Preparation Period: {{ project.climateFinance.projectPreparationPeriod.start }} to {{ project.climateFinance.projectPreparationPeriod.end }}</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="mb-8 bg-orange-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Project Approval</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-calendar-check-fill text-blue-500 mr-2"></i>
+                <span>Approval Period: {{ project.climateFinance.projectApprovalPeriod.start }} to {{ project.climateFinance.projectApprovalPeriod.end }}</span>
+              </p>
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-ratio text-orange-500 mr-2"></i>
+                <span>Co-Finance Ratio: {{ project.climateFinance.coFinanceRatio }}</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-teal-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Finance Terms</h3>
+            <p class="text-gray-600 flex items-center">
+              <i class="bi-calculator-fill text-green-500 mr-2"></i>
+              <span>Climate Finance Terms: Maturity - {{ project.climateFinance.climateFinanceTerms.maturity }} years, Grace Period - {{ project.climateFinance.climateFinanceTerms.gracePeriod }} years, Annual Repayment - {{ project.climateFinance.climateFinanceTerms.annualPrincipalRepayment }}, Interest Rate - {{ project.climateFinance.climateFinanceTerms.interestRate }}, Service Fee - {{ project.climateFinance.climateFinanceTerms.serviceFee }}, Commitment Fee - {{ project.climateFinance.climateFinanceTerms.commitmentFee }}</span>
+            </p>
+          </div>
+        </section>
+
+
+        <section class="p-8">
+          <div class="mb-8 bg-purple-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Carbon Efficiency</h3>
+            <p class="text-gray-600 flex items-center">
+              <i class="bi-speedometer2 text-purple-500 mr-2"></i>
+              <span>Carbon Efficiency: {{ project.climateFinance.carbonEfficiency }}</span>
+            </p>
+          </div>
+
+          <div class="mb-8 bg-red-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Co-Benefits</h3>
+            <p class="text-gray-600 flex items-center">
+              <i class="bi-gift-fill text-red-500 mr-2"></i>
+              <span>Non-Climate Co-Benefits: {{ project.climateFinance.nonClimateCoBenefits.join(', ') }}</span>
+            </p>
+          </div>
+
+          <div class="mb-8 bg-orange-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Public Consultations</h3>
+            <p class="text-gray-600 flex items-center">
+              <i class="bi-people-fill text-orange-500 mr-2"></i>
+              <span>Public Consultations: {{ project.climateFinance.publicConsultationMeetings }}</span>
+            </p>
+          </div>
+
+          <div class="mb-8 bg-green-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Disbursement Records</h3>
+            <p class="text-gray-600 flex items-center">
+              <i class="bi-folder-check text-green-500 mr-2"></i>
+              <span>Disbursement Records: <a href="{{ project.climateFinance.disbursementRecords }}" target="_blank" class="text-blue-600 hover:underline">View Records</a></span>
+            </p>
+          </div>
+
+          <div class="mb-8 bg-blue-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Monitoring</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-graph-up-arrow text-blue-500 mr-2"></i>
+                <span>Monitoring Type: {{ project.climateFinance.projectMonitoringType }}</span>
+              </p>
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-bar-chart-fill text-yellow-500 mr-2"></i>
+                <span>Performance Monitoring: {{ project.climateFinance.performanceMonitoring.join(', ') }}</span>
+              </p>
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-calendar3 text-red-500 mr-2"></i>
+                <span>Reporting Period: {{ project.climateFinance.reportingPeriod }}</span>
+              </p>
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-eye-fill text-cyan-500 mr-2"></i>
+                <span>Oversight Reports: <a href="{{ project.climateFinance.oversightReports }}" target="_blank" class="text-blue-600 hover:underline">View Reports</a></span>
+              </p>
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-person-badge-fill text-purple-500 mr-2"></i>
+                <span>Independent Monitoring: {{ project.climateFinance.independentMonitoring }}</span>
+              </p>
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-file-earmark-medical-fill text-green-500 mr-2"></i>
+                <span>Independent Evaluation: <a href="{{ project.climateFinance.independentEvaluation }}" target="_blank" class="text-blue-600 hover:underline">View Evaluation</a></span>
+              </p>
+            </div>
+          </div>
+
+          <div class="mb-8 bg-yellow-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Impact Measurement</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-clipboard-data-fill text-blue-500 mr-2"></i>
+                <span>Impact Measurement: {{ project.climateFinance.impactMeasurement }}</span>
+              </p>
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-cloud-arrow-down-fill text-yellow-500 mr-2"></i>
+                <span>Carbon Footprint: {{ project.climateFinance.carbonFootprint }}</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-red-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Decommissioning</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-tools text-red-500 mr-2"></i>
+                <span>Decommissioning: {{ project.climateFinance.decomissioningPlan }}</span>
+              </p>
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-clock-history text-purple-500 mr-2"></i>
+                <span>Decommission Period: {{ project.climateFinance.decomissioningPeriod.start }} to {{ project.climateFinance.decomissioningPeriod.end }}</span>
+              </p>
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-recycle text-green-500 mr-2"></i>
+                <span>Carbon Decommission Savings: {{ project.climateFinance.carbonDecomissioningSavings }}</span>
+              </p>
+              <p class="text-gray-600 flex items-center">
+                <i class="bi-people-fill text-orange-500 mr-2"></i>
+                <span>Decommission Mitigation Plan: {{ project.climateFinance.decomissioningMitigationPlan }}</span>
+              </p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
+
+
+  </main>
+</div>
+</div>

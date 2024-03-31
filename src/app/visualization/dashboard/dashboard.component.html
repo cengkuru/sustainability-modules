@@ -1,0 +1,704 @@
+<div class="bg-gradient-to-r from-indigo-50 to-blue-50 min-h-screen">
+  <div class="container mx-auto py-8">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Sustainability Dashboard</h1>
+
+    <!-- Tabs -->
+    <div class="mb-6">
+      <ul class="flex flex-wrap -mb-px text-sm font-medium text-center">
+        <li class="mr-2">
+          <a
+            href="javascript:void(0);"
+            (click)="setActiveTab('economic-financial')"
+            [ngClass]="{ 'tab-link active': activeTab === 'economic-financial', 'tab-link': activeTab !== 'economic-financial' }"
+          >
+            <i class="bi bi-cash-stack mr-2"></i>
+            Economic & Financial
+          </a>
+        </li>
+        <li class="mr-2">
+          <a
+            href="javascript:void(0);"
+            (click)="setActiveTab('environmental-climate')"
+            [ngClass]="{ 'tab-link active': activeTab === 'environmental-climate', 'tab-link': activeTab !== 'environmental-climate' }"
+          >
+            <i class="bi bi-globe mr-2"></i>
+            Environmental & Climate
+          </a>
+        </li>
+        <li class="mr-2">
+          <a
+            href="javascript:void(0);"
+            (click)="setActiveTab('social')"
+            [ngClass]="{ 'tab-link active': activeTab === 'social', 'tab-link': activeTab !== 'social' }"
+          >
+            <i class="bi bi-people-fill mr-2"></i>
+            Social
+          </a>
+        </li>
+        <li class="mr-2">
+          <a
+            href="javascript:void(0);"
+            (click)="setActiveTab('institutional')"
+            [ngClass]="{ 'active': activeTab === 'institutional' }"
+            class="inline-flex items-center px-4 py-2 rounded-full text-gray-600 bg-gray-100 hover:bg-gray-200 transition-colors duration-300"
+          >
+            <i class="bi bi-bank2 mr-2"></i>
+            Institutional
+          </a>
+        </li>
+        <li class="mr-2">
+          <a
+            href="javascript:void(0);"
+            (click)="setActiveTab('climate-finance')"
+            [ngClass]="{ 'active': activeTab === 'climate-finance' }"
+            class="inline-flex items-center px-4 py-2 rounded-full text-gray-600 bg-gray-100 hover:bg-gray-200 transition-colors duration-300"
+          >
+            <i class="bi bi-cloud-lightning-rain-fill mr-2"></i>
+            Climate Finance
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Tab Content -->
+    <div *ngIf="activeTab === 'economic-financial'" class="p-4 bg-white rounded-lg shadow-md">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Economic & Financial Sustainability</h2>
+
+      <!-- Filters -->
+      <div class="mb-6">
+        <h3 class="text-lg font-bold text-gray-800 mb-2">Filters</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label for="count" class="block text-sm font-medium text-gray-700">Country</label>
+            <select id="count" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+              <option value="">All</option>
+              <option value="Ghana">Ghana</option>
+              <option value="Panama">Panama</option>
+              <option value="mexico">Mexico</option>
+            </select>
+          </div>
+          <div>
+            <label for="sect" class="block text-sm font-medium text-gray-700">Sector</label>
+            <select id="sect" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+              <option value="">All</option>
+              <option value="energy">Energy</option>
+              <option value="transportation">Transportation</option>
+              <option value="water">Water</option>
+            </select>
+          </div>
+          <div>
+            <label for="year" class="block text-sm font-medium text-gray-700">Year</label>
+            <select id="year" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+              <option value="">All</option>
+              <option value="2020">2020</option>
+              <option value="2021">2021</option>
+              <option value="2022">2022</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stat Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
+        <div class="bg-green-100 rounded-lg p-6 flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-green-600 mb-1">Total Life Cycle Cost</p>
+            <p class="text-3xl font-bold text-green-700">$125.6M</p>
+          </div>
+          <i class="bi bi-cash-stack text-4xl text-green-500"></i>
+        </div>
+        <div class="bg-blue-100 rounded-lg p-6 flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-blue-600 mb-1">Average Cost-Benefit Ratio</p>
+            <p class="text-3xl font-bold text-blue-700">2.1</p>
+          </div>
+          <i class="bi bi-graph-up-arrow text-4xl text-blue-500"></i>
+        </div>
+        <div class="bg-yellow-100 rounded-lg p-6 flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-yellow-600 mb-1">Average Return on Investment</p>
+            <p class="text-3xl font-bold text-yellow-700">22%</p>
+          </div>
+          <i class="bi bi-piggy-bank text-4xl text-yellow-500"></i>
+        </div>
+        <div class="bg-purple-100 rounded-lg p-6 flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-purple-600 mb-1">Average Asset Lifetime</p>
+            <p class="text-3xl font-bold text-purple-700">30 Years</p>
+          </div>
+          <i class="bi bi-hourglass-split text-4xl text-purple-500"></i>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="mb-8">
+        <h3 class="text-lg font-bold text-gray-800 mb-4">Key Performance Indicators</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-gray-100 rounded-lg p-6">
+            <p class="text-sm font-medium text-gray-600 mb-2">Average Life Cycle Cost per Unit of Output</p>
+            <p class="text-3xl font-bold text-gray-800">$0.85</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-6">
+            <p class="text-sm font-medium text-gray-600 mb-2">Total Net Present Value (NPV)</p>
+            <p class="text-3xl font-bold text-gray-800">$75.2M</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-6">
+            <p class="text-sm font-medium text-gray-600 mb-2">Average Internal Rate of Return (IRR)</p>
+            <p class="text-3xl font-bold text-gray-800">18%</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-6">
+            <p class="text-sm font-medium text-gray-600 mb-2">Average Funding from Government</p>
+            <p class="text-3xl font-bold text-gray-800">55%</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-gray-800 flex items-center">
+              <i class="bi bi-pie-chart-fill text-green-500 mr-2"></i>
+              Cost-Benefit Analysis
+            </h3>
+          </div>
+
+        </div>
+
+        <!-- Other charts -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-gray-800 flex items-center">
+              <i class="bi bi-bar-chart-fill text-green-500 mr-2"></i>
+              Return on Investment Analysis
+            </h3>
+          </div>
+
+        </div>
+
+
+
+
+
+      </div>
+    </div>
+
+    <div *ngIf="activeTab === 'environmental-climate'" class="p-4 bg-white rounded-lg shadow-md">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Environmental & Climate Resilience</h2>
+
+      <!-- Filters -->
+      <div class="mb-6">
+        <h3 class="text-lg font-bold text-gray-800 mb-2">Filters</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="country1" class="block text-sm font-medium text-gray-700">Country</label>
+            <select id="country1" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+              <option value="">All</option>
+              <option value="Ghana">Ghana</option>
+              <option value="Panama">Panama</option>
+              <option value="mexico">Mexico</option>
+            </select>
+          </div>
+          <div>
+            <label for="sector1" class="block text-sm font-medium text-gray-700">Sector</label>
+            <select id="sector1" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+              <option value="">All</option>
+              <option value="energy">Energy</option>
+              <option value="transportation">Transportation</option>
+              <option value="water">Water</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stat Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
+        <div class="bg-green-100 rounded-lg p-6 flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-green-600 mb-1">Total Carbon Footprint</p>
+            <p class="text-3xl font-bold text-green-700">125,000 tCO2e</p>
+          </div>
+          <i class="bi bi-cloud-arrow-down-fill text-4xl text-green-500"></i>
+        </div>
+        <div class="bg-blue-100 rounded-lg p-6 flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-blue-600 mb-1">Average Energy Efficiency</p>
+            <p class="text-3xl font-bold text-blue-700">85%</p>
+          </div>
+          <i class="bi bi-lightning-charge-fill text-4xl text-blue-500"></i>
+        </div>
+        <div class="bg-yellow-100 rounded-lg p-6 flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-yellow-600 mb-1">Total Water Consumption</p>
+            <p class="text-3xl font-bold text-yellow-700">2.5M m³</p>
+          </div>
+          <i class="bi bi-droplet-fill text-4xl text-yellow-500"></i>
+        </div>
+        <div class="bg-purple-100 rounded-lg p-6 flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-purple-600 mb-1">Total Land Conserved</p>
+            <p class="text-3xl font-bold text-purple-700">1,200 hectares</p>
+          </div>
+          <i class="bi bi-tree-fill text-4xl text-purple-500"></i>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="mb-8">
+        <h3 class="text-lg font-bold text-gray-800 mb-4">Key Performance Indicators</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-gray-100 rounded-lg p-6">
+            <p class="text-sm font-medium text-gray-600 mb-2">Carbon Footprint per Unit of Output</p>
+            <p class="text-3xl font-bold text-gray-800">0.75 tCO2e</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-6">
+            <p class="text-sm font-medium text-gray-600 mb-2">Water Consumption per Unit of Output</p>
+            <p class="text-3xl font-bold text-gray-800">15 m³</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-6">
+            <p class="text-sm font-medium text-gray-600 mb-2">Percentage of Waste Recycled</p>
+            <p class="text-3xl font-bold text-gray-800">72%</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-6">
+            <p class="text-sm font-medium text-gray-600 mb-2">Biodiversity Impact Score</p>
+            <p class="text-3xl font-bold text-gray-800">4.2</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-gray-800 flex items-center">
+              <i class="bi bi-cloud-arrow-down-fill text-green-500 mr-2"></i>
+              Carbon Footprint
+            </h3>
+          </div>
+
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-gray-800 flex items-center">
+              <i class="bi bi-lightning-charge-fill text-green-500 mr-2"></i>
+              Energy Efficiency
+            </h3>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-gray-800 flex items-center">
+              <i class="bi bi-droplet-fill text-blue-500 mr-2"></i>
+              Water Consumption
+            </h3>
+          </div>
+
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-gray-800 flex items-center">
+              <i class="bi bi-tree-fill text-yellow-500 mr-2"></i>
+              Biodiversity Impact
+            </h3>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="activeTab === 'social'" class="p-4 bg-white rounded-lg shadow-md">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Social Sustainability</h2>
+
+      <!-- Filters -->
+      <div class="mb-6">
+        <h3 class="text-lg font-bold text-gray-800 mb-2">Filters</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="country11" class="block text-sm font-medium text-gray-700">Country</label>
+            <select id="country11" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+              <option value="">All</option>
+              <option value="Ghana">Ghana</option>
+              <option value="Panama">Panama</option>
+              <option value="mexico">Mexico</option>
+            </select>
+          </div>
+          <div>
+            <label for="sector11" class="block text-sm font-medium text-gray-700">Sector</label>
+            <select id="sector11" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+              <option value="">All</option>
+              <option value="energy">Energy</option>
+              <option value="transportation">Transportation</option>
+              <option value="water">Water</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stat Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
+        <div class="bg-green-100 rounded-lg p-6 flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-green-600 mb-1">Total Community Consultations</p>
+            <p class="text-3xl font-bold text-green-700">125</p>
+          </div>
+          <i class="bi bi-people-fill text-4xl text-green-500"></i>
+        </div>
+        <div class="bg-blue-100 rounded-lg p-6 flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-blue-600 mb-1">Average Accessibility Score</p>
+            <p class="text-3xl font-bold text-blue-700">4.2</p>
+          </div>
+          <i class="bi bi-universal-access text-4xl text-blue-500"></i>
+        </div>
+        <div class="bg-yellow-100 rounded-lg p-6 flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-yellow-600 mb-1">Total Indigenous Land Considered</p>
+            <p class="text-3xl font-bold text-yellow-700">2,500 hectares</p>
+          </div>
+          <i class="bi bi-geo-alt-fill text-4xl text-yellow-500"></i>
+        </div>
+        <div class="bg-purple-100 rounded-lg p-6 flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-purple-600 mb-1">Total Jobs Created</p>
+            <p class="text-3xl font-bold text-purple-700">15,000</p>
+          </div>
+          <i class="bi bi-briefcase-fill text-4xl text-purple-500"></i>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="mb-8">
+        <h3 class="text-lg font-bold text-gray-800 mb-4">Key Performance Indicators</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-gray-100 rounded-lg p-6">
+            <p class="text-sm font-medium text-gray-600 mb-2">Average Community Engagement Score</p>
+            <p class="text-3xl font-bold text-gray-800">4.5</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-6">
+            <p class="text-sm font-medium text-gray-600 mb-2">Percentage of Indigenous Land Considered</p>
+            <p class="text-3xl font-bold text-gray-800">18%</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-6">
+            <p class="text-sm font-medium text-gray-600 mb-2">Labor Standards Compliance Rate</p>
+            <p class="text-3xl font-bold text-gray-800">92%</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-6">
+            <p class="text-sm font-medium text-gray-600 mb-2">Jobs Created per Million Invested</p>
+            <p class="text-3xl font-bold text-gray-800">25</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-gray-800 flex items-center">
+              <i class="bi bi-people-fill text-green-500 mr-2"></i>
+              Community Engagement
+            </h3>
+          </div>
+
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-gray-800 flex items-center">
+              <i class="bi bi-universal-access text-blue-500 mr-2"></i>
+              Inclusive Design
+            </h3>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-gray-800 flex items-center">
+              <i class="bi bi-briefcase-fill text-yellow-500 mr-2"></i>
+              Labor Standards Compliance
+            </h3>
+          </div>
+
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-gray-800 flex items-center">
+              <i class="bi bi-tools text-purple-500 mr-2"></i>
+              Jobs Created
+            </h3>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="activeTab === 'institutional'" class="p-4 bg-white rounded-lg shadow-md">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Institutional Sustainability</h2>
+
+      <!-- Filters -->
+      <div class="mb-6">
+        <h3 class="text-lg font-bold text-gray-800 mb-2">Filters</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="country111" class="block text-sm font-medium text-gray-700">Country</label>
+            <select id="country111" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+              <option value="">All</option>
+              <option value="Ghana">Ghana</option>
+              <option value="Panama">Panama</option>
+              <option value="mexico">Mexico</option>
+            </select>
+          </div>
+          <div>
+            <label for="sector111" class="block text-sm font-medium text-gray-700">Sector</label>
+            <select id="sector111" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+              <option value="">All</option>
+              <option value="energy">Energy</option>
+              <option value="transportation">Transportation</option>
+              <option value="water">Water</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stat Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
+        <div class="bg-green-100 rounded-lg p-6 flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-green-600 mb-1">Total Policy Alignments</p>
+            <p class="text-3xl font-bold text-green-700">25</p>
+          </div>
+          <i class="bi bi-file-text-fill text-4xl text-green-500"></i>
+        </div>
+        <div class="bg-blue-100 rounded-lg p-6 flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-blue-600 mb-1">Average Transparency Score</p>
+            <p class="text-3xl font-bold text-blue-700">4.8</p>
+          </div>
+          <i class="bi bi-sun-fill text-4xl text-blue-500"></i>
+        </div>
+        <div class="bg-yellow-100 rounded-lg p-6 flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-yellow-600 mb-1">Total Anti-Corruption Certifications</p>
+            <p class="text-3xl font-bold text-yellow-700">18</p>
+          </div>
+          <i class="bi bi-shield-check text-4xl text-yellow-500"></i>
+        </div>
+        <div class="bg-purple-100 rounded-lg p-6 flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-purple-600 mb-1">Total Independent Monitoring Reports</p>
+            <p class="text-3xl font-bold text-purple-700">75</p>
+          </div>
+          <i class="bi bi-eye-fill text-4xl text-purple-500"></i>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="mb-8">
+        <h3 class="text-lg font-bold text-gray-800 mb-4">Key Performance Indicators</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-gray-100 rounded-lg p-6">
+            <p class="text-sm font-medium text-gray-600 mb-2">Average Policy Coherence Score</p>
+            <p class="text-3xl font-bold text-gray-800">4.2</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-6">
+            <p class="text-sm font-medium text-gray-600 mb-2">Percentage of Information Disclosed</p>
+            <p class="text-3xl font-bold text-gray-800">82%</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-6">
+            <p class="text-sm font-medium text-gray-600 mb-2">Anti-Corruption Compliance Rate</p>
+            <p class="text-3xl font-bold text-gray-800">96%</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-6">
+            <p class="text-sm font-medium text-gray-600 mb-2">Independent Monitoring Frequency</p>
+            <p class="text-3xl font-bold text-gray-800">Quarterly</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-gray-800 flex items-center">
+              <i class="bi bi-bullseye text-indigo-500 mr-2"></i>
+              Policy Coherence
+            </h3>
+          </div>
+
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-gray-800 flex items-center">
+              <i class="bi bi-shield-check text-yellow-500 mr-2"></i>
+              Anti-Corruption Certifications
+            </h3>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-gray-800 flex items-center">
+              <i class="bi bi-sun text-blue-500 mr-2"></i>
+              Transparency Score over Time
+            </h3>
+          </div>
+
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-gray-800 flex items-center">
+              <i class="bi bi-eye-fill text-green-500 mr-2"></i>
+              Independent Monitoring Reports
+            </h3>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div *ngIf="activeTab === 'climate-finance'" class="p-4 bg-white rounded-lg shadow-md">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Climate Finance</h2>
+
+      <!-- Filters -->
+      <div class="mb-6">
+        <h3 class="text-lg font-bold text-gray-800 mb-2">Filters</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
+            <select id="country" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+              <option value="">All</option>
+              <option value="Ghana">Ghana</option>
+              <option value="Panama">Panama</option>
+              <option value="mexico">Mexico</option>
+            </select>
+          </div>
+          <div>
+            <label for="sector" class="block text-sm font-medium text-gray-700">Sector</label>
+            <select id="sector" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+              <option value="">All</option>
+              <option value="energy">Energy</option>
+              <option value="transportation">Transportation</option>
+              <option value="water">Water</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stat Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
+        <div class="bg-green-100 rounded-lg p-6 flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-green-600 mb-1">Total Climate Finance Investment</p>
+            <p class="text-3xl font-bold text-green-700">$125M</p>
+          </div>
+          <i class="bi bi-cash-coin text-4xl text-green-500"></i>
+        </div>
+        <div class="bg-blue-100 rounded-lg p-6 flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-blue-600 mb-1">Average Carbon Efficiency</p>
+            <p class="text-3xl font-bold text-blue-700">0.75 tCO2e/$M</p>
+          </div>
+          <i class="bi bi-speedometer2 text-4xl text-blue-500"></i>
+        </div>
+        <div class="bg-yellow-100 rounded-lg p-6 flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-yellow-600 mb-1">Total Public Consultations</p>
+            <p class="text-3xl font-bold text-yellow-700">250</p>
+          </div>
+          <i class="bi bi-people-fill text-4xl text-yellow-500"></i>
+        </div>
+        <div class="bg-purple-100 rounded-lg p-6 flex items-center justify-between">
+          <div>
+            <p class="text-sm font-medium text-purple-600 mb-1">Total Independent Evaluations</p>
+            <p class="text-3xl font-bold text-purple-700">35</p>
+          </div>
+          <i class="bi bi-file-earmark-medical-fill text-4xl text-purple-500"></i>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="mb-8">
+        <h3 class="text-lg font-bold text-gray-800 mb-4">Key Performance Indicators</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-gray-100 rounded-lg p-6">
+            <p class="text-sm font-medium text-gray-600 mb-2">Average Climate Objective Alignment Score</p>
+            <p class="text-3xl font-bold text-gray-800">4.6</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-6">
+            <p class="text-sm font-medium text-gray-600 mb-2">Percentage of Funding from Green Climate Fund</p>
+            <p class="text-3xl font-bold text-gray-800">28%</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-6">
+            <p class="text-sm font-medium text-gray-600 mb-2">Average Project Preparation Time</p>
+            <p class="text-3xl font-bold text-gray-800">18 months</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-6">
+            <p class="text-sm font-medium text-gray-600 mb-2">Average Independent Monitoring Frequency</p>
+            <p class="text-3xl font-bold text-gray-800">Bi-annual</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Climate Finance Investment Chart -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+        <div>
+          <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-lg font-bold text-gray-800 flex items-center">
+                <i class="bi bi-pie-chart-fill text-indigo-500 mr-2"></i>
+                Funding Sources
+              </h3>
+            </div>
+
+          </div>
+
+          <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-lg font-bold text-gray-800 flex items-center">
+                <i class="bi bi-graph-up-arrow text-green-500 mr-2"></i>
+                Carbon Efficiency over Time
+              </h3>
+            </div>
+
+          </div>
+        </div>
+
+        <div>
+          <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-lg font-bold text-gray-800 flex items-center">
+                <i class="bi bi-globe text-blue-500 mr-2"></i>
+                Climate Finance Investment by Country
+              </h3>
+            </div>
+
+          </div>
+
+          <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-lg font-bold text-gray-800 flex items-center">
+                <i class="bi bi-bar-chart-fill text-yellow-500 mr-2"></i>
+                Climate Finance Investment by Sector
+              </h3>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+</div>

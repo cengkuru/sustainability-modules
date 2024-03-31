@@ -1,0 +1,36 @@
+// Import the Lato font from Google Fonts
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+
+// Design System: Fluent UI Integration
+// Colors
+$color-background: #F3F2F1;
+$color-text-primary: #333333;
+$color-text-secondary: #557b88;
+$color-accent: #AE282F;
+$color-accent-light: #f9bd48;
+$color-border: #ced1d0;
+
+// Grayscale
+$color-gray: #ced1d0;
+$color-gray-dark: #333333;
+$color-gray-light: #f5f5f5;
+
+// Typography
+$font-family: 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif;
+$font-family-base: $font-family;
+$font-size-base: 16px;
+$font-size-sm: 14px;
+$font-size-lg: 18px;
+$font-size-xl: 20px;
+$font-size-xxl: 24px;
+
+// Font Weights
+$font-weight-thin: 100;
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-bold: 700;
+$font-weight-black: 900;
+
+// Font Styles
+$font-style-normal: normal;
+$font-style-italic: italic;
