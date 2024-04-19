@@ -3,321 +3,238 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-project-details',
   templateUrl: './project-details.component.html',
-  styleUrl: './project-details.component.scss'
+  styleUrls: ['./project-details.component.scss']
 })
 export class ProjectDetailsComponent {
+  // Tracks the currently active tab
+  activeTab: string = 'identification';
+  collapseStates: { [key: string]: boolean } = {};
 
-  // Active section identifier
-  activeSection: string = 'project-overview'; // Default to showing the first section
+  sampleData = {
+    "version": "0.9",
+    "uri": "https://standard.open-contracting.org/infrastructure/0.9/en/_static/example.json",
+    "publishedDate": "2018-12-10T15:53:00Z",
+    "publisher": {
+      "name": "Open Data Services Co-operative Limited",
+      "scheme": "GB-COH",
+      "uid": "9506232",
+      "uri": "http://data.companieshouse.gov.uk/doc/company/09506232"
+    },
+    "license": "http://opendatacommons.org/licenses/pddl/1.0/",
+    "publicationPolicy": "https://standard.open-contracting.org/1.1/en/implementation/publication_policy/",
+    "projects": [
+      {
+        "id": "za-ct-waterfront-revitalization-2021",
+        "identifiers": [
+          {
+            "id": "ZA-CT-2021-01",
+            "legalName": "Cape Town Waterfront Revitalization Authority"
+          }
+        ],
+        "updated": "2021-05-15T12:00:00Z",
+        "title": "Cape Town Waterfront Revitalization Project",
+        "description": "This project involves the expansion and upgrading of the V&A Waterfront to increase tourist capacity and improve public spaces, including the addition of new commercial facilities and enhanced maritime services.",
+        "status": "active",
+        "period": {
+          "startDate": "2021-01-01",
+          "endDate": "2025-12-31"
+        },
+        "identificationPeriod": {
+          "startDate": "2016-01-01T00:00:00Z",
+          "endDate": "2016-06-30T00:00:00Z"
+        },
+        "preparationPeriod": {
+          "startDate": "2016-07-01T00:00:00Z",
+          "endDate": "2016-12-31T00:00:00Z"
+        },
+        "implementationPeriod": {
+          "startDate": "2017-01-01T00:00:00Z",
+          "endDate": "2017-06-30T00:00:00Z"
+        },
+        "completionPeriod": {
+          "startDate": "2017-07-01T00:00:00Z",
+          "endDate": "2017-12-31T00:00:00Z"
+        },
+        "maintenancePeriod": {
+          "startDate": "2018-01-01T00:00:00Z",
+          "endDate": "2040-07-01T00:00:00Z"
+        },
+        "decommissioningPeriod": {
+          "startDate": "2040-07-01T00:00:00Z",
+          "endDate": "2041-06-30T00:00:00Z"
+        },
 
-  project = {
-    "oc4ids": "ocds-123abc-000-00001",
-    "name": "Uganda Solar Power Plant",
-    "country": "Uganda",
-    "budget": 120000000,
-    "currency": "USD",
-    "description": "Construction of a 50MW solar photovoltaic power plant",
-    "sector": "Energy",
-    "subSector": "Renewable Energy",
-    "purpose": "Increase renewable energy generation capacity",
-    "location": {
-      "description": "Nwoya District, Northern Uganda",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [2.9463, 31.3903]
+
+
+
+
+
+
+
+
+
+        "type": "Development",
+        "purpose": "To enhance economic growth and tourism in the Cape Town region by modernizing infrastructure and expanding facilities at the V&A Waterfront.",
+        "locations": [
+          {
+            "description": "Victoria & Alfred Waterfront, Cape Town, South Africa",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [18.423300, -33.918861]
+            }
+          }
+        ],
+        "budget": {
+          "id": "budget-za-ct-01",
+          "description": "Total budget allocated for the waterfront revitalization",
+          "amount": {
+            "currency": "ZAR",
+            "value": 4500000000
+          },
+          "source": "Public-private partnership funding"
+        },
+        "projectParties": [
+          {
+            "role": "developer",
+            "name": "Waterfront Development Co.",
+            "identifier": {
+              "scheme": "ZA-BR",
+              "id": "WD123456"
+            }
+          },
+          {
+            "role": "government",
+            "name": "City of Cape Town",
+            "identifier": {
+              "scheme": "ZA-GOV",
+              "id": "CTO123"
+            }
+          }
+        ],
+        "milestones": [
+          {
+            "id": "milestone1",
+            "type": "start",
+            "title": "Groundbreaking",
+            "status": "achieved",
+            "date": "2021-01-15"
+          },
+          {
+            "id": "milestone2",
+            "type": "mid-point",
+            "title": "Completion of Phase 1",
+            "status": "expected",
+            "date": "2023-12-31"
+          }
+        ],
+        "documents": [
+          {
+            "documentType": "projectProposal",
+            "id": "doc-2021-ct-wf-01",
+            "title": "Waterfront Project Proposal",
+            "description": "Comprehensive project proposal for the Cape Town Waterfront Revitalization.",
+            "url": "http://capetown.gov.za/documents/waterfront-proposal.pdf",
+            "datePublished": "2020-12-20"
+          }
+        ]
       }
-    },
-    "status": "Implementation",
-    "projectIdentification": {
-      "environmentalImpactAssessment": "Environmental impact assessment approved",
-      "socialImpactAssessment": "Social impact assessment conducted"
-    },
-    "projectPreparation": {
-      "projectScope": "Design, construction, and operation of a 50MW solar power plant",
-      "riskAssessments": [
-        "Construction risks",
-        "Operational risks",
-        "Financial risks"
-      ],
-      "procurementPlan": "Public-private partnership with competitive bidding",
-      "budget": 8000000,
-      "fundingSources": [
-        "Government budget",
-        "Private investment",
-        "Development bank loan"
-      ],
-      "publicConsultations": [
-        {
-          "numParticipants": 80,
-          "date": "2022-03-15",
-          "location": "Nwoya Town"
-        },
-        {
-          "numParticipants": 95,
-          "date": "2022-04-20",
-          "location": "Anaka Town"
-        },
-        {
-          "numParticipants": 75,
-          "date": "2022-05-12",
-          "location": "Purongo Town"
-        }
-      ]
-    },
-    "projectProcurement": {
-      "procurementMethod": "Public-private partnership with competitive bidding",
-      "contractType": "Build-Own-Operate-Transfer",
-      "contractValue": 100000000,
-      "numBidders": 5,
-      "awardDetails": {
-        "supplier": "Sun Power Energies Ltd.",
-        "date": "2023-01-15",
-        "value": 100000000
-      }
-    },
-    "projectImplementation": {
-      "contractMilestones": [
-        {
-          "name": "Site preparation",
-          "dueDate": "2023-06-30"
-        },
-        {
-          "name": "Foundation and civil works",
-          "dueDate": "2023-12-31"
-        },
-        {
-          "name": "Panel installation and electrical works",
-          "dueDate": "2024-06-30"
-        },
-        {
-          "name": "Testing and commissioning",
-          "dueDate": "2024-09-30"
-        }
-      ],
-      "variations": [
-        {
-          "type": "Scope",
-          "description": "Addition of battery storage system",
-          "value": 10000000,
-          "reason": "Improve grid stability and energy storage"
-        }
-      ],
-      "progressReports": [
-        {
-          "date": "2023-12-31",
-          "progress": 25,
-          "notes": "Site preparation and foundation works completed"
-        }
-      ],
-      "supervisorReports": [
-        {
-          "date": "2023-12-31",
-          "notes": "Quality of construction meets specifications"
-        }
-      ]
-    },
-    "projectCompletion": {
-      "finalScope": "50MW solar power plant with 10MWh battery storage",
-      "finalCost": 110000000,
-      "delayReasons": [
-        "Supply chain disruptions",
-        "Weather conditions"
-      ],
-      "completionReports": [
-        {
-          "date": "2024-12-31",
-          "notes": "Project completed and operational"
-        }
-      ]
-    },
-    "decommissioning": {
-      "planDescription": "Focused on recycling materials, rehabilitating the site, and restoring the area to its original or better state.",
-      "contractor": {
-        "name": "EcoSol Decommissioning Services",
-        "value": 5000000,
-        "duration": 2
-      },
-      "schedule": {
-        "start": "2045-01-01",
-        "end": "2047-12-31"
-      },
-      "costForecast": 10000000,
-      "environmentalImpact": {
-        "carbonSavings": 5000
-      }
-    },
-    "economicAndFinancial": {
-      "procurementStrategy": "Public-private partnership with competitive bidding",
-      "lifeCycleCost": 120000000,
-      "lifeCycleCostCalculationMethod": "Net present value discounted at 10% over 25 years",
-      "fundingSourcePreparation": "Government budget",
-      "fundingSourceImplementation": "70% private investment, 20% government budget, 10% development bank loan",
-      "fundingSourceMaintenance": "Private operator revenues",
-      "budgetPreparation": 2000000,
-      "budgetImplementation": 80000000,
-      "budgetMaintenance": 50000000,
-      "costBenefitAnalysis": "Economic rate of return of 12%",
-      "valueForMoney": "PPP provides optimal risk transfer compared to public procurement",
-      "assetLifetime": 25,
-      "budgetProjections": {
-        "implementation": 80000000,
-        "maintenance": 50000000
-      },
-      "budgetShortfall": null,
-      "maintenancePlan": "Preventive maintenance every 6 months, panel replacement every 10 years"
-    },
-    "environmentalAndClimate": {
-      "environmentalImpactCategory": "B",
-      "environmentalMeasures": "Habitat restoration, stormwater management",
-      "environmentalLicensesAndExemptions": "Environmental impact assessment approved",
-      "protectedArea": false,
-      "conservationMeasures": "Native vegetation buffers around site",
-      "climateAndDisasterRisk": {
-        "extremeHeat": true,
-        "flooding": true,
-        "highWinds": true
-      },
-      "climateMeasures": "Flood barriers, robust panel mounting, drainage improvements",
-      "greenhouseGasEmissionsEstimate": -50000,
-      "environmentalCertifications": "Pursuing LEED Gold certification",
-      "decomissioningPlans": "Recycling of materials, site rehabilitation",
-      "decomissioningCostForecast": 10000000
-    },
-
-    "social": {
-      "numberOfBeneficiaries": 200000,
-      "inclusiveDesignAndImplementation": "Solar home systems for low-income households",
-      "indigenousLand": false,
-      "publicConsultationMeetings": [
-        {
-          "numParticipants": 80,
-          "date": "2022-03-15",
-          "location": "Nwoya Town"
-        },
-        {
-          "numParticipants": 95,
-          "date": "2022-04-20",
-          "location": "Anaka Town"
-        },
-        {
-          "numParticipants": 75,
-          "date": "2022-05-12",
-          "location": "Purongo Town"
-        }
-      ],
-      "landCompensationBudget": 500000,
-      "laborObligations": "Fair wages, safe working conditions, no child labor",
-      "laborBudget": 15000000,
-      "workersAccidents": 0,
-      "healthAndSafetyCertifications": "ISO 45001",
-      "constructionMaterialsTesting": "Panels tested to IEC standards",
-      "buildingInspections": "Monthly inspections by energy regulator",
-      "jobsGenerated": {
-        "construction": 300,
-        "operations": 25
-      }
-    },
-
-    "institutional": {
-      "policyCoherence": "Aligned with Uganda's Vision 2040 and Renewable Energy Policy 2022.",
-      "freedomOfInformationRequests": 2,
-      "freedomOfInformationResponses": 2,
-      "lobbyingTransparency": "Compliant with national transparency regulations.",
-      "beneficialOwnership": "Public registry available at https://ublr.go.ug/companies/456789.",
-      "sustainabilityCriteria": "30% weight in bid evaluation for sustainability.",
-      "antiCorruptionCertifications": "ISO 37001 certification for anti-bribery management.",
-      "independentMonitoring": "Uganda Electricity Regulatory Authority oversees project.",
-      "performanceMonitoring": "Monthly checks on output, availability, and energy delivery.",
-      "riskManagementPlans": "Comprehensive strategies for construction, operational, and financial risks.",
-      "sustainableSubsectors": "Focus on solar photovoltaic power.",
-      "transparencyAndAccountability": "Public disclosure of project documents and reports.",
-    },
-
-    "climateFinance": {
-      "climateObjective": "Mitigation",
-      "financialInstrument": {
-        "type": "Concessional loan",
-        "amount": 20000000
-      },
-      "climateTransformation": "Expands clean energy, reduces emissions",
-      "climateFinanceDecisionMaking": "Priorities set in Uganda Climate Change Policy",
-      "nationallyDeterminedContributions": "Contributes to 80% renewable energy target by 2030",
-      "parisAgreement": "Supports Paris mitigation goals",
-      "beneficiaries": {
-        "number": 200000,
-        "description": "People gaining clean energy access"
-      },
-      "investmentAmount": 100000000,
-      "fundingSource": [
-        "Green Climate Fund",
-        "Private investment"
-      ],
-      "greenClimateFundAccreditedEntity": true,
-      "accreditedEntityType": "Direct national access",
-      "projectPreparationCosts": 1000000,
-      "projectPreparationPeriod": {
-        "start": "2022-01-01",
-        "end": "2023-06-30"
-      },
-      "projectApprovalPeriod": {
-        "start": "2023-07-01",
-        "end": "2023-12-31"
-      },
-      "coFinanceRatio": 0.2,
-      "climateFinanceTerms": {
-        "maturity": 40,
-        "gracePeriod": 5,
-        "annualPrincipalRepayment": 0.025,
-        "interestRate": 0.0025,
-        "serviceFee": 0.0075,
-        "commitmentFee": 0.005
-      },
-      "carbonEfficiency": 0.5,
-      "nonClimateCoBenefits": [
-        "Improved energy access",
-        "Reduced indoor air pollution"
-      ],
-      "publicConsultationMeetings": 3,
-      "disbursementRecords": "https://greenclimate.fund/project/456/disbursements",
-      "projectMonitoringType": "Mixed",
-      "performanceMonitoring": [
-        "GHG emissions reduced",
-        "Beneficiaries reached"
-      ],
-      "reportingPeriod": "Annual",
-      "oversightReports": "https://greenclimate.fund/project/456/oversight",
-      "independentMonitoring": "Uganda Auditor General",
-      "independentEvaluation": "https://greenclimate.fund/project/456/evaluation",
-      "impactMeasurement": "Household surveys on beneficiaries and socioeconomic impacts",
-      "carbonFootprint": -50000,
-      "assetsToBeDecommissioned": "Diesel generators",
-      "decomissioningPeriod": {
-        "start": "2045-01-01",
-        "end": "2047-12-31"
-      },
-      "decomissioningPlan": "https://anytown.gov/utilities/diesel-generators-decommissioning",
-      "carbonDecomissioningSavings": 5000,
-      "decomissioningMitigationPlan": "Retraining for workers, community transition support"
-    }
-
-  }
-  constructor() {}
-
-
-
-  getTotalParticipants() {
-    return this.project.projectPreparation.publicConsultations.reduce((total, consultation) => total + consultation.numParticipants, 0);
-  }
-
-  getTotalParticipants1() {
-    return this.project.social.publicConsultationMeetings.reduce((total, meeting) => total + meeting.numParticipants, 0);
-  }
-
-  setActiveSection(sectionId: string): void {
-    this.activeSection = sectionId;
+    ]
   }
 
 
 
 
+  // Information about the tabs and their respective names
+  // Each tab now includes a 'fields' array
+
+
+
+  // Detailed fields within the Identification phase
+  identificationFields = [
+    { label: 'Project Identifier', value: '001' },
+    { label: 'Project Name', value: 'Cape Town Waterfront Revitalization' },
+    { label: 'Project Description', value: 'Revitalization of the waterfront area to boost tourism and protect natural resources.' },
+    { label: 'Sector', value: 'Tourism' },
+    { label: 'Subsector', value: 'Urban Development' },
+    { label: 'Project Location', value: 'V&A Waterfront, Cape Town, South Africa' },
+    { label: 'Purpose', value: 'To enhance urban infrastructure and promote sustainable tourism.' },
+    { label: 'Project Owner Organization', value: 'City of Cape Town' },
+    { label: 'Project Owner Organization Roles', value: 'Project Initiator and Supervisor' },
+    { label: 'Project Owner Contact Point', value: 'info@capetown.gov.za' },
+    { label: 'Project Sponsor', value: 'South African Government' },
+    { label: 'Project Sponsor Organization Roles', value: 'Funding and Strategic Support' },
+    { label: 'Project Sponsor Contact Point', value: 'sponsor@sagov.org' },
+    { label: 'Project Needs Assessment', value: 'Identified need for improved urban spaces and tourism facilities' },
+    { label: 'Project Rationale', value: 'To support economic growth and enhance the quality of life for residents' },
+    { label: 'Project Approval Date', value: '2020-01-01' },
+    { label: 'Project Budget Amount', value: 'ZAR 3.2 billion' },
+    { label: 'Project Budget Currency', value: 'ZAR' },
+    { label: 'Project Budget Approval Date', value: '2020-02-15' },
+    { label: 'Environmental Impact Assessment', value: 'Completed, findings reported to relevant authorities' },
+    { label: 'Land and Settlement Impact Assessment', value: 'Minimal impact, with compensation measures in place' },
+    { label: 'Project Status', value: 'Active' }
+  ];
+
+
+  preparationFields = [
+    { label: 'Project Scope (main output)', value: 'Construction of new waterfront facilities, including 2000 meters of public walkways and 30 retail outlets.' },
+    { label: 'Environmental Impact', value: 'Potential impacts include changes to local wildlife habitats; mitigation measures include creating wildlife corridors and noise reduction during construction.' },
+    { label: 'Land and Settlement Impact', value: '150 hectares of land acquired, impacting approximately 40 properties. Compensation measures and resettlement assistance have been provided.' },
+    { label: 'Contact Details', value: 'Postal: P.O. Box 123, Cape Town, 8000; Email: projectinfo@capetown.gov.za' },
+    { label: 'Funding Sources', value: 'Funded by the South African Government, World Bank, and private investors.' },
+    { label: 'Project Budget', value: 'Total budget: ZAR 4.5 billion, including ZAR 2 billion for construction, ZAR 500 million for environmental mitigation, and ZAR 1 billion for public amenities.' },
+    { label: 'Project Budget Approval Date', value: '2021-05-20' },
+    { label: 'Project Approval Date', value: '2021-03-15' }
+  ];
+
+
+  implementationFields = [
+    { label: 'Project Status', value: '75% complete' },
+    { label: 'Project Progress', value: '75%' },
+    { label: 'Completion Cost', value: 'ZAR 5 billion estimated' },
+    { label: 'Completion Date', value: '2026-12-31' },
+    { label: 'Scope at Completion', value: 'Final scope includes 2500 meters of waterfront development, including public spaces and commercial areas.' },
+    { label: 'Reasons for Project Changes', value: 'Adjustments made to incorporate additional safety measures and environmental protections.' },
+    { label: 'Reference to Audit and Evaluation Reports', value: 'Audit Report 2025, Evaluation Report 2026' },
+    { label: 'Variation to Contract Price', value: 'Initial contract price was ZAR 4.5 billion, adjusted to ZAR 5 billion due to material cost increases.' },
+    { label: 'Escalation of Contract Price', value: 'Contract price escalated by 10% due to unforeseen economic factors.' },
+    { label: 'Variation to Contract Duration', value: 'Project duration extended by six months due to regulatory approvals.' },
+    { label: 'Variation to Contract Scope', value: 'Scope expanded to include additional environmental mitigation measures.' }
+  ];
+
+
+  completionFields = [
+    { label: 'Project Status', value: 'Completed' },
+    { label: 'Completion Cost', value: 'ZAR 5.2 billion' },
+    { label: 'Completion Date', value: '2026-12-31' },
+    { label: 'Scope at Completion', value: 'The project concluded with the successful development of 2500 meters of waterfront, including parks, commercial spaces, and recreational facilities.' },
+    { label: 'Reasons for Project Changes', value: 'Changes were primarily due to updated environmental regulations and additional requirements from stakeholders leading to enhancements in design and safety features.' },
+    { label: 'Reference to Audit and Evaluation Reports', value: 'Audit Report 2026 Q4, Evaluation Report 2027 Q1' }
+  ];
+
+
+  tabs = [
+    { id: 'identification', name: 'Identification', fields: this.identificationFields },
+    { id: 'preparation', name: 'Preparation', fields: this.preparationFields },
+    { id: 'implementation', name: 'Implementation', fields: this.implementationFields },
+    { id: 'completion', name: 'Completion', fields: this.completionFields }
+  ];
+
+
+  constructor() {
+    // Initialize all tabs as collapsed
+    this.tabs.forEach(tab => {
+      this.collapseStates[tab.id] = true;
+    });
+  }
+
+
+  // Function to set the active tab
+  setActiveTab(tabId: string): void {
+    this.activeTab = tabId;
+  }
+
+  toggleAccordion(tabId: string): void {
+    this.collapseStates[tabId] = !this.collapseStates[tabId];
+  }
 }
