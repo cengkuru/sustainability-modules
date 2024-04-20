@@ -72,14 +72,18 @@
               <!-- Project Value and Location -->
               <div class="flex-1">
                 <p class="text-sm text-gray-600 flex items-center">
-                  <svg class="w-4 h-4 mr-2 fill-current text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-                    <path d="M11 1a5 5 0 0 0-5 5c0 1.5-.5 3-2 5a15.92 15.92 0 0 0 3 3c1.5-1.5 3.5-2 5-2a5 5 0 0 0 0-10zM3 12c.5-.5 1-1.5 1-3a3 3 0 1 1 6 0c0 1.5.5 2.5 1 3a14.17 14.17 0 0 1-2 1 14.17 14.17 0 0 1-2-1c-.33-.33-.67-.67-1-1z"/>
+                  <svg class="w-4 h-4 mr-2 fill-current text-gray-500" xmlns="http://www.w3.org/2000/svg"
+                       viewBox="0 0 16 16">
+                    <path
+                      d="M11 1a5 5 0 0 0-5 5c0 1.5-.5 3-2 5a15.92 15.92 0 0 0 3 3c1.5-1.5 3.5-2 5-2a5 5 0 0 0 0-10zM3 12c.5-.5 1-1.5 1-3a3 3 0 1 1 6 0c0 1.5.5 2.5 1 3a14.17 14.17 0 0 1-2 1 14.17 14.17 0 0 1-2-1c-.33-.33-.67-.67-1-1z"/>
                   </svg>
                   Value: {{ project.budget?.amount.amount }} {{ project.budget?.amount.currency }}
                 </p>
                 <p class="text-sm text-gray-600 flex items-center">
-                  <svg class="w-4 h-4 mr-2 fill-current text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-                    <path d="M7.5 1A6.5 6.5 0 0 0 1 7.5 6.5 6.5 0 0 0 7.5 14 6.5 6.5 0 0 0 14 7.5 6.5 6.5 0 0 0 7.5 1zM2 7.5a5.5 5.5 0 0 1 11 0A5.5 5.5 0 0 1 2 7.5z"/>
+                  <svg class="w-4 h-4 mr-2 fill-current text-gray-500" xmlns="http://www.w3.org/2000/svg"
+                       viewBox="0 0 16 16">
+                    <path
+                      d="M7.5 1A6.5 6.5 0 0 0 1 7.5 6.5 6.5 0 0 0 7.5 14 6.5 6.5 0 0 0 14 7.5 6.5 6.5 0 0 0 7.5 1zM2 7.5a5.5 5.5 0 0 1 11 0A5.5 5.5 0 0 1 2 7.5z"/>
                   </svg>
                   Location: {{ project.locations?.[0]?.description }}
                 </p>
@@ -97,10 +101,527 @@
             </div>
 
             <!-- Expanded section for project details -->
-            <div *ngIf="isProjectDetailsOpen(project.id)" class="mt-4 p-4 border-t border-gray-200">
-              <div><strong>Project Description:</strong> {{ project.description }}</div>
-              <div><strong>More Info:</strong> Additional details can go here...</div>
+            <!-- Project details section -->
+            <div *ngIf="isProjectDetailsOpen(project.id)" class="mt-4 p-4 border-t border-gray-200 bg-gray-50">
+              <!-- Current Phase spotlight -->
+              <div class="my-4 p-4 border border-gray-100-200 bg-gray-50">
+                <h3 class="text-lg font-semibold text-blue-700">Project Phase: {{ project.phase }}</h3>
+
+                <!-- General Information Section -->
+                <div class="general-info mt-4 p-4 bg-white rounded-lg shadow">
+                  <h2 class="text-xl font-semibold">{{ project.title }}</h2>
+                  <p class="text-sm"><strong>ID:</strong> {{ project.identifiers[0]?.id }}</p>
+                  <p class="text-sm"><strong>Description:</strong> {{ project.description }}</p>
+                  <p class="text-sm"><strong>Status:</strong> {{ project.status }}</p>
+                  <p class="text-sm"><strong>Sector:</strong> {{ project.sector?.join(', ') }}</p>
+                  <p class="text-sm"><strong>Purpose:</strong> {{ project.purpose }}</p>
+
+                  <!-- Additional Classifications -->
+                  <div *ngIf="project.additionalClassifications?.length">
+                    <strong>Classifications:</strong>
+                    <ul>
+                      <li *ngFor="let classification of project.additionalClassifications">
+                        {{ classification.scheme }}: {{ classification.description }}
+                      </li>
+                    </ul>
+                  </div>
+
+                  <p class="text-sm"><strong>Type:</strong> {{ project.type }}</p>
+                  <p class="text-sm"><strong>Authority:</strong> {{ project.publicAuthority?.name }}</p>
+
+                  <!-- Documents -->
+                  <div *ngIf="project.documents?.length">
+                    <strong>Documents:</strong>
+                    <ul>
+                      <li *ngFor="let document of project.documents">
+                        <a [href]="document.url" target="_blank">{{ document.title }}</a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Related Projects -->
+                  <div *ngIf="project.relatedProjects?.length">
+                    <strong>Related Projects:</strong>
+                    <ul>
+                      <li *ngFor="let relatedProject of project.relatedProjects">
+                        {{ relatedProject.title }} ({{ relatedProject.relationship }})
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Parties -->
+                  <div *ngIf="project.parties?.length">
+                    <strong>Parties:</strong>
+                    <ul>
+                      <li *ngFor="let party of project.parties">
+                        {{ party.name }} ({{ party.roles.join(', ') }})
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Contracting Processes -->
+                  <div *ngIf="project.contractingProcesses?.length">
+                    <strong>Contracting Processes:</strong>
+                    <ul>
+                      <li *ngFor="let process of project.contractingProcesses">
+                        {{ process.summary.title }} ({{ process.summary.status }})
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Metrics -->
+                  <div *ngIf="project.metrics?.length">
+                    <strong>Metrics:</strong>
+                    <ul>
+                      <li *ngFor="let metric of project.metrics">
+                        {{ metric.title }}:
+                        <span *ngFor="let observation of metric.observations">
+          {{ observation.value.amount }} {{ observation.value.unit?.name }}
+                          ({{ observation.period.startDate }} - {{ observation.period.endDate }})
+        </span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Transactions -->
+                  <div *ngIf="project.transactions?.length">
+                    <strong>Transactions:</strong>
+                    <ul>
+                      <li *ngFor="let transaction of project.transactions">
+                        {{ transaction.value.amount }} {{ transaction.value.currency }} -
+                        {{ transaction.date }} - {{ transaction.description }}
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Milestones -->
+                  <div *ngIf="project.milestones?.length">
+                    <strong>Milestones:</strong>
+                    <ul>
+                      <li *ngFor="let milestone of project.milestones">
+                        {{ milestone.title }} ({{ milestone.status }}) - Due: {{ milestone.dueDate }}
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Benefits -->
+                  <div *ngIf="project.benefits?.length">
+                    <strong>Benefits:</strong>
+                    <ul>
+                      <li *ngFor="let benefit of project.benefits">
+                        {{ benefit.title }}: {{ benefit.description }}
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Policy Alignment -->
+                  <div *ngIf="project.policyAlignment?.policies?.length">
+                    <strong>Policy Alignment:</strong>
+                    <ul>
+                      <li *ngFor="let policy of project.policyAlignment.policies">
+                        {{ policy }}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div *ngIf="project.phase === 'Identification'" class="mt-2 bg-gray-50 p-4 rounded-md shadow-sm">
+                  <h3 class="font-semibold text-lg text-gray-700 mb-2">Identification Phase</h3>
+                  <p><strong>Start Date:</strong> {{ project.identificationPeriod?.startDate }}</p>
+                  <p><strong>End Date:</strong> {{ project.identificationPeriod?.endDate }}</p>
+                  <p><strong>Environmental Impact Assessment:</strong>
+                    {{ project.environment?.hasImpactAssessment ? 'Conducted' : 'Not Conducted' }}
+                  </p>
+                  <p><strong>Potential Environmental Impact:</strong>
+                    {{ project.environment?.impactCategories[0]?.id }}
+                    <span *ngIf="project.environment?.impactCategories[0]?.description">
+      ({{ project.environment.impactCategories[0]?.description }})
+    </span>
+                  </p>
+                  <p><strong>Located in Protected Area:</strong>
+                    {{ project.environment?.inProtectedArea ? 'Yes' : 'No' }}
+                  </p>
+                  <p><strong>Affects Indigenous Lands:</strong>
+                    {{ project.social?.inIndigenousLand ? 'Yes' : 'No' }}
+                  </p>
+                  <div *ngIf="project.lobbyingMeetings?.length > 0">
+                    <strong>Lobbying Meetings:</strong>
+                    <ul>
+                      <li *ngFor="let meeting of project.lobbyingMeetings">
+                        {{ meeting.date | date }} - {{ meeting.publicOffice?.organization?.name }}
+                        <span *ngIf="meeting.numberOfParticipants">({{ meeting.numberOfParticipants }}
+                          participants)</span>
+                        <span *ngIf="meeting.publicOffice?.person?.name"> ({{ meeting.publicOffice.person.name }}
+                          )</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div *ngIf="hasClimateFinance(project)">
+                    <strong>Climate Finance:</strong>
+                    <p>Objective: {{ project.climateFinance?.climateObjective }}</p>
+                    <p>Instrument: {{ project.climateFinance?.financialInstrument }}</p>
+                    <p>Transformation: {{ project.climateFinance?.climateTransformation }}</p>
+                    <p>Decision Making: {{ project.climateFinance?.climateFinanceDecisionMaking }}</p>
+                    <p>Aligned with NDCs: {{ project.climateFinance?.nationallyDeterminedContributions }}</p>
+                    <p>Paris Agreement: {{ project.climateFinance?.parisAgreement }}</p>
+                    <p>Beneficiaries: {{ project.climateFinance?.beneficiaries }}</p>
+                    <p>Investment Amount: {{ project.climateFinance?.amountOfInvestment }} ZAR</p>
+                    <p>Funding Source: {{ project.climateFinance?.fundingSource }}</p>
+                  </div>
+                </div>
+
+                <div *ngIf="project.phase === 'Preparation'" class="mt-2 bg-gray-50 p-4 rounded-md shadow-sm">
+                  <h3 class="font-semibold text-lg text-gray-700 mb-2">Preparation Phase</h3>
+
+                  <p><strong>Start Date:</strong> {{ project.preparationPeriod?.startDate }}</p>
+                  <p *ngIf="project.preparationPeriod?.endDate"><strong>End
+                    Date:</strong> {{ project.preparationPeriod?.endDate }}</p>
+
+                  <p *ngIf="project.assetLifetime?.durationInDays">
+                    <strong>Expected Asset Lifetime:</strong>
+                    {{ project.assetLifetime?.durationInDays / 365 | number: '1.0-0' }} years
+                  </p>
+
+                  <div *ngIf="project.locations.length > 0">
+                    <strong>Locations:</strong>
+                    <ul>
+                      <li *ngFor="let location of project.locations">
+                        {{ location.description }} ({{ location.geometry.coordinates[0] }}
+                        , {{ location.geometry.coordinates[1] }})
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div *ngIf="project.budget.amount">
+                    <strong>Budget:</strong> {{ project.budget.amount.amount | currency: project.budget.amount.currency }}
+                    <ul *ngIf="project.budget.budgetBreakdowns.length > 0">
+                      <li *ngFor="let breakdown of project.budget.budgetBreakdowns">
+                        {{ breakdown.description }}: {{ breakdown.amount.amount | currency: breakdown.amount.currency }}
+                      </li>
+                    </ul>
+                    <ul *ngIf="project.budget.finance.length > 0">
+                      <li *ngFor="let finance of project.budget.finance">
+                        {{ finance.type }} from {{ finance.source }}
+                        : {{ finance.value.amount | currency: finance.value.currency }}
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div *ngIf="project.costMeasurements.length > 0">
+                    <strong>Cost Measurements:</strong>
+                    <ul>
+                      <li *ngFor="let measurement of project.costMeasurements">
+                        {{ measurement.id }} ({{ measurement.date }}):
+                        {{ measurement.lifeCycleCosting?.value.amount | currency: measurement.lifeCycleCosting?.value.currency }}
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div *ngIf="project.forecasts.length > 0">
+                    <strong>Forecasts:</strong>
+                    <ul>
+                      <li *ngFor="let forecast of project.forecasts">
+                        {{ forecast.title }}:
+                        <ul>
+                          <li *ngFor="let observation of forecast.observations">
+                            {{ observation.period.startDate }} - {{ observation.period.endDate }}:
+                            {{ observation.value.amount }} {{ observation.value.unit?.name }}
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div *ngIf="project.environment?.environmentalMeasures?.length > 0">
+                    <strong>Environmental Measures:</strong>
+                    <ul>
+                      <li *ngFor="let measure of project.environment?.environmentalMeasures">
+                        {{ measure.description }}
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div *ngIf="project.environment?.climateMeasures.length > 0">
+                    <strong>Climate Measures:</strong>
+                    <ul>
+                      <li *ngFor="let measure of project.environment?.climateMeasures">
+                        {{ measure.description }}
+                      </li>
+                    </ul>
+                  </div>
+
+                  <p *ngIf="project.environment?.forecastOfGreenhouseGasEmissions">
+                    <strong>Estimated Greenhouse Gas Emissions:</strong>
+                    {{ project.environment?.forecastOfGreenhouseGasEmissions?.amount }}
+                    {{ project.environment?.forecastOfGreenhouseGasEmissions?.unit?.name }}
+                  </p>
+
+                  <div *ngIf="project.social?.consultationMeetings.length > 0">
+                    <strong>Public Consultations:</strong>
+                    <ul>
+                      <li *ngFor="let meeting of project.social?.consultationMeetings">
+                        {{ meeting.date | date }} - {{ meeting.numberOfParticipants }} participants
+                      </li>
+                    </ul>
+                  </div>
+
+                  <p *ngIf="project.social?.numberOfBeneficiaries">
+                    <strong>Number of Beneficiaries:</strong> {{ project.social?.numberOfBeneficiaries }}
+                  </p>
+
+                  <p *ngIf="project.social?.inclusiveDesign">
+                    <strong>Inclusive Design Considerations:</strong> {{ project.social?.inclusiveDesign }}
+                  </p>
+
+                  <p *ngIf="project.social?.landCompensationBudget?.amount">
+                    <strong>Land Compensation Budget:</strong>
+                    {{ project.social?.landCompensationBudget?.amount | currency: project.social?.landCompensationBudget?.currency }}
+                  </p>
+
+                  <div *ngIf="project.riskManagementPlans?.length > 0">
+                    <strong>Risk Management Plans:</strong>
+                    <ul>
+                      <li *ngFor="let plan of project.riskManagementPlans">
+                        {{ plan.description }}
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div *ngIf="project.climateFinance">
+                    <strong>Climate Finance:</strong>
+                    <p *ngIf="project.climateFinance.greenClimateFundAccreditedEntity">
+                      Green Climate Fund Accredited Entity:
+                      {{ project.climateFinance.greenClimateFundAccreditedEntity }}
+                      ({{ project.climateFinance.accreditedEntityType }})
+                    </p>
+                    <p *ngIf="project.climateFinance.projectPreparationCosts">
+                      Project Preparation Costs:
+                      {{ project.climateFinance.projectPreparationCosts | currency: 'ZAR' }}
+                    </p>
+                    <p *ngIf="project.climateFinance.projectPreparationPeriod?.startDate">
+                      Project Preparation Period:
+                      {{ project.climateFinance.projectPreparationPeriod?.startDate }} -
+                      {{ project.climateFinance.projectPreparationPeriod?.endDate }}
+                    </p>
+                    <p *ngIf="project.climateFinance.projectApprovalPeriod?.startDate">
+                      Project Approval Period:
+                      {{ project.climateFinance.projectApprovalPeriod?.startDate }} -
+                      {{ project.climateFinance.projectApprovalPeriod?.endDate }}
+                    </p>
+                    <p *ngIf="project.climateFinance.ratioOfCoFinance">
+                      Co-financing Ratio: {{ project.climateFinance.ratioOfCoFinance }}
+                    </p>
+                    <p *ngIf="project.climateFinance.termsOfClimateFinance">
+                      Terms of Climate Finance: {{ project.climateFinance.termsOfClimateFinance }}
+                    </p>
+                    <p *ngIf="project.climateFinance.carbonEfficiency">
+                      Carbon Efficiency:
+                      {{ project.climateFinance.carbonEfficiency }} ZAR per tonne CO2 equivalent
+                    </p>
+                    <p *ngIf="project.climateFinance.nonClimateCoBenefits">
+                      Non-Climate Co-benefits: {{ project.climateFinance.nonClimateCoBenefits }}
+                    </p>
+                  </div>
+                </div>
+
+                <div *ngIf="project.phase === 'Implementation'" class="mt-2 bg-gray-50 p-4 rounded-md shadow-sm">
+                  <h3 class="font-semibold text-lg text-gray-700 mb-2">Implementation Phase</h3>
+
+                  <p *ngIf="project.budget.budgetShortfall">
+                    <strong>Budget Shortfall:</strong>
+                    {{ project.budget.budgetShortfall?.amount | currency: project.budget.amount.currency }}
+                    ({{ project.budget.budgetShortfall?.description }})
+                  </p>
+
+                  <div *ngIf="project.contractingProcesses?.length > 0">
+                    <strong>Contracting Processes:</strong>
+                    <ul>
+                      <li *ngFor="let process of project.contractingProcesses">
+                        {{ process.summary.title }} ({{ process.summary.status }})
+                        <ul>
+                          <li>Contract
+                            Value: {{ process.summary.contractValue?.amount | currency: process.summary.contractValue?.currency }}
+                          </li>
+                          <li>Supplier: {{ process.summary.suppliers[0]?.name }}</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div *ngIf="project.environment.environmentalLicensesAndExemptions?.length > 0">
+                    <strong>Environmental Licenses and Exemptions:</strong>
+                    <ul>
+                      <li *ngFor="let license of project.environment.environmentalLicensesAndExemptions">
+                        {{ license.id }}: {{ license.description }}
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div *ngIf="project.social.laborObligations?.obligations?.length > 0">
+                    <strong>Labor Obligations:</strong>
+                    <ul>
+                      <li *ngFor="let obligation of project.social.laborObligations?.obligations">
+                        {{ obligation }}
+                      </li>
+                    </ul>
+                  </div>
+
+                  <p>
+                    <strong>Labor Budget:</strong> {{ project.social.laborBudget?.amount | currency: 'ZAR' }}
+                  </p>
+
+                  <p>
+                    <strong>Worker Accidents:</strong> {{ project.social.workersAccidents }}
+                  </p>
+
+                  <div *ngIf="project.social.healthAndSafetyCertifications?.length > 0">
+                    <strong>Health and Safety Certifications:</strong>
+                    <ul>
+                      <li *ngFor="let certification of project.social.healthAndSafetyCertifications">
+                        {{ certification.id }}: {{ certification.description }}
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div *ngIf="project.social.healthAndSafety?.materialTests?.test?.length > 0">
+                    <strong>Construction Materials Testing:</strong>
+                    <ul>
+                      <li *ngFor="let test of project.social.healthAndSafety?.materialTests?.test">
+                        {{ test }}
+                      </li>
+                    </ul>
+                  </div>
+
+                  <p>
+                    <strong>Building Inspections:</strong> {{ project.social.buildingInspections }}
+                  </p>
+
+                  <p>
+                    <strong>Jobs Generated:</strong> {{ project.social.jobsGenerated }}
+                  </p>
+
+                  <div *ngIf="project.climateFinance?.disbursementRecords?.length > 0">
+                    <strong>Climate Finance Disbursements:</strong>
+                    <ul>
+                      <li *ngFor="let record of project.climateFinance?.disbursementRecords">
+                        {{ record.date }}: {{ record.value.amount | currency: record.value.currency }}
+                      </li>
+                    </ul>
+                  </div>
+
+                  <p *ngIf="project.climateFinance?.typeOfProjectMonitoring">
+                    <strong>Climate Finance Monitoring
+                      Type:</strong> {{ project.climateFinance?.typeOfProjectMonitoring }}
+                  </p>
+                </div>
+
+                <div *ngIf="project.phase === 'Completion'" class="mt-2 bg-gray-50 p-4 rounded-md shadow-sm">
+                  <h3 class="font-semibold text-lg text-gray-700 mb-2">Completion Phase</h3>
+                  <p><strong>Start Date:</strong> {{ project.completionPeriod?.startDate }}</p>
+                  <p><strong>End Date:</strong> {{ project.completionPeriod?.endDate }}</p>
+
+                  <p><strong>Final Project Scope:</strong>
+                    {{ project.completion.finalScope }}
+                    <span *ngIf="project.completion.finalScopeDetails">
+                      ({{ project.completion.finalScopeDetails }})
+                    </span>
+                  </p>
+
+                  <p><strong>Final Project Cost:</strong>
+                    {{ project.completion.finalValue?.amount | currency: project.completion.finalValue?.currency }}
+                    <span *ngIf="project.completion.finalValueDetails">
+                      ({{ project.completion.finalValueDetails }})
+                    </span>
+                  </p>
+
+                  <p><strong>Completion Date:</strong> {{ project.completion.endDate }}
+                    <span *ngIf="project.completion.endDateDetails">
+                      ({{ project.completion.endDateDetails }})
+                    </span>
+                  </p>
+                </div>
+
+                <div *ngIf="project.phase === 'Maintenance'" class="mt-2 bg-gray-50 p-4 rounded-md shadow-sm">
+                  <h3 class="font-semibold text-lg text-gray-700 mb-2">Maintenance Phase</h3>
+                  <p><strong>Start Date:</strong> {{ project.maintenancePeriod?.startDate }}</p>
+
+                  <div *ngIf="project.maintenancePlan?.length > 0">
+                    <strong>Maintenance Plan:</strong>
+                    <ul>
+                      <li *ngFor="let item of project.maintenancePlan">
+                        {{ item.type }}: {{ item.description }}
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div *ngIf="project.climateFinance?.impactMeasurement">
+                    <strong>Climate Impact Measurement:</strong>
+                    <p>{{ project.climateFinance.impactMeasurement }}</p>
+                  </div>
+
+                  <div *ngIf="project.climateFinance?.carbonFootprint">
+                    <strong>Carbon Footprint:</strong>
+                    <p>{{ project.climateFinance.carbonFootprint.amount }} {{ project.climateFinance.carbonFootprint.unit.name }}</p>
+                  </div>
+                </div>
+
+                <div *ngIf="project.phase === 'Decommissioning'" class="mt-2 bg-gray-50 p-4 rounded-md shadow-sm">
+                  <h3 class="text-lg leading-6 font-medium text-gray-900">Decommissioning Phase</h3>
+                  <dl class="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                    <div *ngIf="project.decommissioningPeriod">
+                      <dt class="text-sm font-medium text-gray-500">Decommissioning Period</dt>
+                      <dd class="mt-1 text-sm text-gray-900">{{ project.decommissioningPeriod?.startDate | date }} - {{ project.decommissioningPeriod?.endDate | date }}</dd>
+                    </div>
+                    <div *ngIf="project.environment.decommissioningPlans">
+                      <dt class="text-sm font-medium text-gray-500">Decommissioning Plans</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <ul>
+                          <li *ngFor="let plan of project.environment.decommissioningPlans">{{ plan.description }}</li>
+                        </ul>
+                      </dd>
+                    </div>
+                    <div *ngIf="project.environment.decommissioningCostForecast">
+                      <dt class="text-sm font-medium text-gray-500">Decommissioning Cost Forecast</dt>
+                      <dd class="mt-1 text-sm text-gray-900">{{ project.environment.decommissioningCostForecast?.amount | currency:project.environment.decommissioningCostForecast?.currency }}</dd>
+                    </div>
+                    <div *ngIf="project.climateFinance.infrastructureAssetsToBeDecommissioned">
+                      <dt class="text-sm font-medium text-gray-500">Infrastructure Assets to Be Decommissioned</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <ul>
+                          <li *ngFor="let asset of project.climateFinance.infrastructureAssetsToBeDecommissioned">{{ asset.description }}</li>
+                        </ul>
+                      </dd>
+                    </div>
+                    <div *ngIf="project.climateFinance.decommissionPlan">
+                      <dt class="text-sm font-medium text-gray-500">Decommission Plan</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <ul>
+                          <li *ngFor="let activity of project.climateFinance.decommissionPlan">{{ activity.description }}</li>
+                        </ul>
+                      </dd>
+                    </div>
+                    <div *ngIf="project.climateFinance.carbonDecommissionSavings">
+                      <dt class="text-sm font-medium text-gray-500">Carbon Decommission Savings</dt>
+                      <dd class="mt-1 text-sm text-gray-900">{{ project.climateFinance.carbonDecommissionSavings?.amount }} {{ project.climateFinance.carbonDecommissionSavings?.unit?.name }}</dd>
+                    </div>
+                    <div *ngIf="project.climateFinance.decommissionMitigationPlan">
+                      <dt class="text-sm font-medium text-gray-500">Decommission Mitigation Plan</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <ul>
+                          <li *ngFor="let mitigation of project.climateFinance.decommissionMitigationPlan">{{ mitigation.description }}</li>
+                        </ul>
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
+
+
+
+              </div>
+
+              <!-- Rest of the code remains the same as before -->
             </div>
+
           </div>
         </ng-container>
       </div>

@@ -60,9 +60,21 @@ export class AppComponent implements OnInit {
       .filter((phase: string, index: number, phases: string[]) => phases.indexOf(phase) === index);  // Explicitly specifying types
   }
 
+  // ... (rest of the component)
+
+// Helper method to toggle the project details view
+  toggleProjectDetails(projectId: string): void {
+    const isOpen = this.projectDetailsOpen.get(projectId) || false;
+    this.projectDetailsOpen.set(projectId, !isOpen);
+  }
+
+// Helper method to check if the project details view is open
   isProjectDetailsOpen(projectId: string): boolean {
     return this.projectDetailsOpen.get(projectId) || false;
   }
+
+// ... (rest of the component)
+
 
   setFilterPhase(phase: string): void {
     this.filterPhase = phase;
@@ -72,9 +84,27 @@ export class AppComponent implements OnInit {
     this.filterPhase = '';
   }
 
-  toggleProjectDetails(projectId: string): void {
-    this.projectDetailsOpen.set(projectId, !this.isProjectDetailsOpen(projectId));
+  // AppComponent class
+
+  generalDataPointsVisible(project: any): boolean {
+    // This method should return true if the phase is not the current focus,
+    // i.e., the general data points should be visible
+    // You need to define the logic based on your requirements, for example:
+    return project.phase !== 'Identification'; // Replace with actual logic
   }
+
+  // In your Angular component's class
+
+  // Inside your AppComponent class
+
+  hasClimateFinance(project: any): boolean {
+    return project.additionalClassifications.some((c: any) => c.scheme === 'climate-finance');
+  }
+
+
+
+
+
 
 
 
