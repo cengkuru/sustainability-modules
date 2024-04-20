@@ -1,0 +1,89 @@
+[
+  {
+    "id": "1",
+    "title": "Wind Farm Feasibility Study",
+    "budget": 500000,
+    "totalValue": 600000,
+    "phase": "Identification",
+    "status": "On Time",
+    "location": "Northern Cape, South Africa",
+    "environmentalImpactCategory": "B",
+    "environmentalMeasures": [
+      "Bird migration impact assessment",
+      "Noise pollution mitigation plan"
+    ]
+  },
+  {
+    "id": "2",
+    "title": "Public Transportation Expansion",
+    "budget": 4000000,
+    "totalValue": 4500000,
+    "phase": "Preparation",
+    "status": "On Time",
+    "location": "Gauteng, South Africa",
+    "socialImpacts": [
+      "Improved access to public transport",
+      "Reduction in traffic congestion"
+    ],
+    "climateFinance": {
+      "climateObjective": "Mitigation",
+      "amountOfInvestment": 1500000
+    }
+  },
+  {
+    "id": "3",
+    "title": "Wastewater Treatment Plant Upgrade",
+    "budget": 3200000,
+    "totalValue": 3600000,
+    "phase": "Implementation",
+    "status": "Delayed",
+    "location": "Western Cape, South Africa",
+    "environmentalMeasures": [
+      "Water quality improvement plan",
+      "Odor control measures"
+    ]
+  },
+  {
+    "id": "4",
+    "title": "Low-Cost Housing Construction",
+    "budget": 2800000,
+    "totalValue": 3100000,
+    "phase": "Completion",
+    "status": "On Time",
+    "location": "KwaZulu-Natal, South Africa",
+    "socialImpacts": [
+      "Increased access to affordable housing",
+      "Job creation in construction sector"
+    ]
+  },
+  {
+    "id": "5",
+    "title": "National Highway Maintenance Program",
+    "budget": 1200000,
+    "totalValue": 1350000,
+    "phase": "Maintenance",
+    "status": "On Time",
+    "location": "Nationwide, South Africa",
+    "maintenancePlan": [
+      "Regular road inspections",
+      "Pavement repair and resurfacing"
+    ]
+  },
+  {
+    "id": "6",
+    "title": "Coal Power Plant Decommissioning",
+    "budget": 800000,
+    "totalValue": 900000,
+    "phase": "Decommissioning",
+    "status": "Planning",
+    "location": "Mpumalanga, South Africa",
+    "decommissioningPlan": [
+      "Environmental remediation",
+      "Employee transition plan"
+    ],
+    "climateFinance": {
+      "climateObjective": "Mitigation",
+      "amountOfInvestment": 400000
+    }
+  }
+]

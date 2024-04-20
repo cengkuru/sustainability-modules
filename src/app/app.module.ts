@@ -7,17 +7,25 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 
 import {AppComponent} from "./app.component";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NgxJsonViewerModule} from "ngx-json-viewer";
+import {FilterProjectsPipe} from "./pipes/filter-projects.pipe";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FilterProjectsPipe
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxJsonViewerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

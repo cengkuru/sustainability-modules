@@ -1,7 +1,98 @@
-<app-header></app-header>
-<!-- Main Content Area -->
-<main class="p-4">
-  <router-outlet></router-outlet>
-</main>
+<div class="container mx-auto p-4 bg-white rounded-lg max-w-4xl">
+  <h1 class="text-2xl font-bold text-center mb-6">Explore OC4IDS Data Playground</h1>
 
-<app-footer></app-footer>
+
+
+  <!-- Tabs for mobile view -->
+  <div class="block sm:hidden">
+    <label for="tabs" class="block text-lg font-medium text-gray-700 mb-2">Select a tab</label>
+    <select id="tabs" name="tabs" class="block w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500 text-gray-700 p-2"
+            (change)="onTabChange($event)" [(ngModel)]="activeTab">
+      <option value="data-points">Data Points</option>
+      <option value="worked-example">Worked Example</option>
+      <option value="visualizations">Visualizations</option>
+    </select>
+  </div>
+
+  <!-- Desktop view: Tabs navigation -->
+  <div class="hidden sm:flex justify-center space-x-4 mb-6" aria-label="Tabs">
+    <a (click)="switchTab('data-points')" [ngClass]="{'active': activeTab === 'data-points'}" class="tab-link">
+      Project Details
+    </a>
+    <a (click)="switchTab('worked-example')" [ngClass]="{'active': activeTab === 'worked-example'}" class="tab-link">
+      Sample Data
+    </a>
+    <a (click)="switchTab('sample-projects')" [ngClass]="{'active': activeTab === 'sample-projects'}" class="tab-link">
+      Sample Projects
+    </a>
+    <a (click)="switchTab('visualizations')" [ngClass]="{'active': activeTab === 'visualizations'}" class="tab-link">
+      Data Insights
+    </a>
+  </div>
+
+
+
+  <!-- Tab content -->
+  <div class="bg-white border border-gray-200 rounded-lg p-4" [ngSwitch]="activeTab">
+    <div *ngSwitchCase="'data-points'">
+      <ngx-json-viewer class="ngx-json-viewer" [json]="jsonData" [expanded]="false"></ngx-json-viewer>
+    </div>
+    <div *ngSwitchCase="'worked-example'">
+      <ngx-json-viewer class="ngx-json-viewer" [json]="exampleData" [expanded]="false"></ngx-json-viewer>
+    </div>
+    <div *ngSwitchCase="'sample-projects'" class="space-y-4">
+      <!-- Phase Filter -->
+      <div class="flex justify-center space-x-3 mb-4">
+        <ng-container *ngFor="let phase of uniquePhases">
+          <button (click)="filterPhase = phase"
+                  [ngClass]="{'bg-black text-white': filterPhase === phase, 'text-gray-600 bg-gray-100': filterPhase !== phase}"
+                  class="px-3 py-1 text-xs rounded-full transition-colors duration-150 ease-in-out">
+            {{ phase }}
+          </button>
+        </ng-container>
+        <button (click)="filterPhase = ''"
+                [ngClass]="{'bg-gray-200 text-gray-800': !filterPhase}"
+                class="px-3 py-1 text-xs text-gray-600 bg-gray-100 rounded-full hover:bg-gray-200 focus:outline-none">
+          Show All
+        </button>
+      </div>
+      <!-- List of sample projects using Bootstrap classes for enhanced styling -->
+      <div class="space-y-4">
+        <!-- Loop through filtered projects array -->
+        <ng-container *ngFor="let project of sampleProjects | filterProjects: filterPhase; let i = index">
+          <div class="p-4 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow duration-300">
+            <div class="flex justify-between items-center">
+              <!-- Project Title and Phase -->
+              <div class="flex-1 min-w-0">
+                <h2 class="text-lg font-semibold text-gray-800 truncate">{{ project.title }}</h2>
+                <div class="flex items-center mt-1">
+                <span class="ml-1 px-1 py-0.5 text-xs font-medium rounded-full text-gray-600 border border-gray-200">
+                    {{ project.phase }}
+                </span>
+                </div>
+              </div>
+              <!-- Project Value and Location with Icons -->
+              <div class="flex-1 min-w-0">
+                <p class="text-sm text-gray-600 flex items-center"><i class="bi bi-cash-stack mr-2"></i> Value: {{ project.totalValue | currency:'USD':'symbol' }}</p>
+                <p class="text-sm text-gray-600 flex items-center"><i class="bi bi-geo-alt mr-2"></i> Location: {{ project.location }}</p>
+              </div>
+              <!-- View Details Button -->
+              <div>
+                <button (click)="viewProjectDetails(project.id)"
+                        class="px-3 py-1 text-xs text-gray-600 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">
+                  View Details
+                </button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+
+    <div *ngSwitchCase="'visualizations'">
+      <!-- Your content for Visualizations -->
+    </div>
+  </div>
+</div>
+

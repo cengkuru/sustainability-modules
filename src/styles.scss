@@ -1,31 +1,43 @@
-@import "styles.tailwind";
-@import "styles.variables";
+// Importing Tailwind's layers
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-// Apply the font family to the body
-body {
-  font-family: $font-family;
-}
-.chart-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+// Styling for ngx-json-viewer
+ngx-json-viewer .ngx-json-viewer {
+  --ngx-json-string: #e06c75; // softer red for strings
+  --ngx-json-number: #dcdcaa; // soft yellow for numbers
+  --ngx-json-boolean: #56b6c2; // cyan for booleans
+  --ngx-json-null: #d19a66; // softer orange for nulls
+  --ngx-json-null-bg: #282c34; // dark background for null values
+  --ngx-json-undefined: #e07628; // orange for undefined
+  --ngx-json-toggler: #abb2bf; // light grey for toggler
+  --ngx-json-key: #61afef; // blue for keys
+  --ngx-json-separator: #abb2bf; // light grey for separators
+  --ngx-json-value: #98c379; // soft green for values
+  --ngx-json-undefined-key: #c678dd; // purple for undefined keys
+  --ngx-json-font-family: 'Fira Code', 'Courier New', monospace; // modern monospace font
+  --ngx-json-font-size: 14px; // appropriate font size for readability
+
+  background-color: #282c34; // dark background similar to a code editor
+  color: #abb2bf; // primary text color for good readability
+  padding: 1rem; // Increased padding around the JSON viewer
+  border-radius: 0.5rem; // Soften the corners
+  margin: 0.5rem; // Ensure there's space around the viewer
+  overflow: auto; // Add scroll for overflow content
 }
 
-.chart {
-  width: 100%;
-  height: 400px;
-}
 
-@media screen and (max-width: 768px) {
-  .chart {
-    height: 300px;
+.tab-link {
+  @apply rounded-lg px-4 py-2 text-sm font-medium cursor-pointer transition-colors duration-150 ease-in-out;
+
+  &.active, &:hover {
+    @apply bg-black text-white;
+  }
+
+
+  &:hover {
+    @apply bg-gray-300; // Slightly darker for better legibility
   }
 }
 
-@media screen and (max-width: 480px) {
-  .chart {
-    height: 200px;
-  }
-}
