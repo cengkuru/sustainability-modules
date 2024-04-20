@@ -2,11 +2,11 @@
   <h1 class="text-2xl font-bold text-center mb-6">Explore OC4IDS Data Playground</h1>
 
 
-
   <!-- Tabs for mobile view -->
   <div class="block sm:hidden">
     <label for="tabs" class="block text-lg font-medium text-gray-700 mb-2">Select a tab</label>
-    <select id="tabs" name="tabs" class="block w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500 text-gray-700 p-2"
+    <select id="tabs" name="tabs"
+            class="block w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500 text-gray-700 p-2"
             (change)="onTabChange($event)" [(ngModel)]="activeTab">
       <option value="data-points">Data Points</option>
       <option value="worked-example">Worked Example</option>
@@ -29,7 +29,6 @@
       Data Insights
     </a>
   </div>
-
 
 
   <!-- Tab content -->
@@ -62,26 +61,41 @@
         <ng-container *ngFor="let project of sampleProjects | filterProjects: filterPhase">
           <div class="p-4 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow duration-300">
             <div class="flex justify-between items-center">
-              <div class="flex-1 min-w-0">
-                <h2 class="text-lg font-semibold text-gray-800 truncate">{{ project.title }}</h2>
-                <span class="ml-1 px-1 py-0.5 text-xs font-medium rounded-full text-gray-600 border border-gray-200">
-            {{ project.phase }}
-          </span>
+              <!-- Project Title and Phase -->
+              <div class="flex-1">
+                <h2 class="text-lg font-semibold text-gray-900 truncate">{{ project.title }}</h2>
+                <span class="ml-1 text-xs font-medium text-gray-700 bg-gray-100 rounded-full px-2 py-1">
+      {{ project.phase }}
+    </span>
               </div>
-              <div class="flex-1 min-w-0">
+
+              <!-- Project Value and Location -->
+              <div class="flex-1">
                 <p class="text-sm text-gray-600 flex items-center">
-                  <i class="bi bi-cash-stack mr-2"></i>
+                  <svg class="w-4 h-4 mr-2 fill-current text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                    <path d="M11 1a5 5 0 0 0-5 5c0 1.5-.5 3-2 5a15.92 15.92 0 0 0 3 3c1.5-1.5 3.5-2 5-2a5 5 0 0 0 0-10zM3 12c.5-.5 1-1.5 1-3a3 3 0 1 1 6 0c0 1.5.5 2.5 1 3a14.17 14.17 0 0 1-2 1 14.17 14.17 0 0 1-2-1c-.33-.33-.67-.67-1-1z"/>
+                  </svg>
                   Value: {{ project.budget?.amount.amount }} {{ project.budget?.amount.currency }}
                 </p>
                 <p class="text-sm text-gray-600 flex items-center">
-                  <i class="bi bi-geo-alt mr-2"></i>
+                  <svg class="w-4 h-4 mr-2 fill-current text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                    <path d="M7.5 1A6.5 6.5 0 0 0 1 7.5 6.5 6.5 0 0 0 7.5 14 6.5 6.5 0 0 0 14 7.5 6.5 6.5 0 0 0 7.5 1zM2 7.5a5.5 5.5 0 0 1 11 0A5.5 5.5 0 0 1 2 7.5z"/>
+                  </svg>
                   Location: {{ project.locations?.[0]?.description }}
                 </p>
               </div>
-              <button (click)="toggleProjectDetails(project.id)" class="px-3 py-1 text-xs text-gray-600 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">
+
+              <!-- View Details Button -->
+              <button (click)="toggleProjectDetails(project.id)"
+                      [ngClass]="{
+            'bg-gray-600 text-white hover:bg-gray-700': isProjectDetailsOpen(project.id),
+            'bg-gray-200 text-gray-900 hover:bg-gray-300': !isProjectDetailsOpen(project.id)
+          }"
+                      class="px-4 py-1 text-xs rounded-full focus:outline-none transition-colors duration-150 ease-in-out">
                 {{ isProjectDetailsOpen(project.id) ? 'Close Details' : 'View Details' }}
               </button>
             </div>
+
             <!-- Expanded section for project details -->
             <div *ngIf="isProjectDetailsOpen(project.id)" class="mt-4 p-4 border-t border-gray-200">
               <div><strong>Project Description:</strong> {{ project.description }}</div>
