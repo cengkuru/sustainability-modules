@@ -1,0 +1,103 @@
+{
+    "id": "project-123",
+    "identifiers": [
+        {
+            "id": "2024-XYZ-789",
+            "scheme": "National Project IDs"
+        }
+    ],
+    "updated": "2024-04-19T12:00:00Z",
+    "title": "Urban Water Supply Expansion",
+    "description": "This project involves the expansion of urban water supply networks to underserved communities.",
+    "status": "active",
+    "period": {
+        "startDate": "2024-01-01",
+        "endDate": "2026-12-31",
+        "maxExtentDate": "2027-01-01",
+        "durationInDays": 1096
+    },
+    "sector": [
+        "Water Supply",
+        "Infrastructure"
+    ],
+    "purpose": "Improving access to clean water in urban areas",
+    "type": "Infrastructure",
+    "locations": [
+        {
+            "id": "loc-001",
+            "description": "Main urban areas to be served",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            100.0,
+                            0.0
+                        ],
+                        [
+                            101.0,
+                            0.0
+                        ],
+                        [
+                            101.0,
+                            1.0
+                        ],
+                        [
+                            100.0,
+                            1.0
+                        ],
+                        [
+                            100.0,
+                            0.0
+                        ]
+                    ]
+                ]
+            },
+            "address": {
+                "streetAddress": "123 Water St.",
+                "locality": "Capital City",
+                "region": "Central",
+                "postalCode": "1000",
+                "countryName": "Fictland"
+            }
+        }
+    ],
+    "budget": {
+        "description": "Total budget for the project",
+        "amount": {
+            "amount": 200000000,
+            "currency": "USD"
+        },
+        "requestDate": "2023-12-01",
+        "approvalDate": "2024-01-01",
+        "budgetBreakdowns": [
+            {
+                "id": "BD-001",
+                "description": "Initial funding for project design and surveys",
+                "amount": {
+                    "amount": 5000000,
+                    "currency": "USD"
+                }
+            }
+        ]
+    },
+    "contractingProcesses": [
+        {
+            "id": "contract-001",
+            "summary": {
+                "ocid": "ocds-123abc-2024-001",
+                "title": "Contract for Preliminary Design",
+                "description": "Contract awarded for the preliminary design and environmental impact assessment.",
+                "status": "active",
+                "contractValue": {
+                    "amount": 5000000,
+                    "currency": "USD"
+                },
+                "contractPeriod": {
+                    "startDate": "2024-02-01",
+                    "endDate": "2024-08-31"
+                }
+            }
+        }
+    ]
+}
