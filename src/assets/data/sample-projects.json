@@ -1,89 +1,1050 @@
 [
   {
-    "id": "1",
-    "title": "Wind Farm Feasibility Study",
-    "budget": 500000,
-    "totalValue": 600000,
-    "phase": "Identification",
-    "status": "On Time",
-    "location": "Northern Cape, South Africa",
-    "environmentalImpactCategory": "B",
-    "environmentalMeasures": [
-      "Bird migration impact assessment",
-      "Noise pollution mitigation plan"
-    ]
-  },
-  {
-    "id": "2",
-    "title": "Public Transportation Expansion",
-    "budget": 4000000,
-    "totalValue": 4500000,
-    "phase": "Preparation",
-    "status": "On Time",
-    "location": "Gauteng, South Africa",
-    "socialImpacts": [
-      "Improved access to public transport",
-      "Reduction in traffic congestion"
+    "id": "ZA-WIND-1",
+    "identifiers": [
+      {
+        "id": "WIND-001",
+        "scheme": "internal-project-id"
+      }
     ],
-    "climateFinance": {
-      "climateObjective": "Mitigation",
-      "amountOfInvestment": 1500000
+    "title": "Wind Farm Feasibility Study",
+    "phase": "Identification",
+    "description": "A study to assess the viability of establishing a wind farm in the Northern Cape, considering environmental and economic factors.",
+    "status": "planning",
+    "period": {
+      "startDate": "2024-02-20"
+    },
+    "identificationPeriod": {
+      "startDate": "2024-02-20",
+      "endDate": "2024-04-30"
+    },
+    "preparationPeriod": {},
+    "implementationPeriod": {},
+    "completionPeriod": {},
+    "maintenancePeriod": {},
+    "decommissioningPeriod": {},
+    "sector": ["energy"],
+    "purpose": "To generate renewable energy and contribute to climate change mitigation goals.",
+    "additionalClassifications": [
+      {
+        "scheme": "SDGs",
+        "id": "7.2",
+        "description": "Increase substantially the share of renewable energy in the global energy mix"
+      },
+      {
+        "scheme": "climate-finance",
+        "id": "mitigation"
+      }
+    ],
+    "type": "feasibility study",
+    "relatedProjects": [],
+    "assetLifetime": {},
+    "locations": [
+      {
+        "description": "Northern Cape Province",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [20.0, -28.0]
+        }
+      }
+    ],
+    "budget": {
+      "amount": {
+        "amount": 500000,
+        "currency": "ZAR"
+      },
+      "budgetBreakdowns": [
+        {
+          "id": "environmental-assessment",
+          "description": "Budget allocated for environmental impact assessments",
+          "amount": {
+            "amount": 100000,
+            "currency": "ZAR"
+          }
+        }
+      ],
+      "finance": []
+    },
+    "costMeasurements": [],
+    "forecasts": [],
+    "parties": [
+      {
+        "name": "Department of Energy",
+        "roles": ["procuringEntity"]
+      }
+    ],
+    "publicAuthority": {
+      "name": "Government of South Africa"
+    },
+    "documents": [],
+    "contractingProcesses": [],
+    "metrics": [],
+    "transactions": [],
+    "milestones": [],
+    "completion": {},
+    "lobbyingMeetings": [],
+    "social": {
+      "consultationMeetings": [],
+      "landCompensationBudget": {},
+      "inIndigenousLand": false,
+      "healthAndSafety": {
+        "materialTests": {}
+      }
+    },
+    "environment": {
+      "goals": ["Reduce reliance on fossil fuels", "Promote sustainable energy development"],
+      "conservationMeasures": [],
+      "climateOversightTypes": [],
+      "hasImpactAssessment": true,
+      "impactCategories": [
+        {
+          "scheme": "environmental-impact",
+          "id": "B"
+        }
+      ],
+      "abatementCost": {},
+      "inProtectedArea": false,
+      "climateMeasures": [
+        {
+          "type": "renewable-energy",
+          "description": "Wind energy generation as a clean energy source."
+        }
+      ]
+    },
+    "benefits": [],
+    "policyAlignment": {
+      "policies": ["Integrated Resource Plan", "Renewable Energy Independent Power Producer Procurement Programme"]
     }
   },
   {
-    "id": "3",
+    "id": "ZA-TRANSIT-2",
+    "identifiers": [
+      {
+        "id": "TRANSIT-002",
+        "scheme": "internal-project-id"
+      }
+    ],
+    "title": "Public Transportation Expansion",
+    "phase": "Preparation",
+    "description": "Expansion of the public transportation network in Gauteng to improve accessibility, reduce traffic congestion, and promote sustainable mobility.",
+    "status": "planning",
+    "period": {
+      "startDate": "2023-10-01"
+    },
+    "identificationPeriod": {
+      "startDate": "2023-07-01",
+      "endDate": "2023-09-30"
+    },
+    "preparationPeriod": {
+      "startDate": "2023-10-01"
+    },
+    "sector": ["transport"],
+    "purpose": "Improve accessibility, reduce traffic congestion, and promote sustainable mobility.",
+    "additionalClassifications": [
+      {
+        "scheme": "SDGs",
+        "id": "11.2",
+        "description": "Provide access to safe, affordable, accessible and sustainable transport systems for all"
+      },
+      {
+        "scheme": "climate-finance",
+        "id": "mitigation"
+      }
+    ],
+    "type": "expansion",
+    "locations": [
+      {
+        "description": "Gauteng Province",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [28.0, -26.0]
+        }
+      }
+    ],
+    "budget": {
+      "amount": {
+        "amount": 4000000,
+        "currency": "ZAR"
+      },
+      "budgetBreakdowns": [
+        {
+          "id": "infrastructure",
+          "description": "Budget for construction and infrastructure development",
+          "amount": {
+            "amount": 3000000,
+            "currency": "ZAR"
+          }
+        },
+        {
+          "id": "rolling-stock",
+          "description": "Budget for new buses or trains",
+          "amount": {
+            "amount": 1000000,
+            "currency": "ZAR"
+          }
+        }
+      ],
+      "finance": [
+        {
+          "id": "GCF-grant",
+          "assetClass": "grant",
+          "type": "grant",
+          "concessional": true,
+          "value": {
+            "amount": 1500000,
+            "currency": "ZAR"
+          },
+          "source": "Green Climate Fund",
+          "financingParty": {
+            "id": "GCF",
+            "name": "Green Climate Fund"
+          }
+        }
+      ]
+    },
+    "costMeasurements": [
+      {
+        "id": "lifecycle-costing",
+        "date": "2024-03-15",
+        "lifeCycleCosting": {
+          "value": {
+            "amount": 12000000,
+            "currency": "ZAR"
+          }
+        }
+      }
+    ],
+    "forecasts": [
+      {
+        "id": "ridership-forecast",
+        "title": "Projected Ridership Increase",
+        "description": "Estimated increase in public transport ridership after project completion.",
+        "observations": [
+          {
+            "period": {
+              "startDate": "2025-01-01",
+              "endDate": "2025-12-31"
+            },
+            "value": {
+              "amount": 20,
+              "unit": {
+                "name": "percentage"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "parties": [
+      {
+        "name": "Gauteng Department of Roads and Transport",
+        "roles": ["procuringEntity"]
+      }
+    ],
+    "publicAuthority": {
+      "name": "Government of South Africa"
+    },
+    "documents": [],
+    "contractingProcesses": [],
+    "metrics": [],
+    "transactions": [],
+    "milestones": [],
+    "completion": {},
+    "lobbyingMeetings": [],
+    "social": {
+      "consultationMeetings": [
+        {
+          "id": "community-meeting-1",
+          "date": "2024-02-15",
+          "numberOfParticipants": 120
+        }
+      ],
+      "landCompensationBudget": {
+        "amount": 250000,
+        "currency": "ZAR"
+      },
+      "inIndigenousLand": false,
+      "healthAndSafety": {
+        "materialTests": {}
+      }
+    },
+    "environment": {
+      "goals": ["Reduce greenhouse gas emissions from transportation", "Improve air quality"],
+      "conservationMeasures": [],
+      "climateOversightTypes": [],
+      "hasImpactAssessment": true,
+      "impactCategories": [
+        {
+          "scheme": "environmental-impact",
+          "id": "B"
+        }
+      ],
+      "abatementCost": {},
+      "inProtectedArea": false,
+      "climateMeasures": [
+        {
+          "type": "public-transport",
+          "description": "Expansion of public transport network to reduce reliance on private vehicles."
+        }
+      ],
+      "forecastOfGreenhouseGasEmissions": {
+        "amount": -50000,
+        "unit": {
+          "name": "tonnes CO2 equivalent"
+        }
+      }
+    },
+    "benefits": [
+      {
+        "title": "Improved Accessibility",
+        "description": "Increased access to jobs, education, and other opportunities through expanded public transport options.",
+        "beneficiaries": [
+          {
+            "description": "Residents of Gauteng Province",
+            "numberOfPeople": 15000000
+          }
+        ]
+      }
+    ],
+    "policyAlignment": {
+      "policies": ["National Development Plan", "Gauteng Transport Infrastructure Act"]
+    }
+  },
+  {
+    "id": "ZA-WASTEWATER-3",
+    "identifiers": [
+      {
+        "id": "WASTEWATER-003",
+        "scheme": "internal-project-id"
+      }
+    ],
     "title": "Wastewater Treatment Plant Upgrade",
-    "budget": 3200000,
-    "totalValue": 3600000,
     "phase": "Implementation",
-    "status": "Delayed",
-    "location": "Western Cape, South Africa",
-    "environmentalMeasures": [
-      "Water quality improvement plan",
-      "Odor control measures"
-    ]
+    "description": "Upgrade of a wastewater treatment plant in the Western Cape to improve water quality and environmental standards.",
+    "status": "active",
+    "period": {
+      "startDate": "2023-05-15"
+    },
+    "identificationPeriod": {
+      "startDate": "2023-01-01",
+      "endDate": "2023-03-31"
+    },
+    "preparationPeriod": {
+      "startDate": "2023-04-01",
+      "endDate": "2023-05-14"
+    },
+    "implementationPeriod": {
+      "startDate": "2023-05-15"
+    },
+    "sector": ["water"],
+    "purpose": "Improve water quality and protect the environment by upgrading wastewater treatment facilities.",
+    "additionalClassifications": [
+      {
+        "scheme": "SDGs",
+        "id": "6.3",
+        "description": "Improve water quality by reducing pollution, eliminating dumping and minimizing release of hazardous chemicals and materials, halving the proportion of untreated wastewater and substantially increasing recycling and safe reuse globally"
+      }
+    ],
+    "type": "upgrade",
+    "locations": [
+      {
+        "description": "Western Cape Province",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [18.5, -34.0]
+        }
+      }
+    ],
+    "budget": {
+      "amount": {
+        "amount": 3200000,
+        "currency": "ZAR"
+      },
+      "budgetBreakdowns": [
+        {
+          "id": "construction",
+          "description": "Budget for construction and equipment",
+          "amount": {
+            "amount": 2500000,
+            "currency": "ZAR"
+          }
+        },
+        {
+          "id": "labor",
+          "description": "Budget for labor costs",
+          "amount": {
+            "amount": 700000,
+            "currency": "ZAR"
+          }
+        }
+      ],
+      "finance": []
+    },
+    "costMeasurements": [],
+    "forecasts": [],
+    "parties": [
+      {
+        "name": "Western Cape Department of Water and Sanitation",
+        "roles": ["procuringEntity"]
+      },
+      {
+        "name": "ABC Construction Ltd.",
+        "roles": ["supplier"]
+      }
+    ],
+    "publicAuthority": {
+      "name": "Government of South Africa"
+    },
+    "documents": [
+      {
+        "id": "environmental-permit",
+        "documentType": "permit",
+        "title": "Environmental Permit",
+        "datePublished": "2023-04-10"
+      }
+    ],
+    "contractingProcesses": [
+      {
+        "id": "tender-process-1",
+        "summary": {
+          "ocid": "OCDS-2938127",
+          "nature": ["works"],
+          "title": "Construction of Wastewater Treatment Plant Upgrades",
+          "description": "Tender for the construction and equipment installation for the wastewater treatment plant upgrade.",
+          "status": "complete",
+          "tender": {
+            "procurementMethod": "open",
+            "datePublished": "2023-04-15",
+            "costEstimate": {
+              "amount": 2500000,
+              "currency": "ZAR"
+            },
+            "numberOfTenderers": 3,
+            "tenderers": [
+              {
+                "name": "ABC Construction Ltd.",
+                "id": "ZA-ABC-123"
+              }
+            ],
+            "procuringEntity": {
+              "name": "Western Cape Department of Water and Sanitation",
+              "id": "ZA-WC-DWS"
+            }
+          },
+          "suppliers": [
+            {
+              "name": "ABC Construction Ltd.",
+              "id": "ZA-ABC-123"
+            }
+          ],
+          "contractValue": {
+            "amount": 2450000,
+            "currency": "ZAR"
+          },
+          "contractPeriod": {
+            "startDate": "2023-05-15",
+            "endDate": "2024-05-14"
+          }
+        }
+      }
+    ],
+    "metrics": [],
+    "transactions": [],
+    "milestones": [],
+    "completion": {},
+    "lobbyingMeetings": [],
+    "social": {
+      "consultationMeetings": [],
+      "landCompensationBudget": {},
+      "inIndigenousLand": false,
+      "healthAndSafety": {
+        "materialTests": {
+          "test": ["concrete", "steel"],
+          "description": "Regular testing of concrete and steel used in construction."
+        }
+      }
+    },
+    "environment": {
+      "goals": ["Improve water quality", "Reduce pollution"],
+      "conservationMeasures": [],
+      "climateOversightTypes": [],
+      "hasImpactAssessment": true,
+      "impactCategories": [
+        {
+          "scheme": "environmental-impact",
+          "id": "B"
+        }
+      ],
+      "abatementCost": {},
+      "inProtectedArea": false,
+      "climateMeasures": [],
+      "environmentalLicensesAndExemptions": [
+        {
+          "id": "environmental-permit",
+          "description": "Permit for construction and operation of the upgraded wastewater treatment plant."
+        }
+      ]
+    },
+    "benefits": [],
+    "policyAlignment": {}
   },
   {
-    "id": "4",
-    "title": "Low-Cost Housing Construction",
-    "budget": 2800000,
-    "totalValue": 3100000,
+    "id": "ZA-SCHOOL-4",
+    "identifiers": [
+      {
+        "id": "SCHOOL-004",
+        "scheme": "internal-project-id"
+      }
+    ],
+    "title": "Construction of New Primary School",
+    "description": "Construction of a new primary school in Limpopo Province to address overcrowding and improve access to education.",
     "phase": "Completion",
-    "status": "On Time",
-    "location": "KwaZulu-Natal, South Africa",
-    "socialImpacts": [
-      "Increased access to affordable housing",
-      "Job creation in construction sector"
-    ]
+    "status": "complete",
+    "period": {
+      "startDate": "2022-02-15",
+      "endDate": "2023-08-31"
+    },
+    "identificationPeriod": {
+      "startDate": "2021-08-01",
+      "endDate": "2021-10-31"
+    },
+    "preparationPeriod": {
+      "startDate": "2021-11-01",
+      "endDate": "2022-02-14"
+    },
+    "implementationPeriod": {
+      "startDate": "2022-02-15",
+      "endDate": "2023-07-31"
+    },
+    "completionPeriod": {
+      "startDate": "2023-08-01",
+      "endDate": "2023-08-31"
+    },
+    "sector": ["education"],
+    "purpose": "Improve access to quality education and alleviate overcrowding in existing schools.",
+    "additionalClassifications": [
+      {
+        "scheme": "SDGs",
+        "id": "4.1",
+        "description": "Ensure that all girls and boys complete free, equitable and quality primary and secondary education leading to relevant and effective learning outcomes"
+      }
+    ],
+    "type": "construction",
+    "locations": [
+      {
+        "description": "Limpopo Province",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [29.5, -24.0]
+        }
+      }
+    ],
+    "budget": {
+      "amount": {
+        "amount": 18500000,
+        "currency": "ZAR"
+      },
+      "budgetBreakdowns": [
+        {
+          "id": "construction",
+          "description": "Budget for construction materials and labor",
+          "amount": {
+            "amount": 15000000,
+            "currency": "ZAR"
+          }
+        },
+        {
+          "id": "equipment",
+          "description": "Budget for furniture and educational equipment",
+          "amount": {
+            "amount": 3500000,
+            "currency": "ZAR"
+          }
+        }
+      ],
+      "finance": []
+    },
+    "costMeasurements": [
+      {
+        "id": "final-cost",
+        "date": "2023-08-31",
+        "lifeCycleCosting": {
+          "value": {
+            "amount": 19200000,
+            "currency": "ZAR"
+          }
+        }
+      }
+    ],
+    "forecasts": [],
+    "parties": [
+      {
+        "name": "Limpopo Department of Education",
+        "roles": ["procuringEntity"]
+      },
+      {
+        "name": "XYZ Construction Company",
+        "roles": ["supplier"]
+      }
+    ],
+    "publicAuthority": {
+      "name": "Government of South Africa"
+    },
+    "documents": [
+      {
+        "id": "building-plans",
+        "documentType": "plans",
+        "title": "School Building Plans",
+        "datePublished": "2022-01-15"
+      },
+      {
+        "id": "environmental-assessment",
+        "documentType": "assessment",
+        "title": "Environmental Impact Assessment",
+        "datePublished": "2022-01-30"
+      }
+    ],
+    "contractingProcesses": [
+      {
+        "id": "tender-process-1",
+        "summary": {
+          "ocid": "OCDS-1234567",
+          "nature": ["works"],
+          "title": "Construction of New Primary School",
+          "description": "Tender for the construction of a new primary school building.",
+          "status": "complete",
+          "tender": {
+            "procurementMethod": "open",
+            "datePublished": "2022-01-05",
+            "costEstimate": {
+              "amount": 15000000,
+              "currency": "ZAR"
+            },
+            "numberOfTenderers": 5,
+            "tenderers": [
+              {
+                "name": "XYZ Construction Company",
+                "id": "ZA-XYZ-456"
+              }
+            ],
+            "procuringEntity": {
+              "name": "Limpopo Department of Education",
+              "id": "ZA-LIM-DOE"
+            }
+          },
+          "suppliers": [
+            {
+              "name": "XYZ Construction Company",
+              "id": "ZA-XYZ-456"
+            }
+          ],
+          "contractValue": {
+            "amount": 14800000,
+            "currency": "ZAR"
+          },
+          "contractPeriod": {
+            "startDate": "2022-02-15",
+            "endDate": "2023-07-31"
+          }
+        }
+      }
+    ],
+    "metrics": [],
+    "transactions": [],
+    "milestones": [
+      {
+        "id": "construction-completion",
+        "title": "Construction Completion",
+        "type": "completion",
+        "dueDate": "2023-07-31",
+        "dateMet": "2023-07-28",
+        "status": "met"
+      }
+    ],
+    "completion": {
+      "endDate": "2023-08-31",
+      "endDateDetails": "School building and facilities fully completed and ready for occupancy.",
+      "finalValue": {
+        "amount": 19200000,
+        "currency": "ZAR"
+      },
+      "finalValueDetails": "Includes additional costs for unforeseen site conditions and minor design modifications.",
+      "finalScope": "Construction of a new primary school building with 10 classrooms, administrative offices, library, and sports facilities.",
+      "finalScopeDetails": "Scope remained largely as planned, with minor adjustments to optimize classroom layout and playground design."
+    },
+    "lobbyingMeetings": [],
+    "social": {
+      "consultationMeetings": [],
+      "landCompensationBudget": {},
+      "inIndigenousLand": false,
+      "healthAndSafety": {
+        "materialTests": {}
+      }
+    },
+    "environment": {
+      "goals": ["Minimize environmental impact during construction", "Create a sustainable learning environment"],
+      "conservationMeasures": [],
+      "climateOversightTypes": [],
+      "hasImpactAssessment": true,
+      "impactCategories": [
+        {
+          "scheme": "environmental-impact",
+          "id": "B"
+        }
+      ],
+      "abatementCost": {},
+      "inProtectedArea": false,
+      "climateMeasures": []
+    },
+    "benefits": [],
+    "policyAlignment": {}
   },
   {
-    "id": "5",
+    "id": "ZA-HIGHWAY-5",
+    "identifiers": [
+      {
+        "id": "HIGHWAY-005",
+        "scheme": "internal-project-id"
+      }
+    ],
     "title": "National Highway Maintenance Program",
-    "budget": 1200000,
-    "totalValue": 1350000,
     "phase": "Maintenance",
-    "status": "On Time",
-    "location": "Nationwide, South Africa",
+    "description": "A program to ensure the ongoing maintenance and upkeep of national highways across South Africa.",
+    "status": "active",
+    "period": {
+      "startDate": "2020-01-01"
+    },
+    "maintenancePeriod": {
+      "startDate": "2020-01-01"
+    },
+    "sector": ["transport"],
+    "purpose": "Maintain safe and efficient national highways for transportation and economic activity.",
+    "additionalClassifications": [
+      {
+        "scheme": "SDGs",
+        "id": "9.1",
+        "description": "Develop quality, reliable, sustainable and resilient infrastructure, including regional and transborder infrastructure, to support economic development and human well-being, with a focus on affordable and equitable access for all"
+      }
+    ],
+    "type": "maintenance program",
+    "locations": [
+      {
+        "description": "National highways across South Africa",
+        "geometry": {
+          "type": "MultiLineString",
+          "coordinates": [
+          ]
+        }
+      }
+    ],
+    "budget": {
+      "amount": {
+        "amount": 12000000,
+        "currency": "ZAR"
+      },
+      "budgetBreakdowns": [
+        {
+          "id": "routine-maintenance",
+          "description": "Budget for routine inspections and repairs",
+          "amount": {
+            "amount": 7000000,
+            "currency": "ZAR"
+          }
+        },
+        {
+          "id": "periodic-maintenance",
+          "description": "Budget for resurfacing and major repairs",
+          "amount": {
+            "amount": 5000000,
+            "currency": "ZAR"
+          }
+        }
+      ],
+      "finance": []
+    },
+    "costMeasurements": [],
+    "forecasts": [],
+    "parties": [
+      {
+        "name": "South African National Roads Agency Limited (SANRAL)",
+        "roles": ["procuringEntity"]
+      }
+    ],
+    "publicAuthority": {
+      "name": "Government of South Africa"
+    },
+    "documents": [],
+    "contractingProcesses": [],
+    "metrics": [
+      {
+        "id": "road-condition-index",
+        "title": "Road Condition Index",
+        "description": "Measures the overall condition of the national highway network.",
+        "observations": [
+          {
+            "period": {
+              "startDate": "2023-01-01",
+              "endDate": "2023-12-31"
+            },
+            "value": {
+              "amount": 85,
+              "unit": {
+                "name": "index score"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "transactions": [],
+    "milestones": [],
+    "completion": {},
+    "lobbyingMeetings": [],
+    "social": {
+      "consultationMeetings": [],
+      "landCompensationBudget": {},
+      "inIndigenousLand": false,
+      "healthAndSafety": {
+        "materialTests": {}
+      }
+    },
+    "environment": {
+      "goals": ["Minimize environmental impact of road maintenance activities", "Protect biodiversity along highway corridors"],
+      "conservationMeasures": [],
+      "climateOversightTypes": [],
+      "hasImpactAssessment": true,
+      "impactCategories": [
+        {
+          "scheme": "environmental-impact",
+          "id": "B"
+        }
+      ],
+      "abatementCost": {},
+      "inProtectedArea": false,
+      "climateMeasures": []
+    },
+    "benefits": [],
+    "policyAlignment": {
+      "policies": ["National Transport Master Plan", "SANRAL Environmental Policy"]
+    },
     "maintenancePlan": [
-      "Regular road inspections",
-      "Pavement repair and resurfacing"
-    ]
-  },
-  {
-    "id": "6",
-    "title": "Coal Power Plant Decommissioning",
-    "budget": 800000,
-    "totalValue": 900000,
-    "phase": "Decommissioning",
-    "status": "Planning",
-    "location": "Mpumalanga, South Africa",
-    "decommissioningPlan": [
-      "Environmental remediation",
-      "Employee transition plan"
+      {
+        "type": "inspection",
+        "description": "Regular inspections of road conditions, signage, and drainage systems."
+      },
+      {
+        "type": "repair",
+        "description": "Timely repair of potholes, cracks, and other road surface defects."
+      },
+      {
+        "type": "resurfacing",
+        "description": "Periodic resurfacing of road sections to maintain pavement quality."
+      }
     ],
     "climateFinance": {
-      "climateObjective": "Mitigation",
-      "amountOfInvestment": 400000
+      "impactMeasurement": "Monitoring of fuel consumption and vehicle emissions on national highways.",
+      "carbonFootprint": {
+        "amount": 250000,
+        "unit": {
+          "name": "tonnes CO2 equivalent"
+        }
+      }
+    }
+  },
+  {
+    "id": "ZA-COAL-6",
+    "identifiers": [
+      {
+        "id": "COAL-006",
+        "scheme": "internal-project-id"
+      }
+    ],
+    "title": "Coal Power Plant Decommissioning",
+    "phase": "Decommissioning",
+    "description": "Decommissioning of a coal power plant in Mpumalanga, including environmental remediation and support for affected employees.",
+    "status": "planning",
+    "period": {
+      "startDate": "2024-01-01"
+    },
+    "decommissioningPeriod": {
+      "startDate": "2025-01-01",
+      "endDate": "2027-12-31"
+    },
+    "sector": ["energy"],
+    "purpose": "Reduce greenhouse gas emissions and transition towards cleaner energy sources.",
+    "additionalClassifications": [
+      {
+        "scheme": "SDGs",
+        "id": "13.2",
+        "description": "Integrate climate change measures into national policies, strategies and planning"
+      },
+      {
+        "scheme": "climate-finance",
+        "id": "mitigation"
+      }
+    ],
+    "type": "decommissioning",
+    "locations": [
+      {
+        "description": "Mpumalanga Province",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [30.5, -26.0]
+        }
+      }
+    ],
+    "budget": {
+      "amount": {
+        "amount": 8000000,
+        "currency": "ZAR"
+      },
+      "budgetBreakdowns": [
+        {
+          "id": "decommissioning-activities",
+          "description": "Budget for dismantling and disposal of equipment",
+          "amount": {
+            "amount": 5000000,
+            "currency": "ZAR"
+          }
+        },
+        {
+          "id": "environmental-remediation",
+          "description": "Budget for environmental cleanup and restoration",
+          "amount": {
+            "amount": 2000000,
+            "currency": "ZAR"
+          }
+        },
+        {
+          "id": "employee-transition",
+          "description": "Budget for employee retraining and support programs",
+          "amount": {
+            "amount": 1000000,
+            "currency": "ZAR"
+          }
+        }
+      ],
+      "finance": [
+        {
+          "id": "climate-fund-loan",
+          "assetClass": "loan",
+          "type": "concessional loan",
+          "concessional": true,
+          "value": {
+            "amount": 4000000,
+            "currency": "ZAR"
+          },
+          "source": "International Climate Fund",
+          "financingParty": {
+            "id": "ICF",
+            "name": "International Climate Fund"
+          }
+        }
+      ]
+    },
+    "costMeasurements": [],
+    "forecasts": [],
+    "parties": [
+      {
+        "name": "Eskom Holdings SOC Ltd",
+        "roles": ["procuringEntity"]
+      }
+    ],
+    "publicAuthority": {
+      "name": "Government of South Africa"
+    },
+    "documents": [],
+    "contractingProcesses": [],
+    "metrics": [],
+    "transactions": [],
+    "milestones": [],
+    "completion": {},
+    "lobbyingMeetings": [],
+    "social": {
+      "consultationMeetings": [],
+      "landCompensationBudget": {},
+      "inIndigenousLand": false,
+      "healthAndSafety": {
+        "materialTests": {}
+      }
+    },
+    "environment": {
+      "goals": ["Minimize environmental impact of decommissioning", "Restore land to its natural state"],
+      "conservationMeasures": [],
+      "climateOversightTypes": [],
+      "hasImpactAssessment": true,
+      "impactCategories": [
+        {
+          "scheme": "environmental-impact",
+          "id": "A"
+        }
+      ],
+      "abatementCost": {},
+      "inProtectedArea": false,
+      "climateMeasures": [],
+      "decommissioningPlans": [
+        {
+          "id": "dismantling-plan",
+          "description": "Plan for safe and efficient dismantling of power plant equipment and structures."
+        },
+        {
+          "id": "waste-management-plan",
+          "description": "Plan for handling and disposal of hazardous and non-hazardous waste materials."
+        },
+        {
+          "id": "remediation-plan",
+          "description": "Plan for soil and water remediation to address any environmental contamination."
+        }
+      ],
+      "decommissioningCostForecast": {
+        "amount": 6500000,
+        "currency": "ZAR"
+      }
+    },
+    "benefits": [],
+    "policyAlignment": {
+      "policies": ["Integrated Resource Plan", "Just Transition Framework"]
+    },
+    "climateFinance": {
+      "infrastructureAssetsToBeDecommissioned": [
+        {
+          "id": "coal-power-plant",
+          "description": "Coal-fired power plant with a capacity of 1000 MW."
+        }
+      ],
+      "decommissionPlan": [
+        {
+          "id": "dismantling-activities",
+          "description": "Dismantling and removal of power plant equipment and structures."
+        },
+        {
+          "id": "environmental-remediation",
+          "description": "Soil and water remediation to address any contamination."
+        },
+        {
+          "id": "community-engagement",
+          "description": "Engagement with local communities throughout the decommissioning process."
+        }
+      ],
+      "carbonDecommissionSavings": {
+        "amount": 5000000,
+        "unit": {
+          "name": "tonnes CO2 equivalent"
+        }
+      },
+      "decommissionMitigationPlan": [
+        {
+          "id": "employee-retraining",
+          "description": "Retraining programs to equip employees with skills for new job opportunities in the renewable energy sector."
+        },
+        {
+          "id": "community-development-fund",
+          "description": "Establishment of a community development fund to support economic diversification and job creation in the region."
+        }
+      ]
     }
   }
+
+
+
 ]

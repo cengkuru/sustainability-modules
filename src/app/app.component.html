@@ -56,36 +56,35 @@
           Show All
         </button>
       </div>
+
       <!-- List of sample projects using Bootstrap classes for enhanced styling -->
       <div class="space-y-4">
         <!-- Loop through filtered projects array -->
-        <ng-container *ngFor="let project of sampleProjects | filterProjects: filterPhase; let i = index">
+        <ng-container *ngFor="let project of sampleProjects | filterProjects: filterPhase">
           <div class="p-4 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow duration-300">
             <div class="flex justify-between items-center">
-              <!-- Project Title and Phase -->
               <div class="flex-1 min-w-0">
                 <h2 class="text-lg font-semibold text-gray-800 truncate">{{ project.title }}</h2>
-                <div class="flex items-center mt-1">
                 <span class="ml-1 px-1 py-0.5 text-xs font-medium rounded-full text-gray-600 border border-gray-200">
-                    {{ project.phase }}
-                </span>
-                </div>
+          {{ project.phase }}
+        </span>
               </div>
-              <!-- Project Value and Location with Icons -->
               <div class="flex-1 min-w-0">
                 <p class="text-sm text-gray-600 flex items-center"><i class="bi bi-cash-stack mr-2"></i> Value: {{ project.totalValue | currency:'USD':'symbol' }}</p>
                 <p class="text-sm text-gray-600 flex items-center"><i class="bi bi-geo-alt mr-2"></i> Location: {{ project.location }}</p>
               </div>
-              <!-- View Details Button -->
-              <div>
-                <button (click)="viewProjectDetails(project.id)"
-                        class="px-3 py-1 text-xs text-gray-600 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">
-                  View Details
-                </button>
-              </div>
+              <button (click)="toggleProjectDetails(project.id)" class="px-3 py-1 text-xs text-gray-600 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">
+                {{ isProjectDetailsOpen(project.id) ? 'Close Details' : 'View Details' }}
+              </button>
+            </div>
+            <!-- Expanded section for project details -->
+            <div *ngIf="isProjectDetailsOpen(project.id)" class="mt-4 p-4 border-t border-gray-200">
+              <div><strong>Project Description:</strong> {{ project.description }}</div>
+              <div><strong>More Info:</strong> Additional details can go here...</div>
             </div>
           </div>
         </ng-container>
+
       </div>
     </div>
 
