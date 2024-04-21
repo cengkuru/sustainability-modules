@@ -23,7 +23,7 @@
       Sample Data
     </a>
     <a (click)="switchTab('sample-projects')" [ngClass]="{'active': activeTab === 'sample-projects'}" class="tab-link">
-      Sample Projects
+      Example Project
     </a>
     <a (click)="switchTab('visualizations')" [ngClass]="{'active': activeTab === 'visualizations'}" class="tab-link">
       Data Insights
@@ -100,343 +100,316 @@
             <div *ngIf="isProjectDetailsOpen(project.id)" class="mt-4 p-4 border-t border-gray-200 ">
 
               <!-- Project Phase spotlight -->
-              <div class="my-4 p-4 border border-gray-200 bg-gray-50 rounded-md">
+              <div class="my-4 p-4 ">
                 <h3 class="text-lg font-semibold text-gray-800">Project Overview: {{ project.title }}</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 mb-6 bg-gray-900 p-4 rounded-lg text-gray-200">
                   <!-- Basic Project Information -->
-                  <div>
-                    <p class="text-sm font-medium text-gray-700"><strong>ID:</strong> {{ project.id }}</p>
-                    <p class="text-sm text-gray-600">{{ project.description }}</p>
+                  <div class="bg-gray-800 p-3 rounded-lg shadow">
+                    <p class="text-sm font-medium text-blue-400"><strong>ID:</strong> {{ project.id }}</p>
+                    <p class="text-sm">{{ project.description }}</p>
+                    <p class="text-sm font-medium text-blue-400"><strong>Status:</strong> {{ project.status | titlecase }}</p>
+                    <p class="text-sm font-medium text-blue-400"><strong>Sector:</strong> {{ project.sector.join(', ') }}</p>
                   </div>
-                  <div>
-                    <p class="text-sm font-medium text-gray-700">
-                      <strong>Status:</strong> {{ project.status | titlecase }}</p>
-                    <p class="text-sm text-gray-600"><strong>Sector:</strong> {{ project.sector.join(', ') }}</p>
-                    <p class="text-sm text-gray-600"><strong>Purpose:</strong> {{ project.purpose }}</p>
-                    <p class="text-sm text-gray-600"><strong>Type:</strong> {{ project.type }}</p>
+                  <div class="bg-gray-800 p-3 rounded-lg shadow">
+                    <p class="text-sm font-medium text-blue-400"><strong>Purpose:</strong> {{ project.purpose }}</p>
+                    <p class="text-sm font-medium text-blue-400"><strong>Type:</strong> {{ project.type }}</p>
+                    <p class="text-sm font-medium text-blue-400"><strong>Location:</strong> {{ project.locations[0].description }}</p>
+                    <p class="text-sm font-medium text-blue-400"><strong>Coordinates:</strong> {{ project.locations[0].geometry.coordinates.join(', ') }}</p>
                   </div>
-                  <!-- Location and Budget -->
-                  <div>
-                    <p class="text-sm font-medium text-gray-700">
-                      <strong>Location:</strong> {{ project.locations[0].description }}</p>
-                    <p class="text-sm text-gray-600">
-                      <strong>Coordinates:</strong> {{ project.locations[0].geometry.coordinates.join(', ') }}</p>
-                  </div>
-                  <div>
-                    <p class="text-sm font-medium text-gray-700">
-                      <strong>Budget:</strong> {{ project.budget.amount.amount | currency: project.budget.amount.currency }}
-                    </p>
-                    <p class="text-sm text-gray-600" *ngFor="let breakdown of project.budget.budgetBreakdowns">
-                      <strong>{{ breakdown.description }}
-                        :</strong> {{ breakdown.amount.amount | currency: breakdown.amount.currency }}
+
+                  <!-- Budget Details -->
+                  <div class="bg-gray-800 p-3 rounded-lg shadow">
+                    <p class="text-sm font-medium text-orange-500"><strong>Budget:</strong> {{ project.budget.amount.amount | currency: project.budget.amount.currency }}</p>
+                    <p *ngFor="let breakdown of project.budget.budgetBreakdowns" class="text-sm text-gray-200">
+                      <strong>{{ breakdown.description }}:</strong> {{ breakdown.amount.amount | currency: breakdown.amount.currency }}
                     </p>
                   </div>
 
                   <!-- Stakeholders and Documents -->
-                  <div>
-                    <p class="text-sm font-medium text-gray-700"><strong>Stakeholders:</strong></p>
-                    <ul class="text-sm text-gray-600">
-                      <li *ngFor="let party of project.parties">
-                        {{ party.name }} ({{ party.roles.join(', ') }})
-                      </li>
+                  <div class="bg-gray-800 p-3 rounded-lg shadow">
+                    <p class="text-sm font-medium text-green-500"><strong>Stakeholders:</strong></p>
+                    <ul class="text-sm">
+                      <li *ngFor="let party of project.parties">{{ party.name }} ({{ party.roles.join(', ') }})</li>
                     </ul>
                   </div>
-                  <div>
-                    <p class="text-sm font-medium text-gray-700"><strong>Documents:</strong></p>
-                    <ul class="text-sm text-gray-600">
+                  <div class="bg-gray-800 p-3 rounded-lg shadow">
+                    <p class="text-sm font-medium text-green-500"><strong>Documents:</strong></p>
+                    <ul class="text-sm">
                       <li *ngFor="let document of project.documents">
-                        <a [href]="document.url" target="_blank">{{ document.title }}</a>
+                        <a [href]="document.url" target="_blank" class="text-blue-400">{{ document.title }}</a>
                       </li>
                     </ul>
                   </div>
+
                   <!-- Policy Alignment -->
-                  <div class="col-span-1 md:col-span-2">
-                    <p class="text-sm font-medium text-gray-700"><strong>Policy and Strategic Alignment:</strong></p>
-                    <ul class="text-sm text-gray-600">
+                  <div class="bg-gray-800 p-3 rounded-lg shadow col-span-1 md:col-span-2">
+                    <p class="text-sm font-medium text-orange-500"><strong>Policy and Strategic Alignment:</strong></p>
+                    <ul class="text-sm">
                       <li *ngFor="let policy of project.policyAlignment.policies">{{ policy }}</li>
                     </ul>
-                    <ul class="text-sm text-gray-600">
+                    <ul class="text-sm">
                       <li *ngFor="let classification of project.additionalClassifications">
                         {{ classification.scheme }}: {{ classification.description }}
                       </li>
                     </ul>
                   </div>
                 </div>
+
+
                 <!-- Identification Phase Information Section -->
-                <div *ngIf="project.phase === 'Identification'"
-                     class="identification-phase-info mt-4 p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-300">
-                  <h3 class="text-lg font-semibold text-gray-800 mb-4">Identification Phase</h3>
-                  <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 text-sm text-gray-700">
-                    <!-- Identification Period -->
-                    <div class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                      <dt class="font-medium">Identification Period</dt>
-                      <dd>{{ project.identificationPeriod.startDate | date }}
-                        - {{ project.identificationPeriod.endDate | date }}
-                      </dd>
-                    </div>
+                <div *ngIf="project.phase === 'Identification'" class="bg-gray-900 mt-6 p-6 rounded-lg">
+                  <div class="max-w-4xl mx-auto divide-y divide-gray-700">
+                    <!-- Identification Phase Collapsible Section -->
+                    <div class="pt-6">
+                      <dt>
+                        <!-- Expand/collapse question button -->
+                        <button type="button" class="flex w-full items-start justify-between text-left text-gray-300" (click)="identificationOpen = !identificationOpen" [attr.aria-expanded]="identificationOpen.toString()">
+                          <span class="text-lg font-semibold">Identification Phase</span>
+                          <span class="ml-6 h-7 flex items-center">
+            <!-- Icon when question is collapsed/expanded -->
+            <svg *ngIf="!identificationOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+            </svg>
+            <svg *ngIf="identificationOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
+            </svg>
+          </span>
+                        </button>
+                      </dt>
+                      <dd class="mt-2" [id]="identificationOpen ? 'identification-content' : null" *ngIf="identificationOpen">
+                        <div class="bg-gray-800 p-4 rounded-lg shadow-inner">
+                          <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 text-sm text-gray-400">
+                            <!-- Identification Period -->
+                            <div class="bg-gray-700 p-3 rounded-lg">
+                              <dt class="font-medium text-green-500">Identification Period</dt>
+                              <dd>{{ project.identificationPeriod.startDate | date }} - {{ project.identificationPeriod.endDate | date }}</dd>
+                            </div>
 
-                    <!-- Environmental Impact Category -->
-                    <div class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                      <dt class="font-medium">Environmental Impact Category</dt>
-                      <dd>{{ project.environment.impactCategories[0].id }}
-                        - {{ project.environment.impactCategories[0].description }}
-                      </dd>
-                    </div>
+                            <!-- Environmental Impact Category -->
+                            <div class="bg-gray-700 p-3 rounded-lg">
+                              <dt class="font-medium text-green-500">Environmental Impact Category</dt>
+                              <dd>{{ project.environment.impactCategories[0].id }} - {{ project.environment.impactCategories[0].description }}</dd>
+                            </div>
 
-                    <!-- Environmental Impact Assessment Conducted -->
-                    <div class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                      <dt class="font-medium">Impact Assessment Conducted</dt>
-                      <dd>{{ project.environment.hasImpactAssessment ? 'Yes' : 'No' }}</dd>
-                    </div>
+                            <!-- Environmental Impact Assessment Conducted -->
+                            <div class="bg-gray-700 p-3 rounded-lg">
+                              <dt class="font-medium text-green-500">Impact Assessment Conducted</dt>
+                              <dd>{{ project.environment.hasImpactAssessment ? 'Yes' : 'No' }}</dd>
+                            </div>
 
-                    <!-- In Protected Area -->
-                    <div class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                      <dt class="font-medium">In Protected Area</dt>
-                      <dd>{{ project.environment.inProtectedArea ? 'Yes' : 'No' }}</dd>
-                    </div>
+                            <!-- In Protected Area -->
+                            <div class="bg-gray-700 p-3 rounded-lg">
+                              <dt class="font-medium text-green-500">In Protected Area</dt>
+                              <dd>{{ project.environment.inProtectedArea ? 'Yes' : 'No' }}</dd>
+                            </div>
 
-                    <!-- Affects Indigenous Lands -->
-                    <div class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                      <dt class="font-medium">Affects Indigenous Lands</dt>
-                      <dd>{{ project.social.inIndigenousLand ? 'Yes' : 'No' }}</dd>
-                    </div>
+                            <!-- Affects Indigenous Lands -->
+                            <div class="bg-gray-700 p-3 rounded-lg">
+                              <dt class="font-medium text-green-500">Affects Indigenous Lands</dt>
+                              <dd>{{ project.social.inIndigenousLand ? 'Yes' : 'No' }}</dd>
+                            </div>
 
-                    <!-- Lobbying Meetings -->
-                    <div *ngIf="project.lobbyingMeetings?.length > 0" class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                      <dt class="font-medium">Lobbying Meetings</dt>
-                      <dd>
-                        <ul class="list-disc pl-5">
-                          <li *ngFor="let meeting of project.lobbyingMeetings">{{ meeting.date | date }}
-                            - {{ meeting.publicOffice?.organization?.name }}
-                          </li>
-                        </ul>
-                      </dd>
-                    </div>
+                            <!-- Lobbying Meetings -->
+                            <div *ngIf="project.lobbyingMeetings?.length > 0" class="bg-gray-700 p-3 rounded-lg">
+                              <dt class="font-medium text-green-500">Lobbying Meetings</dt>
+                              <dd>
+                                <ul class="list-disc pl-5 text-gray-400">
+                                  <li *ngFor="let meeting of project.lobbyingMeetings">{{ meeting.date | date }} - {{ meeting.publicOffice?.organization?.name }}</li>
+                                </ul>
+                              </dd>
+                            </div>
 
-                    <!-- Climate Finance Details -->
-                    <div *ngIf="project.climateFinance" class="col-span-2 px-4 py-3 bg-white rounded-lg shadow-xs">
-                      <dt class="font-medium">Climate Finance Details</dt>
-                      <dd>
-                        <div class="grid grid-cols-2 gap-x-4 gap-y-2">
-                          <div><strong>Objective:</strong> {{ project.climateFinance.climateObjective }}</div>
-                          <div><strong>Instrument:</strong> {{ project.climateFinance.financialInstrument }}</div>
-                          <div><strong>Transformation:</strong> {{ project.climateFinance.climateTransformation }}</div>
-                          <div><strong>Decision
-                            Making:</strong> {{ project.climateFinance.climateFinanceDecisionMaking }}
-                          </div>
-                          <div><strong>NDCs
-                            Alignment:</strong> {{ project.climateFinance.nationallyDeterminedContributions }}
-                          </div>
-                          <div><strong>Paris Agreement:</strong> {{ project.climateFinance.parisAgreement }}</div>
-                          <div><strong>Beneficiaries:</strong> {{ project.climateFinance.beneficiaries }}</div>
-                          <div><strong>Investment
-                            Amount:</strong> {{ project.climateFinance.amountOfInvestment | currency }}
-                          </div>
-                          <div><strong>Funding Source:</strong> {{ project.climateFinance.fundingSource }}</div>
+                            <!-- Climate Finance Details -->
+                            <div *ngIf="project.climateFinance" class="col-span-2 bg-gray-700 p-3 rounded-lg">
+                              <dt class="font-medium text-green-500">Climate Finance Details</dt>
+                              <dd>
+                                <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-gray-400">
+                                  <div><strong>Objective:</strong> {{ project.climateFinance.climateObjective }}</div>
+                                  <div><strong>Instrument:</strong> {{ project.climateFinance.financialInstrument }}</div>
+                                  <div><strong>Transformation:</strong> {{ project.climateFinance.climateTransformation }}</div>
+                                  <div><strong>Decision Making:</strong> {{ project.climateFinance.climateFinanceDecisionMaking }}</div>
+                                  <div><strong>NDCs Alignment:</strong> {{ project.climateFinance.nationallyDeterminedContributions }}</div>
+                                  <div><strong>Paris Agreement:</strong> {{ project.climateFinance.parisAgreement }}</div>
+                                  <div><strong>Beneficiaries:</strong> {{ project.climateFinance.beneficiaries }}</div>
+                                  <div><strong>Investment Amount:</strong> {{ project.climateFinance.amountOfInvestment | currency }}</div>
+                                  <div><strong>Funding Source:</strong> {{ project.climateFinance.fundingSource }}</div>
+                                </div>
+                              </dd>
+                            </div>
+                          </dl>
                         </div>
                       </dd>
                     </div>
-                  </dl>
+                  </div>
                 </div>
 
+
+
                 <!-- Preparation Phase Information Section -->
-                <div *ngIf="project.phase === 'Preparation'">
-                  <div class="bg-white">
-                    <div class="mx-auto max-w-7xl px-6 py-6 lg:px-8">
-                      <div class="mx-auto max-w-4xl divide-y divide-gray-300">
+                <div *ngIf="project.phase === 'Preparation'" class="bg-gray-800 p-6 rounded-lg">
+                  <div class="max-w-4xl mx-auto divide-y divide-gray-700">
 
-                        <!-- Identification Phase Collapsible Section -->
-                        <div class="pt-6">
-                          <dt>
-                            <!-- Expand/collapse question button -->
-                            <button type="button" class="flex w-full items-start justify-between text-left" (click)="identificationOpen = !identificationOpen" [attr.aria-expanded]="identificationOpen.toString()">
-                              <span class="text-lg font-semibold text-gray-900">Identification Phase</span>
-                              <span class="ml-6 h-7 flex items-center">
-                              <!-- Icon when question is collapsed/expanded -->
-                              <svg *ngIf="!identificationOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                   viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                              </svg>
-                              <svg *ngIf="identificationOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                   viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
-                              </svg>
-                            </span>
-                            </button>
-                          </dt>
-                          <dd class="mt-2" [id]="identificationOpen ? 'identification-content' : null"
-                              *ngIf="identificationOpen">
-                            <!-- Insert Identification Phase details here -->
-                            <div class="mb-5">
-                              <h3 class="text-lg font-semibold text-gray-800 mb-4">Identification Phase</h3>
-                              <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 text-sm text-gray-700">
-                                <!-- Identification Period -->
-                                <div class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                                  <dt class="font-medium">Identification Period</dt>
-                                  <dd>{{ project.identificationPeriod.startDate | date }}
-                                    - {{ project.identificationPeriod.endDate | date }}
-                                  </dd>
-                                </div>
-
-                                <!-- Environmental Impact Category -->
-                                <div class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                                  <dt class="font-medium">Environmental Impact Category</dt>
-                                  <dd>{{ project.environment.impactCategories[0].id }}
-                                    - {{ project.environment.impactCategories[0].description }}
-                                  </dd>
-                                </div>
-
-                                <!-- Environmental Impact Assessment Conducted -->
-                                <div class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                                  <dt class="font-medium">Impact Assessment Conducted</dt>
-                                  <dd>{{ project.environment.hasImpactAssessment ? 'Yes' : 'No' }}</dd>
-                                </div>
-
-                                <!-- In Protected Area -->
-                                <div class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                                  <dt class="font-medium">In Protected Area</dt>
-                                  <dd>{{ project.environment.inProtectedArea ? 'Yes' : 'No' }}</dd>
-                                </div>
-
-                                <!-- Affects Indigenous Lands -->
-                                <div class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                                  <dt class="font-medium">Affects Indigenous Lands</dt>
-                                  <dd>{{ project.social.inIndigenousLand ? 'Yes' : 'No' }}</dd>
-                                </div>
-
-                                <!-- Lobbying Meetings -->
-                                <div *ngIf="project.lobbyingMeetings?.length > 0"
-                                     class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                                  <dt class="font-medium">Lobbying Meetings</dt>
-                                  <dd>
-                                    <ul class="list-disc pl-5">
-                                      <li *ngFor="let meeting of project.lobbyingMeetings">{{ meeting.date | date }}
-                                        - {{ meeting.publicOffice?.organization?.name }}
-                                      </li>
-                                    </ul>
-                                  </dd>
-                                </div>
-
-                                <!-- Climate Finance Details -->
-                                <div *ngIf="project.climateFinance"
-                                     class="col-span-2 px-4 py-3 bg-white rounded-lg shadow-xs">
-                                  <dt class="font-medium">Climate Finance Details</dt>
-                                  <dd>
-                                    <div class="grid grid-cols-2 gap-x-4 gap-y-2">
-                                      <div><strong>Objective:</strong> {{ project.climateFinance.climateObjective }}</div>
-                                      <div><strong>Instrument:</strong> {{ project.climateFinance.financialInstrument }}
-                                      </div>
-                                      <div>
-                                        <strong>Transformation:</strong> {{ project.climateFinance.climateTransformation }}
-                                      </div>
-                                      <div><strong>Decision
-                                        Making:</strong> {{ project.climateFinance.climateFinanceDecisionMaking }}
-                                      </div>
-                                      <div><strong>NDCs
-                                        Alignment:</strong> {{ project.climateFinance.nationallyDeterminedContributions }}
-                                      </div>
-                                      <div><strong>Paris Agreement:</strong> {{ project.climateFinance.parisAgreement }}
-                                      </div>
-                                      <div><strong>Beneficiaries:</strong> {{ project.climateFinance.beneficiaries }}
-                                      </div>
-                                      <div><strong>Investment
-                                        Amount:</strong> {{ project.climateFinance.amountOfInvestment | currency }}
-                                      </div>
-                                      <div><strong>Funding Source:</strong> {{ project.climateFinance.fundingSource }}
-                                      </div>
-                                    </div>
-                                  </dd>
-                                </div>
-                              </dl>
+                    <!-- Identification Phase Collapsible Section -->
+                    <div class="pt-6 mt-6">
+                      <dt>
+                        <!-- Expand/collapse question button -->
+                        <button type="button" class="flex w-full items-start justify-between text-left text-gray-300" (click)="identificationOpen = !identificationOpen" [attr.aria-expanded]="identificationOpen.toString()">
+                          <span class="text-lg font-semibold">Identification Phase</span>
+                          <span class="ml-6 h-7 flex items-center">
+                            <!-- Icon when question is collapsed/expanded -->
+                            <svg *ngIf="!identificationOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                            <svg *ngIf="identificationOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
+                            </svg>
+                          </span>
+                        </button>
+                      </dt>
+                      <dd class="mt-2" [id]="identificationOpen ? 'identification-content' : null" *ngIf="identificationOpen">
+                        <div class="bg-gray-900 p-4 rounded-lg shadow-inner">
+                          <h3 class="text-lg font-semibold text-blue-400 mb-4">Identification Phase</h3>
+                          <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 text-sm text-gray-400">
+                            <!-- Identification Period -->
+                            <div class="bg-gray-800 p-3 rounded-lg">
+                              <dt class="font-medium text-green-500">Identification Period</dt>
+                              <dd>{{ project.identificationPeriod.startDate | date }} - {{ project.identificationPeriod.endDate | date }}</dd>
                             </div>
 
-                          </dd>
-                        </div>
-
-                        <!-- Preparation Phase Collapsible Section -->
-                        <div class="pt-6">
-                          <dt>
-                            <button type="button" class="flex w-full items-start justify-between text-left" (click)="preparationOpen = !preparationOpen" [attr.aria-expanded]="preparationOpen.toString()">
-                              <span class="text-lg font-semibold text-gray-900">Preparation Phase</span>
-                              <span class="ml-6 h-7 flex items-center">
-                              <!-- Icon when question is collapsed/expanded -->
-                              <svg *ngIf="!preparationOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                   viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                              </svg>
-                              <svg *ngIf="preparationOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                   viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
-                              </svg>
-                            </span>
-                            </button>
-                          </dt>
-                          <dd class="mt-2" [id]="preparationOpen ? 'preparation-content' : null" *ngIf="preparationOpen">
-                            <!-- Insert Preparation Phase details here -->
-                            <div class="mt-5">
-                              <h3 class="text-lg font-semibold text-gray-800 mb-4">Preparation Phase</h3>
-                              <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 text-sm text-gray-700">
-                                <!-- Preparation Period -->
-                                <div class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                                  <dt class="font-medium">Preparation Period Start Date</dt>
-                                  <dd>{{ project.preparationPeriod.startDate | date }}</dd>
-                                </div>
-
-                                <!-- Asset Lifetime -->
-                                <div class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                                  <dt class="font-medium">Estimated Asset Lifetime</dt>
-                                  <dd>{{ (project.assetLifetime.durationInDays / 365) | number: '1.0-2' }} years</dd>
-                                </div>
-
-                                <!-- Budget Breakdowns -->
-                                <div *ngFor="let breakdown of project.budget.budgetBreakdowns"
-                                     class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                                  <dt class="font-medium">{{ breakdown.description }}</dt>
-                                  <dd>{{ breakdown.amount.amount | currency:breakdown.amount.currency }}</dd>
-                                </div>
-
-                                <!-- Preliminary Cost Estimate -->
-                                <div *ngIf="project.costMeasurements.length > 0"
-                                     class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                                  <dt class="font-medium">Preliminary Cost Estimate</dt>
-                                  <dd>{{ project.costMeasurements[0].lifeCycleCosting.value.amount | currency:project.costMeasurements[0].lifeCycleCosting.value.currency }}</dd>
-                                </div>
-
-                                <!-- Energy Production Forecast -->
-                                <div *ngIf="project.forecasts.length > 0" class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                                  <dt class="font-medium">{{ project.forecasts[0].title }}</dt>
-                                  <dd>{{ project.forecasts[0].observations[0].value.amount }} {{ project.forecasts[0].observations[0].value.unit.name }}</dd>
-                                </div>
-
-                                <!-- Consulting Parties -->
-                                <div *ngFor="let party of project.parties | filterRoles: 'consultant'"
-                                     class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                                  <dt class="font-medium">Consulting {{ party.roles[0] | titlecase }}</dt>
-                                  <dd>{{ party.name }}</dd>
-                                </div>
-
-                                <!-- Feasibility Study Report -->
-                                <div *ngIf="project.documents.length > 0" class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                                  <dt class="font-medium">Feasibility Study Report</dt>
-                                  <dd>{{ project.documents[0].title }} - Published
-                                    on {{ project.documents[0].datePublished | date }}
-                                  </dd>
-                                </div>
-
-                                <!-- Milestones -->
-                                <div *ngFor="let milestone of project.milestones"
-                                     class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                                  <dt class="font-medium">{{ milestone.title }}</dt>
-                                  <dd>Due by {{ milestone.dueDate | date }} - Status: {{ milestone.status | titlecase }}
-                                  </dd>
-                                </div>
-                              </dl>
-
+                            <!-- Environmental Impact Category -->
+                            <div class="bg-gray-800 p-3 rounded-lg">
+                              <dt class="font-medium text-green-500">Environmental Impact Category</dt>
+                              <dd>{{ project.environment.impactCategories[0].id }} - {{ project.environment.impactCategories[0].description }}</dd>
                             </div>
-                          </dd>
-                        </div>
 
-                      </div>
+                            <!-- Environmental Impact Assessment Conducted -->
+                            <div class="bg-gray-800 p-3 rounded-lg">
+                              <dt class="font-medium text-green-500">Impact Assessment Conducted</dt>
+                              <dd>{{ project.environment.hasImpactAssessment ? 'Yes' : 'No' }}</dd>
+                            </div>
+
+                            <!-- In Protected Area -->
+                            <div class="bg-gray-800 p-3 rounded-lg">
+                              <dt class="font-medium text-green-500">In Protected Area</dt>
+                              <dd>{{ project.environment.inProtectedArea ? 'Yes' : 'No' }}</dd>
+                            </div>
+
+                            <!-- Affects Indigenous Lands -->
+                            <div class="bg-gray-800 p-3 rounded-lg">
+                              <dt class="font-medium text-green-500">Affects Indigenous Lands</dt>
+                              <dd>{{ project.social.inIndigenousLand ? 'Yes' : 'No' }}</dd>
+                            </div>
+
+                            <!-- Lobbying Meetings -->
+                            <div *ngIf="project.lobbyingMeetings?.length > 0" class="bg-gray-800 p-3 rounded-lg">
+                              <dt class="font-medium text-green-500">Lobbying Meetings</dt>
+                              <dd>
+                                <ul class="list-disc pl-5 text-gray-400">
+                                  <li *ngFor="let meeting of project.lobbyingMeetings">{{ meeting.date | date }} - {{ meeting.publicOffice?.organization?.name }}</li>
+                                </ul>
+                              </dd>
+                            </div>
+
+                            <!-- Climate Finance Details -->
+                            <div *ngIf="project.climateFinance" class="col-span-2 bg-gray-800 p-3 rounded-lg">
+                              <dt class="font-medium text-green-500">Climate Finance Details</dt>
+                              <dd>
+                                <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-gray-400">
+                                  <div><strong>Objective:</strong> {{ project.climateFinance.climateObjective }}</div>
+                                  <div><strong>Instrument:</strong> {{ project.climateFinance.financialInstrument }}</div>
+                                  <div><strong>Transformation:</strong> {{ project.climateFinance.climateTransformation }}</div>
+                                  <div><strong>Decision Making:</strong> {{ project.climateFinance.climateFinanceDecisionMaking }}</div>
+                                  <div><strong>NDCs Alignment:</strong> {{ project.climateFinance.nationallyDeterminedContributions }}</div>
+                                  <div><strong>Paris Agreement:</strong> {{ project.climateFinance.parisAgreement }}</div>
+                                  <div><strong>Beneficiaries:</strong> {{ project.climateFinance.beneficiaries }}</div>
+                                  <div><strong>Investment Amount:</strong> {{ project.climateFinance.amountOfInvestment | currency }}</div>
+                                  <div><strong>Funding Source:</strong> {{ project.climateFinance.fundingSource }}</div>
+                                </div>
+                              </dd>
+                            </div>
+                          </dl>
+                        </div>
+                      </dd>
+                    </div>
+
+                  </div>
+                </div>
+
+
+                <div *ngIf="project.phase === 'Preparation'" class="bg-gray-900 p-6 mt-6 rounded-lg">
+                  <div class="max-w-4xl mx-auto divide-y divide-gray-700">
+                    <!-- Preparation Phase Collapsible Section -->
+                    <div class="pt-6">
+                      <dt>
+                        <!-- Expand/collapse question button -->
+                        <button type="button" class="flex w-full items-start justify-between text-left text-gray-300" (click)="preparationOpen = !preparationOpen" [attr.aria-expanded]="preparationOpen.toString()">
+                          <span class="text-lg font-semibold">Preparation Phase</span>
+                          <span class="ml-6 h-7 flex items-center">
+                                <!-- Icon when question is collapsed/expanded -->
+                                <svg *ngIf="!preparationOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                                <svg *ngIf="preparationOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
+                                </svg>
+                              </span>
+                        </button>
+                      </dt>
+                      <dd class="mt-2" [id]="preparationOpen ? 'preparation-content' : null" *ngIf="preparationOpen">
+                        <!-- Insert Preparation Phase details here -->
+                        <div class="bg-gray-800 p-4 rounded-lg shadow-inner">
+                          <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 text-sm text-gray-400">
+                            <!-- Preparation Period -->
+                            <div class="bg-gray-700 p-3 rounded-lg">
+                              <dt class="font-medium text-green-500">Preparation Period Start Date</dt>
+                              <dd>{{ project.preparationPeriod.startDate | date }}</dd>
+                            </div>
+
+                            <!-- Asset Lifetime -->
+                            <div class="bg-gray-700 p-3 rounded-lg">
+                              <dt class="font-medium text-green-500">Estimated Asset Lifetime</dt>
+                              <dd>{{ (project.assetLifetime.durationInDays / 365) | number: '1.0-2' }} years</dd>
+                            </div>
+
+                            <!-- Budget Breakdowns -->
+                            <div *ngFor="let breakdown of project.budget.budgetBreakdowns" class="bg-gray-700 p-3 rounded-lg">
+                              <dt class="font-medium text-green-500">{{ breakdown.description }}</dt>
+                              <dd>{{ breakdown.amount.amount | currency:breakdown.amount.currency }}</dd>
+                            </div>
+
+                            <!-- Preliminary Cost Estimate -->
+                            <div *ngIf="project.costMeasurements.length > 0" class="bg-gray-700 p-3 rounded-lg">
+                              <dt class="font-medium text-green-500">Preliminary Cost Estimate</dt>
+                              <dd>{{ project.costMeasurements[0].lifeCycleCosting.value.amount | currency:project.costMeasurements[0].lifeCycleCosting.value.currency }}</dd>
+                            </div>
+
+                            <!-- Energy Production Forecast -->
+                            <div *ngIf="project.forecasts.length > 0" class="bg-gray-700 p-3 rounded-lg">
+                              <dt class="font-medium text-green-500">{{ project.forecasts[0].title }}</dt>
+                              <dd>{{ project.forecasts[0].observations[0].value.amount }} {{ project.forecasts[0].observations[0].value.unit.name }}</dd>
+                            </div>
+
+                            <!-- Consulting Parties -->
+                            <div *ngFor="let party of project.parties | filterRoles: 'consultant'" class="bg-gray-700 p-3 rounded-lg">
+                              <dt class="font-medium text-green-500">Consulting {{ party.roles[0] | titlecase }}</dt>
+                              <dd>{{ party.name }}</dd>
+                            </div>
+
+                            <!-- Feasibility Study Report -->
+                            <div *ngIf="project.documents.length > 0" class="bg-gray-700 p-3 rounded-lg">
+                              <dt class="font-medium text-green-500">Feasibility Study Report</dt>
+                              <dd>{{ project.documents[0].title }} - Published on {{ project.documents[0].datePublished | date }}</dd>
+                            </div>
+
+                            <!-- Milestones -->
+                            <div *ngFor="let milestone of project.milestones" class="bg-gray-700 p-3 rounded-lg">
+                              <dt class="font-medium text-green-500">{{ milestone.title }}</dt>
+                              <dd>Due by {{ milestone.dueDate | date }} - Status: {{ milestone.status | titlecase }}</dd>
+                            </div>
+                          </dl>
+                        </div>
+                      </dd>
                     </div>
                   </div>
                 </div>
@@ -1497,116 +1470,96 @@
                 <!-- Decommissioning Phase Information Section -->
                 <div *ngIf="project.phase === 'Decommissioning'">
                   <div class="bg-white">
-                    <div class="mx-auto max-w-7xl px-6 py-6 lg:px-8">
+                    <div class="mx-auto max-w-7xl  py-4 ">
                       <div class="mx-auto max-w-4xl divide-y divide-gray-300">
 
                         <!-- Identification Phase Collapsible Section -->
-                        <div class="pt-6">
-                          <dt>
-                            <!-- Expand/collapse question button -->
-                            <button type="button" class="flex w-full items-start justify-between text-left" (click)="identificationOpen = !identificationOpen" [attr.aria-expanded]="identificationOpen.toString()">
-                              <span class="text-lg font-semibold text-gray-900">Identification Phase</span>
-                              <span class="ml-6 h-7 flex items-center">
-                              <!-- Icon when question is collapsed/expanded -->
-                              <svg *ngIf="!identificationOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                   viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                              </svg>
-                              <svg *ngIf="identificationOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                   viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
-                              </svg>
-                            </span>
-                            </button>
-                          </dt>
-                          <dd class="mt-2" [id]="identificationOpen ? 'identification-content' : null"
-                              *ngIf="identificationOpen">
-                            <!-- Insert Identification Phase details here -->
-                            <div class="mt-4 p-4 bg-white rounded-lg shadow border-2 border-gray-200">
-
-                              <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 text-sm text-gray-700">
-                                <!-- Identification Period -->
-                                <div class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                                  <dt class="font-medium">Identification Period</dt>
-                                  <dd>{{ project.identificationPeriod.startDate | date }}
-                                    - {{ project.identificationPeriod.endDate | date }}
-                                  </dd>
-                                </div>
-
-                                <!-- Environmental Impact Category -->
-                                <div class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                                  <dt class="font-medium">Environmental Impact Category</dt>
-                                  <dd>{{ project.environment.impactCategories[0].id }}
-                                    - {{ project.environment.impactCategories[0].description }}
-                                  </dd>
-                                </div>
-
-                                <!-- Environmental Impact Assessment Conducted -->
-                                <div class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                                  <dt class="font-medium">Impact Assessment Conducted</dt>
-                                  <dd>{{ project.environment.hasImpactAssessment ? 'Yes' : 'No' }}</dd>
-                                </div>
-
-                                <!-- In Protected Area -->
-                                <div class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                                  <dt class="font-medium">In Protected Area</dt>
-                                  <dd>{{ project.environment.inProtectedArea ? 'Yes' : 'No' }}</dd>
-                                </div>
-
-                                <!-- Affects Indigenous Lands -->
-                                <div class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                                  <dt class="font-medium">Affects Indigenous Lands</dt>
-                                  <dd>{{ project.social.inIndigenousLand ? 'Yes' : 'No' }}</dd>
-                                </div>
-
-                                <!-- Lobbying Meetings -->
-                                <div *ngIf="project.lobbyingMeetings?.length > 0"
-                                     class="px-4 py-3 bg-white rounded-lg shadow-xs">
-                                  <dt class="font-medium">Lobbying Meetings</dt>
-                                  <dd>
-                                    <ul class="list-disc pl-5">
-                                      <li *ngFor="let meeting of project.lobbyingMeetings">{{ meeting.date | date }}
-                                        - {{ meeting.publicOffice?.organization?.name }}
-                                      </li>
-                                    </ul>
-                                  </dd>
-                                </div>
-
-                                <!-- Climate Finance Details -->
-                                <div *ngIf="project.climateFinance"
-                                     class="col-span-2 px-4 py-3 bg-white rounded-lg shadow-xs">
-                                  <dt class="font-medium">Climate Finance Details</dt>
-                                  <dd>
-                                    <div class="grid grid-cols-2 gap-x-4 gap-y-2">
-                                      <div><strong>Objective:</strong> {{ project.climateFinance.climateObjective }}</div>
-                                      <div><strong>Instrument:</strong> {{ project.climateFinance.financialInstrument }}
-                                      </div>
-                                      <div>
-                                        <strong>Transformation:</strong> {{ project.climateFinance.climateTransformation }}
-                                      </div>
-                                      <div><strong>Decision
-                                        Making:</strong> {{ project.climateFinance.climateFinanceDecisionMaking }}
-                                      </div>
-                                      <div><strong>NDCs
-                                        Alignment:</strong> {{ project.climateFinance.nationallyDeterminedContributions }}
-                                      </div>
-                                      <div><strong>Paris Agreement:</strong> {{ project.climateFinance.parisAgreement }}
-                                      </div>
-                                      <div><strong>Beneficiaries:</strong> {{ project.climateFinance.beneficiaries }}
-                                      </div>
-                                      <div><strong>Investment
-                                        Amount:</strong> {{ project.climateFinance.amountOfInvestment | currency }}
-                                      </div>
-                                      <div><strong>Funding Source:</strong> {{ project.climateFinance.fundingSource }}
-                                      </div>
+                        <div  class="bg-gray-900 p-6 rounded-lg">
+                          <div class="max-w-4xl mx-auto divide-y divide-gray-700">
+                            <!-- Identification Phase Collapsible Section -->
+                            <div class="pt-6">
+                              <dt>
+                                <!-- Expand/collapse question button -->
+                                <button type="button" class="flex w-full items-start justify-between text-left text-gray-300" (click)="identificationOpen = !identificationOpen" [attr.aria-expanded]="identificationOpen.toString()">
+                                  <span class="text-lg font-semibold">Identification Phase</span>
+                                  <span class="ml-6 h-7 flex items-center">
+            <!-- Icon when question is collapsed/expanded -->
+            <svg *ngIf="!identificationOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+            </svg>
+            <svg *ngIf="identificationOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
+            </svg>
+          </span>
+                                </button>
+                              </dt>
+                              <dd class="mt-2" [id]="identificationOpen ? 'identification-content' : null" *ngIf="identificationOpen">
+                                <div class="bg-gray-800 p-4 rounded-lg shadow-inner">
+                                  <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 text-sm text-gray-400">
+                                    <!-- Identification Period -->
+                                    <div class="bg-gray-700 p-3 rounded-lg">
+                                      <dt class="font-medium text-green-500">Identification Period</dt>
+                                      <dd>{{ project.identificationPeriod.startDate | date }} - {{ project.identificationPeriod.endDate | date }}</dd>
                                     </div>
-                                  </dd>
-                                </div>
-                              </dl>
-                            </div>
 
-                          </dd>
+                                    <!-- Environmental Impact Category -->
+                                    <div class="bg-gray-700 p-3 rounded-lg">
+                                      <dt class="font-medium text-green-500">Environmental Impact Category</dt>
+                                      <dd>{{ project.environment.impactCategories[0].id }} - {{ project.environment.impactCategories[0].description }}</dd>
+                                    </div>
+
+                                    <!-- Environmental Impact Assessment Conducted -->
+                                    <div class="bg-gray-700 p-3 rounded-lg">
+                                      <dt class="font-medium text-green-500">Impact Assessment Conducted</dt>
+                                      <dd>{{ project.environment.hasImpactAssessment ? 'Yes' : 'No' }}</dd>
+                                    </div>
+
+                                    <!-- In Protected Area -->
+                                    <div class="bg-gray-700 p-3 rounded-lg">
+                                      <dt class="font-medium text-green-500">In Protected Area</dt>
+                                      <dd>{{ project.environment.inProtectedArea ? 'Yes' : 'No' }}</dd>
+                                    </div>
+
+                                    <!-- Affects Indigenous Lands -->
+                                    <div class="bg-gray-700 p-3 rounded-lg">
+                                      <dt class="font-medium text-green-500">Affects Indigenous Lands</dt>
+                                      <dd>{{ project.social.inIndigenousLand ? 'Yes' : 'No' }}</dd>
+                                    </div>
+
+                                    <!-- Lobbying Meetings -->
+                                    <div *ngIf="project.lobbyingMeetings?.length > 0" class="bg-gray-700 p-3 rounded-lg">
+                                      <dt class="font-medium text-green-500">Lobbying Meetings</dt>
+                                      <dd>
+                                        <ul class="list-disc pl-5 text-gray-400">
+                                          <li *ngFor="let meeting of project.lobbyingMeetings">{{ meeting.date | date }} - {{ meeting.publicOffice?.organization?.name }}</li>
+                                        </ul>
+                                      </dd>
+                                    </div>
+
+                                    <!-- Climate Finance Details -->
+                                    <div *ngIf="project.climateFinance" class="col-span-2 bg-gray-700 p-3 rounded-lg">
+                                      <dt class="font-medium text-green-500">Climate Finance Details</dt>
+                                      <dd>
+                                        <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-gray-400">
+                                          <div><strong>Objective:</strong> {{ project.climateFinance.climateObjective }}</div>
+                                          <div><strong>Instrument:</strong> {{ project.climateFinance.financialInstrument }}</div>
+                                          <div><strong>Transformation:</strong> {{ project.climateFinance.climateTransformation }}</div>
+                                          <div><strong>Decision Making:</strong> {{ project.climateFinance.climateFinanceDecisionMaking }}</div>
+                                          <div><strong>NDCs Alignment:</strong> {{ project.climateFinance.nationallyDeterminedContributions }}</div>
+                                          <div><strong>Paris Agreement:</strong> {{ project.climateFinance.parisAgreement }}</div>
+                                          <div><strong>Beneficiaries:</strong> {{ project.climateFinance.beneficiaries }}</div>
+                                          <div><strong>Investment Amount:</strong> {{ project.climateFinance.amountOfInvestment | currency }}</div>
+                                          <div><strong>Funding Source:</strong> {{ project.climateFinance.fundingSource }}</div>
+                                        </div>
+                                      </dd>
+                                    </div>
+                                  </dl>
+                                </div>
+                              </dd>
+                            </div>
+                          </div>
                         </div>
+
 
                         <!-- Preparation Phase Collapsible Section -->
                         <div class="pt-6">
