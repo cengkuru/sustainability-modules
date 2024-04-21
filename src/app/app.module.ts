@@ -10,11 +10,13 @@ import {AppComponent} from "./app.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgxJsonViewerModule} from "ngx-json-viewer";
 import {FilterProjectsPipe} from "./pipes/filter-projects.pipe";
+import {FilterRolesPipe} from "./pipes/filter-roles.pipe";
 
 @NgModule({
   declarations: [
     AppComponent,
-    FilterProjectsPipe
+    FilterProjectsPipe,
+    FilterRolesPipe
 
   ],
   imports: [

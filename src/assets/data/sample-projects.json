@@ -1,6 +1,7 @@
 [
   {
     "id": "ZA-WIND-1",
+    "phase": "Identification",
     "identifiers": [
       {
         "id": "WIND-001",
@@ -8,7 +9,6 @@
       }
     ],
     "title": "Wind Farm Feasibility Study",
-    "phase": "Identification",
     "description": "A study to assess the viability of establishing a wind farm in the Northern Cape, considering environmental and economic factors, with potential for community ownership and job creation.",
     "status": "planning",
     "period": {
@@ -168,104 +168,115 @@
       "fundingSource": "Green Climate Fund"
     }
   },
-
   {
-    "id": "ZA-TRANSIT-2",
+    "id": "ZA-WIND-1",
+    "phase": "preparation",
     "identifiers": [
       {
-        "id": "TRANSIT-002",
+        "id": "WIND-001",
         "scheme": "internal-project-id"
       }
     ],
-    "title": "Public Transportation Expansion",
-    "phase": "Preparation",
-    "description": "Expansion of the public transportation network in Gauteng to improve accessibility, reduce traffic congestion, and promote sustainable mobility with a focus on inclusivity and affordability.",
+    "title": "Wind Farm Feasibility Study",
+    "description": "A study to assess the viability of establishing a wind farm in the Northern Cape, considering environmental and economic factors, with potential for community ownership and job creation.",
     "status": "planning",
     "period": {
-      "startDate": "2023-10-01"
+      "startDate": "2024-02-20"
     },
     "identificationPeriod": {
-      "startDate": "2023-07-01",
-      "endDate": "2023-09-30"
+      "startDate": "2024-02-20",
+      "endDate": "2024-04-30"
     },
     "preparationPeriod": {
-      "startDate": "2023-10-01"
+      "startDate": "2024-05-01"
     },
-    "sector": ["transport"],
-    "purpose": "Improve accessibility, reduce traffic congestion, and promote sustainable mobility.",
+    "implementationPeriod": {},
+    "completionPeriod": {},
+    "maintenancePeriod": {},
+    "decommissioningPeriod": {},
+    "sector": ["energy"],
+    "purpose": "To generate renewable energy, contribute to climate change mitigation goals, and promote local economic development.",
     "additionalClassifications": [
       {
         "scheme": "SDGs",
-        "id": "11.2",
-        "description": "Provide access to safe, affordable, accessible and sustainable transport systems for all"
+        "id": "7.2",
+        "description": "Increase substantially the share of renewable energy in the global energy mix"
       },
       {
         "scheme": "climate-finance",
         "id": "mitigation"
       }
     ],
-    "type": "expansion",
+    "type": "feasibility study",
     "relatedProjects": [],
     "assetLifetime": {
-      "durationInDays": 18250
+      "durationInDays": 7300
     },
     "locations": [
       {
-        "description": "Gauteng Province",
+        "description": "Northern Cape Province",
         "geometry": {
           "type": "Point",
-          "coordinates": [28.0, -26.0]
+          "coordinates": [20.0, -28.0]
         }
       }
     ],
     "budget": {
       "amount": {
-        "amount": 4000000,
+        "amount": 500000,
         "currency": "ZAR"
       },
       "budgetBreakdowns": [
         {
-          "id": "infrastructure",
-          "description": "Budget for construction and infrastructure development",
+          "id": "environmental-assessment",
+          "description": "Budget allocated for environmental impact assessments",
           "amount": {
-            "amount": 3000000,
+            "amount": 100000,
             "currency": "ZAR"
           }
         },
         {
-          "id": "rolling-stock",
-          "description": "Budget for new buses or trains",
+          "id": "community-engagement",
+          "description": "Budget for community consultations and engagement activities",
           "amount": {
-            "amount": 1000000,
+            "amount": 50000,
+            "currency": "ZAR"
+          }
+        },
+        {
+          "id": "engineering-design",
+          "description": "Budget for preliminary engineering and design work",
+          "amount": {
+            "amount": 150000,
+            "currency": "ZAR"
+          }
+        },
+        {
+          "id": "financial-analysis",
+          "description": "Budget for financial modeling and analysis",
+          "amount": {
+            "amount": 100000,
+            "currency": "ZAR"
+          }
+        },
+        {
+          "id": "legal-and-permitting",
+          "description": "Budget for legal and permitting activities",
+          "amount": {
+            "amount": 100000,
             "currency": "ZAR"
           }
         }
       ],
-      "finance": [
-        {
-          "id": "GCF-grant",
-          "assetClass": "grant",
-          "type": "grant",
-          "concessional": true,
-          "value": {
-            "amount": 1500000,
-            "currency": "ZAR"
-          },
-          "source": "Green Climate Fund",
-          "financingParty": {
-            "id": "GCF",
-            "name": "Green Climate Fund"
-          }
-        }
-      ]
+      "finance": []
     },
     "costMeasurements": [
       {
-        "id": "lifecycle-costing",
-        "date": "2024-03-15",
+        "id": "preliminary-cost-estimate",
+        "date": "2024-06-30",
         "lifeCycleCosting": {
           "value": {
-            "amount": 12000000,
+            "amount": 15000000,
             "currency": "ZAR"
           }
         }
@@ -273,38 +284,19 @@
     ],
     "forecasts": [
       {
-        "id": "ridership-forecast",
-        "title": "Projected Ridership Increase",
-        "description": "Estimated increase in public transport ridership after project completion.",
+        "id": "energy-production-forecast",
+        "title": "Projected Energy Production",
+        "description": "Estimated annual energy generation from the wind farm.",
         "observations": [
           {
             "period": {
-              "startDate": "2025-01-01",
-              "endDate": "2025-12-31"
+              "startDate": "2026-01-01",
+              "endDate": "2026-12-31"
             },
             "value": {
-              "amount": 20,
+              "amount": 150000,
               "unit": {
-                "name": "percentage"
-              }
-            }
-          }
-        ]
-      },
-      {
-        "id": "cost-forecast",
-        "title": "Projected Cost Increases",
-        "description": "Estimated increase in project costs due to inflation and potential unforeseen circumstances.",
-        "observations": [
-          {
-            "period": {
-              "startDate": "2024-01-01",
-              "endDate": "2024-12-31"
-            },
-            "value": {
-              "amount": 5,
-              "unit": {
-                "name": "percentage"
+                "name": "MWh"
               }
             }
           }
@@ -313,16 +305,28 @@
     ],
     "parties": [
       {
-        "name": "Gauteng Department of Roads and Transport",
+        "name": "Department of Energy",
         "roles": ["procuringEntity"]
       },
       {
-        "name": "Various bus and train manufacturers",
-        "roles": ["potential-suppliers"]
+        "name": "Northern Cape Provincial Government",
+        "roles": ["fundingSource"]
       },
       {
-        "name": "Community Representatives",
-        "roles": ["stakeholder"]
+        "name": "Community Trust",
+        "roles": ["potential-owner"]
+      },
+      {
+        "name": "Engineering Consulting Firm",
+        "roles": ["consultant"]
+      },
+      {
+        "name": "Financial Advisory Firm",
+        "roles": ["consultant"]
+      },
+      {
+        "name": "Legal and Permitting Services",
+        "roles": ["consultant"]
       }
     ],
     "publicAuthority": {
@@ -330,16 +334,10 @@
     },
     "documents": [
       {
-        "id": "feasibility-study",
-        "documentType": "study",
-        "title": "Public Transportation Expansion Feasibility Study",
-        "datePublished": "2023-09-15"
-      },
-      {
-        "id": "environmental-assessment",
-        "documentType": "assessment",
-        "title": "Environmental Impact Assessment",
-        "datePublished": "2023-09-20"
+        "id": "feasibility-study-report",
+        "documentType": "report",
+        "title": "Wind Farm Feasibility Study Report",
+        "datePublished": "2024-04-30"
       }
     ],
     "contractingProcesses": [],
@@ -347,41 +345,39 @@
     "transactions": [],
     "milestones": [
       {
-        "id": "detailed-design-completion",
-        "title": "Detailed Design Completion",
-        "type": "design",
-        "dueDate": "2024-06-30",
+        "id": "environmental-assessment-completion",
+        "title": "Environmental Impact Assessment Completion",
+        "type": "assessment",
+        "dueDate": "2024-08-31",
         "status": "notStarted"
       },
       {
-        "id": "procurement-start",
-        "title": "Procurement Process Initiation",
-        "type": "tender",
-        "dueDate": "2024-07-15",
+        "id": "engineering-design-completion",
+        "title": "Engineering Design Completion",
+        "type": "design",
+        "dueDate": "2024-12-31",
+        "status": "notStarted"
+      },
+      {
+        "id": "financial-close",
+        "title": "Financial Close",
+        "type": "financing",
+        "dueDate": "2025-03-31",
         "status": "notStarted"
       }
     ],
     "completion": {},
     "lobbyingMeetings": [],
     "social": {
-      "consultationMeetings": [
-        {
-          "id": "community-meeting-1",
-          "date": "2024-02-15",
-          "numberOfParticipants": 120
-        }
-      ],
-      "landCompensationBudget": {
-        "amount": 250000,
-        "currency": "ZAR"
-      },
+      "consultationMeetings": [],
+      "landCompensationBudget": {},
       "inIndigenousLand": false,
       "healthAndSafety": {
         "materialTests": {}
       }
     },
     "environment": {
-      "goals": ["Reduce greenhouse gas emissions from transportation", "Improve air quality"],
+      "goals": ["Reduce reliance on fossil fuels", "Promote sustainable energy development", "Protect local biodiversity"],
       "conservationMeasures": [],
       "climateOversightTypes": [],
       "hasImpactAssessment": true,
@@ -395,392 +391,92 @@
       "inProtectedArea": false,
       "climateMeasures": [
         {
-          "type": "public-transport",
-          "description": "Expansion of public transport network to reduce reliance on private vehicles."
-        }
-      ],
-      "forecastOfGreenhouseGasEmissions": {
-        "amount": -50000,
-        "unit": {
-          "name": "tonnes CO2 equivalent"
-        }
-      }
-    },
-    "benefits": [
-      {
-        "title": "Improved Accessibility",
-        "description": "Increased access to jobs, education, and other opportunities through expanded public transport options.",
-        "beneficiaries": [
-          {
-            "description": "Residents of Gauteng Province",
-            "numberOfPeople": 15000000
-          }
-        ]
-      }
-    ],
-    "policyAlignment": {
-      "policies": ["National Development Plan", "Gauteng Transport Infrastructure Act"]
-    },
-    "riskManagementPlans": [
-      {
-        "id": "cost-overrun-plan",
-        "description": "Plan to mitigate potential cost overruns through careful budgeting and contingency measures."
-      },
-      {
-        "id": "environmental-management-plan",
-        "description": "Plan to manage and mitigate environmental impacts during construction and operation."
-      }
-    ],
-    "climateFinance": {
-      "greenClimateFundAccreditedEntity": "Development Bank of Southern Africa",
-      "accreditedEntityType": "public",
-      "projectPreparationCosts": 200000,
-      "projectPreparationPeriod": {
-        "startDate": "2023-10-01",
-        "endDate": "2024-03-31"
-      },
-      "projectApprovalPeriod": {
-        "startDate": "2024-04-01",
-        "endDate": "2024-06-30"
-      },
-      "ratioOfCoFinance": "50/50",
-      "termsOfClimateFinance": "Concessional loan with a low interest rate and extended repayment period.",
-      "carbonEfficiency": 100,
-      "nonClimateCoBenefits": "Improved air quality, reduced traffic congestion, and enhanced economic productivity."
-    }
-  },
-  {
-    "id": "ZA-WASTEWATER-3",
-    "identifiers": [
-      {
-        "id": "WASTEWATER-003",
-        "scheme": "internal-project-id"
-      }
-    ],
-    "title": "Wastewater Treatment Plant Upgrade",
-    "phase": "Implementation",
-    "description": "Upgrade of a wastewater treatment plant in the Western Cape to improve water quality and environmental standards, with potential for water reuse and community health benefits.",
-    "status": "active",
-    "period": {
-      "startDate": "2023-05-15"
-    },
-    "identificationPeriod": {
-      "startDate": "2023-01-01",
-      "endDate": "2023-03-31"
-    },
-    "preparationPeriod": {
-      "startDate": "2023-04-01",
-      "endDate": "2023-05-14"
-    },
-    "implementationPeriod": {
-      "startDate": "2023-05-15"
-    },
-    "sector": ["water"],
-    "purpose": "Improve water quality and protect the environment by upgrading wastewater treatment facilities.",
-    "additionalClassifications": [
-      {
-        "scheme": "SDGs",
-        "id": "6.3",
-        "description": "Improve water quality by reducing pollution, eliminating dumping and minimizing release of hazardous chemicals and materials, halving the proportion of untreated wastewater and substantially increasing recycling and safe reuse globally"
-      }
-    ],
-    "type": "upgrade",
-    "relatedProjects": [],
-    "assetLifetime": {
-      "durationInDays": 14600
-    },
-    "locations": [
-      {
-        "description": "Western Cape Province",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [18.5, -34.0]
-        }
-      }
-    ],
-    "budget": {
-      "amount": {
-        "amount": 3200000,
-        "currency": "ZAR"
-      },
-      "budgetBreakdowns": [
-        {
-          "id": "construction",
-          "description": "Budget for construction and equipment",
-          "amount": {
-            "amount": 2500000,
-            "currency": "ZAR"
-          }
-        },
-        {
-          "id": "labor",
-          "description": "Budget for labor costs",
-          "amount": {
-            "amount": 700000,
-            "currency": "ZAR"
-          }
-        }
-      ],
-      "finance": []
-    },
-    "costMeasurements": [
-      {
-        "id": "current-cost",
-        "date": "2023-11-15",
-        "lifeCycleCosting": {
-          "value": {
-            "amount": 2800000,
-            "currency": "ZAR"
-          }
-        }
-      }
-    ],
-    "forecasts": [],
-    "parties": [
-      {
-        "name": "Western Cape Department of Water and Sanitation",
-        "roles": ["procuringEntity"]
-      },
-      {
-        "name": "ABC Construction Ltd.",
-        "roles": ["supplier"]
-      },
-      {
-        "name": "Environmental Consulting Group",
-        "roles": ["consultant"]
-      }
-    ],
-    "publicAuthority": {
-      "name": "Government of South Africa"
-    },
-    "documents": [
-      {
-        "id": "environmental-permit",
-        "documentType": "permit",
-        "title": "Environmental Permit",
-        "datePublished": "2023-04-10"
-      },
-      {
-        "id": "construction-contract",
-        "documentType": "contract",
-        "title": "Construction Contract with ABC Construction Ltd.",
-        "datePublished": "2023-05-10"
-      }
-    ],
-    "contractingProcesses": [
-      {
-        "id": "tender-process-1",
-        "summary": {
-          "ocid": "OCDS-2938127",
-          "nature": ["works"],
-          "title": "Construction of Wastewater Treatment Plant Upgrades",
-          "description": "Tender for the construction and equipment installation for the wastewater treatment plant upgrade.",
-          "status": "complete",
-          "tender": {
-            "procurementMethod": "open",
-            "datePublished": "2023-04-15",
-            "costEstimate": {
-              "amount": 2500000,
-              "currency": "ZAR"
-            },
-            "numberOfTenderers": 3,
-            "tenderers": [
-              {
-                "name": "ABC Construction Ltd.",
-                "id": "ZA-ABC-123"
-              }
-            ],
-            "procuringEntity": {
-              "name": "Western Cape Department of Water and Sanitation",
-              "id": "ZA-WC-DWS"
-            }
-          },
-          "suppliers": [
-            {
-              "name": "ABC Construction Ltd.",
-              "id": "ZA-ABC-123"
-            }
-          ],
-          "contractValue": {
-            "amount": 2450000,
-            "currency": "ZAR"
-          },
-          "contractPeriod": {
-            "startDate": "2023-05-15",
-            "endDate": "2024-05-14"
-          }
-        }
-      }
-    ],
-    "metrics": [
-      {
-        "id": "water-quality-improvement",
-        "title": "Water Quality Improvement",
-        "description": "Measures the reduction in pollutants in treated wastewater.",
-        "observations": [
-          {
-            "period": {
-              "startDate": "2023-06-01",
-              "endDate": "2023-10-31"
-            },
-            "value": {
-              "amount": 15,
-              "unit": {
-                "name": "percentage"
-              }
-            }
-          }
-        ]
-      }
-    ],
-    "transactions": [
-      {
-        "id": "payment-1",
-        "source": "project budget",
-        "date": "2023-06-15",
-        "value": {
-          "amount": 500000,
-          "currency": "ZAR"
-        },
-        "payer": {
-          "name": "Western Cape Department of Water and Sanitation",
-          "id": "ZA-WC-DWS"
-        },
-        "payee": {
-          "name": "ABC Construction Ltd.",
-          "id": "ZA-ABC-123"
-        },
-        "uri": null
-      }
-    ],
-    "milestones": [
-      {
-        "id": "equipment-installation",
-        "title": "Equipment Installation",
-        "type": "implementation",
-        "dueDate": "2023-12-31",
-        "status": "inProgress"
-      }
-    ],
-    "completion": {},
-    "lobbyingMeetings": [],
-    "social": {
-      "consultationMeetings": [],
-      "landCompensationBudget": {},
-      "inIndigenousLand": false,
-      "healthAndSafety": {
-        "materialTests": {
-          "test": ["concrete", "steel"],
-          "description": "Regular testing of concrete and steel used in construction."
-        },
-        "workersAccidents": 0,
-        "healthAndSafetyCertifications": [
-          {
-            "id": "ISO-45001",
-            "description": "ISO 45001 certification for occupational health and safety management systems held by ABC Construction Ltd."
-          }
-        ],
-        "buildingInspections": 2
-      },
-      "laborObligations": {
-        "obligations": ["minimum wage", "overtime pay", "health insurance"],
-        "description": "Compliance with all relevant labor laws and regulations, including minimum wage requirements, overtime pay provisions, and health insurance for workers."
-      },
-      "laborBudget": {
-        "amount": 700000,
-        "currency": "ZAR"
-      },
-      "jobsGenerated": 50
-    },
-    "environment": {
-      "goals": ["Improve water quality", "Reduce pollution"],
-      "conservationMeasures": [],
-      "climateOversightTypes": [],
-      "hasImpactAssessment": true,
-      "impactCategories": [
-        {
-          "scheme": "environmental-impact",
-          "id": "B"
-        }
-      ],
-      "abatementCost": {},
-      "inProtectedArea": false,
-      "climateMeasures": [],
-      "environmentalLicensesAndExemptions": [
-        {
-          "id": "environmental-permit",
-          "description": "Permit for construction and operation of the upgraded wastewater treatment plant."
+          "type": "renewable-energy",
+          "description": "Wind energy generation as a clean energy source."
         }
       ]
     },
     "benefits": [
       {
-        "title": "Improved Water Quality",
-        "description": "The upgraded wastewater treatment plant will lead to cleaner water and a healthier environment for surrounding communities.",
+        "title": "Renewable Energy Generation",
+        "description": "The wind farm will contribute to South Africa's renewable energy goals and reduce dependence on fossil fuels.",
         "beneficiaries": [
           {
-            "description": "Residents of the Western Cape",
-            "numberOfPeople": 7000000
+            "description": "National energy grid",
+            "numberOfPeople": null
+          },
+          {
+            "description": "Local communities through potential reduced electricity costs",
+            "numberOfPeople": 5000
           }
         ]
       },
       {
-        "title": "Potential for Water Reuse",
-        "description": "The project may explore options for treated wastewater reuse for irrigation or industrial purposes.",
+        "title": "Local Economic Development",
+        "description": "The project has the potential to create job opportunities and stimulate economic growth in the region.",
         "beneficiaries": [
           {
-            "description": "Agricultural and industrial sectors",
-            "numberOfPeople": null
+            "description": "Local residents through employment opportunities",
+            "numberOfPeople": 200
           }
         ]
       }
     ],
     "policyAlignment": {
-      "policies": ["National Water Act", "Western Cape Provincial Water Strategy"]
+      "policies": ["Integrated Resource Plan", "Renewable Energy Independent Power Producer Procurement Programme", "National Development Plan"]
     },
     "climateFinance": {
-      "typeOfProjectMonitoring": "external"
+      "climateObjective": "Mitigation",
+      "financialInstrument": "Investment Loan",
+      "climateTransformation": "Transition to a low-carbon economy",
+      "climateFinanceDecisionMaking": "Ministry of Finance",
+      "nationallyDeterminedContributions": "Compliant with NDCs",
+      "parisAgreement": "Aligned with the goals of the Paris Agreement",
+      "beneficiaries": "Local communities and the environment",
+      "amountOfInvestment": 500000,
+      "fundingSource": "Green Climate Fund"
     }
   },
   {
-    "id": "ZA-SCHOOL-4",
+    "id": "ZA-WIND-1",
+    "phase": "Implementation",
     "identifiers": [
       {
-        "id": "SCHOOL-004",
+        "id": "WIND-001",
         "scheme": "internal-project-id"
       }
     ],
-    "title": "Construction of New Primary School",
-    "description": "Construction of a new primary school in Limpopo Province to address overcrowding and improve access to education, with a focus on sustainable design and community involvement.",
-    "phase": "Completion",
-    "status": "complete",
+    "title": "Wind Farm Construction Project",
+    "description": "Construction of a wind farm in the Northern Cape, following feasibility studies and preparation, with a focus on environmental protection, community engagement, and job creation.",
+    "status": "active",
     "period": {
-      "startDate": "2022-02-15",
-      "endDate": "2023-08-31"
+      "startDate": "2024-02-20"
     },
     "identificationPeriod": {
-      "startDate": "2021-08-01",
-      "endDate": "2021-10-31"
+      "startDate": "2024-02-20",
+      "endDate": "2024-04-30"
     },
     "preparationPeriod": {
-      "startDate": "2021-11-01",
-      "endDate": "2022-02-14"
+      "startDate": "2024-05-01",
+      "endDate": "2025-04-30"
     },
     "implementationPeriod": {
-      "startDate": "2022-02-15",
-      "endDate": "2023-07-31"
+      "startDate": "2025-05-01"
     },
-    "completionPeriod": {
-      "startDate": "2023-08-01",
-      "endDate": "2023-08-31"
-    },
-    "sector": ["education"],
-    "purpose": "Improve access to quality education and alleviate overcrowding in existing schools.",
+    "completionPeriod": {},
+    "maintenancePeriod": {},
+    "decommissioningPeriod": {},
+    "sector": ["energy"],
+    "purpose": "To generate renewable energy, contribute to climate change mitigation goals, and promote local economic development.",
     "additionalClassifications": [
       {
         "scheme": "SDGs",
-        "id": "4.1",
-        "description": "Ensure that all girls and boys complete free, equitable and quality primary and secondary education leading to relevant and effective learning outcomes"
+        "id": "7.2",
+        "description": "Increase substantially the share of renewable energy in the global energy mix"
+      },
+      {
+        "scheme": "climate-finance",
+        "id": "mitigation"
       }
     ],
     "type": "construction",
@@ -790,16 +486,16 @@
     },
     "locations": [
       {
-        "description": "Limpopo Province",
+        "description": "Northern Cape Province",
         "geometry": {
           "type": "Point",
-          "coordinates": [29.5, -24.0]
+          "coordinates": [20.0, -28.0]
         }
       }
     ],
     "budget": {
       "amount": {
-        "amount": 18500000,
+        "amount": 15000000,
         "currency": "ZAR"
       },
       "budgetBreakdowns": [
@@ -807,41 +503,85 @@
           "id": "construction",
           "description": "Budget for construction materials and labor",
           "amount": {
-            "amount": 15000000,
+            "amount": 10000000,
             "currency": "ZAR"
           }
         },
         {
           "id": "equipment",
-          "description": "Budget for furniture and educational equipment",
+          "description": "Budget for wind turbines and electrical equipment",
           "amount": {
-            "amount": 3500000,
+            "amount": 4000000,
+            "currency": "ZAR"
+          }
+        },
+        {
+          "id": "project-management",
+          "description": "Budget for project management and oversight",
+          "amount": {
+            "amount": 1000000,
             "currency": "ZAR"
           }
         }
       ],
-      "finance": []
-    },
-    "costMeasurements": [
-      {
-        "id": "final-cost",
-        "date": "2023-08-31",
-        "lifeCycleCosting": {
+      "finance": [
+        {
+          "id": "GCF-loan",
+          "assetClass": "loan",
+          "type": "concessional loan",
+          "concessional": true,
           "value": {
-            "amount": 19200000,
+            "amount": 7500000,
             "currency": "ZAR"
+          },
+          "source": "Green Climate Fund",
+          "financingParty": {
+            "id": "GCF",
+            "name": "Green Climate Fund"
+          }
+        },
+        {
+          "id": "commercial-loan",
+          "assetClass": "loan",
+          "type": "loan",
+          "concessional": false,
+          "value": {
+            "amount": 7500000,
+            "currency": "ZAR"
+          },
+          "source": "Commercial Bank",
+          "financingParty": {
+            "id": "ABC-BANK",
+            "name": "ABC Bank"
           }
         }
-      }
-    ],
+      ]
+    },
+    "costMeasurements": [],
     "forecasts": [],
     "parties": [
       {
-        "name": "Limpopo Department of Education",
+        "name": "Department of Energy",
         "roles": ["procuringEntity"]
       },
       {
-        "name": "XYZ Construction Company",
+        "name": "Northern Cape Provincial Government",
+        "roles": ["fundingSource"]
+      },
+      {
+        "name": "Community Trust",
+        "roles": ["potential-owner"]
+      },
+      {
+        "name": "Wind Turbine Supplier",
+        "roles": ["supplier"]
+      },
+      {
+        "name": "Construction Company",
+        "roles": ["supplier"]
+      },
+      {
+        "name": "Project Management Firm",
         "roles": ["supplier"]
       }
     ],
@@ -850,84 +590,970 @@
     },
     "documents": [
       {
-        "id": "building-plans",
-        "documentType": "plans",
-        "title": "School Building Plans",
-        "datePublished": "2022-01-15"
+        "id": "feasibility-study-report",
+        "documentType": "report",
+        "title": "Wind Farm Feasibility Study Report",
+        "datePublished": "2024-04-30"
       },
       {
-        "id": "environmental-assessment",
-        "documentType": "assessment",
-        "title": "Environmental Impact Assessment",
-        "datePublished": "2022-01-30"
+        "id": "environmental-permit",
+        "documentType": "permit",
+        "title": "Environmental Permit",
+        "datePublished": "2025-04-15"
+      }
+    ],
+    "contractingProcesses": [
+      {
+        "id": "turbine-supply-contract",
+        "summary": {
+          "ocid": "OCDS-4567890",
+          "nature": ["goods"],
+          "title": "Wind Turbine Supply and Installation Contract",
+          "description": "Contract for the supply and installation of wind turbines for the wind farm.",
+          "status": "active",
+          "tender": {
+            "procurementMethod": "open",
+            "datePublished": "2025-03-15",
+            "costEstimate": {
+              "amount": 4000000,
+              "currency": "ZAR"
+            },
+            "numberOfTenderers": 3,
+            "procuringEntity": {
+              "name": "Department of Energy",
+              "id": "ZA-DOE"
+            }
+          },
+          "suppliers": [
+            {
+              "name": "WindPower Technologies",
+              "id": "ZA-WPT-123"
+            }
+          ],
+          "contractValue": {
+            "amount": 3900000,
+            "currency": "ZAR"
+          },
+          "contractPeriod": {
+            "startDate": "2025-05-01",
+            "endDate": "2026-04-30"
+          }
+        }
+      },
+      {
+        "id": "construction-contract",
+        "summary": {
+          "ocid": "OCDS-5678901",
+          "nature": ["works"],
+          "title": "Wind Farm Construction Contract",
+          "description": "Contract for the construction of infrastructure and facilities for the wind farm.",
+          "status": "active",
+          "tender": {
+            "procurementMethod": "open",
+            "datePublished": "2025-03-20",
+            "costEstimate": {
+              "amount": 6000000,
+              "currency": "ZAR"
+            },
+            "numberOfTenderers": 5,
+            "procuringEntity": {
+              "name": "Department of Energy",
+              "id": "ZA-DOE"
+            }
+          },
+          "suppliers": [
+            {
+              "name": "BuildRight Construction",
+              "id": "ZA-BRC-456"
+            }
+          ],
+          "contractValue": {
+            "amount": 5800000,
+            "currency": "ZAR"
+          },
+          "contractPeriod": {
+            "startDate": "2025-05-01",
+            "endDate": "2026-10-31"
+          }
+        }
+      }
+    ],
+    "metrics": [],
+    "transactions": [],
+    "milestones": [
+      {
+        "id": "environmental-assessment-completion",
+        "title": "Environmental Impact Assessment Completion",
+        "type": "assessment",
+        "dueDate": "2024-08-31",
+        "dateMet": "2024-08-15",
+        "status": "met"
+      },
+      {
+        "id": "engineering-design-completion",
+        "title": "Engineering Design Completion",
+        "type": "design",
+        "dueDate": "2024-12-31",
+        "dateMet": "2024-12-15",
+        "status": "met"
+      },
+      {
+        "id": "financial-close",
+        "title": "Financial Close",
+        "type": "financing",
+        "dueDate": "2025-03-31",
+        "dateMet": "2025-03-15",
+        "status": "met"
+      },
+      {
+        "id": "site-preparation-completion",
+        "title": "Site Preparation Completion",
+        "type": "implementation",
+        "dueDate": "2025-07-31",
+        "status": "inProgress"
+      },
+      {
+        "id": "turbine-installation-start",
+        "title": "Turbine Installation Start",
+        "type": "implementation",
+        "dueDate": "2025-09-01",
+        "status": "notStarted"
+      }
+    ],
+    "completion": {},
+    "lobbyingMeetings": [],
+    "social": {
+      "consultationMeetings": [],
+      "landCompensationBudget": {},
+      "inIndigenousLand": false,
+      "healthAndSafety": {
+        "materialTests": {}
+      }
+    },
+    "environment": {
+      "goals": ["Reduce reliance on fossil fuels", "Promote sustainable energy development", "Protect local biodiversity"],
+      "conservationMeasures": [],
+      "climateOversightTypes": [],
+      "hasImpactAssessment": true,
+      "impactCategories": [
+        {
+          "scheme": "environmental-impact",
+          "id": "B"
+        }
+      ],
+      "abatementCost": {},
+      "inProtectedArea": false,
+      "climateMeasures": [
+        {
+          "type": "renewable-energy",
+          "description": "Wind energy generation as a clean energy source."
+        }
+      ],
+      "environmentalLicensesAndExemptions": [
+        {
+          "id": "environmental-permit",
+          "description": "Permit for construction and operation of the wind farm."
+        }
+      ]
+    },
+    "benefits": [
+      {
+        "title": "Renewable Energy Generation",
+        "description": "The wind farm will contribute to South Africa's renewable energy goals and reduce dependence on fossil fuels.",
+        "beneficiaries": [
+          {
+            "description": "National energy grid",
+            "numberOfPeople": null
+          },
+          {
+            "description": "Local communities through potential reduced electricity costs",
+            "numberOfPeople": 5000
+          }
+        ]
+      },
+      {
+        "title": "Local Economic Development",
+        "description": "The project has the potential to create job opportunities and stimulate economic growth in the region.",
+        "beneficiaries": [
+          {
+            "description": "Local residents through employment opportunities",
+            "numberOfPeople": 200
+          }
+        ]
+      }
+    ],
+    "policyAlignment": {
+      "policies": ["Integrated Resource Plan", "Renewable Energy Independent Power Producer Procurement Programme", "National Development Plan"]
+    },
+    "climateFinance": {
+      "climateObjective": "Mitigation",
+      "financialInstrument": "Investment Loan",
+      "climateTransformation": "Transition to a low-carbon economy",
+      "climateFinanceDecisionMaking": "Ministry of Finance",
+      "nationallyDeterminedContributions": "Compliant with NDCs",
+      "parisAgreement": "Aligned with the goals of the Paris Agreement",
+      "beneficiaries": "Local communities and the environment",
+      "amountOfInvestment": 500000,
+      "fundingSource": "Green Climate Fund"
+    }
+  },
+  {
+    "id": "ZA-WIND-1",
+    "phase": "Completion",
+    "identifiers": [
+      {
+        "id": "WIND-001",
+        "scheme": "internal-project-id"
+      }
+    ],
+    "title": "Northern Cape Wind Farm",
+    "description": "A completed wind farm project in the Northern Cape, providing renewable energy to the national grid and contributing to local economic development.",
+    "status": "complete",
+    "period": {
+      "startDate": "2024-02-20",
+      "endDate": "2026-12-31"
+    },
+    "identificationPeriod": {
+      "startDate": "2024-02-20",
+      "endDate": "2024-04-30"
+    },
+    "preparationPeriod": {
+      "startDate": "2024-05-01",
+      "endDate": "2025-04-30"
+    },
+    "implementationPeriod": {
+      "startDate": "2025-05-01",
+      "endDate": "2026-11-30"
+    },
+    "completionPeriod": {
+      "startDate": "2026-12-01",
+      "endDate": "2026-12-31"
+    },
+    "maintenancePeriod": {},
+    "decommissioningPeriod": {},
+    "sector": ["energy"],
+    "purpose": "To generate renewable energy, contribute to climate change mitigation goals, and promote local economic development.",
+    "additionalClassifications": [
+      {
+        "scheme": "SDGs",
+        "id": "7.2",
+        "description": "Increase substantially the share of renewable energy in the global energy mix"
+      },
+      {
+        "scheme": "climate-finance",
+        "id": "mitigation"
+      }
+    ],
+    "type": "wind farm",
+    "relatedProjects": [],
+    "assetLifetime": {
+      "durationInDays": 7300
+    },
+    "locations": [
+      {
+        "description": "Northern Cape Province",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [20.0, -28.0]
+        }
+      }
+    ],
+    "budget": {
+      "amount": {
+        "amount": 15000000,
+        "currency": "ZAR"
+      },
+      "budgetBreakdowns": [
+        {
+          "id": "construction",
+          "description": "Budget for construction materials and labor",
+          "amount": {
+            "amount": 10000000,
+            "currency": "ZAR"
+          }
+        },
+        {
+          "id": "equipment",
+          "description": "Budget for wind turbines and electrical equipment",
+          "amount": {
+            "amount": 4000000,
+            "currency": "ZAR"
+          }
+        },
+        {
+          "id": "project-management",
+          "description": "Budget for project management and oversight",
+          "amount": {
+            "amount": 1000000,
+            "currency": "ZAR"
+          }
+        }
+      ],
+      "finance": [
+        {
+          "id": "GCF-loan",
+          "assetClass": "loan",
+          "type": "concessional loan",
+          "concessional": true,
+          "value": {
+            "amount": 7500000,
+            "currency": "ZAR"
+          },
+          "source": "Green Climate Fund",
+          "financingParty": {
+            "id": "GCF",
+            "name": "Green Climate Fund"
+          }
+        },
+        {
+          "id": "commercial-loan",
+          "assetClass": "loan",
+          "type": "loan",
+          "concessional": false,
+          "value": {
+            "amount": 7500000,
+            "currency": "ZAR"
+          },
+          "source": "Commercial Bank",
+          "financingParty": {
+            "id": "ABC-BANK",
+            "name": "ABC Bank"
+          }
+        }
+      ]
+    },
+    "costMeasurements": [
+      {
+        "id": "final-project-cost",
+        "date": "2026-12-31",
+        "lifeCycleCosting": {
+          "value": {
+            "amount": 15800000,
+            "currency": "ZAR"
+          }
+        }
+      }
+    ],
+    "forecasts": [],
+    "parties": [
+      {
+        "name": "Department of Energy",
+        "roles": ["procuringEntity"]
+      },
+      {
+        "name": "Northern Cape Provincial Government",
+        "roles": ["fundingSource"]
+      },
+      {
+        "name": "Community Trust",
+        "roles": ["potential-owner"]
+      },
+      {
+        "name": "Wind Turbine Supplier",
+        "roles": ["supplier"]
+      },
+      {
+        "name": "Construction Company",
+        "roles": ["supplier"]
+      },
+      {
+        "name": "Project Management Firm",
+        "roles": ["supplier"]
+      }
+    ],
+    "publicAuthority": {
+      "name": "Government of South Africa"
+    },
+    "documents": [
+      {
+        "id": "feasibility-study-report",
+        "documentType": "report",
+        "title": "Wind Farm Feasibility Study Report",
+        "datePublished": "2024-04-30"
+      },
+      {
+        "id": "environmental-permit",
+        "documentType": "permit",
+        "title": "Environmental Permit",
+        "datePublished": "2025-04-15"
       },
       {
         "id": "completion-report",
         "documentType": "report",
         "title": "Project Completion Report",
-        "datePublished": "2023-09-15"
+        "datePublished": "2027-01-15"
       }
     ],
     "contractingProcesses": [
       {
-        "id": "tender-process-1",
+        "id": "turbine-supply-contract",
         "summary": {
-          "ocid": "OCDS-1234567",
-          "nature": ["works"],
-          "title": "Construction of New Primary School",
-          "description": "Tender for the construction of a new primary school building.",
+          "ocid": "OCDS-4567890",
+          "nature": ["goods"],
+          "title": "Wind Turbine Supply and Installation Contract",
+          "description": "Contract for the supply and installation of wind turbines for the wind farm.",
           "status": "complete",
           "tender": {
             "procurementMethod": "open",
-            "datePublished": "2022-01-05",
+            "datePublished": "2025-03-15",
             "costEstimate": {
-              "amount": 15000000,
+              "amount": 4000000,
               "currency": "ZAR"
             },
-            "numberOfTenderers": 5,
-            "tenderers": [
-              {
-                "name": "XYZ Construction Company",
-                "id": "ZA-XYZ-456"
-              }
-            ],
+            "numberOfTenderers": 3,
             "procuringEntity": {
-              "name": "Limpopo Department of Education",
-              "id": "ZA-LIM-DOE"
+              "name": "Department of Energy",
+              "id": "ZA-DOE"
             }
           },
           "suppliers": [
             {
-              "name": "XYZ Construction Company",
-              "id": "ZA-XYZ-456"
+              "name": "WindPower Technologies",
+              "id": "ZA-WPT-123"
             }
           ],
           "contractValue": {
-            "amount": 14800000,
+            "amount": 3900000,
             "currency": "ZAR"
           },
           "contractPeriod": {
-            "startDate": "2022-02-15",
-            "endDate": "2023-07-31"
+            "startDate": "2025-05-01",
+            "endDate": "2026-04-30"
+          }
+        }
+      },
+      {
+        "id": "construction-contract",
+        "summary": {
+          "ocid": "OCDS-5678901",
+          "nature": ["works"],
+          "title": "Wind Farm Construction Contract",
+          "description": "Contract for the construction of infrastructure and facilities for the wind farm.",
+          "status": "complete",
+          "tender": {
+            "procurementMethod": "open",
+            "datePublished": "2025-03-20",
+            "costEstimate": {
+              "amount": 6000000,
+              "currency": "ZAR"
+            },
+            "numberOfTenderers": 5,
+            "procuringEntity": {
+              "name": "Department of Energy",
+              "id": "ZA-DOE"
+            }
+          },
+          "suppliers": [
+            {
+              "name": "BuildRight Construction",
+              "id": "ZA-BRC-456"
+            }
+          ],
+          "contractValue": {
+            "amount": 5800000,
+            "currency": "ZAR"
+          },
+          "contractPeriod": {
+            "startDate": "2025-05-01",
+            "endDate": "2026-10-31"
+          }
+        }
+      }
+    ],
+    "metrics": [],
+    "transactions": [],
+    "milestones": [
+      {
+        "id": "environmental-assessment-completion",
+        "title": "Environmental Impact Assessment Completion",
+        "type": "assessment",
+        "dueDate": "2024-08-31",
+        "dateMet": "2024-08-15",
+        "status": "met"
+      },
+      {
+        "id": "engineering-design-completion",
+        "title": "Engineering Design Completion",
+        "type": "design",
+        "dueDate": "2024-12-31",
+        "dateMet": "2024-12-15",
+        "status": "met"
+      },
+      {
+        "id": "financial-close",
+        "title": "Financial Close",
+        "type": "financing",
+        "dueDate": "2025-03-31",
+        "dateMet": "2025-03-15",
+        "status": "met"
+      },
+      {
+        "id": "site-preparation-completion",
+        "title": "Site Preparation Completion",
+        "type": "implementation",
+        "dueDate": "2025-07-31",
+        "dateMet": "2025-07-15",
+        "status": "met"
+      },
+      {
+        "id": "turbine-installation-start",
+        "title": "Turbine Installation Start",
+        "type": "implementation",
+        "dueDate": "2025-09-01",
+        "dateMet": "2025-08-20",
+        "status": "met"
+      },
+      {
+        "id": "turbine-installation-completion",
+        "title": "Turbine Installation Completion",
+        "type": "implementation",
+        "dueDate": "2026-04-30",
+        "dateMet": "2026-04-15",
+        "status": "met"
+      },
+      {
+        "id": "grid-connection",
+        "title": "Grid Connection",
+        "type": "implementation",
+        "dueDate": "2026-10-31",
+        "dateMet": "2026-10-15",
+        "status": "met"
+      },
+      {
+        "id": "commissioning-and-testing",
+        "title": "Commissioning and Testing",
+        "type": "implementation",
+        "dueDate": "2026-11-30",
+        "dateMet": "2026-11-25",
+        "status": "met"
+      }
+    ],
+    "completion": {
+      "endDate": "2026-12-31",
+      "endDateDetails": "Wind farm construction completed and fully operational.",
+      "finalValue": {
+        "amount": 15800000,
+        "currency": "ZAR"
+      },
+      "finalValueDetails": "Project completed slightly over budget due to unexpected costs during turbine installation.",
+      "finalScope": "Construction of a 20-turbine wind farm with a total capacity of 50 MW.",
+      "finalScopeDetails": "The project scope was achieved as planned."
+    },
+    "lobbyingMeetings": [],
+    "social": {
+      "consultationMeetings": [],
+      "landCompensationBudget": {},
+      "inIndigenousLand": false,
+      "healthAndSafety": {
+        "materialTests": {}
+      }
+    },
+    "environment": {
+      "goals": ["Reduce reliance on fossil fuels", "Promote sustainable energy development", "Protect local biodiversity"],
+      "conservationMeasures": [],
+      "climateOversightTypes": [],
+      "hasImpactAssessment": true,
+      "impactCategories": [
+        {
+          "scheme": "environmental-impact",
+          "id": "B"
+        }
+      ],
+      "abatementCost": {},
+      "inProtectedArea": false,
+      "climateMeasures": [
+        {
+          "type": "renewable-energy",
+          "description": "Wind energy generation as a clean energy source."
+        }
+      ],
+      "environmentalLicensesAndExemptions": [
+        {
+          "id": "environmental-permit",
+          "description": "Permit for construction and operation of the wind farm."
+        }
+      ]
+    },
+    "benefits": [
+      {
+        "title": "Renewable Energy Generation",
+        "description": "The wind farm will contribute to South Africa's renewable energy goals and reduce dependence on fossil fuels.",
+        "beneficiaries": [
+          {
+            "description": "National energy grid",
+            "numberOfPeople": null
+          },
+          {
+            "description": "Local communities through potential reduced electricity costs",
+            "numberOfPeople": 5000
+          }
+        ]
+      },
+      {
+        "title": "Local Economic Development",
+        "description": "The project has the potential to create job opportunities and stimulate economic growth in the region.",
+        "beneficiaries": [
+          {
+            "description": "Local residents through employment opportunities",
+            "numberOfPeople": 200
+          }
+        ]
+      }
+    ],
+    "policyAlignment": {
+      "policies": ["Integrated Resource Plan", "Renewable Energy Independent Power Producer Procurement Programme", "National Development Plan"]
+    },
+    "climateFinance": {
+      "climateObjective": "Mitigation",
+      "financialInstrument": "Investment Loan",
+      "climateTransformation": "Transition to a low-carbon economy",
+      "climateFinanceDecisionMaking": "Ministry of Finance",
+      "nationallyDeterminedContributions": "Compliant with NDCs",
+      "parisAgreement": "Aligned with the goals of the Paris Agreement",
+      "beneficiaries": "Local communities and the environment",
+      "amountOfInvestment": 500000,
+      "fundingSource": "Green Climate Fund"
+    }
+  },
+  {
+    "id": "ZA-WIND-1",
+    "phase": "maintenance",
+    "identifiers": [
+      {
+        "id": "WIND-001",
+        "scheme": "internal-project-id"
+      }
+    ],
+    "title": "Northern Cape Wind Farm",
+    "description": "An operational wind farm project in the Northern Cape, providing renewable energy to the national grid and contributing to local economic development.",
+    "status": "active",
+    "period": {
+      "startDate": "2024-02-20"
+    },
+    "identificationPeriod": {
+      "startDate": "2024-02-20",
+      "endDate": "2024-04-30"
+    },
+    "preparationPeriod": {
+      "startDate": "2024-05-01",
+      "endDate": "2025-04-30"
+    },
+    "implementationPeriod": {
+      "startDate": "2025-05-01",
+      "endDate": "2026-11-30"
+    },
+    "completionPeriod": {
+      "startDate": "2026-12-01",
+      "endDate": "2026-12-31"
+    },
+    "maintenancePeriod": {
+      "startDate": "2027-01-01"
+    },
+    "decommissioningPeriod": {},
+    "sector": ["energy"],
+    "purpose": "To generate renewable energy, contribute to climate change mitigation goals, and promote local economic development.",
+    "additionalClassifications": [
+      {
+        "scheme": "SDGs",
+        "id": "7.2",
+        "description": "Increase substantially the share of renewable energy in the global energy mix"
+      },
+      {
+        "scheme": "climate-finance",
+        "id": "mitigation"
+      }
+    ],
+    "type": "wind farm",
+    "relatedProjects": [],
+    "assetLifetime": {
+      "durationInDays": 7300
+    },
+    "locations": [
+      {
+        "description": "Northern Cape Province",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [20.0, -28.0]
+        }
+      }
+    ],
+    "budget": {
+      "amount": {
+        "amount": 15000000,
+        "currency": "ZAR"
+      },
+      "budgetBreakdowns": [
+        {
+          "id": "construction",
+          "description": "Budget for construction materials and labor",
+          "amount": {
+            "amount": 10000000,
+            "currency": "ZAR"
+          }
+        },
+        {
+          "id": "equipment",
+          "description": "Budget for wind turbines and electrical equipment",
+          "amount": {
+            "amount": 4000000,
+            "currency": "ZAR"
+          }
+        },
+        {
+          "id": "project-management",
+          "description": "Budget for project management and oversight",
+          "amount": {
+            "amount": 1000000,
+            "currency": "ZAR"
+          }
+        }
+      ],
+      "finance": [
+        {
+          "id": "GCF-loan",
+          "assetClass": "loan",
+          "type": "concessional loan",
+          "concessional": true,
+          "value": {
+            "amount": 7500000,
+            "currency": "ZAR"
+          },
+          "source": "Green Climate Fund",
+          "financingParty": {
+            "id": "GCF",
+            "name": "Green Climate Fund"
+          }
+        },
+        {
+          "id": "commercial-loan",
+          "assetClass": "loan",
+          "type": "loan",
+          "concessional": false,
+          "value": {
+            "amount": 7500000,
+            "currency": "ZAR"
+          },
+          "source": "Commercial Bank",
+          "financingParty": {
+            "id": "ABC-BANK",
+            "name": "ABC Bank"
+          }
+        }
+      ]
+    },
+    "costMeasurements": [
+      {
+        "id": "final-project-cost",
+        "date": "2026-12-31",
+        "lifeCycleCosting": {
+          "value": {
+            "amount": 15800000,
+            "currency": "ZAR"
+          }
+        }
+      }
+    ],
+    "forecasts": [],
+    "parties": [
+      {
+        "name": "Department of Energy",
+        "roles": ["procuringEntity"]
+      },
+      {
+        "name": "Northern Cape Provincial Government",
+        "roles": ["fundingSource"]
+      },
+      {
+        "name": "Community Trust",
+        "roles": ["potential-owner"]
+      },
+      {
+        "name": "Wind Turbine Supplier",
+        "roles": ["supplier"]
+      },
+      {
+        "name": "Construction Company",
+        "roles": ["supplier"]
+      },
+      {
+        "name": "Project Management Firm",
+        "roles": ["supplier"]
+      },
+      {
+        "name": "Maintenance Contractor",
+        "roles": ["supplier"]
+      }
+    ],
+    "publicAuthority": {
+      "name": "Government of South Africa"
+    },
+    "documents": [
+      {
+        "id": "feasibility-study-report",
+        "documentType": "report",
+        "title": "Wind Farm Feasibility Study Report",
+        "datePublished": "2024-04-30"
+      },
+      {
+        "id": "environmental-permit",
+        "documentType": "permit",
+        "title": "Environmental Permit",
+        "datePublished": "2025-04-15"
+      },
+      {
+        "id": "completion-report",
+        "documentType": "report",
+        "title": "Project Completion Report",
+        "datePublished": "2027-01-15"
+      }
+    ],
+    "contractingProcesses": [
+      {
+        "id": "turbine-supply-contract",
+        "summary": {
+          "ocid": "OCDS-4567890",
+          "nature": ["goods"],
+          "title": "Wind Turbine Supply and Installation Contract",
+          "description": "Contract for the supply and installation of wind turbines for the wind farm.",
+          "status": "complete",
+          "tender": {
+            "procurementMethod": "open",
+            "datePublished": "2025-03-15",
+            "costEstimate": {
+              "amount": 4000000,
+              "currency": "ZAR"
+            },
+            "numberOfTenderers": 3,
+            "procuringEntity": {
+              "name": "Department of Energy",
+              "id": "ZA-DOE"
+            }
+          },
+          "suppliers": [
+            {
+              "name": "WindPower Technologies",
+              "id": "ZA-WPT-123"
+            }
+          ],
+          "contractValue": {
+            "amount": 3900000,
+            "currency": "ZAR"
+          },
+          "contractPeriod": {
+            "startDate": "2025-05-01",
+            "endDate": "2026-04-30"
+          }
+        }
+      },
+      {
+        "id": "construction-contract",
+        "summary": {
+          "ocid": "OCDS-5678901",
+          "nature": ["works"],
+          "title": "Wind Farm Construction Contract",
+          "description": "Contract for the construction of infrastructure and facilities for the wind farm.",
+          "status": "complete",
+          "tender": {
+            "procurementMethod": "open",
+            "datePublished": "2025-03-20",
+            "costEstimate": {
+              "amount": 6000000,
+              "currency": "ZAR"
+            },
+            "numberOfTenderers": 5,
+            "procuringEntity": {
+              "name": "Department of Energy",
+              "id": "ZA-DOE"
+            }
+          },
+          "suppliers": [
+            {
+              "name": "BuildRight Construction",
+              "id": "ZA-BRC-456"
+            }
+          ],
+          "contractValue": {
+            "amount": 5800000,
+            "currency": "ZAR"
+          },
+          "contractPeriod": {
+            "startDate": "2025-05-01",
+            "endDate": "2026-10-31"
+          }
+        }
+      },
+      {
+        "id": "maintenance-contract",
+        "summary": {
+          "ocid": "OCDS-6789012",
+          "nature": ["services"],
+          "title": "Wind Farm Maintenance Contract",
+          "description": "Contract for the ongoing maintenance of the wind farm.",
+          "status": "active",
+          "tender": {
+            "procurementMethod": "open",
+            "datePublished": "2026-11-01",
+            "costEstimate": {
+              "amount": 500000,
+              "currency": "ZAR"
+            },
+            "numberOfTenderers": 2,
+            "procuringEntity": {
+              "name": "Department of Energy",
+              "id": "ZA-DOE"
+            }
+          },
+          "suppliers": [
+            {
+              "name": "WindCare Services",
+              "id": "ZA-WCS-789"
+            }
+          ],
+          "contractValue": {
+            "amount": 480000,
+            "currency": "ZAR"
+          },
+          "contractPeriod": {
+            "startDate": "2027-01-01",
+            "endDate": "2029-12-31"
           }
         }
       }
     ],
     "metrics": [
       {
-        "id": "student-enrollment",
-        "title": "Student Enrollment",
-        "description": "Number of students enrolled in the new primary school.",
+        "id": "energy-generation",
+        "title": "Energy Generation",
+        "description": "Amount of energy generated by the wind farm.",
         "observations": [
           {
             "period": {
-              "startDate": "2023-09-01",
-              "endDate": "2023-12-31"
+              "startDate": "2027-01-01",
+              "endDate": "2027-03-31"
             },
             "value": {
-              "amount": 450,
+              "amount": 35000,
               "unit": {
-                "name": "students"
+                "name": "MWh"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": "turbine-availability",
+        "title": "Turbine Availability",
+        "description": "Percentage of time that the wind turbines are operational.",
+        "observations": [
+          {
+            "period": {
+              "startDate": "2027-01-01",
+              "endDate": "2027-03-31"
+            },
+            "value": {
+              "amount": 95,
+              "unit": {
+                "name": "percentage"
               }
             }
           }
@@ -937,32 +1563,80 @@
     "transactions": [],
     "milestones": [
       {
-        "id": "construction-completion",
-        "title": "Construction Completion",
-        "type": "completion",
-        "dueDate": "2023-07-31",
-        "dateMet": "2023-07-28",
+        "id": "environmental-assessment-completion",
+        "title": "Environmental Impact Assessment Completion",
+        "type": "assessment",
+        "dueDate": "2024-08-31",
+        "dateMet": "2024-08-15",
         "status": "met"
       },
       {
-        "id": "school-opening",
-        "title": "School Opening",
-        "type": "completion",
-        "dueDate": "2023-09-01",
-        "dateMet": "2023-09-01",
+        "id": "engineering-design-completion",
+        "title": "Engineering Design Completion",
+        "type": "design",
+        "dueDate": "2024-12-31",
+        "dateMet": "2024-12-15",
+        "status": "met"
+      },
+      {
+        "id": "financial-close",
+        "title": "Financial Close",
+        "type": "financing",
+        "dueDate": "2025-03-31",
+        "dateMet": "2025-03-15",
+        "status": "met"
+      },
+      {
+        "id": "site-preparation-completion",
+        "title": "Site Preparation Completion",
+        "type": "implementation",
+        "dueDate": "2025-07-31",
+        "dateMet": "2025-07-15",
+        "status": "met"
+      },
+      {
+        "id": "turbine-installation-start",
+        "title": "Turbine Installation Start",
+        "type": "implementation",
+        "dueDate": "2025-09-01",
+        "dateMet": "2025-08-20",
+        "status": "met"
+      },
+      {
+        "id": "turbine-installation-completion",
+        "title": "Turbine Installation Completion",
+        "type": "implementation",
+        "dueDate": "2026-04-30",
+        "dateMet": "2026-04-15",
+        "status": "met"
+      },
+      {
+        "id": "grid-connection",
+        "title": "Grid Connection",
+        "type": "implementation",
+        "dueDate": "2026-10-31",
+        "dateMet": "2026-10-15",
+        "status": "met"
+      },
+      {
+        "id": "commissioning-and-testing",
+        "title": "Commissioning and Testing",
+        "type": "implementation",
+        "dueDate": "2026-11-30",
+        "dateMet": "2026-11-25",
         "status": "met"
       }
     ],
     "completion": {
-      "endDate": "2023-08-31",
-      "endDateDetails": "School building and facilities fully completed and ready for occupancy.",
+      "endDate": "2026-12-31",
+      "endDateDetails": "Wind farm construction completed and fully operational.",
       "finalValue": {
-        "amount": 19200000,
+        "amount": 15800000,
         "currency": "ZAR"
       },
-      "finalValueDetails": "Includes additional costs for unforeseen site conditions and minor design modifications.",
-      "finalScope": "Construction of a new primary school building with 10 classrooms, administrative offices, library, and sports facilities.",
-      "finalScopeDetails": "Scope remained largely as planned, with minor adjustments to optimize classroom layout and playground design."
+      "finalValueDetails": "Project completed slightly over budget due to unexpected costs during turbine installation.",
+      "finalScope": "Construction of a 20-turbine wind farm with a total capacity of 50 MW.",
+      "finalScopeDetails": "The project scope was achieved as planned."
     },
     "lobbyingMeetings": [],
     "social": {
@@ -974,7 +1648,7 @@
       }
     },
     "environment": {
-      "goals": ["Minimize environmental impact during construction", "Create a sustainable learning environment"],
+      "goals": ["Reduce reliance on fossil fuels", "Promote sustainable energy development", "Protect local biodiversity"],
       "conservationMeasures": [],
       "climateOversightTypes": [],
       "hasImpactAssessment": true,
@@ -986,371 +1660,164 @@
       ],
       "abatementCost": {},
       "inProtectedArea": false,
-      "climateMeasures": []
+      "climateMeasures": [
+        {
+          "type": "renewable-energy",
+          "description": "Wind energy generation as a clean energy source."
+        }
+      ],
+      "environmentalLicensesAndExemptions": [
+        {
+          "id": "environmental-permit",
+          "description": "Permit for construction and operation of the wind farm."
+        }
+      ]
     },
     "benefits": [
       {
-        "title": "Improved Access to Education",
-        "description": "The new school will provide increased access to quality education for children in the Limpopo Province.",
+        "title": "Renewable Energy Generation",
+        "description": "The wind farm will contribute to South Africa's renewable energy goals and reduce dependence on fossil fuels.",
         "beneficiaries": [
           {
-            "description": "Children in the local community",
-            "numberOfPeople": 500
+            "description": "National energy grid",
+            "numberOfPeople": null
+          },
+          {
+            "description": "Local communities through potential reduced electricity costs",
+            "numberOfPeople": 5000
           }
         ]
       },
       {
-        "title": "Reduced Overcrowding",
-        "description": "The project will alleviate overcrowding in existing schools in the region.",
+        "title": "Local Economic Development",
+        "description": "The project has the potential to create job opportunities and stimulate economic growth in the region.",
         "beneficiaries": [
           {
-            "description": "Students and teachers in nearby schools",
-            "numberOfPeople": 2000
+            "description": "Local residents through employment opportunities",
+            "numberOfPeople": 200
           }
         ]
       }
     ],
     "policyAlignment": {
-      "policies": ["National Education Policy Act", "Limpopo Provincial Education Strategic Plan"]
-    }
-  },
-  {
-    "id": "ZA-HIGHWAY-5",
-    "identifiers": [
-      {
-        "id": "HIGHWAY-005",
-        "scheme": "internal-project-id"
-      }
-    ],
-    "title": "National Highway Maintenance Program",
-    "phase": "Maintenance",
-    "description": "A program to ensure the ongoing maintenance and upkeep of national highways across South Africa, with a focus on road safety, efficiency, and minimizing environmental impact.",
-    "status": "active",
-    "period": {
-      "startDate": "2020-01-01"
+      "policies": ["Integrated Resource Plan", "Renewable Energy Independent Power Producer Procurement Programme", "National Development Plan"]
     },
-    "maintenancePeriod": {
-      "startDate": "2020-01-01"
-    },
-    "sector": ["transport"],
-    "purpose": "Maintain safe and efficient national highways for transportation and economic activity.",
-    "additionalClassifications": [
-      {
-        "scheme": "SDGs",
-        "id": "9.1",
-        "description": "Develop quality, reliable, sustainable and resilient infrastructure, including regional and transborder infrastructure, to support economic development and human well-being, with a focus on affordable and equitable access for all"
-      }
-    ],
-    "type": "maintenance program",
-    "relatedProjects": [],
-    "assetLifetime": {
-      "durationInDays": 36500
-    },
-    "locations": [
-      {
-        "description": "National highways across South Africa",
-        "geometry": {
-          "type": "MultiLineString",
-          "coordinates": []
-        }
-      }
-    ],
-    "budget": {
-      "amount": {
-        "amount": 12000000,
-        "currency": "ZAR"
-      },
-      "budgetBreakdowns": [
-        {
-          "id": "routine-maintenance",
-          "description": "Budget for routine inspections and repairs",
-          "amount": {
-            "amount": 7000000,
-            "currency": "ZAR"
-          }
-        },
-        {
-          "id": "periodic-maintenance",
-          "description": "Budget for resurfacing and major repairs",
-          "amount": {
-            "amount": 5000000,
-            "currency": "ZAR"
-          }
-        }
-      ],
-      "finance": []
-    },
-    "costMeasurements": [
-      {
-        "id": "annual-maintenance-cost",
-        "date": "2023-12-31",
-        "lifeCycleCosting": {
-          "value": {
-            "amount": 10500000,
-            "currency": "ZAR"
-          }
-        }
-      }
-    ],
-    "forecasts": [],
-    "parties": [
-      {
-        "name": "South African National Roads Agency Limited (SANRAL)",
-        "roles": ["procuringEntity"]
-      },
-      {
-        "name": "Various road maintenance contractors",
-        "roles": ["supplier"]
-      }
-    ],
-    "publicAuthority": {
-      "name": "Government of South Africa"
-    },
-    "documents": [
-      {
-        "id": "maintenance-manual",
-        "documentType": "manual",
-        "title": "National Highway Maintenance Manual",
-        "datePublished": "2020-03-15"
-      },
-      {
-        "id": "annual-report-2023",
-        "documentType": "report",
-        "title": "SANRAL Annual Report 2023",
-        "datePublished": "2024-03-01"
-      }
-    ],
-    "contractingProcesses": [
-      {
-        "id": "maintenance-contract-region-a",
-        "summary": {
-          "ocid": "OCDS-9876543",
-          "nature": ["services"],
-          "title": "Highway Maintenance Contract - Region A",
-          "description": "Contract for routine and periodic maintenance of highways in Region A.",
-          "status": "active",
-          "tender": {
-            "procurementMethod": "open",
-            "datePublished": "2023-01-15",
-            "costEstimate": {
-              "amount": 4000000,
-              "currency": "ZAR"
-            },
-            "numberOfTenderers": 4,
-            "procuringEntity": {
-              "name": "South African National Roads Agency Limited (SANRAL)",
-              "id": "ZA-SANRAL"
-            }
-          },
-          "suppliers": [
-            {
-              "name": "RoadFix Maintenance Pty Ltd",
-              "id": "ZA-RF-789"
-            }
-          ],
-          "contractValue": {
-            "amount": 3950000,
-            "currency": "ZAR"
-          },
-          "contractPeriod": {
-            "startDate": "2023-03-01",
-            "endDate": "2025-02-28"
-          }
-        }
-      }
-    ],
-    "metrics": [
-      {
-        "id": "road-condition-index",
-        "title": "Road Condition Index",
-        "description": "Measures the overall condition of the national highway network.",
-        "observations": [
-          {
-            "period": {
-              "startDate": "2023-01-01",
-              "endDate": "2023-12-31"
-            },
-            "value": {
-              "amount": 85,
-              "unit": {
-                "name": "index score"
-              }
-            }
-          }
-        ]
-      },
-      {
-        "id": "average-travel-time",
-        "title": "Average Travel Time",
-        "description": "Measures the average time taken to travel on key highway routes.",
-        "observations": [
-          {
-            "period": {
-              "startDate": "2023-01-01",
-              "endDate": "2023-12-31"
-            },
-            "value": {
-              "amount": 60,
-              "unit": {
-                "name": "minutes"
-              }
-            }
-          }
-        ]
-      }
-    ],
-    "transactions": [],
-    "milestones": [],
-    "completion": {},
-    "lobbyingMeetings": [],
-    "social": {
-      "consultationMeetings": [],
-      "landCompensationBudget": {},
-      "inIndigenousLand": false,
-      "healthAndSafety": {
-        "materialTests": {}
-      }
-    },
-    "environment": {
-      "goals": ["Minimize environmental impact of road maintenance activities", "Protect biodiversity along highway corridors"],
-      "conservationMeasures": [],
-      "climateOversightTypes": [],
-      "hasImpactAssessment": true,
-      "impactCategories": [
-        {
-          "scheme": "environmental-impact",
-          "id": "B"
-        }
-      ],
-      "abatementCost": {},
-      "inProtectedArea": false,
-      "climateMeasures": []
-    },
-    "benefits": [
-      {
-        "title": "Improved Road Safety",
-        "description": "Regular maintenance reduces the risk of accidents and ensures safer travel for all road users.",
-        "beneficiaries": [
-          {
-            "description": "All road users, including motorists, cyclists, and pedestrians",
-            "numberOfPeople": null
-          }
-        ]
-      },
-      {
-        "title": "Enhanced Transportation Efficiency",
-        "description": "Well-maintained roads improve traffic flow and reduce travel times.",
-        "beneficiaries": [
-          {
-            "description": "Businesses and individuals relying on road transportation",
-            "numberOfPeople": null
-          }
-        ]
-      }
-    ],
-    "policyAlignment": {
-      "policies": ["National Transport Master Plan", "SANRAL Environmental Policy"]
+    "climateFinance": {
+      "climateObjective": "Mitigation",
+      "financialInstrument": "Investment Loan",
+      "climateTransformation": "Transition to a low-carbon economy",
+      "climateFinanceDecisionMaking": "Ministry of Finance",
+      "nationallyDeterminedContributions": "Compliant with NDCs",
+      "parisAgreement": "Aligned with the goals of the Paris Agreement",
+      "beneficiaries": "Local communities and the environment",
+      "amountOfInvestment": 500000,
+      "fundingSource": "Green Climate Fund"
     },
     "maintenancePlan": [
       {
-        "type": "inspection",
-        "description": "Regular inspections of road conditions, signage, and drainage systems."
+        "type": "routine-inspection",
+        "description": "Regular inspection and maintenance of wind turbines, electrical systems, and infrastructure."
       },
       {
-        "type": "repair",
-        "description": "Timely repair of potholes, cracks, and other road surface defects."
+        "type": "preventive-maintenance",
+        "description": "Scheduled maintenance activities to prevent potential failures and optimize performance."
       },
       {
-        "type": "resurfacing",
-        "description": "Periodic resurfacing of road sections to maintain pavement quality."
+        "type": "corrective-maintenance",
+        "description": "Repair of any equipment malfunctions or damage."
       }
-    ],
-    "climateFinance": {
-      "impactMeasurement": "Monitoring of fuel consumption and vehicle emissions on national highways.",
-      "carbonFootprint": {
-        "amount": 250000,
-        "unit": {
-          "name": "tonnes CO2 equivalent"
-        }
-      }
-    }
+    ]
   },
   {
-    "id": "ZA-COAL-6",
+    "id": "ZA-WIND-1",
+    "phase": "decommissioning",
     "identifiers": [
       {
-        "id": "COAL-006",
+        "id": "WIND-001",
         "scheme": "internal-project-id"
       }
     ],
-    "title": "Coal Power Plant Decommissioning",
-    "phase": "Decommissioning",
-    "description": "Decommissioning of a coal power plant in Mpumalanga, including environmental remediation and support for affected employees and communities.",
-    "status": "planning",
+    "title": "Northern Cape Wind Farm",
+    "description": "A wind farm project in the Northern Cape nearing the end of its operational life, with decommissioning plans in place to ensure environmental responsibility and support for affected stakeholders.",
+    "status": "active",
     "period": {
-      "startDate": "2024-01-01"
+      "startDate": "2024-02-20"
+    },
+    "identificationPeriod": {
+      "startDate": "2024-02-20",
+      "endDate": "2024-04-30"
+    },
+    "preparationPeriod": {
+      "startDate": "2024-05-01",
+      "endDate": "2025-04-30"
+    },
+    "implementationPeriod": {
+      "startDate": "2025-05-01",
+      "endDate": "2026-11-30"
+    },
+    "completionPeriod": {
+      "startDate": "2026-12-01",
+      "endDate": "2026-12-31"
+    },
+    "maintenancePeriod": {
+      "startDate": "2027-01-01",
+      "endDate": "2047-01-01"
     },
     "decommissioningPeriod": {
-      "startDate": "2025-01-01",
-      "endDate": "2027-12-31"
+      "startDate": "2047-01-02"
     },
     "sector": ["energy"],
-    "purpose": "Reduce greenhouse gas emissions and transition towards cleaner energy sources while minimizing social and economic impacts.",
+    "purpose": "To generate renewable energy, contribute to climate change mitigation goals, and promote local economic development.",
     "additionalClassifications": [
       {
         "scheme": "SDGs",
-        "id": "13.2",
-        "description": "Integrate climate change measures into national policies, strategies and planning"
+        "id": "7.2",
+        "description": "Increase substantially the share of renewable energy in the global energy mix"
       },
       {
         "scheme": "climate-finance",
         "id": "mitigation"
       }
     ],
-    "type": "decommissioning",
-    "relatedProjects": [
-      {
-        "id": "ZA-RENEWABLE-7",
-        "relationship": "replacement",
-        "title": "Renewable Energy Development Project",
-        "description": "A project to develop new renewable energy capacity to replace the decommissioned coal power plant."
-      }
-    ],
-    "assetLifetime": {},
+    "type": "wind farm",
+    "relatedProjects": [],
+    "assetLifetime": {
+      "durationInDays": 7300
+    },
     "locations": [
       {
-        "description": "Mpumalanga Province",
+        "description": "Northern Cape Province",
         "geometry": {
           "type": "Point",
-          "coordinates": [30.5, -26.0]
+          "coordinates": [20.0, -28.0]
         }
       }
     ],
     "budget": {
       "amount": {
-        "amount": 8000000,
+        "amount": 15000000,
         "currency": "ZAR"
       },
       "budgetBreakdowns": [
         {
-          "id": "decommissioning-activities",
-          "description": "Budget for dismantling and disposal of equipment",
+          "id": "construction",
+          "description": "Budget for construction materials and labor",
           "amount": {
-            "amount": 5000000,
+            "amount": 10000000,
             "currency": "ZAR"
           }
         },
         {
-          "id": "environmental-remediation",
-          "description": "Budget for environmental cleanup and restoration",
+          "id": "equipment",
+          "description": "Budget for wind turbines and electrical equipment",
           "amount": {
-            "amount": 2000000,
+            "amount": 4000000,
             "currency": "ZAR"
           }
         },
         {
-          "id": "employee-transition",
-          "description": "Budget for employee retraining and support programs",
+          "id": "project-management",
+          "description": "Budget for project management and oversight",
           "amount": {
             "amount": 1000000,
             "currency": "ZAR"
@@ -1359,55 +1826,334 @@
       ],
       "finance": [
         {
-          "id": "climate-fund-loan",
+          "id": "GCF-loan",
           "assetClass": "loan",
           "type": "concessional loan",
           "concessional": true,
           "value": {
-            "amount": 4000000,
+            "amount": 7500000,
             "currency": "ZAR"
           },
-          "source": "International Climate Fund",
+          "source": "Green Climate Fund",
           "financingParty": {
-            "id": "ICF",
-            "name": "International Climate Fund"
+            "id": "GCF",
+            "name": "Green Climate Fund"
+          }
+        },
+        {
+          "id": "commercial-loan",
+          "assetClass": "loan",
+          "type": "loan",
+          "concessional": false,
+          "value": {
+            "amount": 7500000,
+            "currency": "ZAR"
+          },
+          "source": "Commercial Bank",
+          "financingParty": {
+            "id": "ABC-BANK",
+            "name": "ABC Bank"
           }
         }
       ]
     },
-    "costMeasurements": [],
+    "costMeasurements": [
+      {
+        "id": "final-project-cost",
+        "date": "2026-12-31",
+        "lifeCycleCosting": {
+          "value": {
+            "amount": 15800000,
+            "currency": "ZAR"
+          }
+        }
+      }
+    ],
     "forecasts": [],
     "parties": [
       {
-        "name": "Eskom Holdings SOC Ltd",
+        "name": "Department of Energy",
         "roles": ["procuringEntity"]
       },
       {
-        "name": "Decommissioning Contractor",
+        "name": "Northern Cape Provincial Government",
+        "roles": ["fundingSource"]
+      },
+      {
+        "name": "Community Trust",
+        "roles": ["potential-owner"]
+      },
+      {
+        "name": "Wind Turbine Supplier",
         "roles": ["supplier"]
       },
       {
-        "name": "Environmental Remediation Firm",
+        "name": "Construction Company",
         "roles": ["supplier"]
       },
       {
-        "name": "Employee Union Representatives",
-        "roles": ["stakeholder"]
+        "name": "Project Management Firm",
+        "roles": ["supplier"]
       },
       {
-        "name": "Local Community Representatives",
-        "roles": ["stakeholder"]
+        "name": "Maintenance Contractor",
+        "roles": ["supplier"]
       }
     ],
     "publicAuthority": {
       "name": "Government of South Africa"
     },
-    "documents": [],
-    "contractingProcesses": [],
-    "metrics": [],
+    "documents": [
+      {
+        "id": "feasibility-study-report",
+        "documentType": "report",
+        "title": "Wind Farm Feasibility Study Report",
+        "datePublished": "2024-04-30"
+      },
+      {
+        "id": "environmental-permit",
+        "documentType": "permit",
+        "title": "Environmental Permit",
+        "datePublished": "2025-04-15"
+      },
+      {
+        "id": "completion-report",
+        "documentType": "report",
+        "title": "Project Completion Report",
+        "datePublished": "2027-01-15"
+      }
+    ],
+    "contractingProcesses": [
+      {
+        "id": "turbine-supply-contract",
+        "summary": {
+          "ocid": "OCDS-4567890",
+          "nature": ["goods"],
+          "title": "Wind Turbine Supply and Installation Contract",
+          "description": "Contract for the supply and installation of wind turbines for the wind farm.",
+          "status": "complete",
+          "tender": {
+            "procurementMethod": "open",
+            "datePublished": "2025-03-15",
+            "costEstimate": {
+              "amount": 4000000,
+              "currency": "ZAR"
+            },
+            "numberOfTenderers": 3,
+            "procuringEntity": {
+              "name": "Department of Energy",
+              "id": "ZA-DOE"
+            }
+          },
+          "suppliers": [
+            {
+              "name": "WindPower Technologies",
+              "id": "ZA-WPT-123"
+            }
+          ],
+          "contractValue": {
+            "amount": 3900000,
+            "currency": "ZAR"
+          },
+          "contractPeriod": {
+            "startDate": "2025-05-01",
+            "endDate": "2026-04-30"
+          }
+        }
+      },
+      {
+        "id": "construction-contract",
+        "summary": {
+          "ocid": "OCDS-5678901",
+          "nature": ["works"],
+          "title": "Wind Farm Construction Contract",
+          "description": "Contract for the construction of infrastructure and facilities for the wind farm.",
+          "status": "complete",
+          "tender": {
+            "procurementMethod": "open",
+            "datePublished": "2025-03-20",
+            "costEstimate": {
+              "amount": 6000000,
+              "currency": "ZAR"
+            },
+            "numberOfTenderers": 5,
+            "procuringEntity": {
+              "name": "Department of Energy",
+              "id": "ZA-DOE"
+            }
+          },
+          "suppliers": [
+            {
+              "name": "BuildRight Construction",
+              "id": "ZA-BRC-456"
+            }
+          ],
+          "contractValue": {
+            "amount": 5800000,
+            "currency": "ZAR"
+          },
+          "contractPeriod": {
+            "startDate": "2025-05-01",
+            "endDate": "2026-10-31"
+          }
+        }
+      },
+      {
+        "id": "maintenance-contract",
+        "summary": {
+          "ocid": "OCDS-6789012",
+          "nature": ["services"],
+          "title": "Wind Farm Maintenance Contract",
+          "description": "Contract for the ongoing maintenance of the wind farm.",
+          "status": "active",
+          "tender": {
+            "procurementMethod": "open",
+            "datePublished": "2026-11-01",
+            "costEstimate": {
+              "amount": 500000,
+              "currency": "ZAR"
+            },
+            "numberOfTenderers": 2,
+            "procuringEntity": {
+              "name": "Department of Energy",
+              "id": "ZA-DOE"
+            }
+          },
+          "suppliers": [
+            {
+              "name": "WindCare Services",
+              "id": "ZA-WCS-789"
+            }
+          ],
+          "contractValue": {
+            "amount": 480000,
+            "currency": "ZAR"
+          },
+          "contractPeriod": {
+            "startDate": "2027-01-01",
+            "endDate": "2029-12-31"
+          }
+        }
+      }
+    ],
+    "metrics": [
+      {
+        "id": "energy-generation",
+        "title": "Energy Generation",
+        "description": "Amount of energy generated by the wind farm.",
+        "observations": [
+          {
+            "period": {
+              "startDate": "2027-01-01",
+              "endDate": "2027-03-31"
+            },
+            "value": {
+              "amount": 35000,
+              "unit": {
+                "name": "MWh"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": "turbine-availability",
+        "title": "Turbine Availability",
+        "description": "Percentage of time that the wind turbines are operational.",
+        "observations": [
+          {
+            "period": {
+              "startDate": "2027-01-01",
+              "endDate": "2027-03-31"
+            },
+            "value": {
+              "amount": 95,
+              "unit": {
+                "name": "percentage"
+              }
+            }
+          }
+        ]
+      }
+    ],
     "transactions": [],
-    "milestones": [],
-    "completion": {},
+    "milestones": [
+      {
+        "id": "environmental-assessment-completion",
+        "title": "Environmental Impact Assessment Completion",
+        "type": "assessment",
+        "dueDate": "2024-08-31",
+        "dateMet": "2024-08-15",
+        "status": "met"
+      },
+      {
+        "id": "engineering-design-completion",
+        "title": "Engineering Design Completion",
+        "type": "design",
+        "dueDate": "2024-12-31",
+        "dateMet": "2024-12-15",
+        "status": "met"
+      },
+      {
+        "id": "financial-close",
+        "title": "Financial Close",
+        "type": "financing",
+        "dueDate": "2025-03-31",
+        "dateMet": "2025-03-15",
+        "status": "met"
+      },
+      {
+        "id": "site-preparation-completion",
+        "title": "Site Preparation Completion",
+        "type": "implementation",
+        "dueDate": "2025-07-31",
+        "dateMet": "2025-07-15",
+        "status": "met"
+      },
+      {
+        "id": "turbine-installation-start",
+        "title": "Turbine Installation Start",
+        "type": "implementation",
+        "dueDate": "2025-09-01",
+        "dateMet": "2025-08-20",
+        "status": "met"
+      },
+      {
+        "id": "turbine-installation-completion",
+        "title": "Turbine Installation Completion",
+        "type": "implementation",
+        "dueDate": "2026-04-30",
+        "dateMet": "2026-04-15",
+        "status": "met"
+      },
+      {
+        "id": "grid-connection",
+        "title": "Grid Connection",
+        "type": "implementation",
+        "dueDate": "2026-10-31",
+        "dateMet": "2026-10-15",
+        "status": "met"
+      },
+      {
+        "id": "commissioning-and-testing",
+        "title": "Commissioning and Testing",
+        "type": "implementation",
+        "dueDate": "2026-11-30",
+        "dateMet": "2026-11-25",
+        "status": "met"
+      }
+    ],
+    "completion": {
+      "endDate": "2026-12-31",
+      "endDateDetails": "Wind farm construction completed and fully operational.",
+      "finalValue": {
+        "amount": 15800000,
+        "currency": "ZAR"
+      },
+      "finalValueDetails": "Project completed slightly over budget due to unexpected costs during turbine installation.",
+      "finalScope": "Construction of a 20-turbine wind farm with a total capacity of 50 MW.",
+      "finalScopeDetails": "The project scope was achieved as planned."
+    },
     "lobbyingMeetings": [],
     "social": {
       "consultationMeetings": [],
@@ -1418,105 +2164,103 @@
       }
     },
     "environment": {
-      "goals": ["Minimize environmental impact of decommissioning", "Restore land to its natural state"],
+      "goals": ["Reduce reliance on fossil fuels", "Promote sustainable energy development", "Protect local biodiversity"],
       "conservationMeasures": [],
       "climateOversightTypes": [],
       "hasImpactAssessment": true,
       "impactCategories": [
         {
           "scheme": "environmental-impact",
-          "id": "A"
+          "id": "B"
         }
       ],
       "abatementCost": {},
       "inProtectedArea": false,
-      "climateMeasures": [],
+      "climateMeasures": [
+        {
+          "type": "renewable-energy",
+          "description": "Wind energy generation as a clean energy source."
+        }
+      ],
+      "environmentalLicensesAndExemptions": [
+        {
+          "id": "environmental-permit",
+          "description": "Permit for construction and operation of the wind farm."
+        }
+      ],
       "decommissioningPlans": [
         {
           "id": "dismantling-plan",
-          "description": "Plan for safe and efficient dismantling of power plant equipment and structures."
+          "description": "Plan for safe and efficient dismantling of wind turbines and infrastructure."
         },
         {
-          "id": "waste-management-plan",
-          "description": "Plan for handling and disposal of hazardous and non-hazardous waste materials."
+          "id": "recycling-plan",
+          "description": "Plan for recycling and disposal of turbine components and materials."
         },
         {
-          "id": "remediation-plan",
-          "description": "Plan for soil and water remediation to address any environmental contamination."
+          "id": "site-restoration-plan",
+          "description": "Plan for restoring the land to its natural state."
         }
       ],
       "decommissioningCostForecast": {
-        "amount": 6500000,
+        "amount": 2000000,
         "currency": "ZAR"
       }
     },
     "benefits": [
       {
-        "title": "Reduced Greenhouse Gas Emissions",
-        "description": "Decommissioning the coal power plant will significantly reduce greenhouse gas emissions and contribute to climate change mitigation goals.",
+        "title": "Renewable Energy Generation",
+        "description": "The wind farm will contribute to South Africa's renewable energy goals and reduce dependence on fossil fuels.",
         "beneficiaries": [
           {
-            "description": "Global environment and future generations",
+            "description": "National energy grid",
             "numberOfPeople": null
           },
           {
-            "description": "Local communities through improved air quality",
-            "numberOfPeople": 10000
+            "description": "Local communities through potential reduced electricity costs",
+            "numberOfPeople": 5000
           }
         ]
       },
       {
-        "title": "Transition to Clean Energy",
-        "description": "The project supports the transition to a more sustainable and cleaner energy mix in South Africa.",
+        "title": "Local Economic Development",
+        "description": "The project has the potential to create job opportunities and stimulate economic growth in the region.",
         "beneficiaries": [
           {
-            "description": "National energy security and sustainability",
-            "numberOfPeople": null
+            "description": "Local residents through employment opportunities",
+            "numberOfPeople": 200
           }
         ]
       }
     ],
     "policyAlignment": {
-      "policies": ["Integrated Resource Plan", "Just Transition Framework"]
+      "policies": ["Integrated Resource Plan", "Renewable Energy Independent Power Producer Procurement Programme", "National Development Plan"]
     },
     "climateFinance": {
-      "infrastructureAssetsToBeDecommissioned": [
-        {
-          "id": "coal-power-plant",
-          "description": "Coal-fired power plant with a capacity of 1000 MW."
-        }
-      ],
-      "decommissionPlan": [
-        {
-          "id": "dismantling-activities",
-          "description": "Dismantling and removal of power plant equipment and structures."
-        },
-        {
-          "id": "environmental-remediation",
-          "description": "Soil and water remediation to address any contamination."
-        },
-        {
-          "id": "community-engagement",
-          "description": "Engagement with local communities throughout the decommissioning process."
-        }
-      ],
-      "carbonDecommissionSavings": {
-        "amount": 5000000,
-        "unit": {
-          "name": "tonnes CO2 equivalent"
-        }
+      "climateObjective": "Mitigation",
+      "financialInstrument": "Investment Loan",
+      "climateTransformation": "Transition to a low-carbon economy",
+      "climateFinanceDecisionMaking": "Ministry of Finance",
+      "nationallyDeterminedContributions": "Compliant with NDCs",
+      "parisAgreement": "Aligned with the goals of the Paris Agreement",
+      "beneficiaries": "Local communities and the environment",
+      "amountOfInvestment": 500000,
+      "fundingSource": "Green Climate Fund"
+    },
+    "maintenancePlan": [
+      {
+        "type": "routine-inspection",
+        "description": "Regular inspection and maintenance of wind turbines, electrical systems, and infrastructure."
       },
-      "decommissionMitigationPlan": [
-        {
-          "id": "employee-retraining",
-          "description": "Retraining programs to equip employees with skills for new job opportunities in the renewable energy sector."
-        },
-        {
-          "id": "community-development-fund",
-          "description": "Establishment of a community development fund to support economic diversification and job creation in the region."
-        }
-      ]
-    }
+      {
+        "type": "preventive-maintenance",
+        "description": "Scheduled maintenance activities to prevent potential failures and optimize performance."
+      },
+      {
+        "type": "corrective-maintenance",
+        "description": "Repair of any equipment malfunctions or damage."
+      }
+    ]
   }
 
 

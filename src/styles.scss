@@ -35,6 +35,28 @@ ngx-json-viewer .ngx-json-viewer {
     @apply bg-black text-white;
   }
 
+  dt {
+    cursor: pointer;
+  }
+
+  dd {
+    background-color: #f8f8f8;
+    border: 1px solid #eaeaea;
+    border-top: none;
+    padding: 1rem;
+  }
+
+  svg {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  div[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+  }
+
+  // Add any additional styling as needed to match your design system
+
+
 
   &:hover {
     @apply bg-gray-300; // Slightly darker for better legibility

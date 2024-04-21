@@ -15,8 +15,16 @@ export class AppComponent implements OnInit {
 
   sampleProjects: any;
   uniquePhases!: any[] ;  // Array to hold unique phases
-  filterPhase: any;  // Property to hold the current filtered phase
+  filterPhase = 'Identification';
   projectDetailsOpen = new Map<string, boolean>();
+
+  identificationOpen: boolean = false;
+  preparationOpen: boolean = false;
+  implementationOpen: boolean = false;
+  completionOpen: boolean = false;
+  maintenanceOpen: boolean = false;
+  decommissioningOpen: boolean = false;
+
 
 
 
@@ -80,9 +88,7 @@ export class AppComponent implements OnInit {
     this.filterPhase = phase;
   }
 
-  clearFilter(): void {
-    this.filterPhase = '';
-  }
+
 
   // AppComponent class
 
@@ -100,6 +106,12 @@ export class AppComponent implements OnInit {
   hasClimateFinance(project: any): boolean {
     return project.additionalClassifications.some((c: any) => c.scheme === 'climate-finance');
   }
+
+  // In your component.ts
+
+
+
+
 
 
 
