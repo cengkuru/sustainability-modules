@@ -1217,7 +1217,7 @@
   },
   {
     "id": "ZA-WIND-1",
-    "phase": "maintenance",
+    "phase": "Maintenance",
     "identifiers": [
       {
         "id": "WIND-001",
@@ -1730,7 +1730,7 @@
   },
   {
     "id": "ZA-WIND-1",
-    "phase": "decommissioning",
+    "phase": "Decommissioning",
     "identifiers": [
       {
         "id": "WIND-001",
