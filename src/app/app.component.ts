@@ -38,10 +38,11 @@ export class AppComponent implements OnInit {
   ];
   jsonData: any;  // Variable to hold the JSON data
   exampleData:  any;
-  activeProjectId: number | null = null;
+  activeProjectId: any;
 
   sampleProjects: any;
-  uniquePhases!: any[] ;  // Array to hold unique phases
+  uniquePhases!: any[] ;
+  selectedProject: any;
 
 
 
@@ -87,12 +88,22 @@ export class AppComponent implements OnInit {
   // ... (rest of the component)
 
 // Helper method to toggle the project details view
-  toggleProjectDetails(projectId: any): void {
-    if (this.activeProjectId === projectId) {
-      this.activeProjectId = null;
+  toggleProjectDetails(project: any): void {
+    // Check if the project is already selected, if so, deselect it.
+    if (this.selectedProject && this.selectedProject.id === project.id) {
+      this.selectedProject = null;
     } else {
-      this.activeProjectId = projectId;
+      // Else, select the new project.
+      this.selectedProject = project;
     }
+  }
+
+
+  // Get Project Details by ID
+  getProjectDetails(projectId: any): any {
+    const selectedProject = this.sampleProjects.find((project: any) => project.id === projectId);
+    console.log(selectedProject);
+    return selectedProject;
   }
 
 
