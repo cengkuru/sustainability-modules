@@ -209,15 +209,17 @@
               </div>
             </div>
 
-            <div class="bg-green-50 shadow overflow-hidden sm:rounded-lg">
+            <div class="bg-green-50 shadow overflow-hidden sm:rounded-lg border-2 border-green-500">
               <div class="px-4 py-5 sm:px-6">
-                <h3 class="text-lg leading-6 font-medium text-green-800">Sustainability</h3>
+                <h3 class="text-lg leading-6 font-medium text-green-800 flex items-center">
+                  <i class="bi bi-leaf mr-2"></i> Sustainability
+                </h3>
               </div>
               <div class="border-t border-green-200 px-4 py-5 sm:p-0">
                 <dl class="sm:divide-y sm:divide-green-200">
                   <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-green-700 flex items-center">
-                      <i class="bi bi-leaf mr-2"></i> Environmental Impact Assessment
+                      <i class="bi bi-file-earmark-text mr-2"></i> Environmental Impact Assessment
                     </dt>
                     <dd class="mt-1 text-sm text-green-900 sm:mt-0 sm:col-span-2">
                       <a href="{{ selectedProject?.data?.phases?.identification?.sustainability?.environmentalImpactAssessment?.url }}" target="_blank" class="flex items-center space-x-2 text-green-600 hover:text-green-800">
@@ -228,7 +230,7 @@
                   </div>
                   <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-green-700 flex items-center">
-                      <i class="bi bi-people mr-2"></i> Social Impact Assessment
+                      <i class="bi bi-people-fill mr-2"></i> Social Impact Assessment
                     </dt>
                     <dd class="mt-1 text-sm text-green-900 sm:mt-0 sm:col-span-2">
                       <a href="{{ selectedProject?.data?.phases?.identification?.sustainability?.socialImpactAssessment?.url }}" target="_blank" class="flex items-center space-x-2 text-green-600 hover:text-green-800">
@@ -240,7 +242,6 @@
                 </dl>
               </div>
             </div>
-
             <div class="bg-white shadow overflow-hidden sm:rounded-lg">
               <div class="px-4 py-5 sm:px-6">
                 <h3 class="text-lg leading-6 font-medium text-gray-900">Stakeholder Engagement</h3>
@@ -367,10 +368,6 @@
               </div>
             </div>
         </div>
-
-
-
-
           <!-- Preparation Phase -->
           <div *ngIf="activePhase === 'preparation'" class="bg-white p-6 shadow rounded-lg">
             <h3 class="text-xl font-semibold text-gray-900 mb-4">
@@ -410,18 +407,22 @@
                 </div>
               </div>
 
-              <div class="bg-green-50 p-6 rounded-lg shadow">
-                <h4 class="text-xl font-medium text-green-800">
-                  <i class="bi bi-tree"></i> Sustainability Initiatives
-                </h4>
-                <p class="text-sm text-green-600">{{ selectedProject?.data?.phases?.preparation?.sustainability?.sustainabilityPlan?.summary }}</p>
-                <a href="{{ selectedProject?.data?.phases?.preparation?.sustainability?.sustainabilityPlan?.url }}" class="text-green-600 hover:text-green-800">
-                  <i class="bi bi-link-45deg"></i> Sustainability Details
-                </a>
-                <p class="text-sm text-gray-500 mt-2">
-                  <i class="bi bi-cash"></i> Budget: {{ selectedProject?.data?.phases?.preparation?.sustainability?.sustainabilityBudget?.amount | currency:selectedProject?.data?.phases?.preparation?.sustainability?.sustainabilityBudget?.currency }}
-                </p>
-                <p class="text-sm text-gray-500">For environmental mitigation, social programs, and certification.</p>
+              <div class="bg-green-50 shadow overflow-hidden sm:rounded-lg border-2 border-green-500">
+                <div class="px-4 py-5 sm:px-6">
+                  <h4 class="text-lg leading-6 font-medium text-green-800 flex items-center">
+                    <i class="bi bi-tree-fill mr-2"></i> Sustainability Initiatives
+                  </h4>
+                  <p class="mt-1 text-sm text-green-600">{{ selectedProject?.data?.phases?.preparation?.sustainability?.sustainabilityPlan?.summary }}</p>
+                  <a href="{{ selectedProject?.data?.phases?.preparation?.sustainability?.sustainabilityPlan?.url }}" class="text-green-600 hover:text-green-800 flex items-center mt-2">
+                    <i class="bi bi-link-45deg mr-2"></i> Sustainability Details
+                  </a>
+                  <div class="mt-4">
+                    <p class="text-sm text-green-600 flex items-center">
+                      <i class="bi bi-cash-coin mr-2"></i> Budget: {{ selectedProject?.data?.phases?.preparation?.sustainability?.sustainabilityBudget?.amount | currency:selectedProject?.data?.phases?.preparation?.sustainability?.sustainabilityBudget?.currency }}
+                    </p>
+                    <p class="text-sm text-green-600 mt-1">For environmental mitigation, social programs, and certification.</p>
+                  </div>
+                </div>
               </div>
 
               <div>
@@ -451,67 +452,421 @@
 
           <!-- Implementation Phase -->
           <div *ngIf="activePhase === 'implementation'" class="space-y-4">
-            <h3 class="text-sm font-medium text-gray-700">Implementation Overview</h3>
-            <p class="text-sm text-gray-600">{{ selectedProject?.data?.phases?.implementation?.overview }}</p>
-            <div>
-              <h3 class="text-sm font-medium text-gray-700">Contracts Details</h3>
-              <ul class="list-disc list-inside text-sm text-gray-500">
-                <li>{{ selectedProject?.data?.phases?.implementation?.contracts[0]?.contractor.name }} - Progress: {{ selectedProject?.data?.phases?.implementation?.contracts[0]?.progress }}%</li>
-              </ul>
+            <!-- Implementation Overview -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+              <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">Implementation Overview</h3>
+                <p class="mt-1 max-w-2xl text-sm text-gray-500">{{ selectedProject?.data?.phases?.implementation?.overview }}</p>
+              </div>
+            </div>
+
+            <!-- Contracts Details -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+              <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900 flex items-center">
+                  <i class="bi bi-file-earmark-text mr-2"></i> Contracts Details
+                </h3>
+                <div class="mt-4">
+                  <div *ngFor="let contract of selectedProject?.data?.phases?.implementation?.contracts" class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-building mr-2"></i> {{ contract.contractor.name }}
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      <p class="text-sm text-gray-500">Scope: {{ contract.scope }}</p>
+                      <p class="text-sm text-gray-500">Award Date: {{ contract.awardDate | date:'mediumDate' }}</p>
+                      <p class="text-sm text-gray-500">Award Value: {{ contract.awardValue.amount | currency:contract.awardValue.currency }}</p>
+                      <p class="text-sm text-gray-500">Duration: {{ contract.duration.startDate | date:'mediumDate' }} - {{ contract.duration.endDate | date:'mediumDate' }}</p>
+                      <p class="text-sm text-gray-500">Status: {{ contract.status }}</p>
+                      <p class="text-sm text-gray-500">Progress: {{ contract.progress }}%</p>
+                      <p class="text-sm text-gray-500">Payment Terms: {{ contract.paymentTerms.mechanism }} ({{ contract.paymentTerms.paymentDays }} days)</p>
+                    </dd>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Work Progress -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+              <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900 flex items-center">
+                  <i class="bi bi-chart-bar mr-2"></i> Work Progress
+                </h3>
+                <div class="mt-4">
+                  <div *ngFor="let progress of selectedProject?.data?.phases?.implementation?.workProgress" class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-calendar mr-2"></i> {{ progress.date | date:'mediumDate' }}
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      <p class="text-sm text-gray-500">Milestone: {{ progress.milestone }}</p>
+                      <p class="text-sm text-gray-500">Status: {{ progress.status }}</p>
+                      <p class="text-sm text-gray-500">Progress: {{ progress.progress }}%</p>
+                      <p class="text-sm text-gray-500">Issues: {{ progress.issues.join(', ') }}</p>
+                      <p class="text-sm text-gray-500">Next Steps: {{ progress.nextSteps.join(', ') }}</p>
+                    </dd>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Variations -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+              <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900 flex items-center">
+                  <i class="bi bi-file-earmark-text mr-2"></i> Variations
+                </h3>
+                <div class="mt-4">
+                  <div *ngFor="let variation of selectedProject?.data?.phases?.implementation?.variations" class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-file-earmark-text mr-2"></i> {{ variation.description }}
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      <p class="text-sm text-gray-500">Date: {{ variation.date | date:'mediumDate' }}</p>
+                      <p class="text-sm text-gray-500">Value: {{ variation.value.amount | currency:variation.value.currency }}</p>
+                      <p class="text-sm text-gray-500">Status: {{ variation.status }}</p>
+                      <p class="text-sm text-gray-500">Reason: {{ variation.reason }}</p>
+                      <p class="text-sm text-gray-500">Impact: {{ variation.impact.cost.amount | currency:variation.impact.cost.currency }} ({{ variation.impact.schedule.days }} days)</p>
+                    </dd>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Risk Management -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+              <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900 flex items-center">
+                  <i class="bi bi-exclamation-triangle mr-2"></i> Risk Management
+                </h3>
+                <div class="mt-4">
+                  <div *ngFor="let risk of selectedProject?.data?.phases?.implementation?.riskManagement" class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-exclamation-triangle mr-2"></i> {{ risk.description }}
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      <p class="text-sm text-gray-500">Category: {{ risk.category }}</p>
+                      <p class="text-sm text-gray-500">Probability: {{ risk.probability }}</p>
+                      <p class="text-sm text-gray-500">Impact: {{ risk.impact }}</p>
+                      <p class="text-sm text-gray-500">Mitigation: {{ risk.mitigation.join(', ') }}</p>
+                      <p class="text-sm text-gray-500">Contingency: {{ risk.contingency.join(', ') }}</p>
+                    </dd>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sustainability -->
+            <div class="bg-green-50 shadow overflow-hidden sm:rounded-lg border-2 border-green-500">
+              <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-green-800 flex items-center">
+                  <i class="bi bi-leaf mr-2"></i> Sustainability
+                </h3>
+                <div class="mt-4">
+                  <div *ngFor="let monitoring of selectedProject?.data?.phases?.implementation?.sustainability.environmentalMonitoring" class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-green-700 flex items-center">
+                      <i class="bi bi-leaf mr-2"></i> {{ monitoring.metric }}
+                    </dt>
+                    <dd class="mt-1 text-sm text-green-900 sm:mt-0 sm:col-span-2">
+                      <p class="text-sm text-green-600">Date: {{ monitoring.date | date:'mediumDate' }}</p>
+                      <p class="text-sm text-green-600">Value: {{ monitoring.value }} {{ monitoring.unit }}</p>
+                      <p class="text-sm text-green-600">Target: {{ monitoring.target }} {{ monitoring.unit }}</p>
+                      <p class="text-sm text-green-600">Status: {{ monitoring.status }}</p>
+                    </dd>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Quality Assurance -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+              <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900 flex items-center">
+                  <i class="bi bi-check-circle mr-2"></i> Quality Assurance
+                </h3>
+                <div class="mt-4">
+                  <div *ngFor="let inspection of selectedProject?.data?.phases?.implementation?.qualityAssurance?.inspections" class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-check-circle mr-2"></i> {{ inspection.type }}
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      <p class="text-sm text-gray-500">Date: {{ inspection.date | date:'mediumDate' }}</p>
+                      <p class="text-sm text-gray-500">Outcome: {{ inspection.outcome }}</p>
+                      <p class="text-sm text-gray-500">Inspector: {{ inspection.inspector }}</p>
+                      <p *ngIf="inspection.recommendations && inspection.recommendations.length > 0" class="text-sm text-gray-500">Recommendations: {{ inspection.recommendations.join(', ') }}</p>
+                    </dd>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Health and Safety -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+              <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900 flex items-center">
+                  <i class="bi bi-first-aid mr-2"></i> Health and Safety
+                </h3>
+                <div class="mt-4">
+                  <div *ngFor="let incident of selectedProject?.data?.phases?.implementation?.healthSafety.incidents" class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-first-aid mr-2"></i> {{ incident.description }}
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      <p class="text-sm text-gray-500">Date: {{ incident.date | date:'mediumDate' }}</p>
+                      <p class="text-sm text-gray-500">Severity: {{ incident.severity }}</p>
+                      <p class="text-sm text-gray-500">Remedial Action: {{ incident.remedialAction.join(', ') }}</p>
+                    </dd>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-
           <!-- Completion Phase -->
           <div *ngIf="activePhase === 'completion'" class="space-y-4">
-            <h3 class="text-sm font-medium text-gray-700">Completion Overview</h3>
+            <h3 class="text-sm font-medium text-gray-700 flex items-center">
+              <i class="bi bi-check-circle-fill mr-2"></i> Completion Overview
+            </h3>
             <p class="text-sm text-gray-600">{{ selectedProject?.data?.phases?.completion?.overview }}</p>
+
             <div>
-              <h3 class="text-sm font-medium text-gray-700">Final Outcomes</h3>
+              <h3 class="text-sm font-medium text-gray-700 flex items-center">
+                <i class="bi bi-flag-fill mr-2"></i> Final Outcomes
+              </h3>
               <p class="mt-1 text-sm text-gray-500">{{ selectedProject?.data?.phases?.completion?.finalCost?.amount | currency }}</p>
+            </div>
+
+            <!-- Sustainability Section -->
+            <div class="bg-green-50 shadow overflow-hidden sm:rounded-lg border-2 border-green-500">
+              <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-green-800 flex items-center">
+                  <i class="bi bi-leaf mr-2"></i> Sustainability Outcomes
+                </h3>
+                <div class="mt-4 space-y-4">
+                  <!-- Environmental Outcomes -->
+                  <div>
+                    <h4 class="text-sm font-medium text-green-700 flex items-center">
+                      <i class="bi bi-tree-fill mr-2"></i> Environmental Outcomes
+                    </h4>
+                    <p class="mt-1 text-sm text-green-600">{{ selectedProject?.data?.phases?.completion?.sustainability?.environmentalOutcomes?.summary }}</p>
+                    <div class="mt-2">
+                      <h5 class="text-sm font-medium text-green-700 flex items-center">
+                        <i class="bi bi-graph-up mr-2"></i> Metrics
+                      </h5>
+                      <ul class="list-disc pl-5 mt-1 text-sm text-green-600">
+                        <li *ngFor="let metric of selectedProject?.data?.phases?.completion?.sustainability?.environmentalOutcomes?.metrics">
+                          {{ metric.name }}: {{ metric.actual }} {{ metric.unit }} (Target: {{ metric.target }} {{ metric.unit }})
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="mt-2">
+                      <h5 class="text-sm font-medium text-green-700 flex items-center">
+                        <i class="bi bi-award-fill mr-2"></i> Certifications
+                      </h5>
+                      <ul class="list-disc pl-5 mt-1 text-sm text-green-600">
+                        <li *ngFor="let certification of selectedProject?.data?.phases?.completion?.sustainability?.environmentalOutcomes?.certifications">
+                          {{ certification.name }} by {{ certification.issuer }} on {{ certification.date | date:'mediumDate' }}
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Social Outcomes -->
+                  <div>
+                    <h4 class="text-sm font-medium text-green-700 flex items-center">
+                      <i class="bi bi-people-fill mr-2"></i> Social Outcomes
+                    </h4>
+                    <p class="mt-1 text-sm text-green-600">{{ selectedProject?.data?.phases?.completion?.sustainability?.socialOutcomes?.summary }}</p>
+                    <div class="mt-2">
+                      <h5 class="text-sm font-medium text-green-700 flex items-center">
+                        <i class="bi bi-graph-up mr-2"></i> Metrics
+                      </h5>
+                      <ul class="list-disc pl-5 mt-1 text-sm text-green-600">
+                        <li *ngFor="let metric of selectedProject?.data?.phases?.completion?.sustainability?.socialOutcomes?.metrics">
+                          {{ metric.name }}: {{ metric.actual }} (Target: {{ metric.target }})
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="mt-2">
+                      <h5 class="text-sm font-medium text-green-700 flex items-center">
+                        <i class="bi bi-lightbulb-fill mr-2"></i> Initiatives
+                      </h5>
+                      <ul class="list-disc pl-5 mt-1 text-sm text-green-600">
+                        <li *ngFor="let initiative of selectedProject?.data?.phases?.completion?.sustainability?.socialOutcomes?.initiatives">
+                          {{ initiative.name }}: {{ initiative.description }} (Beneficiaries: {{ initiative.beneficiaries }})
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Economic Outcomes -->
+                  <div>
+                    <h4 class="text-sm font-medium text-green-700 flex items-center">
+                      <i class="bi bi-cash-coin mr-2"></i> Economic Outcomes
+                    </h4>
+                    <p class="mt-1 text-sm text-green-600">{{ selectedProject?.data?.phases?.completion?.sustainability?.economicOutcomes?.summary }}</p>
+                    <div class="mt-2">
+                      <h5 class="text-sm font-medium text-green-700 flex items-center">
+                        <i class="bi bi-graph-up mr-2"></i> Metrics
+                      </h5>
+                      <ul class="list-disc pl-5 mt-1 text-sm text-green-600">
+                        <li *ngFor="let metric of selectedProject?.data?.phases?.completion?.sustainability?.economicOutcomes?.metrics">
+                          {{ metric.name }}: {{ metric.actual }} {{ metric.unit }} (Target: {{ metric.target }} {{ metric.unit }})
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="mt-2">
+                      <h5 class="text-sm font-medium text-green-700 flex items-center">
+                        <i class="bi bi-briefcase-fill mr-2"></i> Case Studies
+                      </h5>
+                      <ul class="list-disc pl-5 mt-1 text-sm text-green-600">
+                        <li *ngFor="let casestudy of selectedProject?.data?.phases?.completion?.sustainability?.economicOutcomes?.casestudies">
+                          {{ casestudy.title }}: {{ casestudy.description }} (Investment: {{ casestudy.investment.amount | currency:casestudy.investment.currency }}, Jobs Created: {{ casestudy.jobsCreated }})
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div *ngIf="activePhase === 'maintenance'" class="space-y-4">
-            <h3 class="text-sm font-medium text-gray-700">Maintenance Overview</h3>
-            <p class="text-sm text-gray-600">{{ selectedProject?.data?.phases?.maintenance?.overview }}</p>
+            <h3 class="text-lg leading-6 font-medium text-gray-900 flex items-center">
+              <i class="bi bi-tools mr-2"></i> Maintenance Overview
+            </h3>
+            <p class="mt-1 text-sm text-gray-600">{{ selectedProject?.data?.phases?.maintenance?.overview }}</p>
+
             <div>
-              <h3 class="text-sm font-medium text-gray-700">Maintenance Activities</h3>
+              <h4 class="text-sm font-medium text-gray-700 flex items-center">
+                <i class="bi bi-list-check mr-2"></i> Maintenance Activities
+              </h4>
               <ul class="list-disc list-inside text-sm text-gray-500">
                 <li>{{ selectedProject?.data?.phases?.maintenance?.maintenancePlan?.summary }}</li>
               </ul>
             </div>
+
             <div>
-              <h3 class="text-sm font-medium text-gray-700">Performance Monitoring</h3>
+              <h4 class="text-sm font-medium text-gray-700 flex items-center">
+                <i class="bi bi-graph-up mr-2"></i> Performance Monitoring
+              </h4>
               <p class="mt-1 text-sm text-gray-500">
                 Last checked: {{ selectedProject?.data?.phases?.maintenance?.performanceMonitoring?.lastChecked | date:'mediumDate' }}
               </p>
             </div>
+
+            <!-- Sustainability Section -->
+            <div class="bg-green-50 shadow overflow-hidden sm:rounded-lg border-2 border-green-500">
+              <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-green-800 flex items-center">
+                  <i class="bi bi-leaf mr-2"></i> Sustainability
+                </h3>
+                <div class="mt-4 space-y-4">
+                  <!-- Performance Monitoring -->
+                  <div>
+                    <h4 class="text-sm font-medium text-green-700 flex items-center">
+                      <i class="bi bi-graph-up mr-2"></i> Performance Monitoring
+                    </h4>
+                    <ul class="list-disc pl-5 mt-1 text-sm text-green-600">
+                      <li *ngFor="let monitoring of selectedProject?.data?.phases?.maintenance?.sustainability?.performanceMonitoring">
+                        {{ monitoring.date | date:'mediumDate' }}: {{ monitoring.metric }} - {{ monitoring.value }} {{ monitoring.unit }} (Target: {{ monitoring.target }}) - {{ monitoring.performance }}
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Sustainability Improvements -->
+                  <div>
+                    <h4 class="text-sm font-medium text-green-700 flex items-center">
+                      <i class="bi bi-arrow-up-circle mr-2"></i> Sustainability Improvements
+                    </h4>
+                    <ul class="list-disc pl-5 mt-1 text-sm text-green-600">
+                      <li *ngFor="let improvement of selectedProject?.data?.phases?.maintenance?.sustainability?.sustainabilityImprovements">
+                        {{ improvement.date | date:'mediumDate' }}: {{ improvement.description }} (Cost: {{ improvement.cost.amount | currency:improvement.cost.currency }}) - {{ improvement.expectedImpact }} - {{ improvement.status }}
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Certifications -->
+                  <div>
+                    <h4 class="text-sm font-medium text-green-700 flex items-center">
+                      <i class="bi bi-award mr-2"></i> Certifications
+                    </h4>
+                    <ul class="list-disc pl-5 mt-1 text-sm text-green-600">
+                      <li *ngFor="let certification of selectedProject?.data?.phases?.maintenance?.sustainability?.certifications">
+                        {{ certification.name }} - {{ certification.level }} ({{ certification.date | date:'mediumDate' }} - {{ certification.expiryDate | date:'mediumDate' }})
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <!-- Decommissioning Phase -->
+          <!-- Decommissioning Phase -->
           <div *ngIf="activePhase === 'decommissioning'" class="space-y-4">
-            <h3 class="text-sm font-medium text-gray-700">Decommissioning Overview</h3>
-            <p class="text-sm text-gray-600">{{ selectedProject?.data?.phases?.decommissioning?.overview }}</p>
+            <h3 class="text-lg leading-6 font-medium text-gray-900 flex items-center">
+              <i class="bi bi-tools mr-2"></i> Decommissioning Overview
+            </h3>
+            <p class="mt-1 text-sm text-gray-600">{{ selectedProject?.data?.phases?.decommissioning?.overview }}</p>
+
             <div>
-              <h3 class="text-sm font-medium text-gray-700">Decommissioning Plan</h3>
+              <h4 class="text-sm font-medium text-gray-700 flex items-center">
+                <i class="bi bi-file-earmark-text mr-2"></i> Decommissioning Plan
+              </h4>
               <p class="mt-1 text-sm text-gray-500">
                 {{ selectedProject?.data?.phases?.decommissioning?.decommissioningPlan?.summary }}
-                <a href="{{ selectedProject?.data?.phases?.decommissioning?.decommissioningPlan?.url }}" target="_blank">Read more</a>
+                <a href="{{ selectedProject?.data?.phases?.decommissioning?.decommissioningPlan?.url }}" target="_blank" class="text-blue-600 hover:underline">Read more</a>
               </p>
             </div>
+
             <div>
-              <h3 class="text-sm font-medium text-gray-700">Environmental Considerations</h3>
+              <h4 class="text-sm font-medium text-gray-700 flex items-center">
+                <i class="bi bi-tree mr-2"></i> Environmental Considerations
+              </h4>
               <ul class="list-disc list-inside text-sm text-gray-500">
                 <li>{{ selectedProject?.data?.phases?.decommissioning?.environmentalConsiderations?.summary }}</li>
               </ul>
             </div>
+
             <div>
-              <h3 class="text-sm font-medium text-gray-700">Economic Impact</h3>
+              <h4 class="text-sm font-medium text-gray-700 flex items-center">
+                <i class="bi bi-cash-coin mr-2"></i> Economic Impact
+              </h4>
               <p class="mt-1 text-sm text-gray-500">
                 {{ selectedProject?.data?.phases?.decommissioning?.economicConsiderations?.summary }}
-                <a href="{{ selectedProject?.data?.phases?.decommissioning?.economicConsiderations?.url }}" target="_blank">Learn more</a>
+                <a href="{{ selectedProject?.data?.phases?.decommissioning?.economicConsiderations?.url }}" target="_blank" class="text-blue-600 hover:underline">Learn more</a>
               </p>
             </div>
-          </div>
 
+            <!-- Sustainability Section -->
+            <div class="bg-green-50 shadow overflow-hidden sm:rounded-lg border-2 border-green-500">
+              <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-green-800 flex items-center">
+                  <i class="bi bi-leaf mr-2"></i> Sustainability
+                </h3>
+                <div class="mt-4 space-y-4">
+                  <!-- Environmental Outcomes -->
+                  <div>
+                    <h4 class="text-sm font-medium text-green-700 flex items-center">
+                      <i class="bi bi-tree-fill mr-2"></i> Environmental Outcomes
+                    </h4>
+                    <ul class="list-disc pl-5 mt-1 text-sm text-green-600">
+                      <li *ngFor="let metric of selectedProject?.data?.phases?.decommissioning?.sustainability?.decommissioningEnvironmentalOutcomes?.metrics">
+                        {{ metric.name }}: {{ metric.value }} {{ metric.unit }}
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Social Outcomes -->
+                  <div>
+                    <h4 class="text-sm font-medium text-green-700 flex items-center">
+                      <i class="bi bi-people-fill mr-2"></i> Social Outcomes
+                    </h4>
+                    <ul class="list-disc pl-5 mt-1 text-sm text-green-600">
+                      <li *ngFor="let metric of selectedProject?.data?.phases?.decommissioning?.sustainability?.decommissioningSocialOutcomes?.metrics">
+                        {{ metric.name }}: {{ metric.value }} {{ metric.unit }}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
