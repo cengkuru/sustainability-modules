@@ -11,6 +11,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgxJsonViewerModule} from "ngx-json-viewer";
 import {FilterProjectsPipe} from "./pipes/filter-projects.pipe";
 import {FilterRolesPipe} from "./pipes/filter-roles.pipe";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {FilterRolesPipe} from "./pipes/filter-roles.pipe";
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     CoreModule,

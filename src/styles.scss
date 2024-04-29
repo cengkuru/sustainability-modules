@@ -32,7 +32,7 @@ ngx-json-viewer .ngx-json-viewer {
   @apply rounded-lg px-4 py-2 text-sm font-medium cursor-pointer transition-colors duration-150 ease-in-out;
 
   &.active, &:hover {
-    @apply bg-black text-white;
+    @apply bg-gray-900 text-white; /* Using Turquoise/Teal as the active and hover background */
   }
 
   dt {
@@ -40,8 +40,8 @@ ngx-json-viewer .ngx-json-viewer {
   }
 
   dd {
-    background-color: #f8f8f8;
-    border: 1px solid #eaeaea;
+    background-color: #f8f8f8; /* Light gray for dropdown details */
+    border: 1px solid #eaeaea; /* Light gray border for dropdown details */
     border-top: none;
     padding: 1rem;
   }
@@ -56,10 +56,9 @@ ngx-json-viewer .ngx-json-viewer {
 
   // Add any additional styling as needed to match your design system
 
-
-
   &:hover {
-    @apply bg-gray-300; // Slightly darker for better legibility
+    @apply bg-gray-400; /* Slightly lighter Teal for hover effect */
   }
 }
+
 

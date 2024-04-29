@@ -1,29 +1,48 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import { formatCurrency, getCurrencySymbol } from '@angular/common';
+import {animate, query, stagger, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [   // :enter is alias to 'void => *'
+        style({ opacity: 0 }),
+        animate(500, style({ opacity: 1 }))
+      ]),
+      transition(':leave', [   // :leave is alias to '* => void'
+        animate(500, style({ opacity: 0 }))
+      ])
+    ]),
+    trigger('listAnimation', [
+      transition('* <=> *', [
+        query(':enter', [
+          style({ opacity: 0, transform: 'translateY(-15px)' }),
+          stagger(100, [
+            animate('0.5s ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+          ])
+        ], { optional: true })
+      ])
+    ])
+  ]
 })
 export class AppComponent implements OnInit {
-  activeTab = 'data-points';  // Default active tab
+  activeTab = 'sample-projects';  // Default active tab
+  tabs = [
+    { id: 'sample-projects', label: 'Sample Projects' },
+    { id: 'data-points', label: 'Explore OC4IDS Data Points' }
+  ];
   jsonData: any;  // Variable to hold the JSON data
   exampleData:  any;
+  activeProjectId: number | null = null;
 
   sampleProjects: any;
   uniquePhases!: any[] ;  // Array to hold unique phases
-  filterPhase = 'Identification';
-  projectDetailsOpen = new Map<string, boolean>();
 
-  identificationOpen: boolean = false;
-  preparationOpen: boolean = false;
-  implementationOpen: boolean = false;
-  completionOpen: boolean = false;
-  maintenanceOpen: boolean = false;
-  decommissioningOpen: boolean = false;
 
 
 
@@ -49,8 +68,8 @@ export class AppComponent implements OnInit {
     }, error => console.error('Error loading the JSON data:', error));
   }
 
-  switchTab(tab: string): void {
-    this.activeTab = tab;
+  switchTab(tabId: string) {
+    this.activeTab = tabId;
   }
 
   onTabChange(event: Event): void {
@@ -58,9 +77,6 @@ export class AppComponent implements OnInit {
     this.activeTab = selectElement.value;
   }
 
-  currency(value: number, currencyCode: string = 'USD', locale: string = 'en-US'): string {
-    return formatCurrency(value, locale, getCurrencySymbol(currencyCode, 'wide'), currencyCode);
-  }
 
   extractUniquePhases(): void {
     this.uniquePhases = this.sampleProjects
@@ -71,41 +87,15 @@ export class AppComponent implements OnInit {
   // ... (rest of the component)
 
 // Helper method to toggle the project details view
-  toggleProjectDetails(projectId: string): void {
-    const isOpen = this.projectDetailsOpen.get(projectId) || false;
-    this.projectDetailsOpen.set(projectId, !isOpen);
-  }
-
-// Helper method to check if the project details view is open
-  isProjectDetailsOpen(projectId: string): boolean {
-    return this.projectDetailsOpen.get(projectId) || false;
-  }
-
-// ... (rest of the component)
-
-
-  setFilterPhase(phase: string): void {
-    this.filterPhase = phase;
+  toggleProjectDetails(projectId: any): void {
+    if (this.activeProjectId === projectId) {
+      this.activeProjectId = null;
+    } else {
+      this.activeProjectId = projectId;
+    }
   }
 
 
-
-  // AppComponent class
-
-  generalDataPointsVisible(project: any): boolean {
-    // This method should return true if the phase is not the current focus,
-    // i.e., the general data points should be visible
-    // You need to define the logic based on your requirements, for example:
-    return project.phase !== 'Identification'; // Replace with actual logic
-  }
-
-  // In your Angular component's class
-
-  // Inside your AppComponent class
-
-  hasClimateFinance(project: any): boolean {
-    return project.additionalClassifications.some((c: any) => c.scheme === 'climate-finance');
-  }
 
   // In your component.ts
 
