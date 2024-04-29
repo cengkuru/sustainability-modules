@@ -38,11 +38,13 @@ export class AppComponent implements OnInit {
   ];
   jsonData: any;  // Variable to hold the JSON data
   exampleData:  any;
-  activeProjectId: any;
+  phases: string[] = ['identification', 'preparation', 'implementation', 'completion', 'maintenance', 'decommissioning']; // Add this property to define the phases
+
 
   sampleProjects: any;
   uniquePhases!: any[] ;
   selectedProject: any;
+  activePhase: string | undefined;
 
 
 
@@ -89,13 +91,17 @@ export class AppComponent implements OnInit {
 
 // Helper method to toggle the project details view
   toggleProjectDetails(project: any): void {
-    // Check if the project is already selected, if so, deselect it.
     if (this.selectedProject && this.selectedProject.id === project.id) {
       this.selectedProject = null;
+      this.activePhase = 'identification'; // Reset to default phase
     } else {
-      // Else, select the new project.
       this.selectedProject = project;
+      this.activePhase = 'identification'; // Reset to default phase
     }
+  }
+
+  setActivePhase(phase: string) {
+    this.activePhase = phase;
   }
 
 

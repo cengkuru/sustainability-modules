@@ -71,12 +71,13 @@
                 <button (click)="toggleProjectDetails(project)"
                         class="px-4 py-1 text-xs rounded-full focus:outline-none transition-colors duration-150 ease-in-out"
                         [ngClass]="{
-                          'bg-gray-600 text-white hover:bg-gray-700': selectedProject?.id === project.id,
-                          'bg-gray-200 text-gray-900 hover:bg-gray-300': selectedProject?.id !== project.id
-                        }">
+                  'bg-gray-600 text-white hover:bg-gray-700': selectedProject?.id === project.id,
+                  'bg-gray-200 text-gray-900 hover:bg-gray-300': selectedProject?.id !== project.id
+                }">
                   {{ selectedProject?.id === project.id ? 'Hide Details' : 'View Details' }}
+                  <i class="bi bi-chevron-down ml-2" *ngIf="selectedProject?.id === project.id"></i>
+                  <i class="bi bi-chevron-right ml-2" *ngIf="selectedProject?.id !== project.id"></i>
                 </button>
-
               </div>
             </div>
           </ng-container>
@@ -84,28 +85,443 @@
       </div>
 
       <!-- Project Details View -->
-      <div *ngIf="selectedProject" @fadeInOut class="p-4 bg-gray-50 rounded-lg border border-gray-200 shadow-md">
-        <div class="flex justify-between items-start">
+      <div *ngIf="selectedProject" @fadeInOut class="p-4 rounded-lg border border-gray-200 shadow-sm bg-gray-50">
+        <div class="flex justify-between items-center mb-4">
           <h2 class="text-lg font-semibold text-gray-900">{{ selectedProject?.data?.phases?.identification?.name }}</h2>
-          <button (click)="toggleProjectDetails(selectedProject)" class="px-4 py-1 text-xs rounded-full bg-gray-600 text-white hover:bg-gray-700 focus:outline-none transition-colors duration-150 ease-in-out">
+          <button (click)="toggleProjectDetails(selectedProject)" class="px-3 py-1 text-xs leading-none rounded-full bg-gray-600 text-white hover:bg-gray-700 focus:outline-none transition-colors duration-150 ease-in-out">
             Close Details
           </button>
         </div>
-        <div class="mt-4">
-          <p class="text-sm text-gray-600">{{ selectedProject?.data?.phases?.identification?.description }}</p>
+
+        <!-- Tabbed Navigation -->
+        <ul class="flex border-b border-gray-300">
+          <li *ngFor="let phase of phases" class="-mb-px mr-2">
+            <a (click)="setActivePhase(phase)"
+               [ngClass]="{'bg-gray-500 text-white': activePhase === phase, 'bg-white text-gray-600 hover:bg-gray-100': activePhase !== phase}"
+               class="inline-block py-2 px-4 text-sm font-medium text-center rounded-t-lg cursor-pointer transition duration-150 ease-in-out">
+              {{ phase | titlecase }}
+
+            </a>
+          </li>
+        </ul>
+
+
+        <!-- Tab Content -->
+        <div class="mt-4 bg-white p-4 rounded-b-lg border">
+          <!-- Identification Phase -->
+          <div *ngIf="activePhase === 'identification'" class="space-y-8">
+            <!-- Project Details View -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+              <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">Project Overview</h3>
+                <p class="mt-1 max-w-2xl text-sm text-gray-500">{{ selectedProject?.data?.phases?.identification?.overview }}</p>
+              </div>
+              <div class="border-t border-gray-200">
+                <dl class="sm:divide-y sm:divide-gray-200">
+                  <div class="py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-file-text mr-2"></i> Project Name
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ selectedProject?.data?.phases?.identification?.name }}</dd>
+                  </div>
+                  <div class="py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-chat-left-text mr-2"></i> Description
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ selectedProject?.data?.phases?.identification?.description }}</dd>
+                  </div>
+                  <div class="py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-lightbulb mr-2"></i> Purpose
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ selectedProject?.data?.phases?.identification?.purpose }}</dd>
+                  </div>
+                  <div class="py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-circle-half mr-2"></i> Status
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ selectedProject?.data?.phases?.identification?.status }}</dd>
+                  </div>
+                  <div class="py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-tag mr-2"></i> Type
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ selectedProject?.data?.phases?.identification?.type }}</dd>
+                  </div>
+                  <div class="py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-building mr-2"></i> Sector
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ selectedProject?.data?.phases?.identification?.sector }}</dd>
+                  </div>
+                  <div class="py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-building mr-2"></i> Subsector
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ selectedProject?.data?.phases?.identification?.subsector }}</dd>
+                  </div>
+                  <div class="py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-clock mr-2"></i> Asset Lifetime
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      {{ selectedProject?.data?.phases?.identification?.assetLifetime?.years }} years
+                      ({{ selectedProject?.data?.phases?.identification?.assetLifetime?.startDate | date:'mediumDate' }} - {{ selectedProject?.data?.phases?.identification?.assetLifetime?.endDate | date:'mediumDate' }})
+                    </dd>
+                  </div>
+                  <div class="py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-calendar mr-2"></i> Project Timeline
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      {{ selectedProject?.data?.phases?.identification?.startDate | date:'mediumDate' }} -
+                      {{ selectedProject?.data?.phases?.identification?.endDate | date:'mediumDate' }}
+                    </dd>
+                  </div>
+                  <div class="py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-geo-alt mr-2"></i> Location
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ selectedProject?.data?.phases?.identification?.location?.address }}</dd>
+                  </div>
+                  <div class="py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-cash mr-2"></i> Budget
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ selectedProject?.data?.phases?.identification?.budget?.amount | currency:selectedProject?.data?.phases?.identification?.budget?.currency }}</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+              <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">Funding</h3>
+              </div>
+              <div class="border-t border-gray-200">
+                <dl class="divide-y divide-gray-200">
+                  <div *ngFor="let source of selectedProject?.data?.phases?.identification?.funding?.sources" class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-cash mr-2"></i> {{ source.name }}
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ source.amount | currency:source.currency }}</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+
+            <div class="bg-green-50 shadow overflow-hidden sm:rounded-lg">
+              <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-green-800">Sustainability</h3>
+              </div>
+              <div class="border-t border-green-200 px-4 py-5 sm:p-0">
+                <dl class="sm:divide-y sm:divide-green-200">
+                  <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-green-700 flex items-center">
+                      <i class="bi bi-leaf mr-2"></i> Environmental Impact Assessment
+                    </dt>
+                    <dd class="mt-1 text-sm text-green-900 sm:mt-0 sm:col-span-2">
+                      <a href="{{ selectedProject?.data?.phases?.identification?.sustainability?.environmentalImpactAssessment?.url }}" target="_blank" class="flex items-center space-x-2 text-green-600 hover:text-green-800">
+                        <i class="bi bi-box-arrow-up-right mr-2"></i>
+                        <span>{{ selectedProject?.data?.phases?.identification?.sustainability?.environmentalImpactAssessment?.summary }}</span>
+                      </a>
+                    </dd>
+                  </div>
+                  <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-green-700 flex items-center">
+                      <i class="bi bi-people mr-2"></i> Social Impact Assessment
+                    </dt>
+                    <dd class="mt-1 text-sm text-green-900 sm:mt-0 sm:col-span-2">
+                      <a href="{{ selectedProject?.data?.phases?.identification?.sustainability?.socialImpactAssessment?.url }}" target="_blank" class="flex items-center space-x-2 text-green-600 hover:text-green-800">
+                        <i class="bi bi-box-arrow-up-right mr-2"></i>
+                        <span>{{ selectedProject?.data?.phases?.identification?.sustainability?.socialImpactAssessment?.summary }}</span>
+                      </a>
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+              <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">Stakeholder Engagement</h3>
+              </div>
+              <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+                <dl class="sm:divide-y sm:divide-gray-200">
+                  <div *ngFor="let consultation of selectedProject?.data?.phases?.identification?.stakeholderEngagement?.consultations" class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-people mr-2"></i> {{ consultation.stakeholderGroup }} Consultation
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      <p class="text-sm text-gray-500">Date: {{ consultation.date | date:'mediumDate' }}</p>
+                      <p class="text-sm text-gray-500">Purpose: {{ consultation.purpose }}</p>
+                      <p class="text-sm text-gray-500">Outcome: {{ consultation.outcome }}</p>
+                    </dd>
+                  </div>
+                  <div *ngFor="let survey of selectedProject?.data?.phases?.identification?.stakeholderEngagement?.surveys" class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-bar-chart mr-2"></i> {{ survey.stakeholderGroup }} Survey
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      <p class="text-sm text-gray-500">Date: {{ survey.date | date:'mediumDate' }}</p>
+                      <p class="text-sm text-gray-500">Purpose: {{ survey.purpose }}</p>
+                      <p class="text-sm text-gray-500">Outcome: {{ survey.outcome }}</p>
+                    </dd>
+                  </div>
+                  <div *ngFor="let workshop of selectedProject?.data?.phases?.identification?.stakeholderEngagement?.workshops" class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-chat-left-text mr-2"></i> {{ workshop.stakeholderGroup }} Workshop
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      <p class="text-sm text-gray-500">Date: {{ workshop.date | date:'mediumDate' }}</p>
+                      <p class="text-sm text-gray-500">Purpose: {{ workshop.purpose }}</p>
+                      <p class="text-sm text-gray-500">Outcome: {{ workshop.outcome }}</p>
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+              <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">Public Authority</h3>
+              </div>
+              <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+                <dl class="sm:divide-y sm:divide-gray-200">
+                  <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-person mr-2"></i> Name
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ selectedProject?.data?.phases?.identification?.publicAuthority?.name }}</dd>
+                  </div>
+                  <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-badge mr-2"></i> Role
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ selectedProject?.data?.phases?.identification?.publicAuthority?.role }}</dd>
+                  </div>
+                  <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-envelope mr-2"></i> Contact
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      <p class="text-sm text-gray-500">{{ selectedProject?.data?.phases?.identification?.publicAuthority?.contact?.name }}</p>
+                      <p class="text-sm text-gray-500">{{ selectedProject?.data?.phases?.identification?.publicAuthority?.contact?.title }}</p>
+                      <p class="text-sm text-gray-500">{{ selectedProject?.data?.phases?.identification?.publicAuthority?.contact?.email }}</p>
+                      <p class="text-sm text-gray-500">{{ selectedProject?.data?.phases?.identification?.publicAuthority?.contact?.phone }}</p>
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+              <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">Related Projects</h3>
+              </div>
+              <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+                <dl class="sm:divide-y sm:divide-gray-200">
+                  <div *ngFor="let project of selectedProject?.data?.phases?.identification?.relatedProjects" class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-folder mr-2"></i> {{ project.name }}
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      <p class="text-sm text-gray-500">ID: {{ project.id }}</p>
+                      <p class="text-sm text-gray-500">Relationship: {{ project.relationship }}</p>
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+              <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">Project Team</h3>
+              </div>
+              <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+                <dl class="sm:divide-y sm:divide-gray-200">
+                  <div *ngFor="let member of selectedProject?.data?.phases?.identification?.projectTeam" class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-person mr-2"></i> {{ member.name }}
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      <p class="text-sm text-gray-500">{{ member.title }}</p>
+                      <p class="text-sm text-gray-500">{{ member.email }}</p>
+                      <p class="text-sm text-gray-500">{{ member.phone }}</p>
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+              <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">Key Stakeholders</h3>
+              </div>
+              <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+                <dl class="sm:divide-y sm:divide-gray-200">
+                  <div *ngFor="let stakeholder of selectedProject?.data?.phases?.identification?.keyStakeholders" class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 flex items-center">
+                      <i class="bi bi-people mr-2"></i> {{ stakeholder.name }}
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ stakeholder.role }}</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
         </div>
-        <div class="mt-4 grid grid-cols-2 gap-4">
-          <div>
-            <h3 class="text-sm font-medium text-gray-700">Location</h3>
-            <p class="mt-1 text-sm text-gray-500">{{ selectedProject?.data?.phases?.identification?.location?.address }}</p>
+
+
+
+
+          <!-- Preparation Phase -->
+          <div *ngIf="activePhase === 'preparation'" class="bg-white p-6 shadow rounded-lg">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">
+              <i class="bi bi-gear"></i> Preparation Details
+            </h3>
+            <p class="text-sm text-gray-600">{{ selectedProject?.data?.phases?.preparation?.overview }}</p>
+
+            <div class="mt-6 space-y-8">
+              <div>
+                <h4 class="text-lg font-medium text-gray-800">
+                  <i class="bi bi-bullseye"></i> Objectives
+                </h4>
+                <ul class="list-disc list-inside text-sm text-gray-500">
+                  <li *ngFor="let objective of selectedProject?.data?.phases?.preparation?.objectives">{{ objective }}</li>
+                </ul>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <h4 class="text-lg font-medium text-gray-800">
+                    <i class="bi bi-clipboard-data"></i> Feasibility Study
+                  </h4>
+                  <p class="text-sm text-gray-500">{{ selectedProject?.data?.phases?.preparation?.feasibilityStudy?.summary }}</p>
+                  <a href="{{ selectedProject?.data?.phases?.preparation?.feasibilityStudy?.url }}" class="text-blue-600 hover:text-blue-800">
+                    <i class="bi bi-link-45deg"></i> More Details
+                  </a>
+                </div>
+
+                <div>
+                  <h4 class="text-lg font-medium text-gray-800">
+                    <i class="bi bi-exclamation-triangle"></i> Risk Analysis
+                  </h4>
+                  <p class="text-sm text-gray-500">{{ selectedProject?.data?.phases?.preparation?.riskAnalysis?.summary }}</p>
+                  <a href="{{ selectedProject?.data?.phases?.preparation?.riskAnalysis?.url }}" class="text-blue-600 hover:text-blue-800">
+                    <i class="bi bi-link-45deg"></i> Risk Details
+                  </a>
+                </div>
+              </div>
+
+              <div class="bg-green-50 p-6 rounded-lg shadow">
+                <h4 class="text-xl font-medium text-green-800">
+                  <i class="bi bi-tree"></i> Sustainability Initiatives
+                </h4>
+                <p class="text-sm text-green-600">{{ selectedProject?.data?.phases?.preparation?.sustainability?.sustainabilityPlan?.summary }}</p>
+                <a href="{{ selectedProject?.data?.phases?.preparation?.sustainability?.sustainabilityPlan?.url }}" class="text-green-600 hover:text-green-800">
+                  <i class="bi bi-link-45deg"></i> Sustainability Details
+                </a>
+                <p class="text-sm text-gray-500 mt-2">
+                  <i class="bi bi-cash"></i> Budget: {{ selectedProject?.data?.phases?.preparation?.sustainability?.sustainabilityBudget?.amount | currency:selectedProject?.data?.phases?.preparation?.sustainability?.sustainabilityBudget?.currency }}
+                </p>
+                <p class="text-sm text-gray-500">For environmental mitigation, social programs, and certification.</p>
+              </div>
+
+              <div>
+                <h4 class="text-lg font-medium text-gray-800">
+                  <i class="bi bi-check2-circle"></i> Approvals
+                </h4>
+                <ul class="list-disc list-inside text-sm text-gray-500">
+                  <li *ngFor="let approval of selectedProject?.data?.phases?.preparation?.approvals">
+                    {{ approval.type }}: {{ approval.status }} on {{ approval.date | date:'mediumDate' }}
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="text-lg font-medium text-gray-800">
+                  <i class="bi bi-people"></i> Key Stakeholders
+                </h4>
+                <ul class="list-disc list-inside text-sm text-gray-500">
+                  <li *ngFor="let stakeholder of selectedProject?.data?.phases?.preparation?.stakeholders">
+                    {{ stakeholder.role }}: {{ stakeholder.name }}, {{ stakeholder.responsibilities }}
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <div>
-            <h3 class="text-sm font-medium text-gray-700">Budget</h3>
-            <p class="mt-1 text-sm text-gray-500">{{ selectedProject?.data?.phases?.preparation?.budgetEstimate?.amount | currency }}</p>
+
+
+          <!-- Implementation Phase -->
+          <div *ngIf="activePhase === 'implementation'" class="space-y-4">
+            <h3 class="text-sm font-medium text-gray-700">Implementation Overview</h3>
+            <p class="text-sm text-gray-600">{{ selectedProject?.data?.phases?.implementation?.overview }}</p>
+            <div>
+              <h3 class="text-sm font-medium text-gray-700">Contracts Details</h3>
+              <ul class="list-disc list-inside text-sm text-gray-500">
+                <li>{{ selectedProject?.data?.phases?.implementation?.contracts[0]?.contractor.name }} - Progress: {{ selectedProject?.data?.phases?.implementation?.contracts[0]?.progress }}%</li>
+              </ul>
+            </div>
           </div>
+
+          <!-- Completion Phase -->
+          <div *ngIf="activePhase === 'completion'" class="space-y-4">
+            <h3 class="text-sm font-medium text-gray-700">Completion Overview</h3>
+            <p class="text-sm text-gray-600">{{ selectedProject?.data?.phases?.completion?.overview }}</p>
+            <div>
+              <h3 class="text-sm font-medium text-gray-700">Final Outcomes</h3>
+              <p class="mt-1 text-sm text-gray-500">{{ selectedProject?.data?.phases?.completion?.finalCost?.amount | currency }}</p>
+            </div>
+          </div>
+          <div *ngIf="activePhase === 'maintenance'" class="space-y-4">
+            <h3 class="text-sm font-medium text-gray-700">Maintenance Overview</h3>
+            <p class="text-sm text-gray-600">{{ selectedProject?.data?.phases?.maintenance?.overview }}</p>
+            <div>
+              <h3 class="text-sm font-medium text-gray-700">Maintenance Activities</h3>
+              <ul class="list-disc list-inside text-sm text-gray-500">
+                <li>{{ selectedProject?.data?.phases?.maintenance?.maintenancePlan?.summary }}</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-sm font-medium text-gray-700">Performance Monitoring</h3>
+              <p class="mt-1 text-sm text-gray-500">
+                Last checked: {{ selectedProject?.data?.phases?.maintenance?.performanceMonitoring?.lastChecked | date:'mediumDate' }}
+              </p>
+            </div>
+          </div>
+          <!-- Decommissioning Phase -->
+          <div *ngIf="activePhase === 'decommissioning'" class="space-y-4">
+            <h3 class="text-sm font-medium text-gray-700">Decommissioning Overview</h3>
+            <p class="text-sm text-gray-600">{{ selectedProject?.data?.phases?.decommissioning?.overview }}</p>
+            <div>
+              <h3 class="text-sm font-medium text-gray-700">Decommissioning Plan</h3>
+              <p class="mt-1 text-sm text-gray-500">
+                {{ selectedProject?.data?.phases?.decommissioning?.decommissioningPlan?.summary }}
+                <a href="{{ selectedProject?.data?.phases?.decommissioning?.decommissioningPlan?.url }}" target="_blank">Read more</a>
+              </p>
+            </div>
+            <div>
+              <h3 class="text-sm font-medium text-gray-700">Environmental Considerations</h3>
+              <ul class="list-disc list-inside text-sm text-gray-500">
+                <li>{{ selectedProject?.data?.phases?.decommissioning?.environmentalConsiderations?.summary }}</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-sm font-medium text-gray-700">Economic Impact</h3>
+              <p class="mt-1 text-sm text-gray-500">
+                {{ selectedProject?.data?.phases?.decommissioning?.economicConsiderations?.summary }}
+                <a href="{{ selectedProject?.data?.phases?.decommissioning?.economicConsiderations?.url }}" target="_blank">Learn more</a>
+              </p>
+            </div>
+          </div>
+
         </div>
       </div>
+
     </div>
   </div>
 </div>
+
+
+
+
+
+
 
