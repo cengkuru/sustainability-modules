@@ -1,0 +1,13 @@
+<div class="container">
+    <form [formGroup]="displayNameForm" (ngSubmit)="updateDisplayName()">
+        <div class="form-group">
+            <label for="displayName">Display Name</label>
+            <input type="text" id="displayName" formControlName="displayName" class="form-control">
+            <div *ngIf="displayNameForm.get('displayName')?.invalid && displayNameForm.get('displayName')?.touched">
+                <small class="text-danger">Display name is required and must be at least 3 characters long.</small>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="displayNameForm.invalid">Update</button>
+    </form>
+    <div *ngIf="message" class="alert alert-info">{{ message }}</div>
+</div>

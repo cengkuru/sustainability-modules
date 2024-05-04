@@ -1,22 +1,27 @@
+// dashboard.module.ts
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {DashboardComponent} from "./dashboard/dashboard.component";
-import {RouterModule, Routes} from "@angular/router";
-import {ReactiveFormsModule} from "@angular/forms";
-import {AuthGuard} from "../core/guards/auth.guard";
+import { ReactiveFormsModule } from '@angular/forms';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 
-const routes: Routes = [
-  { path: '', component: DashboardComponent, canActivate: [AuthGuard] }
-
-];
-
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashLandingComponent } from './dash-landing/dash-landing.component';
+import {SharedModule} from "./shared/shared.module";
+import {SettingsComponent} from "./settings/settings.component";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    DashboardComponent,
+    DashLandingComponent,
+    SettingsComponent
+  ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
     ReactiveFormsModule,
+    SharedModule,
+    DashboardRoutingModule,
+    RouterModule
   ]
 })
 export class DashboardModule { }
