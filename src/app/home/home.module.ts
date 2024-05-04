@@ -7,6 +7,9 @@ import { SocialComponent } from './social/social.component';
 import { EnvironmentComponent } from './environment/environment.component';
 import { InstitutionalComponent } from './institutional/institutional.component';
 import { ClimateComponent } from './climate/climate.component';
+import {LoginComponent} from "./login/login.component";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NgxJsonViewerModule} from "ngx-json-viewer";
 
 
 
@@ -17,11 +20,15 @@ import { ClimateComponent } from './climate/climate.component';
     SocialComponent,
     EnvironmentComponent,
     InstitutionalComponent,
-    ClimateComponent
+    ClimateComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxJsonViewerModule,
   ]
 })
 export class HomeModule { }

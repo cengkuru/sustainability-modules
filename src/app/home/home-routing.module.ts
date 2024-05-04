@@ -6,6 +6,7 @@ import {SocialComponent} from "./social/social.component";
 import {EnvironmentComponent} from "./environment/environment.component";
 import {InstitutionalComponent} from "./institutional/institutional.component";
 import {ClimateComponent} from "./climate/climate.component";
+import {LoginComponent} from "./login/login.component";
 
 const routes: Routes = [
   {
@@ -32,7 +33,11 @@ const routes: Routes = [
   {
     path: 'climate',
     component: ClimateComponent
-  }
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
 ];
 
 @NgModule({

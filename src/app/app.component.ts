@@ -2,6 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import { formatCurrency, getCurrencySymbol } from '@angular/common';
 import {animate, query, stagger, style, transition, trigger} from "@angular/animations";
+import {AngularFirestore} from "@angular/fire/compat/firestore";
 
 @Component({
   selector: 'app-root',
@@ -50,10 +51,27 @@ export class AppComponent implements OnInit {
 
 
 
-  constructor(private http: HttpClient) {}  // Inject HttpClient
+  constructor(private http: HttpClient,private firestore: AngularFirestore) {}  // Inject HttpClient
 
   ngOnInit(): void {
     this.loadJsonData();
+  }
+
+  getItems() {
+    this.firestore.collection('items').valueChanges({ idField: 'id' }).subscribe(items => {
+      console.log(items);
+    }, error => {
+      console.error('Error fetching items: ', error);
+    });
+  }
+
+
+  addItem(item: any) {
+    this.firestore.collection('items').add(item).then(() => {
+      console.log('Item added successfully!');
+    }).catch(error => {
+      console.error('Error adding item: ', error);
+    });
   }
 
   loadJsonData(): void {

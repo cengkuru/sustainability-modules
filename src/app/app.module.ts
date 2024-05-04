@@ -12,6 +12,10 @@ import {NgxJsonViewerModule} from "ngx-json-viewer";
 import {FilterProjectsPipe} from "./pipes/filter-projects.pipe";
 import {FilterRolesPipe} from "./pipes/filter-roles.pipe";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {AngularFireModule} from "@angular/fire/compat";
+import {environment} from "../environments/environment";
+import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 
 @NgModule({
   declarations: [
@@ -30,6 +34,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     FormsModule,
     ReactiveFormsModule,
     NgxJsonViewerModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,  // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule,   // imports firebase/auth, only needed for auth features
+
   ],
   providers: [],
   bootstrap: [AppComponent]

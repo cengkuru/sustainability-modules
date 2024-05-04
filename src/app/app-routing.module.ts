@@ -7,6 +7,11 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
   {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
+  {
     path: 'projects',
     loadChildren: () => import('./project/project.module').then(m => m.ProjectModule)
   },
@@ -15,15 +20,9 @@ const routes: Routes = [
 
     loadChildren: () => import('./visualization/visualization.module').then(m => m.VisualizationModule)
   },
-  {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
-  },
-  {
-    path: '**',
-    redirectTo: '/home'
-  }
+  { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
+
+
 ];
 
 @NgModule({
