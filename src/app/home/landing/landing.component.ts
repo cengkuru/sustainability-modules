@@ -65,13 +65,6 @@ export class LandingComponent implements OnInit {
   }
 
 
-  addItem(item: any) {
-    this.firestore.collection('items').add(item).then(() => {
-      console.log('Item added successfully!');
-    }).catch(error => {
-      console.error('Error adding item: ', error);
-    });
-  }
 
   loadJsonData(): void {
     this.http.get<any>('/assets/data/oc4ids.json').subscribe(data => {
@@ -128,21 +121,6 @@ export class LandingComponent implements OnInit {
     console.log(selectedProject);
     return selectedProject;
   }
-
-
-
-  // In your component.ts
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

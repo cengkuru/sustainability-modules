@@ -1,6 +1,129 @@
 <div class="container mx-auto px-4 py-6" *ngIf="project$ | async as project;">
-    <h1 class="text-xl font-bold text-gray-800 mb-4">Update Project: {{project.title}}</h1>
-
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Update Project: {{project.name}}</h1>
 </div>
 
 <app-admin-loader [isLoading]="isLoading"></app-admin-loader>
+
+<ul class="flex border-b border-gray-300">
+    <li *ngFor="let phase of phases" class="mr-2">
+        <a (click)="setActivePhase(phase)"
+           [ngClass]="{'bg-gray-500 text-white': activePhase === phase, 'bg-white text-gray-600 hover:bg-gray-100': activePhase !== phase}"
+           class="inline-block py-2 px-4 text-sm font-medium text-center rounded-t-lg cursor-pointer transition duration-150 ease-in-out">
+            {{ phase | titlecase }}
+        </a>
+    </li>
+</ul>
+
+<div class="mt-6 bg-white p-4 rounded-b-lg border">
+    <!-- Identification Phase -->
+    <div *ngIf="activePhase === 'identification'" class="space-y-8">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Identification Phase</h2>
+
+        <form [formGroup]="updateProjectIdentificationForm" (ngSubmit)="onSubmit()" class="space-y-4">
+            <div class="border rounded p-5 flex flex-col  gap-4">
+                <h3>Project Overview</h3>
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Name:</label>
+                    <input formControlName="name" id="name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6 px-3" placeholder="Project Title">
+                </div>
+                <div>
+                    <label for="description" class="block text-sm font-medium text-gray-700">Description:</label>
+                    <textarea rows="4" formControlName="description" id="description" class="px-3 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Brief description"></textarea>
+                </div>
+                <div class="flex justify-between">
+                    <div class="flex-1 mr-2">
+                        <label for="startDate" class="block text-sm font-medium text-gray-700">Start Date:</label>
+                        <input formControlName="startDate" id="startDate" type="date" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6 px-3">
+                    </div>
+                    <div class="flex-1 ml-2">
+                        <label for="endDate" class="block text-sm font-medium text-gray-700">End Date:</label>
+                        <input formControlName="endDate" id="endDate" type="date" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6 px-3">
+                    </div>
+                </div>
+                <div>
+                    <label for="scope" class="block text-sm font-medium text-gray-700">Scope:</label>
+                    <textarea rows="4" formControlName="scope" id="scope" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6 px-3" placeholder="Project Scope"></textarea>
+                </div>
+                <div>
+                    <label for="purpose" class="block text-sm font-medium text-gray-700">Purpose:</label>
+                    <textarea rows="4" formControlName="purpose" id="purpose" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6 px-3" placeholder="Project Purpose"></textarea>
+                </div>
+                <div class="flex gap-3 ">
+                    <div>
+                        <label for="sector" class="block text-sm font-medium text-gray-700">Sector:</label>
+                        <select formControlName="sector" id="sector" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6 px-3">
+                            <option value="education">Education</option>
+                            <option value="health">Health</option>
+                            <option value="energy">Energy</option>
+                            <option value="energy.solar">Solar energy</option>
+                            <option value="energy.wind">Wind energy</option>
+                            <option value="energy.hydropower">Hydropower energy</option>
+                            <option value="energy.biomass">Biomass energy</option>
+                            <option value="energy.geothermal">Geothermal energy</option>
+                            <option value="communications">Communications</option>
+                            <option value="waterAndWaste">Water and waste</option>
+                            <option value="governance">Governance</option>
+                            <option value="economy">Economy</option>
+                            <option value="cultureSportsAndRecreation">Culture, sports and recreation</option>
+                            <option value="transport">Transport</option>
+                            <option value="transport.air">Air transport</option>
+                            <option value="transport.water">Water transport</option>
+                            <option value="transport.rail">Rail transport</option>
+                            <option value="transport.road">Road transport</option>
+                            <option value="transport.urban">Urban transport</option>
+                            <option value="transport.lowCarbon">Low-carbon transport</option>
+                            <option value="socialHousing">Social housing</option>
+                            <option value="naturalResources">Natural resources</option>
+                            <option value="naturalResources.floodProtection">Flood protection</option>
+                        </select>
+
+                    </div>
+                    <div>
+                        <label for="type" class="block text-sm font-medium text-gray-700">Project Type:</label>
+                        <select formControlName="type" id="type" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6 px-3">
+                            <option value="construction">Construction</option>
+                            <option value="rehabilitation">Rehabilitation</option>
+                            <option value="replacement">Replacement</option>
+                            <option value="expansion">Expansion</option>
+                            <option value="decommissioning">Decommissioning</option>
+                        </select>
+
+                    </div>
+                </div>
+
+            </div>
+
+            
+            <div class="flex items-center justify-end mt-6">
+                <button type="button" class="bg-gray-200 py-2 px-4 text-sm font-semibold text-gray-900 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 mr-4">Cancel</button>
+                <button type="submit" class="bg-indigo-600 py-2 px-4 text-sm font-semibold text-white rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-600">Update Project</button>
+            </div>
+        </form>
+
+
+    </div>
+
+    <div *ngIf="activePhase === 'preparation'" class="space-y-8">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Preparation Phase</h2>
+
+    </div>
+
+    <div *ngIf="activePhase === 'implementation'" class="space-y-8">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Implementation Phase</h2>
+    </div>
+
+    <div *ngIf="activePhase === 'completion'" class="space-y-8">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Completion Phase</h2>
+    </div>
+
+    <div *ngIf="activePhase === 'maintenance'" class="space-y-8">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Maintenance Phase</h2>
+    </div>
+
+    <div *ngIf="activePhase === 'decommissioning'" class="space-y-8">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Decommissioning Phase</h2>
+    </div>
+
+
+
+</div>

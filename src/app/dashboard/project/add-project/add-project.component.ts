@@ -26,10 +26,6 @@ export class AddProjectComponent implements OnInit {
     this.projectForm = this.fb.group({
       title: ['', Validators.required],
       description: [''],
-      startDate: ['', Validators.required],
-      location: [''],
-      budget: ['', Validators.pattern(/^\d+$/)],
-      currency: ['USD', Validators.required],
       oc4id_id: [this.generateOc4id()],
       publishStatus: [false],
       createdBy: ['']
