@@ -1,0 +1,32 @@
+.skeleton-table-loader {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.skeleton-table-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  animation: skeleton-loader 1s linear infinite;
+}
+
+.skeleton-table-cell {
+  background-color: #f7f7f7;
+  padding: 10px;
+  height: 30px;
+}
+
+@keyframes skeleton-loader {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}

@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {ProjectsListComponent} from "./projects-list/projects-list.component";
 import {IndexProjectComponent} from "./index-project/index-project.component";
 import {AddProjectComponent} from "./add-project/add-project.component";
+import {UpdateProjectComponent} from "./update-project/update-project.component";
 
 
 
@@ -14,7 +15,7 @@ const routes: Routes = [
         children: [
             { path: '', component: ProjectsListComponent, pathMatch: 'full' },
             { path: 'add', component: AddProjectComponent },
-            { path: 'edit/:id', component: ProjectsListComponent }
+            { path: 'edit-project/:id', component: UpdateProjectComponent }
 
         ]
     },

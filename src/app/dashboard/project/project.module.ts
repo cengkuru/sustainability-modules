@@ -7,8 +7,9 @@ import {IndexProjectComponent} from "./index-project/index-project.component";
 import {RouterOutlet} from "@angular/router";
 import {ProjectRoutingModule} from "./project-routing.module";
 import {SharedModule} from "../shared/shared.module";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AddProjectComponent} from "./add-project/add-project.component";
+import {UpdateProjectComponent} from "./update-project/update-project.component";
 
 
 
@@ -18,14 +19,16 @@ import {AddProjectComponent} from "./add-project/add-project.component";
       ProjectsEditComponent,
       ProjectsDetailsComponent,
       IndexProjectComponent,
-      AddProjectComponent
+      AddProjectComponent,
+      UpdateProjectComponent
   ],
     imports: [
         CommonModule,
         RouterOutlet,
         ProjectRoutingModule,
         SharedModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        FormsModule
     ]
 })
 export class ProjectModule { }

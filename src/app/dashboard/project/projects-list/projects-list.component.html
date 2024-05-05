@@ -28,25 +28,24 @@
                         <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
                             <span class="font-bold">{{ project.oc4id_id }}</span>
                             <span class="ml-2" [attr.title]="project.description">
-                    {{ project.title }}
-                                <i class="bi bi-info-circle-fill" style="font-size: 0.75rem; color: gray;"></i>
-                </span>
+                                {{ project.title }}
+                                            <i class="bi bi-info-circle-fill" style="font-size: 0.75rem; color: gray;"></i>
+                            </span>
                         </td>
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ project.currency }} {{ project.budget }}</td>
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-center">
-                <span class="inline-flex rounded-full px-3 py-1 text-xs font-semibold"
-                      [ngClass]="{'bg-red-200 text-white': !project.publishStatus, 'bg-green-500 text-white': project.publishStatus}">
-                    {{ project.publishStatus ? 'Published' : 'Unpublished' }}
-                </span>
+                            <span class="inline-flex rounded-full px-3 py-1 text-xs font-semibold"
+                                  [ngClass]="{'bg-red-200 text-white': !project.publishStatus, 'bg-green-500 text-white': project.publishStatus}">
+                                {{ project.publishStatus ? 'Published' : 'Unpublished' }}
+                            </span>
                             <button (click)="togglePublishStatus(project)" class="ml-2 text-xs text-gray-600 hover:text-gray-900">Toggle</button>
                         </td>
                         <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                            <a href="#" class="text-indigo-600 hover:text-indigo-900">Update<span class="sr-only">, {{ project.title }}</span></a>
+                            <a [routerLink]="['edit-project', project.key]" class="text-gray-600 hover:text-gray-900">Update<span class="sr-only">, {{ project.title }}</span></a>
                         </td>
                     </tr>
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>

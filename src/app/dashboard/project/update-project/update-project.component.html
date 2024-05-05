@@ -1,0 +1,6 @@
+<div class="container mx-auto px-4 py-6" *ngIf="project$ | async as project;">
+    <h1 class="text-xl font-bold text-gray-800 mb-4">Update Project: {{project.title}}</h1>
+
+</div>
+
+<app-admin-loader [isLoading]="isLoading"></app-admin-loader>
