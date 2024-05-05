@@ -9,8 +9,6 @@ import { DashLandingComponent } from './dash-landing/dash-landing.component';
 import {SharedModule} from "./shared/shared.module";
 import {SettingsComponent} from "./settings/settings.component";
 import {RouterModule} from "@angular/router";
-import {ToastrModule} from "ngx-toastr";
-import {IsLoadingComponent} from "../shared/is-loading/is-loading.component";
 
 @NgModule({
   declarations: [
@@ -24,7 +22,6 @@ import {IsLoadingComponent} from "../shared/is-loading/is-loading.component";
     SharedModule,
     DashboardRoutingModule,
     RouterModule,
-    IsLoadingComponent
   ]
 })
 export class DashboardModule { }
