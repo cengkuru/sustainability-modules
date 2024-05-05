@@ -14,6 +14,7 @@ const routes: Routes = [
     children: [
       { path: '', component: DashLandingComponent, pathMatch: 'full' },
       { path: 'settings', component: SettingsComponent },
+      { path: 'projects', loadChildren: () => import('./project/project.module').then(m => m.ProjectModule) }
 
     ]
   },

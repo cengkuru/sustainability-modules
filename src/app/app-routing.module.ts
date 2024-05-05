@@ -11,10 +11,7 @@ const routes: Routes = [
     redirectTo: '/home',
     pathMatch: 'full'
   },
-  {
-    path: 'projects',
-    loadChildren: () => import('./project/project.module').then(m => m.ProjectModule)
-  },
+
   {
     path: 'visualization',
 

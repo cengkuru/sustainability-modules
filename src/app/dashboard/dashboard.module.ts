@@ -9,6 +9,7 @@ import { DashLandingComponent } from './dash-landing/dash-landing.component';
 import {SharedModule} from "./shared/shared.module";
 import {SettingsComponent} from "./settings/settings.component";
 import {RouterModule} from "@angular/router";
+import {ProjectModule} from "./project/project.module";
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {RouterModule} from "@angular/router";
     CommonModule,
     ReactiveFormsModule,
     SharedModule,
+    ProjectModule,
     DashboardRoutingModule,
     RouterModule,
   ]
