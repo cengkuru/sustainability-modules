@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-settings',
@@ -11,9 +12,10 @@ import { BehaviorSubject } from 'rxjs';
 export class SettingsComponent implements OnInit {
   displayNameForm: FormGroup;
   message: string = '';
+  isLoading: boolean = false; // Loading indicator state
   userEmail$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null); // Corrected initialization
 
-  constructor(private afAuth: AngularFireAuth, private fb: FormBuilder) {
+  constructor(private afAuth: AngularFireAuth, private fb: FormBuilder, private toastr: ToastrService) {
     this.displayNameForm = this.fb.group({
       displayName: ['', [Validators.required, Validators.minLength(3)]]
     });
@@ -34,13 +36,16 @@ export class SettingsComponent implements OnInit {
 
   updateDisplayName() {
     if (this.displayNameForm.valid) {
+      this.isLoading = true; // Start loading
       const { displayName } = this.displayNameForm.value;
       this.afAuth.currentUser.then(user => {
         if (user) {
           user.updateProfile({ displayName }).then(() => {
-            this.message = 'Display Name Updated Successfully!';
+            this.toastr.success('Display Name Updated Successfully!');
+            this.isLoading = false; // Stop loading
           }).catch(error => {
-            this.message = 'Error updating display name: ' + error.message;
+            this.toastr.error('Error updating display name: ' + error.message);
+            this.isLoading = false; // Stop loading if there is an error
           });
         }
       });
