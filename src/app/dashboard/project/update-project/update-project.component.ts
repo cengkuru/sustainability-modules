@@ -34,22 +34,7 @@ export class UpdateProjectComponent implements OnInit {
       this.projectId = this.route.snapshot.paramMap.get('id');
       this.project$ = this.db.object(`/projects/${this.projectId}`).valueChanges();
 
-      this.project$.subscribe(project => {
-          if (project) {
-              this.updateProjectIdentificationForm.setValue({
-                  name: project.name || '',
-                  description: project.description || '',
-                  startDate: project.phases.identification.startDate || '',
-                  endDate: project.phases.identification.endDate || '',
-                  scope: project.phases.identification.scope || '',
-                  purpose: project.phases.identification.purpose || '',
-                  projectStatus: project.phases.identification.projectStatus || '',
-                  type: project.phases.identification.type || '',
-                  sector: project.sector || ''
-              });
-              this.isLoading = false;
-          }
-      });
+
 
 
       this.updateProjectIdentificationForm = this.fb.group({
@@ -61,8 +46,44 @@ export class UpdateProjectComponent implements OnInit {
           purpose: [''],
           projectStatus: [''],
           type: [''],
-          sector: ['']
+          sector: [''],
+          location: [''],
+          longitude: [''],
+          latitude: [''],
+          address: [''],
+          assetLifetime: [''],
+          assetLifetimeStartDate: [''],
+          assetLifetimeEndDate: [''],
+          budgetAmount: [''],
+          budgetCurrency: [''],
+
       });
+      this.project$.subscribe(project => {
+          if (project) {
+              this.updateProjectIdentificationForm.setValue({
+                  name: project.name || '',
+                  description: project.description || '',
+                  startDate: project.phases.identification.startDate || '',
+                  endDate: project.phases.identification.endDate || '',
+                  scope: project.phases.identification.scope || '',
+                  purpose: project.phases.identification.purpose || '',
+                  projectStatus: project.phases.identification.projectStatus || '',
+                  type: project.phases.identification.type || '',
+                  sector: project.sector || '',
+                  location:  project.phases.identification.location.location || '',
+                  longitude: project.phases.identification.location.longitude || '',
+                  latitude: project.phases.identification.location.latitude || '',
+                  address: project.phases.identification.location.address || '',
+                  assetLifetime: project.phases.identification.assetLifetime.assetLifetime ||'',
+                  assetLifetimeStartDate: project.phases.identification.assetLifetime.startDate ||'',
+                  assetLifetimeEndDate: project.phases.identification.assetLifetime.endDate ||'',
+                  budgetAmount: project.phases.identification.budget.amount.value ||'',
+                  budgetCurrency: project.phases.identification.budget.amount.currency ||'',
+              });
+              this.isLoading = false;
+          }
+      });
+
   }
 
 
@@ -71,20 +92,6 @@ export class UpdateProjectComponent implements OnInit {
         this.activePhase = phase;
     }
 
-
-    updateProject(project: any) {
-        this.isLoading = true;
-        const path = `/projects/${this.projectId}`;
-        this.db.object(path).update(project)
-            .then(() => {
-                this.isLoading = false;
-                alert('Project updated successfully!');
-            })
-            .catch(err => {
-                this.isLoading = false;
-                alert('Error updating project: ' + err.message);
-            });
-    }
 
 
     onSubmit() {
@@ -104,7 +111,55 @@ export class UpdateProjectComponent implements OnInit {
                                 projectStatus: 'identification',
                                 startDate: formData.startDate,
                                 endDate: formData.endDate,
-                                purpose: formData.purpose
+                                purpose: formData.purpose,
+                                location: {
+                                    location: formData.location,
+                                    longitude: formData.longitude,
+                                    latitude: formData.latitude,
+                                    address: formData.address
+                                },
+                                assetLifetime: {
+                                    assetLifetime: formData.assetLifetime,
+                                    startDate: formData.assetLifetimeStartDate,
+                                    endDate: formData.assetLifetimeEndDate
+                                },
+                                budget:{
+                                    amount: {
+                                        value: formData.budgetAmount,
+                                        currency: formData.budgetCurrency
+                                    },
+                                },
+                                funding:{
+                                    sources: [],
+                                },
+                                sustainability: {
+                                    environmentalImpactAssessment: {
+                                        summary: '',
+                                        url: ''
+                                    },
+                                    socialImpactAssessment: {
+                                        summary: '',
+                                        url: ''
+                                    },
+
+                                },
+                                stakeholderEngagement: {
+                                    consultations: [],
+                                    surveys: [],
+                                    workshops: [],
+                                },
+                                publicAuthority:{
+                                    name: '',
+                                    role: '',
+                                    contact: {
+                                        name: '',
+                                        title: '',
+                                        email: '',
+                                        phone: ''
+                                    }
+                                },
+                                relatedProjects: [],
+
                             }
                         },
                         lastUpdated: new Date().toISOString(),
