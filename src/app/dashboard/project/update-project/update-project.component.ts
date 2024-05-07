@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 
@@ -19,7 +19,7 @@ export class UpdateProjectComponent implements OnInit {
   phases: string[] = ['identification', 'preparation', 'implementation', 'completion', 'maintenance', 'decommissioning','cancelled'];
   activePhase: string | undefined;
   updateProjectIdentificationForm!: FormGroup;
-    currentUser: any;
+  currentUser: any;
 
 
     constructor(
@@ -56,11 +56,12 @@ export class UpdateProjectComponent implements OnInit {
           assetLifetimeEndDate: [''],
           budgetAmount: [''],
           budgetCurrency: [''],
+          fundingSources: this.fb.array([])
 
       });
       this.project$.subscribe(project => {
           if (project) {
-              this.updateProjectIdentificationForm.setValue({
+              const projectData = {
                   name: project.name || '',
                   description: project.description || '',
                   startDate: project.phases.identification.startDate || '',
@@ -70,19 +71,34 @@ export class UpdateProjectComponent implements OnInit {
                   projectStatus: project.phases.identification.projectStatus || '',
                   type: project.phases.identification.type || '',
                   sector: project.sector || '',
-                  location:  project.phases.identification.location.location || '',
+                  location: project.phases.identification.location.location || '',
                   longitude: project.phases.identification.location.longitude || '',
                   latitude: project.phases.identification.location.latitude || '',
                   address: project.phases.identification.location.address || '',
-                  assetLifetime: project.phases.identification.assetLifetime.assetLifetime ||'',
-                  assetLifetimeStartDate: project.phases.identification.assetLifetime.startDate ||'',
-                  assetLifetimeEndDate: project.phases.identification.assetLifetime.endDate ||'',
-                  budgetAmount: project.phases.identification.budget.amount.value ||'',
-                  budgetCurrency: project.phases.identification.budget.amount.currency ||'',
-              });
+                  assetLifetime: project.phases.identification.assetLifetime.assetLifetime || '',
+                  assetLifetimeStartDate: project.phases.identification.assetLifetime.startDate || '',
+                  assetLifetimeEndDate: project.phases.identification.assetLifetime.endDate || '',
+                  budgetAmount: project.phases.identification.budget.amount.value || '',
+                  budgetCurrency: project.phases.identification.budget.amount.currency || ''
+                  // Do not include fundingSources here yet
+              };
+
+              this.updateProjectIdentificationForm.patchValue(projectData); // Use patchValue instead of setValue
+
+              // Clear and reinitialize fundingSources regardless of its presence in the data
+              this.fundingSources.clear();
+              if (project.funding && project.funding.sources && project.funding.sources.length) {
+                  project.funding.sources.forEach((source: any) => {
+                      this.addFundingSource(source);
+                  });
+              } else {
+                  // Optionally, add a blank funding source or handle a scenario where no sources are available
+                  // this.addFundingSource(); // Uncomment this if you need a blank item when no data is present
+              }
               this.isLoading = false;
           }
       });
+
 
   }
 
@@ -90,6 +106,24 @@ export class UpdateProjectComponent implements OnInit {
 
     setActivePhase(phase: string) {
         this.activePhase = phase;
+    }
+
+    get fundingSources() {
+        return this.updateProjectIdentificationForm.get('fundingSources') as FormArray;
+    }
+
+    addFundingSource(source?: any) {
+        const fundingSourceForm = this.fb.group({
+            name: [source ? source.name : '', Validators.required],
+            amount: [source ? source.amount : '', Validators.required],
+            currency: [source ? source.currency : '', Validators.required]
+        });
+        this.fundingSources.push(fundingSourceForm);
+    }
+
+
+    removeFundingSource(index: number) {
+        this.fundingSources.removeAt(index);
     }
 
 
@@ -100,6 +134,9 @@ export class UpdateProjectComponent implements OnInit {
 
             this.auth.currentUser.then(user => {
                 if (user) {
+                    // Extract only data values from fundingSources FormArray
+                    const fundingSourcesData = this.fundingSources.controls.map(control => control.value);
+
                     const projectData = {
                         name: formData.name,
                         description: formData.description,
@@ -129,8 +166,8 @@ export class UpdateProjectComponent implements OnInit {
                                         currency: formData.budgetCurrency
                                     },
                                 },
-                                funding:{
-                                    sources: [],
+                                funding: {
+                                    sources: fundingSourcesData  // Use cleaned data array
                                 },
                                 sustainability: {
                                     environmentalImpactAssessment: {
