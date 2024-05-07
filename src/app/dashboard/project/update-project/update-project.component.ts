@@ -56,7 +56,18 @@ export class UpdateProjectComponent implements OnInit {
           assetLifetimeEndDate: [''],
           budgetAmount: [''],
           budgetCurrency: [''],
-          fundingSources: this.fb.array([])
+          fundingSources: this.fb.array([]),
+            environmentalImpactAssessmentSummary: [''],
+            environmentalImpactAssessmentUrl: [''],
+            socialImpactAssessmentSummary: [''],
+            socialImpactAssessmentUrl: [''],
+            publicAuthorityName: [''],
+            publicAuthorityRole: [''],
+            publicAuthorityContactName: [''],
+            publicAuthorityContactTitle: [''],
+            publicAuthorityContactEmail: [''],
+            publicAuthorityContactPhone: [''],
+
 
       });
       this.project$.subscribe(project => {
@@ -79,7 +90,18 @@ export class UpdateProjectComponent implements OnInit {
                   assetLifetimeStartDate: project.phases.identification.assetLifetime.startDate || '',
                   assetLifetimeEndDate: project.phases.identification.assetLifetime.endDate || '',
                   budgetAmount: project.phases.identification.budget.amount.value || '',
-                  budgetCurrency: project.phases.identification.budget.amount.currency || ''
+                  budgetCurrency: project.phases.identification.budget.amount.currency || '',
+                  environmentalImpactAssessmentSummary: project.phases.identification.sustainability.environmentalImpactAssessment.summary || '',
+                    environmentalImpactAssessmentUrl: project.phases.identification.sustainability.environmentalImpactAssessment.url || '',
+                    socialImpactAssessmentSummary: project.phases.identification.sustainability.socialImpactAssessment.summary || '',
+                    socialImpactAssessmentUrl: project.phases.identification.sustainability.socialImpactAssessment.url || '',
+                    publicAuthorityName: project.phases.identification.publicAuthority.name || '',
+                    publicAuthorityRole: project.phases.identification.publicAuthority.role || '',
+                    publicAuthorityContactName: project.phases.identification.publicAuthority.contact.name || '',
+                    publicAuthorityContactTitle: project.phases.identification.publicAuthority.contact.title || '',
+                    publicAuthorityContactEmail: project.phases.identification.publicAuthority.contact.email || '',
+                    publicAuthorityContactPhone: project.phases.identification.publicAuthority.contact.phone || '',
+
                   // Do not include fundingSources here yet
               };
 
@@ -87,13 +109,10 @@ export class UpdateProjectComponent implements OnInit {
 
               // Clear and reinitialize fundingSources regardless of its presence in the data
               this.fundingSources.clear();
-              if (project.funding && project.funding.sources && project.funding.sources.length) {
-                  project.funding.sources.forEach((source: any) => {
+              if (project.phases.identification.funding && project.phases.identification.funding.sources) {
+                  project.phases.identification.funding.sources.forEach((source: any) => {
                       this.addFundingSource(source);
                   });
-              } else {
-                  // Optionally, add a blank funding source or handle a scenario where no sources are available
-                  // this.addFundingSource(); // Uncomment this if you need a blank item when no data is present
               }
               this.isLoading = false;
           }
@@ -171,12 +190,12 @@ export class UpdateProjectComponent implements OnInit {
                                 },
                                 sustainability: {
                                     environmentalImpactAssessment: {
-                                        summary: '',
-                                        url: ''
+                                        summary: formData.environmentalImpactAssessmentSummary,
+                                        url:    formData.environmentalImpactAssessmentUrl
                                     },
                                     socialImpactAssessment: {
-                                        summary: '',
-                                        url: ''
+                                        summary: formData.socialImpactAssessmentSummary,
+                                        url:   formData.socialImpactAssessmentUrl
                                     },
 
                                 },

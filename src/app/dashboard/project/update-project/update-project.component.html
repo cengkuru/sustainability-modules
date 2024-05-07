@@ -170,8 +170,28 @@
                         <button type="button" (click)="removeFundingSource(i)" class="bg-red-500 py-1 px-3 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400">Remove</button>
                     </div>
                 </div>
-                <button type="button" (click)="addFundingSource()" class="bg-blue-500 py-1 px-3 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">Add Funding Source</button>
+                <button type="button" (click)="addFundingSource()" class="bg-gray-100 py-1 px-3 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300"><i class="bi bi-plus mr-1"></i>Add Funding Source</button>
 
+            </div>
+
+            <div class="p-5 flex flex-col mt-5  gap-4 border border-green-800 rounded bg-green-50">
+                <h3>Sustainability</h3>
+                <div>
+                    <label for="environmentalImpactAssessmentUrl" class="block text-sm font-medium text-gray-700">Environmental Impact Assessment (URL):</label>
+                    <input formControlName="environmentalImpactAssessmentUrl" id="environmentalImpactAssessmentUrl" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6 px-3" placeholder="">
+                </div>
+                <div>
+                    <label for="environmentalImpactAssessmentSummary" class="block text-sm font-medium text-gray-700">Environmental Impact Assessment Summary:</label>
+                    <textarea rows="4" formControlName="environmentalImpactAssessmentSummary" id="environmentalImpactAssessmentSummary" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6 px-3" placeholder=""></textarea>
+                </div>
+                <div>
+                    <label for="socialImpactAssessmentUrl" class="block text-sm font-medium text-gray-700">Social Impact Assessment (URL):</label>
+                    <input formControlName="socialImpactAssessmentUrl" id="socialImpactAssessmentUrl" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6 px-3" placeholder="">
+                </div>
+                <div>
+                    <label for="socialImpactAssessmentSummary" class="block text-sm font-medium text-gray-700">Social Impact Assessment Summary:</label>
+                    <textarea rows="4" formControlName="socialImpactAssessmentSummary" id="socialImpactAssessmentSummary" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6 px-3" placeholder=""></textarea>
+                </div>
 
             </div>
 
