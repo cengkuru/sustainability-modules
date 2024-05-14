@@ -48,4 +48,18 @@ export class ProjectsListComponent implements OnInit {
             });
     }
 
+
+    deleteProject(projectKey: string) {
+        if (confirm('Are you sure you want to delete this project?')) {
+            this.db.object(`/projects/${projectKey}`).remove()
+                .then(() => {
+                    this.toastr.success('Project deleted successfully!');
+                })
+                .catch(error => {
+                    this.toastr.error('Error deleting project: ' + error.message);
+                });
+        }
+    }
+
+
 }

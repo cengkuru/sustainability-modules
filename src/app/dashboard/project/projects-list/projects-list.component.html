@@ -41,7 +41,14 @@
                             <button (click)="togglePublishStatus(project)" class="ml-2 text-xs text-gray-600 hover:text-gray-900">Toggle</button>
                         </td>
                         <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                            <a [routerLink]="['edit-project', project.key]" class="text-gray-600 hover:text-gray-900">Update<span class="sr-only">, {{ project.title }}</span></a>
+                            <a [routerLink]="['edit-project', project.key]" class="text-gray-600 hover:text-gray-900">
+                                <i class="bi bi-pencil-fill" style="font-size: 1rem;"></i>
+                                <span class="sr-only">Update, {{ project.title }}</span>
+                            </a>
+                            <button (click)="deleteProject(project.key)" class="ml-4 text-gray-600 hover:text-red-600">
+                                <i class="bi bi-trash-fill" style="font-size: 1rem;"></i>
+                                <span class="sr-only">Delete, {{ project.title }}</span>
+                            </button>
                         </td>
                     </tr>
                     </tbody>

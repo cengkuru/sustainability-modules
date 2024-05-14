@@ -75,41 +75,38 @@ export class UpdateProjectComponent implements OnInit {
               const projectData = {
                   name: project.name || '',
                   description: project.description || '',
-                  startDate: project.phases.identification.startDate || '',
-                  endDate: project.phases.identification.endDate || '',
-                  scope: project.phases.identification.scope || '',
-                  purpose: project.phases.identification.purpose || '',
-                  projectStatus: project.phases.identification.projectStatus || '',
-                  type: project.phases.identification.type || '',
+                  startDate: project.phases?.identification?.startDate || '',
+                  endDate: project.phases?.identification?.endDate || '',
+                  scope: project.phases?.identification?.scope || '',
+                  purpose: project.phases?.identification?.purpose || '',
+                  projectStatus: project.phases?.identification?.projectStatus || '',
+                  type: project.phases?.identification?.type || '',
                   sector: project.sector || '',
-                  location: project.phases.identification.location.location || '',
-                  longitude: project.phases.identification.location.longitude || '',
-                  latitude: project.phases.identification.location.latitude || '',
-                  address: project.phases.identification.location.address || '',
-                  assetLifetime: project.phases.identification.assetLifetime.assetLifetime || '',
-                  assetLifetimeStartDate: project.phases.identification.assetLifetime.startDate || '',
-                  assetLifetimeEndDate: project.phases.identification.assetLifetime.endDate || '',
-                  budgetAmount: project.phases.identification.budget.amount.value || '',
-                  budgetCurrency: project.phases.identification.budget.amount.currency || '',
-                  environmentalImpactAssessmentSummary: project.phases.identification.sustainability.environmentalImpactAssessment.summary || '',
-                    environmentalImpactAssessmentUrl: project.phases.identification.sustainability.environmentalImpactAssessment.url || '',
-                    socialImpactAssessmentSummary: project.phases.identification.sustainability.socialImpactAssessment.summary || '',
-                    socialImpactAssessmentUrl: project.phases.identification.sustainability.socialImpactAssessment.url || '',
-                    publicAuthorityName: project.phases.identification.publicAuthority.name || '',
-                    publicAuthorityRole: project.phases.identification.publicAuthority.role || '',
-                    publicAuthorityContactName: project.phases.identification.publicAuthority.contact.name || '',
-                    publicAuthorityContactTitle: project.phases.identification.publicAuthority.contact.title || '',
-                    publicAuthorityContactEmail: project.phases.identification.publicAuthority.contact.email || '',
-                    publicAuthorityContactPhone: project.phases.identification.publicAuthority.contact.phone || '',
-
-                  // Do not include fundingSources here yet
+                  location: project.phases?.identification?.location?.location || '',
+                  longitude: project.phases?.identification?.location?.longitude || '',
+                  latitude: project.phases?.identification?.location?.latitude || '',
+                  address: project.phases?.identification?.location?.address || '',
+                  assetLifetime: project.phases?.identification?.assetLifetime?.assetLifetime || '',
+                  assetLifetimeStartDate: project.phases?.identification?.assetLifetime?.startDate || '',
+                  assetLifetimeEndDate: project.phases?.identification?.assetLifetime?.endDate || '',
+                  budgetAmount: project.phases?.identification?.budget?.amount?.value || '',
+                  budgetCurrency: project.phases?.identification?.budget?.amount?.currency || '',
+                  environmentalImpactAssessmentSummary: project.phases?.identification?.sustainability?.environmentalImpactAssessment?.summary || '',
+                  environmentalImpactAssessmentUrl: project.phases?.identification?.sustainability?.environmentalImpactAssessment?.url || '',
+                  socialImpactAssessmentSummary: project.phases?.identification?.sustainability?.socialImpactAssessment?.summary || '',
+                  socialImpactAssessmentUrl: project.phases?.identification?.sustainability?.socialImpactAssessment?.url || '',
+                  publicAuthorityName: project.phases?.identification?.publicAuthority?.name || '',
+                  publicAuthorityRole: project.phases?.identification?.publicAuthority?.role || '',
+                  publicAuthorityContactName: project.phases?.identification?.publicAuthority?.contact?.name || '',
+                  publicAuthorityContactTitle: project.phases?.identification?.publicAuthority?.contact?.title || '',
+                  publicAuthorityContactEmail: project.phases?.identification?.publicAuthority?.contact?.email || '',
+                  publicAuthorityContactPhone: project.phases?.identification?.publicAuthority?.contact?.phone || ''
               };
 
-              this.updateProjectIdentificationForm.patchValue(projectData); // Use patchValue instead of setValue
+              this.updateProjectIdentificationForm.patchValue(projectData);
 
-              // Clear and reinitialize fundingSources regardless of its presence in the data
               this.fundingSources.clear();
-              if (project.phases.identification.funding && project.phases.identification.funding.sources) {
+              if (project.phases?.identification?.funding?.sources) {
                   project.phases.identification.funding.sources.forEach((source: any) => {
                       this.addFundingSource(source);
                   });
@@ -117,9 +114,10 @@ export class UpdateProjectComponent implements OnInit {
               this.isLoading = false;
           }
       });
-
-
   }
+
+
+
 
 
 
