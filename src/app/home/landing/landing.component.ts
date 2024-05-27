@@ -27,7 +27,10 @@ export class LandingComponent implements OnInit, AfterViewInit {
     { lat: -25.6545, lng: 27.2559, popup: 'Rustenburg Local Municipality' }
   ];
 
+
+
   constructor(private http: HttpClient, private firestore: AngularFirestore) {
+    console.log('markers: ', this.markers)
     this.platform = new H.service.Platform({
       apikey: 'bo0uc_5TPAXOiS7C10x1rrlkJ1J7v9ezqiWOmtFi_Ik'
     });
@@ -74,10 +77,21 @@ export class LandingComponent implements OnInit, AfterViewInit {
   }
 
   calculateBounds(): any {
-    const bounds = new H.geo.Rect(this.markers[0].lat, this.markers[0].lng, this.markers[0].lat, this.markers[0].lng);
+    if (this.markers.length === 0) {
+      return null;
+    }
+
+    let bounds = new H.geo.Rect(
+        this.markers[0].lat, this.markers[0].lng,
+        this.markers[0].lat, this.markers[0].lng
+    );
+
     this.markers.forEach(markerData => {
-      bounds.extend(new H.geo.Point(markerData.lat, markerData.lng));
+      if (markerData.lat !== undefined && markerData.lng !== undefined) {
+        bounds = bounds.mergePoint({ lat: markerData.lat, lng: markerData.lng });
+      }
     });
+
     return bounds;
   }
 
@@ -89,9 +103,47 @@ export class LandingComponent implements OnInit, AfterViewInit {
     });
   }
 
+  // Function to generate a random alphanumeric string
+  generateOC4IDSId(): string {
+    const prefix = 'oc4ids_sa_';
+    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const randomStr = Array(8).fill(null).map(() => chars.charAt(Math.floor(Math.random() * chars.length))).join('');
+    return `${prefix}${randomStr}`;
+  }
+
+  // Add projects to Firestore with unique OC4IDS ID
+  addProject(project: any) {
+    project.id = this.generateOC4IDSId();
+    this.firestore.collection('projects').add(project).then(() => {
+      console.log('Project added successfully');
+    }).catch(error => {
+      console.error('Error adding project: ', error);
+    });
+  }
+
+  generateMarkers() {
+    this.markers = this.recentProjects.map(project => {
+      if (project.location && project.location.coordinates) {
+        return {
+          lat: parseFloat(project.location.coordinates.lat),
+          lng: parseFloat(project.location.coordinates.lng),
+          popup: project.location.name
+        };
+      }
+      return null;
+    }).filter((marker): marker is { lat: number; lng: number; popup: string } => marker !== null);
+
+    console.log('Generated markers:', this.markers);
+    this.initializeMap();
+  }
+
   loadProjects() {
     this.http.get<any[]>('assets/data/projects.json').subscribe(data => {
       this.recentProjects = data;
+      this.generateMarkers();
+      this.recentProjects.forEach(project => {
+        this.addProject(project);
+      });
     }, error => {
       console.error('Error loading projects: ', error);
     });
