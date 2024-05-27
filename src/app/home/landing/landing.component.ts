@@ -1,59 +1,82 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {animate, query, stagger, style, transition, trigger} from "@angular/animations";
-import {HttpClient} from "@angular/common/http";
-import {AngularFirestore} from "@angular/fire/compat/firestore";
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { AngularFirestore } from "@angular/fire/compat/firestore";
+import {CommonModule} from "@angular/common";
+
+declare var H: any;
 
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
-  styleUrl: './landing.component.scss',
-  encapsulation: ViewEncapsulation.None,
-  animations: [
-    trigger('fadeInOut', [
-      transition(':enter', [   // :enter is alias to 'void => *'
-        style({ opacity: 0 }),
-        animate(500, style({ opacity: 1 }))
-      ]),
-      transition(':leave', [   // :leave is alias to '* => void'
-        animate(500, style({ opacity: 0 }))
-      ])
-    ]),
-    trigger('listAnimation', [
-      transition('* <=> *', [
-        query(':enter', [
-          style({ opacity: 0, transform: 'translateY(-15px)' }),
-          stagger(100, [
-            animate('0.5s ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
-          ])
-        ], { optional: true })
-      ])
-    ])
-  ]
+  styleUrls: ['./landing.component.scss'],
+  standalone: true,
+    imports: [
+        CommonModule
+    ]
 })
-export class LandingComponent implements OnInit {
-  activeTab = 'sample-projects';  // Default active tab
-  tabs = [
-    { id: 'sample-projects', label: 'Sample Projects' },
-    { id: 'data-points', label: 'Explore OC4IDS Data Points' }
+export class LandingComponent implements OnInit, AfterViewInit {
+  private platform: any;
+  private map: any;
+
+  markers = [
+    { lat: -33.7139, lng: 25.5207, popup: 'Nelson Mandela Metropolitan Municipality' },
+    { lat: -26.2041, lng: 28.0473, popup: 'City of Johannesburg Metropolitan Municipality (JW)' },
+    { lat: -25.7461, lng: 28.1881, popup: 'City of Tshwane Metropolitan Municipality' },
+    { lat: -33.9258, lng: 18.4232, popup: 'City of Cape Town Metropolitan Municipality' },
+    { lat: -25.6545, lng: 27.2559, popup: 'Rustenburg Local Municipality' }
   ];
-  jsonData: any;  // Variable to hold the JSON data
-  exampleData:  any;
-  phases: string[] = ['identification', 'preparation', 'implementation', 'completion', 'maintenance', 'decommissioning']; // Add this property to define the phases
 
-
-  sampleProjects: any;
-  uniquePhases!: any[] ;
-  selectedProject: any;
-  activePhase: string | undefined;
-
-
-
-
-
-  constructor(private http: HttpClient,private firestore: AngularFirestore) {}  // Inject HttpClient
+  constructor(private http: HttpClient, private firestore: AngularFirestore) {
+    this.platform = new H.service.Platform({
+      apikey: 'bo0uc_5TPAXOiS7C10x1rrlkJ1J7v9ezqiWOmtFi_Ik'
+    });
+  }
 
   ngOnInit(): void {
-    this.loadJsonData();
+    this.getItems();
+  }
+
+  ngAfterViewInit(): void {
+    this.initializeMap();
+  }
+
+  initializeMap(): void {
+    const defaultLayers = this.platform.createDefaultLayers();
+    this.map = new H.Map(
+        document.getElementById('map'),
+        defaultLayers.vector.normal.map,
+        {
+          zoom: 6,
+          center: { lat: -28.4793, lng: 24.6727 }
+        }
+    );
+
+    const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map));
+    const ui = H.ui.UI.createDefault(this.map, defaultLayers);
+
+    this.markers.forEach(markerData => {
+      const marker = new H.map.Marker({ lat: markerData.lat, lng: markerData.lng });
+      marker.setData(markerData.popup);
+      marker.addEventListener('tap', (event: any) => {
+        const bubble = new H.ui.InfoBubble(event.target.getGeometry(), {
+          content: event.target.getData()
+        });
+        ui.addBubble(bubble);
+      });
+      this.map.addObject(marker);
+    });
+
+    this.map.getViewModel().setLookAtData({
+      bounds: this.calculateBounds()
+    });
+  }
+
+  calculateBounds(): any {
+    const bounds = new H.geo.Rect(this.markers[0].lat, this.markers[0].lng, this.markers[0].lat, this.markers[0].lng);
+    this.markers.forEach(markerData => {
+      bounds.extend(new H.geo.Point(markerData.lat, markerData.lng));
+    });
+    return bounds;
   }
 
   getItems() {
@@ -63,64 +86,4 @@ export class LandingComponent implements OnInit {
       console.error('Error fetching items: ', error);
     });
   }
-
-
-
-  loadJsonData(): void {
-    this.http.get<any>('/assets/data/oc4ids.json').subscribe(data => {
-      this.jsonData = data;
-    }, error => console.error('Error loading the JSON data:', error));
-
-    this.http.get<any>('/assets/data/example.json').subscribe(data => {
-      this.exampleData = data;
-    }, error => console.error('Error loading the JSON data:', error));
-
-    this.http.get<any>('/assets/data/sample-projects.json').subscribe(data => {
-      this.sampleProjects = data;
-      this.extractUniquePhases();
-    }, error => console.error('Error loading the JSON data:', error));
-  }
-
-  switchTab(tabId: string) {
-    this.activeTab = tabId;
-  }
-
-  onTabChange(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    this.activeTab = selectElement.value;
-  }
-
-
-  extractUniquePhases(): void {
-    this.uniquePhases = this.sampleProjects
-      .map((project: any) => project.phase as string)  // Ensuring phase is treated as a string
-      .filter((phase: string, index: number, phases: string[]) => phases.indexOf(phase) === index);  // Explicitly specifying types
-  }
-
-  // ... (rest of the component)
-
-// Helper method to toggle the project details view
-  toggleProjectDetails(project: any): void {
-    if (this.selectedProject && this.selectedProject.id === project.id) {
-    this.selectedProject = null;
-    this.activePhase = 'identification'; // Reset to default phase
-  } else {
-    this.selectedProject = project;
-    this.activePhase = 'identification'; // Reset to default phase
-  }
-}
-
-  setActivePhase(phase: string) {
-    this.activePhase = phase;
-  }
-
-
-  // Get Project Details by ID
-  getProjectDetails(projectId: any): any {
-    const selectedProject = this.sampleProjects.find((project: any) => project.id === projectId);
-    console.log(selectedProject);
-    return selectedProject;
-  }
-
-
 }
