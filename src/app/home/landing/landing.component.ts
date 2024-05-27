@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { AngularFirestore } from "@angular/fire/compat/firestore";
-import {CommonModule} from "@angular/common";
+import { HttpClient } from '@angular/common/http';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { CommonModule } from '@angular/common';
 
 declare var H: any;
 
@@ -10,13 +10,14 @@ declare var H: any;
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss'],
   standalone: true,
-    imports: [
-        CommonModule
-    ]
+  imports: [
+    CommonModule
+  ]
 })
 export class LandingComponent implements OnInit, AfterViewInit {
   private platform: any;
   private map: any;
+  recentProjects: any[] = [];
 
   markers = [
     { lat: -33.7139, lng: 25.5207, popup: 'Nelson Mandela Metropolitan Municipality' },
@@ -33,6 +34,7 @@ export class LandingComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.loadProjects();
     this.getItems();
   }
 
@@ -84,6 +86,14 @@ export class LandingComponent implements OnInit, AfterViewInit {
       console.log(items);
     }, error => {
       console.error('Error fetching items: ', error);
+    });
+  }
+
+  loadProjects() {
+    this.http.get<any[]>('assets/data/projects.json').subscribe(data => {
+      this.recentProjects = data;
+    }, error => {
+      console.error('Error loading projects: ', error);
     });
   }
 }

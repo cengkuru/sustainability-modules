@@ -1,0 +1,1649 @@
+{
+  "projects": [
+    {
+      "name": "Direct Potable Reuse of Water Plant",
+      "location": {
+        "name": "Nelson Mandela Metropolitan Municipality",
+        "coordinates": {
+          "lat": -33.7139,
+          "lng": 25.5207,
+          "popup": "Nelson Mandela Metropolitan Municipality"
+        }
+      },
+      "stages": {
+        "identification": {
+          "basicData": {
+            "projectReferenceNumber": "001",
+            "projectOwner": "Municipal Water Services",
+            "sectorSubsector": "Water, Potable Water",
+            "projectName": "Direct Potable Reuse of Water Plant",
+            "projectLocation": "Nelson Mandela Metropolitan Municipality",
+            "purpose": "To provide direct potable reuse of water",
+            "projectDescription": "This project involves the construction of a facility for the direct reuse of treated wastewater for drinking purposes.",
+            "projectOfficialsAndRoles": [
+              { "name": "John Doe", "role": "Project Manager" },
+              { "name": "Jane Smith", "role": "Environmental Specialist" }
+            ],
+            "projectBriefOrFeasibilityStudy": "Completed"
+          },
+          "climateFinanceData": {
+            "climateObjective": "Increase water sustainability",
+            "financialInstrument": "Grant",
+            "climateTransformation": "Improved water management",
+            "climateFinanceDecisionMaking": "Aligned with NDCs",
+            "nationallyDeterminedContributions": "Water conservation",
+            "parisAgreement": "Compliant",
+            "amountOfInvestment": "USD 10 million"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfLobbyingActivities": "3",
+            "numberOfFreedomOfInformationRequests": "5",
+            "numberOfFreedomOfInformationAnswers": "5",
+            "policyCoherenceDocumentation": "Available",
+            "freedomOfInformationRequestsAndAnswers": "Documented",
+            "lobbyingMeetingsMinutes": "Recorded"
+          }
+        },
+        "preparation": {
+          "basicData": {
+            "projectScope": "Increase water sustainability",
+            "contactDetails": "municipalwater@nelsonmandela.gov.za",
+            "fundingSources": "Grant",
+            "projectBudget": "USD 10 million",
+            "projectBudgetApprovalDate": "2023-01-15",
+            "attachments": [
+              "Environmental and social impact assessment",
+              "Resettlement and compensation plan",
+              "Financial agreement",
+              "Multiyear programme and budget",
+              "Procurement plan",
+              "Project approval decision"
+            ]
+          },
+          "climateFinanceData": {
+            "fundingSource": "Grant",
+            "greenClimateFundAccreditedEntity": "Climate Change Fund",
+            "accreditedEntityType": "National Entity",
+            "projectPreparationCosts": "USD 500,000",
+            "projectPreparationPeriod": "2022-2023",
+            "projectApprovalPeriod": "2023-2024",
+            "ratioOfCoFinance": "30%",
+            "termsOfClimateFinance": "Aligned with NDCs",
+            "carbonEfficiency": "High",
+            "nonClimateCoBenefits": "Improved public health",
+            "attachments": [
+              "Terms of climate finance: Aligned with NDCs",
+              "Carbon efficiency: High"
+            ]
+          },
+          "socialSustainabilityData": {
+            "beneficiaries": "Local communities",
+            "numberOfBeneficiaries": "50,000",
+            "inclusiveDesign": "Yes",
+            "indigenousLand": "No",
+            "publicConsultationMeetings": "Conducted",
+            "landCompensationBudget": "USD 1 million",
+            "laborObligations": "Compliant with labor laws",
+            "attachments": [
+              "Inclusive design: Yes",
+              "Public consultation meetings: Conducted"
+            ]
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "5",
+            "numberOfFreedomOfInformationAnswers": "5",
+            "attachments": [
+              "Freedom of information requests and answers",
+              "Risk management plans"
+            ]
+          }
+        },
+        "tenderManagement": {
+          "basicData": {
+            "procuringEntity": "Municipal Procurement Office",
+            "procuringEntityContactDetails": "procurement@nelsonmandela.gov.za",
+            "procurementProcess": "Open Competitive Bidding",
+            "procurementMethod": "International Competitive Bidding",
+            "numberOfFirmsTendering": "8",
+            "costEstimate": "USD 12 million",
+            "contractType": "Design-Build",
+            "contractAdministrationEntity": "Municipal Contract Management Office",
+            "contractOfficialsAndRoles": [
+              { "name": "Alice Brown", "role": "Contract Administrator" },
+              { "name": "Bob Green", "role": "Procurement Officer" }
+            ],
+            "contractTitle": "Water Reuse Plant Construction Contract",
+            "contractFirm": "Water Solutions Ltd.",
+            "contractPrice": "USD 12 million",
+            "contractScopeOfWork": "Construction and commissioning of the water reuse plant",
+            "contractStartDate": "2023-06-01",
+            "contractDuration": "24 months",
+            "contractStatus": "Active"
+          },
+          "tenderDocuments": "Prepared",
+          "tenderEvaluationResults": "Completed",
+          "projectDesignReport": "Finalized",
+          "contractAgreementAndConditions": "Signed",
+          "registrationAndOwnershipOfFirms": "Verified",
+          "specificationsAndDrawings": "Approved",
+          "socialSustainabilityData": {
+            "laborBudget": "USD 2 million",
+            "healthAndSafetyCertifications": "ISO 45001"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "5",
+            "numberOfFreedomOfInformationAnswers": "5",
+            "beneficialOwnership": "Transparent",
+            "sustainabilityCriteria": "Met",
+            "freedomOfInformationRequestsAndAnswers": "Documented",
+            "antiCorruptionCertifications": "ISO 37001"
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "numberOfEnvironmentalCertifications": "3",
+            "environmentalCertifications": "ISO 14001"
+          }
+        },
+        "implementation": {
+          "basicData": {
+            "variationToContractPrice": "USD 1 million",
+            "escalationOfContractPrice": "USD 500,000",
+            "variationToContractDuration": "6 months",
+            "variationToContractScope": "Addition of a solar power unit",
+            "reasonsForPriceChanges": "Increase in material costs",
+            "reasonsForScope": "Integration of renewable energy solutions",
+            "reasonsForDurationChanges": "Delayed delivery of materials",
+            "listOfVariationsChangesAmendments": "Available",
+            "listOfEscalationApprovals": "Documented",
+            "qualityAssuranceReports": "Regular",
+            "paymentCertificates": "Issued",
+            "contractAmendments": "Signed"
+          },
+          "climateFinanceData": {
+            "disbursementRecords": "Quarterly",
+            "typeOfMonitoring": "Continuous",
+            "performanceMonitoring": "Monthly",
+            "reportingPeriod": "Quarterly",
+            "independentMonitoring": "Yes"
+          },
+          "socialSustainabilityData": {
+            "jobsGenerated": "200",
+            "inclusiveImplementation": "Yes",
+            "workersAccidents": "2",
+            "constructionMaterialsTesting": "Regular",
+            "buildingInspections": "Weekly"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "5",
+            "numberOfFreedomOfInformationAnswers": "5",
+            "freedomOfInformationRequestsAndAnswers": "Documented",
+            "oversightReports": "Quarterly",
+            "independentMidTermEvaluation": "Conducted"
+          },
+          "economicAndFinancialSustainabilityData": {
+            "budgetShortfall": "USD 1 million",
+            "fundingSourceForImplementation": "Government Grant",
+            "budgetForImplementation": "USD 15 million"
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "environmentalMeasures": "Use of green construction materials",
+            "conservationMeasures": "Water conservation practices",
+            "climateMeasures": "Reduction of greenhouse gas emissions"
+          }
+        },
+        "completion": {
+          "basicData": {
+            "projectStatus": "Completed",
+            "completionCost": "USD 15 million",
+            "completionDate": "2025-06-30",
+            "scopeAtCompletion": "Fully operational water reuse plant",
+            "reasonsForProjectChanges": "Integration of additional features",
+            "implementationProgressReports": "Regular",
+            "budgetAmendmentDecision": "Approved",
+            "projectCompletionReport": "Submitted",
+            "projectEvaluationReport": "Completed",
+            "technicalAuditReports": "Completed",
+            "financialAuditReports": "Completed"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "5",
+            "numberOfFreedomOfInformationAnswers": "5",
+            "freedomOfInformationRequestsAndAnswers": "Documented"
+          }
+        },
+        "operationsAndMaintenance": {
+          "basicData": {
+            "assetName": "Water Reuse Plant",
+            "assetLocation": "Nelson Mandela Metropolitan Municipality",
+            "typeOfMaintenanceWorks": "Routine and preventive",
+            "worksDescription": "Regular maintenance of water treatment facilities and equipment",
+            "projectOfficialsAndRoles": [
+              { "name": "John Doe", "role": "Maintenance Manager" },
+              { "name": "Jane Smith", "role": "Technician" }
+            ],
+            "maintenanceScope": "Ensure continuous operation and efficiency",
+            "maintenancePlan": "Available",
+            "procuringEntity": "Municipal Maintenance Office",
+            "procuringEntityContactDetails": "maintenance@nelsonmandela.gov.za",
+            "procurementProcess": "Annual contract renewal",
+            "procurementMethod": "Direct procurement",
+            "numberOfFirmsTendering": "3",
+            "costEstimate": "USD 500,000 per year",
+            "contractType": "Maintenance contract",
+            "contractAdministrationEntity": "Municipal Contract Management Office",
+            "contractOfficialsAndRoles": [
+              { "name": "Alice Brown", "role": "Contract Administrator" },
+              { "name": "Bob Green", "role": "Procurement Officer" }
+            ],
+            "contractTitle": "Annual Maintenance Contract",
+            "contractFirm": "Water Solutions Maintenance Ltd.",
+            "contractPrice": "USD 500,000 per year",
+            "contractScopeOfWork": "Routine and preventive maintenance of the water reuse plant",
+            "contractStartDate": "2025-07-01",
+            "contractDuration": "1 year",
+            "contractStatus": "Active"
+          },
+          "tenderDocuments": "Prepared",
+          "tenderEvaluationResults": "Completed",
+          "projectDesignReport": "Finalized",
+          "contractAgreementAndConditions": "Signed",
+          "registrationAndOwnershipOfFirms": "Verified",
+          "specificationsAndDrawings": "Approved",
+          "climateFinanceData": {
+            "impactMeasurement": "Quarterly",
+            "carbonFootprint": "Low",
+            "carbonFootprintDocument": "Available"
+          },
+          "socialSustainabilityData": {
+            "jobsGenerated": "50",
+            "inclusiveImplementation": "Yes",
+            "workersAccidents": "0"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "5",
+            "numberOfFreedomOfInformationAnswers": "5",
+            "freedomOfInformationRequestsAndAnswers": "Documented"
+          },
+          "economicAndFinancialSustainabilityData": {
+            "fundingSourceForMaintenance": "Municipal Budget",
+            "budgetForMaintenance": "USD 500,000 per year"
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "environmentalMeasures": "Regular monitoring of effluents",
+            "conservationMeasures": "Use of energy-efficient equipment",
+            "climateMeasures": "Implementation of renewable energy solutions",
+            "environmentalLicensesAndExemptions": "Compliant"
+          }
+        },
+        "decommission": {
+          "basicData": {
+            "assetName": "Water Reuse Plant",
+            "assetLocation": "Nelson Mandela Metropolitan Municipality",
+            "decisionOfAssetDisposal": "Approved",
+            "procuringEntity": "Municipal Disposal Office",
+            "procuringEntityContactDetails": "disposal@nelsonmandela.gov.za",
+            "procurementProcess": "Open Tender",
+            "procurementMethod": "Competitive Bidding",
+            "numberOfFirmsTendering": "5",
+            "costEstimate": "USD 1 million",
+            "contractType": "Decommissioning contract",
+            "contractAdministrationEntity": "Municipal Contract Management Office",
+            "contractOfficialsAndRoles": [
+              { "name": "Alice Brown", "role": "Contract Administrator" },
+              { "name": "Bob Green", "role": "Procurement Officer" }
+            ],
+            "contractTitle": "Decommissioning of Water Reuse Plant",
+            "contractFirm": "Eco-Friendly Demolition Ltd.",
+            "contractPrice": "USD 1 million",
+            "contractScopeOfWork": "Safe decommissioning and site restoration",
+            "contractStartDate": "2050-01-01",
+            "contractDuration": "1 year",
+            "contractStatus": "Planned"
+          },
+          "tenderDocuments": "Prepared",
+          "tenderEvaluationResults": "Completed",
+          "projectDesignReport": "Finalized",
+          "contractAgreementAndConditions": "Signed",
+          "registrationAndOwnershipOfFirms": "Verified",
+          "specificationsAndDrawings": "Approved",
+          "climateFinanceData": {
+            "decommissionPeriod": "2050-2051",
+            "decommissionCosts": "USD 1 million",
+            "carbonDecommissionSavings": "Significant",
+            "decommissionPlans": "Detailed"
+          },
+          "socialSustainabilityData": {
+            "jobsGenerated": "100",
+            "workersAccidents": "2"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "5",
+            "numberOfFreedomOfInformationAnswers": "5",
+            "freedomOfInformationRequestsAndAnswers": "Documented"
+          },
+          "economicAndFinancialSustainabilityData": {
+            "decommissionCostForecast": "USD 1 million"
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "decommissionMitigationPlan": "Implemented"
+          }
+        }
+      }
+    },
+    {
+      "name": "Industrial Reuse of Water Plant",
+      "location": {
+        "name": "City of Tshwane Metropolitan Municipality",
+        "coordinates": {
+          "lat": -25.7461,
+          "lng": 28.1881,
+          "popup": "City of Tshwane Metropolitan Municipality"
+        }
+      },
+      "stages": {
+        "identification": {
+          "basicData": {
+            "projectReferenceNumber": "002",
+            "projectOwner": "Municipal Industrial Services",
+            "sectorSubsector": "Water, Industrial Water",
+            "projectName": "Industrial Reuse of Water Plant",
+            "projectLocation": "City of Tshwane Metropolitan Municipality",
+            "purpose": "To provide industrial reuse of water for manufacturing processes",
+            "projectDescription": "This project involves the construction of a facility for the reuse of treated wastewater for industrial applications.",
+            "projectOfficialsAndRoles": [
+              { "name": "Michael Johnson", "role": "Project Manager" },
+              { "name": "Sarah Lee", "role": "Environmental Specialist" }
+            ],
+            "projectBriefOrFeasibilityStudy": "Completed"
+          },
+          "climateFinanceData": {
+            "climateObjective": "Reduce industrial water consumption",
+            "financialInstrument": "Loan",
+            "climateTransformation": "Efficient water management",
+            "climateFinanceDecisionMaking": "Aligned with NDCs",
+            "nationallyDeterminedContributions": "Industrial water efficiency",
+            "parisAgreement": "Compliant",
+            "amountOfInvestment": "USD 15 million"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfLobbyingActivities": "4",
+            "numberOfFreedomOfInformationRequests": "6",
+            "numberOfFreedomOfInformationAnswers": "6",
+            "policyCoherenceDocumentation": "Available",
+            "freedomOfInformationRequestsAndAnswers": "Documented",
+            "lobbyingMeetingsMinutes": "Recorded"
+          }
+        },
+        "preparation": {
+          "basicData": {
+            "projectScope": "Reduce industrial water consumption",
+            "contactDetails": "industrialservices@tshwane.gov.za",
+            "fundingSources": "Loan",
+            "projectBudget": "USD 15 million",
+            "projectBudgetApprovalDate": "2023-02-20",
+            "attachments": [
+              "Environmental and social impact assessment",
+              "Resettlement and compensation plan",
+              "Financial agreement",
+              "Multiyear programme and budget",
+              "Procurement plan",
+              "Project approval decision"
+            ]
+          },
+          "climateFinanceData": {
+            "fundingSource": "Loan",
+            "greenClimateFundAccreditedEntity": "Industrial Climate Fund",
+            "accreditedEntityType": "International Entity",
+            "projectPreparationCosts": "USD 750,000",
+            "projectPreparationPeriod": "2022-2023",
+            "projectApprovalPeriod": "2023-2024",
+            "ratioOfCoFinance": "25%",
+            "termsOfClimateFinance": "Aligned with NDCs",
+            "carbonEfficiency": "Medium",
+            "nonClimateCoBenefits": "Increased industrial efficiency",
+            "attachments": [
+              "Terms of climate finance: Aligned with NDCs",
+              "Carbon efficiency: Medium"
+            ]
+          },
+          "socialSustainabilityData": {
+            "beneficiaries": "Industrial sector",
+            "numberOfBeneficiaries": "30,000",
+            "inclusiveDesign": "Yes",
+            "indigenousLand": "No",
+            "publicConsultationMeetings": "Conducted",
+            "landCompensationBudget": "USD 1.5 million",
+            "laborObligations": "Compliant with labor laws",
+            "attachments": [
+              "Inclusive design: Yes",
+              "Public consultation meetings: Conducted"
+            ]
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "6",
+            "numberOfFreedomOfInformationAnswers": "6",
+            "attachments": [
+              "Freedom of information requests and answers",
+              "Risk management plans"
+            ]
+          }
+        },
+        "tenderManagement": {
+          "basicData": {
+            "procuringEntity": "Industrial Procurement Office",
+            "procuringEntityContactDetails": "procurement@tshwane.gov.za",
+            "procurementProcess": "Open Competitive Bidding",
+            "procurementMethod": "International Competitive Bidding",
+            "numberOfFirmsTendering": "10",
+            "costEstimate": "USD 18 million",
+            "contractType": "Design-Build",
+            "contractAdministrationEntity": "Industrial Contract Management Office",
+            "contractOfficialsAndRoles": [
+              { "name": "David White", "role": "Contract Administrator" },
+              { "name": "Emily Davis", "role": "Procurement Officer" }
+            ],
+            "contractTitle": "Industrial Water Reuse Plant Construction Contract",
+            "contractFirm": "Eco-Industrial Ltd.",
+            "contractPrice": "USD 18 million",
+            "contractScopeOfWork": "Construction and commissioning of the industrial water reuse plant",
+            "contractStartDate": "2023-07-01",
+            "contractDuration": "24 months",
+            "contractStatus": "Active"
+          },
+          "tenderDocuments": "Prepared",
+          "tenderEvaluationResults": "Completed",
+          "projectDesignReport": "Finalized",
+          "contractAgreementAndConditions": "Signed",
+          "registrationAndOwnershipOfFirms": "Verified",
+          "specificationsAndDrawings": "Approved",
+          "socialSustainabilityData": {
+            "laborBudget": "USD 2.5 million",
+            "healthAndSafetyCertifications": "ISO 45001"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "6",
+            "numberOfFreedomOfInformationAnswers": "6",
+            "beneficialOwnership": "Transparent",
+            "sustainabilityCriteria": "Met",
+            "freedomOfInformationRequestsAndAnswers": "Documented",
+            "antiCorruptionCertifications": "ISO 37001"
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "numberOfEnvironmentalCertifications": "4",
+            "environmentalCertifications": "ISO 14001"
+          }
+        },
+        "implementation": {
+          "basicData": {
+            "variationToContractPrice": "USD 1.5 million",
+            "escalationOfContractPrice": "USD 750,000",
+            "variationToContractDuration": "5 months",
+            "variationToContractScope": "Addition of advanced filtration system",
+            "reasonsForPriceChanges": "Increase in technology costs",
+            "reasonsForScope": "Upgrade to advanced filtration technology",
+            "reasonsForDurationChanges": "Technology integration delays",
+            "listOfVariationsChangesAmendments": "Available",
+            "listOfEscalationApprovals": "Documented",
+            "qualityAssuranceReports": "Regular",
+            "paymentCertificates": "Issued",
+            "contractAmendments": "Signed"
+          },
+          "climateFinanceData": {
+            "disbursementRecords": "Quarterly",
+            "typeOfMonitoring": "Continuous",
+            "performanceMonitoring": "Monthly",
+            "reportingPeriod": "Quarterly",
+            "independentMonitoring": "Yes"
+          },
+          "socialSustainabilityData": {
+            "jobsGenerated": "300",
+            "inclusiveImplementation": "Yes",
+            "workersAccidents": "3",
+            "constructionMaterialsTesting": "Regular",
+            "buildingInspections": "Weekly"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "6",
+            "numberOfFreedomOfInformationAnswers": "6",
+            "freedomOfInformationRequestsAndAnswers": "Documented",
+            "oversightReports": "Quarterly",
+            "independentMidTermEvaluation": "Conducted"
+          },
+          "economicAndFinancialSustainabilityData": {
+            "budgetShortfall": "USD 1.5 million",
+            "fundingSourceForImplementation": "Industrial Loan",
+            "budgetForImplementation": "USD 20 million"
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "environmentalMeasures": "Use of sustainable construction materials",
+            "conservationMeasures": "Efficient water usage practices",
+            "climateMeasures": "Minimization of industrial emissions"
+          }
+        },
+        "completion": {
+          "basicData": {
+            "projectStatus": "Completed",
+            "completionCost": "USD 20 million",
+            "completionDate": "2025-07-30",
+            "scopeAtCompletion": "Fully operational industrial water reuse plant",
+            "reasonsForProjectChanges": "Integration of advanced technologies",
+            "implementationProgressReports": "Regular",
+            "budgetAmendmentDecision": "Approved",
+            "projectCompletionReport": "Submitted",
+            "projectEvaluationReport": "Completed",
+            "technicalAuditReports": "Completed",
+            "financialAuditReports": "Completed"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "6",
+            "numberOfFreedomOfInformationAnswers": "6",
+            "freedomOfInformationRequestsAndAnswers": "Documented"
+          }
+        },
+        "operationsAndMaintenance": {
+          "basicData": {
+            "assetName": "Industrial Water Reuse Plant",
+            "assetLocation": "City of Tshwane Metropolitan Municipality",
+            "typeOfMaintenanceWorks": "Routine and preventive",
+            "worksDescription": "Regular maintenance of industrial water treatment facilities and equipment",
+            "projectOfficialsAndRoles": [
+              { "name": "Michael Johnson", "role": "Maintenance Manager" },
+              { "name": "Sarah Lee", "role": "Technician" }
+            ],
+            "maintenanceScope": "Ensure continuous operation and efficiency",
+            "maintenancePlan": "Available",
+            "procuringEntity": "Industrial Maintenance Office",
+            "procuringEntityContactDetails": "maintenance@tshwane.gov.za",
+            "procurementProcess": "Annual contract renewal",
+            "procurementMethod": "Direct procurement",
+            "numberOfFirmsTendering": "4",
+            "costEstimate": "USD 600,000 per year",
+            "contractType": "Maintenance contract",
+            "contractAdministrationEntity": "Industrial Contract Management Office",
+            "contractOfficialsAndRoles": [
+              { "name": "David White", "role": "Contract Administrator" },
+              { "name": "Emily Davis", "role": "Procurement Officer" }
+            ],
+            "contractTitle": "Annual Maintenance Contract",
+            "contractFirm": "Eco-Industrial Maintenance Ltd.",
+            "contractPrice": "USD 600,000 per year",
+            "contractScopeOfWork": "Routine and preventive maintenance of the industrial water reuse plant",
+            "contractStartDate": "2025-08-01",
+            "contractDuration": "1 year",
+            "contractStatus": "Active"
+          },
+          "tenderDocuments": "Prepared",
+          "tenderEvaluationResults": "Completed",
+          "projectDesignReport": "Finalized",
+          "contractAgreementAndConditions": "Signed",
+          "registrationAndOwnershipOfFirms": "Verified",
+          "specificationsAndDrawings": "Approved",
+          "climateFinanceData": {
+            "impactMeasurement": "Quarterly",
+            "carbonFootprint": "Low",
+            "carbonFootprintDocument": "Available"
+          },
+          "socialSustainabilityData": {
+            "jobsGenerated": "60",
+            "inclusiveImplementation": "Yes",
+            "workersAccidents": "1"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "6",
+            "numberOfFreedomOfInformationAnswers": "6",
+            "freedomOfInformationRequestsAndAnswers": "Documented"
+          },
+          "economicAndFinancialSustainabilityData": {
+            "fundingSourceForMaintenance": "Industrial Budget",
+            "budgetForMaintenance": "USD 600,000 per year"
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "environmentalMeasures": "Regular monitoring of industrial effluents",
+            "conservationMeasures": "Energy-efficient equipment",
+            "climateMeasures": "Renewable energy solutions",
+            "environmentalLicensesAndExemptions": "Compliant"
+          }
+        },
+        "decommission": {
+          "basicData": {
+            "assetName": "Industrial Water Reuse Plant",
+            "assetLocation": "City of Tshwane Metropolitan Municipality",
+            "decisionOfAssetDisposal": "Approved",
+            "procuringEntity": "Industrial Disposal Office",
+            "procuringEntityContactDetails": "disposal@tshwane.gov.za",
+            "procurementProcess": "Open Tender",
+            "procurementMethod": "Competitive Bidding",
+            "numberOfFirmsTendering": "6",
+            "costEstimate": "USD 1.5 million",
+            "contractType": "Decommissioning contract",
+            "contractAdministrationEntity": "Industrial Contract Management Office",
+            "contractOfficialsAndRoles": [
+              { "name": "David White", "role": "Contract Administrator" },
+              { "name": "Emily Davis", "role": "Procurement Officer" }
+            ],
+            "contractTitle": "Decommissioning of Industrial Water Reuse Plant",
+            "contractFirm": "Eco-Friendly Demolition Ltd.",
+            "contractPrice": "USD 1.5 million",
+            "contractScopeOfWork": "Safe decommissioning and site restoration",
+            "contractStartDate": "2051-01-01",
+            "contractDuration": "1 year",
+            "contractStatus": "Planned"
+          },
+          "tenderDocuments": "Prepared",
+          "tenderEvaluationResults": "Completed",
+          "projectDesignReport": "Finalized",
+          "contractAgreementAndConditions": "Signed",
+          "registrationAndOwnershipOfFirms": "Verified",
+          "specificationsAndDrawings": "Approved",
+          "climateFinanceData": {
+            "decommissionPeriod": "2051-2052",
+            "decommissionCosts": "USD 1.5 million",
+            "carbonDecommissionSavings": "Significant",
+            "decommissionPlans": "Detailed"
+          },
+          "socialSustainabilityData": {
+            "jobsGenerated": "120",
+            "workersAccidents": "3"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "6",
+            "numberOfFreedomOfInformationAnswers": "6",
+            "freedomOfInformationRequestsAndAnswers": "Documented"
+          },
+          "economicAndFinancialSustainabilityData": {
+            "decommissionCostForecast": "USD 1.5 million"
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "decommissionMitigationPlan": "Implemented"
+          }
+        }
+      }
+    },
+    {
+      "name": "Indirect Potable Reuse of Water Plant",
+      "location": {
+        "name": "City of Johannesburg Metropolitan Municipality (JW)",
+        "coordinates": {
+          "lat": -26.2041,
+          "lng": 28.0473,
+          "popup": "City of Johannesburg Metropolitan Municipality (JW)"
+        }
+      },
+      "stages": {
+        "identification": {
+          "basicData": {
+            "projectReferenceNumber": "003",
+            "projectOwner": "Municipal Water Services",
+            "sectorSubsector": "Water, Potable Water",
+            "projectName": "Indirect Potable Reuse of Water Plant",
+            "projectLocation": "City of Johannesburg Metropolitan Municipality",
+            "purpose": "To provide indirect potable reuse of water",
+            "projectDescription": "This project involves the construction of a facility for the indirect reuse of treated wastewater for drinking purposes.",
+            "projectOfficialsAndRoles": [
+              { "name": "Emily Johnson", "role": "Project Manager" },
+              { "name": "Chris Lee", "role": "Environmental Specialist" }
+            ],
+            "projectBriefOrFeasibilityStudy": "Completed"
+          },
+          "climateFinanceData": {
+            "climateObjective": "Increase water sustainability",
+            "financialInstrument": "Grant",
+            "climateTransformation": "Improved water management",
+            "climateFinanceDecisionMaking": "Aligned with NDCs",
+            "nationallyDeterminedContributions": "Water conservation",
+            "parisAgreement": "Compliant",
+            "amountOfInvestment": "USD 12 million"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfLobbyingActivities": "4",
+            "numberOfFreedomOfInformationRequests": "6",
+            "numberOfFreedomOfInformationAnswers": "6",
+            "policyCoherenceDocumentation": "Available",
+            "freedomOfInformationRequestsAndAnswers": "Documented",
+            "lobbyingMeetingsMinutes": "Recorded"
+          }
+        },
+        "preparation": {
+          "basicData": {
+            "projectScope": "Increase water sustainability",
+            "contactDetails": "municipalwater@johannesburg.gov.za",
+            "fundingSources": "Grant",
+            "projectBudget": "USD 12 million",
+            "projectBudgetApprovalDate": "2023-03-10",
+            "attachments": [
+              "Environmental and social impact assessment",
+              "Resettlement and compensation plan",
+              "Financial agreement",
+              "Multiyear programme and budget",
+              "Procurement plan",
+              "Project approval decision"
+            ]
+          },
+          "climateFinanceData": {
+            "fundingSource": "Grant",
+            "greenClimateFundAccreditedEntity": "Climate Change Fund",
+            "accreditedEntityType": "National Entity",
+            "projectPreparationCosts": "USD 600,000",
+            "projectPreparationPeriod": "2022-2023",
+            "projectApprovalPeriod": "2023-2024",
+            "ratioOfCoFinance": "30%",
+            "termsOfClimateFinance": "Aligned with NDCs",
+            "carbonEfficiency": "High",
+            "nonClimateCoBenefits": "Improved public health",
+            "attachments": [
+              "Terms of climate finance: Aligned with NDCs",
+              "Carbon efficiency: High"
+            ]
+          },
+          "socialSustainabilityData": {
+            "beneficiaries": "Local communities",
+            "numberOfBeneficiaries": "60,000",
+            "inclusiveDesign": "Yes",
+            "indigenousLand": "No",
+            "publicConsultationMeetings": "Conducted",
+            "landCompensationBudget": "USD 1.2 million",
+            "laborObligations": "Compliant with labor laws",
+            "attachments": [
+              "Inclusive design: Yes",
+              "Public consultation meetings: Conducted"
+            ]
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "6",
+            "numberOfFreedomOfInformationAnswers": "6",
+            "attachments": [
+              "Freedom of information requests and answers",
+              "Risk management plans"
+            ]
+          }
+        },
+        "tenderManagement": {
+          "basicData": {
+            "procuringEntity": "Municipal Procurement Office",
+            "procuringEntityContactDetails": "procurement@johannesburg.gov.za",
+            "procurementProcess": "Open Competitive Bidding",
+            "procurementMethod": "International Competitive Bidding",
+            "numberOfFirmsTendering": "9",
+            "costEstimate": "USD 14 million",
+            "contractType": "Design-Build",
+            "contractAdministrationEntity": "Municipal Contract Management Office",
+            "contractOfficialsAndRoles": [
+              { "name": "Michael Brown", "role": "Contract Administrator" },
+              { "name": "Sarah White", "role": "Procurement Officer" }
+            ],
+            "contractTitle": "Water Reuse Plant Construction Contract",
+            "contractFirm": "Water Solutions Ltd.",
+            "contractPrice": "USD 14 million",
+            "contractScopeOfWork": "Construction and commissioning of the water reuse plant",
+            "contractStartDate": "2023-07-01",
+            "contractDuration": "24 months",
+            "contractStatus": "Active"
+          },
+          "tenderDocuments": "Prepared",
+          "tenderEvaluationResults": "Completed",
+          "projectDesignReport": "Finalized",
+          "contractAgreementAndConditions": "Signed",
+          "registrationAndOwnershipOfFirms": "Verified",
+          "specificationsAndDrawings": "Approved",
+          "socialSustainabilityData": {
+            "laborBudget": "USD 2.5 million",
+            "healthAndSafetyCertifications": "ISO 45001"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "6",
+            "numberOfFreedomOfInformationAnswers": "6",
+            "beneficialOwnership": "Transparent",
+            "sustainabilityCriteria": "Met",
+            "freedomOfInformationRequestsAndAnswers": "Documented",
+            "antiCorruptionCertifications": "ISO 37001"
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "numberOfEnvironmentalCertifications": "3",
+            "environmentalCertifications": "ISO 14001"
+          }
+        },
+        "implementation": {
+          "basicData": {
+            "variationToContractPrice": "USD 1.2 million",
+            "escalationOfContractPrice": "USD 600,000",
+            "variationToContractDuration": "7 months",
+            "variationToContractScope": "Addition of a renewable energy unit",
+            "reasonsForPriceChanges": "Increase in material costs",
+            "reasonsForScope": "Integration of renewable energy solutions",
+            "reasonsForDurationChanges": "Delayed delivery of materials",
+            "listOfVariationsChangesAmendments": "Available",
+            "listOfEscalationApprovals": "Documented",
+            "qualityAssuranceReports": "Regular",
+            "paymentCertificates": "Issued",
+            "contractAmendments": "Signed"
+          },
+          "climateFinanceData": {
+            "disbursementRecords": "Quarterly",
+            "typeOfMonitoring": "Continuous",
+            "performanceMonitoring": "Monthly",
+            "reportingPeriod": "Quarterly",
+            "independentMonitoring": "Yes"
+          },
+          "socialSustainabilityData": {
+            "jobsGenerated": "250",
+            "inclusiveImplementation": "Yes",
+            "workersAccidents": "3",
+            "constructionMaterialsTesting": "Regular",
+            "buildingInspections": "Weekly"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "6",
+            "numberOfFreedomOfInformationAnswers": "6",
+            "freedomOfInformationRequestsAndAnswers": "Documented",
+            "oversightReports": "Quarterly",
+            "independentMidTermEvaluation": "Conducted"
+          },
+          "economicAndFinancialSustainabilityData": {
+            "budgetShortfall": "USD 1.5 million",
+            "fundingSourceForImplementation": "Government Grant",
+            "budgetForImplementation": "USD 15 million"
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "environmentalMeasures": "Use of green construction materials",
+            "conservationMeasures": "Water conservation practices",
+            "climateMeasures": "Reduction of greenhouse gas emissions"
+          }
+        },
+        "completion": {
+          "basicData": {
+            "projectStatus": "Completed",
+            "completionCost": "USD 16 million",
+            "completionDate": "2025-08-31",
+            "scopeAtCompletion": "Fully operational water reuse plant",
+            "reasonsForProjectChanges": "Integration of additional features",
+            "implementationProgressReports": "Regular",
+            "budgetAmendmentDecision": "Approved",
+            "projectCompletionReport": "Submitted",
+            "projectEvaluationReport": "Completed",
+            "technicalAuditReports": "Completed",
+            "financialAuditReports": "Completed"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "6",
+            "numberOfFreedomOfInformationAnswers": "6",
+            "freedomOfInformationRequestsAndAnswers": "Documented"
+          }
+        },
+        "operationsAndMaintenance": {
+          "basicData": {
+            "assetName": "Water Reuse Plant",
+            "assetLocation": "City of Johannesburg Metropolitan Municipality",
+            "typeOfMaintenanceWorks": "Routine and preventive",
+            "worksDescription": "Regular maintenance of water treatment facilities and equipment",
+            "projectOfficialsAndRoles": [
+              { "name": "Michael Johnson", "role": "Maintenance Manager" },
+              { "name": "Sarah Lee", "role": "Technician" }
+            ],
+            "maintenanceScope": "Ensure continuous operation and efficiency",
+            "maintenancePlan": "Available",
+            "procuringEntity": "Municipal Maintenance Office",
+            "procuringEntityContactDetails": "maintenance@johannesburg.gov.za",
+            "procurementProcess": "Annual contract renewal",
+            "procurementMethod": "Direct procurement",
+            "numberOfFirmsTendering": "4",
+            "costEstimate": "USD 600,000 per year",
+            "contractType": "Maintenance contract",
+            "contractAdministrationEntity": "Municipal Contract Management Office",
+            "contractOfficialsAndRoles": [
+              { "name": "Alice Brown", "role": "Contract Administrator" },
+              { "name": "Bob Green", "role": "Procurement Officer" }
+            ],
+            "contractTitle": "Annual Maintenance Contract",
+            "contractFirm": "Water Solutions Maintenance Ltd.",
+            "contractPrice": "USD 600,000 per year",
+            "contractScopeOfWork": "Routine and preventive maintenance of the water reuse plant",
+            "contractStartDate": "2025-09-01",
+            "contractDuration": "1 year",
+            "contractStatus": "Active"
+          },
+          "tenderDocuments": "Prepared",
+          "tenderEvaluationResults": "Completed",
+          "projectDesignReport": "Finalized",
+          "contractAgreementAndConditions": "Signed",
+          "registrationAndOwnershipOfFirms": "Verified",
+          "specificationsAndDrawings": "Approved",
+          "climateFinanceData": {
+            "impactMeasurement": "Quarterly",
+            "carbonFootprint": "Low",
+            "carbonFootprintDocument": "Available"
+          },
+          "socialSustainabilityData": {
+            "jobsGenerated": "55",
+            "inclusiveImplementation": "Yes",
+            "workersAccidents": "0"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "6",
+            "numberOfFreedomOfInformationAnswers": "6",
+            "freedomOfInformationRequestsAndAnswers": "Documented"
+          },
+          "economicAndFinancialSustainabilityData": {
+            "fundingSourceForMaintenance": "Municipal Budget",
+            "budgetForMaintenance": "USD 600,000 per year"
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "environmentalMeasures": "Regular monitoring of effluents",
+            "conservationMeasures": "Use of energy-efficient equipment",
+            "climateMeasures": "Implementation of renewable energy solutions",
+            "environmentalLicensesAndExemptions": "Compliant"
+          }
+        },
+        "decommission": {
+          "basicData": {
+            "assetName": "Water Reuse Plant",
+            "assetLocation": "City of Johannesburg Metropolitan Municipality",
+            "decisionOfAssetDisposal": "Approved",
+            "procuringEntity": "Municipal Disposal Office",
+            "procuringEntityContactDetails": "disposal@johannesburg.gov.za",
+            "procurementProcess": "Open Tender",
+            "procurementMethod": "Competitive Bidding",
+            "numberOfFirmsTendering": "6",
+            "costEstimate": "USD 1.5 million",
+            "contractType": "Decommissioning contract",
+            "contractAdministrationEntity": "Municipal Contract Management Office",
+            "contractOfficialsAndRoles": [
+              { "name": "David White", "role": "Contract Administrator" },
+              { "name": "Emily Davis", "role": "Procurement Officer" }
+            ],
+            "contractTitle": "Decommissioning of Water Reuse Plant",
+            "contractFirm": "Eco-Friendly Demolition Ltd.",
+            "contractPrice": "USD 1.5 million",
+            "contractScopeOfWork": "Safe decommissioning and site restoration",
+            "contractStartDate": "2050-01-01",
+            "contractDuration": "1 year",
+            "contractStatus": "Planned"
+          },
+          "tenderDocuments": "Prepared",
+          "tenderEvaluationResults": "Completed",
+          "projectDesignReport": "Finalized",
+          "contractAgreementAndConditions": "Signed",
+          "registrationAndOwnershipOfFirms": "Verified",
+          "specificationsAndDrawings": "Approved",
+          "climateFinanceData": {
+            "decommissionPeriod": "2050-2051",
+            "decommissionCosts": "USD 1.5 million",
+            "carbonDecommissionSavings": "Significant",
+            "decommissionPlans": "Detailed"
+          },
+          "socialSustainabilityData": {
+            "jobsGenerated": "120",
+            "workersAccidents": "3"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "6",
+            "numberOfFreedomOfInformationAnswers": "6",
+            "freedomOfInformationRequestsAndAnswers": "Documented"
+          },
+          "economicAndFinancialSustainabilityData": {
+            "decommissionCostForecast": "USD 1.5 million"
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "decommissionMitigationPlan": "Implemented"
+          }
+        }
+      }
+    },
+    {
+      "name": "Direct Potable Reuse of Water Plant",
+      "location": {
+        "name": "Nelson Mandela Metropolitan Municipality",
+        "coordinates": {
+          "lat": -33.7139,
+          "lng": 25.5207,
+          "popup": "Nelson Mandela Metropolitan Municipality"
+        }
+      },
+      "stages": {
+        "identification": {
+          "basicData": {
+            "projectReferenceNumber": "001",
+            "projectOwner": "Municipal Water Services",
+            "sectorSubsector": "Water, Potable Water",
+            "projectName": "Direct Potable Reuse of Water Plant",
+            "projectLocation": "Nelson Mandela Metropolitan Municipality",
+            "purpose": "To provide direct potable reuse of water",
+            "projectDescription": "This project involves the construction of a facility for the direct reuse of treated wastewater for drinking purposes.",
+            "projectOfficialsAndRoles": [
+              { "name": "John Doe", "role": "Project Manager" },
+              { "name": "Jane Smith", "role": "Environmental Specialist" }
+            ],
+            "projectBriefOrFeasibilityStudy": "Completed"
+          },
+          "climateFinanceData": {
+            "climateObjective": "Increase water sustainability",
+            "financialInstrument": "Grant",
+            "climateTransformation": "Improved water management",
+            "climateFinanceDecisionMaking": "Aligned with NDCs",
+            "nationallyDeterminedContributions": "Water conservation",
+            "parisAgreement": "Compliant",
+            "amountOfInvestment": "USD 10 million"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfLobbyingActivities": "3",
+            "numberOfFreedomOfInformationRequests": "5",
+            "numberOfFreedomOfInformationAnswers": "5",
+            "policyCoherenceDocumentation": "Available",
+            "freedomOfInformationRequestsAndAnswers": "Documented",
+            "lobbyingMeetingsMinutes": "Recorded"
+          }
+        },
+        "preparation": {
+          "basicData": {
+            "projectScope": "Increase water sustainability",
+            "contactDetails": "municipalwater@nelsonmandela.gov.za",
+            "fundingSources": "Grant",
+            "projectBudget": "USD 10 million",
+            "projectBudgetApprovalDate": "2023-01-15",
+            "attachments": [
+              "Environmental and social impact assessment",
+              "Resettlement and compensation plan",
+              "Financial agreement",
+              "Multiyear programme and budget",
+              "Procurement plan",
+              "Project approval decision"
+            ]
+          },
+          "climateFinanceData": {
+            "fundingSource": "Grant",
+            "greenClimateFundAccreditedEntity": "Climate Change Fund",
+            "accreditedEntityType": "National Entity",
+            "projectPreparationCosts": "USD 500,000",
+            "projectPreparationPeriod": "2022-2023",
+            "projectApprovalPeriod": "2023-2024",
+            "ratioOfCoFinance": "30%",
+            "termsOfClimateFinance": "Aligned with NDCs",
+            "carbonEfficiency": "High",
+            "nonClimateCoBenefits": "Improved public health",
+            "attachments": [
+              "Terms of climate finance: Aligned with NDCs",
+              "Carbon efficiency: High"
+            ]
+          },
+          "socialSustainabilityData": {
+            "beneficiaries": "Local communities",
+            "numberOfBeneficiaries": "50,000",
+            "inclusiveDesign": "Yes",
+            "indigenousLand": "No",
+            "publicConsultationMeetings": "Conducted",
+            "landCompensationBudget": "USD 1 million",
+            "laborObligations": "Compliant with labor laws",
+            "attachments": [
+              "Inclusive design: Yes",
+              "Public consultation meetings: Conducted"
+            ]
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "5",
+            "numberOfFreedomOfInformationAnswers": "5",
+            "attachments": [
+              "Freedom of information requests and answers",
+              "Risk management plans"
+            ]
+          }
+        },
+        "tenderManagement": {
+          "basicData": {
+            "procuringEntity": "Municipal Procurement Office",
+            "procuringEntityContactDetails": "procurement@nelsonmandela.gov.za",
+            "procurementProcess": "Open Competitive Bidding",
+            "procurementMethod": "International Competitive Bidding",
+            "numberOfFirmsTendering": "8",
+            "costEstimate": "USD 12 million",
+            "contractType": "Design-Build",
+            "contractAdministrationEntity": "Municipal Contract Management Office",
+            "contractOfficialsAndRoles": [
+              { "name": "Alice Brown", "role": "Contract Administrator" },
+              { "name": "Bob Green", "role": "Procurement Officer" }
+            ],
+            "contractTitle": "Water Reuse Plant Construction Contract",
+            "contractFirm": "Water Solutions Ltd.",
+            "contractPrice": "USD 12 million",
+            "contractScopeOfWork": "Construction and commissioning of the water reuse plant",
+            "contractStartDate": "2023-06-01",
+            "contractDuration": "24 months",
+            "contractStatus": "Active"
+          },
+          "tenderDocuments": "Prepared",
+          "tenderEvaluationResults": "Completed",
+          "projectDesignReport": "Finalized",
+          "contractAgreementAndConditions": "Signed",
+          "registrationAndOwnershipOfFirms": "Verified",
+          "specificationsAndDrawings": "Approved",
+          "socialSustainabilityData": {
+            "laborBudget": "USD 2 million",
+            "healthAndSafetyCertifications": "ISO 45001"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "5",
+            "numberOfFreedomOfInformationAnswers": "5",
+            "beneficialOwnership": "Transparent",
+            "sustainabilityCriteria": "Met",
+            "freedomOfInformationRequestsAndAnswers": "Documented",
+            "antiCorruptionCertifications": "ISO 37001"
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "numberOfEnvironmentalCertifications": "3",
+            "environmentalCertifications": "ISO 14001"
+          }
+        },
+        "implementation": {
+          "basicData": {
+            "variationToContractPrice": "USD 1 million",
+            "escalationOfContractPrice": "USD 500,000",
+            "variationToContractDuration": "6 months",
+            "variationToContractScope": "Addition of a solar power unit",
+            "reasonsForPriceChanges": "Increase in material costs",
+            "reasonsForScope": "Integration of renewable energy solutions",
+            "reasonsForDurationChanges": "Delayed delivery of materials",
+            "listOfVariationsChangesAmendments": "Available",
+            "listOfEscalationApprovals": "Documented",
+            "qualityAssuranceReports": "Regular",
+            "paymentCertificates": "Issued",
+            "contractAmendments": "Signed"
+          },
+          "climateFinanceData": {
+            "disbursementRecords": "Quarterly",
+            "typeOfMonitoring": "Continuous",
+            "performanceMonitoring": "Monthly",
+            "reportingPeriod": "Quarterly",
+            "independentMonitoring": "Yes"
+          },
+          "socialSustainabilityData": {
+            "jobsGenerated": "200",
+            "inclusiveImplementation": "Yes",
+            "workersAccidents": "2",
+            "constructionMaterialsTesting": "Regular",
+            "buildingInspections": "Weekly"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "5",
+            "numberOfFreedomOfInformationAnswers": "5",
+            "freedomOfInformationRequestsAndAnswers": "Documented",
+            "oversightReports": "Quarterly",
+            "independentMidTermEvaluation": "Conducted"
+          },
+          "economicAndFinancialSustainabilityData": {
+            "budgetShortfall": "USD 1 million",
+            "fundingSourceForImplementation": "Government Grant",
+            "budgetForImplementation": "USD 15 million"
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "environmentalMeasures": "Use of green construction materials",
+            "conservationMeasures": "Water conservation practices",
+            "climateMeasures": "Reduction of greenhouse gas emissions"
+          }
+        },
+        "completion": {
+          "basicData": {
+            "projectStatus": "Completed",
+            "completionCost": "USD 15 million",
+            "completionDate": "2025-06-30",
+            "scopeAtCompletion": "Fully operational water reuse plant",
+            "reasonsForProjectChanges": "Integration of additional features",
+            "implementationProgressReports": "Regular",
+            "budgetAmendmentDecision": "Approved",
+            "projectCompletionReport": "Submitted",
+            "projectEvaluationReport": "Completed",
+            "technicalAuditReports": "Completed",
+            "financialAuditReports": "Completed"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "5",
+            "numberOfFreedomOfInformationAnswers": "5",
+            "freedomOfInformationRequestsAndAnswers": "Documented"
+          }
+        },
+        "operationsAndMaintenance": {
+          "basicData": {
+            "assetName": "Water Reuse Plant",
+            "assetLocation": "Nelson Mandela Metropolitan Municipality",
+            "typeOfMaintenanceWorks": "Routine and preventive",
+            "worksDescription": "Regular maintenance of water treatment facilities and equipment",
+            "projectOfficialsAndRoles": [
+              { "name": "John Doe", "role": "Maintenance Manager" },
+              { "name": "Jane Smith", "role": "Technician" }
+            ],
+            "maintenanceScope": "Ensure continuous operation and efficiency",
+            "maintenancePlan": "Available",
+            "procuringEntity": "Municipal Maintenance Office",
+            "procuringEntityContactDetails": "maintenance@nelsonmandela.gov.za",
+            "procurementProcess": "Annual contract renewal",
+            "procurementMethod": "Direct procurement",
+            "numberOfFirmsTendering": "3",
+            "costEstimate": "USD 500,000 per year",
+            "contractType": "Maintenance contract",
+            "contractAdministrationEntity": "Municipal Contract Management Office",
+            "contractOfficialsAndRoles": [
+              { "name": "Alice Brown", "role": "Contract Administrator" },
+              { "name": "Bob Green", "role": "Procurement Officer" }
+            ],
+            "contractTitle": "Annual Maintenance Contract",
+            "contractFirm": "Water Solutions Maintenance Ltd.",
+            "contractPrice": "USD 500,000 per year",
+            "contractScopeOfWork": "Routine and preventive maintenance of the water reuse plant",
+            "contractStartDate": "2025-07-01",
+            "contractDuration": "1 year",
+            "contractStatus": "Active"
+          },
+          "tenderDocuments": "Prepared",
+          "tenderEvaluationResults": "Completed",
+          "projectDesignReport": "Finalized",
+          "contractAgreementAndConditions": "Signed",
+          "registrationAndOwnershipOfFirms": "Verified",
+          "specificationsAndDrawings": "Approved",
+          "climateFinanceData": {
+            "impactMeasurement": "Quarterly",
+            "carbonFootprint": "Low",
+            "carbonFootprintDocument": "Available"
+          },
+          "socialSustainabilityData": {
+            "jobsGenerated": "50",
+            "inclusiveImplementation": "Yes",
+            "workersAccidents": "0"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "5",
+            "numberOfFreedomOfInformationAnswers": "5",
+            "freedomOfInformationRequestsAndAnswers": "Documented"
+          },
+          "economicAndFinancialSustainabilityData": {
+            "fundingSourceForMaintenance": "Municipal Budget",
+            "budgetForMaintenance": "USD 500,000 per year"
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "environmentalMeasures": "Regular monitoring of effluents",
+            "conservationMeasures": "Use of energy-efficient equipment",
+            "climateMeasures": "Implementation of renewable energy solutions",
+            "environmentalLicensesAndExemptions": "Compliant"
+          }
+        },
+        "decommission": {
+          "basicData": {
+            "assetName": "Water Reuse Plant",
+            "assetLocation": "Nelson Mandela Metropolitan Municipality",
+            "decisionOfAssetDisposal": "Approved",
+            "procuringEntity": "Municipal Disposal Office",
+            "procuringEntityContactDetails": "disposal@nelsonmandela.gov.za",
+            "procurementProcess": "Open Tender",
+            "procurementMethod": "Competitive Bidding",
+            "numberOfFirmsTendering": "5",
+            "costEstimate": "USD 1 million",
+            "contractType": "Decommissioning contract",
+            "contractAdministrationEntity": "Municipal Contract Management Office",
+            "contractOfficialsAndRoles": [
+              { "name": "Alice Brown", "role": "Contract Administrator" },
+              { "name": "Bob Green", "role": "Procurement Officer" }
+            ],
+            "contractTitle": "Decommissioning of Water Reuse Plant",
+            "contractFirm": "Eco-Friendly Demolition Ltd.",
+            "contractPrice": "USD 1 million",
+            "contractScopeOfWork": "Safe decommissioning and site restoration",
+            "contractStartDate": "2050-01-01",
+            "contractDuration": "1 year",
+            "contractStatus": "Planned"
+          },
+          "tenderDocuments": "Prepared",
+          "tenderEvaluationResults": "Completed",
+          "projectDesignReport": "Finalized",
+          "contractAgreementAndConditions": "Signed",
+          "registrationAndOwnershipOfFirms": "Verified",
+          "specificationsAndDrawings": "Approved",
+          "climateFinanceData": {
+            "decommissionPeriod": "2050-2051",
+            "decommissionCosts": "USD 1 million",
+            "carbonDecommissionSavings": "Significant",
+            "decommissionPlans": "Detailed"
+          },
+          "socialSustainabilityData": {
+            "jobsGenerated": "100",
+            "workersAccidents": "2"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "5",
+            "numberOfFreedomOfInformationAnswers": "5",
+            "freedomOfInformationRequestsAndAnswers": "Documented"
+          },
+          "economicAndFinancialSustainabilityData": {
+            "decommissionCostForecast": "USD 1 million"
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "decommissionMitigationPlan": "Implemented"
+          }
+        }
+      }
+    },
+    {
+      "name": "Irrigation Reuse of Water Plant",
+      "location": {
+        "name": "City of Cape Town Metropolitan Municipality",
+        "coordinates": {
+          "lat": -33.9258,
+          "lng": 18.4232,
+          "popup": "City of Cape Town Metropolitan Municipality"
+        }
+      },
+      "stages": {
+        "identification": {
+          "basicData": {
+            "projectReferenceNumber": "004",
+            "projectOwner": "Municipal Agricultural Services",
+            "sectorSubsector": "Water, Irrigation Water",
+            "projectName": "Irrigation Reuse of Water Plant",
+            "projectLocation": "City of Cape Town Metropolitan Municipality",
+            "purpose": "To provide irrigation reuse of water for agricultural purposes",
+            "projectDescription": "This project involves the construction of a facility for the reuse of treated wastewater for irrigation purposes.",
+            "projectOfficialsAndRoles": [
+              { "name": "Emma Wilson", "role": "Project Manager" },
+              { "name": "Oliver Brown", "role": "Environmental Specialist" }
+            ],
+            "projectBriefOrFeasibilityStudy": "Completed"
+          },
+          "climateFinanceData": {
+            "climateObjective": "Enhance water sustainability in agriculture",
+            "financialInstrument": "Grant",
+            "climateTransformation": "Improved water management for irrigation",
+            "climateFinanceDecisionMaking": "Aligned with NDCs",
+            "nationallyDeterminedContributions": "Agricultural water conservation",
+            "parisAgreement": "Compliant",
+            "amountOfInvestment": "USD 8 million"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfLobbyingActivities": "2",
+            "numberOfFreedomOfInformationRequests": "4",
+            "numberOfFreedomOfInformationAnswers": "4",
+            "policyCoherenceDocumentation": "Available",
+            "freedomOfInformationRequestsAndAnswers": "Documented",
+            "lobbyingMeetingsMinutes": "Recorded"
+          }
+        },
+        "preparation": {
+          "basicData": {
+            "projectScope": "Enhance water sustainability in agriculture",
+            "contactDetails": "agriculturalservices@capetown.gov.za",
+            "fundingSources": "Grant",
+            "projectBudget": "USD 8 million",
+            "projectBudgetApprovalDate": "2023-04-10",
+            "attachments": [
+              "Environmental and social impact assessment",
+              "Resettlement and compensation plan",
+              "Financial agreement",
+              "Multiyear programme and budget",
+              "Procurement plan",
+              "Project approval decision"
+            ]
+          },
+          "climateFinanceData": {
+            "fundingSource": "Grant",
+            "greenClimateFundAccreditedEntity": "Agricultural Climate Fund",
+            "accreditedEntityType": "National Entity",
+            "projectPreparationCosts": "USD 400,000",
+            "projectPreparationPeriod": "2022-2023",
+            "projectApprovalPeriod": "2023-2024",
+            "ratioOfCoFinance": "20%",
+            "termsOfClimateFinance": "Aligned with NDCs",
+            "carbonEfficiency": "Medium",
+            "nonClimateCoBenefits": "Improved agricultural productivity",
+            "attachments": [
+              "Terms of climate finance: Aligned with NDCs",
+              "Carbon efficiency: Medium"
+            ]
+          },
+          "socialSustainabilityData": {
+            "beneficiaries": "Local farmers",
+            "numberOfBeneficiaries": "15,000",
+            "inclusiveDesign": "Yes",
+            "indigenousLand": "No",
+            "publicConsultationMeetings": "Conducted",
+            "landCompensationBudget": "USD 600,000",
+            "laborObligations": "Compliant with labor laws",
+            "attachments": [
+              "Inclusive design: Yes",
+              "Public consultation meetings: Conducted"
+            ]
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "4",
+            "numberOfFreedomOfInformationAnswers": "4",
+            "attachments": [
+              "Freedom of information requests and answers",
+              "Risk management plans"
+            ]
+          }
+        },
+        "tenderManagement": {
+          "basicData": {
+            "procuringEntity": "Agricultural Procurement Office",
+            "procuringEntityContactDetails": "procurement@capetown.gov.za",
+            "procurementProcess": "Open Competitive Bidding",
+            "procurementMethod": "International Competitive Bidding",
+            "numberOfFirmsTendering": "7",
+            "costEstimate": "USD 9 million",
+            "contractType": "Design-Build",
+            "contractAdministrationEntity": "Agricultural Contract Management Office",
+            "contractOfficialsAndRoles": [
+              { "name": "Jack Miller", "role": "Contract Administrator" },
+              { "name": "Liam Davis", "role": "Procurement Officer" }
+            ],
+            "contractTitle": "Irrigation Water Reuse Plant Construction Contract",
+            "contractFirm": "Green Agriculture Ltd.",
+            "contractPrice": "USD 9 million",
+            "contractScopeOfWork": "Construction and commissioning of the irrigation water reuse plant",
+            "contractStartDate": "2023-08-01",
+            "contractDuration": "20 months",
+            "contractStatus": "Active"
+          },
+          "tenderDocuments": "Prepared",
+          "tenderEvaluationResults": "Completed",
+          "projectDesignReport": "Finalized",
+          "contractAgreementAndConditions": "Signed",
+          "registrationAndOwnershipOfFirms": "Verified",
+          "specificationsAndDrawings": "Approved",
+          "socialSustainabilityData": {
+            "laborBudget": "USD 1.5 million",
+            "healthAndSafetyCertifications": "ISO 45001"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "4",
+            "numberOfFreedomOfInformationAnswers": "4",
+            "beneficialOwnership": "Transparent",
+            "sustainabilityCriteria": "Met",
+            "freedomOfInformationRequestsAndAnswers": "Documented",
+            "antiCorruptionCertifications": "ISO 37001"
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "numberOfEnvironmentalCertifications": "2",
+            "environmentalCertifications": "ISO 14001"
+          }
+        },
+        "implementation": {
+          "basicData": {
+            "variationToContractPrice": "USD 800,000",
+            "escalationOfContractPrice": "USD 300,000",
+            "variationToContractDuration": "4 months",
+            "variationToContractScope": "Addition of advanced irrigation systems",
+            "reasonsForPriceChanges": "Increase in material costs",
+            "reasonsForScope": "Integration of advanced irrigation systems",
+            "reasonsForDurationChanges": "Delayed delivery of materials",
+            "listOfVariationsChangesAmendments": "Available",
+            "listOfEscalationApprovals": "Documented",
+            "qualityAssuranceReports": "Regular",
+            "paymentCertificates": "Issued",
+            "contractAmendments": "Signed"
+          },
+          "climateFinanceData": {
+            "disbursementRecords": "Quarterly",
+            "typeOfMonitoring": "Continuous",
+            "performanceMonitoring": "Monthly",
+            "reportingPeriod": "Quarterly",
+            "independentMonitoring": "Yes"
+          },
+          "socialSustainabilityData": {
+            "jobsGenerated": "150",
+            "inclusiveImplementation": "Yes",
+            "workersAccidents": "1",
+            "constructionMaterialsTesting": "Regular",
+            "buildingInspections": "Weekly"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "4",
+            "numberOfFreedomOfInformationAnswers": "4",
+            "freedomOfInformationRequestsAndAnswers": "Documented",
+            "oversightReports": "Quarterly",
+            "independentMidTermEvaluation": "Conducted"
+          },
+          "economicAndFinancialSustainabilityData": {
+            "budgetShortfall": "USD 800,000",
+            "fundingSourceForImplementation": "Government Grant",
+            "budgetForImplementation": "USD 10 million"
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "environmentalMeasures": "Use of sustainable construction materials",
+            "conservationMeasures": "Water conservation practices",
+            "climateMeasures": "Reduction of greenhouse gas emissions"
+          }
+        },
+        "completion": {
+          "basicData": {
+            "projectStatus": "Completed",
+            "completionCost": "USD 10 million",
+            "completionDate": "2025-04-30",
+            "scopeAtCompletion": "Fully operational irrigation water reuse plant",
+            "reasonsForProjectChanges": "Integration of additional features",
+            "implementationProgressReports": "Regular",
+            "budgetAmendmentDecision": "Approved",
+            "projectCompletionReport": "Submitted",
+            "projectEvaluationReport": "Completed",
+            "technicalAuditReports": "Completed",
+            "financialAuditReports": "Completed"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "4",
+            "numberOfFreedomOfInformationAnswers": "4",
+            "freedomOfInformationRequestsAndAnswers": "Documented"
+          }
+        },
+        "operationsAndMaintenance": {
+          "basicData": {
+            "assetName": "Irrigation Water Reuse Plant",
+            "assetLocation": "City of Cape Town Metropolitan Municipality",
+            "typeOfMaintenanceWorks": "Routine and preventive",
+            "worksDescription": "Regular maintenance of irrigation water treatment facilities and equipment",
+            "projectOfficialsAndRoles": [
+              { "name": "Emma Wilson", "role": "Maintenance Manager" },
+              { "name": "Oliver Brown", "role": "Technician" }
+            ],
+            "maintenanceScope": "Ensure continuous operation and efficiency",
+            "maintenancePlan": "Available",
+            "procuringEntity": "Municipal Maintenance Office",
+            "procuringEntityContactDetails": "maintenance@capetown.gov.za",
+            "procurementProcess": "Annual contract renewal",
+            "procurementMethod": "Direct procurement",
+            "numberOfFirmsTendering": "3",
+            "costEstimate": "USD 400,000 per year",
+            "contractType": "Maintenance contract",
+            "contractAdministrationEntity": "Municipal Contract Management Office",
+            "contractOfficialsAndRoles": [
+              { "name": "Jack Miller", "role": "Contract Administrator" },
+              { "name": "Liam Davis", "role": "Procurement Officer" }
+            ],
+            "contractTitle": "Annual Maintenance Contract",
+            "contractFirm": "Green Agriculture Maintenance Ltd.",
+            "contractPrice": "USD 400,000 per year",
+            "contractScopeOfWork": "Routine and preventive maintenance of the irrigation water reuse plant",
+            "contractStartDate": "2025-05-01",
+            "contractDuration": "1 year",
+            "contractStatus": "Active"
+          },
+          "tenderDocuments": "Prepared",
+          "tenderEvaluationResults": "Completed",
+          "projectDesignReport": "Finalized",
+          "contractAgreementAndConditions": "Signed",
+          "registrationAndOwnershipOfFirms": "Verified",
+          "specificationsAndDrawings": "Approved",
+          "climateFinanceData": {
+            "impactMeasurement": "Quarterly",
+            "carbonFootprint": "Low",
+            "carbonFootprintDocument": "Available"
+          },
+          "socialSustainabilityData": {
+            "jobsGenerated": "40",
+            "inclusiveImplementation": "Yes",
+            "workersAccidents": "0"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "4",
+            "numberOfFreedomOfInformationAnswers": "4",
+            "freedomOfInformationRequestsAndAnswers": "Documented"
+          },
+          "economicAndFinancialSustainabilityData": {
+            "fundingSourceForMaintenance": "Municipal Budget",
+            "budgetForMaintenance": "USD 400,000 per year"
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "environmentalMeasures": "Regular monitoring of effluents",
+            "conservationMeasures": "Use of energy-efficient equipment",
+            "climateMeasures": "Implementation of renewable energy solutions",
+            "environmentalLicensesAndExemptions": "Compliant"
+          }
+        },
+        "decommission": {
+          "basicData": {
+            "assetName": "Irrigation Water Reuse Plant",
+            "assetLocation": "City of Cape Town Metropolitan Municipality",
+            "decisionOfAssetDisposal": "Approved",
+            "procuringEntity": "Municipal Disposal Office",
+            "procuringEntityContactDetails": "disposal@capetown.gov.za",
+            "procurementProcess": "Open Tender",
+            "procurementMethod": "Competitive Bidding",
+            "numberOfFirmsTendering": "4",
+            "costEstimate": "USD 1.2 million",
+            "contractType": "Decommissioning contract",
+            "contractAdministrationEntity": "Municipal Contract Management Office",
+            "contractOfficialsAndRoles": [
+              { "name": "Jack Miller", "role": "Contract Administrator" },
+              { "name": "Liam Davis", "role": "Procurement Officer" }
+            ],
+            "contractTitle": "Decommissioning of Irrigation Water Reuse Plant",
+            "contractFirm": "Eco-Friendly Demolition Ltd.",
+            "contractPrice": "USD 1.2 million",
+            "contractScopeOfWork": "Safe decommissioning and site restoration",
+            "contractStartDate": "2050-01-01",
+            "contractDuration": "1 year",
+            "contractStatus": "Planned"
+          },
+          "tenderDocuments": "Prepared",
+          "tenderEvaluationResults": "Completed",
+          "projectDesignReport": "Finalized",
+          "contractAgreementAndConditions": "Signed",
+          "registrationAndOwnershipOfFirms": "Verified",
+          "specificationsAndDrawings": "Approved",
+          "climateFinanceData": {
+            "decommissionPeriod": "2050-2051",
+            "decommissionCosts": "USD 1.2 million",
+            "carbonDecommissionSavings": "Significant",
+            "decommissionPlans": "Detailed"
+          },
+          "socialSustainabilityData": {
+            "jobsGenerated": "80",
+            "workersAccidents": "2"
+          },
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": "4",
+            "numberOfFreedomOfInformationAnswers": "4",
+            "freedomOfInformationRequestsAndAnswers": "Documented"
+          },
+          "economicAndFinancialSustainabilityData": {
+            "decommissionCostForecast": "USD 1.2 million"
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "decommissionMitigationPlan": "Implemented"
+          }
+        }
+      }
+    }
+  ]
+}
