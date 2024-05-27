@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 declare var H: any;
 
@@ -20,7 +21,7 @@ export class LandingComponent implements OnInit {
   recentProjects: any[] = [];
   markers: { lat: number; lng: number; popup: string; }[] = [];
 
-  constructor(private http: HttpClient, private firestore: AngularFirestore) {
+  constructor(private http: HttpClient, private firestore: AngularFirestore, private router: Router) {
     console.log('markers: ', this.markers);
     this.platform = new H.service.Platform({
       apikey: 'bo0uc_5TPAXOiS7C10x1rrlkJ1J7v9ezqiWOmtFi_Ik'
@@ -29,7 +30,6 @@ export class LandingComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProjects();
-    this.getItems();
   }
 
   initializeMap(): void {
@@ -85,34 +85,18 @@ export class LandingComponent implements OnInit {
     return bounds;
   }
 
-  getItems() {
-    this.firestore.collection('items').valueChanges({ idField: 'id' }).subscribe(items => {
-      console.log(items);
-    }, error => {
-      console.error('Error fetching items: ', error);
-    });
+  fitMapBounds() {
+    const bounds = this.calculateBounds();
+    if (bounds) {
+      this.map.getViewModel().setLookAtData({
+        bounds: bounds
+      });
+    }
   }
 
-  // Function to generate a random alphanumeric string
-  generateOC4IDSId(): string {
-    const prefix = 'oc4ids_sa_';
-    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    const randomStr = Array(8).fill(null).map(() => chars.charAt(Math.floor(Math.random() * chars.length))).join('');
-    return `${prefix}${randomStr}`;
-  }
-
-  // Add projects to Firestore with unique OC4IDS ID
-  addProject(project: any) {
-    console.log('Preparing to add project:', project);
-    project.id = this.generateOC4IDSId();
-    console.log('Generated OC4IDS ID for project:', project.id);
-    return this.firestore.collection('projects').doc(project.id).set(project)
-        .then(() => {
-          console.log('Project added successfully:', project);
-        })
-        .catch(error => {
-          console.error('Error adding project:', error);
-        });
+  viewProjectDetails(projectId: string) {
+    // Navigate to the project details page with the projectId
+    this.router.navigate(['/project-details', projectId]);
   }
 
   loadProjects() {
@@ -125,7 +109,22 @@ export class LandingComponent implements OnInit {
           this.recentProjects = projects;
           console.log('Loaded projects:', this.recentProjects);
           this.generateMarkers();
-          this.initializeMap(); // Initialize the map after markers are generated
+
+          // Initialize the map after the markers are generated
+          this.initializeMap();
+
+          // Wait for the map to be initialized before fitting the bounds
+          if (this.map) {
+            this.fitMapBounds();
+          } else {
+            // If the map is not initialized yet, wait for it to be ready
+            const mapReadyInterval = setInterval(() => {
+              if (this.map) {
+                clearInterval(mapReadyInterval);
+                this.fitMapBounds();
+              }
+            }, 100);
+          }
         },
         (error) => {
           console.error('Error loading projects:', error);
@@ -136,10 +135,18 @@ export class LandingComponent implements OnInit {
   generateMarkers() {
     this.markers = this.recentProjects.map(project => {
       if (project.location && project.location.coordinates) {
+        const popup = `
+          <div>
+            <h3 class="text-lg font-semibold">${project.name}</h3>
+            <p class="text-gray-600">${project.description}</p>
+            <p class="text-gray-500">Location: ${project.location.name}</p>
+            <button class="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" (click)="viewProjectDetails('${project.id}')">View Details</button>
+          </div>
+        `;
         return {
           lat: parseFloat(project.location.coordinates.lat),
           lng: parseFloat(project.location.coordinates.lng),
-          popup: project.location.name
+          popup: popup
         };
       }
       return null;
