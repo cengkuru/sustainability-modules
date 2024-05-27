@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from "@angular/common";
-import { RouterLink, RouterOutlet } from "@angular/router";
+import {Router, RouterLink, RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-index',
@@ -16,12 +16,13 @@ import { RouterLink, RouterOutlet } from "@angular/router";
 export class IndexComponent {
   isProfileDropdownOpen = false;
   isMobileMenuOpen = false;
+  isLoggedIn = false; // Simulating the login status. You should replace this with actual authentication status.
 
   currentYear = new Date().getFullYear();
   owner = 'CoST Infrastructure Transparency Initiative';
   appName = 'CoST Data Portal: Prototype';
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   toggleProfileDropdown() {
     this.isProfileDropdownOpen = !this.isProfileDropdownOpen;
@@ -33,5 +34,11 @@ export class IndexComponent {
 
   closeMobileMenu() {
     this.isMobileMenuOpen = false;
+  }
+
+  login() {
+    // Redirect to the login page
+    this.router.navigate(['/public/login']);
+
   }
 }

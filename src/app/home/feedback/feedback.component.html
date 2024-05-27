@@ -1,1 +1,108 @@
-<p>feedback works!</p>
+<div class="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+    <div class="grid grid-cols-1 items-start gap-4 lg:grid-cols-1 lg:gap-8">
+        <!-- About Section -->
+        <div class="grid grid-cols-1 gap-4 lg:col-span-2">
+            <section aria-labelledby="section-1-title">
+                <div class="overflow-hidden rounded-lg bg-white shadow-lg">
+                    <div class="p-6">
+                        <div class="bg-white py-24 sm:py-32">
+                            <div class="mx-auto max-w-7xl px-6 lg:px-8">
+                                <div class="mx-auto max-w-2xl space-y-16 divide-y divide-gray-100 lg:mx-0 lg:max-w-none">
+                                    <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-3">
+                                        <div>
+                                            <h2 class="text-3xl font-bold tracking-tight text-gray-900">Get in touch</h2>
+                                            <p class="mt-4 leading-7 text-gray-600">For any inquiries or feedback regarding CoST and OC4IDS, please reach out to us through the following channels:</p>
+                                        </div>
+                                        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:col-span-2 lg:gap-8">
+                                            <div *ngFor="let contact of contacts" class="rounded-2xl bg-gray-50 p-10 shadow-sm border">
+                                                <h3 class="text-base font-semibold leading-7 text-gray-900"><i class="bi bi-envelope-fill mr-2"></i>{{ contact.title }}</h3>
+                                                <dl class="mt-3 space-y-1 text-sm leading-6 text-gray-600">
+                                                    <div>
+                                                        <dt class="sr-only">Email</dt>
+                                                        <dd><a class="font-semibold text-indigo-600" href="mailto:{{ contact.email }}"><i class="bi bi-envelope mr-2"></i>{{ contact.email }}</a></dd>
+                                                    </div>
+                                                    <div class="mt-1">
+                                                        <dt class="sr-only">Phone number</dt>
+                                                        <dd><i class="bi bi-telephone mr-2"></i>{{ contact.phone }}</dd>
+                                                    </div>
+                                                    <div class="mt-1">
+                                                        <dt class="sr-only">Address</dt>
+                                                        <dd><i class="bi bi-geo-alt-fill mr-2"></i>{{ contact.address }}</dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-1 gap-x-8 gap-y-10 pt-16 lg:grid-cols-3">
+                                        <div>
+                                            <h2 class="text-3xl font-bold tracking-tight text-gray-900">Feedback Channels</h2>
+                                            <p class="mt-4 leading-7 text-gray-600">We value your feedback and suggestions. Please reach out through the following channels:</p>
+                                        </div>
+                                        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:col-span-2 lg:gap-8">
+                                            <div *ngFor="let feedback of feedbackChannels" class="rounded-2xl bg-gray-50 p-10 shadow-sm border">
+                                                <h3 class="text-base font-semibold leading-7 text-gray-900"><i class="bi bi-chat-left-dots-fill mr-2"></i>{{ feedback.title }}</h3>
+                                                <dl class="mt-3 space-y-1 text-sm leading-6 text-gray-600">
+                                                    <div>
+                                                        <dt class="sr-only">Email</dt>
+                                                        <dd><a class="font-semibold text-indigo-600" href="mailto:{{ feedback.email }}"><i class="bi bi-envelope mr-2"></i>{{ feedback.email }}</a></dd>
+                                                    </div>
+                                                    <div class="mt-1">
+                                                        <dt class="sr-only">Phone number</dt>
+                                                        <dd><i class="bi bi-telephone mr-2"></i>{{ feedback.phone }}</dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-1 gap-x-8 gap-y-10 pt-16 lg:grid-cols-3">
+                                        <div>
+                                            <h2 class="text-3xl font-bold tracking-tight text-gray-900">Additional Contacts</h2>
+                                            <p class="mt-4 leading-7 text-gray-600">For more information, you can also contact the following organizations:</p>
+                                        </div>
+                                        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:col-span-2 lg:gap-8">
+                                            <div *ngFor="let additionalContact of additionalContacts" class="rounded-2xl bg-gray-50 p-10 shadow-sm border">
+                                                <h3 class="text-base font-semibold leading-7 text-gray-900"><i class="bi bi-building mr-2"></i>{{ additionalContact.title }}</h3>
+                                                <dl class="mt-3 space-y-1 text-sm leading-6 text-gray-600">
+                                                    <div>
+                                                        <dt class="sr-only">Email</dt>
+                                                        <dd><a class="font-semibold text-indigo-600" href="mailto:{{ additionalContact.email }}"><i class="bi bi-envelope mr-2"></i>{{ additionalContact.email }}</a></dd>
+                                                    </div>
+                                                    <div class="mt-1">
+                                                        <dt class="sr-only">Phone number</dt>
+                                                        <dd><i class="bi bi-telephone mr-2"></i>{{ additionalContact.phone }}</dd>
+                                                    </div>
+                                                    <div class="mt-1">
+                                                        <dt class="sr-only">Address</dt>
+                                                        <dd><i class="bi bi-geo-alt-fill mr-2"></i>{{ additionalContact.address }}</dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-1 gap-x-8 gap-y-10 pt-16 lg:grid-cols-3">
+                                        <div>
+                                            <h2 class="text-3xl font-bold tracking-tight text-gray-900">Social Media</h2>
+                                            <p class="mt-4 leading-7 text-gray-600">Follow us on social media for the latest updates:</p>
+                                        </div>
+                                        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:col-span-2 lg:gap-8">
+                                            <div *ngFor="let socialMedia of socialMediaChannels" class="rounded-2xl bg-gray-50 p-10 shadow-sm border">
+                                                <h3 class="text-base font-semibold leading-7 text-gray-900"><i class="bi bi-{{ socialMedia.icon }} mr-2"></i>{{ socialMedia.platform }}</h3>
+                                                <dl class="mt-3 space-y-1 text-sm leading-6 text-gray-600">
+                                                    <div>
+                                                        <dt class="sr-only">URL</dt>
+                                                        <dd><a class="font-semibold text-indigo-600" href="{{ socialMedia.url }}" target="_blank">{{ socialMedia.platform }}</a></dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

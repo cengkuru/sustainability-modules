@@ -22,527 +22,793 @@
                             </div>
                             <div class="w-3/4 p-4">
                                 <div *ngIf="activeTab === 'identification'" class="tab-content space-y-4">
-                                    <h2 class="text-2xl font-bold text-gray-700 mb-4">Identification</h2>
-                                    <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Basic Data</h3>
-                                        <p><strong>Project Reference Number:</strong> {{ project.projectReferenceNumber }}</p>
-                                        <p><strong>Project Owner:</strong> {{ project.projectOwner }}</p>
-                                        <p><strong>Sector, Subsector:</strong> {{ project.sectorSubsector }}</p>
-                                        <p><strong>Project Name:</strong> {{ project.projectName }}</p>
-                                        <p><strong>Project Location:</strong> {{ project.projectLocation }}</p>
-                                        <p><strong>Purpose:</strong> {{ project.purpose }}</p>
-                                        <p><strong>Project Description:</strong> {{ project.projectDescription }}</p>
-                                        <p><strong>Project Officials and Roles:</strong></p>
-                                        <ul>
-                                            <li *ngFor="let official of project.projectOfficialsAndRoles">
-                                                {{ official.role }}: {{ official.name }}
-                                            </li>
-                                        </ul>
+                                    <div class="flex items-center mb-4">
+                                        <i class="bi bi-card-list mr-2 text-2xl text-primary"></i>
+                                        <h2 class="text-2xl font-bold text-gray-700">Identification</h2>
                                     </div>
-                                    <div class="bg-yellow-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Climate Finance Data</h3>
-                                        <p><strong>Climate Objective:</strong> {{ project.climateObjective }}</p>
-                                        <p><strong>Financial Instrument:</strong> {{ project.financialInstrument }}</p>
-                                        <p><strong>Climate Transformation:</strong> {{ project.climateTransformation }}</p>
-                                        <p><strong>Climate Finance Decision-Making:</strong> {{ project.climateFinanceDecisionMaking }}</p>
-                                        <p><strong>Nationally Determined Contributions:</strong> {{ project.nationallyDeterminedContributions }}</p>
-                                        <p><strong>Paris Agreement:</strong> {{ project.parisAgreement }}</p>
-                                        <p><strong>Amount of Investment:</strong> {{ project.amountOfInvestment }}</p>
-                                    </div>
-                                    <div class="bg-blue-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Institutional Sustainability Data</h3>
-                                        <p><strong>Number of Lobbying Activities:</strong> {{ project.numberOfLobbyingActivities }}</p>
-                                        <p><strong>Number of Freedom of Information Requests:</strong> {{ project.numberOfFreedomOfInformationRequests }}</p>
-                                        <p><strong>Number of Freedom of Information Answers:</strong> {{ project.numberOfFreedomOfInformationAnswers }}</p>
-                                        <p><strong>Policy Coherence Documentation:</strong> {{ project.policyCoherenceDocumentation }}</p>
-                                        <p><strong>Freedom of Information Requests and Answers:</strong> {{ project.freedomOfInformationRequestsAndAnswers }}</p>
-                                        <p><strong>Lobbying Meetings Minutes:</strong> {{ project.lobbyingMeetingsMinutes }}</p>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                                        <!-- Basic Data -->
+                                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-file-earmark-text mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Basic Data</h3>
+                                            </div>
+                                            <p><strong>Project Reference Number:</strong> {{ project.projectReferenceNumber }}</p>
+                                            <p><strong>Project Owner:</strong> {{ project.projectOwner }}</p>
+                                            <p><strong>Sector, Subsector:</strong> {{ project.sectorSubsector }}</p>
+                                            <p><strong>Project Name:</strong> {{ project.projectName }}</p>
+                                            <p><strong>Project Location:</strong> {{ project.projectLocation }}</p>
+                                            <p><strong>Purpose:</strong> {{ project.purpose }}</p>
+                                            <p><strong>Project Description:</strong> {{ project.projectDescription }}</p>
+                                            <p><strong>Project Officials and Roles:</strong></p>
+                                            <ul>
+                                                <li *ngFor="let official of project.projectOfficialsAndRoles">
+                                                    {{ official.role }}: {{ official.name }}
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <!-- Climate Finance Data -->
+                                        <div class="bg-yellow-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-cash-coin mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Climate Finance Data</h3>
+                                            </div>
+                                            <p><strong>Climate Objective:</strong> {{ project.climateObjective }}</p>
+                                            <p><strong>Financial Instrument:</strong> {{ project.financialInstrument }}</p>
+                                            <p><strong>Climate Transformation:</strong> {{ project.climateTransformation }}</p>
+                                            <p><strong>Climate Finance Decision-Making:</strong> {{ project.climateFinanceDecisionMaking }}</p>
+                                            <p><strong>Nationally Determined Contributions:</strong> {{ project.nationallyDeterminedContributions }}</p>
+                                            <p><strong>Paris Agreement:</strong> {{ project.parisAgreement }}</p>
+                                            <p><strong>Amount of Investment:</strong> {{ project.amountOfInvestment }}</p>
+                                        </div>
+
+                                        <!-- Institutional Sustainability Data -->
+                                        <div class="bg-blue-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-building mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Institutional Sustainability Data</h3>
+                                            </div>
+                                            <p><strong>Number of Lobbying Activities:</strong> {{ project.numberOfLobbyingActivities }}</p>
+                                            <p><strong>Number of Freedom of Information Requests:</strong> {{ project.numberOfFreedomOfInformationRequests }}</p>
+                                            <p><strong>Number of Freedom of Information Answers:</strong> {{ project.numberOfFreedomOfInformationAnswers }}</p>
+                                            <p><strong>Policy Coherence Documentation:</strong> {{ project.policyCoherenceDocumentation }}</p>
+                                            <p><strong>Freedom of Information Requests and Answers:</strong> {{ project.freedomOfInformationRequestsAndAnswers }}</p>
+                                            <p><strong>Lobbying Meetings Minutes:</strong> {{ project.lobbyingMeetingsMinutes }}</p>
+                                        </div>
+
                                     </div>
                                 </div>
+
                                 <div *ngIf="activeTab === 'preparation'" class="tab-content space-y-4">
-                                    <h2 class="text-2xl font-bold text-gray-700 mb-4">Preparation</h2>
+                                    <div class="flex items-center mb-4">
+                                        <i class="bi bi-gear-fill mr-2 text-2xl text-primary"></i>
+                                        <h2 class="text-2xl font-bold text-gray-700">Preparation</h2>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                                    <!-- Basic Data -->
-                                    <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Basic Data</h3>
-                                        <p><strong>Project Scope (Main Output):</strong> {{ project.projectScope }}</p>
-                                        <p><strong>Contact Details:</strong> {{ project.contactDetails }}</p>
-                                        <p><strong>Funding Sources:</strong> {{ project.fundingSources }}</p>
-                                        <p><strong>Project Budget:</strong> {{ project.projectBudget }}</p>
-                                        <p><strong>Project Budget Approval Date:</strong> {{ project.projectBudgetApprovalDate }}</p>
-                                    </div>
-                                    <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Basic Data - Additional</h3>
-                                        <p><strong>Environmental and Social Impact Assessment:</strong> {{ project.environmentalAndSocialImpactAssessment }}</p>
-                                        <p><strong>Resettlement and Compensation Plan:</strong> {{ project.resettlementAndCompensationPlan }}</p>
-                                        <p><strong>Financial Agreement:</strong> {{ project.financialAgreement }}</p>
-                                        <p><strong>Multiyear Programme and Budget:</strong> {{ project.multiyearProgrammeAndBudget }}</p>
-                                        <p><strong>Procurement Plan:</strong> {{ project.procurementPlan }}</p>
-                                        <p><strong>Project Approval Decision:</strong> {{ project.projectApprovalDecision }}</p>
-                                    </div>
+                                        <!-- Basic Data -->
+                                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-file-earmark-text mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Basic Data</h3>
+                                            </div>
+                                            <p><strong>Project Scope (Main Output):</strong> {{ project.projectScope }}</p>
+                                            <p><strong>Contact Details:</strong> {{ project.contactDetails }}</p>
+                                            <p><strong>Funding Sources:</strong> {{ project.fundingSources }}</p>
+                                            <p><strong>Project Budget:</strong> {{ project.projectBudget }}</p>
+                                            <p><strong>Project Budget Approval Date:</strong> {{ project.projectBudgetApprovalDate }}</p>
+                                        </div>
 
-                                    <!-- Climate Finance Data -->
-                                    <div class="bg-yellow-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Climate Finance Data</h3>
-                                        <p><strong>Funding Source (Climate Finance):</strong> {{ project.fundingSource }}</p>
-                                        <p><strong>Green Climate Fund Accredited Entity:</strong> {{ project.greenClimateFundAccreditedEntity }}</p>
-                                        <p><strong>Accredited Entity Type:</strong> {{ project.accreditedEntityType }}</p>
-                                        <p><strong>Project Preparation Costs:</strong> {{ project.projectPreparationCosts }}</p>
-                                        <p><strong>Project Preparation Period:</strong> {{ project.projectPreparationPeriod }}</p>
-                                        <p><strong>Project Approval Period:</strong> {{ project.projectApprovalPeriod }}</p>
-                                        <p><strong>Ratio of Co-Finance:</strong> {{ project.ratioOfCoFinance }}</p>
-                                        <p><strong>Terms of Climate Finance:</strong> {{ project.termsOfClimateFinance }}</p>
-                                        <p><strong>Carbon Efficiency:</strong> {{ project.carbonEfficiency }}</p>
-                                        <p><strong>Non-Climate Co-Benefits:</strong> {{ project.nonClimateCoBenefits }}</p>
-                                    </div>
-                                    <div class="bg-yellow-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Climate Finance Data - Additional</h3>
-                                        <p><strong>Terms of Climate Finance:</strong> {{ project.termsOfClimateFinance }}</p>
-                                        <p><strong>Carbon Efficiency:</strong> {{ project.carbonEfficiency }}</p>
-                                    </div>
+                                        <!-- Basic Data - Additional -->
+                                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-file-earmark-medical mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Basic Data - Additional</h3>
+                                            </div>
+                                            <p><strong>Environmental and Social Impact Assessment:</strong> {{ project.environmentalAndSocialImpactAssessment }}</p>
+                                            <p><strong>Resettlement and Compensation Plan:</strong> {{ project.resettlementAndCompensationPlan }}</p>
+                                            <p><strong>Financial Agreement:</strong> {{ project.financialAgreement }}</p>
+                                            <p><strong>Multiyear Programme and Budget:</strong> {{ project.multiyearProgrammeAndBudget }}</p>
+                                            <p><strong>Procurement Plan:</strong> {{ project.procurementPlan }}</p>
+                                            <p><strong>Project Approval Decision:</strong> {{ project.projectApprovalDecision }}</p>
+                                        </div>
 
-                                    <!-- Social Sustainability Data -->
-                                    <div class="bg-red-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Social Sustainability Data</h3>
-                                        <p><strong>Beneficiaries:</strong> {{ project.beneficiaries }}</p>
-                                        <p><strong>Number of Beneficiaries:</strong> {{ project.numberOfBeneficiaries }}</p>
-                                        <p><strong>Inclusive Design:</strong> {{ project.inclusiveDesign }}</p>
-                                        <p><strong>Indigenous Land:</strong> {{ project.indigenousLand }}</p>
-                                        <p><strong>Public Consultation Meetings:</strong> {{ project.publicConsultationMeetings }}</p>
-                                        <p><strong>Land Compensation Budget:</strong> {{ project.landCompensationBudget }}</p>
-                                        <p><strong>Labor Obligations:</strong> {{ project.laborObligations }}</p>
-                                    </div>
-                                    <div class="bg-red-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Social Sustainability Data - Additional</h3>
-                                        <p><strong>Inclusive Design:</strong> {{ project.inclusiveDesign }}</p>
-                                        <p><strong>Public Consultation Meetings:</strong> {{ project.publicConsultationMeetings }}</p>
-                                    </div>
+                                        <!-- Climate Finance Data -->
+                                        <div class="bg-yellow-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-cash-coin mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Climate Finance Data</h3>
+                                            </div>
+                                            <p><strong>Funding Source (Climate Finance):</strong> {{ project.fundingSource }}</p>
+                                            <p><strong>Green Climate Fund Accredited Entity:</strong> {{ project.greenClimateFundAccreditedEntity }}</p>
+                                            <p><strong>Accredited Entity Type:</strong> {{ project.accreditedEntityType }}</p>
+                                            <p><strong>Project Preparation Costs:</strong> {{ project.projectPreparationCosts }}</p>
+                                            <p><strong>Project Preparation Period:</strong> {{ project.projectPreparationPeriod }}</p>
+                                            <p><strong>Project Approval Period:</strong> {{ project.projectApprovalPeriod }}</p>
+                                            <p><strong>Ratio of Co-Finance:</strong> {{ project.ratioOfCoFinance }}</p>
+                                            <p><strong>Terms of Climate Finance:</strong> {{ project.termsOfClimateFinance }}</p>
+                                            <p><strong>Carbon Efficiency:</strong> {{ project.carbonEfficiency }}</p>
+                                            <p><strong>Non-Climate Co-Benefits:</strong> {{ project.nonClimateCoBenefits }}</p>
+                                        </div>
 
-                                    <!-- Institutional Sustainability Data -->
-                                    <div class="bg-blue-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Institutional Sustainability Data</h3>
-                                        <p><strong>Number of Freedom of Information Requests:</strong> {{ project.numberOfFreedomOfInformationRequests }}</p>
-                                        <p><strong>Number of Freedom of Information Answers:</strong> {{ project.numberOfFreedomOfInformationAnswers }}</p>
-                                    </div>
-                                    <div class="bg-blue-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Institutional Sustainability Data - Additional</h3>
-                                        <p><strong>Freedom of Information Requests and Answers:</strong> {{ project.freedomOfInformationRequestsAndAnswers }}</p>
-                                        <p><strong>Risk Management Plans:</strong> {{ project.riskManagementPlans }}</p>
-                                    </div>
+                                        <!-- Climate Finance Data - Additional -->
+                                        <div class="bg-yellow-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-cash-coin mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Climate Finance Data - Additional</h3>
+                                            </div>
+                                            <p><strong>Terms of Climate Finance:</strong> {{ project.termsOfClimateFinance }}</p>
+                                            <p><strong>Carbon Efficiency:</strong> {{ project.carbonEfficiency }}</p>
+                                        </div>
 
-                                    <!-- Economic and Financial Sustainability Data -->
-                                    <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Economic and Financial Sustainability Data</h3>
-                                        <p><strong>Procurement Strategy:</strong> {{ project.procurementStrategy }}</p>
-                                        <p><strong>Life-cycle Cost:</strong> {{ project.lifeCycleCost }}</p>
-                                        <p><strong>Life-cycle Cost Calculation Methodology:</strong> {{ project.lifeCycleCostCalculationMethodology }}</p>
-                                        <p><strong>Funding Source for Preparation:</strong> {{ project.fundingSourceForPreparation }}</p>
-                                        <p><strong>Budget for Preparation:</strong> {{ project.budgetForPreparation }}</p>
-                                        <p><strong>Cost-benefit Analysis:</strong> {{ project.costBenefitAnalysis }}</p>
-                                        <p><strong>Value for Money:</strong> {{ project.valueForMoney }}</p>
-                                        <p><strong>Asset Lifetime:</strong> {{ project.assetLifetime }}</p>
-                                        <p><strong>Budget Projections:</strong> {{ project.budgetProjections }}</p>
-                                        <p><strong>Maintenance Plan:</strong> {{ project.maintenancePlan }}</p>
-                                    </div>
+                                        <!-- Social Sustainability Data -->
+                                        <div class="bg-red-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-people-fill mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Social Sustainability Data</h3>
+                                            </div>
+                                            <p><strong>Beneficiaries:</strong> {{ project.beneficiaries }}</p>
+                                            <p><strong>Number of Beneficiaries:</strong> {{ project.numberOfBeneficiaries }}</p>
+                                            <p><strong>Inclusive Design:</strong> {{ project.inclusiveDesign }}</p>
+                                            <p><strong>Indigenous Land:</strong> {{ project.indigenousLand }}</p>
+                                            <p><strong>Public Consultation Meetings:</strong> {{ project.publicConsultationMeetings }}</p>
+                                            <p><strong>Land Compensation Budget:</strong> {{ project.landCompensationBudget }}</p>
+                                            <p><strong>Labor Obligations:</strong> {{ project.laborObligations }}</p>
+                                        </div>
 
-                                    <!-- Environmental and Climate Sustainability Data -->
-                                    <div class="bg-green-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Environmental and Climate Sustainability Data</h3>
-                                        <p><strong>Environmental Impact Category:</strong> {{ project.environmentalImpactCategory }}</p>
-                                        <p><strong>Environmental Measures:</strong> {{ project.environmentalMeasures }}</p>
-                                        <p><strong>Environmental Licenses and Exemptions:</strong> {{ project.environmentalLicensesAndExemptions }}</p>
-                                        <p><strong>Protected Area:</strong> {{ project.protectedArea }}</p>
-                                        <p><strong>Conservation Measures:</strong> {{ project.conservationMeasures }}</p>
-                                        <p><strong>Climate and Disaster Risk Assessment:</strong> {{ project.climateAndDisasterRiskAssessment }}</p>
-                                        <p><strong>Climate Measures:</strong> {{ project.climateMeasures }}</p>
-                                        <p><strong>Forecast of Green House Gas Emissions:</strong> {{ project.forecastOfGreenHouseGasEmissions }}</p>
+                                        <!-- Social Sustainability Data - Additional -->
+                                        <div class="bg-red-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-people-fill mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Social Sustainability Data - Additional</h3>
+                                            </div>
+                                            <p><strong>Inclusive Design:</strong> {{ project.inclusiveDesign }}</p>
+                                            <p><strong>Public Consultation Meetings:</strong> {{ project.publicConsultationMeetings }}</p>
+                                        </div>
+
+                                        <!-- Institutional Sustainability Data -->
+                                        <div class="bg-blue-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-building mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Institutional Sustainability Data</h3>
+                                            </div>
+                                            <p><strong>Number of Freedom of Information Requests:</strong> {{ project.numberOfFreedomOfInformationRequests }}</p>
+                                            <p><strong>Number of Freedom of Information Answers:</strong> {{ project.numberOfFreedomOfInformationAnswers }}</p>
+                                        </div>
+
+                                        <!-- Institutional Sustainability Data - Additional -->
+                                        <div class="bg-blue-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-building mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Institutional Sustainability Data - Additional</h3>
+                                            </div>
+                                            <p><strong>Freedom of Information Requests and Answers:</strong> {{ project.freedomOfInformationRequestsAndAnswers }}</p>
+                                            <p><strong>Risk Management Plans:</strong> {{ project.riskManagementPlans }}</p>
+                                        </div>
+
+                                        <!-- Economic and Financial Sustainability Data -->
+                                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-graph-up-arrow mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Economic and Financial Sustainability Data</h3>
+                                            </div>
+                                            <p><strong>Procurement Strategy:</strong> {{ project.procurementStrategy }}</p>
+                                            <p><strong>Life-cycle Cost:</strong> {{ project.lifeCycleCost }}</p>
+                                            <p><strong>Life-cycle Cost Calculation Methodology:</strong> {{ project.lifeCycleCostCalculationMethodology }}</p>
+                                            <p><strong>Funding Source for Preparation:</strong> {{ project.fundingSourceForPreparation }}</p>
+                                            <p><strong>Budget for Preparation:</strong> {{ project.budgetForPreparation }}</p>
+                                            <p><strong>Cost-benefit Analysis:</strong> {{ project.costBenefitAnalysis }}</p>
+                                            <p><strong>Value for Money:</strong> {{ project.valueForMoney }}</p>
+                                            <p><strong>Asset Lifetime:</strong> {{ project.assetLifetime }}</p>
+                                            <p><strong>Budget Projections:</strong> {{ project.budgetProjections }}</p>
+                                            <p><strong>Maintenance Plan:</strong> {{ project.maintenancePlan }}</p>
+                                        </div>
+
+                                        <!-- Environmental and Climate Sustainability Data -->
+                                        <div class="bg-green-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-tree mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Environmental and Climate Sustainability Data</h3>
+                                            </div>
+                                            <p><strong>Environmental Impact Category:</strong> {{ project.environmentalImpactCategory }}</p>
+                                            <p><strong>Environmental Measures:</strong> {{ project.environmentalMeasures }}</p>
+                                            <p><strong>Environmental Licenses and Exemptions:</strong> {{ project.environmentalLicensesAndExemptions }}</p>
+                                            <p><strong>Protected Area:</strong> {{ project.protectedArea }}</p>
+                                            <p><strong>Conservation Measures:</strong> {{ project.conservationMeasures }}</p>
+                                            <p><strong>Climate and Disaster Risk Assessment:</strong> {{ project.climateAndDisasterRiskAssessment }}</p>
+                                            <p><strong>Climate Measures:</strong> {{ project.climateMeasures }}</p>
+                                            <p><strong>Forecast of Green House Gas Emissions:</strong> {{ project.forecastOfGreenHouseGasEmissions }}</p>
+                                        </div>
+
                                     </div>
                                 </div>
 
                                 <div *ngIf="activeTab === 'tender-management'" class="tab-content space-y-4">
-                                    <h2 class="text-2xl font-bold text-gray-700 mb-4">Tender Management</h2>
+                                    <div class="flex items-center mb-4">
+                                        <i class="bi bi-briefcase-fill mr-2 text-2xl text-primary"></i>
+                                        <h2 class="text-2xl font-bold text-gray-700">Tender Management</h2>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                                    <!-- Basic Data -->
-                                    <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Basic Data</h3>
-                                        <p><strong>Procuring Entity:</strong> {{ project.procuringEntity }}</p>
-                                        <p><strong>Procuring Entity Contact Details:</strong> {{ project.procuringEntityContactDetails }}</p>
-                                        <p><strong>Procurement Process:</strong> {{ project.procurementProcess }}</p>
-                                        <p><strong>Procurement Method:</strong> {{ project.procurementMethod }}</p>
-                                        <p><strong>Number of Firms Tendering:</strong> {{ project.numberOfFirmsTendering }}</p>
-                                        <p><strong>Cost Estimate:</strong> {{ project.costEstimate }}</p>
-                                        <p><strong>Contract Type:</strong> {{ project.contractType }}</p>
-                                        <p><strong>Contract Administration Entity:</strong> {{ project.contractAdministrationEntity }}</p>
-                                        <p><strong>Contract Officials and Roles:</strong></p>
-                                        <ul>
-                                            <li *ngFor="let official of project.contractOfficialsAndRoles">
-                                                {{ official.role }}: {{ official.name }}
-                                            </li>
-                                        </ul>
-                                        <p><strong>Contract Title:</strong> {{ project.contractTitle }}</p>
-                                        <p><strong>Contract Firm(s):</strong> {{ project.contractFirm }}</p>
-                                        <p><strong>Contract Price:</strong> {{ project.contractPrice }}</p>
-                                        <p><strong>Contract Scope of Work:</strong> {{ project.contractScopeOfWork }}</p>
-                                        <p><strong>Contract Start Date:</strong> {{ project.contractStartDate }}</p>
-                                        <p><strong>Contract Duration:</strong> {{ project.contractDuration }}</p>
-                                        <p><strong>Contract Status:</strong> {{ project.contractStatus }}</p>
-                                    </div>
-                                    <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Basic Data - Additional</h3>
-                                        <p><strong>Tender Documents:</strong> {{ project.tenderDocuments }}</p>
-                                        <p><strong>Tender Evaluation Results:</strong> {{ project.tenderEvaluationResults }}</p>
-                                        <p><strong>Project Design Report:</strong> {{ project.projectDesignReport }}</p>
-                                        <p><strong>Contract Agreement and Conditions:</strong> {{ project.contractAgreementAndConditions }}</p>
-                                        <p><strong>Registration and Ownership of Firms:</strong> {{ project.registrationAndOwnershipOfFirms }}</p>
-                                        <p><strong>Specifications and Drawings:</strong> {{ project.specificationsAndDrawings }}</p>
-                                    </div>
+                                        <!-- Basic Data -->
+                                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-card-list mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Basic Data</h3>
+                                            </div>
+                                            <p><strong>Procuring Entity:</strong> {{ project.procuringEntity }}</p>
+                                            <p><strong>Procuring Entity Contact Details:</strong> {{ project.procuringEntityContactDetails }}</p>
+                                            <p><strong>Procurement Process:</strong> {{ project.procurementProcess }}</p>
+                                            <p><strong>Procurement Method:</strong> {{ project.procurementMethod }}</p>
+                                            <p><strong>Number of Firms Tendering:</strong> {{ project.numberOfFirmsTendering }}</p>
+                                            <p><strong>Cost Estimate:</strong> {{ project.costEstimate }}</p>
+                                            <p><strong>Contract Type:</strong> {{ project.contractType }}</p>
+                                            <p><strong>Contract Administration Entity:</strong> {{ project.contractAdministrationEntity }}</p>
+                                            <p><strong>Contract Officials and Roles:</strong></p>
+                                            <ul>
+                                                <li *ngFor="let official of project.contractOfficialsAndRoles">
+                                                    {{ official.role }}: {{ official.name }}
+                                                </li>
+                                            </ul>
+                                            <p><strong>Contract Title:</strong> {{ project.contractTitle }}</p>
+                                            <p><strong>Contract Firm(s):</strong> {{ project.contractFirm }}</p>
+                                            <p><strong>Contract Price:</strong> {{ project.contractPrice }}</p>
+                                            <p><strong>Contract Scope of Work:</strong> {{ project.contractScopeOfWork }}</p>
+                                            <p><strong>Contract Start Date:</strong> {{ project.contractStartDate }}</p>
+                                            <p><strong>Contract Duration:</strong> {{ project.contractDuration }}</p>
+                                            <p><strong>Contract Status:</strong> {{ project.contractStatus }}</p>
+                                        </div>
 
-                                    <!-- Social Sustainability Data -->
-                                    <div class="bg-red-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Social Sustainability Data</h3>
-                                        <p><strong>Labor Budget:</strong> {{ project.laborBudget }}</p>
-                                        <p><strong>Health and Safety Certifications:</strong> {{ project.healthAndSafetyCertifications }}</p>
-                                    </div>
+                                        <!-- Basic Data - Additional -->
+                                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-file-earmark-fill mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Basic Data - Additional</h3>
+                                            </div>
+                                            <p><strong>Tender Documents:</strong> {{ project.tenderDocuments }}</p>
+                                            <p><strong>Tender Evaluation Results:</strong> {{ project.tenderEvaluationResults }}</p>
+                                            <p><strong>Project Design Report:</strong> {{ project.projectDesignReport }}</p>
+                                            <p><strong>Contract Agreement and Conditions:</strong> {{ project.contractAgreementAndConditions }}</p>
+                                            <p><strong>Registration and Ownership of Firms:</strong> {{ project.registrationAndOwnershipOfFirms }}</p>
+                                            <p><strong>Specifications and Drawings:</strong> {{ project.specificationsAndDrawings }}</p>
+                                        </div>
 
-                                    <!-- Institutional Sustainability Data -->
-                                    <div class="bg-blue-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Institutional Sustainability Data</h3>
-                                        <p><strong>Number of Freedom of Information Requests:</strong> {{ project.numberOfFreedomOfInformationRequests }}</p>
-                                        <p><strong>Number of Freedom of Information Answers:</strong> {{ project.numberOfFreedomOfInformationAnswers }}</p>
-                                        <p><strong>Beneficial Ownership:</strong> {{ project.beneficialOwnership }}</p>
-                                        <p><strong>Sustainability Criteria:</strong> {{ project.sustainabilityCriteria }}</p>
-                                    </div>
-                                    <div class="bg-blue-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Institutional Sustainability Data - Additional</h3>
-                                        <p><strong>Freedom of Information Requests and Answers:</strong> {{ project.freedomOfInformationRequestsAndAnswers }}</p>
-                                        <p><strong>Anti-Corruption Certifications:</strong> {{ project.antiCorruptionCertifications }}</p>
-                                    </div>
+                                        <!-- Social Sustainability Data -->
+                                        <div class="bg-red-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-people-fill mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Social Sustainability Data</h3>
+                                            </div>
+                                            <p><strong>Labor Budget:</strong> {{ project.laborBudget }}</p>
+                                            <p><strong>Health and Safety Certifications:</strong> {{ project.healthAndSafetyCertifications }}</p>
+                                        </div>
 
-                                    <!-- Environmental and Climate Sustainability Data -->
-                                    <div class="bg-green-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Environmental and Climate Sustainability Data</h3>
-                                        <p><strong>Number of Environmental Certifications:</strong> {{ project.numberOfEnvironmentalCertifications }}</p>
-                                    </div>
-                                    <div class="bg-green-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Environmental and Climate Sustainability Data - Additional</h3>
-                                        <p><strong>Environmental Certifications:</strong> {{ project.environmentalCertifications }}</p>
+                                        <!-- Institutional Sustainability Data -->
+                                        <div class="bg-blue-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-building mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Institutional Sustainability Data</h3>
+                                            </div>
+                                            <p><strong>Number of Freedom of Information Requests:</strong> {{ project.numberOfFreedomOfInformationRequests }}</p>
+                                            <p><strong>Number of Freedom of Information Answers:</strong> {{ project.numberOfFreedomOfInformationAnswers }}</p>
+                                            <p><strong>Beneficial Ownership:</strong> {{ project.beneficialOwnership }}</p>
+                                            <p><strong>Sustainability Criteria:</strong> {{ project.sustainabilityCriteria }}</p>
+                                        </div>
+
+                                        <!-- Institutional Sustainability Data - Additional -->
+                                        <div class="bg-blue-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-building mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Institutional Sustainability Data - Additional</h3>
+                                            </div>
+                                            <p><strong>Freedom of Information Requests and Answers:</strong> {{ project.freedomOfInformationRequestsAndAnswers }}</p>
+                                            <p><strong>Anti-Corruption Certifications:</strong> {{ project.antiCorruptionCertifications }}</p>
+                                        </div>
+
+                                        <!-- Environmental and Climate Sustainability Data -->
+                                        <div class="bg-green-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-tree-fill mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Environmental and Climate Sustainability Data</h3>
+                                            </div>
+                                            <p><strong>Number of Environmental Certifications:</strong> {{ project.numberOfEnvironmentalCertifications }}</p>
+                                        </div>
+
+                                        <!-- Environmental and Climate Sustainability Data - Additional -->
+                                        <div class="bg-green-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-tree-fill mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Environmental and Climate Sustainability Data - Additional</h3>
+                                            </div>
+                                            <p><strong>Environmental Certifications:</strong> {{ project.environmentalCertifications }}</p>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div *ngIf="activeTab === 'implementation'" class="tab-content space-y-4">
-                                    <h2 class="text-2xl font-bold text-gray-700 mb-4">Implementation</h2>
+                                    <div class="flex items-center mb-4">
+                                        <i class="bi bi-gear-fill mr-2 text-2xl text-primary"></i>
+                                        <h2 class="text-2xl font-bold text-gray-700">Implementation</h2>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                                    <!-- Basic Data -->
-                                    <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Basic Data</h3>
-                                        <p><strong>Variation to Contract Price:</strong> {{ project.variationToContractPrice }}</p>
-                                        <p><strong>Escalation of Contract Price:</strong> {{ project.escalationOfContractPrice }}</p>
-                                        <p><strong>Variation to Contract Duration:</strong> {{ project.variationToContractDuration }}</p>
-                                        <p><strong>Variation to Contract Scope:</strong> {{ project.variationToContractScope }}</p>
-                                        <p><strong>Reasons for Price Changes:</strong> {{ project.reasonsForPriceChanges }}</p>
-                                        <p><strong>Reasons for Scope Changes:</strong> {{ project.reasonsForScope }}</p>
-                                        <p><strong>Reasons for Duration Changes:</strong> {{ project.reasonsForDurationChanges }}</p>
-                                    </div>
-                                    <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Basic Data - Additional</h3>
-                                        <p><strong>List of Variations, Changes, Amendments:</strong> {{ project.listOfVariationsChangesAmendments }}</p>
-                                        <p><strong>List of Escalation Approvals:</strong> {{ project.listOfEscalationApprovals }}</p>
-                                        <p><strong>Quality Assurance Reports:</strong> {{ project.qualityAssuranceReports }}</p>
-                                        <p><strong>Payment Certificates:</strong> {{ project.paymentCertificates }}</p>
-                                        <p><strong>Contract Amendments:</strong> {{ project.contractAmendments }}</p>
-                                    </div>
+                                        <!-- Basic Data -->
+                                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-card-list mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Basic Data</h3>
+                                            </div>
+                                            <p><strong>Variation to Contract Price:</strong> {{ project.variationToContractPrice }}</p>
+                                            <p><strong>Escalation of Contract Price:</strong> {{ project.escalationOfContractPrice }}</p>
+                                            <p><strong>Variation to Contract Duration:</strong> {{ project.variationToContractDuration }}</p>
+                                            <p><strong>Variation to Contract Scope:</strong> {{ project.variationToContractScope }}</p>
+                                            <p><strong>Reasons for Price Changes:</strong> {{ project.reasonsForPriceChanges }}</p>
+                                            <p><strong>Reasons for Scope Changes:</strong> {{ project.reasonsForScope }}</p>
+                                            <p><strong>Reasons for Duration Changes:</strong> {{ project.reasonsForDurationChanges }}</p>
+                                        </div>
 
-                                    <!-- Climate Finance Data -->
-                                    <div class="bg-yellow-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Climate Finance Data</h3>
-                                        <p><strong>Disbursement Records (Payments):</strong> {{ project.disbursementRecords }}</p>
-                                        <p><strong>Type of Monitoring:</strong> {{ project.typeOfMonitoring }}</p>
-                                        <p><strong>Performance Monitoring:</strong> {{ project.performanceMonitoring }}</p>
-                                        <p><strong>Reporting Period:</strong> {{ project.reportingPeriod }}</p>
-                                    </div>
-                                    <div class="bg-yellow-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Climate Finance Data - Additional</h3>
-                                        <p><strong>Independent Monitoring:</strong> {{ project.independentMonitoring }}</p>
-                                    </div>
+                                        <!-- Basic Data - Additional -->
+                                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-file-earmark-fill mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Basic Data - Additional</h3>
+                                            </div>
+                                            <p><strong>List of Variations, Changes, Amendments:</strong> {{ project.listOfVariationsChangesAmendments }}</p>
+                                            <p><strong>List of Escalation Approvals:</strong> {{ project.listOfEscalationApprovals }}</p>
+                                            <p><strong>Quality Assurance Reports:</strong> {{ project.qualityAssuranceReports }}</p>
+                                            <p><strong>Payment Certificates:</strong> {{ project.paymentCertificates }}</p>
+                                            <p><strong>Contract Amendments:</strong> {{ project.contractAmendments }}</p>
+                                        </div>
 
-                                    <!-- Social Sustainability Data -->
-                                    <div class="bg-red-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Social Sustainability Data</h3>
-                                        <p><strong>Jobs Generated:</strong> {{ project.jobsGenerated }}</p>
-                                        <p><strong>Inclusive Implementation:</strong> {{ project.inclusiveImplementation }}</p>
-                                        <p><strong>Workers' Accidents:</strong> {{ project.workersAccidents }}</p>
-                                    </div>
-                                    <div class="bg-red-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Social Sustainability Data - Additional</h3>
-                                        <p><strong>Construction Materials Testing:</strong> {{ project.constructionMaterialsTesting }}</p>
-                                        <p><strong>Building Inspections:</strong> {{ project.buildingInspections }}</p>
-                                    </div>
+                                        <!-- Climate Finance Data -->
+                                        <div class="bg-yellow-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-bar-chart-line-fill mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Climate Finance Data</h3>
+                                            </div>
+                                            <p><strong>Disbursement Records (Payments):</strong> {{ project.disbursementRecords }}</p>
+                                            <p><strong>Type of Monitoring:</strong> {{ project.typeOfMonitoring }}</p>
+                                            <p><strong>Performance Monitoring:</strong> {{ project.performanceMonitoring }}</p>
+                                            <p><strong>Reporting Period:</strong> {{ project.reportingPeriod }}</p>
+                                        </div>
 
-                                    <!-- Institutional Sustainability Data -->
-                                    <div class="bg-blue-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Institutional Sustainability Data</h3>
-                                        <p><strong>Number of Freedom of Information Requests:</strong> {{ project.numberOfFreedomOfInformationRequests }}</p>
-                                        <p><strong>Number of Freedom of Information Answers:</strong> {{ project.numberOfFreedomOfInformationAnswers }}</p>
-                                    </div>
-                                    <div class="bg-blue-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Institutional Sustainability Data - Additional</h3>
-                                        <p><strong>Freedom of Information Requests and Answers:</strong> {{ project.freedomOfInformationRequestsAndAnswers }}</p>
-                                        <p><strong>Oversight Reports:</strong> {{ project.oversightReports }}</p>
-                                        <p><strong>Independent Mid Term Evaluation:</strong> {{ project.independentMidTermEvaluation }}</p>
-                                    </div>
+                                        <!-- Climate Finance Data - Additional -->
+                                        <div class="bg-yellow-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-bar-chart-line-fill mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Climate Finance Data - Additional</h3>
+                                            </div>
+                                            <p><strong>Independent Monitoring:</strong> {{ project.independentMonitoring }}</p>
+                                        </div>
 
-                                    <!-- Economic and Financial Sustainability Data -->
-                                    <div class="bg-black p-4 rounded-lg shadow-sm text-white">
-                                        <h3 class="text-lg font-bold mb-2">Economic and Financial Sustainability Data</h3>
-                                        <p><strong>Budget Shortfall:</strong> {{ project.budgetShortfall }}</p>
-                                        <p><strong>Funding Source for Implementation:</strong> {{ project.fundingSourceForImplementation }}</p>
-                                        <p><strong>Budget for Implementation:</strong> {{ project.budgetForImplementation }}</p>
-                                    </div>
+                                        <!-- Social Sustainability Data -->
+                                        <div class="bg-red-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-people-fill mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Social Sustainability Data</h3>
+                                            </div>
+                                            <p><strong>Jobs Generated:</strong> {{ project.jobsGenerated }}</p>
+                                            <p><strong>Inclusive Implementation:</strong> {{ project.inclusiveImplementation }}</p>
+                                            <p><strong>Workers' Accidents:</strong> {{ project.workersAccidents }}</p>
+                                        </div>
 
-                                    <!-- Environmental and Climate Sustainability Data -->
-                                    <div class="bg-green-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Environmental and Climate Sustainability Data</h3>
-                                        <p><strong>Environmental Measures:</strong> {{ project.environmentalMeasures }}</p>
-                                        <p><strong>Conservation Measures:</strong> {{ project.conservationMeasures }}</p>
-                                        <p><strong>Climate Measures:</strong> {{ project.climateMeasures }}</p>
-                                    </div>
-                                    <div class="bg-green-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Environmental and Climate Sustainability Data - Additional</h3>
-                                        <p><strong>Environmental Licenses and Exemptions:</strong> {{ project.environmentalLicensesAndExemptions }}</p>
+                                        <!-- Social Sustainability Data - Additional -->
+                                        <div class="bg-red-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-people-fill mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Social Sustainability Data - Additional</h3>
+                                            </div>
+                                            <p><strong>Construction Materials Testing:</strong> {{ project.constructionMaterialsTesting }}</p>
+                                            <p><strong>Building Inspections:</strong> {{ project.buildingInspections }}</p>
+                                        </div>
+
+                                        <!-- Institutional Sustainability Data -->
+                                        <div class="bg-blue-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-building mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Institutional Sustainability Data</h3>
+                                            </div>
+                                            <p><strong>Number of Freedom of Information Requests:</strong> {{ project.numberOfFreedomOfInformationRequests }}</p>
+                                            <p><strong>Number of Freedom of Information Answers:</strong> {{ project.numberOfFreedomOfInformationAnswers }}</p>
+                                        </div>
+
+                                        <!-- Institutional Sustainability Data - Additional -->
+                                        <div class="bg-blue-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-building mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Institutional Sustainability Data - Additional</h3>
+                                            </div>
+                                            <p><strong>Freedom of Information Requests and Answers:</strong> {{ project.freedomOfInformationRequestsAndAnswers }}</p>
+                                            <p><strong>Oversight Reports:</strong> {{ project.oversightReports }}</p>
+                                            <p><strong>Independent Mid Term Evaluation:</strong> {{ project.independentMidTermEvaluation }}</p>
+                                        </div>
+
+                                        <!-- Economic and Financial Sustainability Data -->
+                                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-currency-exchange mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Economic and Financial Sustainability Data</h3>
+                                            </div>
+                                            <p><strong>Budget Shortfall:</strong> {{ project.budgetShortfall }}</p>
+                                            <p><strong>Funding Source for Implementation:</strong> {{ project.fundingSourceForImplementation }}</p>
+                                            <p><strong>Budget for Implementation:</strong> {{ project.budgetForImplementation }}</p>
+                                        </div>
+
+                                        <!-- Environmental and Climate Sustainability Data -->
+                                        <div class="bg-green-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-tree-fill mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Environmental and Climate Sustainability Data</h3>
+                                            </div>
+                                            <p><strong>Environmental Measures:</strong> {{ project.environmentalMeasures }}</p>
+                                            <p><strong>Conservation Measures:</strong> {{ project.conservationMeasures }}</p>
+                                            <p><strong>Climate Measures:</strong> {{ project.climateMeasures }}</p>
+                                        </div>
+
+                                        <!-- Environmental and Climate Sustainability Data - Additional -->
+                                        <div class="bg-green-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-tree-fill mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Environmental and Climate Sustainability Data - Additional</h3>
+                                            </div>
+                                            <p><strong>Environmental Licenses and Exemptions:</strong> {{ project.environmentalLicensesAndExemptions }}</p>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div *ngIf="activeTab === 'completion'" class="tab-content space-y-4">
-                                    <h2 class="text-2xl font-bold text-gray-700 mb-4">Completion</h2>
+                                    <div class="flex items-center mb-4">
+                                        <i class="bi bi-check-circle-fill mr-2 text-2xl text-primary"></i>
+                                        <h2 class="text-2xl font-bold text-gray-700">Completion</h2>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                                    <!-- Basic Data -->
-                                    <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Basic Data</h3>
-                                        <p><strong>Project Status:</strong> {{ project.projectStatus }}</p>
-                                        <p><strong>Completion Cost:</strong> {{ project.completionCost }}</p>
-                                        <p><strong>Completion Date:</strong> {{ project.completionDate }}</p>
-                                        <p><strong>Scope at Completion:</strong> {{ project.scopeAtCompletion }}</p>
-                                        <p><strong>Reasons for Project Changes:</strong> {{ project.reasonsForProjectChanges }}</p>
-                                    </div>
-                                    <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Basic Data - Additional</h3>
-                                        <p><strong>Implementation Progress Reports:</strong> {{ project.implementationProgressReports }}</p>
-                                        <p><strong>Budget Amendment Decision:</strong> {{ project.budgetAmendmentDecision }}</p>
-                                        <p><strong>Project Completion Report:</strong> {{ project.projectCompletionReport }}</p>
-                                        <p><strong>Project Evaluation Report:</strong> {{ project.projectEvaluationReport }}</p>
-                                        <p><strong>Technical Audit Reports:</strong> {{ project.technicalAuditReports }}</p>
-                                        <p><strong>Financial Audit Reports:</strong> {{ project.financialAuditReports }}</p>
-                                    </div>
+                                        <!-- Basic Data -->
+                                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-card-list mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Basic Data</h3>
+                                            </div>
+                                            <p><strong>Project Status:</strong> {{ project.projectStatus }}</p>
+                                            <p><strong>Completion Cost:</strong> {{ project.completionCost }}</p>
+                                            <p><strong>Completion Date:</strong> {{ project.completionDate }}</p>
+                                            <p><strong>Scope at Completion:</strong> {{ project.scopeAtCompletion }}</p>
+                                            <p><strong>Reasons for Project Changes:</strong> {{ project.reasonsForProjectChanges }}</p>
+                                        </div>
 
-                                    <!-- Institutional Sustainability Data -->
-                                    <div class="bg-blue-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Institutional Sustainability Data</h3>
-                                        <p><strong>Number of Freedom of Information Requests:</strong> {{ project.numberOfFreedomOfInformationRequests }}</p>
-                                        <p><strong>Number of Freedom of Information Answers:</strong> {{ project.numberOfFreedomOfInformationAnswers }}</p>
-                                    </div>
-                                    <div class="bg-blue-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Institutional Sustainability Data - Additional</h3>
-                                        <p><strong>Freedom of Information Requests and Answers:</strong> {{ project.freedomOfInformationRequestsAndAnswers }}</p>
+                                        <!-- Basic Data - Additional -->
+                                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-file-earmark-fill mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Basic Data - Additional</h3>
+                                            </div>
+                                            <p><strong>Implementation Progress Reports:</strong> {{ project.implementationProgressReports }}</p>
+                                            <p><strong>Budget Amendment Decision:</strong> {{ project.budgetAmendmentDecision }}</p>
+                                            <p><strong>Project Completion Report:</strong> {{ project.projectCompletionReport }}</p>
+                                            <p><strong>Project Evaluation Report:</strong> {{ project.projectEvaluationReport }}</p>
+                                            <p><strong>Technical Audit Reports:</strong> {{ project.technicalAuditReports }}</p>
+                                            <p><strong>Financial Audit Reports:</strong> {{ project.financialAuditReports }}</p>
+                                        </div>
+
+                                        <!-- Institutional Sustainability Data -->
+                                        <div class="bg-blue-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-building mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Institutional Sustainability Data</h3>
+                                            </div>
+                                            <p><strong>Number of Freedom of Information Requests:</strong> {{ project.numberOfFreedomOfInformationRequests }}</p>
+                                            <p><strong>Number of Freedom of Information Answers:</strong> {{ project.numberOfFreedomOfInformationAnswers }}</p>
+                                        </div>
+
+                                        <!-- Institutional Sustainability Data - Additional -->
+                                        <div class="bg-blue-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-building mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Institutional Sustainability Data - Additional</h3>
+                                            </div>
+                                            <p><strong>Freedom of Information Requests and Answers:</strong> {{ project.freedomOfInformationRequestsAndAnswers }}</p>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div *ngIf="activeTab === 'operation-and-maintenance'" class="tab-content space-y-4">
-                                    <h2 class="text-2xl font-bold text-gray-700 mb-4">Operation and Maintenance</h2>
+                                    <div class="flex items-center mb-4">
+                                        <i class="bi bi-tools mr-2 text-2xl text-primary"></i>
+                                        <h2 class="text-2xl font-bold text-gray-700">Operation and Maintenance</h2>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                                    <!-- Basic Data -->
-                                    <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Basic Data</h3>
-                                        <p><strong>Asset Name:</strong> {{ project.assetName }}</p>
-                                        <p><strong>Asset Location:</strong> {{ project.assetLocation }}</p>
-                                        <p><strong>Type of Maintenance Works:</strong> {{ project.typeOfMaintenanceWorks }}</p>
-                                        <p><strong>Works Description:</strong> {{ project.worksDescription }}</p>
-                                        <p><strong>Project Officials and Roles:</strong></p>
-                                        <ul>
-                                            <li *ngFor="let official of project.projectOfficialsAndRoles">
-                                                {{ official.role }}: {{ official.name }}
-                                            </li>
-                                        </ul>
-                                        <p><strong>Maintenance Scope (Main Output):</strong> {{ project.maintenanceScope }}</p>
-                                    </div>
-                                    <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Basic Data - Additional</h3>
-                                        <p><strong>Maintenance Plan:</strong> {{ project.maintenancePlan }}</p>
-                                    </div>
+                                        <!-- Basic Data -->
+                                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-card-list mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Basic Data</h3>
+                                            </div>
+                                            <p><strong>Asset Name:</strong> {{ project.assetName }}</p>
+                                            <p><strong>Asset Location:</strong> {{ project.assetLocation }}</p>
+                                            <p><strong>Type of Maintenance Works:</strong> {{ project.typeOfMaintenanceWorks }}</p>
+                                            <p><strong>Works Description:</strong> {{ project.worksDescription }}</p>
+                                            <p><strong>Project Officials and Roles:</strong></p>
+                                            <ul>
+                                                <li *ngFor="let official of project.projectOfficialsAndRoles">
+                                                    {{ official.role }}: {{ official.name }}
+                                                </li>
+                                            </ul>
+                                            <p><strong>Maintenance Scope (Main Output):</strong> {{ project.maintenanceScope }}</p>
+                                        </div>
 
-                                    <!-- Extended Basic Data -->
-                                    <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Extended Basic Data</h3>
-                                        <p><strong>Procuring Entity:</strong> {{ project.procuringEntity }}</p>
-                                        <p><strong>Procuring Entity Contact Details:</strong> {{ project.procuringEntityContactDetails }}</p>
-                                        <p><strong>Procurement Process:</strong> {{ project.procurementProcess }}</p>
-                                        <p><strong>Procurement Method:</strong> {{ project.procurementMethod }}</p>
-                                        <p><strong>Number of Firms Tendering:</strong> {{ project.numberOfFirmsTendering }}</p>
-                                        <p><strong>Cost Estimate:</strong> {{ project.costEstimate }}</p>
-                                        <p><strong>Contract Type:</strong> {{ project.contractType }}</p>
-                                        <p><strong>Contract Administration Entity:</strong> {{ project.contractAdministrationEntity }}</p>
-                                        <p><strong>Contract Officials and Roles:</strong></p>
-                                        <ul>
-                                            <li *ngFor="let official of project.contractOfficialsAndRoles">
-                                                {{ official.role }}: {{ official.name }}
-                                            </li>
-                                        </ul>
-                                        <p><strong>Contract Title:</strong> {{ project.contractTitle }}</p>
-                                        <p><strong>Contract Firm(s):</strong> {{ project.contractFirm }}</p>
-                                        <p><strong>Contract Price:</strong> {{ project.contractPrice }}</p>
-                                        <p><strong>Contract Scope of Work:</strong> {{ project.contractScopeOfWork }}</p>
-                                        <p><strong>Contract Start Date:</strong> {{ project.contractStartDate }}</p>
-                                        <p><strong>Contract Duration:</strong> {{ project.contractDuration }}</p>
-                                        <p><strong>Contract Status:</strong> {{ project.contractStatus }}</p>
-                                    </div>
-                                    <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Extended Basic Data - Additional</h3>
-                                        <p><strong>Tender Documents:</strong> {{ project.tenderDocuments }}</p>
-                                        <p><strong>Tender Evaluation Results:</strong> {{ project.tenderEvaluationResults }}</p>
-                                        <p><strong>Project Design Report:</strong> {{ project.projectDesignReport }}</p>
-                                        <p><strong>Contract Agreement and Conditions:</strong> {{ project.contractAgreementAndConditions }}</p>
-                                        <p><strong>Registration and Ownership of Firms:</strong> {{ project.registrationAndOwnershipOfFirms }}</p>
-                                        <p><strong>Specifications and Drawings:</strong> {{ project.specificationsAndDrawings }}</p>
-                                    </div>
+                                        <!-- Basic Data - Additional -->
+                                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-file-earmark-fill mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Basic Data - Additional</h3>
+                                            </div>
+                                            <p><strong>Maintenance Plan:</strong> {{ project.maintenancePlan }}</p>
+                                        </div>
 
-                                    <!-- Climate Finance Data -->
-                                    <div class="bg-yellow-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Climate Finance Data</h3>
-                                        <p><strong>Impact Measurement:</strong> {{ project.impactMeasurement }}</p>
-                                        <p><strong>Carbon Footprint:</strong> {{ project.carbonFootprint }}</p>
-                                    </div>
-                                    <div class="bg-yellow-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Climate Finance Data - Additional</h3>
-                                        <p><strong>Carbon Footprint Document:</strong> {{ project.carbonFootprintDocument }}</p>
-                                    </div>
+                                        <!-- Extended Basic Data -->
+                                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-card-list mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Extended Basic Data</h3>
+                                            </div>
+                                            <p><strong>Procuring Entity:</strong> {{ project.procuringEntity }}</p>
+                                            <p><strong>Procuring Entity Contact Details:</strong> {{ project.procuringEntityContactDetails }}</p>
+                                            <p><strong>Procurement Process:</strong> {{ project.procurementProcess }}</p>
+                                            <p><strong>Procurement Method:</strong> {{ project.procurementMethod }}</p>
+                                            <p><strong>Number of Firms Tendering:</strong> {{ project.numberOfFirmsTendering }}</p>
+                                            <p><strong>Cost Estimate:</strong> {{ project.costEstimate }}</p>
+                                            <p><strong>Contract Type:</strong> {{ project.contractType }}</p>
+                                            <p><strong>Contract Administration Entity:</strong> {{ project.contractAdministrationEntity }}</p>
+                                            <p><strong>Contract Officials and Roles:</strong></p>
+                                            <ul>
+                                                <li *ngFor="let official of project.contractOfficialsAndRoles">
+                                                    {{ official.role }}: {{ official.name }}
+                                                </li>
+                                            </ul>
+                                            <p><strong>Contract Title:</strong> {{ project.contractTitle }}</p>
+                                            <p><strong>Contract Firm(s):</strong> {{ project.contractFirm }}</p>
+                                            <p><strong>Contract Price:</strong> {{ project.contractPrice }}</p>
+                                            <p><strong>Contract Scope of Work:</strong> {{ project.contractScopeOfWork }}</p>
+                                            <p><strong>Contract Start Date:</strong> {{ project.contractStartDate }}</p>
+                                            <p><strong>Contract Duration:</strong> {{ project.contractDuration }}</p>
+                                            <p><strong>Contract Status:</strong> {{ project.contractStatus }}</p>
+                                        </div>
 
-                                    <!-- Social Sustainability Data -->
-                                    <div class="bg-red-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Social Sustainability Data</h3>
-                                        <p><strong>Jobs Generated:</strong> {{ project.jobsGenerated }}</p>
-                                        <p><strong>Inclusive Implementation:</strong> {{ project.inclusiveImplementation }}</p>
-                                        <p><strong>Workers' Accidents:</strong> {{ project.workersAccidents }}</p>
-                                    </div>
-                                    <div class="bg-red-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Social Sustainability Data - Additional</h3>
-                                        <p><strong>Jobs Generated:</strong> {{ project.jobsGenerated }}</p>
-                                        <p><strong>Inclusive Implementation:</strong> {{ project.inclusiveImplementation }}</p>
-                                        <p><strong>Workers' Accidents:</strong> {{ project.workersAccidents }}</p>
-                                    </div>
+                                        <!-- Extended Basic Data - Additional -->
+                                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-file-earmark-fill mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Extended Basic Data - Additional</h3>
+                                            </div>
+                                            <p><strong>Tender Documents:</strong> {{ project.tenderDocuments }}</p>
+                                            <p><strong>Tender Evaluation Results:</strong> {{ project.tenderEvaluationResults }}</p>
+                                            <p><strong>Project Design Report:</strong> {{ project.projectDesignReport }}</p>
+                                            <p><strong>Contract Agreement and Conditions:</strong> {{ project.contractAgreementAndConditions }}</p>
+                                            <p><strong>Registration and Ownership of Firms:</strong> {{ project.registrationAndOwnershipOfFirms }}</p>
+                                            <p><strong>Specifications and Drawings:</strong> {{ project.specificationsAndDrawings }}</p>
+                                        </div>
 
-                                    <!-- Institutional Sustainability Data -->
-                                    <div class="bg-blue-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Institutional Sustainability Data</h3>
-                                        <p><strong>Number of Freedom of Information Requests:</strong> {{ project.numberOfFreedomOfInformationRequests }}</p>
-                                        <p><strong>Number of Freedom of Information Answers:</strong> {{ project.numberOfFreedomOfInformationAnswers }}</p>
-                                    </div>
-                                    <div class="bg-blue-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Institutional Sustainability Data - Additional</h3>
-                                        <p><strong>Freedom of Information Requests and Answers:</strong> {{ project.freedomOfInformationRequestsAndAnswers }}</p>
-                                    </div>
+                                        <!-- Climate Finance Data -->
+                                        <div class="bg-yellow-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-wallet-fill mr-2 text-xl text-yellow-600"></i>
+                                                <h3 class="text-lg font-bold">Climate Finance Data</h3>
+                                            </div>
+                                            <p><strong>Impact Measurement:</strong> {{ project.impactMeasurement }}</p>
+                                            <p><strong>Carbon Footprint:</strong> {{ project.carbonFootprint }}</p>
+                                        </div>
 
-                                    <!-- Economic and Financial Sustainability Data -->
-                                    <div class="bg-black p-4 rounded-lg shadow-sm text-white">
-                                        <h3 class="text-lg font-bold mb-2">Economic and Financial Sustainability Data</h3>
-                                        <p><strong>Funding Source for Maintenance:</strong> {{ project.fundingSourceForMaintenance }}</p>
-                                        <p><strong>Budget for Maintenance:</strong> {{ project.budgetForMaintenance }}</p>
+                                        <!-- Climate Finance Data - Additional -->
+                                        <div class="bg-yellow-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-wallet-fill mr-2 text-xl text-yellow-600"></i>
+                                                <h3 class="text-lg font-bold">Climate Finance Data - Additional</h3>
+                                            </div>
+                                            <p><strong>Carbon Footprint Document:</strong> {{ project.carbonFootprintDocument }}</p>
+                                        </div>
+
+                                        <!-- Social Sustainability Data -->
+                                        <div class="bg-red-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-people-fill mr-2 text-xl text-red-600"></i>
+                                                <h3 class="text-lg font-bold">Social Sustainability Data</h3>
+                                            </div>
+                                            <p><strong>Jobs Generated:</strong> {{ project.jobsGenerated }}</p>
+                                            <p><strong>Inclusive Implementation:</strong> {{ project.inclusiveImplementation }}</p>
+                                            <p><strong>Workers' Accidents:</strong> {{ project.workersAccidents }}</p>
+                                        </div>
+
+                                        <!-- Social Sustainability Data - Additional -->
+                                        <div class="bg-red-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-people-fill mr-2 text-xl text-red-600"></i>
+                                                <h3 class="text-lg font-bold">Social Sustainability Data - Additional</h3>
+                                            </div>
+                                            <p><strong>Jobs Generated:</strong> {{ project.jobsGenerated }}</p>
+                                            <p><strong>Inclusive Implementation:</strong> {{ project.inclusiveImplementation }}</p>
+                                            <p><strong>Workers' Accidents:</strong> {{ project.workersAccidents }}</p>
+                                        </div>
+
+                                        <!-- Institutional Sustainability Data -->
+                                        <div class="bg-blue-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-building mr-2 text-xl text-blue-600"></i>
+                                                <h3 class="text-lg font-bold">Institutional Sustainability Data</h3>
+                                            </div>
+                                            <p><strong>Number of Freedom of Information Requests:</strong> {{ project.numberOfFreedomOfInformationRequests }}</p>
+                                            <p><strong>Number of Freedom of Information Answers:</strong> {{ project.numberOfFreedomOfInformationAnswers }}</p>
+                                        </div>
+
+                                        <!-- Institutional Sustainability Data - Additional -->
+                                        <div class="bg-blue-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-building mr-2 text-xl text-blue-600"></i>
+                                                <h3 class="text-lg font-bold">Institutional Sustainability Data - Additional</h3>
+                                            </div>
+                                            <p><strong>Freedom of Information Requests and Answers:</strong> {{ project.freedomOfInformationRequestsAndAnswers }}</p>
+                                        </div>
+
+                                        <!-- Economic and Financial Sustainability Data -->
+                                        <div class="bg-black p-4 rounded-lg shadow-sm text-white">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-graph-up-arrow mr-2 text-xl"></i>
+                                                <h3 class="text-lg font-bold">Economic and Financial Sustainability Data</h3>
+                                            </div>
+                                            <p><strong>Funding Source for Maintenance:</strong> {{ project.fundingSourceForMaintenance }}</p>
+                                            <p><strong>Budget for Maintenance:</strong> {{ project.budgetForMaintenance }}</p>
+                                        </div>
                                     </div>
                                 </div>
 
 
                                 <div *ngIf="activeTab === 'decommissioning'" class="tab-content space-y-4">
-                                    <h2 class="text-2xl font-bold text-gray-700 mb-4">Decommissioning</h2>
+                                    <div class="flex items-center mb-4">
+                                        <i class="bi bi-x-circle mr-2 text-2xl text-primary"></i>
+                                        <h2 class="text-2xl font-bold text-gray-700">Decommissioning</h2>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                                    <!-- Basic Data -->
-                                    <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Basic Data</h3>
-                                        <p><strong>Asset Name:</strong> {{ project.assetName }}</p>
-                                        <p><strong>Asset Location:</strong> {{ project.assetLocation }}</p>
-                                    </div>
-                                    <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Basic Data - Additional</h3>
-                                        <p><strong>Decision of Asset Disposal:</strong> {{ project.decisionOfAssetDisposal }}</p>
-                                    </div>
+                                        <!-- Basic Data -->
+                                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-card-list mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Basic Data</h3>
+                                            </div>
+                                            <p><strong>Asset Name:</strong> {{ project.assetName }}</p>
+                                            <p><strong>Asset Location:</strong> {{ project.assetLocation }}</p>
+                                        </div>
 
-                                    <!-- Extended Basic Data -->
-                                    <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Extended Basic Data</h3>
-                                        <p><strong>Procuring Entity:</strong> {{ project.procuringEntity }}</p>
-                                        <p><strong>Procuring Entity Contact Details:</strong> {{ project.procuringEntityContactDetails }}</p>
-                                        <p><strong>Procurement Process:</strong> {{ project.procurementProcess }}</p>
-                                        <p><strong>Procurement Method:</strong> {{ project.procurementMethod }}</p>
-                                        <p><strong>Number of Firms Tendering:</strong> {{ project.numberOfFirmsTendering }}</p>
-                                        <p><strong>Cost Estimate:</strong> {{ project.costEstimate }}</p>
-                                        <p><strong>Contract Type:</strong> {{ project.contractType }}</p>
-                                        <p><strong>Contract Administration Entity:</strong> {{ project.contractAdministrationEntity }}</p>
-                                        <p><strong>Contract Officials and Roles:</strong></p>
-                                        <ul>
-                                            <li *ngFor="let official of project.contractOfficialsAndRoles">
-                                                {{ official.role }}: {{ official.name }}
-                                            </li>
-                                        </ul>
-                                        <p><strong>Contract Title:</strong> {{ project.contractTitle }}</p>
-                                        <p><strong>Contract Firm(s):</strong> {{ project.contractFirm }}</p>
-                                        <p><strong>Contract Price:</strong> {{ project.contractPrice }}</p>
-                                        <p><strong>Contract Scope of Work:</strong> {{ project.contractScopeOfWork }}</p>
-                                        <p><strong>Contract Start Date:</strong> {{ project.contractStartDate }}</p>
-                                        <p><strong>Contract Duration:</strong> {{ project.contractDuration }}</p>
-                                        <p><strong>Contract Status:</strong> {{ project.contractStatus }}</p>
-                                    </div>
-                                    <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Extended Basic Data - Additional</h3>
-                                        <p><strong>Tender Documents:</strong> {{ project.tenderDocuments }}</p>
-                                        <p><strong>Tender Evaluation Results:</strong> {{ project.tenderEvaluationResults }}</p>
-                                        <p><strong>Project Design Report:</strong> {{ project.projectDesignReport }}</p>
-                                        <p><strong>Contract Agreement and Conditions:</strong> {{ project.contractAgreementAndConditions }}</p>
-                                        <p><strong>Registration and Ownership of Firms:</strong> {{ project.registrationAndOwnershipOfFirms }}</p>
-                                        <p><strong>Specifications and Drawings:</strong> {{ project.specificationsAndDrawings }}</p>
-                                    </div>
+                                        <!-- Basic Data - Additional -->
+                                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-file-earmark-fill mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Basic Data - Additional</h3>
+                                            </div>
+                                            <p><strong>Decision of Asset Disposal:</strong> {{ project.decisionOfAssetDisposal }}</p>
+                                        </div>
 
-                                    <!-- Climate Finance Data -->
-                                    <div class="bg-yellow-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Climate Finance Data</h3>
-                                        <p><strong>Decommissioning Period:</strong> {{ project.decommissionPeriod }}</p>
-                                        <p><strong>Decommission Costs:</strong> {{ project.decommissionCosts }}</p>
-                                        <p><strong>Carbon Decommission Savings:</strong> {{ project.carbonDecommissionSavings }}</p>
-                                    </div>
-                                    <div class="bg-yellow-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Climate Finance Data - Additional</h3>
-                                        <p><strong>Decommission Plans:</strong> {{ project.decommissionPlans }}</p>
-                                    </div>
+                                        <!-- Extended Basic Data -->
+                                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-card-list mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Extended Basic Data</h3>
+                                            </div>
+                                            <p><strong>Procuring Entity:</strong> {{ project.procuringEntity }}</p>
+                                            <p><strong>Procuring Entity Contact Details:</strong> {{ project.procuringEntityContactDetails }}</p>
+                                            <p><strong>Procurement Process:</strong> {{ project.procurementProcess }}</p>
+                                            <p><strong>Procurement Method:</strong> {{ project.procurementMethod }}</p>
+                                            <p><strong>Number of Firms Tendering:</strong> {{ project.numberOfFirmsTendering }}</p>
+                                            <p><strong>Cost Estimate:</strong> {{ project.costEstimate }}</p>
+                                            <p><strong>Contract Type:</strong> {{ project.contractType }}</p>
+                                            <p><strong>Contract Administration Entity:</strong> {{ project.contractAdministrationEntity }}</p>
+                                            <p><strong>Contract Officials and Roles:</strong></p>
+                                            <ul>
+                                                <li *ngFor="let official of project.contractOfficialsAndRoles">
+                                                    {{ official.role }}: {{ official.name }}
+                                                </li>
+                                            </ul>
+                                            <p><strong>Contract Title:</strong> {{ project.contractTitle }}</p>
+                                            <p><strong>Contract Firm(s):</strong> {{ project.contractFirm }}</p>
+                                            <p><strong>Contract Price:</strong> {{ project.contractPrice }}</p>
+                                            <p><strong>Contract Scope of Work:</strong> {{ project.contractScopeOfWork }}</p>
+                                            <p><strong>Contract Start Date:</strong> {{ project.contractStartDate }}</p>
+                                            <p><strong>Contract Duration:</strong> {{ project.contractDuration }}</p>
+                                            <p><strong>Contract Status:</strong> {{ project.contractStatus }}</p>
+                                        </div>
 
-                                    <!-- Social Sustainability Data -->
-                                    <div class="bg-red-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Social Sustainability Data</h3>
-                                        <p><strong>Jobs Generated:</strong> {{ project.jobsGenerated }}</p>
-                                        <p><strong>Workers' Accidents:</strong> {{ project.workersAccidents }}</p>
-                                    </div>
-                                    <div class="bg-red-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Social Sustainability Data - Additional</h3>
-                                        <p><strong>Jobs Generated:</strong> {{ project.jobsGenerated }}</p>
-                                        <p><strong>Workers' Accidents:</strong> {{ project.workersAccidents }}</p>
-                                    </div>
+                                        <!-- Extended Basic Data - Additional -->
+                                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-file-earmark-fill mr-2 text-xl text-primary"></i>
+                                                <h3 class="text-lg font-bold">Extended Basic Data - Additional</h3>
+                                            </div>
+                                            <p><strong>Tender Documents:</strong> {{ project.tenderDocuments }}</p>
+                                            <p><strong>Tender Evaluation Results:</strong> {{ project.tenderEvaluationResults }}</p>
+                                            <p><strong>Project Design Report:</strong> {{ project.projectDesignReport }}</p>
+                                            <p><strong>Contract Agreement and Conditions:</strong> {{ project.contractAgreementAndConditions }}</p>
+                                            <p><strong>Registration and Ownership of Firms:</strong> {{ project.registrationAndOwnershipOfFirms }}</p>
+                                            <p><strong>Specifications and Drawings:</strong> {{ project.specificationsAndDrawings }}</p>
+                                        </div>
 
-                                    <!-- Institutional Sustainability Data -->
-                                    <div class="bg-blue-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Institutional Sustainability Data</h3>
-                                        <p><strong>Number of Freedom of Information Requests:</strong> {{ project.numberOfFreedomOfInformationRequests }}</p>
-                                        <p><strong>Number of Freedom of Information Answers:</strong> {{ project.numberOfFreedomOfInformationAnswers }}</p>
-                                    </div>
-                                    <div class="bg-blue-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Institutional Sustainability Data - Additional</h3>
-                                        <p><strong>Freedom of Information Requests and Answers:</strong> {{ project.freedomOfInformationRequestsAndAnswers }}</p>
-                                    </div>
+                                        <!-- Climate Finance Data -->
+                                        <div class="bg-yellow-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-wallet-fill mr-2 text-xl text-yellow-600"></i>
+                                                <h3 class="text-lg font-bold">Climate Finance Data</h3>
+                                            </div>
+                                            <p><strong>Decommissioning Period:</strong> {{ project.decommissionPeriod }}</p>
+                                            <p><strong>Decommission Costs:</strong> {{ project.decommissionCosts }}</p>
+                                            <p><strong>Carbon Decommission Savings:</strong> {{ project.carbonDecommissionSavings }}</p>
+                                        </div>
 
-                                    <!-- Economic and Financial Sustainability Data -->
-                                    <div class="bg-black p-4 rounded-lg shadow-sm text-white">
-                                        <h3 class="text-lg font-bold mb-2">Economic and Financial Sustainability Data</h3>
-                                        <p><strong>Decommission Cost Forecast:</strong> {{ project.decommissionCostForecast }}</p>
-                                    </div>
+                                        <!-- Climate Finance Data - Additional -->
+                                        <div class="bg-yellow-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-wallet-fill mr-2 text-xl text-yellow-600"></i>
+                                                <h3 class="text-lg font-bold">Climate Finance Data - Additional</h3>
+                                            </div>
+                                            <p><strong>Decommission Plans:</strong> {{ project.decommissionPlans }}</p>
+                                        </div>
 
-                                    <!-- Environmental and Climate Sustainability Data -->
-                                    <div class="bg-green-100 p-4 rounded-lg shadow-sm">
-                                        <h3 class="text-lg font-bold mb-2">Environmental and Climate Sustainability Data</h3>
-                                        <p><strong>Decommission Mitigation Plan:</strong> {{ project.decommissionMitigationPlan }}</p>
+                                        <!-- Social Sustainability Data -->
+                                        <div class="bg-red-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-people-fill mr-2 text-xl text-red-600"></i>
+                                                <h3 class="text-lg font-bold">Social Sustainability Data</h3>
+                                            </div>
+                                            <p><strong>Jobs Generated:</strong> {{ project.jobsGenerated }}</p>
+                                            <p><strong>Workers' Accidents:</strong> {{ project.workersAccidents }}</p>
+                                        </div>
+
+                                        <!-- Social Sustainability Data - Additional -->
+                                        <div class="bg-red-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-people-fill mr-2 text-xl text-red-600"></i>
+                                                <h3 class="text-lg font-bold">Social Sustainability Data - Additional</h3>
+                                            </div>
+                                            <p><strong>Jobs Generated:</strong> {{ project.jobsGenerated }}</p>
+                                            <p><strong>Workers' Accidents:</strong> {{ project.workersAccidents }}</p>
+                                        </div>
+
+                                        <!-- Institutional Sustainability Data -->
+                                        <div class="bg-blue-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-building mr-2 text-xl text-blue-600"></i>
+                                                <h3 class="text-lg font-bold">Institutional Sustainability Data</h3>
+                                            </div>
+                                            <p><strong>Number of Freedom of Information Requests:</strong> {{ project.numberOfFreedomOfInformationRequests }}</p>
+                                            <p><strong>Number of Freedom of Information Answers:</strong> {{ project.numberOfFreedomOfInformationAnswers }}</p>
+                                        </div>
+
+                                        <!-- Institutional Sustainability Data - Additional -->
+                                        <div class="bg-blue-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-building mr-2 text-xl text-blue-600"></i>
+                                                <h3 class="text-lg font-bold">Institutional Sustainability Data - Additional</h3>
+                                            </div>
+                                            <p><strong>Freedom of Information Requests and Answers:</strong> {{ project.freedomOfInformationRequestsAndAnswers }}</p>
+                                        </div>
+
+                                        <!-- Economic and Financial Sustainability Data -->
+                                        <div class="bg-black p-4 rounded-lg shadow-sm text-white">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-graph-up-arrow mr-2 text-xl"></i>
+                                                <h3 class="text-lg font-bold">Economic and Financial Sustainability Data</h3>
+                                            </div>
+                                            <p><strong>Decommission Cost Forecast:</strong> {{ project.decommissionCostForecast }}</p>
+                                        </div>
+
+                                        <!-- Environmental and Climate Sustainability Data -->
+                                        <div class="bg-green-50 p-4 rounded-lg shadow-sm">
+                                            <div class="flex items-center mb-2">
+                                                <i class="bi bi-tree-fill mr-2 text-xl text-green-600"></i>
+                                                <h3 class="text-lg font-bold">Environmental and Climate Sustainability Data</h3>
+                                            </div>
+                                            <p><strong>Decommission Mitigation Plan:</strong> {{ project.decommissionMitigationPlan }}</p>
+                                        </div>
                                     </div>
                                 </div>
 

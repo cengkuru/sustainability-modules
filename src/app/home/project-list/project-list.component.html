@@ -1,1 +1,52 @@
-<p>project-list works!</p>
+<div class="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+    <div class="grid grid-cols-1 items-start gap-4 lg:grid-cols-1 lg:gap-8">
+
+        <div class="grid grid-cols-1 gap-4">
+            <section aria-labelledby="section-2-title">
+
+                <div class="overflow-hidden rounded-lg bg-white shadow">
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-xl font-bold text-gray-700">Projects</h2>
+                            <div>
+                                <span class="text-sm text-gray-600">Total Projects: </span>
+                                <span class="text-lg font-semibold text-gray-800" *ngIf="totalProjects$ | async as total">{{ total }}</span>
+                            </div>
+                        </div>
+
+                        <form class="mb-4">
+                            <input (input)="onSearchChange($event)" type="text" class="border border-gray-300 rounded px-4 py-2 w-full" placeholder="Search projects...">
+                        </form>
+
+                        <ul *ngIf="projects$ | async as projects; else loading" role="list" class="divide-y divide-gray-100">
+                            <li *ngFor="let project of projects" class="flex items-center justify-between gap-x-6 py-5 hover:bg-gray-100">
+                                <div class="min-w-0">
+                                    <div class="flex items-start gap-x-3">
+                                        <i class="bi bi-folder text-primary"></i>
+                                        <a [routerLink]="['/public/projects', project.id]" class="text-sm font-semibold leading-6 text-gray-900 hover:text-accent">{{ project.name }}</a>
+
+                                    </div>
+                                    <div class="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
+                                        <p class="whitespace-nowrap">Due on <time [attr.datetime]="project.completionDate">{{ project.completionDate | date }}</time></p>
+                                        <svg viewBox="0 0 2 2" class="h-0.5 w-0.5 fill-current">
+                                            <circle cx="1" cy="1" r="1" />
+                                        </svg>
+                                        <p class="truncate">Created by {{ project.projectOwner }}</p>
+                                    </div>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <a [routerLink]="['/public/projects', project.id]" class="text-sm font-semibold leading-6 text-primary hover:text-accent">View Details <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <ng-template #loading>
+                            <p>Loading projects...</p>
+                        </ng-template>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
