@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { CommonModule } from '@angular/common';
@@ -14,23 +14,14 @@ declare var H: any;
     CommonModule
   ]
 })
-export class LandingComponent implements OnInit, AfterViewInit {
+export class LandingComponent implements OnInit {
   private platform: any;
   private map: any;
   recentProjects: any[] = [];
-
-  markers = [
-    { lat: -33.7139, lng: 25.5207, popup: 'Nelson Mandela Metropolitan Municipality' },
-    { lat: -26.2041, lng: 28.0473, popup: 'City of Johannesburg Metropolitan Municipality (JW)' },
-    { lat: -25.7461, lng: 28.1881, popup: 'City of Tshwane Metropolitan Municipality' },
-    { lat: -33.9258, lng: 18.4232, popup: 'City of Cape Town Metropolitan Municipality' },
-    { lat: -25.6545, lng: 27.2559, popup: 'Rustenburg Local Municipality' }
-  ];
-
-
+  markers: { lat: number; lng: number; popup: string; }[] = [];
 
   constructor(private http: HttpClient, private firestore: AngularFirestore) {
-    console.log('markers: ', this.markers)
+    console.log('markers: ', this.markers);
     this.platform = new H.service.Platform({
       apikey: 'bo0uc_5TPAXOiS7C10x1rrlkJ1J7v9ezqiWOmtFi_Ik'
     });
@@ -39,10 +30,6 @@ export class LandingComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.loadProjects();
     this.getItems();
-  }
-
-  ngAfterViewInit(): void {
-    this.initializeMap();
   }
 
   initializeMap(): void {
@@ -71,9 +58,12 @@ export class LandingComponent implements OnInit, AfterViewInit {
       this.map.addObject(marker);
     });
 
-    this.map.getViewModel().setLookAtData({
-      bounds: this.calculateBounds()
-    });
+    const bounds = this.calculateBounds();
+    if (bounds) {
+      this.map.getViewModel().setLookAtData({
+        bounds: bounds
+      });
+    }
   }
 
   calculateBounds(): any {
@@ -88,7 +78,7 @@ export class LandingComponent implements OnInit, AfterViewInit {
 
     this.markers.forEach(markerData => {
       if (markerData.lat !== undefined && markerData.lng !== undefined) {
-        bounds = bounds.mergePoint({ lat: markerData.lat, lng: markerData.lng });
+        bounds = bounds.mergePoint(new H.geo.Point(markerData.lat, markerData.lng));
       }
     });
 
@@ -113,12 +103,34 @@ export class LandingComponent implements OnInit, AfterViewInit {
 
   // Add projects to Firestore with unique OC4IDS ID
   addProject(project: any) {
+    console.log('Preparing to add project:', project);
     project.id = this.generateOC4IDSId();
-    this.firestore.collection('projects').add(project).then(() => {
-      console.log('Project added successfully');
-    }).catch(error => {
-      console.error('Error adding project: ', error);
-    });
+    console.log('Generated OC4IDS ID for project:', project.id);
+    return this.firestore.collection('projects').doc(project.id).set(project)
+        .then(() => {
+          console.log('Project added successfully:', project);
+        })
+        .catch(error => {
+          console.error('Error adding project:', error);
+        });
+  }
+
+  loadProjects() {
+    this.firestore.collection('projects').get().subscribe(
+        (querySnapshot) => {
+          const projects: any[] = [];
+          querySnapshot.forEach((doc) => {
+            projects.push(doc.data());
+          });
+          this.recentProjects = projects;
+          console.log('Loaded projects:', this.recentProjects);
+          this.generateMarkers();
+          this.initializeMap(); // Initialize the map after markers are generated
+        },
+        (error) => {
+          console.error('Error loading projects:', error);
+        }
+    );
   }
 
   generateMarkers() {
@@ -134,18 +146,5 @@ export class LandingComponent implements OnInit, AfterViewInit {
     }).filter((marker): marker is { lat: number; lng: number; popup: string } => marker !== null);
 
     console.log('Generated markers:', this.markers);
-    this.initializeMap();
-  }
-
-  loadProjects() {
-    this.http.get<any[]>('assets/data/projects.json').subscribe(data => {
-      this.recentProjects = data;
-      this.generateMarkers();
-      this.recentProjects.forEach(project => {
-        this.addProject(project);
-      });
-    }, error => {
-      console.error('Error loading projects: ', error);
-    });
   }
 }
