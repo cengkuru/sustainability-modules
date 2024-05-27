@@ -80,5 +80,53 @@ html, body, #map {
   background-color: $color-primary;
 }
 
+.bg-accent {
+  background-color: $color-accent;
+  color: $color-gray-light;
+}
+.bg-accent-light {
+  background-color: $color-accent-light;
+  color: $color-gray-dark;
+}
+
+
+.H_ib_body {
+  min-width: 300px !important;
+}
+
+.H_ib_header {
+  background-color: $color-primary;
+  color: $color-gray-light;
+}
+
+// H_ib button
+.H_ib_button {
+  background-color: $color-primary;
+  color: $color-gray-light;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: $color-accent-light;
+    color: $color-gray-dark;
+  }
+}
+
+.tab-button {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.tab-button.bg-gray-100 {
+  background-color: #f7fafc; /* Example active tab background color */
+  color: #4a5568; /* Example active tab text color */
+}
+
+.tab-button:hover {
+  background-color: #edf2f7; /* Example hover background color */
+  color: #2d3748; /* Example hover text color */
+}
+
 
 

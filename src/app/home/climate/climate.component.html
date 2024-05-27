@@ -1,0 +1,86 @@
+<div class="bg-gray-100 mx-auto max-w-7xl pt-16 lg:flex lg:items-start lg:gap-x-16 lg:px-8">
+  <h1 class="sr-only">General Settings</h1>
+
+  <aside class="lg:w-64 lg:flex-none bg-white shadow-lg rounded-lg p-4 lg:p-8">
+    <nav>
+      <ul role="list" class="space-y-4">
+        <li *ngFor="let i of newModules">
+          <a routerLink="/home/{{i.url}}" class="flex items-center gap-x-3 rounded-md py-3 px-4 text-base font-semibold text-gray-600 hover:text-indigo-600 hover:bg-gray-50 transition-colors duration-300">
+            <i [class]="i.icon" class="text-2xl"></i>
+            {{i.title}}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="flex-1">
+    <div class="px-4 sm:px-6 lg:px-8">
+      <div class="bg-white shadow-lg rounded-lg p-6 lg:p-8">
+        <div class="mb-8">
+          <div class="flex items-center space-x-4">
+            <i [class]="moduleInfo.icon" class="text-4xl text-indigo-400"></i>
+            <div>
+              <h2 class="text-2xl font-semibold text-gray-800">{{ moduleInfo.title }}</h2>
+              <span class="inline-flex items-center rounded-full bg-indigo-100 px-3 py-1 text-sm font-medium text-indigo-800">
+                {{ moduleInfo.dataPoints }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="text-gray-600 space-y-4">
+          <p>
+            {{ moduleInfo.description }}
+          </p>
+          <p>
+            {{ moduleInfo.rationale }}
+          </p>
+        </div>
+
+        <div class="mt-8 overflow-hidden rounded-lg shadow-md">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">
+                Category
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">
+                Project Stage
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">
+                Description
+              </th>
+            </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+            <ng-container *ngFor="let category of categories">
+              <tr [ngClass]="{'bg-green-50': category.name === 'Environmental', 'bg-blue-50': category.name === 'Financial', 'bg-purple-50': category.name === 'Social', 'bg-yellow-50': category.name === 'Institutional'}">
+                <td colspan="3" class="px-6 py-4 text-base font-semibold text-gray-900">
+                  <i [ngClass]="{'bi-tree-fill text-green-500': category.name === 'Environmental', 'bi-cash-stack text-blue-500': category.name === 'Financial', 'bi-people-fill text-purple-500': category.name === 'Social', 'bi-bank2 text-yellow-500': category.name === 'Institutional'}" class="mr-2"></i>
+                  {{ category.name }}
+                  <span class="ml-3 inline-flex items-center rounded-full bg-indigo-100 px-2.5 py-0.5 text-xs font-medium text-indigo-800">
+                    {{ category.dataPoints.length }}
+                  </span>
+                </td>
+              </tr>
+              <tr *ngFor="let dataPoint of category.dataPoints; let i = index" class="hover:bg-gray-50 transition-colors duration-300">
+                <td class="px-6 py-4 text-sm font-medium text-gray-700">
+                  <span>{{ dataPoint.title }}</span>
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-500">
+                  <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">
+                    {{ dataPoint.stage }}
+                  </span>
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-500">
+                  {{ dataPoint.description }}
+                </td>
+              </tr>
+            </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

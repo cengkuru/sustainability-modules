@@ -2,9 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 
 declare var H: any;
+interface ViewProjectDetailsEvent extends CustomEvent {
+  detail: string;
+}
+
 
 @Component({
   selector: 'app-landing',
@@ -12,7 +16,8 @@ declare var H: any;
   styleUrls: ['./landing.component.scss'],
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    RouterLink
   ]
 })
 export class LandingComponent implements OnInit {
@@ -30,7 +35,17 @@ export class LandingComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProjects();
+
+    window.addEventListener('viewProjectDetails', this.handleViewProjectDetails as EventListener);
   }
+
+  ngOnDestroy(): void {
+    window.removeEventListener('viewProjectDetails', this.handleViewProjectDetails as EventListener);
+  }
+
+  handleViewProjectDetails = (event: ViewProjectDetailsEvent) => {
+    this.viewProjectDetails(event.detail);
+  };
 
   initializeMap(): void {
     const defaultLayers = this.platform.createDefaultLayers();
@@ -96,7 +111,10 @@ export class LandingComponent implements OnInit {
 
   viewProjectDetails(projectId: string) {
     // Navigate to the project details page with the projectId
-    this.router.navigate(['/project-details', projectId]);
+    this.router.navigate(['/public/projects', projectId]).then(
+        r =>
+            console.log('Navigated to project details:', r ? 'success' : 'failed')
+    );
   }
 
   loadProjects() {
@@ -138,9 +156,9 @@ export class LandingComponent implements OnInit {
         const popup = `
           <div>
             <h3 class="text-lg font-semibold">${project.name}</h3>
-            <p class="text-gray-600">${project.description}</p>
+            <p class="text-gray-600">Cost Estimate: ${project.costEstimate}</p>
             <p class="text-gray-500">Location: ${project.location.name}</p>
-            <button class="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" (click)="viewProjectDetails('${project.id}')">View Details</button>
+           <button class="mt-2 px-2 py-1 bg-primary text-white rounded hover:bg-primary-light"  #1f78b4;" onclick="window.dispatchEvent(new CustomEvent('viewProjectDetails', { detail: '${project.id}' }))">View Details</button>
           </div>
         `;
         return {
