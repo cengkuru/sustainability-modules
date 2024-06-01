@@ -30,7 +30,7 @@ export class ProjectListComponent implements OnInit {
                             const data = a.payload.doc.data() as any;
                             const id = a.payload.doc.id;
                             return { id, ...data };
-                        }).filter(project => project.name.toLowerCase().includes(term.toLowerCase())))
+                        }).filter(project => project.projectName.toLowerCase().includes(term.toLowerCase())))
                     );
                 } else {
                     return this.firestore.collection('projects').snapshotChanges().pipe(
@@ -44,6 +44,11 @@ export class ProjectListComponent implements OnInit {
             })
         );
 
+        // Log projects to console
+        this.projects$.subscribe(projects => {
+            console.log('Projects:', projects);
+        });
+
         this.totalProjects$ = this.firestore.collection('projects').valueChanges().pipe(
             map(projects => projects.length)
         );
@@ -52,5 +57,14 @@ export class ProjectListComponent implements OnInit {
     onSearchChange(event: Event): void {
         const target = event.target as HTMLInputElement;
         this.searchTerm.next(target.value);
+    }
+
+    getStatusPercentage(status: string): number {
+        const statusMap: { [key: string]: number } = {
+            'Planned': 10,
+            'In Progress': 50,
+            'Completed': 100
+        };
+        return statusMap[status] || 0;
     }
 }

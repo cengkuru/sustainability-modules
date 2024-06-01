@@ -5,7 +5,6 @@
 @import 'ngx-toastr/toastr';
 @import 'styles.variables.scss';
 
-
 // Styling for ngx-json-viewer
 ngx-json-viewer .ngx-json-viewer {
   --ngx-json-string: #e06c75; // softer red for strings
@@ -30,12 +29,12 @@ ngx-json-viewer .ngx-json-viewer {
   overflow: auto; // Add scroll for overflow content
 }
 
-
+// Styling for tabs
 .tab-link {
   @apply rounded-lg px-4 py-2 text-sm font-medium cursor-pointer transition-colors duration-150 ease-in-out;
 
   &.active, &:hover {
-    @apply bg-gray-900 text-white; /* Using Turquoise/Teal as the active and hover background */
+    @apply bg-secondary text-white; // Using secondary color for active and hover background
   }
 
   dt {
@@ -43,8 +42,8 @@ ngx-json-viewer .ngx-json-viewer {
   }
 
   dd {
-    background-color: #f8f8f8; /* Light gray for dropdown details */
-    border: 1px solid #eaeaea; /* Light gray border for dropdown details */
+    background-color: $color-primary; // Light gray for dropdown details
+    border: 1px solid $color-gray; // Light gray border for dropdown details
     border-top: none;
     padding: 1rem;
   }
@@ -57,10 +56,8 @@ ngx-json-viewer .ngx-json-viewer {
     transform: rotate(180deg);
   }
 
-  // Add any additional styling as needed to match your design system
-
   &:hover {
-    @apply bg-gray-400; /* Slightly lighter Teal for hover effect */
+    @apply bg-gray-400; // Slightly lighter gray for hover effect
   }
 }
 
@@ -70,33 +67,47 @@ ngx-json-viewer .ngx-json-viewer {
 }
 
 html, body, #map {
-  background: $color-background;
+  background: $color-primary;
   margin: 0;
   padding: 0;
   height: 100%;
+  color: $color-black;
+  font-family: $font-family;
+}
+
+
+body {
+  font-family: $font-family;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family;
+}
+
+p, a, li {
+  font-family: $font-family;
 }
 
 .bg-primary {
   background-color: $color-primary;
 }
 
+.bg-secondary {
+  background-color: $color-secondary;
+}
+
 .bg-accent {
   background-color: $color-accent;
-  color: $color-gray-light;
-}
-.bg-accent-light {
-  background-color: $color-accent-light;
-  color: $color-gray-dark;
+  color: $color-black;
 }
 
 .text-primary {
-  color: $color-gray-dark;
+  color: $color-black !important;
 }
 
 .text-accent {
   color: $color-accent;
 }
-
 
 .H_ib_body {
   min-width: 300px !important;
@@ -104,37 +115,49 @@ html, body, #map {
 
 .H_ib_header {
   background-color: $color-primary;
-  color: $color-gray-light;
+  color: $color-primary;
 }
 
 // H_ib button
 .H_ib_button {
   background-color: $color-primary;
-  color: $color-gray-light;
+  color: $color-secondary;
   border-radius: 4px;
   padding: 0.5rem 1rem;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 
   &:hover {
-    background-color: $color-accent-light;
-    color: $color-gray-dark;
+    background-color: $color-accent;
+    color: $color-secondary;
   }
 }
 
+// Tab button styling
 .tab-button {
   transition: background-color 0.3s, color 0.3s;
 }
 
 .tab-button.bg-gray-100 {
-  background-color: #f7fafc; /* Example active tab background color */
-  color: #4a5568; /* Example active tab text color */
+  background-color: $color-primary; // Primary background color for active tab
+  color: $color-secondary; // Secondary text color for active tab
 }
 
 .tab-button:hover {
-  background-color: #edf2f7; /* Example hover background color */
-  color: #2d3748; /* Example hover text color */
+  background-color: $color-primary; // Primary background color for hover effect
+  color: $color-secondary; // Secondary text color for hover effect
+}
+.project-link {
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
 
+li:hover .project-link {
+  color: $color-black; // Assuming $color-black is defined as black in your variables file
+  background-color: $color-accent;
+}
+
+.text-secondary {
+  color: $color-secondary;
+}
 
 

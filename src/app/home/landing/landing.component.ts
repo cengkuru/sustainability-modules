@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { CommonModule } from '@angular/common';
-import {Router, RouterLink} from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import {environment} from "../../../environments/environment";
 
 declare var H: any;
+
 interface ViewProjectDetailsEvent extends CustomEvent {
   detail: string;
 }
-
 
 @Component({
   selector: 'app-landing',
@@ -20,7 +21,8 @@ interface ViewProjectDetailsEvent extends CustomEvent {
     RouterLink
   ]
 })
-export class LandingComponent implements OnInit {
+export class LandingComponent implements OnInit, OnDestroy {
+  pageTitle = 'South Africa\'s National Infrastructure Disclosure Platform';
   private platform: any;
   private map: any;
   recentProjects: any[] = [];
@@ -29,13 +31,12 @@ export class LandingComponent implements OnInit {
   constructor(private http: HttpClient, private firestore: AngularFirestore, private router: Router) {
     console.log('markers: ', this.markers);
     this.platform = new H.service.Platform({
-      apikey: 'bo0uc_5TPAXOiS7C10x1rrlkJ1J7v9ezqiWOmtFi_Ik'
+      apikey: environment.hereMapsApiKey
     });
   }
 
   ngOnInit(): void {
     this.loadProjects();
-
     window.addEventListener('viewProjectDetails', this.handleViewProjectDetails as EventListener);
   }
 
@@ -69,16 +70,13 @@ export class LandingComponent implements OnInit {
           content: event.target.getData()
         });
         ui.addBubble(bubble);
+        this.map.setCenter(event.target.getGeometry());
+        this.map.setZoom(12); // Adjust zoom level as needed to focus on the marker
       });
       this.map.addObject(marker);
     });
 
-    const bounds = this.calculateBounds();
-    if (bounds) {
-      this.map.getViewModel().setLookAtData({
-        bounds: bounds
-      });
-    }
+    this.fitMapBounds();
   }
 
   calculateBounds(): any {
@@ -110,10 +108,8 @@ export class LandingComponent implements OnInit {
   }
 
   viewProjectDetails(projectId: string) {
-    // Navigate to the project details page with the projectId
     this.router.navigate(['/public/projects', projectId]).then(
-        r =>
-            console.log('Navigated to project details:', r ? 'success' : 'failed')
+        r => console.log('Navigated to project details:', r ? 'success' : 'failed')
     );
   }
 
@@ -128,21 +124,7 @@ export class LandingComponent implements OnInit {
           console.log('Loaded projects:', this.recentProjects);
           this.generateMarkers();
 
-          // Initialize the map after the markers are generated
           this.initializeMap();
-
-          // Wait for the map to be initialized before fitting the bounds
-          if (this.map) {
-            this.fitMapBounds();
-          } else {
-            // If the map is not initialized yet, wait for it to be ready
-            const mapReadyInterval = setInterval(() => {
-              if (this.map) {
-                clearInterval(mapReadyInterval);
-                this.fitMapBounds();
-              }
-            }, 100);
-          }
         },
         (error) => {
           console.error('Error loading projects:', error);
@@ -156,9 +138,9 @@ export class LandingComponent implements OnInit {
         const popup = `
           <div>
             <h3 class="text-lg font-semibold">${project.name}</h3>
-            <p class="text-gray-600">Cost Estimate: ${project.costEstimate}</p>
-            <p class="text-gray-500">Location: ${project.location.name}</p>
-           <button class="mt-2 px-2 py-1 bg-primary text-white rounded hover:bg-primary-light"  #1f78b4;" onclick="window.dispatchEvent(new CustomEvent('viewProjectDetails', { detail: '${project.id}' }))">View Details</button>
+            <p class="text-secondary">Cost Estimate: ${project.costEstimate}</p>
+            <p class="text-secondary">Location: ${project.location.name}</p>
+            <button class="mt-2 px-2 py-1 bg-primary text-white rounded hover:bg-secondary" onclick="window.dispatchEvent(new CustomEvent('viewProjectDetails', { detail: '${project.id}' }))">View Details</button>
           </div>
         `;
         return {
