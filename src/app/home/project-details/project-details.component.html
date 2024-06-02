@@ -447,10 +447,55 @@
                         </div>
                     </ng-container>
 
-                    <div *ngIf="activeTab === 'completion'" class="tab-content space-y-12">
-                        <h2 class="text-xl font-bold text-secondary">Completion</h2>
-                        <!-- Content for Completion Tab -->
-                    </div>
+                    <ng-container *ngIf="activeTab === 'completion'">
+                        <div class="mb-8">
+                            <h2 class="text-xl font-bold text-secondary">Completion</h2>
+                            <div class="flex flex-col lg:flex-row">
+                                <!-- Vertical Sub-tabs -->
+                                <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-gray-200">
+                                    <ul class="space-y-4 p-4">
+                                        <li *ngFor="let subTab of completionTabs">
+                                            <button (click)="setCompletionActiveTab(subTab.id)"
+                                                    class="w-full text-left py-2 px-4 rounded-lg focus:outline-none"
+                                                    [ngClass]="{'bg-gray-100': completionActiveTab === subTab.id}">{{ subTab.label }}</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- Sub-tab Content -->
+                                <div class="w-full lg:w-3/4 p-4 space-y-8">
+                                    <div *ngIf="completionActiveTab === 'basicData'" class="space-y-4">
+                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                            <h3 class="text-xl font-semibold text-secondary mb-4">Basic Data</h3>
+                                            <div class="text-gray-700 space-y-2">
+                                                <p>Estimated completion cost: {{ project.stages.completion.basicData.estimatedCompletionCost }}</p>
+                                                <p>Budget amendment decision: {{ project.stages.completion.basicData.budgetAmendmentDecision }}</p>
+                                                <p>Scope at completion: {{ project.stages.completion.basicData.scopeAtCompletion }}</p>
+                                                <p>Project evaluation report: {{ project.stages.completion.basicData.projectEvaluationReport }}</p>
+                                                <p>Project status: {{ project.stages.completion.basicData.projectStatus }}</p>
+                                                <p>Financial audit reports: {{ project.stages.completion.basicData.financialAuditReports }}</p>
+                                                <p>Project completion report: {{ project.stages.completion.basicData.projectCompletionReport }}</p>
+                                                <p>Technical audit reports: {{ project.stages.completion.basicData.technicalAuditReports }}</p>
+                                                <p>Reasons for project changes: {{ project.stages.completion.basicData.reasonsForProjectChanges }}</p>
+                                                <p>Estimated completion date: {{ project.stages.completion.basicData.estimatedCompletionDate }}</p>
+                                                <p>Implementation progress reports: {{ project.stages.completion.basicData.implementationProgressReports }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="completionActiveTab === 'attachments'" class="space-y-4">
+                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                            <h3 class="text-xl font-semibold text-secondary mb-4">Attachments</h3>
+                                            <ul class="list-disc list-inside space-y-2">
+                                                <li *ngFor="let attachment of project.stages.completion.attachments" class="text-secondary">
+                                                    <a [href]="attachment.link" class="text-accent hover:underline">{{ attachment.title }}</a> - {{ attachment.description }}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+
                     <div *ngIf="activeTab === 'operation-and-maintenance'" class="tab-content space-y-12">
                         <h2 class="text-xl font-bold text-secondary">Operation and Maintenance</h2>
                         <!-- Content for Operation and Maintenance Tab -->
