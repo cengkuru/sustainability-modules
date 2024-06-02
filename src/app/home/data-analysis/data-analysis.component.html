@@ -1,33 +1,20 @@
-<div class="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+<div *ngIf="projects.length > 0; else loading" class="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
     <div class="grid grid-cols-1 items-start gap-4 lg:grid-cols-2 lg:gap-8">
-        <!-- Project Locations and Investment Amounts Chart -->
-        <div *ngIf="projects$ | async as projects" class="overflow-hidden rounded-lg bg-white shadow p-6">
-            <div id="projectLocationsChart" style="width: 100%; height: 400px;"></div>
+        <div class="overflow-hidden rounded-lg bg-white shadow p-6">
+            <div id="projectStatusOverviewChart" style="height: 400px;"></div>
         </div>
 
-        <!-- Project Completion Timeline Chart -->
-        <div *ngIf="projects$ | async as projects" class="overflow-hidden rounded-lg bg-white shadow p-6">
-            <div id="completionTimelineChart" style="width: 100%; height: 400px;"></div>
+        <div class="overflow-hidden rounded-lg bg-white shadow p-6">
+            <div id="fundingSourcesChart" style="height: 400px;"></div>
         </div>
-
-        <!-- Climate Finance Breakdown Chart -->
-        <div *ngIf="projects$ | async as projects" class="overflow-hidden rounded-lg bg-white shadow p-6">
-            <div id="climateFinanceChart" style="width: 100%; height: 400px;"></div>
+        <div class="overflow-hidden rounded-lg bg-white shadow p-6">
+            <div id="completionTimelineChart" style="height: 400px;"></div>
         </div>
-
-        <!-- Job Creation and Beneficiaries Chart -->
-        <div *ngIf="projects$ | async as projects" class="overflow-hidden rounded-lg bg-white shadow p-6">
-            <div id="jobsAndBeneficiariesChart" style="width: 100%; height: 400px;"></div>
+        <div class="overflow-hidden rounded-lg bg-white shadow p-6">
+            <div id="climateFinanceChart" style="height: 400px;"></div>
         </div>
-
-        <!-- Environmental and Climate Sustainability Measures Chart -->
-        <div *ngIf="projects$ | async as projects" class="overflow-hidden rounded-lg bg-white shadow p-6">
-            <div id="sustainabilityMeasuresChart" style="width: 100%; height: 400px;"></div>
-        </div>
-
-        <!-- Freedom of Information Requests and Answers Chart -->
-        <div *ngIf="projects$ | async as projects" class="overflow-hidden rounded-lg bg-white shadow p-6">
-            <div id="informationRequestsChart" style="width: 100%; height: 400px;"></div>
+        <div class="overflow-hidden rounded-lg bg-white shadow p-6">
+            <div id="budgetVsActualCostsChart" style="height: 400px;"></div>
         </div>
     </div>
 </div>

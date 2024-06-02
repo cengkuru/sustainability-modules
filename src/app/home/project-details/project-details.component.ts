@@ -25,12 +25,14 @@ export class ProjectDetailsComponent implements OnInit {
     implementationActiveTab: string = 'basicData';
     completionActiveTab: string = 'basicData';
     operationAndMaintenanceActiveTab: string = 'basicData';
+    decommissioningActiveTab: string = 'basicData';
     identificationTabs: { id: string, label: string }[] = [];
     preparationTabs: { id: string, label: string }[] = [];
     tenderManagementTabs: { id: string, label: string }[] = [];
     implementationTabs: { id: string, label: string }[] = [];
     completionTabs: { id: string, label: string }[] = [];
     operationAndMaintenanceTabs: { id: string, label: string }[] = [];
+    decommissioningTabs: { id: string, label: string }[] = [];
 
     tabs = [
         { id: 'identification', label: 'Identification', icon: 'bi-info-circle' },
@@ -66,6 +68,7 @@ export class ProjectDetailsComponent implements OnInit {
                     this.generateImplementationTabs(project);
                     this.generateCompletionTabs(project);
                     this.generateOperationAndMaintenanceTabs(project);
+                    this.generateDecommissioningTabs(project);
                     return { id: projectId, ...project as object };
                 }
                 return null;
@@ -121,6 +124,14 @@ export class ProjectDetailsComponent implements OnInit {
         }));
     }
 
+    generateDecommissioningTabs(project: any): void {
+        const decommissioningStage = project.stages['decommissioning'];
+        this.decommissioningTabs = Object.keys(decommissioningStage).map(key => ({
+            id: key,
+            label: this.formatLabel(key)
+        }));
+    }
+
     formatLabel(key: string): string {
         return key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
     }
@@ -151,5 +162,9 @@ export class ProjectDetailsComponent implements OnInit {
 
     setOperationAndMaintenanceActiveTab(tab: string): void {
         this.operationAndMaintenanceActiveTab = tab;
+    }
+
+    setDecommissioningActiveTab(tab: string): void {
+        this.decommissioningActiveTab = tab;
     }
 }

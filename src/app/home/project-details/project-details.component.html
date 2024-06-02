@@ -29,27 +29,48 @@
                                         <li *ngFor="let subTab of identificationTabs">
                                             <button (click)="setIdentificationActiveTab(subTab.id)"
                                                     class="w-full text-left py-2 px-4 rounded-lg focus:outline-none"
-                                                    [ngClass]="{'bg-gray-100': identificationActiveTab === subTab.id}">{{ subTab.label }}</button>
+                                                    [ngClass]="{'bg-accent': identificationActiveTab === subTab.id}">{{ subTab.label }}</button>
                                         </li>
                                     </ul>
                                 </div>
                                 <!-- Sub-tab Content -->
-                                <div class="w-full lg:w-3/4 p-4 space-y-8">
+                                <div class="w-full lg:w-3/4 p-4 space-y-8 bg-dark text-light rounded font-mono">
                                     <div *ngIf="identificationActiveTab === 'basicData'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Basic Data</h3>
-                                            <div class="text-gray-700 space-y-2">
-                                                <p>Project reference number: {{ project.stages.identification.basicData.projectReferenceNumber }}</p>
-                                                <p>Project owner: {{ project.stages.identification.basicData.projectOwner }}</p>
-                                                <p>Sector, sub-sector: {{ project.stages.identification.basicData.sectorSubsector }}</p>
-                                                <p>Project name: {{ project.stages.identification.basicData.projectName }}</p>
-                                                <p>Project location: {{ project.stages.identification.basicData.projectLocation }}</p>
-                                                <p>Purpose: {{ project.stages.identification.basicData.purpose }}</p>
-                                                <p>Project description: {{ project.stages.identification.basicData.projectDescription }}</p>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-info-circle mr-2"></i>Basic Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Project reference number:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.identification.basicData.projectReferenceNumber }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Project owner:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.identification.basicData.projectOwner }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Sector, sub-sector:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.identification.basicData.sectorSubsector }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Project name:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.identification.basicData.projectName }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Project location:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.identification.basicData.projectLocation }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Purpose:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.identification.basicData.purpose }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Project description:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.identification.basicData.projectDescription }}</p>
+                                                </div>
                                                 <div>
-                                                    <p class="font-semibold">Project officials and roles:</p>
+                                                    <p class="font-semibold mb-2 text-key">Project officials and roles:</p>
                                                     <ul class="list-disc list-inside">
-                                                        <li *ngFor="let official of project.stages.identification.basicData.projectOfficialsAndRoles" class="text-secondary">
+                                                        <li *ngFor="let official of project.stages.identification.basicData.projectOfficialsAndRoles" class="text-value">
                                                             {{ official.role }}: {{ official.name }}
                                                         </li>
                                                     </ul>
@@ -58,198 +79,353 @@
                                         </div>
                                     </div>
                                     <div *ngIf="identificationActiveTab === 'climateFinanceData'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Climate Finance Data</h3>
-                                            <div class="text-gray-700 space-y-2">
-                                                <p>Climate objective: {{ project.stages.identification.climateFinanceData.climateObjective }}</p>
-                                                <p>Financial instrument: {{ project.stages.identification.climateFinanceData.financialInstrument }}</p>
-                                                <p>Climate transformation: {{ project.stages.identification.climateFinanceData.climateTransformation }}</p>
-                                                <p>Climate finance decision-making: {{ project.stages.identification.climateFinanceData.climateFinanceDecisionMaking }}</p>
-                                                <p>Nationally determined contributions: {{ project.stages.identification.climateFinanceData.nationallyDeterminedContributions }}</p>
-                                                <p>Paris agreement: {{ project.stages.identification.climateFinanceData.parisAgreement }}</p>
-                                                <p>Amount of investment: {{ project.stages.identification.climateFinanceData.amountOfInvestment }}</p>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-cash-coin mr-2"></i>Climate Finance Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Climate objective:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.identification.climateFinanceData.climateObjective }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Financial instrument:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.identification.climateFinanceData.financialInstrument }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Climate transformation:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.identification.climateFinanceData.climateTransformation }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Climate finance decision-making:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.identification.climateFinanceData.climateFinanceDecisionMaking }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Nationally determined contributions:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.identification.climateFinanceData.nationallyDeterminedContributions }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Paris agreement:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.identification.climateFinanceData.parisAgreement }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Amount of investment:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.identification.climateFinanceData.amountOfInvestment }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="identificationActiveTab === 'socialSustainabilityData'" class="space-y-4">
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-people mr-2"></i>Social Sustainability Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Indigenous land:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.identification.socialSustainabilityData.indigenousLand }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Beneficiaries:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.identification.socialSustainabilityData.beneficiaries }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Number of beneficiaries:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.identification.socialSustainabilityData.numberOfBeneficiaries }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div *ngIf="identificationActiveTab === 'institutionalSustainabilityData'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Institutional Sustainability Data</h3>
-                                            <div class="text-gray-700 space-y-2">
-                                                <p>Policy coherence documentation: {{ project.stages.identification.institutionalSustainabilityData.policyCoherenceDocumentation }}</p>
-                                                <p>Number of Freedom of Information requests: {{ project.stages.identification.institutionalSustainabilityData.numberOfFreedomOfInformationRequests }}</p>
-                                                <p>Lobbying meetings minutes: {{ project.stages.identification.institutionalSustainabilityData.lobbyingMeetingsMinutes }}</p>
-                                                <p>Number of lobbying activities: {{ project.stages.identification.institutionalSustainabilityData.numberOfLobbyingActivities }}</p>
-                                                <p>Number of Freedom of Information answers: {{ project.stages.identification.institutionalSustainabilityData.numberOfFreedomOfInformationAnswers }}</p>
-                                                <p>Freedom of Information requests and answers: {{ project.stages.identification.institutionalSustainabilityData.freedomOfInformationRequestsAndAnswers }}</p>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-building mr-2"></i>Institutional Sustainability Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Number of lobbying activities:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.identification.institutionalSustainabilityData.numberOfLobbyingActivities }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Number of freedom of information requests:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.identification.institutionalSustainabilityData.numberOfFreedomOfInformationRequests }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Number of freedom of information answers:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.identification.institutionalSustainabilityData.numberOfFreedomOfInformationAnswers }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Policy coherence documentation:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.identification.institutionalSustainabilityData.policyCoherenceDocumentation }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Freedom of information requests and answers:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.identification.institutionalSustainabilityData.freedomOfInformationRequestsAndAnswers }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Lobbying meetings minutes:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.identification.institutionalSustainabilityData.lobbyingMeetingsMinutes }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div *ngIf="identificationActiveTab === 'attachments'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Supporting Documents</h3>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-paperclip mr-2"></i>Attachments</h3>
                                             <ul class="list-disc list-inside space-y-2">
-                                                <li *ngFor="let attachment of project.stages.identification.attachments" class="text-secondary">
+                                                <li *ngFor="let attachment of project.stages.identification.attachments" class="text-value">
                                                     <a [href]="attachment.link" class="text-accent hover:underline">{{ attachment.title }}</a> - {{ attachment.description }}
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
+
+
+
                             </div>
                         </div>
                     </ng-container>
                     <!-- Placeholder for the rest of the tabs -->
-                    <div *ngIf="activeTab === 'preparation'" class="tab-content space-y-12">
-                        <h2 class="text-xl font-bold text-secondary">Preparation</h2>
-                        <div class="flex flex-col lg:flex-row">
-                            <!-- Vertical Sub-tabs -->
-                            <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-gray-200">
-                                <ul class="space-y-4 p-4">
-                                    <li *ngFor="let subTab of preparationTabs">
-                                        <button (click)="setPreparationActiveTab(subTab.id)"
-                                                class="w-full text-left py-2 px-4 rounded-lg focus:outline-none"
-                                                [ngClass]="{'bg-gray-100': preparationActiveTab === subTab.id}">{{ subTab.label }}</button>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- Sub-tab Content -->
-                            <div class="w-full lg:w-3/4 p-4 space-y-8">
-                                <div *ngIf="preparationActiveTab === 'basicData'" class="space-y-4">
-                                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                        <h3 class="text-xl font-semibold text-secondary mb-4">Basic Data</h3>
-                                        <div class="text-gray-700 space-y-2">
-                                            <p>Project Scope: {{ project.stages.preparation.basicData.projectScope }}</p>
-                                            <p>Contact Details: {{ project.stages.preparation.basicData.contactDetails }}</p>
-                                            <p>Funding Sources: {{ project.stages.preparation.basicData.fundingSources }}</p>
-                                            <p>Project Budget: {{ project.stages.preparation.basicData.projectBudget }}</p>
-                                            <p>Project Budget Approval Date: {{ project.stages.preparation.basicData.projectBudgetApprovalDate }}</p>
-                                            <div>
-                                                <p class="font-semibold">Attachments:</p>
-                                                <ul class="list-disc list-inside">
-                                                    <li *ngFor="let attachment of project.stages.preparation.basicData.attachments" class="text-secondary">
-                                                        <a [href]="attachment.link" class="text-accent hover:underline">{{ attachment.title }}</a> - {{ attachment.description }}
-                                                    </li>
-                                                </ul>
+                    <ng-container *ngIf="activeTab === 'preparation'">
+                        <div class="mb-8">
+                            <h2 class="text-xl font-bold text-secondary">Preparation</h2>
+                            <div class="flex flex-col lg:flex-row">
+                                <!-- Vertical Sub-tabs -->
+                                <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-gray-200">
+                                    <ul class="space-y-4 p-4">
+                                        <li *ngFor="let subTab of preparationTabs">
+                                            <button (click)="setPreparationActiveTab(subTab.id)"
+                                                    class="w-full text-left py-2 px-4 rounded-lg focus:outline-none"
+                                                    [ngClass]="{'bg-accent': preparationActiveTab === subTab.id}">{{ subTab.label }}</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- Sub-tab Content -->
+                                <div class="w-full lg:w-3/4 p-4 space-y-8 bg-dark text-light rounded font-mono">
+                                    <div *ngIf="preparationActiveTab === 'basicData'" class="space-y-4">
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-info-circle mr-2"></i>Basic Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Project scope:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.basicData.projectScope }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Contact details:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.basicData.contactDetails }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Funding sources:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.basicData.fundingSources }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Project budget:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.basicData.projectBudget }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Project budget approval date:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.basicData.projectBudgetApprovalDate }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div *ngIf="preparationActiveTab === 'climateFinanceData'" class="space-y-4">
-                                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                        <h3 class="text-xl font-semibold text-secondary mb-4">Climate Finance Data</h3>
-                                        <div class="text-gray-700 space-y-2">
-                                            <p>Accredited Entity Type: {{ project.stages.preparation.climateFinanceData.accreditedEntityType }}</p>
-                                            <p>Project Approval Period: {{ project.stages.preparation.climateFinanceData.projectApprovalPeriod }}</p>
-                                            <p>Project Preparation Period: {{ project.stages.preparation.climateFinanceData.projectPreparationPeriod }}</p>
-                                            <p>Non-Climate Co-Benefits: {{ project.stages.preparation.climateFinanceData.nonClimateCoBenefits }}</p>
-                                            <p>Funding Source: {{ project.stages.preparation.climateFinanceData.fundingSource }}</p>
-                                            <p>Green Climate Fund Accredited Entity: {{ project.stages.preparation.climateFinanceData.greenClimateFundAccreditedEntity }}</p>
-                                            <p>Project Preparation Costs: {{ project.stages.preparation.climateFinanceData.projectPreparationCosts }}</p>
-                                            <p>Ratio of Co-Finance: {{ project.stages.preparation.climateFinanceData.ratioOfCoFinance }}</p>
-                                            <p>Terms of Climate Finance: {{ project.stages.preparation.climateFinanceData.termsOfClimateFinance }}</p>
-                                            <p>Carbon Efficiency: {{ project.stages.preparation.climateFinanceData.carbonEfficiency }}</p>
-                                            <div>
-                                                <p class="font-semibold">Attachments:</p>
-                                                <ul class="list-disc list-inside">
-                                                    <li *ngFor="let attachment of project.stages.preparation.climateFinanceData.attachments" class="text-secondary">
-                                                        <a [href]="attachment.link" class="text-accent hover:underline">{{ attachment.title }}</a> - {{ attachment.description }}
-                                                    </li>
-                                                </ul>
+                                    <div *ngIf="preparationActiveTab === 'climateFinanceData'" class="space-y-4">
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-cash-coin mr-2"></i>Climate Finance Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Accredited entity type:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.climateFinanceData.accreditedEntityType }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Project approval period:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.climateFinanceData.projectApprovalPeriod }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Project preparation period:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.climateFinanceData.projectPreparationPeriod }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Non-climate co-benefits:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.climateFinanceData.nonClimateCoBenefits }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Funding source:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.climateFinanceData.fundingSource }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Green Climate Fund accredited entity:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.climateFinanceData.greenClimateFundAccreditedEntity }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Project preparation costs:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.climateFinanceData.projectPreparationCosts }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Ratio of co-finance:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.climateFinanceData.ratioOfCoFinance }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Terms of climate finance:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.climateFinanceData.termsOfClimateFinance }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Carbon efficiency:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.climateFinanceData.carbonEfficiency }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div *ngIf="preparationActiveTab === 'environmentalAndClimateSustainabilityData'" class="space-y-4">
-                                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                        <h3 class="text-xl font-semibold text-secondary mb-4">Environmental and Climate Sustainability Data</h3>
-                                        <div class="text-gray-700 space-y-2">
-                                            <p>Conservation Measures: {{ project.stages.preparation.environmentalAndClimateSustainabilityData.conservationMeasures }}</p>
-                                            <p>Environmental Impact Category: {{ project.stages.preparation.environmentalAndClimateSustainabilityData.environmentalImpactCategory }}</p>
-                                            <p>Environmental Measures: {{ project.stages.preparation.environmentalAndClimateSustainabilityData.environmentalMeasures }}</p>
-                                            <p>Environmental Licenses and Exemptions: {{ project.stages.preparation.environmentalAndClimateSustainabilityData.environmentalLicensesAndExemptions }}</p>
-                                            <p>Climate and Disaster Risk Assessment: {{ project.stages.preparation.environmentalAndClimateSustainabilityData.climateAndDisasterRiskAssessment }}</p>
-                                            <p>Protected Area: {{ project.stages.preparation.environmentalAndClimateSustainabilityData.protectedArea }}</p>
-                                            <p>Climate Measures: {{ project.stages.preparation.environmentalAndClimateSustainabilityData.climateMeasures }}</p>
-                                            <p>Forecast of Greenhouse Gas Emissions: {{ project.stages.preparation.environmentalAndClimateSustainabilityData.forecastOfGreenHouseGasEmissions }}</p>
-                                            <div>
-                                                <p class="font-semibold">Attachments:</p>
-                                                <ul class="list-disc list-inside">
-                                                    <li *ngFor="let attachment of project.stages.preparation.environmentalAndClimateSustainabilityData.attachments" class="text-secondary">
-                                                        <a [href]="attachment.link" class="text-accent hover:underline">{{ attachment.title }}</a> - {{ attachment.description }}
-                                                    </li>
-                                                </ul>
+                                    <div *ngIf="preparationActiveTab === 'institutionalSustainabilityData'" class="space-y-4">
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-building mr-2"></i>Institutional Sustainability Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Number of freedom of information requests:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.institutionalSustainabilityData.numberOfFreedomOfInformationRequests }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Number of freedom of information answers:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.institutionalSustainabilityData.numberOfFreedomOfInformationAnswers }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Freedom of information requests and answers:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.institutionalSustainabilityData.freedomOfInformationRequestsAndAnswers }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div *ngIf="preparationActiveTab === 'economicAndFinancialSustainabilityData'" class="space-y-4">
-                                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                        <h3 class="text-xl font-semibold text-secondary mb-4">Economic and Financial Sustainability Data</h3>
-                                        <div class="text-gray-700 space-y-2">
-                                            <p>Maintenance Plan: {{ project.stages.preparation.economicAndFinancialSustainabilityData.maintenancePlan }}</p>
-                                            <p>Value for Money: {{ project.stages.preparation.economicAndFinancialSustainabilityData.valueForMoney }}</p>
-                                            <p>Budget Projections: {{ project.stages.preparation.economicAndFinancialSustainabilityData.budgetProjections }}</p>
-                                            <p>Life Cycle Cost: {{ project.stages.preparation.economicAndFinancialSustainabilityData.lifeCycleCost }}</p>
-                                            <p>Procurement Strategy: {{ project.stages.preparation.economicAndFinancialSustainabilityData.procurementStrategy }}</p>
-                                            <p>Cost Benefit Analysis: {{ project.stages.preparation.economicAndFinancialSustainabilityData.costBenefitAnalysis }}</p>
-                                            <p>Life Cycle Cost Calculation Methodology: {{ project.stages.preparation.economicAndFinancialSustainabilityData.lifeCycleCostCalculationMethodology }}</p>
-                                            <p>Budget for Preparation: {{ project.stages.preparation.economicAndFinancialSustainabilityData.budgetForPreparation }}</p>
-                                            <p>Funding Source for Preparation: {{ project.stages.preparation.economicAndFinancialSustainabilityData.fundingSourceForPreparation }}</p>
-                                            <p>Asset Lifetime: {{ project.stages.preparation.economicAndFinancialSustainabilityData.assetLifetime }}</p>
-                                            <div>
-                                                <p class="font-semibold">Attachments:</p>
-                                                <ul class="list-disc list-inside">
-                                                    <li *ngFor="let attachment of project.stages.preparation.economicAndFinancialSustainabilityData.attachments" class="text-secondary">
-                                                        <a [href]="attachment.link" class="text-accent hover:underline">{{ attachment.title }}</a> - {{ attachment.description }}
-                                                    </li>
-                                                </ul>
+                                    <div *ngIf="preparationActiveTab === 'environmentalAndClimateSustainabilityData'" class="space-y-4">
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-tree mr-2"></i>Environmental and Climate Sustainability Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Conservation measures:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.environmentalAndClimateSustainabilityData.conservationMeasures }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Environmental impact category:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.environmentalAndClimateSustainabilityData.environmentalImpactCategory }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Environmental measures:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.environmentalAndClimateSustainabilityData.environmentalMeasures }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Environmental licenses and exemptions:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.environmentalAndClimateSustainabilityData.environmentalLicensesAndExemptions }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Climate and disaster risk assessment:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.environmentalAndClimateSustainabilityData.climateAndDisasterRiskAssessment }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Protected area:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.environmentalAndClimateSustainabilityData.protectedArea }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Climate measures:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.environmentalAndClimateSustainabilityData.climateMeasures }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Forecast of greenhouse gas emissions:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.environmentalAndClimateSustainabilityData.forecastOfGreenHouseGasEmissions }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div *ngIf="preparationActiveTab === 'institutionalSustainabilityData'" class="space-y-4">
-                                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                        <h3 class="text-xl font-semibold text-secondary mb-4">Institutional Sustainability Data</h3>
-                                        <div class="text-gray-700 space-y-2">
-                                            <p>Number of Freedom of Information Requests: {{ project.stages.preparation.institutionalSustainabilityData.numberOfFreedomOfInformationRequests }}</p>
-                                            <p>Number of Freedom of Information Answers: {{ project.stages.preparation.institutionalSustainabilityData.numberOfFreedomOfInformationAnswers }}</p>
-                                            <p>Freedom of Information Requests and Answers: {{ project.stages.preparation.institutionalSustainabilityData.freedomOfInformationRequestsAndAnswers }}</p>
-                                            <div>
-                                                <p class="font-semibold">Attachments:</p>
-                                                <ul class="list-disc list-inside">
-                                                    <li *ngFor="let attachment of project.stages.preparation.institutionalSustainabilityData.attachments" class="text-secondary">
-                                                        <a [href]="attachment.link" class="text-accent hover:underline">{{ attachment.title }}</a> - {{ attachment.description }}
-                                                    </li>
-                                                </ul>
+                                    <div *ngIf="preparationActiveTab === 'economicAndFinancialSustainabilityData'" class="space-y-4">
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-currency-dollar mr-2"></i>Economic and Financial Sustainability Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Maintenance plan:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.economicAndFinancialSustainabilityData.maintenancePlan }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Value for money:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.economicAndFinancialSustainabilityData.valueForMoney }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Budget projections:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.economicAndFinancialSustainabilityData.budgetProjections }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Life cycle cost:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.economicAndFinancialSustainabilityData.lifeCycleCost }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Procurement strategy:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.economicAndFinancialSustainabilityData.procurementStrategy }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Cost benefit analysis:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.economicAndFinancialSustainabilityData.costBenefitAnalysis }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Life cycle cost calculation methodology:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.economicAndFinancialSustainabilityData.lifeCycleCostCalculationMethodology }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Budget for preparation:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.economicAndFinancialSustainabilityData.budgetForPreparation }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Funding source for preparation:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.economicAndFinancialSustainabilityData.fundingSourceForPreparation }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Asset lifetime:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.economicAndFinancialSustainabilityData.assetLifetime }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div *ngIf="preparationActiveTab === 'socialSustainabilityData'" class="space-y-4">
-                                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                        <h3 class="text-xl font-semibold text-secondary mb-4">Social Sustainability Data</h3>
-                                        <div class="text-gray-700 space-y-2">
-                                            <p>Number of Beneficiaries: {{ project.stages.preparation.socialSustainabilityData.numberOfBeneficiaries }}</p>
-                                            <p>Indigenous Land: {{ project.stages.preparation.socialSustainabilityData.indigenousLand }}</p>
-                                            <p>Inclusive Design: {{ project.stages.preparation.socialSustainabilityData.inclusiveDesign }}</p>
-                                            <p>Land Compensation Budget: {{ project.stages.preparation.socialSustainabilityData.landCompensationBudget }}</p>
-                                            <p>Public Consultation Meetings: {{ project.stages.preparation.socialSustainabilityData.publicConsultationMeetings }}</p>
-                                            <p>Beneficiaries: {{ project.stages.preparation.socialSustainabilityData.beneficiaries }}</p>
-                                            <p>Labor Obligations: {{ project.stages.preparation.socialSustainabilityData.laborObligations }}</p>
-                                            <div>
-                                                <p class="font-semibold">Attachments:</p>
-                                                <ul class="list-disc list-inside">
-                                                    <li *ngFor="let attachment of project.stages.preparation.socialSustainabilityData.attachments" class="text-secondary">
-                                                        <a [href]="attachment.link" class="text-accent hover:underline">{{ attachment.title }}</a> - {{ attachment.description }}
-                                                    </li>
-                                                </ul>
+                                    <div *ngIf="preparationActiveTab === 'socialSustainabilityData'" class="space-y-4">
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-people mr-2"></i>Social Sustainability Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Number of beneficiaries:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.socialSustainabilityData.numberOfBeneficiaries }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Indigenous land:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.socialSustainabilityData.indigenousLand }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Inclusive design:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.socialSustainabilityData.inclusiveDesign }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Land compensation budget:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.socialSustainabilityData.landCompensationBudget }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Public consultation meetings:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.socialSustainabilityData.publicConsultationMeetings }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Beneficiaries:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.socialSustainabilityData.beneficiaries }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Labor obligations:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.preparation.socialSustainabilityData.laborObligations }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div *ngIf="preparationActiveTab === 'attachments'" class="space-y-4">
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-paperclip mr-2"></i>Attachments</h3>
+                                            <ul class="list-disc list-inside space-y-2">
+                                                <li *ngFor="let attachment of project.stages.preparation.attachments" class="text-value">
+                                                    <a [href]="attachment.link" class="text-accent hover:underline">{{ attachment.title }}</a> - {{ attachment.description }}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
-                    </div>
+                    </ng-container>
 
                     <ng-container *ngIf="activeTab === 'tender-management'">
                         <div class="mb-8">
@@ -261,33 +437,72 @@
                                         <li *ngFor="let subTab of tenderManagementTabs">
                                             <button (click)="setTenderManagementActiveTab(subTab.id)"
                                                     class="w-full text-left py-2 px-4 rounded-lg focus:outline-none"
-                                                    [ngClass]="{'bg-gray-100': tenderManagementActiveTab === subTab.id}">{{ subTab.label }}</button>
+                                                    [ngClass]="{'bg-accent': tenderManagementActiveTab === subTab.id}">{{ subTab.label }}</button>
                                         </li>
                                     </ul>
                                 </div>
                                 <!-- Sub-tab Content -->
-                                <div class="w-full lg:w-3/4 p-4 space-y-8">
+                                <div class="w-full lg:w-3/4 p-4 space-y-8 bg-dark text-light rounded font-mono">
                                     <div *ngIf="tenderManagementActiveTab === 'basicData'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Basic Data</h3>
-                                            <div class="text-gray-700 space-y-2">
-                                                <p>Contract price: {{ project.stages.tenderManagement.basicData.contractPrice }}</p>
-                                                <p>Contract title: {{ project.stages.tenderManagement.basicData.contractTitle }}</p>
-                                                <p>Contract duration: {{ project.stages.tenderManagement.basicData.contractDuration }}</p>
-                                                <p>Contract scope of work: {{ project.stages.tenderManagement.basicData.contractScopeOfWork }}</p>
-                                                <p>Contract type: {{ project.stages.tenderManagement.basicData.contractType }}</p>
-                                                <p>Contract administration entity: {{ project.stages.tenderManagement.basicData.contractAdministrationEntity }}</p>
-                                                <p>Contract start date: {{ project.stages.tenderManagement.basicData.contractStartDate }}</p>
-                                                <p>Procuring entity: {{ project.stages.tenderManagement.basicData.procuringEntity }}</p>
-                                                <p>Procuring entity contact details: {{ project.stages.tenderManagement.basicData.procuringEntityContactDetails }}</p>
-                                                <p>Procurement method: {{ project.stages.tenderManagement.basicData.procurementMethod }}</p>
-                                                <p>Procurement process: {{ project.stages.tenderManagement.basicData.procurementProcess }}</p>
-                                                <p>Contract firm: {{ project.stages.tenderManagement.basicData.contractFirm }}</p>
-                                                <p>Number of firms tendering: {{ project.stages.tenderManagement.basicData.numberOfFirmsTendering }}</p>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-info-circle mr-2"></i>Basic Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Contract price:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.tenderManagement.basicData.contractPrice }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Contract title:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.tenderManagement.basicData.contractTitle }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Contract duration:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.tenderManagement.basicData.contractDuration }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Contract scope of work:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.tenderManagement.basicData.contractScopeOfWork }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Contract type:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.tenderManagement.basicData.contractType }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Contract administration entity:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.tenderManagement.basicData.contractAdministrationEntity }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Contract start date:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.tenderManagement.basicData.contractStartDate }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Procuring entity:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.tenderManagement.basicData.procuringEntity }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Procuring entity contact details:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.tenderManagement.basicData.procuringEntityContactDetails }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Procurement method:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.tenderManagement.basicData.procurementMethod }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Procurement process:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.tenderManagement.basicData.procurementProcess }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Contract firm:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.tenderManagement.basicData.contractFirm }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Number of firms tendering:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.tenderManagement.basicData.numberOfFirmsTendering }}</p>
+                                                </div>
                                                 <div>
-                                                    <p class="font-semibold">Contract officials and roles:</p>
+                                                    <p class="font-semibold mb-2 text-key">Contract officials and roles:</p>
                                                     <ul class="list-disc list-inside">
-                                                        <li *ngFor="let official of project.stages.tenderManagement.basicData.contractOfficialsAndRoles" class="text-secondary">
+                                                        <li *ngFor="let official of project.stages.tenderManagement.basicData.contractOfficialsAndRoles" class="text-value">
                                                             {{ official.role }}: {{ official.name }}
                                                         </li>
                                                     </ul>
@@ -296,47 +511,78 @@
                                         </div>
                                     </div>
                                     <div *ngIf="tenderManagementActiveTab === 'institutionalSustainabilityData'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Institutional Sustainability Data</h3>
-                                            <div class="text-gray-700 space-y-2">
-                                                <p>Beneficial ownership: {{ project.stages.tenderManagement.institutionalSustainabilityData.beneficialOwnership }}</p>
-                                                <p>Sustainability criteria: {{ project.stages.tenderManagement.institutionalSustainabilityData.sustainabilityCriteria }}</p>
-                                                <p>Anti-corruption certifications: {{ project.stages.tenderManagement.institutionalSustainabilityData.antiCorruptionCertifications }}</p>
-                                                <p>Number of freedom of information requests: {{ project.stages.tenderManagement.institutionalSustainabilityData.numberOfFreedomOfInformationRequests }}</p>
-                                                <p>Number of freedom of information answers: {{ project.stages.tenderManagement.institutionalSustainabilityData.numberOfFreedomOfInformationAnswers }}</p>
-                                                <p>Freedom of information requests and answers: {{ project.stages.tenderManagement.institutionalSustainabilityData.freedomOfInformationRequestsAndAnswers }}</p>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-building mr-2"></i>Institutional Sustainability Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Beneficial ownership:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.tenderManagement.institutionalSustainabilityData.beneficialOwnership }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Sustainability criteria:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.tenderManagement.institutionalSustainabilityData.sustainabilityCriteria }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Anti-corruption certifications:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.tenderManagement.institutionalSustainabilityData.antiCorruptionCertifications }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Number of freedom of information requests:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.tenderManagement.institutionalSustainabilityData.numberOfFreedomOfInformationRequests }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Number of freedom of information answers:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.tenderManagement.institutionalSustainabilityData.numberOfFreedomOfInformationAnswers }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Freedom of information requests and answers:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.tenderManagement.institutionalSustainabilityData.freedomOfInformationRequestsAndAnswers }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div *ngIf="tenderManagementActiveTab === 'environmentalAndClimateSustainabilityData'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Environmental And Climate Sustainability Data</h3>
-                                            <div class="text-gray-700 space-y-2">
-                                                <p>Number of environmental certifications: {{ project.stages.tenderManagement.environmentalAndClimateSustainabilityData.numberOfEnvironmentalCertifications }}</p>
-                                                <p>Environmental certifications: {{ project.stages.tenderManagement.environmentalAndClimateSustainabilityData.environmentalCertifications }}</p>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-tree mr-2"></i>Environmental And Climate Sustainability Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Number of environmental certifications:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.tenderManagement.environmentalAndClimateSustainabilityData.numberOfEnvironmentalCertifications }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Environmental certifications:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.tenderManagement.environmentalAndClimateSustainabilityData.environmentalCertifications }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div *ngIf="tenderManagementActiveTab === 'socialSustainabilityData'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Social Sustainability Data</h3>
-                                            <div class="text-gray-700 space-y-2">
-                                                <p>Labor budget: {{ project.stages.tenderManagement.socialSustainabilityData.laborBudget }}</p>
-                                                <p>Health and safety certifications: {{ project.stages.tenderManagement.socialSustainabilityData.healthAndSafetyCertifications }}</p>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-people mr-2"></i>Social Sustainability Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Labor budget:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.tenderManagement.socialSustainabilityData.laborBudget }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Health and safety certifications:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.tenderManagement.socialSustainabilityData.healthAndSafetyCertifications }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div *ngIf="tenderManagementActiveTab === 'attachments'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Attachments</h3>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-paperclip mr-2"></i>Attachments</h3>
                                             <ul class="list-disc list-inside space-y-2">
-                                                <li *ngFor="let attachment of project.stages.tenderManagement.attachments" class="text-secondary">
+                                                <li *ngFor="let attachment of project.stages.tenderManagement.attachments" class="text-value">
                                                     <a [href]="attachment.link" class="text-accent hover:underline">{{ attachment.title }}</a> - {{ attachment.description }}
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </ng-container>
@@ -351,98 +597,198 @@
                                         <li *ngFor="let subTab of implementationTabs">
                                             <button (click)="setImplementationActiveTab(subTab.id)"
                                                     class="w-full text-left py-2 px-4 rounded-lg focus:outline-none"
-                                                    [ngClass]="{'bg-gray-100': implementationActiveTab === subTab.id}">{{ subTab.label }}</button>
+                                                    [ngClass]="{'bg-accent': implementationActiveTab === subTab.id}">{{ subTab.label }}</button>
                                         </li>
                                     </ul>
                                 </div>
                                 <!-- Sub-tab Content -->
-                                <div class="w-full lg:w-3/4 p-4 space-y-8">
+                                <div class="w-full lg:w-3/4 p-4 space-y-8 bg-dark text-light rounded font-mono">
                                     <div *ngIf="implementationActiveTab === 'basicData'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Basic Data</h3>
-                                            <div class="text-gray-700 space-y-2">
-                                                <p>List of escalation approvals: {{ project.stages.implementation.basicData.listOfEscalationApprovals }}</p>
-                                                <p>List of variations, changes, amendments: {{ project.stages.implementation.basicData.listOfVariationsChangesAmendments }}</p>
-                                                <p>Contract amendments: {{ project.stages.implementation.basicData.contractAmendments }}</p>
-                                                <p>Variation to contract scope: {{ project.stages.implementation.basicData.variationToContractScope }}</p>
-                                                <p>Reasons for price changes: {{ project.stages.implementation.basicData.reasonsForPriceChanges }}</p>
-                                                <p>Variation to contract duration: {{ project.stages.implementation.basicData.variationToContractDuration }}</p>
-                                                <p>Variation to contract price: {{ project.stages.implementation.basicData.variationToContractPrice }}</p>
-                                                <p>Reasons for scope: {{ project.stages.implementation.basicData.reasonsForScope }}</p>
-                                                <p>Payment certificates: {{ project.stages.implementation.basicData.paymentCertificates }}</p>
-                                                <p>Quality assurance reports: {{ project.stages.implementation.basicData.qualityAssuranceReports }}</p>
-                                                <p>Escalation of contract price: {{ project.stages.implementation.basicData.escalationOfContractPrice }}</p>
-                                                <p>Reasons for duration changes: {{ project.stages.implementation.basicData.reasonsForDurationChanges }}</p>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-info-circle mr-2"></i>Basic Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">List of escalation approvals:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.basicData.listOfEscalationApprovals }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">List of variations, changes, amendments:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.basicData.listOfVariationsChangesAmendments }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Contract amendments:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.basicData.contractAmendments }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Variation to contract scope:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.basicData.variationToContractScope }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Reasons for price changes:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.basicData.reasonsForPriceChanges }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Variation to contract duration:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.basicData.variationToContractDuration }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Variation to contract price:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.basicData.variationToContractPrice }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Reasons for scope:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.basicData.reasonsForScope }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Payment certificates:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.basicData.paymentCertificates }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Quality assurance reports:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.basicData.qualityAssuranceReports }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Escalation of contract price:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.basicData.escalationOfContractPrice }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Reasons for duration changes:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.basicData.reasonsForDurationChanges }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div *ngIf="implementationActiveTab === 'institutionalSustainabilityData'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Institutional Sustainability Data</h3>
-                                            <div class="text-gray-700 space-y-2">
-                                                <p>Number of freedom of information requests: {{ project.stages.implementation.institutionalSustainabilityData.numberOfFreedomOfInformationRequests }}</p>
-                                                <p>Number of freedom of information answers: {{ project.stages.implementation.institutionalSustainabilityData.numberOfFreedomOfInformationAnswers }}</p>
-                                                <p>Oversight reports: {{ project.stages.implementation.institutionalSustainabilityData.oversightReports }}</p>
-                                                <p>Freedom of information requests and answers: {{ project.stages.implementation.institutionalSustainabilityData.freedomOfInformationRequestsAndAnswers }}</p>
-                                                <p>Independent mid-term evaluation: {{ project.stages.implementation.institutionalSustainabilityData.independentMidTermEvaluation }}</p>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-building mr-2"></i>Institutional Sustainability Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Number of freedom of information requests:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.institutionalSustainabilityData.numberOfFreedomOfInformationRequests }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Number of freedom of information answers:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.institutionalSustainabilityData.numberOfFreedomOfInformationAnswers }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Oversight reports:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.institutionalSustainabilityData.oversightReports }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Freedom of information requests and answers:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.institutionalSustainabilityData.freedomOfInformationRequestsAndAnswers }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Independent mid-term evaluation:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.institutionalSustainabilityData.independentMidTermEvaluation }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div *ngIf="implementationActiveTab === 'environmentalAndClimateSustainabilityData'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Environmental And Climate Sustainability Data</h3>
-                                            <div class="text-gray-700 space-y-2">
-                                                <p>Environmental measures: {{ project.stages.implementation.environmentalAndClimateSustainabilityData.environmentalMeasures }}</p>
-                                                <p>Climate measures: {{ project.stages.implementation.environmentalAndClimateSustainabilityData.climateMeasures }}</p>
-                                                <p>Conservation measures: {{ project.stages.implementation.environmentalAndClimateSustainabilityData.conservationMeasures }}</p>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-tree mr-2"></i>Environmental And Climate Sustainability Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Environmental measures:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.environmentalAndClimateSustainabilityData.environmentalMeasures }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Climate measures:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.environmentalAndClimateSustainabilityData.climateMeasures }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Conservation measures:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.environmentalAndClimateSustainabilityData.conservationMeasures }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div *ngIf="implementationActiveTab === 'climateFinanceData'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Climate Finance Data</h3>
-                                            <div class="text-gray-700 space-y-2">
-                                                <p>Type of monitoring: {{ project.stages.implementation.climateFinanceData.typeOfMonitoring }}</p>
-                                                <p>Performance monitoring: {{ project.stages.implementation.climateFinanceData.performanceMonitoring }}</p>
-                                                <p>Reporting period: {{ project.stages.implementation.climateFinanceData.reportingPeriod }}</p>
-                                                <p>Independent monitoring: {{ project.stages.implementation.climateFinanceData.independentMonitoring }}</p>
-                                                <p>Disbursement records: {{ project.stages.implementation.climateFinanceData.disbursementRecords }}</p>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-cash-coin mr-2"></i>Climate Finance Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Type of monitoring:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.climateFinanceData.typeOfMonitoring }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Performance monitoring:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.climateFinanceData.performanceMonitoring }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Reporting period:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.climateFinanceData.reportingPeriod }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Independent monitoring:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.climateFinanceData.independentMonitoring }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Disbursement records:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.climateFinanceData.disbursementRecords }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div *ngIf="implementationActiveTab === 'economicAndFinancialSustainabilityData'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Economic And Financial Sustainability Data</h3>
-                                            <div class="text-gray-700 space-y-2">
-                                                <p>Budget for implementation: {{ project.stages.implementation.economicAndFinancialSustainabilityData.budgetForImplementation }}</p>
-                                                <p>Funding source for implementation: {{ project.stages.implementation.economicAndFinancialSustainabilityData.fundingSourceForImplementation }}</p>
-                                                <p>Budget shortfall: {{ project.stages.implementation.economicAndFinancialSustainabilityData.budgetShortfall }}</p>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-graph-up-arrow mr-2"></i>Economic And Financial Sustainability Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Budget for implementation:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.economicAndFinancialSustainabilityData.budgetForImplementation }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Funding source for implementation:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.economicAndFinancialSustainabilityData.fundingSourceForImplementation }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Budget shortfall:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.economicAndFinancialSustainabilityData.budgetShortfall }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div *ngIf="implementationActiveTab === 'socialSustainabilityData'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Social Sustainability Data</h3>
-                                            <div class="text-gray-700 space-y-2">
-                                                <p>Inclusive implementation: {{ project.stages.implementation.socialSustainabilityData.inclusiveImplementation }}</p>
-                                                <p>Jobs generated: {{ project.stages.implementation.socialSustainabilityData.jobsGenerated }}</p>
-                                                <p>Construction materials testing: {{ project.stages.implementation.socialSustainabilityData.constructionMaterialsTesting }}</p>
-                                                <p>Workers accidents: {{ project.stages.implementation.socialSustainabilityData.workersAccidents }}</p>
-                                                <p>Building inspections: {{ project.stages.implementation.socialSustainabilityData.buildingInspections }}</p>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-people mr-2"></i>Social Sustainability Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Inclusive implementation:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.socialSustainabilityData.inclusiveImplementation }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Jobs generated:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.socialSustainabilityData.jobsGenerated }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Construction materials testing:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.socialSustainabilityData.constructionMaterialsTesting }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Workers accidents:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.socialSustainabilityData.workersAccidents }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Building inspections:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.implementation.socialSustainabilityData.buildingInspections }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div *ngIf="implementationActiveTab === 'attachments'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Attachments</h3>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-paperclip mr-2"></i>Attachments</h3>
                                             <ul class="list-disc list-inside space-y-2">
-                                                <li *ngFor="let attachment of project.stages.implementation.attachments" class="text-secondary">
+                                                <li *ngFor="let attachment of project.stages.implementation.attachments" class="text-value">
                                                     <a [href]="attachment.link" class="text-accent hover:underline">{{ attachment.title }}</a> - {{ attachment.description }}
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </ng-container>
@@ -457,41 +803,75 @@
                                         <li *ngFor="let subTab of completionTabs">
                                             <button (click)="setCompletionActiveTab(subTab.id)"
                                                     class="w-full text-left py-2 px-4 rounded-lg focus:outline-none"
-                                                    [ngClass]="{'bg-gray-100': completionActiveTab === subTab.id}">{{ subTab.label }}</button>
+                                                    [ngClass]="{'bg-accent': completionActiveTab === subTab.id}">{{ subTab.label }}</button>
                                         </li>
                                     </ul>
                                 </div>
                                 <!-- Sub-tab Content -->
-                                <div class="w-full lg:w-3/4 p-4 space-y-8">
+                                <div class="w-full lg:w-3/4 p-4 space-y-8 bg-dark text-light rounded font-mono">
                                     <div *ngIf="completionActiveTab === 'basicData'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Basic Data</h3>
-                                            <div class="text-gray-700 space-y-2">
-                                                <p>Estimated completion cost: {{ project.stages.completion.basicData.estimatedCompletionCost }}</p>
-                                                <p>Budget amendment decision: {{ project.stages.completion.basicData.budgetAmendmentDecision }}</p>
-                                                <p>Scope at completion: {{ project.stages.completion.basicData.scopeAtCompletion }}</p>
-                                                <p>Project evaluation report: {{ project.stages.completion.basicData.projectEvaluationReport }}</p>
-                                                <p>Project status: {{ project.stages.completion.basicData.projectStatus }}</p>
-                                                <p>Financial audit reports: {{ project.stages.completion.basicData.financialAuditReports }}</p>
-                                                <p>Project completion report: {{ project.stages.completion.basicData.projectCompletionReport }}</p>
-                                                <p>Technical audit reports: {{ project.stages.completion.basicData.technicalAuditReports }}</p>
-                                                <p>Reasons for project changes: {{ project.stages.completion.basicData.reasonsForProjectChanges }}</p>
-                                                <p>Estimated completion date: {{ project.stages.completion.basicData.estimatedCompletionDate }}</p>
-                                                <p>Implementation progress reports: {{ project.stages.completion.basicData.implementationProgressReports }}</p>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-info-circle mr-2"></i>Basic Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Estimated completion cost:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.completion.basicData.estimatedCompletionCost }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Budget amendment decision:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.completion.basicData.budgetAmendmentDecision }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Scope at completion:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.completion.basicData.scopeAtCompletion }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Project evaluation report:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.completion.basicData.projectEvaluationReport }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Project status:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.completion.basicData.projectStatus }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Financial audit reports:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.completion.basicData.financialAuditReports }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Project completion report:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.completion.basicData.projectCompletionReport }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Technical audit reports:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.completion.basicData.technicalAuditReports }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Reasons for project changes:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.completion.basicData.reasonsForProjectChanges }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Estimated completion date:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.completion.basicData.estimatedCompletionDate }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Implementation progress reports:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.completion.basicData.implementationProgressReports }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div *ngIf="completionActiveTab === 'attachments'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Attachments</h3>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-paperclip mr-2"></i>Attachments</h3>
                                             <ul class="list-disc list-inside space-y-2">
-                                                <li *ngFor="let attachment of project.stages.completion.attachments" class="text-secondary">
+                                                <li *ngFor="let attachment of project.stages.completion.attachments" class="text-value">
                                                     <a [href]="attachment.link" class="text-accent hover:underline">{{ attachment.title }}</a> - {{ attachment.description }}
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </ng-container>
@@ -506,29 +886,56 @@
                                         <li *ngFor="let subTab of operationAndMaintenanceTabs">
                                             <button (click)="setOperationAndMaintenanceActiveTab(subTab.id)"
                                                     class="w-full text-left py-2 px-4 rounded-lg focus:outline-none"
-                                                    [ngClass]="{'bg-gray-100': operationAndMaintenanceActiveTab === subTab.id}">{{ subTab.label }}</button>
+                                                    [ngClass]="{'bg-accent': operationAndMaintenanceActiveTab === subTab.id}">{{ subTab.label }}</button>
                                         </li>
                                     </ul>
                                 </div>
                                 <!-- Sub-tab Content -->
-                                <div class="w-full lg:w-3/4 p-4 space-y-8">
+                                <div class="w-full lg:w-3/4 p-4 space-y-8 bg-dark text-light rounded font-mono">
                                     <div *ngIf="operationAndMaintenanceActiveTab === 'basicData'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Basic Data</h3>
-                                            <div class="text-gray-700 space-y-2">
-                                                <p>Asset location: {{ project.stages.operationsAndMaintenance.basicData.assetLocation }}</p>
-                                                <p>Budget for maintenance: {{ project.stages.operationsAndMaintenance.basicData.budgetForMaintenance }}</p>
-                                                <p>Funding source for maintenance: {{ project.stages.operationsAndMaintenance.basicData.fundingSourceForMaintenance }}</p>
-                                                <p>Works description: {{ project.stages.operationsAndMaintenance.basicData.worksDescription }}</p>
-                                                <p>Asset name: {{ project.stages.operationsAndMaintenance.basicData.assetName }}</p>
-                                                <p>Maintenance scope: {{ project.stages.operationsAndMaintenance.basicData.maintenanceScope }}</p>
-                                                <p>Type of maintenance works: {{ project.stages.operationsAndMaintenance.basicData.typeOfMaintenanceWorks }}</p>
-                                                <p>Carbon footprint document: {{ project.stages.operationsAndMaintenance.basicData.carbonFootprintDocument }}</p>
-                                                <p>Maintenance plan: {{ project.stages.operationsAndMaintenance.basicData.maintenancePlan }}</p>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-info-circle mr-2"></i>Basic Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Asset location:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.basicData.assetLocation }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Budget for maintenance:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.basicData.budgetForMaintenance }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Funding source for maintenance:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.basicData.fundingSourceForMaintenance }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Works description:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.basicData.worksDescription }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Asset name:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.basicData.assetName }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Maintenance scope:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.basicData.maintenanceScope }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Type of maintenance works:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.basicData.typeOfMaintenanceWorks }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Carbon footprint document:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.basicData.carbonFootprintDocument }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Maintenance plan:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.basicData.maintenancePlan }}</p>
+                                                </div>
                                                 <div>
-                                                    <p class="font-semibold">Project officials and roles:</p>
+                                                    <p class="font-semibold text-key">Project officials and roles:</p>
                                                     <ul class="list-disc list-inside">
-                                                        <li *ngFor="let official of project.stages.operationsAndMaintenance.basicData.projectOfficialsAndRoles" class="text-secondary">
+                                                        <li *ngFor="let official of project.stages.operationsAndMaintenance.basicData.projectOfficialsAndRoles" class="text-value">
                                                             {{ official.role }}: {{ official.name }}
                                                         </li>
                                                     </ul>
@@ -537,74 +944,239 @@
                                         </div>
                                     </div>
                                     <div *ngIf="operationAndMaintenanceActiveTab === 'environmentalAndClimateSustainabilityData'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Environmental and Climate Sustainability Data</h3>
-                                            <div class="text-gray-700 space-y-2">
-                                                <p>Environmental measures: {{ project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData.environmentalMeasures }}</p>
-                                                <p>Climate measures: {{ project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData.climateMeasures }}</p>
-                                                <p>Conservation measures: {{ project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData.conservationMeasures }}</p>
-                                                <p>Environmental licenses and exemptions: {{ project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData.environmentalLicensesAndExemptions }}</p>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-cloud-sun mr-2"></i>Environmental and Climate Sustainability Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Environmental measures:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData.environmentalMeasures }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Climate measures:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData.climateMeasures }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Conservation measures:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData.conservationMeasures }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Environmental licenses and exemptions:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData.environmentalLicensesAndExemptions }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div *ngIf="operationAndMaintenanceActiveTab === 'institutionalSustainabilityData'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Institutional Sustainability Data</h3>
-                                            <div class="text-gray-700 space-y-2">
-                                                <p>Number of freedom of information requests: {{ project.stages.operationsAndMaintenance.institutionalSustainabilityData.numberOfFreedomOfInformationRequests }}</p>
-                                                <p>Number of freedom of information answers: {{ project.stages.operationsAndMaintenance.institutionalSustainabilityData.numberOfFreedomOfInformationAnswers }}</p>
-                                                <p>Freedom of information requests and answers: {{ project.stages.operationsAndMaintenance.institutionalSustainabilityData.freedomOfInformationRequestsAndAnswers }}</p>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-building mr-2"></i>Institutional Sustainability Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Number of freedom of information requests:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.institutionalSustainabilityData.numberOfFreedomOfInformationRequests }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Number of freedom of information answers:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.institutionalSustainabilityData.numberOfFreedomOfInformationAnswers }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Freedom of information requests and answers:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.institutionalSustainabilityData.freedomOfInformationRequestsAndAnswers }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div *ngIf="operationAndMaintenanceActiveTab === 'climateFinanceData'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Climate Finance Data</h3>
-                                            <div class="text-gray-700 space-y-2">
-                                                <p>Carbon footprint: {{ project.stages.operationsAndMaintenance.climateFinanceData.carbonFootprint }}</p>
-                                                <p>Carbon footprint document: {{ project.stages.operationsAndMaintenance.climateFinanceData.carbonFootprintDocument }}</p>
-                                                <p>Impact measurement: {{ project.stages.operationsAndMaintenance.climateFinanceData.impactMeasurement }}</p>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-cash-coin mr-2"></i>Climate Finance Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Carbon footprint:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.climateFinanceData.carbonFootprint }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Carbon footprint document:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.climateFinanceData.carbonFootprintDocument }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Impact measurement:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.climateFinanceData.impactMeasurement }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div *ngIf="operationAndMaintenanceActiveTab === 'economicAndFinancialSustainabilityData'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Economic and Financial Sustainability Data</h3>
-                                            <div class="text-gray-700 space-y-2">
-                                                <p>Budget for maintenance: {{ project.stages.operationsAndMaintenance.economicAndFinancialSustainabilityData.budgetForMaintenance }}</p>
-                                                <p>Funding source for maintenance: {{ project.stages.operationsAndMaintenance.economicAndFinancialSustainabilityData.fundingSourceForMaintenance }}</p>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-graph-up mr-2"></i>Economic and Financial Sustainability Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Budget for maintenance:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.economicAndFinancialSustainabilityData.budgetForMaintenance }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Funding source for maintenance:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.economicAndFinancialSustainabilityData.fundingSourceForMaintenance }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div *ngIf="operationAndMaintenanceActiveTab === 'socialSustainabilityData'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Social Sustainability Data</h3>
-                                            <div class="text-gray-700 space-y-2">
-                                                <p>Inclusive implementation: {{ project.stages.operationsAndMaintenance.socialSustainabilityData.inclusiveImplementation }}</p>
-                                                <p>Workers accidents: {{ project.stages.operationsAndMaintenance.socialSustainabilityData.workersAccidents }}</p>
-                                                <p>Jobs generated: {{ project.stages.operationsAndMaintenance.socialSustainabilityData.jobsGenerated }}</p>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-people mr-2"></i>Social Sustainability Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Inclusive implementation:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.socialSustainabilityData.inclusiveImplementation }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Workers accidents:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.socialSustainabilityData.workersAccidents }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Jobs generated:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.operationsAndMaintenance.socialSustainabilityData.jobsGenerated }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div *ngIf="operationAndMaintenanceActiveTab === 'attachments'" class="space-y-4">
-                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                                            <h3 class="text-xl font-semibold text-secondary mb-4">Attachments</h3>
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-paperclip mr-2"></i>Attachments</h3>
                                             <ul class="list-disc list-inside space-y-2">
-                                                <li *ngFor="let attachment of project.stages.operationsAndMaintenance.attachments" class="text-secondary">
+                                                <li *ngFor="let attachment of project.stages.operationsAndMaintenance.attachments" class="text-value">
                                                     <a [href]="attachment.link" class="text-accent hover:underline">{{ attachment.title }}</a> - {{ attachment.description }}
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </ng-container>
 
-                    <div *ngIf="activeTab === 'decommissioning'" class="tab-content space-y-12">
-                        <h2 class="text-xl font-bold text-secondary">Decommissioning</h2>
-                        <!-- Content for Decommissioning Tab -->
-                    </div>
+                    <ng-container *ngIf="activeTab === 'decommissioning'">
+                        <div class="mb-8">
+                            <h2 class="text-xl font-bold text-secondary">Decommissioning</h2>
+                            <div class="flex flex-col lg:flex-row">
+                                <!-- Vertical Sub-tabs -->
+                                <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-gray-200">
+                                    <ul class="space-y-4 p-4">
+                                        <li *ngFor="let subTab of decommissioningTabs">
+                                            <button (click)="setDecommissioningActiveTab(subTab.id)"
+                                                    class="w-full text-left py-2 px-4 rounded-lg focus:outline-none"
+                                                    [ngClass]="{'bg-accent': decommissioningActiveTab === subTab.id}">{{ subTab.label }}</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- Sub-tab Content -->
+                                <div class="w-full lg:w-3/4 p-4 space-y-8 bg-dark text-light rounded font-mono">
+                                    <div *ngIf="decommissioningActiveTab === 'basicData'" class="space-y-4">
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-info-circle mr-2"></i>Basic Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Decommission period:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.decommissioning.basicData.decommissionPeriod }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Decommission mitigation plan:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.decommissioning.basicData.decommissionMitigationPlan }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Carbon decommission savings:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.decommissioning.basicData.carbonDecommissionSavings }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Asset name:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.decommissioning.basicData.assetName }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Asset location:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.decommissioning.basicData.assetLocation }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Decision of asset disposal:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.decommissioning.basicData.decisionOfAssetDisposal }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Decommission costs:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.decommissioning.basicData.decommissionCosts }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="decommissioningActiveTab === 'environmentalAndClimateSustainabilityData'" class="space-y-4">
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-cloud-sun mr-2"></i>Environmental and Climate Sustainability Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Decommission mitigation plan:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.decommissioning.environmentalAndClimateSustainabilityData.decommissionMitigationPlan }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="decommissioningActiveTab === 'institutionalSustainabilityData'" class="space-y-4">
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-building mr-2"></i>Institutional Sustainability Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Number of freedom of information requests:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.decommissioning.institutionalSustainabilityData.numberOfFreedomOfInformationRequests }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Number of freedom of information answers:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.decommissioning.institutionalSustainabilityData.numberOfFreedomOfInformationAnswers }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Freedom of information requests and answers:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.decommissioning.institutionalSustainabilityData.freedomOfInformationRequestsAndAnswers }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="decommissioningActiveTab === 'economicAndFinancialSustainabilityData'" class="space-y-4">
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-graph-up mr-2"></i>Economic and Financial Sustainability Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Decommission cost forecast:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.decommissioning.economicAndFinancialSustainabilityData.decommissionCostForecast }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="decommissioningActiveTab === 'socialSustainabilityData'" class="space-y-4">
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-people mr-2"></i>Social Sustainability Data</h3>
+                                            <div class="space-y-4">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Jobs generated:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.decommissioning.socialSustainabilityData.jobsGenerated }}</p>
+                                                </div>
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-key">Workers accidents:</p>
+                                                    <p class="w-1/2 text-value">{{ project.stages.decommissioning.socialSustainabilityData.workersAccidents }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="decommissioningActiveTab === 'attachments'" class="space-y-4">
+                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                            <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-paperclip mr-2"></i>Attachments</h3>
+                                            <ul class="list-disc list-inside space-y-2">
+                                                <li *ngFor="let attachment of project.stages.decommissioning.attachments" class="text-value">
+                                                    <a [href]="attachment.link" class="text-accent hover:underline">{{ attachment.title }}</a> - {{ attachment.description }}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </ng-container>
+
                 </div>
             </div>
         </div>
