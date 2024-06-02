@@ -496,10 +496,111 @@
                         </div>
                     </ng-container>
 
-                    <div *ngIf="activeTab === 'operation-and-maintenance'" class="tab-content space-y-12">
-                        <h2 class="text-xl font-bold text-secondary">Operation and Maintenance</h2>
-                        <!-- Content for Operation and Maintenance Tab -->
-                    </div>
+                    <ng-container *ngIf="activeTab === 'operation-and-maintenance'">
+                        <div class="mb-8">
+                            <h2 class="text-xl font-bold text-secondary">Operation and Maintenance</h2>
+                            <div class="flex flex-col lg:flex-row">
+                                <!-- Vertical Sub-tabs -->
+                                <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-gray-200">
+                                    <ul class="space-y-4 p-4">
+                                        <li *ngFor="let subTab of operationAndMaintenanceTabs">
+                                            <button (click)="setOperationAndMaintenanceActiveTab(subTab.id)"
+                                                    class="w-full text-left py-2 px-4 rounded-lg focus:outline-none"
+                                                    [ngClass]="{'bg-gray-100': operationAndMaintenanceActiveTab === subTab.id}">{{ subTab.label }}</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- Sub-tab Content -->
+                                <div class="w-full lg:w-3/4 p-4 space-y-8">
+                                    <div *ngIf="operationAndMaintenanceActiveTab === 'basicData'" class="space-y-4">
+                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                            <h3 class="text-xl font-semibold text-secondary mb-4">Basic Data</h3>
+                                            <div class="text-gray-700 space-y-2">
+                                                <p>Asset location: {{ project.stages.operationsAndMaintenance.basicData.assetLocation }}</p>
+                                                <p>Budget for maintenance: {{ project.stages.operationsAndMaintenance.basicData.budgetForMaintenance }}</p>
+                                                <p>Funding source for maintenance: {{ project.stages.operationsAndMaintenance.basicData.fundingSourceForMaintenance }}</p>
+                                                <p>Works description: {{ project.stages.operationsAndMaintenance.basicData.worksDescription }}</p>
+                                                <p>Asset name: {{ project.stages.operationsAndMaintenance.basicData.assetName }}</p>
+                                                <p>Maintenance scope: {{ project.stages.operationsAndMaintenance.basicData.maintenanceScope }}</p>
+                                                <p>Type of maintenance works: {{ project.stages.operationsAndMaintenance.basicData.typeOfMaintenanceWorks }}</p>
+                                                <p>Carbon footprint document: {{ project.stages.operationsAndMaintenance.basicData.carbonFootprintDocument }}</p>
+                                                <p>Maintenance plan: {{ project.stages.operationsAndMaintenance.basicData.maintenancePlan }}</p>
+                                                <div>
+                                                    <p class="font-semibold">Project officials and roles:</p>
+                                                    <ul class="list-disc list-inside">
+                                                        <li *ngFor="let official of project.stages.operationsAndMaintenance.basicData.projectOfficialsAndRoles" class="text-secondary">
+                                                            {{ official.role }}: {{ official.name }}
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="operationAndMaintenanceActiveTab === 'environmentalAndClimateSustainabilityData'" class="space-y-4">
+                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                            <h3 class="text-xl font-semibold text-secondary mb-4">Environmental and Climate Sustainability Data</h3>
+                                            <div class="text-gray-700 space-y-2">
+                                                <p>Environmental measures: {{ project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData.environmentalMeasures }}</p>
+                                                <p>Climate measures: {{ project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData.climateMeasures }}</p>
+                                                <p>Conservation measures: {{ project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData.conservationMeasures }}</p>
+                                                <p>Environmental licenses and exemptions: {{ project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData.environmentalLicensesAndExemptions }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="operationAndMaintenanceActiveTab === 'institutionalSustainabilityData'" class="space-y-4">
+                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                            <h3 class="text-xl font-semibold text-secondary mb-4">Institutional Sustainability Data</h3>
+                                            <div class="text-gray-700 space-y-2">
+                                                <p>Number of freedom of information requests: {{ project.stages.operationsAndMaintenance.institutionalSustainabilityData.numberOfFreedomOfInformationRequests }}</p>
+                                                <p>Number of freedom of information answers: {{ project.stages.operationsAndMaintenance.institutionalSustainabilityData.numberOfFreedomOfInformationAnswers }}</p>
+                                                <p>Freedom of information requests and answers: {{ project.stages.operationsAndMaintenance.institutionalSustainabilityData.freedomOfInformationRequestsAndAnswers }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="operationAndMaintenanceActiveTab === 'climateFinanceData'" class="space-y-4">
+                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                            <h3 class="text-xl font-semibold text-secondary mb-4">Climate Finance Data</h3>
+                                            <div class="text-gray-700 space-y-2">
+                                                <p>Carbon footprint: {{ project.stages.operationsAndMaintenance.climateFinanceData.carbonFootprint }}</p>
+                                                <p>Carbon footprint document: {{ project.stages.operationsAndMaintenance.climateFinanceData.carbonFootprintDocument }}</p>
+                                                <p>Impact measurement: {{ project.stages.operationsAndMaintenance.climateFinanceData.impactMeasurement }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="operationAndMaintenanceActiveTab === 'economicAndFinancialSustainabilityData'" class="space-y-4">
+                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                            <h3 class="text-xl font-semibold text-secondary mb-4">Economic and Financial Sustainability Data</h3>
+                                            <div class="text-gray-700 space-y-2">
+                                                <p>Budget for maintenance: {{ project.stages.operationsAndMaintenance.economicAndFinancialSustainabilityData.budgetForMaintenance }}</p>
+                                                <p>Funding source for maintenance: {{ project.stages.operationsAndMaintenance.economicAndFinancialSustainabilityData.fundingSourceForMaintenance }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="operationAndMaintenanceActiveTab === 'socialSustainabilityData'" class="space-y-4">
+                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                            <h3 class="text-xl font-semibold text-secondary mb-4">Social Sustainability Data</h3>
+                                            <div class="text-gray-700 space-y-2">
+                                                <p>Inclusive implementation: {{ project.stages.operationsAndMaintenance.socialSustainabilityData.inclusiveImplementation }}</p>
+                                                <p>Workers accidents: {{ project.stages.operationsAndMaintenance.socialSustainabilityData.workersAccidents }}</p>
+                                                <p>Jobs generated: {{ project.stages.operationsAndMaintenance.socialSustainabilityData.jobsGenerated }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="operationAndMaintenanceActiveTab === 'attachments'" class="space-y-4">
+                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                            <h3 class="text-xl font-semibold text-secondary mb-4">Attachments</h3>
+                                            <ul class="list-disc list-inside space-y-2">
+                                                <li *ngFor="let attachment of project.stages.operationsAndMaintenance.attachments" class="text-secondary">
+                                                    <a [href]="attachment.link" class="text-accent hover:underline">{{ attachment.title }}</a> - {{ attachment.description }}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+
                     <div *ngIf="activeTab === 'decommissioning'" class="tab-content space-y-12">
                         <h2 class="text-xl font-bold text-secondary">Decommissioning</h2>
                         <!-- Content for Decommissioning Tab -->
