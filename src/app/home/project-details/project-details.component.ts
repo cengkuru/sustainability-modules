@@ -19,15 +19,8 @@ import { map } from 'rxjs/operators';
 export class ProjectDetailsComponent implements OnInit {
     project$: Observable<any> | undefined;
     activeTab: string = 'identification';
-    identificationActiveTab: string = 'basicData'; // Add this line
-    preparationActiveTab: string = 'basicData';
-    tenderManagementActiveTab: string = 'basicData';
-    implementationActiveTab: string = 'basicData';
-    completionActiveTab: string = 'basicData';
-    operationAndMaintenanceActiveTab: string = 'basicData';
-    decommissioningActiveTab: string = 'basicData';
-
-    steps: string[] = ['Planned', 'In Progress', 'Completed'];
+    identificationActiveTab: string = 'basicData';
+    identificationTabs: { id: string, label: string }[] = [];
 
     tabs = [
         { id: 'identification', label: 'Identification', icon: 'bi-info-circle' },
@@ -57,6 +50,7 @@ export class ProjectDetailsComponent implements OnInit {
         this.project$ = this.firestore.collection('projects').doc(projectId).valueChanges().pipe(
             map(project => {
                 if (project) {
+                    this.generateIdentificationTabs(project);
                     return { id: projectId, ...project as object };
                 }
                 return null;
@@ -64,36 +58,23 @@ export class ProjectDetailsComponent implements OnInit {
         );
     }
 
+    generateIdentificationTabs(project: any): void {
+        const identificationStage = project.stages.identification;
+        this.identificationTabs = Object.keys(identificationStage).map(key => ({
+            id: key,
+            label: this.formatLabel(key)
+        }));
+    }
+
+    formatLabel(key: string): string {
+        return key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+    }
+
     setActiveTab(tab: string): void {
         this.activeTab = tab;
     }
 
-    setPreparationActiveTab(tab: string): void {
-        this.preparationActiveTab = tab;
-    }
-
-    setIdentificationActiveTab(tab: string): void { // Add this method
+    setIdentificationActiveTab(tab: string): void {
         this.identificationActiveTab = tab;
     }
-
-    setTenderManagementActiveTab(tab: string): void {
-        this.tenderManagementActiveTab = tab;
-    }
-
-    setImplementationActiveTab(tab: string): void { // Add this method
-        this.implementationActiveTab = tab;
-    }
-
-    setCompletionActiveTab(tab: string): void { // Add this method
-        this.completionActiveTab = tab;
-    }
-
-    setOperationAndMaintenanceActiveTab(tab: string): void { // Add this method
-        this.operationAndMaintenanceActiveTab = tab;
-    }
-
-    setDecommissioningActiveTab(tab: string): void { // Add this method
-        this.decommissioningActiveTab = tab;
-    }
-
 }
