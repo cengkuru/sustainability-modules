@@ -101,8 +101,156 @@
                     <!-- Placeholder for the rest of the tabs -->
                     <div *ngIf="activeTab === 'preparation'" class="tab-content space-y-12">
                         <h2 class="text-xl font-bold text-secondary">Preparation</h2>
-                        <!-- Content for Preparation Tab -->
+                        <div class="flex flex-col lg:flex-row">
+                            <!-- Vertical Sub-tabs -->
+                            <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-gray-200">
+                                <ul class="space-y-4 p-4">
+                                    <li *ngFor="let subTab of preparationTabs">
+                                        <button (click)="setPreparationActiveTab(subTab.id)"
+                                                class="w-full text-left py-2 px-4 rounded-lg focus:outline-none"
+                                                [ngClass]="{'bg-gray-100': preparationActiveTab === subTab.id}">{{ subTab.label }}</button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- Sub-tab Content -->
+                            <div class="w-full lg:w-3/4 p-4 space-y-8">
+                                <div *ngIf="preparationActiveTab === 'basicData'" class="space-y-4">
+                                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                        <h3 class="text-xl font-semibold text-secondary mb-4">Basic Data</h3>
+                                        <div class="text-gray-700 space-y-2">
+                                            <p>Project Scope: {{ project.stages.preparation.basicData.projectScope }}</p>
+                                            <p>Contact Details: {{ project.stages.preparation.basicData.contactDetails }}</p>
+                                            <p>Funding Sources: {{ project.stages.preparation.basicData.fundingSources }}</p>
+                                            <p>Project Budget: {{ project.stages.preparation.basicData.projectBudget }}</p>
+                                            <p>Project Budget Approval Date: {{ project.stages.preparation.basicData.projectBudgetApprovalDate }}</p>
+                                            <div>
+                                                <p class="font-semibold">Attachments:</p>
+                                                <ul class="list-disc list-inside">
+                                                    <li *ngFor="let attachment of project.stages.preparation.basicData.attachments" class="text-secondary">
+                                                        <a [href]="attachment.link" class="text-accent hover:underline">{{ attachment.title }}</a> - {{ attachment.description }}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="preparationActiveTab === 'climateFinanceData'" class="space-y-4">
+                                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                        <h3 class="text-xl font-semibold text-secondary mb-4">Climate Finance Data</h3>
+                                        <div class="text-gray-700 space-y-2">
+                                            <p>Accredited Entity Type: {{ project.stages.preparation.climateFinanceData.accreditedEntityType }}</p>
+                                            <p>Project Approval Period: {{ project.stages.preparation.climateFinanceData.projectApprovalPeriod }}</p>
+                                            <p>Project Preparation Period: {{ project.stages.preparation.climateFinanceData.projectPreparationPeriod }}</p>
+                                            <p>Non-Climate Co-Benefits: {{ project.stages.preparation.climateFinanceData.nonClimateCoBenefits }}</p>
+                                            <p>Funding Source: {{ project.stages.preparation.climateFinanceData.fundingSource }}</p>
+                                            <p>Green Climate Fund Accredited Entity: {{ project.stages.preparation.climateFinanceData.greenClimateFundAccreditedEntity }}</p>
+                                            <p>Project Preparation Costs: {{ project.stages.preparation.climateFinanceData.projectPreparationCosts }}</p>
+                                            <p>Ratio of Co-Finance: {{ project.stages.preparation.climateFinanceData.ratioOfCoFinance }}</p>
+                                            <p>Terms of Climate Finance: {{ project.stages.preparation.climateFinanceData.termsOfClimateFinance }}</p>
+                                            <p>Carbon Efficiency: {{ project.stages.preparation.climateFinanceData.carbonEfficiency }}</p>
+                                            <div>
+                                                <p class="font-semibold">Attachments:</p>
+                                                <ul class="list-disc list-inside">
+                                                    <li *ngFor="let attachment of project.stages.preparation.climateFinanceData.attachments" class="text-secondary">
+                                                        <a [href]="attachment.link" class="text-accent hover:underline">{{ attachment.title }}</a> - {{ attachment.description }}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="preparationActiveTab === 'environmentalAndClimateSustainabilityData'" class="space-y-4">
+                                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                        <h3 class="text-xl font-semibold text-secondary mb-4">Environmental and Climate Sustainability Data</h3>
+                                        <div class="text-gray-700 space-y-2">
+                                            <p>Conservation Measures: {{ project.stages.preparation.environmentalAndClimateSustainabilityData.conservationMeasures }}</p>
+                                            <p>Environmental Impact Category: {{ project.stages.preparation.environmentalAndClimateSustainabilityData.environmentalImpactCategory }}</p>
+                                            <p>Environmental Measures: {{ project.stages.preparation.environmentalAndClimateSustainabilityData.environmentalMeasures }}</p>
+                                            <p>Environmental Licenses and Exemptions: {{ project.stages.preparation.environmentalAndClimateSustainabilityData.environmentalLicensesAndExemptions }}</p>
+                                            <p>Climate and Disaster Risk Assessment: {{ project.stages.preparation.environmentalAndClimateSustainabilityData.climateAndDisasterRiskAssessment }}</p>
+                                            <p>Protected Area: {{ project.stages.preparation.environmentalAndClimateSustainabilityData.protectedArea }}</p>
+                                            <p>Climate Measures: {{ project.stages.preparation.environmentalAndClimateSustainabilityData.climateMeasures }}</p>
+                                            <p>Forecast of Greenhouse Gas Emissions: {{ project.stages.preparation.environmentalAndClimateSustainabilityData.forecastOfGreenHouseGasEmissions }}</p>
+                                            <div>
+                                                <p class="font-semibold">Attachments:</p>
+                                                <ul class="list-disc list-inside">
+                                                    <li *ngFor="let attachment of project.stages.preparation.environmentalAndClimateSustainabilityData.attachments" class="text-secondary">
+                                                        <a [href]="attachment.link" class="text-accent hover:underline">{{ attachment.title }}</a> - {{ attachment.description }}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="preparationActiveTab === 'economicAndFinancialSustainabilityData'" class="space-y-4">
+                                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                        <h3 class="text-xl font-semibold text-secondary mb-4">Economic and Financial Sustainability Data</h3>
+                                        <div class="text-gray-700 space-y-2">
+                                            <p>Maintenance Plan: {{ project.stages.preparation.economicAndFinancialSustainabilityData.maintenancePlan }}</p>
+                                            <p>Value for Money: {{ project.stages.preparation.economicAndFinancialSustainabilityData.valueForMoney }}</p>
+                                            <p>Budget Projections: {{ project.stages.preparation.economicAndFinancialSustainabilityData.budgetProjections }}</p>
+                                            <p>Life Cycle Cost: {{ project.stages.preparation.economicAndFinancialSustainabilityData.lifeCycleCost }}</p>
+                                            <p>Procurement Strategy: {{ project.stages.preparation.economicAndFinancialSustainabilityData.procurementStrategy }}</p>
+                                            <p>Cost Benefit Analysis: {{ project.stages.preparation.economicAndFinancialSustainabilityData.costBenefitAnalysis }}</p>
+                                            <p>Life Cycle Cost Calculation Methodology: {{ project.stages.preparation.economicAndFinancialSustainabilityData.lifeCycleCostCalculationMethodology }}</p>
+                                            <p>Budget for Preparation: {{ project.stages.preparation.economicAndFinancialSustainabilityData.budgetForPreparation }}</p>
+                                            <p>Funding Source for Preparation: {{ project.stages.preparation.economicAndFinancialSustainabilityData.fundingSourceForPreparation }}</p>
+                                            <p>Asset Lifetime: {{ project.stages.preparation.economicAndFinancialSustainabilityData.assetLifetime }}</p>
+                                            <div>
+                                                <p class="font-semibold">Attachments:</p>
+                                                <ul class="list-disc list-inside">
+                                                    <li *ngFor="let attachment of project.stages.preparation.economicAndFinancialSustainabilityData.attachments" class="text-secondary">
+                                                        <a [href]="attachment.link" class="text-accent hover:underline">{{ attachment.title }}</a> - {{ attachment.description }}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="preparationActiveTab === 'institutionalSustainabilityData'" class="space-y-4">
+                                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                        <h3 class="text-xl font-semibold text-secondary mb-4">Institutional Sustainability Data</h3>
+                                        <div class="text-gray-700 space-y-2">
+                                            <p>Number of Freedom of Information Requests: {{ project.stages.preparation.institutionalSustainabilityData.numberOfFreedomOfInformationRequests }}</p>
+                                            <p>Number of Freedom of Information Answers: {{ project.stages.preparation.institutionalSustainabilityData.numberOfFreedomOfInformationAnswers }}</p>
+                                            <p>Freedom of Information Requests and Answers: {{ project.stages.preparation.institutionalSustainabilityData.freedomOfInformationRequestsAndAnswers }}</p>
+                                            <div>
+                                                <p class="font-semibold">Attachments:</p>
+                                                <ul class="list-disc list-inside">
+                                                    <li *ngFor="let attachment of project.stages.preparation.institutionalSustainabilityData.attachments" class="text-secondary">
+                                                        <a [href]="attachment.link" class="text-accent hover:underline">{{ attachment.title }}</a> - {{ attachment.description }}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="preparationActiveTab === 'socialSustainabilityData'" class="space-y-4">
+                                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                        <h3 class="text-xl font-semibold text-secondary mb-4">Social Sustainability Data</h3>
+                                        <div class="text-gray-700 space-y-2">
+                                            <p>Number of Beneficiaries: {{ project.stages.preparation.socialSustainabilityData.numberOfBeneficiaries }}</p>
+                                            <p>Indigenous Land: {{ project.stages.preparation.socialSustainabilityData.indigenousLand }}</p>
+                                            <p>Inclusive Design: {{ project.stages.preparation.socialSustainabilityData.inclusiveDesign }}</p>
+                                            <p>Land Compensation Budget: {{ project.stages.preparation.socialSustainabilityData.landCompensationBudget }}</p>
+                                            <p>Public Consultation Meetings: {{ project.stages.preparation.socialSustainabilityData.publicConsultationMeetings }}</p>
+                                            <p>Beneficiaries: {{ project.stages.preparation.socialSustainabilityData.beneficiaries }}</p>
+                                            <p>Labor Obligations: {{ project.stages.preparation.socialSustainabilityData.laborObligations }}</p>
+                                            <div>
+                                                <p class="font-semibold">Attachments:</p>
+                                                <ul class="list-disc list-inside">
+                                                    <li *ngFor="let attachment of project.stages.preparation.socialSustainabilityData.attachments" class="text-secondary">
+                                                        <a [href]="attachment.link" class="text-accent hover:underline">{{ attachment.title }}</a> - {{ attachment.description }}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                     <div *ngIf="activeTab === 'tender-management'" class="tab-content space-y-12">
                         <h2 class="text-xl font-bold text-secondary">Tender Management</h2>
                         <!-- Content for Tender Management Tab -->

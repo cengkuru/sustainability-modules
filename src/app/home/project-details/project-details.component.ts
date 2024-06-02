@@ -20,7 +20,9 @@ export class ProjectDetailsComponent implements OnInit {
     project$: Observable<any> | undefined;
     activeTab: string = 'identification';
     identificationActiveTab: string = 'basicData';
+    preparationActiveTab: string = 'basicData';
     identificationTabs: { id: string, label: string }[] = [];
+    preparationTabs: { id: string, label: string }[] = [];
 
     tabs = [
         { id: 'identification', label: 'Identification', icon: 'bi-info-circle' },
@@ -51,6 +53,7 @@ export class ProjectDetailsComponent implements OnInit {
             map(project => {
                 if (project) {
                     this.generateIdentificationTabs(project);
+                    this.generatePreparationTabs(project);
                     return { id: projectId, ...project as object };
                 }
                 return null;
@@ -66,6 +69,14 @@ export class ProjectDetailsComponent implements OnInit {
         }));
     }
 
+    generatePreparationTabs(project: any): void {
+        const preparationStage = project.stages.preparation;
+        this.preparationTabs = Object.keys(preparationStage).map(key => ({
+            id: key,
+            label: this.formatLabel(key)
+        }));
+    }
+
     formatLabel(key: string): string {
         return key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
     }
@@ -76,5 +87,9 @@ export class ProjectDetailsComponent implements OnInit {
 
     setIdentificationActiveTab(tab: string): void {
         this.identificationActiveTab = tab;
+    }
+
+    setPreparationActiveTab(tab: string): void {
+        this.preparationActiveTab = tab;
     }
 }
