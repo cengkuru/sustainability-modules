@@ -341,10 +341,112 @@
                         </div>
                     </ng-container>
 
-                    <div *ngIf="activeTab === 'implementation'" class="tab-content space-y-12">
-                        <h2 class="text-xl font-bold text-secondary">Implementation</h2>
-                        <!-- Content for Implementation Tab -->
-                    </div>
+                    <ng-container *ngIf="activeTab === 'implementation'">
+                        <div class="mb-8">
+                            <h2 class="text-xl font-bold text-secondary">Implementation</h2>
+                            <div class="flex flex-col lg:flex-row">
+                                <!-- Vertical Sub-tabs -->
+                                <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-gray-200">
+                                    <ul class="space-y-4 p-4">
+                                        <li *ngFor="let subTab of implementationTabs">
+                                            <button (click)="setImplementationActiveTab(subTab.id)"
+                                                    class="w-full text-left py-2 px-4 rounded-lg focus:outline-none"
+                                                    [ngClass]="{'bg-gray-100': implementationActiveTab === subTab.id}">{{ subTab.label }}</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- Sub-tab Content -->
+                                <div class="w-full lg:w-3/4 p-4 space-y-8">
+                                    <div *ngIf="implementationActiveTab === 'basicData'" class="space-y-4">
+                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                            <h3 class="text-xl font-semibold text-secondary mb-4">Basic Data</h3>
+                                            <div class="text-gray-700 space-y-2">
+                                                <p>List of escalation approvals: {{ project.stages.implementation.basicData.listOfEscalationApprovals }}</p>
+                                                <p>List of variations, changes, amendments: {{ project.stages.implementation.basicData.listOfVariationsChangesAmendments }}</p>
+                                                <p>Contract amendments: {{ project.stages.implementation.basicData.contractAmendments }}</p>
+                                                <p>Variation to contract scope: {{ project.stages.implementation.basicData.variationToContractScope }}</p>
+                                                <p>Reasons for price changes: {{ project.stages.implementation.basicData.reasonsForPriceChanges }}</p>
+                                                <p>Variation to contract duration: {{ project.stages.implementation.basicData.variationToContractDuration }}</p>
+                                                <p>Variation to contract price: {{ project.stages.implementation.basicData.variationToContractPrice }}</p>
+                                                <p>Reasons for scope: {{ project.stages.implementation.basicData.reasonsForScope }}</p>
+                                                <p>Payment certificates: {{ project.stages.implementation.basicData.paymentCertificates }}</p>
+                                                <p>Quality assurance reports: {{ project.stages.implementation.basicData.qualityAssuranceReports }}</p>
+                                                <p>Escalation of contract price: {{ project.stages.implementation.basicData.escalationOfContractPrice }}</p>
+                                                <p>Reasons for duration changes: {{ project.stages.implementation.basicData.reasonsForDurationChanges }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="implementationActiveTab === 'institutionalSustainabilityData'" class="space-y-4">
+                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                            <h3 class="text-xl font-semibold text-secondary mb-4">Institutional Sustainability Data</h3>
+                                            <div class="text-gray-700 space-y-2">
+                                                <p>Number of freedom of information requests: {{ project.stages.implementation.institutionalSustainabilityData.numberOfFreedomOfInformationRequests }}</p>
+                                                <p>Number of freedom of information answers: {{ project.stages.implementation.institutionalSustainabilityData.numberOfFreedomOfInformationAnswers }}</p>
+                                                <p>Oversight reports: {{ project.stages.implementation.institutionalSustainabilityData.oversightReports }}</p>
+                                                <p>Freedom of information requests and answers: {{ project.stages.implementation.institutionalSustainabilityData.freedomOfInformationRequestsAndAnswers }}</p>
+                                                <p>Independent mid-term evaluation: {{ project.stages.implementation.institutionalSustainabilityData.independentMidTermEvaluation }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="implementationActiveTab === 'environmentalAndClimateSustainabilityData'" class="space-y-4">
+                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                            <h3 class="text-xl font-semibold text-secondary mb-4">Environmental And Climate Sustainability Data</h3>
+                                            <div class="text-gray-700 space-y-2">
+                                                <p>Environmental measures: {{ project.stages.implementation.environmentalAndClimateSustainabilityData.environmentalMeasures }}</p>
+                                                <p>Climate measures: {{ project.stages.implementation.environmentalAndClimateSustainabilityData.climateMeasures }}</p>
+                                                <p>Conservation measures: {{ project.stages.implementation.environmentalAndClimateSustainabilityData.conservationMeasures }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="implementationActiveTab === 'climateFinanceData'" class="space-y-4">
+                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                            <h3 class="text-xl font-semibold text-secondary mb-4">Climate Finance Data</h3>
+                                            <div class="text-gray-700 space-y-2">
+                                                <p>Type of monitoring: {{ project.stages.implementation.climateFinanceData.typeOfMonitoring }}</p>
+                                                <p>Performance monitoring: {{ project.stages.implementation.climateFinanceData.performanceMonitoring }}</p>
+                                                <p>Reporting period: {{ project.stages.implementation.climateFinanceData.reportingPeriod }}</p>
+                                                <p>Independent monitoring: {{ project.stages.implementation.climateFinanceData.independentMonitoring }}</p>
+                                                <p>Disbursement records: {{ project.stages.implementation.climateFinanceData.disbursementRecords }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="implementationActiveTab === 'economicAndFinancialSustainabilityData'" class="space-y-4">
+                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                            <h3 class="text-xl font-semibold text-secondary mb-4">Economic And Financial Sustainability Data</h3>
+                                            <div class="text-gray-700 space-y-2">
+                                                <p>Budget for implementation: {{ project.stages.implementation.economicAndFinancialSustainabilityData.budgetForImplementation }}</p>
+                                                <p>Funding source for implementation: {{ project.stages.implementation.economicAndFinancialSustainabilityData.fundingSourceForImplementation }}</p>
+                                                <p>Budget shortfall: {{ project.stages.implementation.economicAndFinancialSustainabilityData.budgetShortfall }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="implementationActiveTab === 'socialSustainabilityData'" class="space-y-4">
+                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                            <h3 class="text-xl font-semibold text-secondary mb-4">Social Sustainability Data</h3>
+                                            <div class="text-gray-700 space-y-2">
+                                                <p>Inclusive implementation: {{ project.stages.implementation.socialSustainabilityData.inclusiveImplementation }}</p>
+                                                <p>Jobs generated: {{ project.stages.implementation.socialSustainabilityData.jobsGenerated }}</p>
+                                                <p>Construction materials testing: {{ project.stages.implementation.socialSustainabilityData.constructionMaterialsTesting }}</p>
+                                                <p>Workers accidents: {{ project.stages.implementation.socialSustainabilityData.workersAccidents }}</p>
+                                                <p>Building inspections: {{ project.stages.implementation.socialSustainabilityData.buildingInspections }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="implementationActiveTab === 'attachments'" class="space-y-4">
+                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                            <h3 class="text-xl font-semibold text-secondary mb-4">Attachments</h3>
+                                            <ul class="list-disc list-inside space-y-2">
+                                                <li *ngFor="let attachment of project.stages.implementation.attachments" class="text-secondary">
+                                                    <a [href]="attachment.link" class="text-accent hover:underline">{{ attachment.title }}</a> - {{ attachment.description }}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+
                     <div *ngIf="activeTab === 'completion'" class="tab-content space-y-12">
                         <h2 class="text-xl font-bold text-secondary">Completion</h2>
                         <!-- Content for Completion Tab -->
