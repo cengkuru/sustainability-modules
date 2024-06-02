@@ -21,8 +21,10 @@ export class ProjectDetailsComponent implements OnInit {
     activeTab: string = 'identification';
     identificationActiveTab: string = 'basicData';
     preparationActiveTab: string = 'basicData';
+    tenderManagementActiveTab: string = 'basicData';
     identificationTabs: { id: string, label: string }[] = [];
     preparationTabs: { id: string, label: string }[] = [];
+    tenderManagementTabs: { id: string, label: string }[] = [];
 
     tabs = [
         { id: 'identification', label: 'Identification', icon: 'bi-info-circle' },
@@ -54,6 +56,7 @@ export class ProjectDetailsComponent implements OnInit {
                 if (project) {
                     this.generateIdentificationTabs(project);
                     this.generatePreparationTabs(project);
+                    this.generateTenderManagementTabs(project);
                     return { id: projectId, ...project as object };
                 }
                 return null;
@@ -77,6 +80,14 @@ export class ProjectDetailsComponent implements OnInit {
         }));
     }
 
+    generateTenderManagementTabs(project: any): void {
+        const tenderManagementStage = project.stages['tenderManagement'];
+        this.tenderManagementTabs = Object.keys(tenderManagementStage).map(key => ({
+            id: key,
+            label: this.formatLabel(key)
+        }));
+    }
+
     formatLabel(key: string): string {
         return key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
     }
@@ -91,5 +102,9 @@ export class ProjectDetailsComponent implements OnInit {
 
     setPreparationActiveTab(tab: string): void {
         this.preparationActiveTab = tab;
+    }
+
+    setTenderManagementActiveTab(tab: string): void {
+        this.tenderManagementActiveTab = tab;
     }
 }

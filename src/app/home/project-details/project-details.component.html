@@ -251,10 +251,96 @@
                         </div>
                     </div>
 
-                    <div *ngIf="activeTab === 'tender-management'" class="tab-content space-y-12">
-                        <h2 class="text-xl font-bold text-secondary">Tender Management</h2>
-                        <!-- Content for Tender Management Tab -->
-                    </div>
+                    <ng-container *ngIf="activeTab === 'tender-management'">
+                        <div class="mb-8">
+                            <h2 class="text-xl font-bold text-secondary">Tender Management</h2>
+                            <div class="flex flex-col lg:flex-row">
+                                <!-- Vertical Sub-tabs -->
+                                <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-gray-200">
+                                    <ul class="space-y-4 p-4">
+                                        <li *ngFor="let subTab of tenderManagementTabs">
+                                            <button (click)="setTenderManagementActiveTab(subTab.id)"
+                                                    class="w-full text-left py-2 px-4 rounded-lg focus:outline-none"
+                                                    [ngClass]="{'bg-gray-100': tenderManagementActiveTab === subTab.id}">{{ subTab.label }}</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- Sub-tab Content -->
+                                <div class="w-full lg:w-3/4 p-4 space-y-8">
+                                    <div *ngIf="tenderManagementActiveTab === 'basicData'" class="space-y-4">
+                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                            <h3 class="text-xl font-semibold text-secondary mb-4">Basic Data</h3>
+                                            <div class="text-gray-700 space-y-2">
+                                                <p>Contract price: {{ project.stages.tenderManagement.basicData.contractPrice }}</p>
+                                                <p>Contract title: {{ project.stages.tenderManagement.basicData.contractTitle }}</p>
+                                                <p>Contract duration: {{ project.stages.tenderManagement.basicData.contractDuration }}</p>
+                                                <p>Contract scope of work: {{ project.stages.tenderManagement.basicData.contractScopeOfWork }}</p>
+                                                <p>Contract type: {{ project.stages.tenderManagement.basicData.contractType }}</p>
+                                                <p>Contract administration entity: {{ project.stages.tenderManagement.basicData.contractAdministrationEntity }}</p>
+                                                <p>Contract start date: {{ project.stages.tenderManagement.basicData.contractStartDate }}</p>
+                                                <p>Procuring entity: {{ project.stages.tenderManagement.basicData.procuringEntity }}</p>
+                                                <p>Procuring entity contact details: {{ project.stages.tenderManagement.basicData.procuringEntityContactDetails }}</p>
+                                                <p>Procurement method: {{ project.stages.tenderManagement.basicData.procurementMethod }}</p>
+                                                <p>Procurement process: {{ project.stages.tenderManagement.basicData.procurementProcess }}</p>
+                                                <p>Contract firm: {{ project.stages.tenderManagement.basicData.contractFirm }}</p>
+                                                <p>Number of firms tendering: {{ project.stages.tenderManagement.basicData.numberOfFirmsTendering }}</p>
+                                                <div>
+                                                    <p class="font-semibold">Contract officials and roles:</p>
+                                                    <ul class="list-disc list-inside">
+                                                        <li *ngFor="let official of project.stages.tenderManagement.basicData.contractOfficialsAndRoles" class="text-secondary">
+                                                            {{ official.role }}: {{ official.name }}
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="tenderManagementActiveTab === 'institutionalSustainabilityData'" class="space-y-4">
+                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                            <h3 class="text-xl font-semibold text-secondary mb-4">Institutional Sustainability Data</h3>
+                                            <div class="text-gray-700 space-y-2">
+                                                <p>Beneficial ownership: {{ project.stages.tenderManagement.institutionalSustainabilityData.beneficialOwnership }}</p>
+                                                <p>Sustainability criteria: {{ project.stages.tenderManagement.institutionalSustainabilityData.sustainabilityCriteria }}</p>
+                                                <p>Anti-corruption certifications: {{ project.stages.tenderManagement.institutionalSustainabilityData.antiCorruptionCertifications }}</p>
+                                                <p>Number of freedom of information requests: {{ project.stages.tenderManagement.institutionalSustainabilityData.numberOfFreedomOfInformationRequests }}</p>
+                                                <p>Number of freedom of information answers: {{ project.stages.tenderManagement.institutionalSustainabilityData.numberOfFreedomOfInformationAnswers }}</p>
+                                                <p>Freedom of information requests and answers: {{ project.stages.tenderManagement.institutionalSustainabilityData.freedomOfInformationRequestsAndAnswers }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="tenderManagementActiveTab === 'environmentalAndClimateSustainabilityData'" class="space-y-4">
+                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                            <h3 class="text-xl font-semibold text-secondary mb-4">Environmental And Climate Sustainability Data</h3>
+                                            <div class="text-gray-700 space-y-2">
+                                                <p>Number of environmental certifications: {{ project.stages.tenderManagement.environmentalAndClimateSustainabilityData.numberOfEnvironmentalCertifications }}</p>
+                                                <p>Environmental certifications: {{ project.stages.tenderManagement.environmentalAndClimateSustainabilityData.environmentalCertifications }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="tenderManagementActiveTab === 'socialSustainabilityData'" class="space-y-4">
+                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                            <h3 class="text-xl font-semibold text-secondary mb-4">Social Sustainability Data</h3>
+                                            <div class="text-gray-700 space-y-2">
+                                                <p>Labor budget: {{ project.stages.tenderManagement.socialSustainabilityData.laborBudget }}</p>
+                                                <p>Health and safety certifications: {{ project.stages.tenderManagement.socialSustainabilityData.healthAndSafetyCertifications }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="tenderManagementActiveTab === 'attachments'" class="space-y-4">
+                                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                                            <h3 class="text-xl font-semibold text-secondary mb-4">Attachments</h3>
+                                            <ul class="list-disc list-inside space-y-2">
+                                                <li *ngFor="let attachment of project.stages.tenderManagement.attachments" class="text-secondary">
+                                                    <a [href]="attachment.link" class="text-accent hover:underline">{{ attachment.title }}</a> - {{ attachment.description }}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+
                     <div *ngIf="activeTab === 'implementation'" class="tab-content space-y-12">
                         <h2 class="text-xl font-bold text-secondary">Implementation</h2>
                         <!-- Content for Implementation Tab -->
