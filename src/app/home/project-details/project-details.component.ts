@@ -19,6 +19,15 @@ import { map } from 'rxjs/operators';
 export class ProjectDetailsComponent implements OnInit {
     project$: Observable<any> | undefined;
     activeTab: string = 'identification';
+    identificationActiveTab: string = 'basicData'; // Add this line
+    preparationActiveTab: string = 'basicData';
+    tenderManagementActiveTab: string = 'basicData';
+    implementationActiveTab: string = 'basicData';
+    completionActiveTab: string = 'basicData';
+    operationAndMaintenanceActiveTab: string = 'basicData';
+    decommissioningActiveTab: string = 'basicData';
+
+    steps: string[] = ['Planned', 'In Progress', 'Completed'];
 
     tabs = [
         { id: 'identification', label: 'Identification', icon: 'bi-info-circle' },
@@ -58,4 +67,33 @@ export class ProjectDetailsComponent implements OnInit {
     setActiveTab(tab: string): void {
         this.activeTab = tab;
     }
+
+    setPreparationActiveTab(tab: string): void {
+        this.preparationActiveTab = tab;
+    }
+
+    setIdentificationActiveTab(tab: string): void { // Add this method
+        this.identificationActiveTab = tab;
+    }
+
+    setTenderManagementActiveTab(tab: string): void {
+        this.tenderManagementActiveTab = tab;
+    }
+
+    setImplementationActiveTab(tab: string): void { // Add this method
+        this.implementationActiveTab = tab;
+    }
+
+    setCompletionActiveTab(tab: string): void { // Add this method
+        this.completionActiveTab = tab;
+    }
+
+    setOperationAndMaintenanceActiveTab(tab: string): void { // Add this method
+        this.operationAndMaintenanceActiveTab = tab;
+    }
+
+    setDecommissioningActiveTab(tab: string): void { // Add this method
+        this.decommissioningActiveTab = tab;
+    }
+
 }

@@ -30,7 +30,7 @@ export class ProjectListComponent implements OnInit {
                             const data = a.payload.doc.data() as any;
                             const id = a.payload.doc.id;
                             return { id, ...data };
-                        }).filter(project => project.projectName.toLowerCase().includes(term.toLowerCase())))
+                        }).filter(project => project.name.toLowerCase().includes(term.toLowerCase())))
                     );
                 } else {
                     return this.firestore.collection('projects').snapshotChanges().pipe(
@@ -59,12 +59,42 @@ export class ProjectListComponent implements OnInit {
         this.searchTerm.next(target.value);
     }
 
-    getStatusPercentage(status: string): number {
-        const statusMap: { [key: string]: number } = {
-            'Planned': 10,
-            'In Progress': 50,
-            'Completed': 100
+    calculateProgress(project: any): number {
+        const stages = project.stages;
+        const stageWeights: { [key: string]: number } = {
+            identification: 10,
+            preparation: 20,
+            tenderManagement: 20,
+            implementation: 40,
+            completion: 10
         };
-        return statusMap[status] || 0;
+
+        const stageProgress: { [key: string]: number } = {
+            identification: this.getStageProgress(stages.identification, ['basicData', 'climateFinanceData', 'institutionalSustainabilityData']),
+            preparation: this.getStageProgress(stages.preparation, ['basicData', 'climateFinanceData', 'environmentalAndClimateSustainabilityData', 'economicAndFinancialSustainabilityData', 'socialSustainabilityData', 'institutionalSustainabilityData']),
+            tenderManagement: this.getStageProgress(stages.tenderManagement, ['basicData', 'socialSustainabilityData', 'environmentalAndClimateSustainabilityData', 'institutionalSustainabilityData']),
+            implementation: this.getStageProgress(stages.implementation, ['basicData', 'climateFinanceData', 'environmentalAndClimateSustainabilityData', 'economicAndFinancialSustainabilityData', 'socialSustainabilityData', 'institutionalSustainabilityData']),
+            completion: this.getStageProgress(stages.completion, ['basicData'])
+        };
+
+        let totalProgress = 0;
+        for (const stage in stageWeights) {
+            totalProgress += stageWeights[stage] * (stageProgress[stage] / 100);
+        }
+
+        return totalProgress;
+    }
+
+    getStageProgress(stage: any, keys: string[]): number {
+        let completed = 0;
+        let total = keys.length;
+
+        keys.forEach(key => {
+            if (stage[key] && Object.values(stage[key]).every(value => value !== 'Pending' && value !== 'Not Applicable')) {
+                completed++;
+            }
+        });
+
+        return (completed / total) * 100;
     }
 }

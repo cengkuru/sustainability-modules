@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import {environment} from "../../../environments/environment";
+import * as projectsData from '../../../assets/data/projects.json';
 
 declare var H: any;
 
@@ -36,6 +37,7 @@ export class LandingComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // this.addProjectsToFirebase();
     this.loadProjects();
     window.addEventListener('viewProjectDetails', this.handleViewProjectDetails as EventListener);
   }
@@ -138,9 +140,9 @@ export class LandingComponent implements OnInit, OnDestroy {
         const popup = `
           <div>
             <h3 class="text-lg font-semibold">${project.name}</h3>
-            <p class="text-secondary">Cost Estimate: ${project.costEstimate}</p>
-            <p class="text-secondary">Location: ${project.location.name}</p>
-            <button class="mt-2 px-2 py-1 bg-primary text-white rounded hover:bg-secondary" onclick="window.dispatchEvent(new CustomEvent('viewProjectDetails', { detail: '${project.id}' }))">View Details</button>
+            <p >Cost Estimate: ${project.costEstimate}</p>
+            <p >Location: ${project.location.name}</p>
+            <a [routerLink]="['/public/projects', project.id]" class="mt-2 px-2 py-1 bg-accent text-black rounded hover:bg-secondary ">View Details</a>
           </div>
         `;
         return {
@@ -154,4 +156,21 @@ export class LandingComponent implements OnInit, OnDestroy {
 
     console.log('Generated markers:', this.markers);
   }
+
+
+  addProjectsToFirebase(): void {
+    const projects = (projectsData as any).projects;
+    projects.forEach((project: any) => {
+      const id = this.generateUniqueId();
+      this.firestore.collection('projects').doc(id).set({ id, ...project });
+    });
+  }
+
+  generateUniqueId(): string {
+    const prefix = 'oc4ids_sa_';
+    const suffix = Math.random().toString(36).substr(2, 6);
+    return prefix + suffix;
+  }
+
+
 }

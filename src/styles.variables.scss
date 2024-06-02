@@ -1,12 +1,4 @@
-@font-face {
-  font-family: 'Segoe UI';
-  src:
-          local("Segoe UI Semibold"),
-          url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semibold/latest.woff2) format("woff2"),
-          url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semibold/latest.woff) format("woff"),
-          url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semibold/latest.ttf) format("truetype");
-  font-weight: 600;
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 // Colors
 $color-primary: #FAFAFA; // Light Gray (Background, large surfaces)
@@ -23,13 +15,14 @@ $color-black: #000000;
 $color-white: #FFFFFF;
 
 // Typography
-$font-family: 'Segoe UI', sans-serif;
+$font-family: 'Roboto', sans-serif;
 $font-family-base: $font-family;
 $font-size-base: 16px;
 $font-size-sm: 14px;
 $font-size-lg: 18px;
 $font-size-xl: 20px;
 $font-size-xxl: 24px;
+$font-weight-thin: 100;
 
 // Font Weights
 $font-weight-thin: 100;
