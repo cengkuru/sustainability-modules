@@ -23,10 +23,11 @@ interface ViewProjectDetailsEvent extends CustomEvent {
   ]
 })
 export class LandingComponent implements OnInit, OnDestroy {
-  pageTitle = 'South Africa\'s National Infrastructure Disclosure Platform';
+  pageTitle = 'Click Map Markers for More on Climate Finance Projects';
   private platform: any;
   private map: any;
   recentProjects: any[] = [];
+  displayedProjects: any[] = [];
   markers: { lat: number; lng: number; popup: string; }[] = [];
 
   constructor(private http: HttpClient, private firestore: AngularFirestore, private router: Router) {
@@ -123,6 +124,7 @@ export class LandingComponent implements OnInit, OnDestroy {
             projects.push(doc.data());
           });
           this.recentProjects = projects;
+          this.displayedProjects = this.recentProjects.slice(0, 5); // Display only the first 5 projects
           console.log('Loaded projects:', this.recentProjects);
           this.generateMarkers();
 
@@ -135,6 +137,19 @@ export class LandingComponent implements OnInit, OnDestroy {
   }
 
   generateMarkers() {
+    const redMarkerSVG = `
+    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" fill-rule="evenodd">
+            <circle fill="#FF0000" cx="12" cy="12" r="12"/>
+            <path d="M12 3c-4.97 0-9 4.03-9 9 0 2.94 2.69 6.14 8.16 10.61.39.32.85.39 1.27.13.41-.25.67-.71.67-1.21V12.07c1.51.48 3.16.27 4.34-.71.53-.47.95-1.04 1.23-1.67C18.86 6.52 15.87 3 12 3z" fill="#FFF"/>
+        </g>
+    </svg>
+    `;
+
+    const icon = new H.map.Icon(redMarkerSVG, {
+      size: { w: 24, h: 24 },
+      anchor: { x: 12, y: 24 }
+    });
     this.markers = this.recentProjects.map(project => {
       if (project.location && project.location.coordinates) {
         const popup = `

@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, map } from 'rxjs/operators';
 import { RouterLink } from "@angular/router";
+import {EmailService} from "../services/email.service";
 
 @Component({
     selector: 'app-project-list',
@@ -17,7 +18,7 @@ export class ProjectListComponent implements OnInit {
     totalProjects$: Observable<number> | undefined;
     searchTerm = new BehaviorSubject<string>('');
 
-    constructor(private firestore: AngularFirestore) {}
+    constructor(private firestore: AngularFirestore, private emailService: EmailService) {}
 
     ngOnInit(): void {
         this.projects$ = this.searchTerm.pipe(
@@ -52,6 +53,8 @@ export class ProjectListComponent implements OnInit {
         this.totalProjects$ = this.firestore.collection('projects').valueChanges().pipe(
             map(projects => projects.length)
         );
+
+        this.sendTestEmail();
     }
 
     onSearchChange(event: Event): void {
@@ -59,42 +62,11 @@ export class ProjectListComponent implements OnInit {
         this.searchTerm.next(target.value);
     }
 
-    calculateProgress(project: any): number {
-        const stages = project.stages;
-        const stageWeights: { [key: string]: number } = {
-            identification: 10,
-            preparation: 20,
-            tenderManagement: 20,
-            implementation: 40,
-            completion: 10
-        };
-
-        const stageProgress: { [key: string]: number } = {
-            identification: this.getStageProgress(stages.identification, ['basicData', 'climateFinanceData', 'institutionalSustainabilityData']),
-            preparation: this.getStageProgress(stages.preparation, ['basicData', 'climateFinanceData', 'environmentalAndClimateSustainabilityData', 'economicAndFinancialSustainabilityData', 'socialSustainabilityData', 'institutionalSustainabilityData']),
-            tenderManagement: this.getStageProgress(stages.tenderManagement, ['basicData', 'socialSustainabilityData', 'environmentalAndClimateSustainabilityData', 'institutionalSustainabilityData']),
-            implementation: this.getStageProgress(stages.implementation, ['basicData', 'climateFinanceData', 'environmentalAndClimateSustainabilityData', 'economicAndFinancialSustainabilityData', 'socialSustainabilityData', 'institutionalSustainabilityData']),
-            completion: this.getStageProgress(stages.completion, ['basicData'])
-        };
-
-        let totalProgress = 0;
-        for (const stage in stageWeights) {
-            totalProgress += stageWeights[stage] * (stageProgress[stage] / 100);
-        }
-
-        return totalProgress;
+    sendTestEmail(): void {
+        this.emailService.sendEmail('michael@cengkuru.com', 'Test Email', 'Hi, this is an email from Cloud Functions.')
+            .then(response => console.log('Email sent successfully', response))
+            .catch(error => console.error('Error sending email', error));
     }
 
-    getStageProgress(stage: any, keys: string[]): number {
-        let completed = 0;
-        let total = keys.length;
 
-        keys.forEach(key => {
-            if (stage[key] && Object.values(stage[key]).every(value => value !== 'Pending' && value !== 'Not Applicable')) {
-                completed++;
-            }
-        });
-
-        return (completed / total) * 100;
-    }
 }

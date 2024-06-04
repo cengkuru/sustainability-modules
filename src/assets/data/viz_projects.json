@@ -1,0 +1,90 @@
+[
+  {
+    "name": "Project 1",
+    "stages": {
+      "identification": {
+        "climateFinanceData": {
+          "financialInstrument": "Energy",
+          "amountOfInvestment": "$500,000"
+        }
+      },
+      "preparation": {
+        "basicData": {
+          "projectBudget": "$600,000"
+        }
+      },
+      "completion": {
+        "basicData": {
+          "estimatedCompletionCost": "$550,000",
+          "estimatedCompletionDate": "2023-12-31"
+        }
+      }
+    }
+  },
+  {
+    "name": "Project 2",
+    "stages": {
+      "identification": {
+        "climateFinanceData": {
+          "financialInstrument": "Water",
+          "amountOfInvestment": "$200,000"
+        }
+      },
+      "preparation": {
+        "basicData": {
+          "projectBudget": "$250,000"
+        }
+      },
+      "completion": {
+        "basicData": {
+          "estimatedCompletionCost": "$230,000",
+          "estimatedCompletionDate": "2024-06-30"
+        }
+      }
+    }
+  },
+  {
+    "name": "Project 3",
+    "stages": {
+      "identification": {
+        "climateFinanceData": {
+          "financialInstrument": "Transport",
+          "amountOfInvestment": "$150,000"
+        }
+      },
+      "preparation": {
+        "basicData": {
+          "projectBudget": "$180,000"
+        }
+      },
+      "completion": {
+        "basicData": {
+          "estimatedCompletionCost": "$160,000",
+          "estimatedCompletionDate": "2024-03-31"
+        }
+      }
+    }
+  },
+  {
+    "name": "Project 4",
+    "stages": {
+      "identification": {
+        "climateFinanceData": {
+          "financialInstrument": "Economy",
+          "amountOfInvestment": "$150,000"
+        }
+      },
+      "preparation": {
+        "basicData": {
+          "projectBudget": "$170,000"
+        }
+      },
+      "completion": {
+        "basicData": {
+          "estimatedCompletionCost": "$165,000",
+          "estimatedCompletionDate": "2024-05-31"
+        }
+      }
+    }
+  }
+]

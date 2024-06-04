@@ -6,9 +6,10 @@
                 <!-- Vertical Tabs -->
                 <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-gray-200">
                     <nav class="flex flex-col space-y-1">
+                        <h1 class="text-lg font-semibold text-secondary">Project Stages</h1>
                         <button *ngFor="let tab of tabs"
                                 class="tab-button py-4 px-4 text-left text-sm font-medium flex items-center space-x-2"
-                                [class.bg-accent]="activeTab === tab.id"
+                                [class.bg-secondary]="activeTab === tab.id"
                                 [class.text-white]="activeTab === tab.id"
                                 [class.text-secondary]="activeTab !== tab.id"
                                 (click)="setActiveTab(tab.id)">
@@ -18,7 +19,7 @@
                     </nav>
                 </div>
                 <!-- Tab Content -->
-                <div class="w-full lg:w-3/4 p-4">
+                <div class="w-full lg:w-3/4 p-4 ">
                     <ng-container *ngIf="activeTab === 'identification'">
                         <div class="mb-8">
                             <h2 class="text-xl font-bold text-secondary">Identification</h2>
@@ -29,14 +30,14 @@
                                         <li *ngFor="let subTab of identificationTabs">
                                             <button (click)="setIdentificationActiveTab(subTab.id)"
                                                     class="w-full text-left py-2 px-4 rounded-lg focus:outline-none"
-                                                    [ngClass]="{'bg-accent': identificationActiveTab === subTab.id}">{{ subTab.label }}</button>
+                                                    [ngClass]="{'bg-secondary': identificationActiveTab === subTab.id}">{{ subTab.label }}</button>
                                         </li>
                                     </ul>
                                 </div>
                                 <!-- Sub-tab Content -->
-                                <div class="w-full lg:w-3/4 p-4 space-y-8 bg-dark text-light rounded font-mono">
+                                <div class="w-full lg:w-3/4 p-4 space-y-8  text-light rounded font-mono">
                                     <div *ngIf="identificationActiveTab === 'basicData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-info-circle mr-2"></i>Basic Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -79,7 +80,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="identificationActiveTab === 'climateFinanceData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-cash-coin mr-2"></i>Climate Finance Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -114,7 +115,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="identificationActiveTab === 'socialSustainabilityData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-people mr-2"></i>Social Sustainability Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -133,7 +134,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="identificationActiveTab === 'institutionalSustainabilityData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-building mr-2"></i>Institutional Sustainability Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -164,7 +165,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="identificationActiveTab === 'attachments'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-paperclip mr-2"></i>Attachments</h3>
                                             <ul class="list-disc list-inside space-y-2">
                                                 <li *ngFor="let attachment of project.stages.identification.attachments" class="text-value">
@@ -191,14 +192,14 @@
                                         <li *ngFor="let subTab of preparationTabs">
                                             <button (click)="setPreparationActiveTab(subTab.id)"
                                                     class="w-full text-left py-2 px-4 rounded-lg focus:outline-none"
-                                                    [ngClass]="{'bg-accent': preparationActiveTab === subTab.id}">{{ subTab.label }}</button>
+                                                    [ngClass]="{'bg-secondary': preparationActiveTab === subTab.id}">{{ subTab.label }}</button>
                                         </li>
                                     </ul>
                                 </div>
                                 <!-- Sub-tab Content -->
                                 <div class="w-full lg:w-3/4 p-4 space-y-8 bg-dark text-light rounded font-mono">
                                     <div *ngIf="preparationActiveTab === 'basicData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-info-circle mr-2"></i>Basic Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -225,7 +226,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="preparationActiveTab === 'climateFinanceData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-cash-coin mr-2"></i>Climate Finance Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -272,7 +273,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="preparationActiveTab === 'institutionalSustainabilityData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-building mr-2"></i>Institutional Sustainability Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -291,7 +292,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="preparationActiveTab === 'environmentalAndClimateSustainabilityData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-tree mr-2"></i>Environmental and Climate Sustainability Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -330,7 +331,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="preparationActiveTab === 'economicAndFinancialSustainabilityData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-currency-dollar mr-2"></i>Economic and Financial Sustainability Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -377,7 +378,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="preparationActiveTab === 'socialSustainabilityData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-people mr-2"></i>Social Sustainability Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -412,7 +413,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="preparationActiveTab === 'attachments'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-paperclip mr-2"></i>Attachments</h3>
                                             <ul class="list-disc list-inside space-y-2">
                                                 <li *ngFor="let attachment of project.stages.preparation.attachments" class="text-value">
@@ -437,14 +438,14 @@
                                         <li *ngFor="let subTab of tenderManagementTabs">
                                             <button (click)="setTenderManagementActiveTab(subTab.id)"
                                                     class="w-full text-left py-2 px-4 rounded-lg focus:outline-none"
-                                                    [ngClass]="{'bg-accent': tenderManagementActiveTab === subTab.id}">{{ subTab.label }}</button>
+                                                    [ngClass]="{'bg-secondary': tenderManagementActiveTab === subTab.id}">{{ subTab.label }}</button>
                                         </li>
                                     </ul>
                                 </div>
                                 <!-- Sub-tab Content -->
                                 <div class="w-full lg:w-3/4 p-4 space-y-8 bg-dark text-light rounded font-mono">
                                     <div *ngIf="tenderManagementActiveTab === 'basicData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-info-circle mr-2"></i>Basic Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -511,7 +512,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="tenderManagementActiveTab === 'institutionalSustainabilityData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-building mr-2"></i>Institutional Sustainability Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -542,7 +543,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="tenderManagementActiveTab === 'environmentalAndClimateSustainabilityData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-tree mr-2"></i>Environmental And Climate Sustainability Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -557,7 +558,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="tenderManagementActiveTab === 'socialSustainabilityData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-people mr-2"></i>Social Sustainability Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -572,7 +573,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="tenderManagementActiveTab === 'attachments'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-paperclip mr-2"></i>Attachments</h3>
                                             <ul class="list-disc list-inside space-y-2">
                                                 <li *ngFor="let attachment of project.stages.tenderManagement.attachments" class="text-value">
@@ -597,14 +598,14 @@
                                         <li *ngFor="let subTab of implementationTabs">
                                             <button (click)="setImplementationActiveTab(subTab.id)"
                                                     class="w-full text-left py-2 px-4 rounded-lg focus:outline-none"
-                                                    [ngClass]="{'bg-accent': implementationActiveTab === subTab.id}">{{ subTab.label }}</button>
+                                                    [ngClass]="{'bg-secondary': implementationActiveTab === subTab.id}">{{ subTab.label }}</button>
                                         </li>
                                     </ul>
                                 </div>
                                 <!-- Sub-tab Content -->
                                 <div class="w-full lg:w-3/4 p-4 space-y-8 bg-dark text-light rounded font-mono">
                                     <div *ngIf="implementationActiveTab === 'basicData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-info-circle mr-2"></i>Basic Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -659,7 +660,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="implementationActiveTab === 'institutionalSustainabilityData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-building mr-2"></i>Institutional Sustainability Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -686,7 +687,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="implementationActiveTab === 'environmentalAndClimateSustainabilityData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-tree mr-2"></i>Environmental And Climate Sustainability Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -705,7 +706,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="implementationActiveTab === 'climateFinanceData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-cash-coin mr-2"></i>Climate Finance Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -732,7 +733,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="implementationActiveTab === 'economicAndFinancialSustainabilityData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-graph-up-arrow mr-2"></i>Economic And Financial Sustainability Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -751,7 +752,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="implementationActiveTab === 'socialSustainabilityData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-people mr-2"></i>Social Sustainability Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -778,7 +779,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="implementationActiveTab === 'attachments'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-paperclip mr-2"></i>Attachments</h3>
                                             <ul class="list-disc list-inside space-y-2">
                                                 <li *ngFor="let attachment of project.stages.implementation.attachments" class="text-value">
@@ -803,14 +804,14 @@
                                         <li *ngFor="let subTab of completionTabs">
                                             <button (click)="setCompletionActiveTab(subTab.id)"
                                                     class="w-full text-left py-2 px-4 rounded-lg focus:outline-none"
-                                                    [ngClass]="{'bg-accent': completionActiveTab === subTab.id}">{{ subTab.label }}</button>
+                                                    [ngClass]="{'bg-secondary': completionActiveTab === subTab.id}">{{ subTab.label }}</button>
                                         </li>
                                     </ul>
                                 </div>
                                 <!-- Sub-tab Content -->
                                 <div class="w-full lg:w-3/4 p-4 space-y-8 bg-dark text-light rounded font-mono">
                                     <div *ngIf="completionActiveTab === 'basicData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-info-circle mr-2"></i>Basic Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -861,7 +862,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="completionActiveTab === 'attachments'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-paperclip mr-2"></i>Attachments</h3>
                                             <ul class="list-disc list-inside space-y-2">
                                                 <li *ngFor="let attachment of project.stages.completion.attachments" class="text-value">
@@ -886,14 +887,14 @@
                                         <li *ngFor="let subTab of operationAndMaintenanceTabs">
                                             <button (click)="setOperationAndMaintenanceActiveTab(subTab.id)"
                                                     class="w-full text-left py-2 px-4 rounded-lg focus:outline-none"
-                                                    [ngClass]="{'bg-accent': operationAndMaintenanceActiveTab === subTab.id}">{{ subTab.label }}</button>
+                                                    [ngClass]="{'bg-secondary': operationAndMaintenanceActiveTab === subTab.id}">{{ subTab.label }}</button>
                                         </li>
                                     </ul>
                                 </div>
                                 <!-- Sub-tab Content -->
                                 <div class="w-full lg:w-3/4 p-4 space-y-8 bg-dark text-light rounded font-mono">
                                     <div *ngIf="operationAndMaintenanceActiveTab === 'basicData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-info-circle mr-2"></i>Basic Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -944,7 +945,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="operationAndMaintenanceActiveTab === 'environmentalAndClimateSustainabilityData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-cloud-sun mr-2"></i>Environmental and Climate Sustainability Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -967,7 +968,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="operationAndMaintenanceActiveTab === 'institutionalSustainabilityData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-building mr-2"></i>Institutional Sustainability Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -986,7 +987,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="operationAndMaintenanceActiveTab === 'climateFinanceData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-cash-coin mr-2"></i>Climate Finance Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -1005,7 +1006,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="operationAndMaintenanceActiveTab === 'economicAndFinancialSustainabilityData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-graph-up mr-2"></i>Economic and Financial Sustainability Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -1020,7 +1021,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="operationAndMaintenanceActiveTab === 'socialSustainabilityData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-people mr-2"></i>Social Sustainability Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -1039,7 +1040,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="operationAndMaintenanceActiveTab === 'attachments'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-paperclip mr-2"></i>Attachments</h3>
                                             <ul class="list-disc list-inside space-y-2">
                                                 <li *ngFor="let attachment of project.stages.operationsAndMaintenance.attachments" class="text-value">
@@ -1064,14 +1065,14 @@
                                         <li *ngFor="let subTab of decommissioningTabs">
                                             <button (click)="setDecommissioningActiveTab(subTab.id)"
                                                     class="w-full text-left py-2 px-4 rounded-lg focus:outline-none"
-                                                    [ngClass]="{'bg-accent': decommissioningActiveTab === subTab.id}">{{ subTab.label }}</button>
+                                                    [ngClass]="{'bg-secondary': decommissioningActiveTab === subTab.id}">{{ subTab.label }}</button>
                                         </li>
                                     </ul>
                                 </div>
                                 <!-- Sub-tab Content -->
                                 <div class="w-full lg:w-3/4 p-4 space-y-8 bg-dark text-light rounded font-mono">
                                     <div *ngIf="decommissioningActiveTab === 'basicData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-info-circle mr-2"></i>Basic Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -1106,7 +1107,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="decommissioningActiveTab === 'environmentalAndClimateSustainabilityData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-cloud-sun mr-2"></i>Environmental and Climate Sustainability Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -1117,7 +1118,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="decommissioningActiveTab === 'institutionalSustainabilityData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-building mr-2"></i>Institutional Sustainability Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -1136,7 +1137,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="decommissioningActiveTab === 'economicAndFinancialSustainabilityData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-graph-up mr-2"></i>Economic and Financial Sustainability Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -1147,7 +1148,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="decommissioningActiveTab === 'socialSustainabilityData'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-people mr-2"></i>Social Sustainability Data</h3>
                                             <div class="space-y-4">
                                                 <div class="flex">
@@ -1162,7 +1163,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="decommissioningActiveTab === 'attachments'" class="space-y-4">
-                                        <div class="p-6 rounded-lg shadow-sm border border-gray-700 bg-editor-dark">
+                                        <div class="p-6 rounded-lg  bg-editor-dark">
                                             <h3 class="text-xl font-semibold text-heading mb-4"><i class="bi bi-paperclip mr-2"></i>Attachments</h3>
                                             <ul class="list-disc list-inside space-y-2">
                                                 <li *ngFor="let attachment of project.stages.decommissioning.attachments" class="text-value">
