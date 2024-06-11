@@ -15,8 +15,12 @@ export class DataAnalysisComponent implements OnInit, AfterViewInit {
     projects: any[] = [];
     climateFinanceChart: echarts.ECharts | undefined;
     mitigationAdaptationChart: echarts.ECharts | undefined;
+    beneficiariesChart: echarts.ECharts | undefined;
+    eiaChart: echarts.ECharts | undefined;
     climateFinanceDropdownOpen = false;
     mitigationAdaptationDropdownOpen = false;
+    beneficiariesDropdownOpen = false;
+    eiaDropdownOpen = false;
 
     constructor(private http: HttpClient) {}
 
@@ -38,6 +42,8 @@ export class DataAnalysisComponent implements OnInit, AfterViewInit {
         setTimeout(() => {
             this.initClimateFinanceChart();
             this.initMitigationAdaptationChart();
+            this.initBeneficiariesChart();
+            this.initEIAChart();
         }, 0);
     }
 
@@ -79,9 +85,9 @@ export class DataAnalysisComponent implements OnInit, AfterViewInit {
         });
     }
 
-    calculateClimateFinanceData(projects: any[]): any[] {
+    calculateClimateFinanceData(projectList: any[]): any[] {
         const climateFinance: { [key: string]: number } = {};
-        projects.forEach(project => {
+        projectList.forEach(project => {
             const financeSource = project.stages.identification?.climateFinanceData?.financialInstrument;
             const amount = project.stages.identification?.climateFinanceData?.amountOfInvestment || 0;
             if (financeSource) {
@@ -108,11 +114,145 @@ export class DataAnalysisComponent implements OnInit, AfterViewInit {
         return { regions, adaptation, mitigation, crossCutting };
     }
 
+    initBeneficiariesChart(): void {
+        const beneficiariesData = this.calculateBeneficiariesData(this.projects);
+        this.beneficiariesChart = echarts.init(document.getElementById('beneficiariesChart') as HTMLDivElement);
+        this.beneficiariesChart.setOption({
+            title: { text: 'Number of Direct Beneficiaries', left: 'center', textStyle: { color: '#2c4143' } },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#6a7985'
+                    }
+                }
+            },
+            legend: { data: ['Female', 'Male'], top: 'bottom' },
+            xAxis: { type: 'category', boundaryGap: false, data: beneficiariesData.regions, axisLine: { lineStyle: { color: '#58707b' } } },
+            yAxis: { type: 'value', axisLine: { lineStyle: { color: '#58707b' } } },
+            series: [
+                {
+                    name: 'Female',
+                    type: 'line',
+                    stack: 'Total',
+                    areaStyle: {},
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    data: beneficiariesData.female,
+                    color: '#ffce32'
+                },
+                {
+                    name: 'Male',
+                    type: 'line',
+                    stack: 'Total',
+                    areaStyle: {},
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    data: beneficiariesData.male,
+                    color: '#D60000'
+                }
+            ]
+        });
+    }
+
+
+    calculateBeneficiariesData(projectList: any[]): any {
+        const regions = projectList.map(project => project.region);
+        const total = projectList.map(project => project.beneficiaries.total);
+        const female = projectList.map(project => project.beneficiaries.female);
+        const male = projectList.map(project => project.beneficiaries.male);
+
+        return { regions, total, female, male };
+    }
+
+    initEIAChart(): void {
+        const eiaData = this.calculateEIAData(this.projects);
+        this.eiaChart = echarts.init(document.getElementById('eiaChart') as HTMLDivElement);
+        this.eiaChart.setOption({
+            title: { text: 'Environmental Impact Assessment Approval Status', left: 'center', textStyle: { color: '#2c4143' } },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend: { data: ['Approved', 'Pending', 'Rejected'], top: 'bottom' },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '10%',
+                containLabel: true
+            },
+            xAxis: { type: 'value', axisLine: { lineStyle: { color: '#58707b' } } },
+            yAxis: { type: 'category', data: eiaData.projects, axisLine: { lineStyle: { color: '#58707b' } } },
+            series: [
+                {
+                    name: 'Approved',
+                    type: 'bar',
+                    stack: 'total',
+                    label: {
+                        show: true
+                    },
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    data: eiaData.approved,
+                    color: '#61a8bd'
+                },
+                {
+                    name: 'Pending',
+                    type: 'bar',
+                    stack: 'total',
+                    label: {
+                        show: true
+                    },
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    data: eiaData.pending,
+                    color: '#ffce32'
+                },
+                {
+                    name: 'Rejected',
+                    type: 'bar',
+                    stack: 'total',
+                    label: {
+                        show: true
+                    },
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    data: eiaData.rejected,
+                    color: '#D60000'
+                }
+            ]
+        });
+    }
+
+
+    calculateEIAData(projectList: any[]): any {
+        const projectNames = projectList.map(project => project.name);
+        const approved = projectList.map(project => project.EIA.status === 'Approved' ? 1 : 0);
+        const pending = projectList.map(project => project.EIA.status === 'Pending' ? 1 : 0);
+        const rejected = projectList.map(project => project.EIA.status === 'Rejected' ? 1 : 0);
+
+        return { projects: projectNames, approved, pending, rejected };
+    }
+
+
     toggleDropdown(chartType: string): void {
         if (chartType === 'climateFinance') {
             this.climateFinanceDropdownOpen = !this.climateFinanceDropdownOpen;
         } else if (chartType === 'mitigationAdaptation') {
             this.mitigationAdaptationDropdownOpen = !this.mitigationAdaptationDropdownOpen;
+        }
+        else if (chartType === 'beneficiaries') {
+            this.beneficiariesDropdownOpen = !this.beneficiariesDropdownOpen;
+        } else if (chartType === 'eia') {
+            this.eiaDropdownOpen = !this.eiaDropdownOpen;
         }
     }
 
