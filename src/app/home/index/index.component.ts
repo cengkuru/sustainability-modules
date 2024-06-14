@@ -15,7 +15,7 @@ import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/route
   styleUrls: ['./index.component.scss']
 })
 export class IndexComponent {
-  pageTitle = 'The National Infrastructure Disclosure Platform of South Africa';
+  pageTitle = 'The National Infrastructure Disclosure Platform';
   isProfileDropdownOpen = false;
   isMobileMenuOpen = false;
   isLoggedIn = false; // Simulating the login status. You should replace this with actual authentication status.

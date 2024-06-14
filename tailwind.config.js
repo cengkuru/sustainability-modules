@@ -34,10 +34,12 @@ module.exports = {
           },
         },
       },
+      fontSize: {
+        base: ['16px', '1.5'], // Set the base font size and line height
+      },
     },
   },
   plugins: [
     require('@tailwindcss/typography'),
   ],
 }
-

@@ -5,6 +5,11 @@
 @import 'ngx-toastr/toastr';
 @import 'styles.variables.scss';
 
+// Custom styles
+body {
+  @apply text-base;
+}
+
 
 
 html, body, #map {
@@ -17,11 +22,16 @@ html, body, #map {
   font-weight: $font-weight-thin;
 }
 
-// Apply Roboto font to all text elements
+
 body, h1, h2, h3, h4, h5, h6, p, a, li {
   font-family: $font-family;
-  font-weight: $font-weight-thin;
 }
+
+body {
+  font-size: 1rem; // or use any Tailwind class like text-base if you prefer using utility classes
+  line-height: 1.5;
+}
+
 
 .bg-primary {
   background-color: $color-primary;
