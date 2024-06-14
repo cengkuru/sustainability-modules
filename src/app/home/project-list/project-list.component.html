@@ -1,37 +1,56 @@
 <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-    <div class="container mx-auto px-4 py-8">
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-semibold text-secondary">Projects</h1>
-            <div class="text-secondary">Total Projects: {{ totalProjects$ | async }}</div>
+    <div appIntersectionObserver class="animate-hidden bg-secondary py-14 flex flex-col lg:flex-row items-center justify-between text-secondary p-4">
+        <div class="w-full lg:w-1/2 text-center lg:text-left lg:pr-8">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-gray-100">
+                Explore Projects
+            </h1>
+            <p class="mt-4 text-base sm:text-lg text-gray-200">
+                Explore a wide range of projects aimed at promoting transparency in climate finance.
+                <br>
+                Discover comprehensive project details, financial insights, and sustainability metrics to understand how these initiatives are shaping a greener future.
+            </p>
+
         </div>
-        <div class="mb-6">
+        <div class="relative mt-12 lg:mt-0 w-full lg:w-1/2 flex items-center justify-center">
+            <img src="../../../assets/explore.png" alt="Featured Project" class="w-full h-auto rounded-lg">
+        </div>
+    </div>
+
+
+
+    <div class="container mx-auto px-4 py-8 my-14">
+        <div class="flex flex-col sm:flex-row justify-between items-center mb-6">
+            <h1 class="text-4xl font-semibold text-secondary">Projects</h1>
+            <div class="text-secondary text-4xl font-semibold mt-4 sm:mt-0">Total: {{ totalProjects$ | async }}</div>
+        </div>
+        <div class="mb-6 flex justify-center">
             <input
                     type="text"
-                    class="w-full px-4 py-2 rounded bg-primary border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent"
+                    class="w-full sm:w-2/3 lg:w-1/2 px-4 py-2 rounded bg-primary border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary"
                     placeholder="Search projects..."
                     (input)="onSearchChange($event)"
             />
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div *ngFor="let project of projects$ | async" class="relative overflow-hidden rounded-lg bg-gray-100 text-black hover:bg-gray-200 transition duration-300 ease-in-out">
+            <div *ngFor="let project of projects$ | async" class="relative overflow-hidden rounded-lg bg-customGray text-black transition duration-300 ease-in-out transform hover:-translate-y-1 animate-slide-up">
                 <div class="p-6">
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="text-lg font-semibold">{{ project.name }}</h3>
-                    </div>
-                    <p class="text-sm mb-1">
-                        {{ project.location.name }}
-                    </p>
-                    <p class="text-xs mb-2">
-                        {{ project.stages.implementation.basicData.budgetForImplementation | currency }}
-                    </p>
-                    <p class="text-xs">{{ project.stages.identification.basicData.projectDescription }}</p>
-                    <div class="mt-4">
-                        <a [routerLink]="['/public/projects', project.id]" class="inline-block px-4 py-2 text-xs font-medium text-white bg-accent rounded hover:bg-opacity-75">View Details</a>
-                    </div>
+                    <a [routerLink]="['/public/projects', project.id]" class="block">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-xl font-semibold hover:underline">{{ project.name }}</h3>
+                            <i class="bi bi-arrow-right text-xl"></i>
+                        </div>
+                        <p class="text-sm mb-5">
+                            <i class="bi bi-geo-alt-fill"></i> {{ project.location.name }}
+                        </p>
+
+                        <p>{{ project.stages.identification.basicData.projectDescription }}</p>
+                    </a>
                 </div>
             </div>
         </div>
+
     </div>
+
 
 
 

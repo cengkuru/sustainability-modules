@@ -340,3 +340,15 @@ a.text-accent:hover {
 }
 
 
+/* Add these styles to your global styles (e.g., styles.css or styles.scss) */
+
+.animate-hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.animate-slideUp {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
