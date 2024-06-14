@@ -4,15 +4,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#FAFAFA', // Light Gray
-        secondary: '#58707B', // Muted Blue
+        primary: '#fff', // white
+        secondary: '#333333', // Muted Blue
         accent: '#FFCE32', // Bright Yellow
-        customGray: '#D8D8CD', // Custom gray color
+        customGray: '#F7F7F7', // Custom gray color
       },
       typography: {
         DEFAULT: {
           css: {
-            color: '#58707B', // Secondary color for text
+            color: '#333333', // Secondary color for text
             a: {
               color: '#FFCE32', // Accent color for links
               '&:hover': {
@@ -20,13 +20,13 @@ module.exports = {
               },
             },
             h1: {
-              color: '#58707B', // Secondary color for headings
+              color: '#333333', // Secondary color for headings
             },
             h2: {
-              color: '#58707B',
+              color: '#333333',
             },
             h3: {
-              color: '#58707B',
+              color: '#333333',
             },
             p: {
               marginBottom: '1.5em',

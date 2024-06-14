@@ -32,7 +32,7 @@
             />
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div *ngFor="let project of projects$ | async" class="relative overflow-hidden rounded-lg bg-customGray text-black transition duration-300 ease-in-out transform hover:-translate-y-1 animate-slide-up">
+            <div *ngFor="let project of projects$ | async" class="relative overflow-hidden rounded-lg border bg-customGray text-black transition duration-300 ease-in-out transform hover:bg-accent  hover:-translate-y-1 animate-slide-up">
                 <div class="p-6">
                     <a [routerLink]="['/public/projects', project.id]" class="block">
                         <div class="flex justify-between items-center mb-2">

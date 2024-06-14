@@ -17,7 +17,7 @@ html, body, #map {
   margin: 0;
   padding: 0;
   height: 100%;
-  color: $color-black;
+  color: $color-secondary;
   font-family: $font-family;
   font-weight: $font-weight-thin;
 }
@@ -49,11 +49,13 @@ body {
 }
 
 .text-primary {
-  color: $color-black !important;
+  color: $color-primary !important;
 }
-
+.text-secondary {
+  color: $color-secondary !important;
+}
 .text-accent {
-  color: $color-accent;
+  color: $color-accent !important;
 }
 
 .H_ib_body {

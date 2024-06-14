@@ -1,8 +1,8 @@
 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <!-- Main section -->
-    <div appIntersectionObserver class="animate-hidden bg-primary min-h-screen flex flex-col lg:flex-row items-center justify-between text-secondary p-4">
+    <div appIntersectionObserver class="animate-hidden bg-primary rounded min-h-screen flex flex-col lg:flex-row items-center justify-between text-secondary p-4">
         <div class="w-full lg:w-1/2 text-center lg:text-left lg:pr-8">
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-gray-900">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-secondary">
                 Invest Green, Build Smart
             </h1>
             <p class="mt-4 text-base sm:text-lg">
@@ -10,24 +10,25 @@
                 <br>
                 Explore mock data inspired by Green Climate Fund-approved projects for South Africa. Witness how transparency empowers informed decision-making for a greener future.
             </p>
-            <button (click)="navigateToProjects()" class="mt-8 px-6 sm:px-8 py-3 bg-black text-white text-base sm:text-lg font-medium rounded hover:bg-accent hover:text-gray-950 transition">
+            <button (click)="navigateToProjects()" class="mt-8 px-6 sm:px-8 py-3 bg-accent text-secondary text-base sm:text-lg font-medium rounded hover:bg-secondary hover:text-primary transition">
                 Explore Projects →
             </button>
             <div class="flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-8 mt-8">
                 <div class="text-center">
                     <span class="block text-2xl sm:text-3xl font-bold">{{ numberOfProjects }}</span>
-                    <span class="block mt-2 text-sm">Projects Available</span>
+                    <span class="block mt-2 text-sm">Projects Published</span>
                 </div>
                 <div class="text-center">
                     <span class="block text-2xl sm:text-3xl font-bold">{{ totalValueOfProjects | currency:'USD':true }}</span>
-                    <span class="block mt-2 text-sm">Total Project Value</span>
+                    <span class="block mt-2 text-sm">Total Value</span>
                 </div>
             </div>
         </div>
         <div class="relative mt-12 lg:mt-0 w-full lg:w-1/2 flex items-center justify-center">
-            <div id="map" class="w-full h-64 sm:h-96 rounded-lg shadow-lg"></div>
+            <div id="map" class="w-full h-64 sm:h-96 rounded-lg border-4   shadow-lg"></div>
         </div>
     </div>
+
 
     <div   appIntersectionObserver class="animate-hidden bg-accent py-12 sm:py-16 my-14 rounded-sm ">
         <div class="container mx-auto px-6 lg:flex lg:items-center">
@@ -55,7 +56,7 @@
             <!-- Recent Projects Section -->
             <div class="animate-hidden" appIntersectionObserver>
                 <div class="flex items-center mb-4">
-                    <i class="bi bi-stars text-green-500 text-2xl"></i>
+                    <i class="bi bi-stars text-secondary text-2xl"></i>
                     <h2 class="text-2xl font-semibold ml-2">Recent Projects</h2>
                 </div>
                 <ul class="pl-6">
@@ -71,7 +72,7 @@
             <!-- High-Value Projects Section -->
             <div class="animate-hidden" appIntersectionObserver>
                 <div class="flex items-center mb-4">
-                    <i class="bi bi-graph-up text-red-500 text-2xl"></i>
+                    <i class="bi bi-graph-up text-secondary text-2xl"></i>
                     <h2 class="text-2xl font-semibold ml-2">High-Value Projects</h2>
                 </div>
                 <ul class="pl-6">
