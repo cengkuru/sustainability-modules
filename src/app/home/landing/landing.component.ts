@@ -3,8 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import {environment} from "../../../environments/environment";
+import { environment } from "../../../environments/environment";
 import * as projectsData from '../../../assets/data/projects.json';
+import {IntersectionObserverDirective} from "../../directives/intersection-observer.directive";
 
 declare var H: any;
 
@@ -19,7 +20,8 @@ interface ViewProjectDetailsEvent extends CustomEvent {
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink
+    RouterLink,
+    IntersectionObserverDirective
   ]
 })
 export class LandingComponent implements OnInit, OnDestroy {
@@ -27,8 +29,10 @@ export class LandingComponent implements OnInit, OnDestroy {
   private platform: any;
   private map: any;
   recentProjects: any[] = [];
-  displayedProjects: any[] = [];
+  highValueProjects: any[] = [];
   markers: { lat: number; lng: number; popup: string; }[] = [];
+  numberOfProjects: number = 0;
+  totalValueOfProjects: number = 0;
 
   constructor(private http: HttpClient, private firestore: AngularFirestore, private router: Router) {
     console.log('markers: ', this.markers);
@@ -120,14 +124,27 @@ export class LandingComponent implements OnInit, OnDestroy {
     this.firestore.collection('projects').get().subscribe(
         (querySnapshot) => {
           const projects: any[] = [];
+          let totalValue = 0;
           querySnapshot.forEach((doc) => {
-            projects.push(doc.data());
+            const project = doc.data() as any;
+            projects.push(project);
+            const contractPrice = project.stages?.tenderManagement?.basicData?.contractPrice;
+            if (contractPrice) {
+              totalValue += parseFloat(contractPrice.replace(/[^0-9.-]+/g, ""));
+            }
           });
-          this.recentProjects = projects;
-          this.displayedProjects = this.recentProjects.slice(0, 5); // Display only the first 5 projects
-          console.log('Loaded projects:', this.recentProjects);
-          this.generateMarkers();
 
+          this.recentProjects = projects.slice(0, 5); // Display only the first 5 projects
+          this.highValueProjects = projects.sort((a, b) => {
+            const aPrice = parseFloat(a.stages?.tenderManagement?.basicData?.contractPrice.replace(/[^0-9.-]+/g, "") || '0');
+            const bPrice = parseFloat(b.stages?.tenderManagement?.basicData?.contractPrice.replace(/[^0-9.-]+/g, "") || '0');
+            return bPrice - aPrice;
+          }).slice(0, 5); // Display top 5 high-value projects
+
+          this.numberOfProjects = projects.length;
+          this.totalValueOfProjects = totalValue;
+          console.log('Loaded projects:', projects);
+          this.generateMarkers();
           this.initializeMap();
         },
         (error) => {
@@ -135,6 +152,8 @@ export class LandingComponent implements OnInit, OnDestroy {
         }
     );
   }
+
+
 
   generateMarkers() {
     const redMarkerSVG = `
@@ -155,8 +174,8 @@ export class LandingComponent implements OnInit, OnDestroy {
         const popup = `
           <div>
             <h3 class="text-lg font-semibold">${project.name}</h3>
-            <p >Cost Estimate: ${project.costEstimate}</p>
-            <p >Location: ${project.location.name}</p>
+            <p>Cost Estimate: ${project.stages?.tenderManagement?.basicData?.contractPrice || 'N/A'}</p>
+            <p>Location: ${project.location.name}</p>
             <a [routerLink]="['/public/projects', project.id]" class="mt-2 px-2 py-1 bg-accent text-black rounded hover:bg-secondary ">View Details</a>
           </div>
         `;
@@ -172,6 +191,9 @@ export class LandingComponent implements OnInit, OnDestroy {
     console.log('Generated markers:', this.markers);
   }
 
+  navigateToProjects() {
+    this.router.navigate(['/projects']);
+  }
 
   addProjectsToFirebase(): void {
     const projects = (projectsData as any).projects;
@@ -186,6 +208,4 @@ export class LandingComponent implements OnInit, OnDestroy {
     const suffix = Math.random().toString(36).substr(2, 6);
     return prefix + suffix;
   }
-
-
 }

@@ -37,6 +37,15 @@ module.exports = {
       fontSize: {
         base: ['16px', '1.5'], // Set the base font size and line height
       },
+      keyframes: {
+        slideUp: {
+          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+      },
+      animation: {
+        slideUp: 'slideUp 0.5s ease-in-out',
+      },
     },
   },
   plugins: [

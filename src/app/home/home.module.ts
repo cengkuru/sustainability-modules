@@ -3,15 +3,19 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from "./home-routing.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgxJsonViewerModule } from "ngx-json-viewer";
+import {IntersectionObserverDirective} from "../directives/intersection-observer.directive";
 
 @NgModule({
-  declarations: [],
+  declarations: [
+
+  ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxJsonViewerModule
+    NgxJsonViewerModule,
+    IntersectionObserverDirective,
   ]
 })
 export class HomeModule { }
