@@ -1,7 +1,9 @@
 <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 py-8">
     <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-        <div class="p-6">
-            <h2 class="text-2xl font-bold text-secondary mb-6">Project Name</h2>
+        <div class="p-6" *ngIf="project$ | async as project">
+            <h2 class="text-2xl font-bold text-secondary mb-6" >
+                {{ project.name }}
+            </h2>
             <div class="flex flex-col lg:flex-row">
                 <!-- Dropdown for mobile view -->
                 <div class="lg:hidden mb-4">
@@ -26,7 +28,7 @@
                 <div class="w-full lg:w-3/4 p-4">
                     <!-- Content for Identification Tab -->
                     <div *ngIf="selectedTab === 'Identification'">
-                        <div class="space-y-4">
+                        <div *ngIf="project$ | async as project" class="space-y-4">
                             <!-- Basic Data Section -->
                             <div class="p-6 rounded-lg bg-gray-100 mb-4">
                                 <h3 class="text-xl font-semibold text-secondary mb-4">
@@ -35,35 +37,39 @@
                                 <div class="space-y-2">
                                     <div class="flex">
                                         <p class="w-1/2 font-semibold text-gray-600">Project reference number:</p>
-                                        <p class="w-1/2 text-gray-800">XXX</p>
+                                        <p class="w-1/2 text-gray-800">{{ project.stages.identification.basicData.projectReferenceNumber }}</p>
                                     </div>
                                     <div class="flex">
                                         <p class="w-1/2 font-semibold text-gray-600">Project owner:</p>
-                                        <p class="w-1/2 text-gray-800">XXX</p>
+                                        <p class="w-1/2 text-gray-800">{{ project.stages.identification.basicData.projectOwner }}</p>
                                     </div>
                                     <div class="flex">
                                         <p class="w-1/2 font-semibold text-gray-600">Sector, subsector:</p>
-                                        <p class="w-1/2 text-gray-800">XXX</p>
+                                        <p class="w-1/2 text-gray-800">{{ project.stages.identification.basicData.sectorSubsector }}</p>
                                     </div>
                                     <div class="flex">
                                         <p class="w-1/2 font-semibold text-gray-600">Project name:</p>
-                                        <p class="w-1/2 text-gray-800">XXX</p>
+                                        <p class="w-1/2 text-gray-800">{{ project.stages.identification.basicData.projectName }}</p>
                                     </div>
                                     <div class="flex">
                                         <p class="w-1/2 font-semibold text-gray-600">Project location:</p>
-                                        <p class="w-1/2 text-gray-800">XXX</p>
+                                        <p class="w-1/2 text-gray-800">{{ project.stages.identification.basicData.projectLocation }}</p>
                                     </div>
                                     <div class="flex">
                                         <p class="w-1/2 font-semibold text-gray-600">Purpose:</p>
-                                        <p class="w-1/2 text-gray-800">XXX</p>
+                                        <p class="w-1/2 text-gray-800">{{ project.stages.identification.basicData.purpose }}</p>
                                     </div>
                                     <div class="flex">
                                         <p class="w-1/2 font-semibold text-gray-600">Project description:</p>
-                                        <p class="w-1/2 text-gray-800">XXX</p>
+                                        <p class="w-1/2 text-gray-800">{{ project.stages.identification.basicData.projectDescription }}</p>
                                     </div>
                                     <div class="flex">
                                         <p class="w-1/2 font-semibold text-gray-600">Project officials and roles:</p>
-                                        <p class="w-1/2 text-gray-800">XXX</p>
+                                        <p class="w-1/2 text-gray-800">
+                                            <ng-container *ngFor="let official of project.stages.identification.basicData.projectOfficialsAndRoles">
+                                                {{ official.name }} ({{ official.role }}),
+                                            </ng-container>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -75,31 +81,31 @@
                                 <div class="space-y-2">
                                     <div class="flex">
                                         <p class="w-1/2 font-semibold text-gray-600">Climate objective:</p>
-                                        <p class="w-1/2 text-gray-800">XXX</p>
+                                        <p class="w-1/2 text-gray-800">{{ project.stages.identification.climateFinanceData.climateObjective }}</p>
                                     </div>
                                     <div class="flex">
                                         <p class="w-1/2 font-semibold text-gray-600">Financial instrument:</p>
-                                        <p class="w-1/2 text-gray-800">XXX</p>
+                                        <p class="w-1/2 text-gray-800">{{ project.stages.identification.climateFinanceData.financialInstrument }}</p>
                                     </div>
                                     <div class="flex">
                                         <p class="w-1/2 font-semibold text-gray-600">Climate transformation:</p>
-                                        <p class="w-1/2 text-gray-800">XXX</p>
+                                        <p class="w-1/2 text-gray-800">{{ project.stages.identification.climateFinanceData.climateTransformation }}</p>
                                     </div>
                                     <div class="flex">
                                         <p class="w-1/2 font-semibold text-gray-600">Climate finance decision-making:</p>
-                                        <p class="w-1/2 text-gray-800">XXX</p>
+                                        <p class="w-1/2 text-gray-800">{{ project.stages.identification.climateFinanceData.climateFinanceDecisionMaking }}</p>
                                     </div>
                                     <div class="flex">
                                         <p class="w-1/2 font-semibold text-gray-600">Nationally Determined Contributions:</p>
-                                        <p class="w-1/2 text-gray-800">XXX</p>
+                                        <p class="w-1/2 text-gray-800">{{ project.stages.identification.climateFinanceData.nationallyDeterminedContributions }}</p>
                                     </div>
                                     <div class="flex">
                                         <p class="w-1/2 font-semibold text-gray-600">Paris Agreement:</p>
-                                        <p class="w-1/2 text-gray-800">XXX</p>
+                                        <p class="w-1/2 text-gray-800">{{ project.stages.identification.climateFinanceData.parisAgreement }}</p>
                                     </div>
                                     <div class="flex">
                                         <p class="w-1/2 font-semibold text-gray-600">Amount of investment:</p>
-                                        <p class="w-1/2 text-gray-800">XXX</p>
+                                        <p class="w-1/2 text-gray-800">{{ project.stages.identification.climateFinanceData.amountOfInvestment }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -111,259 +117,261 @@
                                 <div class="space-y-2">
                                     <div class="flex">
                                         <p class="w-1/2 font-semibold text-gray-600">Number of lobbying activities:</p>
-                                        <p class="w-1/2 text-gray-800">XXX</p>
+                                        <p class="w-1/2 text-gray-800">{{ project.stages.identification.institutionalSustainabilityData.numberOfLobbyingActivities }}</p>
                                     </div>
                                     <div class="flex">
                                         <p class="w-1/2 font-semibold text-gray-600">Number of freedom of information requests:</p>
-                                        <p class="w-1/2 text-gray-800">XXX</p>
+                                        <p class="w-1/2 text-gray-800">{{ project.stages.identification.institutionalSustainabilityData.numberOfFreedomOfInformationRequests }}</p>
                                     </div>
                                     <div class="flex">
                                         <p class="w-1/2 font-semibold text-gray-600">Number of freedom of information answers:</p>
-                                        <p class="w-1/2 text-gray-800">XXX</p>
+                                        <p class="w-1/2 text-gray-800">{{ project.stages.identification.institutionalSustainabilityData.numberOfFreedomOfInformationAnswers }}</p>
                                     </div>
                                     <div class="flex">
                                         <p class="w-1/2 font-semibold text-gray-600">Policy coherence documentation:</p>
-                                        <p class="w-1/2 text-gray-800">XXX</p>
+                                        <p class="w-1/2 text-gray-800">{{ project.stages.identification.institutionalSustainabilityData.policyCoherenceDocumentation }}</p>
                                     </div>
                                     <div class="flex">
-                                        <p class="w-1/2 font-semibold text-gray-600">Freedom-of information requests and answers:</p>
-                                        <p class="w-1/2 text-gray-800">XXX</p>
+                                        <p class="w-1/2 font-semibold text-gray-600">Freedom of information requests and answers:</p>
+                                        <p class="w-1/2 text-gray-800">{{ project.stages.identification.institutionalSustainabilityData.freedomOfInformationRequestsAndAnswers }}</p>
                                     </div>
                                     <div class="flex">
                                         <p class="w-1/2 font-semibold text-gray-600">Lobbying meetings minutes:</p>
-                                        <p class="w-1/2 text-gray-800">XXX</p>
+                                        <p class="w-1/2 text-gray-800">{{ project.stages.identification.institutionalSustainabilityData.lobbyingMeetingsMinutes }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+
                     <!-- Content for Preparation Tab -->
-                    <!-- Preparation Section -->
                     <div *ngIf="selectedTab === 'Preparation'" class="space-y-4">
-                        <div class="p-6 rounded-lg bg-gray-100">
-                            <h3 class="text-xl font-semibold text-secondary mb-4">
-                                <i class="bi bi-tools mr-2"></i>Preparation
-                            </h3>
-                            <div class="space-y-4">
-                                <!-- Basic Data Section -->
-                                <div class="p-4 rounded-lg bg-gray-200">
-                                    <h4 class="text-lg font-semibold text-secondary mb-2">Basic Data</h4>
-                                    <div class="space-y-2">
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Project scope (main output):</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Contact details:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Funding sources:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Project budget:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Project budget approval date:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Climate Finance Data Section -->
-                                <div class="p-4 rounded-lg bg-yellow-200">
-                                    <h4 class="text-lg font-semibold text-secondary mb-2">Climate Finance Data</h4>
-                                    <div class="space-y-2">
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Funding source (climate finance):</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Green Climate Fund Accredited Entity:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Accredited entity type:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Project preparation costs:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Project preparation period:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Project approval period:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Ratio of co-finance:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Terms of climate finance:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Carbon efficiency:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Non-climate co-benefits:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
+                        <div *ngIf="project$ | async as project" class="space-y-4">
+                            <!-- Basic Data Section -->
+                            <div class="p-6 rounded-lg bg-gray-100 mb-4">
+                                <h3 class="text-xl font-semibold text-secondary mb-4">
+                                    <i class="bi bi-tools mr-2"></i>Preparation
+                                </h3>
+                                <div class="space-y-4">
+                                    <div class="p-4 rounded-lg bg-gray-200">
+                                        <h4 class="text-lg font-semibold text-secondary mb-2">Basic Data</h4>
+                                        <div class="space-y-2">
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Project scope (main output):</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.basicData.projectScope }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Contact details:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.basicData.contactDetails }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Funding sources:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.basicData.fundingSources }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Project budget:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.basicData.projectBudget }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Project budget approval date:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.basicData.projectBudgetApprovalDate }}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- Social Sustainability Data Section -->
-                                <div class="p-4 rounded-lg bg-red-200">
-                                    <h4 class="text-lg font-semibold text-secondary mb-2">Social Sustainability Data</h4>
-                                    <div class="space-y-2">
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Beneficiaries:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Number of beneficiaries:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Inclusive design:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Indigenous land:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Public consultation meetings:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Land compensation budget:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Labor obligations:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
+                                    <!-- Climate Finance Data Section -->
+                                    <div class="p-4 rounded-lg bg-yellow-200">
+                                        <h4 class="text-lg font-semibold text-secondary mb-2">Climate Finance Data</h4>
+                                        <div class="space-y-2">
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Funding source (climate finance):</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.climateFinanceData.fundingSource }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Green Climate Fund Accredited Entity:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.climateFinanceData.greenClimateFundAccreditedEntity }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Accredited entity type:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.climateFinanceData.accreditedEntityType }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Project preparation costs:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.climateFinanceData.projectPreparationCosts }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Project preparation period:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.climateFinanceData.projectPreparationPeriod }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Project approval period:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.climateFinanceData.projectApprovalPeriod }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Ratio of co-finance:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.climateFinanceData.ratioOfCoFinance }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Terms of climate finance:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.climateFinanceData.termsOfClimateFinance }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Carbon efficiency:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.climateFinanceData.carbonEfficiency }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Non-climate co-benefits:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.climateFinanceData.nonClimateCoBenefits }}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- Institutional Sustainability Data Section -->
-                                <div class="p-4 rounded-lg bg-blue-200">
-                                    <h4 class="text-lg font-semibold text-secondary mb-2">Institutional Sustainability Data</h4>
-                                    <div class="space-y-2">
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Number of freedom of information requests:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Number of freedom of information answers:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Policy coherence documentation:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Freedom-of information requests and answers:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Risk management plans:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
+                                    <!-- Social Sustainability Data Section -->
+                                    <div class="p-4 rounded-lg bg-red-200">
+                                        <h4 class="text-lg font-semibold text-secondary mb-2">Social Sustainability Data</h4>
+                                        <div class="space-y-2">
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Beneficiaries:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.socialSustainabilityData.beneficiaries }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Number of beneficiaries:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.socialSustainabilityData.numberOfBeneficiaries }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Inclusive design:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.socialSustainabilityData.inclusiveDesign }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Indigenous land:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.socialSustainabilityData.indigenousLand }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Public consultation meetings:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.socialSustainabilityData.publicConsultationMeetings }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Land compensation budget:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.socialSustainabilityData.landCompensationBudget }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Labor obligations:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.socialSustainabilityData.laborObligations }}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- Economic and Financial Sustainability Data Section -->
-                                <div class="p-4 rounded-lg bg-black text-white">
-                                    <h4 class="text-lg font-semibold text-secondary mb-2">Economic and Financial Sustainability Data</h4>
-                                    <div class="space-y-2">
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-300">Procurement strategy:</p>
-                                            <p class="w-1/2 text-gray-100">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-300">Life-cycle cost:</p>
-                                            <p class="w-1/2 text-gray-100">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-300">Life-cycle cost calculation methodology:</p>
-                                            <p class="w-1/2 text-gray-100">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-300">Funding source for preparation:</p>
-                                            <p class="w-1/2 text-gray-100">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-300">Budget for preparation:</p>
-                                            <p class="w-1/2 text-gray-100">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-300">Cost-benefit analysis:</p>
-                                            <p class="w-1/2 text-gray-100">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-300">Value for money:</p>
-                                            <p class="w-1/2 text-gray-100">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-300">Asset lifetime:</p>
-                                            <p class="w-1/2 text-gray-100">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-300">Budget projections:</p>
-                                            <p class="w-1/2 text-gray-100">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-300">Maintenance plan:</p>
-                                            <p class="w-1/2 text-gray-100">XXX</p>
+                                    <!-- Institutional Sustainability Data Section -->
+                                    <div class="p-4 rounded-lg bg-blue-200">
+                                        <h4 class="text-lg font-semibold text-secondary mb-2">Institutional Sustainability Data</h4>
+                                        <div class="space-y-2">
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Number of freedom of information requests:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.institutionalSustainabilityData.numberOfFreedomOfInformationRequests }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Number of freedom of information answers:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.institutionalSustainabilityData.numberOfFreedomOfInformationAnswers }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Policy coherence documentation:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.institutionalSustainabilityData.policyCoherenceDocumentation }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Freedom-of information requests and answers:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.institutionalSustainabilityData.freedomOfInformationRequestsAndAnswers }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Risk management plans:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.institutionalSustainabilityData.riskManagementPlans }}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- Environmental and Climate Sustainability Data Section -->
-                                <div class="p-4 rounded-lg bg-green-200">
-                                    <h4 class="text-lg font-semibold text-secondary mb-2">Environmental and Climate Sustainability Data</h4>
-                                    <div class="space-y-2">
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Environmental impact category:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
+                                    <!-- Economic and Financial Sustainability Data Section -->
+                                    <div class="p-4 rounded-lg bg-black text-white">
+                                        <h4 class="text-lg font-semibold text-accent mb-2">Economic and Financial Sustainability Data</h4>
+                                        <div class="space-y-2">
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-300">Procurement strategy:</p>
+                                                <p class="w-1/2 text-gray-100">{{ project.stages.preparation.economicAndFinancialSustainabilityData.procurementStrategy }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-300">Life-cycle cost:</p>
+                                                <p class="w-1/2 text-gray-100">{{ project.stages.preparation.economicAndFinancialSustainabilityData.lifeCycleCost }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-300">Life-cycle cost calculation methodology:</p>
+                                                <p class="w-1/2 text-gray-100">{{ project.stages.preparation.economicAndFinancialSustainabilityData.lifeCycleCostCalculationMethodology }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-300">Funding source for preparation:</p>
+                                                <p class="w-1/2 text-gray-100">{{ project.stages.preparation.economicAndFinancialSustainabilityData.fundingSourceForPreparation }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-300">Budget for preparation:</p>
+                                                <p class="w-1/2 text-gray-100">{{ project.stages.preparation.economicAndFinancialSustainabilityData.budgetForPreparation }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-300">Cost-benefit analysis:</p>
+                                                <p class="w-1/2 text-gray-100">{{ project.stages.preparation.economicAndFinancialSustainabilityData.costBenefitAnalysis }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-300">Value for money:</p>
+                                                <p class="w-1/2 text-gray-100">{{ project.stages.preparation.economicAndFinancialSustainabilityData.valueForMoney }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-300">Asset lifetime:</p>
+                                                <p class="w-1/2 text-gray-100">{{ project.stages.preparation.economicAndFinancialSustainabilityData.assetLifetime }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-300">Budget projections:</p>
+                                                <p class="w-1/2 text-gray-100">{{ project.stages.preparation.economicAndFinancialSustainabilityData.budgetProjections }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-300">Maintenance plan:</p>
+                                                <p class="w-1/2 text-gray-100">{{ project.stages.preparation.economicAndFinancialSustainabilityData.maintenancePlan }}</p>
+                                            </div>
                                         </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Environmental measures:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Environmental licenses and exemptions:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Protected area:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Conservation measures:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Climate and disaster risk assessment:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Climate measures:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Forecast of Green House Gas Emissions:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
+                                    </div>
+
+                                    <!-- Environmental and Climate Sustainability Data Section -->
+                                    <div class="p-4 rounded-lg bg-green-200">
+                                        <h4 class="text-lg font-semibold text-secondary mb-2">Environmental and Climate Sustainability Data</h4>
+                                        <div class="space-y-2">
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Environmental impact category:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.environmentalAndClimateSustainabilityData.environmentalImpactCategory }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Environmental measures:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.environmentalAndClimateSustainabilityData.environmentalMeasures }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Environmental licenses and exemptions:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.environmentalAndClimateSustainabilityData.environmentalLicensesAndExemptions }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Protected area:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.environmentalAndClimateSustainabilityData.protectedArea }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Conservation measures:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.environmentalAndClimateSustainabilityData.conservationMeasures }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Climate and disaster risk assessment:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.environmentalAndClimateSustainabilityData.climateAndDisasterRiskAssessment }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Climate measures:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.environmentalAndClimateSustainabilityData.climateMeasures }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Forecast of Green House Gas Emissions:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.preparation.environmentalAndClimateSustainabilityData.forecastOfGreenHouseGasEmissions }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -375,170 +383,160 @@
 
                     <!-- Content for Tender Management Tab -->
                     <div *ngIf="selectedTab === 'TenderManagement'" class="space-y-4">
-                        <div class="p-6 rounded-lg bg-gray-100">
-                            <h3 class="text-xl font-semibold text-secondary mb-4">
-                                <i class="bi bi-file-earmark mr-2"></i>Tender Management
-                            </h3>
-                            <div class="space-y-4">
-                                <!-- Basic Data Section -->
-                                <div class="p-4 rounded-lg bg-gray-200">
-                                    <h4 class="text-lg font-semibold text-secondary mb-2">Basic Data</h4>
-                                    <div class="space-y-2">
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Procuring entity:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Procuring entity contact details:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Procurement process:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Procurement method:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Number of firms tendering:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Cost estimate:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Contract type:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Contract administration entity:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Contract officials and roles:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Contract title:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Contract firm(s):</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Contract price:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Contract scope of work:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Contract start date:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Contract duration:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Contract status:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Attachments Section -->
-                                <div class="p-4 rounded-lg bg-gray-200">
-                                    <h4 class="text-lg font-semibold text-secondary mb-2">Attachments</h4>
-                                    <div class="space-y-2">
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Tender documents:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Tender evaluation results:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Project design report:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Contract agreement and conditions:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Registration and ownership of firms:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Specifications and drawings:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
+                        <div *ngIf="project$ | async as project" class="space-y-4">
+                            <div class="p-6 rounded-lg bg-gray-100">
+                                <h3 class="text-xl font-semibold text-secondary mb-4">
+                                    <i class="bi bi-file-earmark mr-2"></i>Tender Management
+                                </h3>
+                                <div class="space-y-4">
+                                    <!-- Basic Data Section -->
+                                    <div class="p-4 rounded-lg bg-gray-200">
+                                        <h4 class="text-lg font-semibold text-secondary mb-2">Basic Data</h4>
+                                        <div class="space-y-2">
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Procuring entity:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.basicData.procuringEntity }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Procuring entity contact details:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.basicData.procuringEntityContactDetails }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Procurement process:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.basicData.procurementProcess }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Procurement method:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.basicData.procurementMethod }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Number of firms tendering:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.basicData.numberOfFirmsTendering }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Cost estimate:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.basicData.costEstimate }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Contract type:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.basicData.contractType }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Contract administration entity:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.basicData.contractAdministrationEntity }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Contract officials and roles:</p>
+                                                <p class="w-1/2 text-gray-800">
+                                                    <ng-container *ngFor="let official of project.stages.tenderManagement.basicData.contractOfficialsAndRoles">
+                                                        {{ official.name }} - {{ official.role }}<br>
+                                                    </ng-container>
+                                                </p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Contract title:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.basicData.contractTitle }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Contract firm(s):</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.basicData.contractFirm }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Contract price:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.basicData.contractPrice }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Contract scope of work:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.basicData.contractScopeOfWork }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Contract start date:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.basicData.contractStartDate }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Contract duration:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.basicData.contractDuration }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Contract status:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.basicData.contractStatus }}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- Social Sustainability Data Section -->
-                                <div class="p-4 rounded-lg bg-red-200">
-                                    <h4 class="text-lg font-semibold text-secondary mb-2">Social Sustainability Data</h4>
-                                    <div class="space-y-2">
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Labor budget:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Health and safety certifications:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
+                                    <!-- Attachments Section -->
+                                    <div class="p-4 rounded-lg bg-gray-200">
+                                        <h4 class="text-lg font-semibold text-secondary mb-2">Attachments</h4>
+                                        <div class="space-y-2">
+                                            <div *ngFor="let attachment of project.stages.tenderManagement.attachments">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-gray-600">{{ attachment.title }}:</p>
+                                                    <p class="w-1/2 text-gray-800">
+                                                        <a [href]="attachment.link" target="_blank" class="text-blue-600 hover:underline">{{ attachment.description }}</a>
+                                                    </p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- Institutional Sustainability Data Section -->
-                                <div class="p-4 rounded-lg bg-blue-200">
-                                    <h4 class="text-lg font-semibold text-secondary mb-2">Institutional Sustainability Data</h4>
-                                    <div class="space-y-2">
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Number of freedom of information requests:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Number of freedom of information answers:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Beneficial ownership:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Sustainability criteria:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Freedom of information requests and answers:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Anti-corruption certifications:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
+                                    <!-- Social Sustainability Data Section -->
+                                    <div class="p-4 rounded-lg bg-red-200">
+                                        <h4 class="text-lg font-semibold text-secondary mb-2">Social Sustainability Data</h4>
+                                        <div class="space-y-2">
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Labor budget:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.socialSustainabilityData.laborBudget }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Health and safety certifications:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.socialSustainabilityData.healthAndSafetyCertifications }}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- Environmental and Climate Sustainability Data Section -->
-                                <div class="p-4 rounded-lg bg-green-200">
-                                    <h4 class="text-lg font-semibold text-secondary mb-2">Environmental and Climate Sustainability Data</h4>
-                                    <div class="space-y-2">
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Number of environmental certifications:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
+                                    <!-- Institutional Sustainability Data Section -->
+                                    <div class="p-4 rounded-lg bg-blue-200">
+                                        <h4 class="text-lg font-semibold text-secondary mb-2">Institutional Sustainability Data</h4>
+                                        <div class="space-y-2">
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Number of freedom of information requests:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.institutionalSustainabilityData.numberOfFreedomOfInformationRequests }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Number of freedom of information answers:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.institutionalSustainabilityData.numberOfFreedomOfInformationAnswers }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Beneficial ownership:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.institutionalSustainabilityData.beneficialOwnership }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Sustainability criteria:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.institutionalSustainabilityData.sustainabilityCriteria }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Freedom of information requests and answers:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.institutionalSustainabilityData.freedomOfInformationRequestsAndAnswers }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Anti-corruption certifications:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.institutionalSustainabilityData.antiCorruptionCertifications }}</p>
+                                            </div>
                                         </div>
-                                        <div class="flex">
-                                            <p class="w-1/2 font-semibold text-gray-600">Environmental certifications:</p>
-                                            <p class="w-1/2 text-gray-800">XXX</p>
+                                    </div>
+
+                                    <!-- Environmental and Climate Sustainability Data Section -->
+                                    <div class="p-4 rounded-lg bg-green-200">
+                                        <h4 class="text-lg font-semibold text-secondary mb-2">Environmental and Climate Sustainability Data</h4>
+                                        <div class="space-y-2">
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Number of environmental certifications:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.environmentalAndClimateSustainabilityData.numberOfEnvironmentalCertifications }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Environmental certifications:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.tenderManagement.environmentalAndClimateSustainabilityData.environmentalCertifications }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -549,140 +547,216 @@
 
                     <!-- Content for Implementation Tab -->
                     <div *ngIf="selectedTab === 'Implementation'" class="space-y-4">
-                        <div class="p-6 rounded-lg bg-gray-100">
-                            <h3 class="text-xl font-semibold text-secondary mb-4">
-                                <i class="bi bi-play-circle mr-2"></i>Implementation
-                            </h3>
-                            <div class="space-y-4">
-                                <!-- Basic Data -->
-                                <div class="p-4 rounded-lg bg-gray-200">
-                                    <h4 class="text-lg font-semibold mb-2">
-                                        <i class="bi bi-file-earmark mr-2"></i>Basic Data
-                                    </h4>
-                                    <ul class="list-disc pl-5">
-                                        <li>Variation to contract price: XXX</li>
-                                        <li>Escalation of contract price: XXX</li>
-                                        <li>Variation to contract duration: XXX</li>
-                                        <li>Variation to contract scope: XXX</li>
-                                        <li>Reasons for price changes: XXX</li>
-                                        <li>Reasons for scope: XXX</li>
-                                        <li>Reasons for duration changes: XXX</li>
-                                    </ul>
-                                </div>
-                                <div class="p-4 rounded-lg bg-gray-200">
-                                    <h4 class="text-lg font-semibold mb-2">
-                                        <i class="bi bi-file-earmark mr-2"></i>Attachments
-                                    </h4>
-                                    <ul class="list-disc pl-5">
-                                        <li>List of variations, changes, amendments</li>
-                                        <li>List of escalation approvals</li>
-                                        <li>Quality assurance reports</li>
-                                        <li>Payment certificates</li>
-                                        <li>Contract amendments</li>
-                                    </ul>
-                                </div>
+                        <div *ngIf="project$ | async as project" class="space-y-4">
+                            <div class="p-6 rounded-lg bg-gray-100">
+                                <h3 class="text-xl font-semibold text-secondary mb-4">
+                                    <i class="bi bi-play-circle mr-2"></i>Implementation
+                                </h3>
+                                <div class="space-y-4">
+                                    <!-- Basic Data Section -->
+                                    <div class="p-4 rounded-lg bg-gray-200">
+                                        <h4 class="text-lg font-semibold text-secondary mb-2">Basic Data</h4>
+                                        <div class="space-y-2">
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Variation to contract price:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.implementation.basicData.variationToContractPrice }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Escalation of contract price:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.implementation.basicData.escalationOfContractPrice }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Variation to contract duration:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.implementation.basicData.variationToContractDuration }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Variation to contract scope:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.implementation.basicData.variationToContractScope }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Reasons for price changes:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.implementation.basicData.reasonsForPriceChanges }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Reasons for scope:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.implementation.basicData.reasonsForScope }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Reasons for duration changes:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.implementation.basicData.reasonsForDurationChanges }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Attachments Section -->
+                                    <div class="p-4 rounded-lg bg-gray-200">
+                                        <h4 class="text-lg font-semibold text-secondary mb-2">Attachments</h4>
+                                        <div class="space-y-2">
+                                            <div *ngFor="let attachment of project.stages.implementation.attachments">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-gray-600">{{ attachment.title }}:</p>
+                                                    <p class="w-1/2 text-gray-800">
+                                                        <a [href]="attachment.link" target="_blank" class="text-blue-600 hover:underline">{{ attachment.description }}</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                <!-- Climate Finance Data -->
-                                <div class="p-4 rounded-lg bg-yellow-200">
-                                    <h4 class="text-lg font-semibold mb-2">
-                                        <i class="bi bi-cash-stack mr-2"></i>Climate Finance Data
-                                    </h4>
-                                    <ul class="list-disc pl-5">
-                                        <li>Disbursement records (payments): XXX</li>
-                                        <li>Type of monitoring: XXX</li>
-                                        <li>Performance monitoring: XXX</li>
-                                        <li>Reporting period: XXX</li>
-                                    </ul>
-                                </div>
-                                <div class="p-4 rounded-lg bg-yellow-200">
-                                    <h4 class="text-lg font-semibold mb-2">
-                                        <i class="bi bi-cash-stack mr-2"></i>Attachments
-                                    </h4>
-                                    <ul class="list-disc pl-5">
-                                        <li>Independent monitoring</li>
-                                    </ul>
-                                </div>
+                                    <!-- Climate Finance Data Section -->
+                                    <div class="p-4 rounded-lg bg-yellow-200">
+                                        <h4 class="text-lg font-semibold text-secondary mb-2">Climate Finance Data</h4>
+                                        <div class="space-y-2">
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Disbursement records (payments):</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.implementation.climateFinanceData.disbursementRecords }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Type of monitoring:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.implementation.climateFinanceData.typeOfMonitoring }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Performance monitoring:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.implementation.climateFinanceData.performanceMonitoring }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Reporting period:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.implementation.climateFinanceData.reportingPeriod }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-4 rounded-lg bg-yellow-200">
+                                        <h4 class="text-lg font-semibold text-secondary mb-2">Attachments</h4>
+                                        <div class="space-y-2">
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Independent monitoring:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.implementation.climateFinanceData.independentMonitoring }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                <!-- Social Sustainability Data -->
-                                <div class="p-4 rounded-lg bg-red-200">
-                                    <h4 class="text-lg font-semibold mb-2">
-                                        <i class="bi bi-people mr-2"></i>Social Sustainability Data
-                                    </h4>
-                                    <ul class="list-disc pl-5">
-                                        <li>Jobs generated: XXX</li>
-                                        <li>Inclusive implementation: XXX</li>
-                                        <li>Workers’ accidents: XXX</li>
-                                    </ul>
-                                </div>
-                                <div class="p-4 rounded-lg bg-red-200">
-                                    <h4 class="text-lg font-semibold mb-2">
-                                        <i class="bi bi-people mr-2"></i>Attachments
-                                    </h4>
-                                    <ul class="list-disc pl-5">
-                                        <li>Construction materials testing</li>
-                                        <li>Building inspections</li>
-                                    </ul>
-                                </div>
+                                    <!-- Social Sustainability Data Section -->
+                                    <div class="p-4 rounded-lg bg-red-200">
+                                        <h4 class="text-lg font-semibold text-secondary mb-2">Social Sustainability Data</h4>
+                                        <div class="space-y-2">
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Jobs generated:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.implementation.socialSustainabilityData.jobsGenerated }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Inclusive implementation:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.implementation.socialSustainabilityData.inclusiveImplementation }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Workers’ accidents:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.implementation.socialSustainabilityData.workersAccidents }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-4 rounded-lg bg-red-200">
+                                        <h4 class="text-lg font-semibold text-secondary mb-2">Attachments</h4>
+                                        <div class="space-y-2">
+                                            <div *ngFor="let attachment of project.stages.implementation.socialSustainabilityData.attachments">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-gray-600">{{ attachment.title }}:</p>
+                                                    <p class="w-1/2 text-gray-800">
+                                                        <a [href]="attachment.link" target="_blank" class="text-blue-600 hover:underline">{{ attachment.description }}</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                <!-- Institutional Sustainability Data -->
-                                <div class="p-4 rounded-lg bg-blue-200">
-                                    <h4 class="text-lg font-semibold mb-2">
-                                        <i class="bi bi-building mr-2"></i>Institutional Sustainability Data
-                                    </h4>
-                                    <ul class="list-disc pl-5">
-                                        <li>Number of freedom of information requests: X</li>
-                                        <li>Number of freedom of information answers: X</li>
-                                    </ul>
-                                </div>
-                                <div class="p-4 rounded-lg bg-blue-200">
-                                    <h4 class="text-lg font-semibold mb-2">
-                                        <i class="bi bi-building mr-2"></i>Attachments
-                                    </h4>
-                                    <ul class="list-disc pl-5">
-                                        <li>Freedom of information requests and answers</li>
-                                        <li>Oversight reports</li>
-                                        <li>Independent mid term evaluation</li>
-                                    </ul>
-                                </div>
+                                    <!-- Institutional Sustainability Data Section -->
+                                    <div class="p-4 rounded-lg bg-blue-200">
+                                        <h4 class="text-lg font-semibold text-secondary mb-2">Institutional Sustainability Data</h4>
+                                        <div class="space-y-2">
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Number of freedom of information requests:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.implementation.institutionalSustainabilityData.numberOfFreedomOfInformationRequests }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Number of freedom of information answers:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.implementation.institutionalSustainabilityData.numberOfFreedomOfInformationAnswers }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-4 rounded-lg bg-blue-200">
+                                        <h4 class="text-lg font-semibold text-secondary mb-2">Attachments</h4>
+                                        <div class="space-y-2">
+                                            <div *ngFor="let attachment of project.stages.implementation.institutionalSustainabilityData.attachments">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-gray-600">{{ attachment.title }}:</p>
+                                                    <p class="w-1/2 text-gray-800">
+                                                        <a [href]="attachment.link" target="_blank" class="text-blue-600 hover:underline">{{ attachment.description }}</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                <!-- Economic and Financial Sustainability Data -->
-                                <div class="p-4 rounded-lg bg-black-200">
-                                    <h4 class="text-lg font-semibold mb-2">
-                                        <i class="bi bi-bar-chart mr-2"></i>Economic and Financial Sustainability Data
-                                    </h4>
-                                    <ul class="list-disc pl-5">
-                                        <li>Budget shortfall: XXX</li>
-                                        <li>Funding source for implementation: XXX</li>
-                                        <li>Budget for implementation: XXX</li>
-                                    </ul>
-                                </div>
-                                <div class="p-4 rounded-lg bg-black-200">
-                                    <h4 class="text-lg font-semibold mb-2">
-                                        <i class="bi bi-bar-chart mr-2"></i>Attachments
-                                    </h4>
-                                    <ul class="list-disc pl-5">
-                                        <li>Funding source for implementation</li>
-                                    </ul>
-                                </div>
+                                    <!-- Economic and Financial Sustainability Data Section -->
+                                    <div class="p-4 rounded-lg bg-black-200">
+                                        <h4 class="text-lg font-semibold text-secondary mb-2">Economic and Financial Sustainability Data</h4>
+                                        <div class="space-y-2">
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Budget shortfall:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.implementation.economicAndFinancialSustainabilityData.budgetShortfall }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Funding source for implementation:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.implementation.economicAndFinancialSustainabilityData.fundingSourceForImplementation }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Budget for implementation:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.implementation.economicAndFinancialSustainabilityData.budgetForImplementation }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-4 rounded-lg bg-black-200">
+                                        <h4 class="text-lg font-semibold text-secondary mb-2">Attachments</h4>
+                                        <div class="space-y-2">
+                                            <div *ngFor="let attachment of project.stages.implementation.economicAndFinancialSustainabilityData.attachments">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-gray-600">{{ attachment.title }}:</p>
+                                                    <p class="w-1/2 text-gray-800">
+                                                        <a [href]="attachment.link" target="_blank" class="text-blue-600 hover:underline">{{ attachment.description }}</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                <!-- Environmental and Climate Sustainability Data -->
-                                <div class="p-4 rounded-lg bg-green-200">
-                                    <h4 class="text-lg font-semibold mb-2">
-                                        <i class="bi bi-tree mr-2"></i>Environmental and Climate Sustainability Data
-                                    </h4>
-                                    <ul class="list-disc pl-5">
-                                        <li>Environmental measures: XXX</li>
-                                        <li>Conservation measures: XXX</li>
-                                        <li>Climate measures: XXX</li>
-                                    </ul>
-                                </div>
-                                <div class="p-4 rounded-lg bg-green-200">
-                                    <h4 class="text-lg font-semibold mb-2">
-                                        <i class="bi bi-tree mr-2"></i>Attachments
-                                    </h4>
-                                    <ul class="list-disc pl-5">
-                                        <li>Environmental licenses and exemptions</li>
-                                    </ul>
+                                    <!-- Environmental and Climate Sustainability Data Section -->
+                                    <div class="p-4 rounded-lg bg-green-200">
+                                        <h4 class="text-lg font-semibold text-secondary mb-2">Environmental and Climate Sustainability Data</h4>
+                                        <div class="space-y-2">
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Environmental measures:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.implementation.environmentalAndClimateSustainabilityData.environmentalMeasures }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Conservation measures:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.implementation.environmentalAndClimateSustainabilityData.conservationMeasures }}</p>
+                                            </div>
+                                            <div class="flex">
+                                                <p class="w-1/2 font-semibold text-gray-600">Climate measures:</p>
+                                                <p class="w-1/2 text-gray-800">{{ project.stages.implementation.environmentalAndClimateSustainabilityData.climateMeasures }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-4 rounded-lg bg-green-200">
+                                        <h4 class="text-lg font-semibold text-secondary mb-2">Attachments</h4>
+                                        <div class="space-y-2">
+                                            <div *ngFor="let attachment of project.stages.implementation.environmentalAndClimateSustainabilityData.attachments">
+                                                <div class="flex">
+                                                    <p class="w-1/2 font-semibold text-gray-600">{{ attachment.title }}:</p>
+                                                    <p class="w-1/2 text-gray-800">
+                                                        <a [href]="attachment.link" target="_blank" class="text-blue-600 hover:underline">{{ attachment.description }}</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -691,44 +765,52 @@
 
                     <!-- Content for Completion Tab -->
                     <div *ngIf="selectedTab === 'Completion'" class="space-y-4">
-                        <div class="p-6 rounded-lg bg-gray-100">
-                            <h3 class="text-xl font-semibold text-secondary mb-4">
-                                <i class="bi bi-check-circle mr-2"></i>Completion
-                            </h3>
-                            <div class="space-y-4">
-                                <!-- Basic Data -->
-                                <div class="p-4 bg-white rounded-lg shadow">
-                                    <h4 class="text-lg font-semibold mb-2">Basic Data</h4>
-                                    <ul>
-                                        <li>Project status: XXX</li>
-                                        <li>Completion cost: XXX</li>
-                                        <li>Completion date: XXX</li>
-                                        <li>Scope at completion: XXX</li>
-                                        <li>Reasons for project changes: XXX</li>
-                                    </ul>
-                                </div>
-                                <div class="p-4 bg-white rounded-lg shadow">
-                                    <ul>
-                                        <li>Implementation progress reports</li>
-                                        <li>Budget amendment decision</li>
-                                        <li>Project completion report</li>
-                                        <li>Project evaluation report</li>
-                                        <li>Technical audit reports</li>
-                                        <li>Financial audit reports</li>
-                                    </ul>
-                                </div>
-                                <!-- Institutional Sustainability Data -->
-                                <div class="p-4 bg-white rounded-lg shadow">
-                                    <h4 class="text-lg font-semibold mb-2">Institutional Sustainability Data</h4>
-                                    <ul>
-                                        <li>Number of freedom of information requests: X</li>
-                                        <li>Number of freedom of information answers: X</li>
-                                    </ul>
-                                </div>
-                                <div class="p-4 bg-white rounded-lg shadow">
-                                    <ul>
-                                        <li>Freedom of information requests and answers</li>
-                                    </ul>
+                        <div *ngIf="project$ | async as project" class="space-y-4">
+                            <div class="p-6 rounded-lg bg-gray-100">
+                                <h3 class="text-xl font-semibold text-secondary mb-4">
+                                    <i class="bi bi-check-circle mr-2"></i>Completion
+                                </h3>
+                                <div class="space-y-4">
+                                    <!-- Basic Data Section -->
+                                    <div class="p-4 bg-white rounded-lg shadow">
+                                        <h4 class="text-lg font-semibold mb-2">Basic Data</h4>
+                                        <ul class="list-disc pl-5">
+                                            <li>Project status: {{ project.stages?.completion?.basicData?.projectStatus }}</li>
+                                            <li>Completion cost: {{ project.stages?.completion?.basicData?.completionCost }}</li>
+                                            <li>Completion date: {{ project.stages?.completion?.basicData?.completionDate }}</li>
+                                            <li>Scope at completion: {{ project.stages?.completion?.basicData?.scopeAtCompletion }}</li>
+                                            <li>Reasons for project changes: {{ project.stages?.completion?.basicData?.reasonsForProjectChanges }}</li>
+                                        </ul>
+                                    </div>
+                                    <!-- Attachments Section -->
+                                    <div class="p-4 bg-white rounded-lg shadow">
+                                        <h4 class="text-lg font-semibold mb-2">Attachments</h4>
+                                        <ul class="list-disc pl-5">
+                                            <div *ngFor="let attachment of project.stages?.completion?.attachments">
+                                                <li>
+                                                    <a [href]="attachment.link" target="_blank" class="text-blue-600 hover:underline">{{ attachment.title }}</a>: {{ attachment.description }}
+                                                </li>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                    <!-- Institutional Sustainability Data Section -->
+                                    <div class="p-4 bg-white rounded-lg shadow">
+                                        <h4 class="text-lg font-semibold mb-2">Institutional Sustainability Data</h4>
+                                        <ul class="list-disc pl-5">
+                                            <li>Number of freedom of information requests: {{ project.stages?.completion?.institutionalSustainabilityData?.numberOfFreedomOfInformationRequests }}</li>
+                                            <li>Number of freedom of information answers: {{ project.stages?.completion?.institutionalSustainabilityData?.numberOfFreedomOfInformationAnswers }}</li>
+                                        </ul>
+                                    </div>
+                                    <div class="p-4 bg-white rounded-lg shadow">
+                                        <h4 class="text-lg font-semibold mb-2">Attachments</h4>
+                                        <ul class="list-disc pl-5">
+                                            <div *ngFor="let attachment of project.stages?.completion?.institutionalSustainabilityData?.attachments">
+                                                <li>
+                                                    <a [href]="attachment.link" target="_blank" class="text-blue-600 hover:underline">{{ attachment.title }}</a>: {{ attachment.description }}
+                                                </li>
+                                            </div>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -737,78 +819,108 @@
 
                     <!-- Content for Operation and Maintenance Tab -->
                     <div *ngIf="selectedTab === 'OperationAndMaintenance'" class="space-y-4">
-                        <div class="p-6 rounded-lg bg-gray-100">
-                            <h3 class="text-xl font-semibold text-secondary mb-4">
-                                <i class="bi bi-gear mr-2"></i>Operation and Maintenance
-                            </h3>
-                            <div class="space-y-4">
-                                <!-- Basic Data Section -->
-                                <div class="p-4 bg-primary rounded shadow">
-                                    <h4 class="text-lg font-bold text-secondary mb-2">Basic data</h4>
-                                    <p>Asset name: XXX</p>
-                                    <p>Asset location: XXX</p>
-                                    <p>Type of maintenance works: XXX</p>
-                                    <p>Works description: XXX</p>
-                                    <p>Project officials and roles: XXX</p>
-                                    <p>Maintenance scope (main output): XXX</p>
-                                </div>
-                                <div class="p-4 bg-primary rounded shadow">
-                                    <p>Maintenance plan</p>
-                                </div>
+                        <div *ngIf="project$ | async as project" class="space-y-4">
+                            <div class="p-6 rounded-lg bg-gray-100">
+                                <h3 class="text-xl font-semibold text-secondary mb-4">
+                                    <i class="bi bi-gear mr-2"></i>Operation and Maintenance
+                                </h3>
+                                <div class="space-y-4">
+                                    <!-- Basic Data Section -->
+                                    <div class="p-4 bg-primary rounded shadow">
+                                        <h4 class="text-lg font-bold text-secondary mb-2">Basic data</h4>
+                                        <p>Asset name: {{ project.stages.operationsAndMaintenance.basicData.assetName }}</p>
+                                        <p>Asset location: {{ project.stages.operationsAndMaintenance.basicData.assetLocation }}</p>
+                                        <p>Type of maintenance works: {{ project.stages.operationsAndMaintenance.basicData.typeOfMaintenanceWorks }}</p>
+                                        <p>Works description: {{ project.stages.operationsAndMaintenance.basicData.worksDescription }}</p>
+                                        <p>Project officials and roles:</p>
+                                        <ul class="list-disc pl-5">
+                                            <li *ngFor="let official of project.stages.operationsAndMaintenance.basicData.projectOfficialsAndRoles">
+                                                {{ official.name }} - {{ official.role }}
+                                            </li>
+                                        </ul>
+                                        <p>Maintenance scope (main output): {{ project.stages.operationsAndMaintenance.basicData.maintenanceScope }}</p>
+                                    </div>
+                                    <div class="p-4 bg-primary rounded shadow">
+                                        <p>Maintenance plan</p>
+                                        <ul class="list-disc pl-5">
+                                            <li *ngFor="let attachment of project.stages.operationsAndMaintenance.basicData.attachments">
+                                                <a [href]="attachment.link" target="_blank" class="text-blue-600 hover:underline">{{ attachment.title }}</a>: {{ attachment.description }}
+                                            </li>
+                                        </ul>
+                                    </div>
 
-                                <!-- Climate Finance Data Section -->
-                                <div class="p-4 bg-accent rounded shadow">
-                                    <h4 class="text-lg font-bold text-secondary mb-2">Climate finance data</h4>
-                                    <p>Impact measurement</p>
-                                    <p>Carbon footprint</p>
-                                </div>
-                                <div class="p-4 bg-accent rounded shadow">
-                                    <p>Carbon footprint document</p>
-                                </div>
+                                    <!-- Climate Finance Data Section -->
+                                    <div class="p-4 bg-accent rounded shadow">
+                                        <h4 class="text-lg font-bold text-secondary mb-2">Climate finance data</h4>
+                                        <p>Impact measurement: {{ project.stages.operationsAndMaintenance.climateFinanceData.impactMeasurement }}</p>
+                                        <p>Carbon footprint: {{ project.stages.operationsAndMaintenance.climateFinanceData.carbonFootprint }}</p>
+                                    </div>
+                                    <div class="p-4 bg-accent rounded shadow">
+                                        <p>Carbon footprint document</p>
+                                        <ul class="list-disc pl-5">
+                                            <li *ngFor="let attachment of project.stages.operationsAndMaintenance.climateFinanceData.attachments">
+                                                <a [href]="attachment.link" target="_blank" class="text-blue-600 hover:underline">{{ attachment.title }}</a>: {{ attachment.description }}
+                                            </li>
+                                        </ul>
+                                    </div>
 
-                                <!-- Social Sustainability Data Section -->
-                                <div class="p-4 bg-red-500 text-white rounded shadow">
-                                    <h4 class="text-lg font-bold text-white mb-2">Social sustainability data</h4>
-                                    <p>Jobs generated: XXX</p>
-                                    <p>Inclusive implementation: XXX</p>
-                                    <p>Workers’ accidents: XXX</p>
-                                </div>
-                                <div class="p-4 bg-red-500 text-white rounded shadow">
-                                    <p>Jobs generated: XXX</p>
-                                    <p>Inclusive implementation: XXX</p>
-                                    <p>Workers’ accidents: XXX</p>
-                                </div>
+                                    <!-- Social Sustainability Data Section -->
+                                    <div class="p-4 bg-red-500 text-white rounded shadow">
+                                        <h4 class="text-lg font-bold text-white mb-2">Social sustainability data</h4>
+                                        <p>Jobs generated: {{ project.stages.operationsAndMaintenance.socialSustainabilityData.jobsGenerated }}</p>
+                                        <p>Inclusive implementation: {{ project.stages.operationsAndMaintenance.socialSustainabilityData.inclusiveImplementation }}</p>
+                                        <p>Workers’ accidents: {{ project.stages.operationsAndMaintenance.socialSustainabilityData.workersAccidents }}</p>
+                                    </div>
+                                    <div class="p-4 bg-red-500 text-white rounded shadow">
+                                        <ul class="list-disc pl-5">
+                                            <li *ngFor="let attachment of project.stages.operationsAndMaintenance.socialSustainabilityData.attachments">
+                                                <a [href]="attachment.link" target="_blank" class="text-blue-600 hover:underline">{{ attachment.title }}</a>: {{ attachment.description }}
+                                            </li>
+                                        </ul>
+                                    </div>
 
-                                <!-- Institutional Sustainability Data Section -->
-                                <div class="p-4 bg-blue-200 rounded shadow">
-                                    <h4 class="text-lg font-bold text-secondary mb-2">Institutional sustainability data</h4>
-                                    <p>Number of freedom of information requests: X</p>
-                                    <p>Number of freedom of information answers: X</p>
-                                </div>
-                                <div class="p-4 bg-blue-200 rounded shadow">
-                                    <p>Freedom of information requests and answers</p>
-                                </div>
+                                    <!-- Institutional Sustainability Data Section -->
+                                    <div class="p-4 bg-blue-200 rounded shadow">
+                                        <h4 class="text-lg font-bold text-secondary mb-2">Institutional sustainability data</h4>
+                                        <p>Number of freedom of information requests: {{ project.stages.operationsAndMaintenance.institutionalSustainabilityData.numberOfFreedomOfInformationRequests }}</p>
+                                        <p>Number of freedom of information answers: {{ project.stages.operationsAndMaintenance.institutionalSustainabilityData.numberOfFreedomOfInformationAnswers }}</p>
+                                    </div>
+                                    <div class="p-4 bg-blue-200 rounded shadow">
+                                        <ul class="list-disc pl-5">
+                                            <li *ngFor="let attachment of project.stages.operationsAndMaintenance.institutionalSustainabilityData.attachments">
+                                                <a [href]="attachment.link" target="_blank" class="text-blue-600 hover:underline">{{ attachment.title }}</a>: {{ attachment.description }}
+                                            </li>
+                                        </ul>
+                                    </div>
 
-                                <!-- Economic and Financial Sustainability Data Section -->
-                                <div class="p-4 bg-black text-white rounded shadow">
-                                    <h4 class="text-lg font-bold text-white mb-2">Economic and financial sustainability data</h4>
-                                    <p>Funding source for maintenance</p>
-                                    <p>Budget for maintenance</p>
-                                </div>
-                                <div class="p-4 bg-black text-white rounded shadow">
-                                    <p>Funding source for maintenance</p>
-                                    <p>Budget for maintenance</p>
-                                </div>
+                                    <!-- Economic and Financial Sustainability Data Section -->
+                                    <div class="p-4 bg-black text-white rounded shadow">
+                                        <h4 class="text-lg font-bold text-white mb-2">Economic and financial sustainability data</h4>
+                                        <p>Funding source for maintenance: {{ project.stages.operationsAndMaintenance.economicAndFinancialSustainabilityData.fundingSourceForMaintenance }}</p>
+                                        <p>Budget for maintenance: {{ project.stages.operationsAndMaintenance.economicAndFinancialSustainabilityData.budgetForMaintenance }}</p>
+                                    </div>
+                                    <div class="p-4 bg-black text-white rounded shadow">
+                                        <ul class="list-disc pl-5">
+                                            <li *ngFor="let attachment of project.stages.operationsAndMaintenance.economicAndFinancialSustainabilityData.attachments">
+                                                <a [href]="attachment.link" target="_blank" class="text-blue-600 hover:underline">{{ attachment.title }}</a>: {{ attachment.description }}
+                                            </li>
+                                        </ul>
+                                    </div>
 
-                                <!-- Environmental and Climate Sustainability Data Section -->
-                                <div class="p-4 bg-green-600 text-white rounded shadow">
-                                    <h4 class="text-lg font-bold text-white mb-2">Environmental and climate sustainability data</h4>
-                                    <p>Environmental measures</p>
-                                    <p>Conservation measures</p>
-                                    <p>Climate measures</p>
-                                </div>
-                                <div class="p-4 bg-green-600 text-white rounded shadow">
-                                    <p>Environmental licenses and exemptions</p>
+                                    <!-- Environmental and Climate Sustainability Data Section -->
+                                    <div class="p-4 bg-green-600 text-white rounded shadow">
+                                        <h4 class="text-lg font-bold text-white mb-2">Environmental and climate sustainability data</h4>
+                                        <p>Environmental measures: {{ project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData.environmentalMeasures }}</p>
+                                        <p>Conservation measures: {{ project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData.conservationMeasures }}</p>
+                                        <p>Climate measures: {{ project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData.climateMeasures }}</p>
+                                    </div>
+                                    <div class="p-4 bg-green-600 text-white rounded shadow">
+                                        <ul class="list-disc pl-5">
+                                            <li *ngFor="let attachment of project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData.attachments">
+                                                <a [href]="attachment.link" target="_blank" class="text-blue-600 hover:underline">{{ attachment.title }}</a>: {{ attachment.description }}
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -816,112 +928,128 @@
 
                     <!-- Content for Decommissioning Tab -->
                     <div *ngIf="selectedTab === 'Decommissioning'" class="space-y-4">
-                        <div class="p-6 rounded-lg bg-gray-100">
-                            <h3 class="text-xl font-semibold text-secondary mb-4">
-                                <i class="bi bi-x-circle mr-2"></i>Decommissioning
-                            </h3>
-                            <div class="space-y-4">
-                                <!-- Basic Data -->
-                                <div class="p-6 rounded-lg bg-gray-300">
-                                    <h4 class="text-lg font-semibold mb-2">Basic data</h4>
-                                    <ul class="list-disc list-inside">
-                                        <li>Asset name: XXX</li>
-                                        <li>Asset location: XXX</li>
-                                        <li>Procuring entity: XXX</li>
-                                        <li>Procuring entity contact details: XXX</li>
-                                        <li>Procurement process: XXX</li>
-                                        <li>Procurement method: XXX</li>
-                                        <li>Number of firms tendering: XXX</li>
-                                        <li>Cost estimate: XXX</li>
-                                        <li>Contract type: XXX</li>
-                                        <li>Contract administration entity: XXX</li>
-                                        <li>Contract officials and roles: XXX</li>
-                                        <li>Contract title: XXX</li>
-                                        <li>Contract firm(s): XXX</li>
-                                        <li>Contract price: XXX</li>
-                                        <li>Contract scope of work: XXX</li>
-                                        <li>Contract start date: XXX</li>
-                                        <li>Contract duration: XXX</li>
-                                        <li>Contract status: XXX</li>
-                                        <li>Decision of asset disposal</li>
-                                    </ul>
-                                    <div class="mt-4">
+                        <div *ngIf="project$ | async as project">
+                            <div class="p-6 rounded-lg bg-gray-100">
+                                <h3 class="text-xl font-semibold text-secondary mb-4">
+                                    <i class="bi bi-x-circle mr-2"></i>Decommissioning
+                                </h3>
+                                <div class="space-y-4">
+                                    <!-- Basic Data -->
+                                    <div class="p-6 rounded-lg bg-gray-300" *ngIf="project.stages?.decommissioning?.basicData">
+                                        <h4 class="text-lg font-semibold mb-2">Basic data</h4>
                                         <ul class="list-disc list-inside">
-                                            <li>Tender documents</li>
-                                            <li>Tender evaluation results</li>
-                                            <li>Project design report</li>
-                                            <li>Contract agreement and conditions</li>
-                                            <li>Registration and ownership of firms</li>
-                                            <li>Specifications and drawings</li>
+                                            <li>Asset name: {{ project.stages.decommissioning.basicData.assetName }}</li>
+                                            <li>Asset location: {{ project.stages.decommissioning.basicData.assetLocation }}</li>
+                                            <li>Procuring entity: {{ project.stages.decommissioning.basicData.procuringEntity }}</li>
+                                            <li>Procuring entity contact details: {{ project.stages.decommissioning.basicData.procuringEntityContactDetails }}</li>
+                                            <li>Procurement process: {{ project.stages.decommissioning.basicData.procurementProcess }}</li>
+                                            <li>Procurement method: {{ project.stages.decommissioning.basicData.procurementMethod }}</li>
+                                            <li>Number of firms tendering: {{ project.stages.decommissioning.basicData.numberOfFirmsTendering }}</li>
+                                            <li>Cost estimate: {{ project.stages.decommissioning.basicData.costEstimate }}</li>
+                                            <li>Contract type: {{ project.stages.decommissioning.basicData.contractType }}</li>
+                                            <li>Contract administration entity: {{ project.stages.decommissioning.basicData.contractAdministrationEntity }}</li>
+                                            <li>Contract officials and roles:</li>
+                                            <ul class="list-disc pl-5">
+                                                <li *ngFor="let official of project.stages.decommissioning.basicData.contractOfficialsAndRoles">
+                                                    {{ official.name }} - {{ official.role }}
+                                                </li>
+                                            </ul>
+                                            <li>Contract title: {{ project.stages.decommissioning.basicData.contractTitle }}</li>
+                                            <li>Contract firm(s): {{ project.stages.decommissioning.basicData.contractFirm }}</li>
+                                            <li>Contract price: {{ project.stages.decommissioning.basicData.contractPrice }}</li>
+                                            <li>Contract scope of work: {{ project.stages.decommissioning.basicData.contractScopeOfWork }}</li>
+                                            <li>Contract start date: {{ project.stages.decommissioning.basicData.contractStartDate }}</li>
+                                            <li>Contract duration: {{ project.stages.decommissioning.basicData.contractDuration }}</li>
+                                            <li>Contract status: {{ project.stages.decommissioning.basicData.contractStatus }}</li>
+                                            <li>Decision of asset disposal: {{ project.stages.decommissioning.basicData.decisionOfAssetDisposal }}</li>
+                                        </ul>
+                                        <div class="mt-4">
+                                            <ul class="list-disc list-inside">
+                                                <li *ngFor="let attachment of project.stages.decommissioning.basicData.attachments">
+                                                    <a [href]="attachment.link" target="_blank" class="text-blue-600 hover:underline">{{ attachment.title }}</a>: {{ attachment.description }}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <!-- Climate Finance Data -->
+                                    <div class="p-6 rounded-lg bg-yellow-300" *ngIf="project.stages?.decommissioning?.climateFinanceData">
+                                        <h4 class="text-lg font-semibold mb-2">Climate finance data</h4>
+                                        <ul class="list-disc list-inside">
+                                            <li>Decommission period: {{ project.stages.decommissioning.climateFinanceData.decommissionPeriod }}</li>
+                                            <li>Decommission costs: {{ project.stages.decommissioning.climateFinanceData.decommissionCosts }}</li>
+                                            <li>Carbon decommission savings: {{ project.stages.decommissioning.climateFinanceData.carbonDecommissionSavings }}</li>
+                                        </ul>
+                                        <div class="mt-4">
+                                            <ul class="list-disc list-inside">
+                                                <li *ngFor="let attachment of project.stages.decommissioning.climateFinanceData.attachments">
+                                                    <a [href]="attachment.link" target="_blank" class="text-blue-600 hover:underline">{{ attachment.title }}</a>: {{ attachment.description }}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <!-- Social Sustainability Data -->
+                                    <div class="p-6 rounded-lg bg-red-300" *ngIf="project.stages?.decommissioning?.socialSustainabilityData">
+                                        <h4 class="text-lg font-semibold mb-2">Social sustainability data</h4>
+                                        <ul class="list-disc list-inside">
+                                            <li>Jobs generated: {{ project.stages.decommissioning.socialSustainabilityData.jobsGenerated }}</li>
+                                            <li>Workers' accidents: {{ project.stages.decommissioning.socialSustainabilityData.workersAccidents }}</li>
+                                        </ul>
+                                        <div class="mt-4">
+                                            <ul class="list-disc list-inside">
+                                                <li *ngFor="let attachment of project.stages.decommissioning.socialSustainabilityData.attachments">
+                                                    <a [href]="attachment.link" target="_blank" class="text-blue-600 hover:underline">{{ attachment.title }}</a>: {{ attachment.description }}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <!-- Institutional Sustainability Data -->
+                                    <div class="p-6 rounded-lg bg-blue-300" *ngIf="project.stages?.decommissioning?.institutionalSustainabilityData">
+                                        <h4 class="text-lg font-semibold mb-2">Institutional sustainability data</h4>
+                                        <ul class="list-disc list-inside">
+                                            <li>Number of freedom of information requests: {{ project.stages.decommissioning.institutionalSustainabilityData.numberOfFreedomOfInformationRequests }}</li>
+                                            <li>Number of freedom of information answers: {{ project.stages.decommissioning.institutionalSustainabilityData.numberOfFreedomOfInformationAnswers }}</li>
+                                        </ul>
+                                        <div class="mt-4">
+                                            <ul class="list-disc list-inside">
+                                                <li *ngFor="let attachment of project.stages.decommissioning.institutionalSustainabilityData.attachments">
+                                                    <a [href]="attachment.link" target="_blank" class="text-blue-600 hover:underline">{{ attachment.title }}</a>: {{ attachment.description }}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <!-- Economic and Financial Sustainability Data -->
+                                    <div class="p-6 rounded-lg bg-black text-white" *ngIf="project.stages?.decommissioning?.economicAndFinancialSustainabilityData">
+                                        <h4 class="text-lg font-semibold mb-2">Economic and financial sustainability data</h4>
+                                        <ul class="list-disc list-inside">
+                                            <li>Decommission cost forecast: {{ project.stages.decommissioning.economicAndFinancialSustainabilityData.decommissionCostForecast }}</li>
                                         </ul>
                                     </div>
-                                </div>
 
-                                <!-- Climate Finance Data -->
-                                <div class="p-6 rounded-lg bg-yellow-300">
-                                    <h4 class="text-lg font-semibold mb-2">Climate finance data</h4>
-                                    <ul class="list-disc list-inside">
-                                        <li>Decommission period: XXX</li>
-                                        <li>Decommission costs: XXX</li>
-                                        <li>Carbon decommission savings: XXX</li>
-                                    </ul>
-                                    <div class="mt-4">
+                                    <!-- Environmental and Climate Sustainability Data -->
+                                    <div class="p-6 rounded-lg bg-green-300" *ngIf="project.stages?.decommissioning?.environmentalAndClimateSustainabilityData">
+                                        <h4 class="text-lg font-semibold mb-2">Environmental and climate sustainability data</h4>
                                         <ul class="list-disc list-inside">
-                                            <li>Decommission plans</li>
+                                            <li>Decommission mitigation plan: {{ project.stages.decommissioning.environmentalAndClimateSustainabilityData.decommissionMitigationPlan }}</li>
                                         </ul>
                                     </div>
-                                </div>
-
-                                <!-- Social Sustainability Data -->
-                                <div class="p-6 rounded-lg bg-red-300">
-                                    <h4 class="text-lg font-semibold mb-2">Social sustainability data</h4>
-                                    <ul class="list-disc list-inside">
-                                        <li>Jobs generated: XXX</li>
-                                        <li>Workers' accidents: XXX</li>
-                                    </ul>
-                                    <div class="mt-4">
-                                        <ul class="list-disc list-inside">
-                                            <li>Jobs generated: XXX</li>
-                                            <li>Workers' accidents: XXX</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Institutional Sustainability Data -->
-                                <div class="p-6 rounded-lg bg-blue-300">
-                                    <h4 class="text-lg font-semibold mb-2">Institutional sustainability data</h4>
-                                    <ul class="list-disc list-inside">
-                                        <li>Number of freedom of information requests: X</li>
-                                        <li>Number of freedom of information answers: X</li>
-                                    </ul>
-                                    <div class="mt-4">
-                                        <ul class="list-disc list-inside">
-                                            <li>Freedom of information requests and answers</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Economic and Financial Sustainability Data -->
-                                <div class="p-6 rounded-lg bg-black text-white">
-                                    <h4 class="text-lg font-semibold mb-2">Economic and financial sustainability data</h4>
-                                    <ul class="list-disc list-inside">
-                                        <li>Decommission cost forecast</li>
-                                    </ul>
-                                </div>
-
-                                <!-- Environmental and Climate Sustainability Data -->
-                                <div class="p-6 rounded-lg bg-green-300">
-                                    <h4 class="text-lg font-semibold mb-2">Environmental and climate sustainability data</h4>
-                                    <ul class="list-disc list-inside">
-                                        <li>Decommission mitigation plan</li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+
                 </div>
             </div>
+
+            <div class="flex justify-end space-x-4 mt-6 px-4">
+                <button (click)="navigateToPreviousProject()" class="px-4 py-2 bg-secondary text-white rounded hover:bg-secondary-dark">Previous Project</button>
+                <button (click)="navigateToNextProject()" class="px-4 py-2 bg-secondary text-white rounded hover:bg-secondary-dark">Next Project</button>
+            </div>
+
         </div>
     </div>
 </div>

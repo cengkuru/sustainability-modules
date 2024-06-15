@@ -31,16 +31,13 @@
                 </div>
                 <!-- Mobile menu button -->
                 <div class="lg:hidden">
-                    <button (click)="toggleMobileMenu()" type="button" class="relative inline-flex items-center justify-center rounded-md bg-transparent p-2 text-secondary hover:bg-primary hover:bg-opacity-10 hover:text-secondary focus:outline-none focus:ring-2 focus:ring-secondary" aria-expanded="false">
+                    <button (click)="toggleMobileMenu()" type="button" class="relative inline-flex items-center justify-center rounded-md bg-transparent p-2 text-accent hover:bg-primary hover:bg-opacity-10 hover:text-secondary focus:outline-none focus:ring-2 focus:ring-secondary" aria-expanded="false">
                         <span class="sr-only">Open main menu</span>
-                        <svg [class.hidden]="isMobileMenuOpen" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                        </svg>
-                        <svg [class.hidden]="!isMobileMenuOpen" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
+                        <i [class.hidden]="isMobileMenuOpen" class="bi bi-list block h-6 w-6" aria-hidden="true"></i>
+                        <i [class.hidden]="!isMobileMenuOpen" class="bi bi-x block h-6 w-6" aria-hidden="true"></i>
                     </button>
                 </div>
+
             </div>
             <!-- Desktop navigation -->
             <div class="hidden border-t border-secondary border-opacity-20 py-5 lg:block">
@@ -60,9 +57,9 @@
                     <div class="pb-2 pt-3">
                         <div class="flex items-center justify-between px-4">
                             <div>
-                                <img class="h-8 w-auto" src="../../../assets/logo-2.png" alt="{{pageTitle}}">
+                                <img class="h-8 w-auto" src="../../../assets/logo 2.png" alt="{{pageTitle}}">
                             </div>
-                            <button (click)="closeMobileMenu()" type="button" class="relative inline-flex items-center justify-center rounded-md bg-primary p-2 text-secondary hover:bg-secondary hover:text-primary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary">
+                            <button (click)="closeMobileMenu()" type="button" class="relative inline-flex items-center justify-center rounded-md bg-accent p-2 text-secondary hover:bg-secondary hover:text-primary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary">
                                 <span class="sr-only">Close menu</span>
                                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -70,7 +67,7 @@
                             </button>
                         </div>
                         <div class="mt-3 space-y-1 px-2">
-                            <a *ngFor="let link of navLinks" [routerLink]="link.path" class="block rounded-md px-3 py-2 text-base font-medium text-primary hover:bg-accent hover:text-black" (click)="closeMobileMenu()">{{ link.label }}</a>
+                            <a *ngFor="let link of navLinks" [routerLink]="link.path" class="block rounded-md px-3 py-2 text-base font-medium text-secondary hover:bg-accent hover:text-black" (click)="closeMobileMenu()">{{ link.label }}</a>
                         </div>
                     </div>
                     <div class="pb-2 pt-4" *ngIf="isLoggedIn; else loginButtonMobile">
@@ -94,7 +91,7 @@
                     </div>
                     <ng-template #loginButtonMobile>
                         <div class="mt-3 space-y-1 px-2">
-                            <button (click)="login()" class="block w-full text-center rounded-md px-3 py-2 text-base font-medium text-secondary hover:bg-secondary hover:text-primary">Login</button>
+                            <button (click)="login()" class="block w-full text-center rounded-md px-3 py-2 text-base font-medium text-secondary hover:bg-accent hover:text-secondary">Login</button>
                         </div>
                     </ng-template>
                 </div>

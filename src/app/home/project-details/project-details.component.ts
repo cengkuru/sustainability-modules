@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe, NgForOf } from '@angular/common';
+import { Observable, of } from "rxjs";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AngularFirestore } from "@angular/fire/compat/firestore";
+import { switchMap } from "rxjs/operators";
 
 @Component({
     selector: 'app-project-details',
@@ -23,11 +27,32 @@ export class ProjectDetailsComponent implements OnInit {
         { id: 'Decommissioning', icon: 'bi-x-circle', label: 'Decommissioning' }
     ];
 
+    project$: Observable<any> | undefined;
+    projectIds: string[] = [];
+    currentProjectIndex: number = 0;
+
     selectedTab: string = 'Identification';
 
-    constructor() {}
+    constructor(
+        private route: ActivatedRoute,
+        private firestore: AngularFirestore,
+        private router: Router
+    ) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.firestore.collection('projects').snapshotChanges().subscribe(actions => {
+            this.projectIds = actions.map(a => a.payload.doc.id);
+            this.route.paramMap.subscribe(params => {
+                const projectId = params.get('id');
+                if (projectId) {
+                    this.currentProjectIndex = this.projectIds.indexOf(projectId);
+                    this.project$ = this.firestore.collection('projects').doc(projectId).valueChanges();
+                } else {
+                    this.project$ = of(null);
+                }
+            });
+        });
+    }
 
     onTabChange(event: Event): void {
         const target = event.target as HTMLSelectElement;
@@ -36,5 +61,19 @@ export class ProjectDetailsComponent implements OnInit {
 
     selectTab(tabId: string): void {
         this.selectedTab = tabId;
+    }
+
+    navigateToNextProject(): void {
+        if (this.currentProjectIndex < this.projectIds.length - 1) {
+            const nextProjectId = this.projectIds[this.currentProjectIndex + 1];
+            this.router.navigate(['/public/projects', nextProjectId]);
+        }
+    }
+
+    navigateToPreviousProject(): void {
+        if (this.currentProjectIndex > 0) {
+            const previousProjectId = this.projectIds[this.currentProjectIndex - 1];
+            this.router.navigate(['/public/projects', previousProjectId]);
+        }
     }
 }
