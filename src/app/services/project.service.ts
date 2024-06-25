@@ -9,6 +9,16 @@ import { map } from "rxjs/operators";
 export class ProjectService {
     constructor(private firestore: AngularFirestore) {}
 
+    getProjects(): Observable<any[]> {
+        return this.firestore.collection('projects', ref => ref.orderBy('id')).snapshotChanges().pipe(
+            map(actions => actions.map(a => {
+                const data = a.payload.doc.data() as { [key: string]: any };
+                const id = a.payload.doc.id;
+                return { id, ...data };
+            }))
+        );
+    }
+
     getProjectIds(): Observable<string[]> {
         return this.firestore.collection('projects').snapshotChanges().pipe(
             map(actions => actions.map(a => a.payload.doc.id))
@@ -27,4 +37,24 @@ export class ProjectService {
             })
         );
     }
+
+    getNextProject(currentProjectId: string): Observable<any> {
+        return this.getProjects().pipe(
+            map(projects => {
+                const currentIndex = projects.findIndex(p => p.id === currentProjectId);
+                return (currentIndex < projects.length - 1) ? projects[currentIndex + 1] : null;
+            })
+        );
+    }
+
+    getPreviousProject(currentProjectId: string): Observable<any> {
+        return this.getProjects().pipe(
+            map(projects => {
+                const currentIndex = projects.findIndex(p => p.id === currentProjectId);
+                return (currentIndex > 0) ? projects[currentIndex - 1] : null;
+            })
+        );
+    }
+
+
 }
