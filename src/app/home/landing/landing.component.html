@@ -1,17 +1,15 @@
 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <!-- Main section -->
-    <div appIntersectionObserver class="animate-hidden bg-primary rounded min-h-screen flex flex-col lg:flex-row items-center justify-between text-secondary p-4">
+    <div appIntersectionObserver [@slideInAnimation] class="bg-primary rounded min-h-screen flex flex-col lg:flex-row items-center justify-between text-secondary p-4">
         <div class="w-full lg:w-1/2 text-center lg:text-left lg:pr-8">
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-secondary">
-                Invest Green, Build Smart
+            <h1 class="text-4xl sm:text-5xl lg:text-4xl font-bold leading-tight text-secondary">
+                {{ mainSection.title }}
             </h1>
             <p class="mt-4 text-base sm:text-lg">
-                Developed by CoST, the National Infrastructure Disclosure Platform utilizes OC4IDS modules to illustrate transparency in climate finance.
-                <br>
-                Explore mock data inspired by Green Climate Fund-approved projects for South Africa. Witness how transparency empowers informed decision-making for a greener future.
+                {{ mainSection.description }}
             </p>
             <button (click)="navigateToProjects()" class="mt-8 px-6 sm:px-8 py-3 bg-accent text-secondary text-base sm:text-lg font-medium rounded hover:bg-secondary hover:text-primary transition">
-                Explore Projects →
+                {{ mainSection.buttonText }}
             </button>
             <div class="flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-8 mt-8">
                 <div class="text-center">
@@ -24,33 +22,50 @@
                 </div>
             </div>
         </div>
-        <div class="relative mt-12 lg:mt-0 w-full lg:w-1/2 flex items-center justify-center">
-            <div id="map" class="w-full h-64 sm:h-96 rounded-lg border-4   shadow-lg"></div>
+        <div class="relative mt-4 lg:mt-0 w-full lg:w-1/2 flex items-center justify-center">
+            <div id="map" class="w-full h-64 sm:h-96 rounded-lg border-4 shadow-lg"></div>
+        </div>
+    </div>
+    <!-- New GCF Section -->
+    <div appIntersectionObserver [@slideInAnimation] class="bg-primary text-secondary py-16 my-10">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h2 class="text-3xl font-bold mb-4">{{ gcfInfo.title }}</h2>
+                    <p class="text-lg leading-relaxed">
+                        {{ gcfInfo.description }}
+                    </p>
+                    <a [href]="gcfInfo.linkUrl" target="_blank" rel="noopener noreferrer"
+                       class="inline-block mt-6 px-6 py-3 bg-accent text-secondary font-medium rounded hover:bg-secondary hover:text-primary transition duration-300 ease-in-out">
+                        {{ gcfInfo.linkText }}
+                    </a>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="/assets/gcf.jpg" alt="Green Climate Fund Illustration" class="rounded-lg shadow-md max-w-full h-auto">
+                </div>
+            </div>
         </div>
     </div>
 
-
-    <div   appIntersectionObserver class="animate-hidden bg-accent py-12 sm:py-16 my-14 rounded-sm ">
+    <!-- Featured Projects Section -->
+    <div appIntersectionObserver [@slideInAnimation] class="bg-accent py-12 sm:py-16 my-10 rounded-sm">
         <div class="container mx-auto px-6 lg:flex lg:items-center">
-            <!-- Text Content -->
             <div class="lg:w-1/2">
-                <h2 class="text-4xl font-bold mb-4">Explore Featured Projects</h2>
+                <h2 class="text-4xl font-bold mb-4">{{ featuredProjectsSection.title }}</h2>
                 <p class="mb-6 text-lg">
-                    Discover the innovative projects that are leading the way in infrastructure development. Whether it's sustainable energy, modern transportation, or advanced water management, our projects set the standard for excellence.
+                    {{ featuredProjectsSection.description }}
                 </p>
-                <a href="/projects/featured" class="inline-block px-8 py-4 bg-black text-white text-lg font-medium rounded hover:bg-gray-800 transition duration-300 ease-in-out">
-                    View Featured Projects →
+                <a [href]="featuredProjectsSection.buttonLink" class="inline-block px-8 py-4 bg-black text-white text-lg font-medium rounded hover:bg-gray-800 transition duration-300 ease-in-out">
+                    {{ featuredProjectsSection.buttonText }}
                 </a>
             </div>
-            <!-- Image Content -->
             <div class="lg:w-1/2 lg:pl-12 mt-8 lg:mt-0 relative">
-                <img src="../../../assets/featured.png" alt="Featured Project" class="w-full h-auto rounded-lg ">
-
+                <img src="../../../assets/featured.png" alt="Featured Project" class="w-full h-auto rounded-lg">
             </div>
         </div>
     </div>
 
-
+    <!-- Recent and High-Value Projects Section -->
     <div class="container mx-auto px-4 py-14 rounded-lg my-10">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Recent Projects Section -->
@@ -62,7 +77,7 @@
                 <ul class="pl-6">
                     <li *ngFor="let project of recentProjects" class="mb-2 flex items-center">
                         <i class="bi bi-file-earmark-text text-gray-500 mr-2"></i>
-                        <a [routerLink]="['/public/projects', project.id]" class=" hover:underline">
+                        <a [routerLink]="['/public/projects', project.id]" class="hover:underline">
                             {{ project.name }}
                         </a>
                     </li>
@@ -87,39 +102,19 @@
         </div>
     </div>
 
-
-
-
-
     <!-- Sponsors section -->
     <div class="py-12 sm:py-16 animate-slideUp">
         <div class="mx-auto max-w-7xl">
             <div class="text-center mb-8">
-                <h1 class="font-bold text-lg text-gray-700">Supported by</h1>
+                <h1 class="font-bold text-lg text-gray-700">{{ sponsorsSection.title }}</h1>
             </div>
             <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-5">
-                <div class="flex justify-center items-center p-6 animate-slideUp">
-                    <a href="https://www.giz.de" target="_blank" rel="noopener noreferrer">
-                        <img class="max-h-24 w-auto object-contain opacity-50 hover:opacity-100 transition duration-300 ease-in-out" src="../../../assets/giz.png" alt="GIZ" width="158" height="48">
-                      
-                    </a>
-                </div>
-                <div class="flex justify-center items-center p-6 animate-slideUp">
-                    <a href="https://www.fcdo.gov.uk" target="_blank" rel="noopener noreferrer">
-                        <img class="max-h-24 w-auto object-contain opacity-50 hover:opacity-100 transition duration-300 ease-in-out" src="../../../assets/fcdo.png" alt="FCDO" width="158" height="48">
-                      
-                    </a>
-                </div>
-                <!-- Add more sponsors as needed -->
-                <div class="flex justify-center items-center p-6 animate-slideUp">
-                    <a href="#" target="_blank" rel="noopener noreferrer">
-                        <img class="max-h-24 w-auto object-contain opacity-50 hover:opacity-100 transition duration-300 ease-in-out" src="../../../assets/cost-logo-transparent.png" alt="Company 3" width="158" height="48">
-                      
+                <div *ngFor="let sponsor of sponsorsSection.sponsors" class="flex justify-center items-center p-6 animate-slideUp">
+                    <a [href]="sponsor.link" target="_blank" rel="noopener noreferrer">
+                        <img class="max-h-24 w-auto object-contain opacity-50 hover:opacity-100 transition duration-300 ease-in-out" [src]="sponsor.image" [alt]="sponsor.name" width="158" height="48">
                     </a>
                 </div>
             </div>
         </div>
     </div>
-
-
 </div>

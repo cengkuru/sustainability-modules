@@ -78,8 +78,8 @@ export class ProjectListComponent implements OnInit {
     }
 
     sendTestEmail(): void {
-        this.emailService.sendEmail('michael@cengkuru.com', 'Test Email', 'Hi, this is an email from Cloud Functions.')
+        /*this.emailService.sendEmail('michael@cengkuru.com', 'Test Email', 'Hi, this is an email from Cloud Functions.')
             .then(response => console.log('Email sent successfully', response))
-            .catch(error => console.error('Error sending email', error));
+            .catch(error => console.error('Error sending email', error));*/
     }
 }

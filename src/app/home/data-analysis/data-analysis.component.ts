@@ -12,295 +12,358 @@ import jsPDF from 'jspdf';
     styleUrls: ['./data-analysis.component.scss']
 })
 export class DataAnalysisComponent implements OnInit, AfterViewInit {
-    projects: any[] = [];
-    climateFinanceChart: echarts.ECharts | undefined;
-    mitigationAdaptationChart: echarts.ECharts | undefined;
-    beneficiariesChart: echarts.ECharts | undefined;
-    eiaChart: echarts.ECharts | undefined;
-    climateFinanceDropdownOpen = false;
-    mitigationAdaptationDropdownOpen = false;
-    beneficiariesDropdownOpen = false;
-    eiaDropdownOpen = false;
+    projectCompletionRatesChart: any;
+    totalClimateFinanceChart: any;
+    transparencyImpactChart: any;
+    stakeholderEngagementChart: any;
+    totalBudgetVsActualExpenditureChart: any;
+    budgetVariancesChart: any;
 
-    constructor(private http: HttpClient) {}
+    dropdownOpen: { [key: string]: boolean } = {
+        projectCompletionRates: false,
+        totalClimateFinance: false,
+        transparencyImpact: false,
+        stakeholderEngagement: false,
+        totalBudgetVsActualExpenditure: false,
+        budgetVariances: false
+    };
+
+    constructor(private http: HttpClient) { }
 
     ngOnInit(): void {
-        this.http.get<any[]>('assets/data/viz_projects.json').subscribe(data => {
-            this.projects = data;
-            this.initCharts();
-        });
+        // Initialization code if needed
     }
 
     ngAfterViewInit(): void {
-        // Ensure charts are only initialized when the DOM is ready
-        if (this.projects.length > 0) {
-            this.initCharts();
+        this.createProjectCompletionRatesChart();
+        this.createTotalClimateFinanceChart();
+        this.createTransparencyImpactChart();
+        this.createStakeholderEngagementChart();
+        this.createTotalBudgetVsActualExpenditureChart();
+        this.createBudgetVariancesChart();
+    }
+
+    toggleDropdown(chartName: string): void {
+        this.dropdownOpen[chartName] = !this.dropdownOpen[chartName];
+    }
+
+    downloadChartData(chart: any, format: string): void {
+        const dataURL = chart.getDataURL({
+            type: format === 'png' ? 'png' : 'svg',
+        });
+
+        if (format === 'pdf') {
+            const pdf = new jsPDF();
+            pdf.addImage(dataURL, 'PNG', 10, 10, 180, 160);
+            pdf.save('chart.pdf');
+        } else if (format === 'json') {
+            const json = chart.getOption();
+            const blob = new Blob([JSON.stringify(json)], { type: 'application/json' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'chart.json';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        } else if (format === 'csv') {
+            const csvData = 'data:text/csv;charset=utf-8,' + encodeURI(this.convertChartToCSV(chart));
+            const link = document.createElement('a');
+            link.setAttribute('href', csvData);
+            link.setAttribute('download', 'chart.csv');
+            link.click();
+        } else if (format === 'png') {
+            const link = document.createElement('a');
+            link.href = dataURL;
+            link.download = 'chart.png';
+            link.click();
         }
     }
 
-    initCharts(): void {
-        setTimeout(() => {
-            this.initClimateFinanceChart();
-            this.initMitigationAdaptationChart();
-            this.initBeneficiariesChart();
-            this.initEIAChart();
-        }, 0);
+    convertChartToCSV(chart: any): string {
+        const option = chart.getOption();
+        let csv = '';
+        if (option && option.series) {
+            option.series.forEach((series: any) => {
+                csv += series.name + '\n';
+                csv += series.data.map((d: any) => d.join(',')).join('\n') + '\n\n';
+            });
+        }
+        return csv;
     }
 
-    initClimateFinanceChart(): void {
-        const climateFinanceData = this.calculateClimateFinanceData(this.projects);
-        this.climateFinanceChart = echarts.init(document.getElementById('climateFinanceChart') as HTMLDivElement);
-        this.climateFinanceChart.setOption({
-            title: { text: 'Climate Finance Projects per Sector', left: 'center', textStyle: { color: '#2c4143' } },
-            tooltip: { trigger: 'item' },
-            series: [{
-                name: 'Climate Finance',
-                type: 'pie',
-                radius: '50%',
-                data: climateFinanceData,
-                emphasis: { itemStyle: { shadowBlur: 10, shadowOffsetX: 0, shadowColor: 'rgba(0, 0, 0, 0.5)' } },
-                itemStyle: {
-                    color: (params: any) => {
-                        const colors = ['#61a8bd', '#ffce32', '#D60000', '#628ea0'];
-                        return colors[params.dataIndex % colors.length];
-                    }
-                }
-            }]
-        });
-    }
+    createProjectCompletionRatesChart(): void {
+        const chartDom = document.getElementById('projectCompletionRatesChart')!;
+        this.projectCompletionRatesChart = echarts.init(chartDom);
 
-    initMitigationAdaptationChart(): void {
-        const mitigationAdaptationData = this.calculateMitigationAdaptationData();
-        this.mitigationAdaptationChart = echarts.init(document.getElementById('mitigationAdaptationChart') as HTMLDivElement);
-        this.mitigationAdaptationChart.setOption({
-            title: { text: 'Mitigation, Adaptation and Cross Cutting Investments', left: 'center', textStyle: { color: '#2c4143' } },
-            tooltip: { trigger: 'axis' },
-            xAxis: { type: 'category', data: mitigationAdaptationData.regions, axisLine: { lineStyle: { color: '#58707b' } } },
-            yAxis: { type: 'value', axisLine: { lineStyle: { color: '#58707b' } } },
-            series: [
-                { name: 'Adaptation', type: 'bar', data: mitigationAdaptationData.adaptation, color: '#61a8bd' },
-                { name: 'Mitigation', type: 'bar', data: mitigationAdaptationData.mitigation, color: '#ffce32' },
-                { name: 'Cross Cutting', type: 'bar', data: mitigationAdaptationData.crossCutting, color: '#D60000' }
-            ]
-        });
-    }
-
-    calculateClimateFinanceData(projectList: any[]): any[] {
-        const climateFinance: { [key: string]: number } = {};
-        projectList.forEach(project => {
-            const financeSource = project.stages.identification?.climateFinanceData?.financialInstrument;
-            const amount = project.stages.identification?.climateFinanceData?.amountOfInvestment || 0;
-            if (financeSource) {
-                const parsedAmount = parseFloat(amount.replace(/[^0-9.-]+/g, ""));
-                climateFinance[financeSource] = (climateFinance[financeSource] || 0) + parsedAmount;
-            }
-        });
-        return Object.keys(climateFinance).map(source => ({ value: climateFinance[source], name: source }));
-    }
-
-    calculateMitigationAdaptationData(): { regions: string[], adaptation: number[], mitigation: number[], crossCutting: number[] } {
-        const data: { [key: string]: { Adaptation: number, Mitigation: number, 'Cross Cutting': number } } = {
-            'Eastern Cape': { 'Adaptation': 4, 'Mitigation': 1, 'Cross Cutting': 2 },
-            'Western Cape': { 'Adaptation': 2, 'Mitigation': 4, 'Cross Cutting': 3 },
-            'Free State': { 'Adaptation': 3, 'Mitigation': 2, 'Cross Cutting': 2 },
-            'Northern Cape': { 'Adaptation': 4, 'Mitigation': 2, 'Cross Cutting': 5 }
-        };
-
-        const regions = Object.keys(data);
-        const adaptation = regions.map(region => data[region]['Adaptation']);
-        const mitigation = regions.map(region => data[region]['Mitigation']);
-        const crossCutting = regions.map(region => data[region]['Cross Cutting']);
-
-        return { regions, adaptation, mitigation, crossCutting };
-    }
-
-    initBeneficiariesChart(): void {
-        const beneficiariesData = this.calculateBeneficiariesData(this.projects);
-        this.beneficiariesChart = echarts.init(document.getElementById('beneficiariesChart') as HTMLDivElement);
-        this.beneficiariesChart.setOption({
-            title: { text: 'Number of Direct Beneficiaries', left: 'center', textStyle: { color: '#2c4143' } },
+        const option: any = {
+            title: {
+                text: 'Project Completion Rates by Region',
+                left: 'center'
+            },
             tooltip: {
                 trigger: 'axis',
-                axisPointer: {
-                    type: 'cross',
-                    label: {
-                        backgroundColor: '#6a7985'
-                    }
+                formatter: (params: any) => {
+                    let tooltipText = `${params[0].name}<br/>`;
+                    tooltipText += `${params[0].marker} Completion Rate: ${params[0].value}%<br/>`;
+                    tooltipText += 'Project completion rate in this region';
+                    return tooltipText;
                 }
             },
-            legend: { data: ['Female', 'Male'], top: 'bottom' },
-            xAxis: { type: 'category', boundaryGap: false, data: beneficiariesData.regions, axisLine: { lineStyle: { color: '#58707b' } } },
-            yAxis: { type: 'value', axisLine: { lineStyle: { color: '#58707b' } } },
+            xAxis: {
+                type: 'category',
+                data: ['Gauteng', 'Western Cape', 'KwaZulu-Natal', 'Eastern Cape']
+            },
+            yAxis: {
+                type: 'value',
+                max: 100
+            },
             series: [
                 {
-                    name: 'Female',
-                    type: 'line',
-                    stack: 'Total',
-                    areaStyle: {},
-                    emphasis: {
-                        focus: 'series'
-                    },
-                    data: beneficiariesData.female,
-                    color: '#ffce32'
-                },
-                {
-                    name: 'Male',
-                    type: 'line',
-                    stack: 'Total',
-                    areaStyle: {},
-                    emphasis: {
-                        focus: 'series'
-                    },
-                    data: beneficiariesData.male,
-                    color: '#D60000'
+                    data: [90, 75, 85, 80],
+                    type: 'bar',
+                    color: '#FFCE32',
+                    label: {
+                        show: true,
+                        position: 'top',
+                        formatter: '{c}%'
+                    }
                 }
             ]
-        });
+        };
+
+        this.projectCompletionRatesChart.setOption(option);
+    }
+
+    createTotalClimateFinanceChart(): void {
+        const chartDom = document.getElementById('totalClimateFinanceChart')!;
+        this.totalClimateFinanceChart = echarts.init(chartDom);
+        const option: any = {
+            title: {
+                text: 'Total Climate Finance by Sector',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: (params: any) => {
+                    return `${params.marker} ${params.name}: $${params.value} million<br/>Total climate finance allocated to the ${params.name} sector.`;
+                }
+            },
+            legend: {
+                bottom: '0%'
+            },
+            series: [
+                {
+                    name: 'Total Climate Finance',
+                    type: 'pie',
+                    radius: '50%',
+                    data: [
+                        { value: 120, name: 'Water' },
+                        { value: 150, name: 'Energy' },
+                        { value: 90, name: 'Transport' },
+                        { value: 110, name: 'Agriculture' }
+                    ],
+                    color: ['#FFCE32', '#333333', '#61A8BD', '#D60000'],
+                    label: {
+                        formatter: '{b}: ${c}M',
+                        position: 'outside'
+                    }
+                }
+            ]
+        };
+        this.totalClimateFinanceChart.setOption(option);
+    }
+
+    createTransparencyImpactChart(): void {
+        const chartDom = document.getElementById('transparencyImpactChart')!;
+        this.transparencyImpactChart = echarts.init(chartDom);
+        const option: any = {
+            title: {
+                text: 'Impact of Transparency on Project Outcomes',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'axis',
+                formatter: (params: any) => {
+                    return `${params[0].name}<br/>Transparency Impact: ${params[0].value}%<br/>Higher transparency leads to better project outcomes.`;
+                }
+            },
+            xAxis: {
+                type: 'category',
+                data: ['Q1', 'Q2', 'Q3', 'Q4']
+            },
+            yAxis: {
+                type: 'value',
+                max: 100
+            },
+            series: [
+                {
+                    data: [65, 75, 70, 80],
+                    type: 'bar',
+                    color: '#FFCE32',
+                    label: {
+                        show: true,
+                        position: 'top',
+                        formatter: '{c}%'
+                    }
+                }
+            ]
+        };
+        this.transparencyImpactChart.setOption(option);
+    }
+
+    createStakeholderEngagementChart(): void {
+        const chartDom = document.getElementById('stakeholderEngagementChart')!;
+        this.stakeholderEngagementChart = echarts.init(chartDom);
+        const option: any = {
+            title: {
+                text: 'Stakeholder Engagement Activities',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: (params: any) => {
+                    return `${params.marker} ${params.name}: ${params.value}%<br/>Engagement with ${params.name} sector.`;
+                }
+            },
+            legend: {
+                bottom: '0%'
+            },
+            series: [
+                {
+                    name: 'Engagement Activities',
+                    type: 'pie',
+                    radius: '50%',
+                    data: [
+                        { value: 40, name: 'Government' },
+                        { value: 30, name: 'Private Sector' },
+                        { value: 20, name: 'Civil Society' },
+                        { value: 10, name: 'Others' }
+                    ],
+                    color: ['#FFCE32', '#333333', '#61A8BD', '#D60000'],
+                    label: {
+                        formatter: '{b}: {d}%',
+                        position: 'outside'
+                    }
+                }
+            ]
+        };
+        this.stakeholderEngagementChart.setOption(option);
     }
 
 
-    calculateBeneficiariesData(projectList: any[]): any {
-        const regions = projectList.map(project => project.region);
-        const total = projectList.map(project => project.beneficiaries.total);
-        const female = projectList.map(project => project.beneficiaries.female);
-        const male = projectList.map(project => project.beneficiaries.male);
 
-        return { regions, total, female, male };
-    }
-
-    initEIAChart(): void {
-        const eiaData = this.calculateEIAData(this.projects);
-        this.eiaChart = echarts.init(document.getElementById('eiaChart') as HTMLDivElement);
-        this.eiaChart.setOption({
-            title: { text: 'Environmental Impact Assessment Approval Status', left: 'center', textStyle: { color: '#2c4143' } },
+    createTotalBudgetVsActualExpenditureChart(): void {
+        const chartDom = document.getElementById('totalBudgetVsActualExpenditureChart')!;
+        this.totalBudgetVsActualExpenditureChart = echarts.init(chartDom);
+        const option: any = {
+            title: {
+                text: 'Total Budget vs. Actual Expenditure',
+                left: 'center'
+            },
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
                     type: 'shadow'
+                },
+                formatter: (params: any) => {
+                    let tooltipText = `${params[0].name}<br/>`;
+                    params.forEach((item: any) => {
+                        tooltipText += `${item.marker} ${item.seriesName}: $${item.value}M<br/>`;
+                    });
+                    tooltipText += 'The total budget and actual expenditure for each project.';
+                    return tooltipText;
                 }
             },
-            legend: { data: ['Approved', 'Pending', 'Rejected'], top: 'bottom' },
-            grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '10%',
-                containLabel: true
+            legend: {
+                bottom: '0%'
             },
-            xAxis: { type: 'value', axisLine: { lineStyle: { color: '#58707b' } } },
-            yAxis: { type: 'category', data: eiaData.projects, axisLine: { lineStyle: { color: '#58707b' } } },
+            xAxis: {
+                type: 'category',
+                data: ['Water Treatment Plant', 'Solar Energy Farm', 'Highway Expansion', 'Urban Development']
+            },
+            yAxis: {
+                type: 'value',
+                name: 'USD (millions)',
+                axisLabel: {
+                    formatter: '{value}M'
+                }
+            },
             series: [
                 {
-                    name: 'Approved',
+                    name: 'Total Budget',
                     type: 'bar',
-                    stack: 'total',
-                    label: {
-                        show: true
-                    },
-                    emphasis: {
-                        focus: 'series'
-                    },
-                    data: eiaData.approved,
-                    color: '#61a8bd'
+                    data: [200, 150, 300, 250],
+                    color: '#61A8BD'
                 },
                 {
-                    name: 'Pending',
+                    name: 'Actual Expenditure',
                     type: 'bar',
-                    stack: 'total',
-                    label: {
-                        show: true
-                    },
-                    emphasis: {
-                        focus: 'series'
-                    },
-                    data: eiaData.pending,
-                    color: '#ffce32'
-                },
-                {
-                    name: 'Rejected',
-                    type: 'bar',
-                    stack: 'total',
-                    label: {
-                        show: true
-                    },
-                    emphasis: {
-                        focus: 'series'
-                    },
-                    data: eiaData.rejected,
+                    data: [180, 130, 290, 240],
                     color: '#D60000'
                 }
             ]
-        });
+        };
+        this.totalBudgetVsActualExpenditureChart.setOption(option);
     }
 
-
-    calculateEIAData(projectList: any[]): any {
-        const projectNames = projectList.map(project => project.name);
-        const approved = projectList.map(project => project.EIA.status === 'Approved' ? 1 : 0);
-        const pending = projectList.map(project => project.EIA.status === 'Pending' ? 1 : 0);
-        const rejected = projectList.map(project => project.EIA.status === 'Rejected' ? 1 : 0);
-
-        return { projects: projectNames, approved, pending, rejected };
+    createBudgetVariancesChart(): void {
+        const chartDom = document.getElementById('budgetVariancesChart')!;
+        this.budgetVariancesChart = echarts.init(chartDom);
+        const option: any = {
+            title: {
+                text: 'Budget Variances (Planned vs. Actual)',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                },
+                formatter: (params: any) => {
+                    let tooltipText = `${params[0].name}<br/>`;
+                    params.forEach((item: any) => {
+                        tooltipText += `${item.marker} ${item.seriesName}: $${item.value}M<br/>`;
+                    });
+                    tooltipText += 'Variances between the planned budget and actual expenditure for each project.';
+                    return tooltipText;
+                }
+            },
+            legend: {
+                bottom: '0%'
+            },
+            xAxis: {
+                type: 'category',
+                data: ['Water Treatment Plant', 'Solar Energy Farm', 'Highway Expansion', 'Urban Development']
+            },
+            yAxis: {
+                type: 'value',
+                name: 'USD (millions)',
+                axisLabel: {
+                    formatter: '{value}M'
+                }
+            },
+            series: [
+                {
+                    name: 'Planned Budget',
+                    type: 'bar',
+                    data: [200, 150, 300, 250],
+                    color: '#61A8BD'
+                },
+                {
+                    name: 'Actual Expenditure',
+                    type: 'bar',
+                    data: [180, 130, 290, 240],
+                    color: '#D60000'
+                },
+                {
+                    name: 'Variance',
+                    type: 'line',
+                    data: [20, 20, 10, 10],
+                    color: '#FFCE32'
+                }
+            ]
+        };
+        this.budgetVariancesChart.setOption(option);
     }
 
-
-    toggleDropdown(chartType: string): void {
-        if (chartType === 'climateFinance') {
-            this.climateFinanceDropdownOpen = !this.climateFinanceDropdownOpen;
-        } else if (chartType === 'mitigationAdaptation') {
-            this.mitigationAdaptationDropdownOpen = !this.mitigationAdaptationDropdownOpen;
-        }
-        else if (chartType === 'beneficiaries') {
-            this.beneficiariesDropdownOpen = !this.beneficiariesDropdownOpen;
-        } else if (chartType === 'eia') {
-            this.eiaDropdownOpen = !this.eiaDropdownOpen;
-        }
-    }
-
-    downloadChartData(chart: echarts.ECharts, format: string): void {
-        const option = chart.getOption() as any;
-        const dataStr = JSON.stringify(option.series[0].data);
-        const blob = new Blob([dataStr], { type: "application/json" });
-
-        if (format === 'json') {
-            this.downloadFile(blob, 'chart-data.json');
-        } else if (format === 'csv') {
-            const csvStr = this.convertToCSV(JSON.parse(dataStr));
-            this.downloadFile(new Blob([csvStr], { type: "text/csv" }), 'chart-data.csv');
-        } else if (format === 'png') {
-            const imgData = chart.getDataURL({
-                type: 'png',
-                pixelRatio: 2,
-                backgroundColor: '#fff'
-            });
-            const link = document.createElement('a');
-            link.href = imgData;
-            link.download = 'chart.png';
-            link.click();
-        } else if (format === 'pdf') {
-            const imgData = chart.getDataURL({
-                type: 'png',
-                pixelRatio: 2,
-                backgroundColor: '#fff'
-            });
-            const doc = new jsPDF();
-            doc.addImage(imgData, 'PNG', 10, 10, 180, 160);
-            doc.save('chart.pdf');
-        }
-    }
-
-    downloadFile(blob: Blob, filename: string): void {
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = filename;
-        link.click();
-    }
-
-    convertToCSV(data: any[]): string {
-        const array = [Object.keys(data[0])].concat(data);
-        return array.map(row => {
-            return Object.values(row).map(value => {
-                return typeof value === 'string' ? JSON.stringify(value) : value;
-            }).toString();
-        }).join('\n');
-    }
 }

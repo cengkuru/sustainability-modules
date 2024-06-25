@@ -10,8 +10,6 @@
                     <h4 class="font-bold text-xs sm:hidden">{{pageTitle}}</h4>
                 </div>
 
-
-
                 <!-- Right section on desktop -->
                 <div class="hidden lg:flex lg:items-center lg:space-x-4">
                     <!-- Profile dropdown -->
@@ -37,7 +35,6 @@
                         <i [class.hidden]="!isMobileMenuOpen" class="bi bi-x block h-6 w-6" aria-hidden="true"></i>
                     </button>
                 </div>
-
             </div>
             <!-- Desktop navigation -->
             <div class="hidden border-t border-secondary border-opacity-20 py-5 lg:block">
@@ -98,7 +95,7 @@
             </div>
         </div>
     </header>
-    <main class="-mt-24 pb-8">
+    <main class="pb-8">
         <router-outlet></router-outlet>
     </main>
     <footer>

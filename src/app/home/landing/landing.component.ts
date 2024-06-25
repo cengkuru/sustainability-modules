@@ -6,6 +6,7 @@ import { Router, RouterLink } from '@angular/router';
 import { environment } from "../../../environments/environment";
 import * as projectsData from '../../../assets/data/projects.json';
 import {IntersectionObserverDirective} from "../../directives/intersection-observer.directive";
+import {animate, style, transition, trigger} from "@angular/animations";
 
 declare var H: any;
 
@@ -22,6 +23,14 @@ interface ViewProjectDetailsEvent extends CustomEvent {
     CommonModule,
     RouterLink,
     IntersectionObserverDirective
+  ],
+  animations: [
+    trigger('slideInAnimation', [
+      transition(':enter', [
+        style({ transform: 'translateY(20px)', opacity: 0 }),
+        animate('1000ms ease-out', style({ transform: 'translateY(0)', opacity: 1 }))
+      ])
+    ])
   ]
 })
 export class LandingComponent implements OnInit, OnDestroy {
@@ -33,6 +42,35 @@ export class LandingComponent implements OnInit, OnDestroy {
   markers: { lat: number; lng: number; popup: string; }[] = [];
   numberOfProjects: number = 0;
   totalValueOfProjects: number = 0;
+
+  gcfInfo = {
+    title: "Green Climate Fund (GCF)",
+    description: "The GCF is the world's largest climate fund, mandated to support developing countries raise and realise their Nationally Determined Contributions (NDC) ambitions towards low-emissions, climate-resilient pathways. GCF's investments are aimed at achieving maximum impact in the developing world, supporting paradigm shifts in both mitigation and adaptation.",
+    linkText: "Learn More About GCF",
+    linkUrl: "https://www.greenclimate.fund"
+  };
+
+  mainSection = {
+    title: "Explore GCF Projects: Boosting Climate Finance Investments in South Africa",
+    description: "This prototype, developed by the Infrastructure Transparency Initiative (CoST), demonstrates the implementation of the Open Contracting for Infrastructure Data Standard (OC4IDS). It specifically focuses on the climate finance and sustainability modules to highlight their potential applications and benefits. The information shown is based on projects approved by the Green Climate Fund (GCF) for the Republic of South Africa. Values are for illustrative purposes only.",
+    buttonText: "Explore Projects →"
+  };
+
+  featuredProjectsSection = {
+    title: "Explore Featured Projects",
+    description: "Discover the innovative projects that are leading the way in infrastructure development. Whether it's sustainable energy, modern transportation, or advanced water management, our projects set the standard for excellence.",
+    buttonText: "View Featured Projects →",
+    buttonLink: "/projects/featured"
+  };
+
+  sponsorsSection = {
+    title: "Supported by",
+    sponsors: [
+      { name: "GIZ", link: "https://www.giz.de", image: "../../../assets/giz.png" },
+      { name: "FCDO", link: "https://www.fcdo.gov.uk", image: "../../../assets/fcdo.png" },
+      { name: "CoST", link: "#", image: "../../../assets/cost-logo-transparent.png" }
+    ]
+  };
 
   constructor(private http: HttpClient, private firestore: AngularFirestore, private router: Router) {
     console.log('markers: ', this.markers);
@@ -156,27 +194,16 @@ export class LandingComponent implements OnInit, OnDestroy {
 
 
   generateMarkers() {
-    const redMarkerSVG = `
-    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-        <g fill="none" fill-rule="evenodd">
-            <circle fill="#FF0000" cx="12" cy="12" r="12"/>
-            <path d="M12 3c-4.97 0-9 4.03-9 9 0 2.94 2.69 6.14 8.16 10.61.39.32.85.39 1.27.13.41-.25.67-.71.67-1.21V12.07c1.51.48 3.16.27 4.34-.71.53-.47.95-1.04 1.23-1.67C18.86 6.52 15.87 3 12 3z" fill="#FFF"/>
-        </g>
-    </svg>
-    `;
-
-    const icon = new H.map.Icon(redMarkerSVG, {
-      size: { w: 24, h: 24 },
-      anchor: { x: 12, y: 24 }
-    });
     this.markers = this.recentProjects.map(project => {
       if (project.location && project.location.coordinates) {
         const popup = `
-          <div>
-            <h3 class="text-lg font-semibold">${project.name}</h3>
-            <p>Cost Estimate: ${project.stages?.tenderManagement?.basicData?.contractPrice || 'N/A'}</p>
-            <p>Location: ${project.location.name}</p>
-            <a [routerLink]="['/public/projects', project.id]" class="mt-2 px-2 py-1 bg-accent text-black rounded hover:bg-secondary ">View Details</a>
+          <div class="p-4 max-w-sm">
+            <h3 class="text-lg font-semibold mb-2">${project.name}</h3>
+            <p class="mb-2">Cost Estimate: ${project.stages?.tenderManagement?.basicData?.contractPrice || 'N/A'}</p>
+            <p class="mb-4">Location: ${project.location.name}</p>
+            <button class="view-details-button px-4 py-2 bg-accent text-secondary rounded hover:bg-secondary hover:text-accent transition duration-300" data-project-id="${project.id}">
+              View Details
+            </button>
           </div>
         `;
         return {
@@ -187,12 +214,10 @@ export class LandingComponent implements OnInit, OnDestroy {
       }
       return null;
     }).filter((marker): marker is { lat: number; lng: number; popup: string } => marker !== null);
-
-    console.log('Generated markers:', this.markers);
   }
 
   navigateToProjects() {
-    this.router.navigate(['/projects']);
+    this.router.navigate(['/public/projects']);
   }
 
   addProjectsToFirebase(): void {

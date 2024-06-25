@@ -8,6 +8,7 @@ module.exports = {
         secondary: '#333333', // Muted Blue
         accent: '#FFCE32', // Bright Yellow
         customGray: '#F7F7F7', // Custom gray color
+        customBlueLight: '#61A8BD', // Custom light blue color
       },
       typography: {
         DEFAULT: {
