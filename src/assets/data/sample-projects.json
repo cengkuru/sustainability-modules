@@ -1,1113 +1,723 @@
-[
-  {
-    "oc4ids_id": "oc4ids-1234",
-    "data": {
-      "phases": {
-        "identification": {
-          "overview": "Encompasses the initial phase of the project lifecycle, involving scoping, objective-setting, initial assessments, and stakeholder identification to define the infrastructure project's parameters and requirements.",
-          "id": "oc4ids-1234",
-          "name": "Cape Town Water Expansion Project",
-          "description": "A brief description of Cape Town Water Expansion Project, outlining its main objectives and scope.",
-          "purpose": "To improve transportation infrastructure in Anytown.",
-          "status": "Active",
-          "type": "Construction",
-          "sector": "Transport",
-          "subsector": "Highway",
-          "assetLifetime": {
-            "years": 50,
-            "startDate": "2023-01-01",
-            "endDate": "2073-01-01"
-          },
-          "startDate": "2020-01-01",
-          "endDate": "2023-01-01",
-          "location": {
-            "latitude": 34.0522,
-            "longitude": -118.2437,
-            "address": "123 Main St, Anytown, Country"
-          },
-          "budget": {
-            "amount": 100000000,
-            "currency": "USD"
-          },
-          "funding": {
-            "sources": [
-              {
-                "name": "Government Grant",
-                "amount": 80000000,
-                "currency": "USD"
-              },
-              {
-                "name": "Private Investment",
-                "amount": 20000000,
-                "currency": "USD"
-              }
-            ]
-          },
-          "sustainability": {
-            "environmentalImpactAssessment": {
-              "summary": "Summary of the environmental impact assessment.",
-              "url": "http://example.com/environmental-impact-assessment"
-            },
-            "socialImpactAssessment": {
-              "summary": "Summary of the social impact assessment.",
-              "url": "http://example.com/social-impact-assessment"
-            }
-          },
-          "stakeholderEngagement": {
-            "consultations": [
-              {
-                "date": "2019-12-01",
-                "stakeholderGroup": "Local community",
-                "purpose": "Gather input on project objectives and potential impacts",
-                "outcome": "Community concerns identified and addressed in project plan"
-              }
-            ],
-            "surveys": [
-              {
-                "date": "2019-11-15",
-                "stakeholderGroup": "Local businesses",
-                "purpose": "Assess potential economic impacts and opportunities",
-                "outcome": "Survey results incorporated into economic impact assessment"
-              }
-            ],
-            "workshops": [
-              {
-                "date": "2019-12-15",
-                "stakeholderGroup": "Technical experts",
-                "purpose": "Review and validate project scope and technical requirements",
-                "outcome": "Technical specifications refined based on expert input"
-              }
-            ]
-          },
-          "publicAuthority": {
-            "name": "Department of Transportation",
-            "role": "Project Oversight",
-            "contact": {
-              "name": "John Doe",
-              "title": "Project Manager",
-              "email": "john.doe@dot.gov",
-              "phone": "+1 123-456-7890"
-            }
-          },
-          "relatedProjects": [
-            {
-              "id": "oc4ids-5678",
-              "name": "Highway Expansion Project",
-              "relationship": "Complementary"
-            },
-            {
-              "id": "oc4ids-9012",
-              "name": "Public Transit Improvement Project",
-              "relationship": "Enabling"
-            }
-          ],
-          "keyStakeholders": [
-            {
-              "name": "Local Government",
-              "role": "Project Sponsor"
-            },
-            {
-              "name": "Construction Company",
-              "role": "Main Contractor"
-            },
-            {
-              "name": "Engineering Firm",
-              "role": "Design Consultant"
-            }
-          ]
-        },
-
-        "preparation": {
-          "overview": "Encompasses rigorous planning activities such as feasibility studies, budgeting, risk analysis, and obtaining requisite approvals to ensure the project's viability and readiness for implementation.",
-          "objectives": [
-            "Objective 1: Improve transportation efficiency and reduce congestion",
-            "Objective 2: Enhance road safety and reduce accidents",
-            "Objective 3: Promote economic growth and development in the region"
-          ],
-          "feasibilityStudy": {
-            "summary": "The feasibility study concluded that the project is technically and economically viable, with a positive cost-benefit ratio and significant potential for social and economic impact.",
-            "url": "http://example.com/feasibility-study",
-            "startDate": "2019-06-01",
-            "endDate": "2019-09-30",
-            "conductedBy": "ABC Consulting Firm"
-          },
-          "budgetEstimate": {
-            "amount": 2000000,
-            "currency": "USD",
-            "breakdown": [
-              {
-                "category": "Construction",
-                "amount": 1500000,
-                "currency": "USD"
-              },
-              {
-                "category": "Design and Engineering",
-                "amount": 300000,
-                "currency": "USD"
-              },
-              {
-                "category": "Contingency",
-                "amount": 200000,
-                "currency": "USD"
-              }
-            ]
-          },
-          "riskAnalysis": {
-            "summary": "The risk analysis identified potential risks related to construction delays, cost overruns, and environmental impacts, along with mitigation strategies.",
-            "url": "http://example.com/risk-analysis",
-            "startDate": "2019-10-01",
-            "endDate": "2019-11-30",
-            "conductedBy": "XYZ Risk Management Firm"
-          },
-          "approvals": [
-            {
-              "type": "Environmental Clearance",
-              "authority": "Department of Environment",
-              "status": "Approved",
-              "date": "2019-12-15"
-            },
-            {
-              "type": "Planning Permission",
-              "authority": "City Planning Commission",
-              "status": "Approved",
-              "date": "2020-01-31"
-            }
-          ],
-          "stakeholders": [
-            {
-              "role": "Government",
-              "name": "Department of Infrastructure",
-              "responsibilities": "Oversight and funding"
-            },
-            {
-              "role": "Contractor",
-              "name": "ABC Construction Company",
-              "responsibilities": "Construction and project execution"
-            },
-            {
-              "role": "Consultant",
-              "name": "XYZ Engineering Firm",
-              "responsibilities": "Design and technical support"
-            }
-          ],
-          "planningDocuments": [
-            {
-              "documentType": "Project Plan",
-              "url": "http://example.com/project-plan",
-              "version": "1.0",
-              "date": "2020-02-15"
-            },
-            {
-              "documentType": "Detailed Design",
-              "url": "http://example.com/detailed-design",
-              "version": "2.0",
-              "date": "2020-03-31"
-            }
-          ],
-          "sustainability": {
-            "sustainabilityPlan": {
-              "summary": "The sustainability plan outlines measures to minimize environmental impact, promote sustainable construction practices, and ensure long-term social and economic benefits.",
-              "url": "http://example.com/sustainability-plan",
-              "version": "1.0",
-              "date": "2020-02-28"
-            },
-            "sustainabilityBudget": {
-              "amount": 100000,
-              "currency": "USD",
-              "breakdown": [
-                {
-                  "category": "Environmental Mitigation",
-                  "amount": 50000,
-                  "currency": "USD"
-                },
-                {
-                  "category": "Social Impact Programs",
-                  "amount": 30000,
-                  "currency": "USD"
-                },
-                {
-                  "category": "Sustainability Certification",
-                  "amount": 20000,
-                  "currency": "USD"
-                }
-              ]
-            }
-          },
-          "procurementPlan": {
-            "summary": "The procurement plan outlines the strategies and processes for acquiring goods, services, and works required for the project, ensuring transparency, fairness, and value for money.",
-            "url": "http://example.com/procurement-plan",
-            "version": "1.0",
-            "date": "2020-03-15"
-          },
-          "communicationPlan": {
-            "summary": "The communication plan defines the strategies and channels for engaging stakeholders, disseminating project information, and managing communications throughout the project lifecycle.",
-            "url": "http://example.com/communication-plan",
-            "version": "1.0",
-            "date": "2020-03-31"
-          }
-        },
-
-        "implementation": {
-          "overview": "Detailing the execution phase, including contract awards, work progress, variations, risk management, and sustainability monitoring.",
-          "contracts": [
-            {
-              "id": "contract-1",
-              "awardDate": "2020-02-01",
-              "awardValue": {
-                "amount": 1500000,
-                "currency": "USD"
-              },
-              "contractor": {
-                "name": "ABC Construction",
-                "id": "abc-construction"
-              },
-              "scope": "Construction of main highway section",
-              "duration": {
-                "startDate": "2020-02-15",
-                "endDate": "2021-08-31"
-              },
-              "status": "Active",
-              "progress": 35,
-              "paymentTerms": {
-                "mechanism": "Monthly invoicing",
-                "paymentDays": 30
-              }
-            }
-          ],
-          "workProgress": [
-            {
-              "date": "2020-03-01",
-              "milestone": "Foundation completed",
-              "status": "On schedule",
-              "progress": 15,
-              "issues": [],
-              "nextSteps": [
-                "Commence superstructure construction"
-              ]
-            },
-            {
-              "date": "2020-06-30",
-              "milestone": "Superstructure completed",
-              "status": "Delayed",
-              "progress": 45,
-              "issues": [
-                "Delay in material delivery",
-                "Labor shortage"
-              ],
-              "nextSteps": [
-                "Expedite material delivery",
-                "Hire additional workers"
-              ]
-            }
-          ],
-          "variations": [
-            {
-              "id": "variation-1",
-              "description": "Change in materials",
-              "date": "2020-04-01",
-              "value": {
-                "amount": 50000,
-                "currency": "USD"
-              },
-              "status": "Approved",
-              "reason": "Improved durability",
-              "impact": {
-                "cost": {
-                  "amount": 50000,
-                  "currency": "USD"
-                },
-                "schedule": {
-                  "days": 7
-                }
-              }
-            }
-          ],
-          "riskManagement": [
-            {
-              "id": "risk-1",
-              "description": "Potential delay due to weather",
-              "category": "Environmental",
-              "probability": "High",
-              "impact": "Medium",
-              "mitigation": [
-                "Adjust schedule and allocate additional resources",
-                "Implement weather monitoring and early warning system"
-              ],
-              "contingency": [
-                "Activate standby contractors",
-                "Utilize weather-resistant materials"
-              ]
-            }
-          ],
-          "sustainability": {
-            "environmentalMonitoring": [
-              {
-                "date": "2020-03-15",
-                "metric": "Carbon emissions",
-                "value": 1000,
-                "unit": "tCO2e",
-                "target": 950,
-                "status": "Exceeds target"
-              },
-              {
-                "date": "2020-06-30",
-                "metric": "Water consumption",
-                "value": 5000,
-                "unit": "m3",
-                "target": 4500,
-                "status": "Within target"
-              }
-            ],
-            "socialImpactMonitoring": [
-              {
-                "date": "2020-03-31",
-                "metric": "Local jobs created",
-                "value": 50,
-                "target": 75,
-                "status": "Below target",
-                "remedialAction": [
-                  "Conduct additional local recruitment drives",
-                  "Partner with local training institutions"
-                ]
-              },
-              {
-                "date": "2020-06-30",
-                "metric": "Community engagement events",
-                "value": 3,
-                "target": 4,
-                "status": "On track"
-              }
-            ]
-          },
-          "qualityAssurance": {
-            "inspections": [
-              {
-                "date": "2020-04-15",
-                "type": "Material quality inspection",
-                "outcome": "Passed",
-                "inspector": "Quality Control Inc."
-              },
-              {
-                "date": "2020-07-31",
-                "type": "Structural integrity inspection",
-                "outcome": "Passed with recommendations",
-                "inspector": "Engineering Consultants Ltd.",
-                "recommendations": [
-                  "Conduct additional load testing",
-                  "Monitor settlement for 6 months"
-                ]
-              }
-            ],
-            "testing": [
-              {
-                "date": "2020-05-31",
-                "type": "Concrete strength testing",
-                "outcome": "Passed",
-                "results": {
-                  "compressiveStrength": {
-                    "value": 35,
-                    "unit": "MPa"
-                  },
-                  "flexuralStrength": {
-                    "value": 5,
-                    "unit": "MPa"
-                  }
-                }
-              }
-            ]
-          },
-          "healthSafety": {
-            "incidents": [
-              {
-                "date": "2020-03-10",
-                "description": "Minor injury - Worker tripped on construction debris",
-                "severity": "Low",
-                "remedialAction": [
-                  "Provide safety training to all workers",
-                  "Implement daily site cleanups"
-                ]
-              }
-            ],
-            "training": [
-              {
-                "date": "2020-02-20",
-                "type": "Safety induction training",
-                "provider": "ABC Safety Solutions",
-                "attendees": 50
-              },
-              {
-                "date": "2020-06-15",
-                "type": "Toolbox talk on working at heights",
-                "provider": "Internal",
-                "attendees": 30
-              }
-            ]
-          }
-        },
-
-        "completion": {
-          "overview": "This stage documents the final project outcomes, including actual completion dates, final costs, a comparison to the original plan, assessments of project performance, lessons learned, and sustainability outcomes.",
-          "actualCompletionDate": "2023-02-28",
-          "finalCost": {
-            "amount": 2200000,
-            "currency": "USD",
-            "breakdown": [
-              {
-                "category": "Construction",
-                "amount": 1800000,
-                "currency": "USD"
-              },
-              {
-                "category": "Design and Engineering",
-                "amount": 350000,
-                "currency": "USD"
-              },
-              {
-                "category": "Contingency",
-                "amount": 50000,
-                "currency": "USD"
-              }
-            ]
-          },
-          "originalPlanComparison": {
-            "scheduleVariance": {
-              "days": 30,
-              "percentage": 5,
-              "explanation": "Delay due to unexpected site conditions"
-            },
-            "costVariance": {
-              "amount": 200000,
-              "percentage": 10,
-              "currency": "USD",
-              "explanation": "Additional costs due to design changes"
-            },
-            "scopeVariance": {
-              "description": "Additional features added to enhance user experience",
-              "impact": {
-                "cost": {
-                  "amount": 150000,
-                  "currency": "USD"
-                },
-                "schedule": {
-                  "days": 20
-                }
-              }
-            }
-          },
-          "performanceAssessment": {
-            "summary": "The project was completed with minor delays and cost overruns. Overall objectives were met, and the infrastructure asset is performing as expected.",
-            "metrics": [
-              {
-                "name": "User satisfaction",
-                "target": 90,
-                "actual": 95,
-                "unit": "percent"
-              },
-              {
-                "name": "Capacity utilization",
-                "target": 80,
-                "actual": 85,
-                "unit": "percent"
-              }
-            ],
-            "lessonsLearned": [
-              {
-                "category": "Planning",
-                "description": "Improve site investigation process to minimize unexpected conditions"
-              },
-              {
-                "category": "Communication",
-                "description": "Enhance communication with stakeholders to align expectations and manage changes"
-              }
-            ]
-          },
-          "sustainability": {
-            "environmentalOutcomes": {
-              "summary": "The project achieved its environmental targets and demonstrated sustainable practices throughout its lifecycle.",
-              "metrics": [
-                {
-                  "name": "Carbon emissions reduction",
-                  "target": 20,
-                  "actual": 22,
-                  "unit": "percent"
-                },
-                {
-                  "name": "Renewable energy usage",
-                  "target": 30,
-                  "actual": 35,
-                  "unit": "percent"
-                }
-              ],
-              "certifications": [
-                {
-                  "name": "LEED Gold",
-                  "issuer": "U.S. Green Building Council",
-                  "date": "2023-03-15"
-                }
-              ]
-            },
-            "socialOutcomes": {
-              "summary": "The project had a positive impact on the local community, creating jobs, improving access to services, and enhancing quality of life.",
-              "metrics": [
-                {
-                  "name": "Local jobs created",
-                  "target": 100,
-                  "actual": 120
-                },
-                {
-                  "name": "Community engagement events",
-                  "target": 5,
-                  "actual": 7
-                }
-              ],
-              "initiatives": [
-                {
-                  "name": "Community Skills Training Program",
-                  "description": "Provided vocational training to local residents",
-                  "beneficiaries": 50
-                }
-              ]
-            },
-            "economicOutcomes": {
-              "summary": "The project contributed to local economic growth and development, attracting new investments and businesses to the area.",
-              "metrics": [
-                {
-                  "name": "Local procurement",
-                  "target": 40,
-                  "actual": 45,
-                  "unit": "percent"
-                },
-                {
-                  "name": "Increase in property values",
-                  "target": 10,
-                  "actual": 12,
-                  "unit": "percent"
-                }
-              ],
-              "casestudies": [
-                {
-                  "title": "New Business Hub Development",
-                  "description": "The infrastructure project catalyzed the development of a new business hub in the area.",
-                  "investment": {
-                    "amount": 500000,
-                    "currency": "USD"
-                  },
-                  "jobsCreated": 200
-                }
-              ]
-            }
-          },
-          "handover": {
-            "date": "2023-03-31",
-            "client": "Department of Transportation",
-            "documents": [
-              {
-                "name": "As-Built Drawings",
-                "url": "https://example.com/as-built-drawings"
-              },
-              {
-                "name": "Operation and Maintenance Manuals",
-                "url": "https://example.com/o-and-m-manuals"
-              }
-            ],
-            "warranties": [
-              {
-                "type": "Construction Warranty",
-                "duration": {
-                  "years": 5
-                },
-                "coverage": "Defects in materials and workmanship"
-              },
-              {
-                "type": "Equipment Warranty",
-                "duration": {
-                  "years": 2
-                },
-                "coverage": "Defects in equipment supplied"
-              }
-            ]
-          },
-          "feedback": {
-            "clientSatisfaction": {
-              "score": 4,
-              "scale": 5,
-              "feedback": "The project team demonstrated great professionalism and delivered a high-quality asset."
-            },
-            "userSatisfaction": {
-              "score": 4.5,
-              "scale": 5,
-              "feedback": "The new infrastructure has greatly improved our daily commute and enhanced safety."
-            }
-          }
-        },
-
-        "maintenance": {
-          "overview": "Covers the post-completion activities including routine maintenance, performance monitoring, warranty management, and documentation of major repairs or upgrades for sustained operation of the infrastructure asset.",
-          "maintenancePlan": {
-            "summary": "Outlines the scheduled maintenance activities and resources required.",
-            "url": "http://example.com/maintenance-plan",
-            "activities": [
-              {
-                "name": "Routine Inspection",
-                "frequency": "Monthly",
-                "description": "Visual inspection of the infrastructure asset to identify any issues or defects.",
-                "resources": [
-                  {
-                    "type": "Personnel",
-                    "quantity": 2,
-                    "description": "Maintenance Engineers"
-                  }
-                ]
-              },
-              {
-                "name": "Preventive Maintenance",
-                "frequency": "Quarterly",
-                "description": "Scheduled maintenance activities to prevent breakdowns and ensure optimal performance.",
-                "resources": [
-                  {
-                    "type": "Personnel",
-                    "quantity": 4,
-                    "description": "Maintenance Technicians"
-                  },
-                  {
-                    "type": "Equipment",
-                    "quantity": 1,
-                    "description": "Maintenance Van"
-                  }
-                ]
-              }
-            ]
-          },
-          "warrantyManagement": {
-            "summary": "Details the warranty terms and conditions for the infrastructure asset.",
-            "url": "http://example.com/warranty-management",
-            "warranties": [
-              {
-                "type": "Construction Warranty",
-                "provider": "ABC Contractors",
-                "startDate": "2023-03-01",
-                "endDate": "2028-02-28",
-                "coverage": "Defects in materials and workmanship"
-              },
-              {
-                "type": "Equipment Warranty",
-                "provider": "XYZ Suppliers",
-                "startDate": "2023-03-01",
-                "endDate": "2025-02-28",
-                "coverage": "Defects in supplied equipment"
-              }
-            ],
-            "claimsProcess": {
-              "description": "Process for submitting and managing warranty claims.",
-              "url": "http://example.com/warranty-claims-process"
-            }
-          },
-          "majorRepairsUpgrades": [
-            {
-              "date": "2024-01-01",
-              "description": "Replacement of HVAC system",
-              "cost": {
-                "amount": 100000,
-                "currency": "USD"
-              },
-              "status": "Planned",
-              "contractor": "HVAC Solutions Inc."
-            },
-            {
-              "date": "2025-06-01",
-              "description": "Upgrade of electrical systems",
-              "cost": {
-                "amount": 250000,
-                "currency": "USD"
-              },
-              "status": "Proposed",
-              "contractor": "Power Systems Ltd."
-            }
-          ],
-          "performanceMonitoring": {
-            "metrics": [
-              {
-                "name": "Energy Consumption",
-                "description": "Measures the energy consumed by the infrastructure asset.",
-                "unit": "kWh",
-                "baseline": 500,
-                "target": 450,
-                "frequency": "Monthly"
-              },
-              {
-                "name": "Uptime",
-                "description": "Measures the percentage of time the infrastructure asset is operational.",
-                "unit": "Percentage",
-                "baseline": 95,
-                "target": 98,
-                "frequency": "Monthly"
-              }
-            ],
-            "reports": [
-              {
-                "name": "Monthly Performance Report",
-                "description": "Summarizes the performance of the infrastructure asset for the previous month.",
-                "frequency": "Monthly",
-                "url": "http://example.com/monthly-performance-reports"
-              },
-              {
-                "name": "Annual Performance Review",
-                "description": "Provides a comprehensive review of the infrastructure asset's performance for the previous year.",
-                "frequency": "Annually",
-                "url": "http://example.com/annual-performance-reviews"
-              }
-            ]
-          },
-          "sustainability": {
-            "performanceMonitoring": [
-              {
-                "date": "2023-12-31",
-                "metric": "Energy consumption",
-                "value": 500,
-                "unit": "MWh",
-                "target": 450,
-                "performance": "Needs Improvement"
-              },
-              {
-                "date": "2024-06-30",
-                "metric": "Water consumption",
-                "value": 1000,
-                "unit": "m3",
-                "target": 900,
-                "performance": "On Track"
-              }
-            ],
-            "sustainabilityImprovements": [
-              {
-                "date": "2024-06-01",
-                "description": "Installation of solar panels",
-                "cost": {
-                  "amount": 200000,
-                  "currency": "USD"
-                },
-                "expectedImpact": "Reduction of carbon emissions by 10%",
-                "status": "Planned"
-              },
-              {
-                "date": "2025-01-01",
-                "description": "Implementation of water recycling system",
-                "cost": {
-                  "amount": 150000,
-                  "currency": "USD"
-                },
-                "expectedImpact": "Reduction of water consumption by 20%",
-                "status": "Proposed"
-              }
-            ],
-            "certifications": [
-              {
-                "name": "LEED Operations and Maintenance",
-                "level": "Gold",
-                "date": "2024-03-01",
-                "expiryDate": "2027-02-28"
-              }
-            ]
-          },
-          "assetManagement": {
-            "inventory": {
-              "description": "Comprehensive inventory of all assets associated with the infrastructure.",
-              "url": "http://example.com/asset-inventory"
-            },
-            "conditionAssessment": {
-              "description": "Regular assessment of the condition of the infrastructure assets.",
-              "frequency": "Annually",
-              "url": "http://example.com/condition-assessments"
-            },
-            "lifecycle": {
-              "description": "Lifecycle management plan for the infrastructure assets.",
-              "url": "http://example.com/asset-lifecycle-plan"
-            }
-          },
-          "stakeholderEngagement": {
-            "communicationPlan": {
-              "description": "Plan for ongoing communication with stakeholders during the maintenance phase.",
-              "url": "http://example.com/maintenance-communication-plan"
-            },
-            "feedback": [
-              {
-                "date": "2023-09-30",
-                "stakeholder": "Local Community",
-                "feedback": "The infrastructure is well-maintained and has improved the quality of life in the community.",
-                "url": "http://example.com/community-feedback"
-              },
-              {
-                "date": "2024-03-31",
-                "stakeholder": "Regulatory Agency",
-                "feedback": "The maintenance practices comply with all relevant regulations and standards.",
-                "url": "http://example.com/regulatory-feedback"
-              }
-            ]
-          }
-        },
-        "decommissioning": {
-          "overview": "Describes the procedures and actions taken to safely close or remove the infrastructure asset, ensuring environmental and economic considerations are addressed, and detailing the final status and impact on the community.",
-          "decommissioningPlan": {
-            "summary": "Outlines the steps and resources required for safe and responsible decommissioning.",
-            "url": "http://example.com/decommissioning-plan",
-            "activities": [
-              {
-                "name": "Asset Inventory",
-                "description": "Comprehensive inventory of all assets to be decommissioned.",
-                "startDate": "2040-01-01",
-                "endDate": "2040-03-31"
-              },
-              {
-                "name": "Hazardous Material Removal",
-                "description": "Safe removal and disposal of any hazardous materials.",
-                "startDate": "2040-04-01",
-                "endDate": "2040-06-30"
-              },
-              {
-                "name": "Asset Dismantling",
-                "description": "Dismantling and removal of infrastructure assets.",
-                "startDate": "2040-07-01",
-                "endDate": "2040-12-31"
-              },
-              {
-                "name": "Site Restoration",
-                "description": "Restoration of the site to its original condition.",
-                "startDate": "2041-01-01",
-                "endDate": "2041-06-30"
-              }
-            ],
-            "regulations": [
-              {
-                "name": "Environmental Protection Act",
-                "description": "Regulations governing environmental protection during decommissioning.",
-                "url": "http://example.com/environmental-protection-act"
-              },
-              {
-                "name": "Occupational Health and Safety Act",
-                "description": "Regulations governing worker safety during decommissioning.",
-                "url": "http://example.com/ohs-act"
-              }
-            ]
-          },
-          "environmentalConsiderations": {
-            "summary": "Describes the measures taken to minimize environmental impact during decommissioning.",
-            "url": "http://example.com/decommissioning-environmental-considerations",
-            "impactAssessment": {
-              "description": "Comprehensive assessment of potential environmental impacts of decommissioning.",
-              "url": "http://example.com/decommissioning-eia"
-            },
-            "mitigationMeasures": [
-              {
-                "name": "Erosion Control",
-                "description": "Measures to prevent soil erosion during decommissioning."
-              },
-              {
-                "name": "Waste Management",
-                "description": "Procedures for proper handling and disposal of waste materials."
-              }
-            ],
-            "monitoringPlan": {
-              "description": "Plan for monitoring environmental impacts during and after decommissioning.",
-              "url": "http://example.com/decommissioning-environmental-monitoring"
-            }
-          },
-          "economicConsiderations": {
-            "summary": "Outlines the financial implications and strategies for decommissioning.",
-            "url": "http://example.com/decommissioning-economic-considerations",
-            "costEstimate": {
-              "amount": 500000,
-              "currency": "USD",
-              "breakdown": [
-                {
-                  "category": "Labor",
-                  "amount": 300000,
-                  "currency": "USD"
-                },
-                {
-                  "category": "Equipment",
-                  "amount": 150000,
-                  "currency": "USD"
-                },
-                {
-                  "category": "Disposal",
-                  "amount": 50000,
-                  "currency": "USD"
-                }
-              ]
-            },
-            "fundingPlan": {
-              "description": "Plan for funding the decommissioning activities.",
-              "url": "http://example.com/decommissioning-funding-plan",
-              "sources": [
-                {
-                  "name": "Decommissioning Reserve Fund",
-                  "amount": 400000,
-                  "currency": "USD"
-                },
-                {
-                  "name": "Government Grant",
-                  "amount": 100000,
-                  "currency": "USD"
-                }
-              ]
-            },
-            "economicImpact": {
-              "description": "Assessment of the economic impact of decommissioning on the local community.",
-              "url": "http://example.com/decommissioning-economic-impact",
-              "jobLosses": 100,
-              "revenueImpact": {
-                "amount": 1000000,
-                "currency": "USD"
-              }
-            }
-          },
-          "finalStatus": {
-            "summary": "Describes the final state of the infrastructure asset after decommissioning.",
-            "url": "http://example.com/decommissioning-final-status",
-            "landUse": {
-              "description": "Final land use of the site after decommissioning.",
-              "type": "Greenfield"
-            },
-            "assetDisposition": {
-              "description": "Final disposition of the decommissioned assets.",
-              "url": "http://example.com/decommissioning-asset-disposition",
-              "recycled": {
-                "percentage": 60,
-                "description": "Percentage of assets recycled."
-              },
-              "reused": {
-                "percentage": 20,
-                "description": "Percentage of assets reused in other projects."
-              },
-              "disposed": {
-                "percentage": 20,
-                "description": "Percentage of assets disposed of in landfills."
-              }
-            }
-          },
-          "communityImpact": {
-            "summary": "Assesses the impact of decommissioning on the local community.",
-            "url": "http://example.com/decommissioning-community-impact",
-            "stakeholderEngagement": {
-              "description": "Engagement with community stakeholders during decommissioning.",
-              "url": "http://example.com/decommissioning-stakeholder-engagement",
-              "events": [
-                {
-                  "name": "Community Town Hall",
-                  "date": "2039-06-01",
-                  "description": "Public meeting to discuss decommissioning plans and address community concerns."
-                },
-                {
-                  "name": "Stakeholder Workshop",
-                  "date": "2039-09-15",
-                  "description": "Workshop with key stakeholders to gather input on decommissioning plans."
-                }
-              ]
-            },
-            "transitionPlan": {
-              "description": "Plan for transitioning the local community after decommissioning.",
-              "url": "http://example.com/decommissioning-transition-plan",
-              "initiatives": [
-                {
-                  "name": "Worker Retraining",
-                  "description": "Program to retrain workers affected by decommissioning.",
-                  "budget": {
-                    "amount": 200000,
-                    "currency": "USD"
-                  }
-                },
-                {
-                  "name": "Economic Diversification",
-                  "description": "Initiatives to diversify the local economy after decommissioning.",
-                  "budget": {
-                    "amount": 500000,
-                    "currency": "USD"
-                  }
-                }
-              ]
-            }
-          },
-          "sustainability": {
-            "decommissioningEnvironmentalOutcomes": {
-              "summary": "Describes the environmental outcomes of the decommissioning process.",
-              "metrics": [
-                {
-                  "name": "Waste recycled",
-                  "value": 80,
-                  "unit": "percent"
-                },
-                {
-                  "name": "Hazardous materials safely disposed",
-                  "value": 100,
-                  "unit": "percent"
-                },
-                {
-                  "name": "Site restored to natural state",
-                  "value": 95,
-                  "unit": "percent"
-                }
-              ]
-            },
-            "decommissioningSocialOutcomes": {
-              "summary": "Describes the social outcomes of the decommissioning process.",
-              "metrics": [
-                {
-                  "name": "Local jobs transitioned",
-                  "value": 50,
-                  "unit": "percent"
-                },
-                {
-                  "name": "Community satisfaction",
-                  "value": 85,
-                  "unit": "percent"
-                }
-              ]
-            }
-          },
-          "lessonsLearned": {
-            "summary": "Captures the key lessons learned from the decommissioning process.",
-            "url": "http://example.com/decommissioning-lessons-learned",
-            "technical": [
-              {
-                "lesson": "Early planning is critical for successful decommissioning.",
-                "description": "Developing a comprehensive decommissioning plan early in the project lifecycle helps ensure a smooth and efficient process."
-              },
-              {
-                "lesson": "Innovative recycling techniques can minimize waste.",
-                "description": "Investing in advanced recycling technologies can significantly reduce the amount of waste generated during decommissioning."
-              }
-            ],
-            "social": [
-              {
-                "lesson": "Transparent communication with stakeholders is essential.",
-                "description": "Regular and open communication with the local community and other stakeholders helps build trust and support for the decommissioning process."
-              },
-              {
-                "lesson": "Workforce transition planning should start early.",
-                "description": "Developing a plan to support workers affected by decommissioning should be initiated well in advance to minimize social and economic impacts."
-              }
-            ]
-          }
-        }
-
-      },
-      "metadata": {
-        "dateCreated": "2020-01-01T00:00:00Z",
-        "dateUpdated": "2020-01-01T00:00:00Z",
-        "datePublished": "2020-01-01T00:00:00Z",
-        "version": "1.0",
-        "language": "en",
-        "lastModifiedBy": "username or user ID",
-        "changeLog": [
+{
+  "id": "",
+  "metadata": {
+    "dateCreated": "",
+    "dateUpdated": "",
+    "datePublished": "",
+    "version": "1.0",
+    "language": "en",
+    "lastModifiedBy": "",
+    "changeLog": [
+      {
+        "date": "",
+        "change": "",
+        "changedBy": ""
+      }
+    ]
+  },
+  "stages": {
+    "identification": {
+      "basicData": {
+        "projectReferenceNumber": "",
+        "projectOwner": "",
+        "sectorSubsector": "",
+        "projectName": "",
+        "projectLocation": "",
+        "purpose": "",
+        "projectDescription": "",
+        "projectOfficialsAndRoles": [
           {
-            "date": "2020-01-01T00:00:00Z",
-            "change": "Initial creation",
-            "changedBy": "username or user ID"
+            "name": "",
+            "role": ""
+          }
+        ],
+        "projectBriefOrFeasibilityStudy": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "climateFinanceData": {
+        "climateObjective": "",
+        "financialInstrument": "",
+        "climateTransformation": "",
+        "climateFinanceDecisionMaking": "",
+        "nationallyDeterminedContributions": "",
+        "parisAgreement": "",
+        "beneficiaries": "",
+        "amountOfInvestment": "",
+        "policyCoherence": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "institutionalSustainabilityData": {
+        "numberOfLobbyingActivities": 0,
+        "numberOfFreedomOfInformationRequests": 0,
+        "numberOfFreedomOfInformationAnswers": 0,
+        "policyCoherenceDocumentation": "",
+        "freedomOfInformationRequestsAndAnswers": "",
+        "lobbyingMeetingsMinutes": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
           }
         ]
       }
-
-
+    },
+    "preparation": {
+      "basicData": {
+        "procurementStrategy": "",
+        "lifeCycleCost": "",
+        "lifeCycleCostCalculationMethodology": "",
+        "fundingSourceForPreparation": "",
+        "budgetForPreparation": "",
+        "costBenefitAnalysis": "",
+        "valueForMoney": "",
+        "assetLifetime": "",
+        "budgetProjections": "",
+        "maintenancePlan": "",
+        "environmentalImpactCategory": "",
+        "environmentalMeasures": "",
+        "environmentalLicensesAndExemptions": "",
+        "protectedArea": "",
+        "conservationMeasures": "",
+        "climateAndDisasterRiskAssessment": "",
+        "climateMeasures": "",
+        "forecastOfGreenhouseGasEmissions": "",
+        "numberOfBeneficiaries": 0,
+        "inclusiveDesign": "",
+        "indigenousLand": "",
+        "publicConsultationMeetings": "",
+        "landCompensationBudget": "",
+        "riskManagementPlans": "",
+        "projectScope": "",
+        "contactDetails": "",
+        "fundingSources": "",
+        "projectBudget": "",
+        "projectBudgetApprovalDate": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "climateFinanceData": {
+        "fundingSource": "",
+        "greenClimateFundAccreditedEntity": "",
+        "accreditedEntityType": "",
+        "projectPreparationCosts": "",
+        "projectPreparationPeriod": "",
+        "projectApprovalPeriod": "",
+        "ratioOfCoFinance": "",
+        "termsOfClimateFinance": "",
+        "carbonEfficiency": "",
+        "nonClimateCoBenefits": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "socialSustainabilityData": {
+        "beneficiaries": "",
+        "numberOfBeneficiaries": 0,
+        "inclusiveDesign": "",
+        "indigenousLand": "",
+        "publicConsultationMeetings": "",
+        "landCompensationBudget": "",
+        "laborObligations": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "institutionalSustainabilityData": {
+        "numberOfFreedomOfInformationRequests": 0,
+        "numberOfFreedomOfInformationAnswers": 0,
+        "policyCoherenceDocumentation": "",
+        "freedomOfInformationRequestsAndAnswers": "",
+        "riskManagementPlans": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "economicAndFinancialSustainabilityData": {
+        "procurementStrategy": "",
+        "lifeCycleCost": "",
+        "lifeCycleCostCalculationMethodology": "",
+        "fundingSourceForPreparation": "",
+        "budgetForPreparation": "",
+        "costBenefitAnalysis": "",
+        "valueForMoney": "",
+        "assetLifetime": "",
+        "budgetProjections": "",
+        "maintenancePlan": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "environmentalAndClimateSustainabilityData": {
+        "environmentalImpactCategory": "",
+        "environmentalMeasures": "",
+        "environmentalLicensesAndExemptions": "",
+        "protectedArea": "",
+        "conservationMeasures": "",
+        "climateAndDisasterRiskAssessment": "",
+        "climateMeasures": "",
+        "forecastOfGreenhouseGasEmissions": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      }
+    },
+    "tenderManagement": {
+      "basicData": {
+        "procuringEntity": "",
+        "procuringEntityContactDetails": "",
+        "procurementProcess": "",
+        "procurementMethod": "",
+        "numberOfFirmsTendering": 0,
+        "costEstimate": "",
+        "contractType": "",
+        "contractAdministrationEntity": "",
+        "contractOfficialsAndRoles": [
+          {
+            "name": "",
+            "role": ""
+          }
+        ],
+        "contractTitle": "",
+        "contractFirm": "",
+        "contractPrice": "",
+        "contractScopeOfWork": "",
+        "contractStartDate": "",
+        "contractDuration": "",
+        "contractStatus": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "socialSustainabilityData": {
+        "laborBudget": "",
+        "healthAndSafetyCertifications": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "institutionalSustainabilityData": {
+        "numberOfFreedomOfInformationRequests": 0,
+        "numberOfFreedomOfInformationAnswers": 0,
+        "beneficialOwnership": "",
+        "sustainabilityCriteria": "",
+        "freedomOfInformationRequestsAndAnswers": "",
+        "antiCorruptionCertifications": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "environmentalAndClimateSustainabilityData": {
+        "numberOfEnvironmentalCertifications": 0,
+        "environmentalCertifications": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      }
+    },
+    "implementation": {
+      "basicData": {
+        "variationToContractPrice": "",
+        "escalationOfContractPrice": "",
+        "variationToContractDuration": "",
+        "variationToContractScope": "",
+        "reasonsForPriceChanges": "",
+        "reasonsForScope": "",
+        "reasonsForDurationChanges": "",
+        "budgetShortfall": "",
+        "fundingSourceForImplementation": "",
+        "budgetForImplementation": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "climateFinanceData": {
+        "disbursementRecords": "",
+        "typeOfMonitoring": "",
+        "performanceMonitoring": "",
+        "reportingPeriod": "",
+        "independentMonitoring": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "socialSustainabilityData": {
+        "jobsGenerated": 0,
+        "inclusiveImplementation": "",
+        "workersAccidents": 0,
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "institutionalSustainabilityData": {
+        "numberOfFreedomOfInformationRequests": 0,
+        "numberOfFreedomOfInformationAnswers": 0,
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "economicAndFinancialSustainabilityData": {
+        "budgetShortfall": "",
+        "fundingSourceForImplementation": "",
+        "budgetForImplementation": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "environmentalAndClimateSustainabilityData": {
+        "environmentalMeasures": "",
+        "conservationMeasures": "",
+        "climateMeasures": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      }
+    },
+    "completion": {
+      "basicData": {
+        "projectStatus": "",
+        "completionCost": "",
+        "completionDate": "",
+        "scopeAtCompletion": "",
+        "reasonsForProjectChanges": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "institutionalSustainabilityData": {
+        "numberOfFreedomOfInformationRequests": 0,
+        "numberOfFreedomOfInformationAnswers": 0,
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      }
+    },
+    "operationsAndMaintenance": {
+      "basicData": {
+        "assetName": "",
+        "assetLocation": "",
+        "typeOfMaintenanceWorks": "",
+        "worksDescription": "",
+        "projectOfficialsAndRoles": [
+          {
+            "name": "",
+            "role": ""
+          }
+        ],
+        "maintenanceScope": "",
+        "maintenancePlan": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "climateFinanceData": {
+        "impactMeasurement": "",
+        "carbonFootprint": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "socialSustainabilityData": {
+        "jobsGenerated": 0,
+        "inclusiveImplementation": "",
+        "workersAccidents": 0,
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "institutionalSustainabilityData": {
+        "numberOfFreedomOfInformationRequests": 0,
+        "numberOfFreedomOfInformationAnswers": 0,
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "economicAndFinancialSustainabilityData": {
+        "fundingSourceForMaintenance": "",
+        "budgetForMaintenance": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "environmentalAndClimateSustainabilityData": {
+        "environmentalMeasures": "",
+        "conservationMeasures": "",
+        "climateMeasures": "",
+        "environmentalLicensesAndExemptions": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      }
+    },
+    "decommissioning": {
+      "basicData": {
+        "decommissionPlan": "",
+        "decommissionCostForecast": "",
+        "infrastructureAssetsToBeDecommissioned": "",
+        "decommissionPeriod": "",
+        "carbonDecommissionSavings": "",
+        "decommissionMitigationPlan": "",
+        "decisionOfAssetDisposal": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "socialSustainabilityData": {
+        "jobsGenerated": "",
+        "workersAccidents": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "institutionalSustainabilityData": {
+        "numberOfFreedomOfInformationRequests": "",
+        "numberOfFreedomOfInformationAnswers": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "economicAndFinancialSustainabilityData": {
+        "decommissionCostForecast": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      },
+      "environmentalAndClimateSustainabilityData": {
+        "decommissionMitigationPlan": "",
+        "attachments": [
+          {
+            "title": "",
+            "description": "",
+            "url": "",
+            "documentType": "",
+            "format": "",
+            "language": "",
+            "pages": 0,
+            "datePublished": "",
+            "dateModified": ""
+          }
+        ]
+      }
     }
+  },
+  "name": "",
+  "location": {
+    "coordinates": {
+      "lat": 0,
+      "lng": 0,
+      "popup": ""
+    },
+    "name": ""
   }
-]
-
+}

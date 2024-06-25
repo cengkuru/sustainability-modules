@@ -75,18 +75,6 @@ export class AppComponent implements OnInit {
   }
 
   loadJsonData(): void {
-    this.http.get<any>('/assets/data/oc4ids.json').subscribe(data => {
-      this.jsonData = data;
-    }, error => console.error('Error loading the JSON data:', error));
-
-    this.http.get<any>('/assets/data/example.json').subscribe(data => {
-      this.exampleData = data;
-    }, error => console.error('Error loading the JSON data:', error));
-
-    this.http.get<any>('/assets/data/sample-projects.json').subscribe(data => {
-      this.sampleProjects = data;
-      this.extractUniquePhases();
-    }, error => console.error('Error loading the JSON data:', error));
   }
 
   switchTab(tabId: string) {
