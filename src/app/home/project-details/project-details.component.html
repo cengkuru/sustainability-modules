@@ -33,12 +33,12 @@
                 </div>
 
                 <!-- Vertical Tabs for larger screens -->
-                <div class="hidden lg:flex flex-col w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-gray-200">
+                <div class="hidden lg:flex flex-col w-full lg:w-1/4 border-b lg:border-b-0  border-gray-200">
                     <nav class="flex flex-col space-y-1">
                         <button *ngFor="let stage of stages"
                                 (click)="selectTab(stage.id)"
-                                [ngClass]="{'bg-accent text-white': selectedTab === stage.id, 'bg-gray-100 text-gray-500 hover:bg-gray-200': selectedTab !== stage.id}"
-                                class="py-4 px-4 text-left text-sm font-medium flex items-center space-x-2 transition duration-200 ease-in-out"
+                                [ngClass]="{'bg-accent text-black': selectedTab === stage.id, 'bg-gray-100 text-gray-700 hover:bg-gray-200': selectedTab !== stage.id}"
+                                class="py-4 px-4 text-left text-sm font-medium flex items-center space-x-2 transition duration-200 ease-in-out rounded-lg"
                         >
                             <i class="text-xl {{ stage.icon }}"></i>
                             <span>{{ stage.label }}</span>
@@ -57,7 +57,9 @@
                                 <section [@fadeInAnimation] class="bg-blue-50 rounded-lg overflow-hidden border border-blue-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                                            <i class="bi bi-info-circle-fill mr-2 text-blue-600"></i>Basic Data
+                                            <i class="bi bi-info-circle-fill mr-2 text-blue-600"></i>
+
+                                            <span class="border-b-2 border-blue-400 pb-1">Basic Data</span>
                                         </h3>
                                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                             <div class="space-y-2" *ngFor="let item of getBasicDataItems(project.stages.identification.basicData) | keyvalue">
@@ -73,7 +75,8 @@
                                 <section [@fadeInAnimation] class="bg-green-50 rounded-lg overflow-hidden border border-green-100 transition-all duration-300 hover:shadow-lg">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                                            <i class="bi bi-leaf-fill mr-2 text-green-600"></i>Climate Finance Data
+                                            <i class="bi bi-leaf-fill mr-2 text-green-600"></i>
+                                            <span class="border-b-2 border-green-400 pb-1">Climate Finance Data</span>
                                         </h3>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div class="space-y-2" *ngFor="let item of getClimateFinanceDataItemsImplementation(project.stages.implementation.climateFinanceData) | keyvalue">
@@ -111,7 +114,8 @@
                                 <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-blue-50 rounded-lg overflow-hidden border border-blue-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                                            <i class="bi bi-info-circle-fill mr-2 text-blue-600"></i>Basic Data
+                                            <i class="bi bi-info-circle-fill mr-2 text-blue-600"></i>
+                                            <span class="border-b-2 border-blue-400 pb-1">Basic Data</span>
                                         </h3>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div class="space-y-2" *ngFor="let item of getBasicDataItemsPreparation(project.stages.preparation.basicData) | keyvalue">
@@ -128,7 +132,8 @@
                                 <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-green-50 rounded-lg overflow-hidden border border-green-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                                            <i class="bi bi-leaf-fill mr-2 text-green-600"></i>Climate Finance Data
+                                            <i class="bi bi-leaf-fill mr-2 text-green-600"></i>
+                                            <span class="border-b-2 border-green-400 pb-1">Climate Finance Data</span>
                                         </h3>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div class="space-y-2" *ngFor="let item of getClimateFinanceDataItemsPreparation(project.stages.preparation.climateFinanceData.attachments) | keyvalue">
@@ -144,7 +149,8 @@
                                 <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-purple-50 rounded-lg overflow-hidden border border-purple-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                                            <i class="bi bi-people-fill mr-2 text-purple-600"></i>Social Sustainability Data
+                                            <i class="bi bi-people-fill mr-2 text-purple-600"></i>
+                                            <span class="border-b-2 border-purple-400 pb-1">Social Sustainability Data</span>
                                         </h3>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div class="space-y-2" *ngFor="let item of getSocialSustainabilityDataItemsPreparation(project.stages.preparation.socialSustainabilityData) | keyvalue">
@@ -221,7 +227,8 @@
                                 <section [@fadeInAnimation] class="bg-blue-50 rounded-lg overflow-hidden border border-blue-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                                            <i class="bi bi-info-circle-fill mr-2 text-blue-600"></i>Basic Data
+                                            <i class="bi bi-info-circle-fill mr-2 text-blue-600"></i>
+                                            <span class="border-b-2 border-blue-400 pb-1">Basic Data</span>
                                         </h3>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div class="space-y-2" *ngFor="let item of getBasicDataItemsTenderManagement(project.stages.tenderManagement.basicData) | keyvalue">
@@ -238,7 +245,8 @@
                                 <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-purple-50 rounded-lg overflow-hidden border border-purple-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                                            <i class="bi bi-people-fill mr-2 text-purple-600"></i>Social Sustainability Data
+                                            <i class="bi bi-people-fill mr-2 text-purple-600"></i>
+                                            <span class="border-b-2 border-purple-400 pb-1">Social Sustainability Data</span>
                                         </h3>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div class="space-y-2" *ngFor="let item of getSocialSustainabilityDataItemsTenderManagement(project.stages.tenderManagement.socialSustainabilityData) | keyvalue">
@@ -255,7 +263,8 @@
                                 <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-indigo-50 rounded-lg overflow-hidden border border-indigo-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                                            <i class="bi bi-building-fill mr-2 text-indigo-600"></i>Institutional Sustainability Data
+                                            <i class="bi bi-building-fill mr-2 text-indigo-600"></i>
+                                            <span class="border-b-2 border-indigo-400 pb-1">Institutional Sustainability Data</span>
                                         </h3>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div class="space-y-2" *ngFor="let item of getInstitutionalSustainabilityDataItemsTenderManagement(project.stages.tenderManagement.institutionalSustainabilityData) | keyvalue">
@@ -296,7 +305,8 @@
                                 <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-blue-50 rounded-lg overflow-hidden border border-blue-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                                            <i class="bi bi-info-circle-fill mr-2 text-blue-600"></i>Basic Data
+                                            <i class="bi bi-info-circle-fill mr-2 text-blue-600"></i>
+                                            <span class="border-b-2 border-blue-400 pb-1">Basic Data</span>
                                         </h3>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div class="space-y-2" *ngFor="let item of getBasicDataItemsImplementation(project.stages.implementation.basicData) | keyvalue">
@@ -313,7 +323,8 @@
                                 <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-green-50 rounded-lg overflow-hidden border border-green-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                                            <i class="bi bi-leaf-fill mr-2 text-green-600"></i>Climate Finance Data
+                                            <i class="bi bi-leaf-fill mr-2 text-green-600"></i>
+                                            <span class="border-b-2 border-green-400 pb-1">Climate Finance Data</span>
                                         </h3>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div class="space-y-2" *ngFor="let item of getClimateFinanceDataItemsImplementation(project.stages.implementation.climateFinanceData) | keyvalue">
@@ -330,7 +341,8 @@
                                 <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-purple-50 rounded-lg overflow-hidden border border-purple-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                                            <i class="bi bi-people-fill mr-2 text-purple-600"></i>Social Sustainability Data
+                                            <i class="bi bi-people-fill mr-2 text-purple-600"></i>
+                                            <span class="border-b-2 border-purple-400 pb-1">Social Sustainability Data</span>
                                         </h3>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div class="space-y-2" *ngFor="let item of getSocialSustainabilityDataItemsImplementation(project.stages.implementation.socialSustainabilityData) | keyvalue">
@@ -346,7 +358,8 @@
                                 <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-indigo-50 rounded-lg overflow-hidden border border-indigo-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                                            <i class="bi bi-building-fill mr-2 text-indigo-600"></i>Institutional Sustainability Data
+                                            <i class="bi bi-building-fill mr-2 text-indigo-600"></i>
+                                            <span class="border-b-2 border-indigo-400 pb-1">Institutional Sustainability Data</span>
                                         </h3>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div class="space-y-2" *ngFor="let item of getInstitutionalSustainabilityDataItemsImplementation(project.stages.implementation.institutionalSustainabilityData) | keyvalue">
@@ -401,7 +414,8 @@
                                 <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-blue-50 rounded-lg overflow-hidden border border-blue-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                                            <i class="bi bi-info-circle-fill mr-2 text-blue-600"></i>Basic Data
+                                            <i class="bi bi-info-circle-fill mr-2 text-blue-600"></i>
+                                            <span class="border-b-2 border-blue-400 pb-1">Basic Data</span>
                                         </h3>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div class="space-y-2" *ngFor="let item of getBasicDataItemsCompletion(project.stages.completion.basicData) | keyvalue">
@@ -418,7 +432,8 @@
                                 <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-indigo-50 rounded-lg overflow-hidden border border-indigo-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                                            <i class="bi bi-building-fill mr-2 text-indigo-600"></i>Institutional Sustainability Data
+                                            <i class="bi bi-building-fill mr-2 text-indigo-600"></i>
+                                            <span class="border-b-2 border-indigo-400 pb-1">Institutional Sustainability Data</span>
                                         </h3>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div class="space-y-2" *ngFor="let item of getInstitutionalSustainabilityDataItemsCompletion(project.stages.completion.institutionalSustainabilityData) | keyvalue">
@@ -442,7 +457,8 @@
                                 <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-blue-50 rounded-lg overflow-hidden border border-blue-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                                            <i class="bi bi-info-circle-fill mr-2 text-blue-600"></i>Basic Data
+                                            <i class="bi bi-info-circle-fill mr-2 text-blue-600"></i>
+                                            <span class="border-b-2 border-blue-400 pb-1">Basic Data</span>
                                         </h3>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div class="space-y-2" *ngFor="let item of getBasicDataItemsOandM(project.stages.operationsAndMaintenance.basicData) | keyvalue">
@@ -458,7 +474,8 @@
                                 <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-green-50 rounded-lg overflow-hidden border border-green-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                                            <i class="bi bi-leaf-fill mr-2 text-green-600"></i>Climate Finance Data
+                                            <i class="bi bi-leaf-fill mr-2 text-green-600"></i>
+                                            <span class="border-b-2 border-green-400 pb-1">Climate Finance Data</span>
                                         </h3>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div class="space-y-2" *ngFor="let item of getClimateFinanceDataItemsOandM(project.stages.operationsAndMaintenance.climateFinanceData) | keyvalue">
@@ -474,7 +491,8 @@
                                 <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-purple-50 rounded-lg overflow-hidden border border-purple-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                                            <i class="bi bi-people-fill mr-2 text-purple-600"></i>Social Sustainability Data
+                                            <i class="bi bi-people-fill mr-2 text-purple-600"></i>
+                                            <span class="border-b-2 border-purple-400 pb-1">Social Sustainability Data</span>
                                         </h3>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div class="space-y-2" *ngFor="let item of getSocialSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.socialSustainabilityData) | keyvalue">
@@ -492,7 +510,8 @@
                                 <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-indigo-50 rounded-lg overflow-hidden border border-indigo-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                                            <i class="bi bi-building-fill mr-2 text-indigo-600"></i>Institutional Sustainability Data
+                                            <i class="bi bi-building-fill mr-2 text-indigo-600"></i>
+                                            <span class="border-b-2 border-indigo-400 pb-1">Institutional Sustainability Data</span>
                                         </h3>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div class="space-y-2" *ngFor="let item of getInstitutionalSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.institutionalSustainabilityData) | keyvalue">
@@ -547,7 +566,8 @@
                                 <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-blue-50 rounded-lg overflow-hidden border border-blue-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                                            <i class="bi bi-info-circle-fill mr-2 text-blue-600"></i>Basic Data
+                                            <i class="bi bi-info-circle-fill mr-2 text-blue-600"></i>
+                                            <span class="border-b-2 border-blue-400 pb-1">Basic Data</span>
                                         </h3>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div class="space-y-2" *ngFor="let item of getBasicDataItemsDecommissioning(project.stages.decommissioning.basicData) | keyvalue">
@@ -563,7 +583,8 @@
                                 <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-purple-50 rounded-lg overflow-hidden border border-purple-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                                            <i class="bi bi-people-fill mr-2 text-purple-600"></i>Social Sustainability Data
+                                            <i class="bi bi-people-fill mr-2 text-purple-600"></i>
+                                            <span class="border-b-2 border-purple-400 pb-1">Social Sustainability Data</span>
                                         </h3>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div class="space-y-2" *ngFor="let item of getSocialSustainabilityDataItemsDecommissioning(project.stages.decommissioning.socialSustainabilityData) | keyvalue">
@@ -611,7 +632,9 @@
                                 <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-indigo-50 rounded-lg overflow-hidden border border-indigo-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                                            <i class="bi bi-building-fill mr-2 text-indigo-600"></i>Institutional Sustainability Data
+                                            <i class="bi bi-building-fill mr-2 text-indigo-600"></i>
+
+                                            <span class="border-b-2 border-Indigo-400 pb-1">Institutional Sustainability Data</span>
                                         </h3>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div class="space-y-2" *ngFor="let item of getInstitutionalSustainabilityDataItemsDecommissioning(project.stages.decommissioning.institutionalSustainabilityData) | keyvalue">
