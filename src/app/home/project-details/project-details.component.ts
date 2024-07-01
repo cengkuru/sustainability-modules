@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule, DatePipe, NgForOf } from '@angular/common';
+import {CommonModule, CurrencyPipe, DatePipe, DecimalPipe, NgForOf} from '@angular/common';
 import { Observable, of } from "rxjs";
 import { ActivatedRoute, Router } from "@angular/router";
 import { switchMap, tap } from "rxjs/operators";
 import { animate, style, transition, trigger } from "@angular/animations";
 import { ProjectService } from "../../services/project.service";
 import { AttachmentListComponent } from "./attachment-list/attachment-list.component";
-
 @Component({
     selector: 'app-project-details',
     standalone: true,
@@ -14,8 +13,11 @@ import { AttachmentListComponent } from "./attachment-list/attachment-list.compo
         DatePipe,
         NgForOf,
         CommonModule,
-        AttachmentListComponent
+        AttachmentListComponent,
+        CurrencyPipe,
+        DecimalPipe
     ],
+    providers: [CurrencyPipe, DatePipe, DecimalPipe],
     templateUrl: './project-details.component.html',
     styleUrls: ['./project-details.component.scss'],
     animations: [
@@ -52,7 +54,10 @@ export class ProjectDetailsComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private projectService: ProjectService
+        private projectService: ProjectService,
+        private currencyPipe: CurrencyPipe,
+        private decimalPipe: DecimalPipe,
+        private datePipe: DatePipe
     ) {}
 
     ngOnInit(): void {
@@ -88,6 +93,32 @@ export class ProjectDetailsComponent implements OnInit {
         this.selectedTab = tabId;
     }
 
+    formatCurrency(value: string | number): string {
+        if (typeof value === 'string') {
+            value = parseFloat(value.replace(/[^0-9.-]+/g, ""));
+        }
+        return value ? `$${value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : '';
+    }
+
+    formatValue(value: any, type: string): string {
+        if (value === null || value === undefined) return '';
+
+        switch (type) {
+            case 'currency':
+                return this.currencyPipe.transform(value, 'USD', 'symbol', '1.0-0') || '';
+            case 'number':
+                return this.decimalPipe.transform(value, '1.0-0') || '';
+            case 'date':
+                return this.datePipe.transform(value, 'mediumDate') || '';
+            default:
+                return value.toString();
+        }
+    }
+
+    formatDate(date: string): string {
+        return date ? new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : '';
+    }
+
     getBasicDataItems(basicData: any) {
         if (!basicData) return {};
         return {
@@ -114,7 +145,7 @@ export class ProjectDetailsComponent implements OnInit {
             'Climate Finance Decision-Making': climateFinanceData.climateFinanceDecisionMaking,
             'Nationally Determined Contributions': climateFinanceData.nationallyDeterminedContributions,
             'Paris Agreement': climateFinanceData.parisAgreement,
-            'Amount of Investment': climateFinanceData.amountOfInvestment,
+            'Amount of Investment': this.formatCurrency(climateFinanceData.amountOfInvestment),
             'Policy Coherence': climateFinanceData.policyCoherence,
             'Beneficiaries': climateFinanceData.beneficiaries
         };
@@ -149,11 +180,10 @@ export class ProjectDetailsComponent implements OnInit {
             'Project Scope': basicData.projectScope,
             'Contact Details': basicData.contactDetails,
             'Funding Sources': basicData.fundingSources,
-            'Project Budget': basicData.projectBudget,
-            'Project Budget Approval Date': basicData.projectBudgetApprovalDate
+            'Project Budget': this.formatCurrency(basicData.projectBudget),
+            'Project Budget Approval Date': this.formatDate(basicData.projectBudgetApprovalDate)
         };
     }
-
     getClimateFinanceDataItemsPreparation(climateFinanceData: any) {
         if (!climateFinanceData) return {};
         return {
@@ -165,21 +195,20 @@ export class ProjectDetailsComponent implements OnInit {
             'Project Preparation Period': climateFinanceData.projectPreparationPeriod,
             'Non-Climate Co-Benefits': climateFinanceData.nonClimateCoBenefits,
             'Terms of Climate Finance': climateFinanceData.termsOfClimateFinance,
-            'Project Preparation Costs': climateFinanceData.projectPreparationCosts,
+            'Project Preparation Costs': this.formatCurrency(climateFinanceData.projectPreparationCosts),
             'Funding Source': climateFinanceData.fundingSource
         };
     }
-
     getSocialSustainabilityDataItemsPreparation(socialSustainabilityData: any) {
         if (!socialSustainabilityData) return {};
         return {
             'Public Consultation Meetings': socialSustainabilityData.publicConsultationMeetings,
             'Inclusive Design': socialSustainabilityData.inclusiveDesign,
             'Labor Obligations': socialSustainabilityData.laborObligations,
-            'Land Compensation Budget': socialSustainabilityData.landCompensationBudget,
+            'Land Compensation Budget': this.formatCurrency(socialSustainabilityData.landCompensationBudget),
             'Indigenous Land': socialSustainabilityData.indigenousLand,
             'Beneficiaries': socialSustainabilityData.beneficiaries,
-            'Number of Beneficiaries': socialSustainabilityData.numberOfBeneficiaries
+            'Number of Beneficiaries': socialSustainabilityData.numberOfBeneficiaries?.toLocaleString()
         };
     }
 
@@ -243,16 +272,16 @@ export class ProjectDetailsComponent implements OnInit {
             'Procuring Entity Contact Details': basicData.procuringEntityContactDetails,
             'Procurement Process': basicData.procurementProcess,
             'Procurement Method': basicData.procurementMethod,
-            'Number of Firms Tendering': basicData.numberOfFirmsTendering,
-            'Cost Estimate': basicData.costEstimate,
+            'Number of Firms Tendering': this.formatValue(basicData.numberOfFirmsTendering, 'number'),
+            'Cost Estimate': this.formatValue(basicData.costEstimate, 'currency'),
             'Contract Type': basicData.contractType,
             'Contract Administration Entity': basicData.contractAdministrationEntity,
             'Contract Officials and Roles': basicData.contractOfficialsAndRoles?.map((official: any) => `${official.name} - ${official.role}`).join(', '),
             'Contract Title': basicData.contractTitle,
             'Contract Firm': basicData.contractFirm,
-            'Contract Price': basicData.contractPrice,
+            'Contract Price': this.formatValue(basicData.contractPrice, 'currency'),
             'Contract Scope of Work': basicData.contractScopeOfWork,
-            'Contract Start Date': basicData.contractStartDate,
+            'Contract Start Date': this.formatValue(basicData.contractStartDate, 'date'),
             'Contract Duration': basicData.contractDuration,
             'Contract Status': basicData.contractStatus
         };
@@ -371,8 +400,8 @@ export class ProjectDetailsComponent implements OnInit {
         if (!basicData) return {};
         return {
             'Project Status': basicData.projectStatus,
-            'Completion Cost': basicData.completionCost,
-            'Completion Date': basicData.completionDate,
+            'Completion Cost': this.formatValue(basicData.completionCost, 'currency'),
+            'Completion Date': this.formatValue(basicData.completionDate, 'date'),
             'Scope at Completion': basicData.scopeAtCompletion,
             'Reasons for Project Changes': basicData.reasonsForProjectChanges
         };
