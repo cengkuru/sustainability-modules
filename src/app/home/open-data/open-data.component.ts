@@ -71,21 +71,18 @@ export class OpenDataComponent implements OnInit {
     if (!data || data.length === 0) return '';
 
     const headers = Object.keys(data[0]);
-    const csvRows = [];
+    const csvRows = [headers.join(',')];
 
-    // Add the headers
-    csvRows.push(headers.join(','));
-
-    // Add the data
     for (const row of data) {
       const values = headers.map(header => {
         const value = row[header as keyof FlattenedProject];
-        if (typeof value === 'object' && value !== null) {
-          // If the value is an object, stringify it
-          return JSON.stringify(value).replace(/"/g, '""'); // Escape double quotes
+        if (typeof value === 'number') {
+          return value.toString();
         }
-        if (typeof value === 'string') {
-          // Escape commas and double quotes in strings
+        if (typeof value === 'object' && value !== null) {
+          return `"${JSON.stringify(value).replace(/"/g, '""')}"`;
+        }
+        if (typeof value === 'string' && value.includes(',')) {
           return `"${value.replace(/"/g, '""')}"`;
         }
         return value;

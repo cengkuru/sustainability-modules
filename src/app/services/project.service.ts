@@ -16,12 +16,12 @@ export class ProjectService {
             name: project.name || '',
             featured: project.featured || false,
             location: project.location?.name || '',
-            coordinates: {
+            coordinates: JSON.stringify({
                 lat: project.location?.coordinates?.lat || 0,
                 lng: project.location?.coordinates?.lng || 0
-            },
+            }),
             sector: project.stages?.identification?.basicData?.sectorSubsector || '',
-            projectOwner: this.flattenProjectOwner(project.stages?.identification?.basicData?.projectOwner),
+            projectOwner: project.stages?.identification?.basicData?.projectOwner || '',
             projectReferenceNumber: project.stages?.identification?.basicData?.projectReferenceNumber || '',
             purpose: project.stages?.identification?.basicData?.purpose || '',
             description: project.stages?.identification?.basicData?.projectDescription || '',

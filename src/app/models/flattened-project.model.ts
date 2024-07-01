@@ -3,10 +3,7 @@ export interface FlattenedProject {
     name: string;
     featured: boolean;
     location: string;
-    coordinates: {
-        lat: number;
-        lng: number;
-    };
+    coordinates: string;
     sector: string;
     projectOwner: string;
     projectReferenceNumber: string;

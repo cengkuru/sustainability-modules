@@ -28,6 +28,7 @@ export class IndexComponent {
     { path: 'home', label: 'Home', icon: 'bi-house-fill' },
     { path: 'projects', label: 'Projects', icon: 'bi-kanban-fill' },
     { path: 'data-analytics', label: 'Analysis', icon: 'bi-graph-up-arrow' },
+    { path: 'downloads', label: 'Downloads', icon: 'bi-cloud-download-fill' },
     { path: 'feedback', label: 'Feedback', icon: 'bi-chat-left-text-fill' },
   ];
 
