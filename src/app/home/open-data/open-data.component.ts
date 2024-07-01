@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import {firstValueFrom, Observable} from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
-import {ProjectService} from "../../services/project.service";
-import {FlattenedProject} from "../models/flattened-project.model";
+import { ProjectService } from "../../services/project.service";
+import {FlattenedProject} from "../../models/flattened-project.model";
 
 @Component({
   selector: 'app-open-data',
@@ -69,9 +69,31 @@ export class OpenDataComponent implements OnInit {
 
   private convertToCSV(data: FlattenedProject[]): string {
     if (!data || data.length === 0) return '';
-    const headers = Object.keys(data[0]).join(',');
-    const rows = data.map(row => Object.values(row).join(','));
-    return [headers, ...rows].join('\n');
+
+    const headers = Object.keys(data[0]);
+    const csvRows = [];
+
+    // Add the headers
+    csvRows.push(headers.join(','));
+
+    // Add the data
+    for (const row of data) {
+      const values = headers.map(header => {
+        const value = row[header as keyof FlattenedProject];
+        if (typeof value === 'object' && value !== null) {
+          // If the value is an object, stringify it
+          return JSON.stringify(value).replace(/"/g, '""'); // Escape double quotes
+        }
+        if (typeof value === 'string') {
+          // Escape commas and double quotes in strings
+          return `"${value.replace(/"/g, '""')}"`;
+        }
+        return value;
+      });
+      csvRows.push(values.join(','));
+    }
+
+    return csvRows.join('\n');
   }
 
   private convertToTXT(data: FlattenedProject[]): string {

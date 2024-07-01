@@ -1,3 +1,7 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 .download-button {
   @apply px-6 py-3 text-sm font-medium text-secondary bg-accent rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent;
 
@@ -14,8 +18,53 @@
   }
 }
 
+.error-message {
+  @apply mt-4 text-red-500 text-center;
+}
+
+.downloading-indicator {
+  @apply bg-customGray px-6 py-4 flex items-center justify-center;
+
+  i {
+    @apply text-secondary animate-bounce mr-2;
+  }
+
+  span {
+    @apply text-sm text-secondary;
+  }
+}
+
+// Custom animations
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.5s ease-out;
+}
+
+// Responsive adjustments
 @screen sm {
-  .download-button {
-    @apply text-base;
+  .download-buttons {
+    @apply flex-row space-y-0 space-x-4;
+  }
+}
+
+@screen md {
+  .container {
+    @apply px-8;
+  }
+}
+
+@screen lg {
+  .container {
+    @apply px-12;
   }
 }
