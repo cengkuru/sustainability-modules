@@ -1,43 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import {firstValueFrom, Observable} from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
-import { lastValueFrom } from 'rxjs';
+import {ProjectService} from "../../services/project.service";
+import {FlattenedProject} from "../models/flattened-project.model";
 
 @Component({
   selector: 'app-open-data',
+  templateUrl: './open-data.component.html',
+  styleUrls: ['./open-data.component.scss'],
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './open-data.component.html',
-  styleUrls: ['./open-data.component.scss']
 })
 export class OpenDataComponent implements OnInit {
-  projects$: Observable<any[]>;
+  flattenedProjects$!: Observable<FlattenedProject[]>;
+  downloading = false;
+  error: string | null = null;
 
-  constructor(private firestore: AngularFirestore) {
-    this.projects$ = new Observable<any[]>(); // Initialize to an empty observable to avoid undefined issues
-  }
+  constructor(
+      private firestore: AngularFirestore,
+      private projectService: ProjectService
+  ) {}
 
   ngOnInit(): void {
-    this.projects$ = this.firestore.collection('projects').snapshotChanges().pipe(
-        map(actions => actions.map(a => {
-          const data = a.payload.doc.data() as object;
-          console.log('Data:', data);
-          const id = a.payload.doc.id;
-          return { id, ...data };
-        }))
+    this.flattenedProjects$ = this.firestore.collection('projects').valueChanges().pipe(
+        map(projects => projects.map(project => this.projectService.flattenProject(project)))
     );
   }
 
   async downloadFile(format: string): Promise<void> {
+    this.downloading = true;
+    this.error = null;
     console.log('Downloading data in ' + format + ' format...');
+
     try {
-      const projects = await lastValueFrom(this.projects$);
-      console.log('Projects:', projects);
-      if (!projects || projects.length === 0) {
-        console.error('No project data available for download.');
-        return;
+      const flattenedProjects = await firstValueFrom(this.flattenedProjects$);
+      if (!flattenedProjects || flattenedProjects.length === 0) {
+        throw new Error('No project data available for download.');
       }
 
       let dataStr = '';
@@ -45,41 +45,47 @@ export class OpenDataComponent implements OnInit {
 
       switch (format) {
         case 'csv':
-          dataStr = this.convertToCSV(projects);
+          dataStr = this.convertToCSV(flattenedProjects);
           fileName += '.csv';
           break;
         case 'json':
-          dataStr = JSON.stringify(projects, null, 2);
+          dataStr = JSON.stringify(flattenedProjects, null, 2);
           fileName += '.json';
           break;
         case 'txt':
-          dataStr = this.convertToTXT(projects);
+          dataStr = this.convertToTXT(flattenedProjects);
           fileName += '.txt';
           break;
       }
 
-      const blob = new Blob([dataStr], { type: 'text/plain' });
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = fileName;
-      a.click();
-      window.URL.revokeObjectURL(url);
+      this.downloadData(dataStr, fileName);
     } catch (error) {
       console.error('Error downloading data:', error);
+      this.error = 'An error occurred while downloading the data. Please try again.';
+    } finally {
+      this.downloading = false;
     }
   }
 
-  private convertToCSV(data: any[]): string {
-    console.log('Converting data to CSV format...', data);
+  private convertToCSV(data: FlattenedProject[]): string {
     if (!data || data.length === 0) return '';
     const headers = Object.keys(data[0]).join(',');
     const rows = data.map(row => Object.values(row).join(','));
     return [headers, ...rows].join('\n');
   }
 
-  private convertToTXT(data: any[]): string {
+  private convertToTXT(data: FlattenedProject[]): string {
     if (!data || data.length === 0) return '';
     return data.map(row => JSON.stringify(row)).join('\n');
+  }
+
+  private downloadData(data: string, fileName: string): void {
+    const blob = new Blob([data], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    a.click();
+    window.URL.revokeObjectURL(url);
   }
 }

@@ -1,23 +1,21 @@
-.bg-indigo-100 {
-  background-color: #d8d8cd; // CoST Light Gray
+.download-button {
+  @apply px-6 py-3 text-sm font-medium text-secondary bg-accent rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent;
+
+  &:hover:not(:disabled) {
+    @apply bg-opacity-90 transform scale-105;
+  }
+
+  &:active:not(:disabled) {
+    @apply transform scale-95;
+  }
+
+  &:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
 }
 
-.text-gray-900 {
-  color: #2c4143; // CoST Blue
-}
-
-.text-gray-600 {
-  color: #58707b; // CoST Teal
-}
-
-.bg-indigo-600 {
-  background-color: #61a8bd; // CoST Light Blue
-}
-
-.hover\:bg-indigo-500:hover {
-  background-color: #628ea0; // CoST Medium Blue
-}
-
-.focus-visible\:outline-indigo-600:focus-visible {
-  outline-color: #61a8bd; // CoST Light Blue
+@screen sm {
+  .download-button {
+    @apply text-base;
+  }
 }
