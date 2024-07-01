@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe, NgForOf } from '@angular/common';
 import { Observable, of } from "rxjs";
 import { ActivatedRoute, Router } from "@angular/router";
-import {switchMap, tap} from "rxjs/operators";
+import { switchMap, tap } from "rxjs/operators";
 import { animate, style, transition, trigger } from "@angular/animations";
-import {ProjectService} from "../../services/project.service";
+import { ProjectService } from "../../services/project.service";
+import { AttachmentListComponent } from "./attachment-list/attachment-list.component";
 
 @Component({
     selector: 'app-project-details',
@@ -12,7 +13,8 @@ import {ProjectService} from "../../services/project.service";
     imports: [
         DatePipe,
         NgForOf,
-        CommonModule
+        CommonModule,
+        AttachmentListComponent
     ],
     templateUrl: './project-details.component.html',
     styleUrls: ['./project-details.component.scss'],
@@ -86,24 +88,25 @@ export class ProjectDetailsComponent implements OnInit {
         this.selectedTab = tabId;
     }
 
-
-
-
-
     getBasicDataItems(basicData: any) {
+        if (!basicData) return {};
         return {
-            'Project Reference Number': basicData.projectReferenceNumber,
-            'Project Owner': basicData.projectOwner,
-            'Sector, Subsector': basicData.sectorSubsector,
-            'Project Name': basicData.projectName,
-            'Project Location': basicData.projectLocation,
-            'Purpose': basicData.purpose,
-            'Project Description': basicData.projectDescription,
-            'Project Brief or Feasibility Study': basicData.projectBriefOrFeasibilityStudy
+            'Project Reference Number': basicData.projectReferenceNumber || '',
+            'Project Owner': basicData.projectOwner || '',
+            'Sector, Subsector': basicData.sectorSubsector || '',
+            'Project Name': basicData.projectName || '',
+            'Project Location': basicData.projectLocation || '',
+            'Purpose': basicData.purpose || '',
+            'Project Description': basicData.projectDescription || '',
+            'Project Brief or Feasibility Study': basicData.projectBriefOrFeasibilityStudy || ''
         };
     }
 
+// Repeat this pattern for other get*Items methods.
+
+
     getClimateFinanceDataItems(climateFinanceData: any) {
+        if (!climateFinanceData) return {};
         return {
             'Climate Objective': climateFinanceData.climateObjective,
             'Financial Instrument': climateFinanceData.financialInstrument,
@@ -118,6 +121,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getInstitutionalSustainabilityDataItems(institutionalSustainabilityData: any) {
+        if (!institutionalSustainabilityData) return {};
         return {
             'Policy Coherence Documentation': institutionalSustainabilityData.policyCoherenceDocumentation,
             'Number of Freedom of Information Requests': institutionalSustainabilityData.numberOfFreedomOfInformationRequests,
@@ -128,49 +132,30 @@ export class ProjectDetailsComponent implements OnInit {
         };
     }
 
-    getAllAttachments(identificationStage: any) {
-        return [
-            ...(identificationStage.basicData.attachments || []),
-            ...(identificationStage.climateFinanceData.attachments || []),
-            ...(identificationStage.institutionalSustainabilityData.attachments || [])
-        ];
+    getAllAttachments(stage: any): any[] {
+        if (!stage) return [];
+        let attachments: any[] = [];
+        Object.keys(stage).forEach(key => {
+            if (stage[key] && stage[key].attachments) {
+                attachments = attachments.concat(stage[key].attachments);
+            }
+        });
+        return attachments;
     }
 
-
     getBasicDataItemsPreparation(basicData: any) {
+        if (!basicData) return {};
         return {
             'Project Scope': basicData.projectScope,
             'Contact Details': basicData.contactDetails,
             'Funding Sources': basicData.fundingSources,
             'Project Budget': basicData.projectBudget,
-            'Project Budget Approval Date': basicData.projectBudgetApprovalDate,
-            'Number of Beneficiaries': basicData.numberOfBeneficiaries,
-            'Climate and Disaster Risk Assessment': basicData.climateAndDisasterRiskAssessment,
-            'Conservation Measures': basicData.conservationMeasures,
-            'Risk Management Plans': basicData.riskManagementPlans,
-            'Life Cycle Cost Calculation Methodology': basicData.lifeCycleCostCalculationMethodology,
-            'Climate Measures': basicData.climateMeasures,
-            'Asset Lifetime': basicData.assetLifetime,
-            'Indigenous Land': basicData.indigenousLand,
-            'Environmental Measures': basicData.environmentalMeasures,
-            'Protected Area': basicData.protectedArea,
-            'Public Consultation Meetings': basicData.publicConsultationMeetings,
-            'Land Compensation Budget': basicData.landCompensationBudget,
-            'Cost Benefit Analysis': basicData.costBenefitAnalysis,
-            'Environmental Impact Category': basicData.environmentalImpactCategory,
-            'Forecast of Greenhouse Gas Emissions': basicData.forecastOfGreenhouseGasEmissions,
-            'Life Cycle Cost': basicData.lifeCycleCost,
-            'Value for Money': basicData.valueForMoney,
-            'Environmental Licenses and Exemptions': basicData.environmentalLicensesAndExemptions,
-            'Inclusive Design': basicData.inclusiveDesign,
-            'Maintenance Plan': basicData.maintenancePlan,
-            'Procurement Strategy': basicData.procurementStrategy,
-            'Budget Projections': basicData.budgetProjections,
-            'Budget for Preparation': basicData.budgetForPreparation
+            'Project Budget Approval Date': basicData.projectBudgetApprovalDate
         };
     }
 
     getClimateFinanceDataItemsPreparation(climateFinanceData: any) {
+        if (!climateFinanceData) return {};
         return {
             'Green Climate Fund Accredited Entity': climateFinanceData.greenClimateFundAccreditedEntity,
             'Accredited Entity Type': climateFinanceData.accreditedEntityType,
@@ -186,6 +171,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getSocialSustainabilityDataItemsPreparation(socialSustainabilityData: any) {
+        if (!socialSustainabilityData) return {};
         return {
             'Public Consultation Meetings': socialSustainabilityData.publicConsultationMeetings,
             'Inclusive Design': socialSustainabilityData.inclusiveDesign,
@@ -198,6 +184,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getInstitutionalSustainabilityDataItemsPreparation(institutionalSustainabilityData: any) {
+        if (!institutionalSustainabilityData) return {};
         return {
             'Number of Freedom of Information Requests': institutionalSustainabilityData.numberOfFreedomOfInformationRequests,
             'Policy Coherence Documentation': institutionalSustainabilityData.policyCoherenceDocumentation,
@@ -208,6 +195,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getEconomicFinancialSustainabilityDataItemsPreparation(economicFinancialSustainabilityData: any) {
+        if (!economicFinancialSustainabilityData) return {};
         return {
             'Value for Money': economicFinancialSustainabilityData.valueForMoney,
             'Budget for Preparation': economicFinancialSustainabilityData.budgetForPreparation,
@@ -223,6 +211,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getEnvironmentalClimateSustainabilityDataItemsPreparation(environmentalClimateSustainabilityData: any) {
+        if (!environmentalClimateSustainabilityData) return {};
         return {
             'Environmental Licenses and Exemptions': environmentalClimateSustainabilityData.environmentalLicensesAndExemptions,
             'Forecast of Greenhouse Gas Emissions': environmentalClimateSustainabilityData.forecastOfGreenhouseGasEmissions,
@@ -236,17 +225,19 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getAllAttachmentsPreparation(preparationStage: any) {
+        if (!preparationStage) return [];
         return [
-            ...(preparationStage.basicData.attachments || []),
-            ...(preparationStage.climateFinanceData.attachments || []),
-            ...(preparationStage.socialSustainabilityData.attachments || []),
-            ...(preparationStage.institutionalSustainabilityData.attachments || []),
-            ...(preparationStage.economicAndFinancialSustainabilityData.attachments || []),
-            ...(preparationStage.environmentalAndClimateSustainabilityData.attachments || [])
+            ...(preparationStage.basicData?.attachments || []),
+            ...(preparationStage.climateFinanceData?.attachments || []),
+            ...(preparationStage.socialSustainabilityData?.attachments || []),
+            ...(preparationStage.institutionalSustainabilityData?.attachments || []),
+            ...(preparationStage.economicAndFinancialSustainabilityData?.attachments || []),
+            ...(preparationStage.environmentalAndClimateSustainabilityData?.attachments || [])
         ];
     }
 
     getBasicDataItemsTenderManagement(basicData: any) {
+        if (!basicData) return {};
         return {
             'Procuring Entity': basicData.procuringEntity,
             'Procuring Entity Contact Details': basicData.procuringEntityContactDetails,
@@ -256,7 +247,7 @@ export class ProjectDetailsComponent implements OnInit {
             'Cost Estimate': basicData.costEstimate,
             'Contract Type': basicData.contractType,
             'Contract Administration Entity': basicData.contractAdministrationEntity,
-            'Contract Officials and Roles': basicData.contractOfficialsAndRoles.map((official: any) => `${official.name} - ${official.role}`).join(', '),
+            'Contract Officials and Roles': basicData.contractOfficialsAndRoles?.map((official: any) => `${official.name} - ${official.role}`).join(', '),
             'Contract Title': basicData.contractTitle,
             'Contract Firm': basicData.contractFirm,
             'Contract Price': basicData.contractPrice,
@@ -268,6 +259,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getSocialSustainabilityDataItemsTenderManagement(socialSustainabilityData: any) {
+        if (!socialSustainabilityData) return {};
         return {
             'Labor Budget': socialSustainabilityData.laborBudget,
             'Health and Safety Certifications': socialSustainabilityData.healthAndSafetyCertifications
@@ -275,6 +267,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getInstitutionalSustainabilityDataItemsTenderManagement(institutionalSustainabilityData: any) {
+        if (!institutionalSustainabilityData) return {};
         return {
             'Number of Freedom of Information Requests': institutionalSustainabilityData.numberOfFreedomOfInformationRequests,
             'Number of Freedom of Information Answers': institutionalSustainabilityData.numberOfFreedomOfInformationAnswers,
@@ -286,6 +279,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getEnvironmentalClimateSustainabilityDataItemsTenderManagement(environmentalClimateSustainabilityData: any) {
+        if (!environmentalClimateSustainabilityData) return {};
         return {
             'Number of Environmental Certifications': environmentalClimateSustainabilityData.numberOfEnvironmentalCertifications,
             'Environmental Certifications': environmentalClimateSustainabilityData.environmentalCertifications
@@ -293,6 +287,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getAllAttachmentsTenderManagement(stage: any) {
+        if (!stage) return [];
         return [
             ...(stage.basicData?.attachments || []),
             ...(stage.socialSustainabilityData?.attachments || []),
@@ -301,8 +296,8 @@ export class ProjectDetailsComponent implements OnInit {
         ];
     }
 
-
     getBasicDataItemsImplementation(basicData: any) {
+        if (!basicData) return {};
         return {
             'Variation to Contract Price': basicData.variationToContractPrice,
             'Escalation of Contract Price': basicData.escalationOfContractPrice,
@@ -315,6 +310,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getClimateFinanceDataItemsImplementation(climateFinanceData: any) {
+        if (!climateFinanceData) return {};
         return {
             'Disbursement Records': climateFinanceData.disbursementRecords,
             'Type of Monitoring': climateFinanceData.typeOfMonitoring,
@@ -325,6 +321,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getSocialSustainabilityDataItemsImplementation(socialSustainabilityData: any) {
+        if (!socialSustainabilityData) return {};
         return {
             'Jobs Generated': socialSustainabilityData.jobsGenerated,
             'Inclusive Implementation': socialSustainabilityData.inclusiveImplementation,
@@ -333,6 +330,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getInstitutionalSustainabilityDataItemsImplementation(institutionalSustainabilityData: any) {
+        if (!institutionalSustainabilityData) return {};
         return {
             'Number of Freedom of Information Requests': institutionalSustainabilityData.numberOfFreedomOfInformationRequests,
             'Number of Freedom of Information Answers': institutionalSustainabilityData.numberOfFreedomOfInformationAnswers
@@ -340,6 +338,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getEconomicAndFinancialSustainabilityDataItemsImplementation(economicAndFinancialSustainabilityData: any) {
+        if (!economicAndFinancialSustainabilityData) return {};
         return {
             'Budget Shortfall': economicAndFinancialSustainabilityData.budgetShortfall,
             'Funding Source for Implementation': economicAndFinancialSustainabilityData.fundingSourceForImplementation,
@@ -348,6 +347,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getEnvironmentalAndClimateSustainabilityDataItemsImplementation(environmentalAndClimateSustainabilityData: any) {
+        if (!environmentalAndClimateSustainabilityData) return {};
         return {
             'Environmental Measures': environmentalAndClimateSustainabilityData.environmentalMeasures,
             'Conservation Measures': environmentalAndClimateSustainabilityData.conservationMeasures,
@@ -356,6 +356,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getAllAttachmentsImplementation(stage: any) {
+        if (!stage) return [];
         return [
             ...(stage.basicData?.attachments || []),
             ...(stage.climateFinanceData?.attachments || []),
@@ -367,6 +368,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getBasicDataItemsCompletion(basicData: any) {
+        if (!basicData) return {};
         return {
             'Project Status': basicData.projectStatus,
             'Completion Cost': basicData.completionCost,
@@ -377,6 +379,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getInstitutionalSustainabilityDataItemsCompletion(institutionalSustainabilityData: any) {
+        if (!institutionalSustainabilityData) return {};
         return {
             'Number of Freedom of Information Requests': institutionalSustainabilityData.numberOfFreedomOfInformationRequests,
             'Number of Freedom of Information Answers': institutionalSustainabilityData.numberOfFreedomOfInformationAnswers
@@ -384,6 +387,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getAllAttachmentsCompletion(stage: any) {
+        if (!stage) return [];
         return [
             ...(stage.basicData?.attachments || []),
             ...(stage.institutionalSustainabilityData?.attachments || [])
@@ -391,18 +395,20 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getBasicDataItemsOandM(basicData: any) {
+        if (!basicData) return {};
         return {
             'Asset Name': basicData.assetName,
             'Asset Location': basicData.assetLocation,
             'Type of Maintenance Works': basicData.typeOfMaintenanceWorks,
             'Works Description': basicData.worksDescription,
-            'Project Officials and Roles': basicData.projectOfficialsAndRoles.map((official: any) => `${official.name} - ${official.role}`).join(', '),
+            'Project Officials and Roles': basicData.projectOfficialsAndRoles?.map((official: any) => `${official.name} - ${official.role}`).join(', '),
             'Maintenance Scope': basicData.maintenanceScope,
             'Maintenance Plan': basicData.maintenancePlan
         };
     }
 
     getClimateFinanceDataItemsOandM(climateFinanceData: any) {
+        if (!climateFinanceData) return {};
         return {
             'Impact Measurement': climateFinanceData.impactMeasurement,
             'Carbon Footprint': climateFinanceData.carbonFootprint
@@ -410,6 +416,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getSocialSustainabilityDataItemsOandM(socialSustainabilityData: any) {
+        if (!socialSustainabilityData) return {};
         return {
             'Jobs Generated': socialSustainabilityData.jobsGenerated,
             'Inclusive Implementation': socialSustainabilityData.inclusiveImplementation,
@@ -418,6 +425,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getInstitutionalSustainabilityDataItemsOandM(institutionalSustainabilityData: any) {
+        if (!institutionalSustainabilityData) return {};
         return {
             'Number of Freedom of Information Requests': institutionalSustainabilityData.numberOfFreedomOfInformationRequests,
             'Number of Freedom of Information Answers': institutionalSustainabilityData.numberOfFreedomOfInformationAnswers
@@ -425,6 +433,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getEconomicFinancialSustainabilityDataItemsOandM(economicFinancialSustainabilityData: any) {
+        if (!economicFinancialSustainabilityData) return {};
         return {
             'Funding Source for Maintenance': economicFinancialSustainabilityData.fundingSourceForMaintenance,
             'Budget for Maintenance': economicFinancialSustainabilityData.budgetForMaintenance
@@ -432,6 +441,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getEnvironmentalClimateSustainabilityDataItemsOandM(environmentalClimateSustainabilityData: any) {
+        if (!environmentalClimateSustainabilityData) return {};
         return {
             'Environmental Measures': environmentalClimateSustainabilityData.environmentalMeasures,
             'Conservation Measures': environmentalClimateSustainabilityData.conservationMeasures,
@@ -441,6 +451,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getAllAttachmentsOandM(stage: any) {
+        if (!stage) return [];
         return [
             ...(stage.basicData?.attachments || []),
             ...(stage.climateFinanceData?.attachments || []),
@@ -452,6 +463,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getBasicDataItemsDecommissioning(basicData: any) {
+        if (!basicData) return {};
         return {
             'Decommission Cost Forecast': basicData.decommissionCostForecast,
             'Infrastructure Assets to be Decommissioned': basicData.infrastructureAssetsToBeDecommissioned,
@@ -464,6 +476,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getSocialSustainabilityDataItemsDecommissioning(socialSustainabilityData: any) {
+        if (!socialSustainabilityData) return {};
         return {
             'Jobs Generated': socialSustainabilityData.jobsGenerated,
             'Workers’ Accidents': socialSustainabilityData.workersAccidents
@@ -471,18 +484,21 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getEnvironmentalClimateSustainabilityDataItemsDecommissioning(environmentalClimateSustainabilityData: any) {
+        if (!environmentalClimateSustainabilityData) return {};
         return {
             'Decommission Mitigation Plan': environmentalClimateSustainabilityData.decommissionMitigationPlan
         };
     }
 
     getEconomicFinancialSustainabilityDataItemsDecommissioning(economicFinancialSustainabilityData: any) {
+        if (!economicFinancialSustainabilityData) return {};
         return {
             'Decommission Cost Forecast': economicFinancialSustainabilityData.decommissionCostForecast
         };
     }
 
     getInstitutionalSustainabilityDataItemsDecommissioning(institutionalSustainabilityData: any) {
+        if (!institutionalSustainabilityData) return {};
         return {
             'Number of Freedom of Information Requests': institutionalSustainabilityData.numberOfFreedomOfInformationRequests,
             'Number of Freedom of Information Answers': institutionalSustainabilityData.numberOfFreedomOfInformationAnswers
@@ -490,6 +506,7 @@ export class ProjectDetailsComponent implements OnInit {
     }
 
     getAllAttachmentsDecommissioning(stage: any) {
+        if (!stage) return [];
         return [
             ...(stage.basicData?.attachments || []),
             ...(stage.socialSustainabilityData?.attachments || []),

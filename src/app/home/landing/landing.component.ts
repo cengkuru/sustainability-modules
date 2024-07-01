@@ -4,7 +4,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { environment } from "../../../environments/environment";
-import * as projectsData from '../../../assets/data/projects.json';
+import projectsData from '../../../assets/data/projects.json';
 import {IntersectionObserverDirective} from "../../directives/intersection-observer.directive";
 import {animate, style, transition, trigger} from "@angular/animations";
 
@@ -43,12 +43,7 @@ export class LandingComponent implements OnInit, OnDestroy {
   numberOfProjects: number = 0;
   totalValueOfProjects: number = 0;
 
-  gcfInfo = {
-    title: "Green Climate Fund (GCF)",
-    description: "The GCF is the world's largest climate fund, mandated to support developing countries raise and realise their Nationally Determined Contributions (NDC) ambitions towards low-emissions, climate-resilient pathways. GCF's investments are aimed at achieving maximum impact in the developing world, supporting paradigm shifts in both mitigation and adaptation.",
-    linkText: "Learn More About GCF",
-    linkUrl: "https://www.greenclimate.fund"
-  };
+
 
   mainSection = {
     title: "Explore GCF Projects: Boosting Climate Finance Investments in South Africa",
@@ -80,6 +75,7 @@ export class LandingComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
     // this.addProjectsToFirebase();
     this.loadProjects();
     window.addEventListener('viewProjectDetails', this.handleViewProjectDetails as EventListener);

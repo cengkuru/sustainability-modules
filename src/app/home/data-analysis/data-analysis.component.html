@@ -215,24 +215,25 @@
                 </div>
             </div>
 
-            <div class="bg-customGray rounded-lg shadow p-6 mt-6">
-                <div id="budgetVariancesChart" style="height: 400px;"></div>
+            <!-- New Investment Trends by Region Chart -->
+            <div class="bg-customGray rounded-lg shadow p-6">
+                <div #investmentTrendsChart style="height: 400px;"></div>
                 <div class="relative inline-block text-left mt-4">
-                    <button type="button" (click)="toggleDropdown('budgetVariances')" class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-expanded="true" aria-haspopup="true">
+                    <button type="button" (click)="toggleDropdown('investmentTrends')" class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-expanded="true" aria-haspopup="true">
                         <i class="bi bi-download mr-2"></i>Download
                     </button>
-                    <div *ngIf="dropdownOpen['budgetVariances']" class="absolute right-0 z-20 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <div *ngIf="dropdownOpen['investmentTrends']" class="absolute right-0 z-20 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <div class="py-1">
-                            <button (click)="downloadChartData(budgetVariancesChart, 'pdf')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
+                            <button (click)="downloadChartData(investmentByRegionChart, 'pdf')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
                                 <i class="bi bi-file-pdf mr-2"></i>Download PDF
                             </button>
-                            <button (click)="downloadChartData(budgetVariancesChart, 'json')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
+                            <button (click)="downloadChartData(investmentByRegionChart, 'json')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
                                 <i class="bi bi-file-earmark-code mr-2"></i>Download JSON
                             </button>
-                            <button (click)="downloadChartData(budgetVariancesChart, 'csv')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
+                            <button (click)="downloadChartData(investmentByRegionChart, 'csv')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
                                 <i class="bi bi-file-earmark-spreadsheet mr-2"></i>Download CSV
                             </button>
-                            <button (click)="downloadChartData(budgetVariancesChart, 'png')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
+                            <button (click)="downloadChartData(investmentByRegionChart, 'png')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
                                 <i class="bi bi-file-earmark-image mr-2"></i>Download PNG
                             </button>
                         </div>

@@ -1,0 +1,23 @@
+
+<div class="bg-primary rounded-lg mt-5 overflow-hidden border border-white p-4">
+    <h4 class="text-xl font-semibold text-gray-800 mb-4">Files</h4>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div *ngFor="let attachment of attachments" class="bg-white rounded-lg  p-4" [@fadeSlideInOut]>
+            <h5 class="text-lg font-semibold text-gray-800 mb-2">{{attachment.title}}</h5>
+            <p class="text-sm text-gray-600 mb-3">{{attachment.description}}</p>
+            <div class="space-y-1 text-sm text-gray-600 mb-3">
+                <p><span class="font-medium">Document Type:</span> {{attachment.documentType}}</p>
+                <p><span class="font-medium">Format:</span> {{attachment.format}}</p>
+                <p><span class="font-medium">Language:</span> {{attachment.language}}</p>
+                <p><span class="font-medium">Pages:</span> {{attachment.pages}}</p>
+                <p><span class="font-medium">Date Published:</span> {{attachment.datePublished | date:'mediumDate'}}</p>
+                <p><span class="font-medium">Date Modified:</span> {{attachment.dateModified | date:'mediumDate'}}</p>
+            </div>
+            <div class="flex items-center justify-start">
+                <a [href]="attachment.url" target="_blank" class="text-blue-600 hover:text-blue-700 transition-colors duration-300">
+                    <i class="bi bi-download mr-1"></i>Download
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
