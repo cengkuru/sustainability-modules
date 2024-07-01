@@ -54,41 +54,38 @@
                             <div *ngIf="project$ | async as project" class="space-y-6">
 
                                 <!-- Basic Data Section -->
-                                <section class="bg-blue-50 rounded-lg overflow-hidden border border-blue-100">
+                                <section [@fadeInAnimation] class="bg-blue-50 rounded-lg overflow-hidden border border-blue-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-info-circle-fill mr-2 text-blue-600"></i>Basic Data
                                         </h3>
-                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                             <div class="space-y-2" *ngFor="let item of getBasicDataItems(project.stages.identification.basicData) | keyvalue">
                                                 <p class="text-sm font-medium text-gray-600">{{item.key}}</p>
-                                                <p class="text-base text-gray-900">{{item.value}}</p>
+                                                <p class="text-base text-gray-900 font-semibold">{{formatValue(item.value, getValueType(item.key))}}</p>
                                             </div>
-
                                         </div>
                                         <app-attachment-list [attachments]="project.stages.identification.basicData.attachments"></app-attachment-list>
                                     </div>
                                 </section>
 
                                 <!-- Climate Finance Data Section -->
-                                <section class="bg-green-50 rounded-lg overflow-hidden border border-green-100">
+                                <section [@fadeInAnimation] class="bg-green-50 rounded-lg overflow-hidden border border-green-100 transition-all duration-300 hover:shadow-lg">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-leaf-fill mr-2 text-green-600"></i>Climate Finance Data
                                         </h3>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                            <div class="space-y-2" *ngFor="let item of getClimateFinanceDataItems(project.stages.identification.climateFinanceData) | keyvalue">
+                                            <div class="space-y-2" *ngFor="let item of getClimateFinanceDataItemsImplementation(project.stages.implementation.climateFinanceData) | keyvalue">
                                                 <p class="text-sm font-medium text-gray-600">{{item.key}}</p>
-                                                <p class="text-base text-gray-900">{{item.value}}</p>
+                                                <p class="text-base text-gray-900">{{formatValue(item.value, getValueType(item.key))}}</p>
                                             </div>
-
                                         </div>
-                                        <app-attachment-list [attachments]="project.stages.identification.climateFinanceData.attachments"></app-attachment-list>
+                                        <app-attachment-list [attachments]="project.stages.implementation.climateFinanceData.attachments"></app-attachment-list>
                                     </div>
                                 </section>
-
                                 <!-- Institutional Sustainability Data Section -->
-                                <section class="bg-purple-50 rounded-lg overflow-hidden border border-purple-100">
+                                <section [@fadeInAnimation] class="bg-purple-50 rounded-lg overflow-hidden border border-purple-100 transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02]">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-building-fill mr-2 text-purple-600"></i>Institutional Sustainability Data
@@ -111,7 +108,7 @@
                             <div *ngIf="project$ | async as project" class="space-y-6">
 
                                 <!-- Basic Data Section -->
-                                <section class="bg-blue-50 rounded-lg overflow-hidden border border-blue-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-blue-50 rounded-lg overflow-hidden border border-blue-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-info-circle-fill mr-2 text-blue-600"></i>Basic Data
@@ -128,7 +125,7 @@
                                 </section>
 
                                 <!-- Climate Finance Data Section -->
-                                <section class="bg-green-50 rounded-lg overflow-hidden border border-green-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-green-50 rounded-lg overflow-hidden border border-green-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-leaf-fill mr-2 text-green-600"></i>Climate Finance Data
@@ -144,7 +141,7 @@
                                 </section>
 
                                 <!-- Social Sustainability Data Section -->
-                                <section class="bg-purple-50 rounded-lg overflow-hidden border border-purple-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-purple-50 rounded-lg overflow-hidden border border-purple-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-people-fill mr-2 text-purple-600"></i>Social Sustainability Data
@@ -162,7 +159,7 @@
                                 </section>
 
                                 <!-- Institutional Sustainability Data Section -->
-                                <section class="bg-indigo-50 rounded-lg overflow-hidden border border-indigo-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-indigo-50 rounded-lg overflow-hidden border border-indigo-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-building-fill mr-2 text-indigo-600"></i>Institutional Sustainability Data
@@ -180,7 +177,7 @@
                                 </section>
 
                                 <!-- Economic and Financial Sustainability Data Section -->
-                                <section class="bg-yellow-50 rounded-lg overflow-hidden border border-yellow-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-yellow-50 rounded-lg overflow-hidden border border-yellow-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-cash-coin mr-2 text-yellow-600"></i>Economic and Financial Sustainability Data
@@ -197,7 +194,7 @@
                                 </section>
 
                                 <!-- Environmental and Climate Sustainability Data Section -->
-                                <section class="bg-teal-50 rounded-lg overflow-hidden border border-teal-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-teal-50 rounded-lg overflow-hidden border border-teal-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-tree-fill mr-2 text-teal-600"></i>Environmental and Climate Sustainability Data
@@ -221,7 +218,7 @@
                             <div *ngIf="project$ | async as project" class="space-y-6">
 
                                 <!-- Basic Data Section -->
-                                <section class="bg-blue-50 rounded-lg overflow-hidden border border-blue-100">
+                                <section [@fadeInAnimation] class="bg-blue-50 rounded-lg overflow-hidden border border-blue-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-info-circle-fill mr-2 text-blue-600"></i>Basic Data
@@ -238,7 +235,7 @@
                                 </section>
 
                                 <!-- Social Sustainability Data Section -->
-                                <section class="bg-purple-50 rounded-lg overflow-hidden border border-purple-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-purple-50 rounded-lg overflow-hidden border border-purple-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-people-fill mr-2 text-purple-600"></i>Social Sustainability Data
@@ -255,7 +252,7 @@
                                 </section>
 
                                 <!-- Institutional Sustainability Data Section -->
-                                <section class="bg-indigo-50 rounded-lg overflow-hidden border border-indigo-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-indigo-50 rounded-lg overflow-hidden border border-indigo-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-building-fill mr-2 text-indigo-600"></i>Institutional Sustainability Data
@@ -272,7 +269,7 @@
                                 </section>
 
                                 <!-- Environmental and Climate Sustainability Data Section -->
-                                <section class="bg-teal-50 rounded-lg overflow-hidden border border-teal-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-teal-50 rounded-lg overflow-hidden border border-teal-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-tree-fill mr-2 text-teal-600"></i>Environmental and Climate Sustainability Data
@@ -296,7 +293,7 @@
                             <div *ngIf="project$ | async as project" class="space-y-6">
 
                                 <!-- Basic Data Section -->
-                                <section class="bg-blue-50 rounded-lg overflow-hidden border border-blue-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-blue-50 rounded-lg overflow-hidden border border-blue-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-info-circle-fill mr-2 text-blue-600"></i>Basic Data
@@ -313,7 +310,7 @@
                                 </section>
 
                                 <!-- Climate Finance Data Section -->
-                                <section class="bg-green-50 rounded-lg overflow-hidden border border-green-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-green-50 rounded-lg overflow-hidden border border-green-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-leaf-fill mr-2 text-green-600"></i>Climate Finance Data
@@ -330,7 +327,7 @@
                                 </section>
 
                                 <!-- Social Sustainability Data Section -->
-                                <section class="bg-purple-50 rounded-lg overflow-hidden border border-purple-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-purple-50 rounded-lg overflow-hidden border border-purple-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-people-fill mr-2 text-purple-600"></i>Social Sustainability Data
@@ -346,7 +343,7 @@
                                 </section>
 
                                 <!-- Institutional Sustainability Data Section -->
-                                <section class="bg-indigo-50 rounded-lg overflow-hidden border border-indigo-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-indigo-50 rounded-lg overflow-hidden border border-indigo-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-building-fill mr-2 text-indigo-600"></i>Institutional Sustainability Data
@@ -362,7 +359,7 @@
                                 </section>
 
                                 <!-- Economic and Financial Sustainability Data Section -->
-                                <section class="bg-yellow-50 rounded-lg overflow-hidden border border-yellow-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-yellow-50 rounded-lg overflow-hidden border border-yellow-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-cash-coin mr-2 text-yellow-600"></i>Economic and Financial Sustainability Data
@@ -378,7 +375,7 @@
                                 </section>
 
                                 <!-- Environmental and Climate Sustainability Data Section -->
-                                <section class="bg-teal-50 rounded-lg overflow-hidden border border-teal-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-teal-50 rounded-lg overflow-hidden border border-teal-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-tree-fill mr-2 text-teal-600"></i>Environmental and Climate Sustainability Data
@@ -401,7 +398,7 @@
                             <div *ngIf="project$ | async as project" class="space-y-6">
 
                                 <!-- Basic Data Section -->
-                                <section class="bg-blue-50 rounded-lg overflow-hidden border border-blue-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-blue-50 rounded-lg overflow-hidden border border-blue-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-info-circle-fill mr-2 text-blue-600"></i>Basic Data
@@ -418,7 +415,7 @@
                                 </section>
 
                                 <!-- Institutional Sustainability Data Section -->
-                                <section class="bg-indigo-50 rounded-lg overflow-hidden border border-indigo-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-indigo-50 rounded-lg overflow-hidden border border-indigo-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-building-fill mr-2 text-indigo-600"></i>Institutional Sustainability Data
@@ -442,7 +439,7 @@
                             <div *ngIf="project$ | async as project" class="space-y-6">
 
                                 <!-- Basic Data Section -->
-                                <section class="bg-blue-50 rounded-lg overflow-hidden border border-blue-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-blue-50 rounded-lg overflow-hidden border border-blue-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-info-circle-fill mr-2 text-blue-600"></i>Basic Data
@@ -458,7 +455,7 @@
                                 </section>
 
                                 <!-- Climate Finance Data Section -->
-                                <section class="bg-green-50 rounded-lg overflow-hidden border border-green-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-green-50 rounded-lg overflow-hidden border border-green-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-leaf-fill mr-2 text-green-600"></i>Climate Finance Data
@@ -474,7 +471,7 @@
                                 </section>
 
                                 <!-- Social Sustainability Data Section -->
-                                <section class="bg-purple-50 rounded-lg overflow-hidden border border-purple-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-purple-50 rounded-lg overflow-hidden border border-purple-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-people-fill mr-2 text-purple-600"></i>Social Sustainability Data
@@ -492,7 +489,7 @@
                                 </section>
 
                                 <!-- Institutional Sustainability Data Section -->
-                                <section class="bg-indigo-50 rounded-lg overflow-hidden border border-indigo-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-indigo-50 rounded-lg overflow-hidden border border-indigo-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-building-fill mr-2 text-indigo-600"></i>Institutional Sustainability Data
@@ -508,7 +505,7 @@
                                 </section>
 
                                 <!-- Economic and Financial Sustainability Data Section -->
-                                <section class="bg-yellow-50 rounded-lg overflow-hidden border border-yellow-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-yellow-50 rounded-lg overflow-hidden border border-yellow-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-cash-coin mr-2 text-yellow-600"></i>Economic and Financial Sustainability Data
@@ -524,7 +521,7 @@
                                 </section>
 
                                 <!-- Environmental and Climate Sustainability Data Section -->
-                                <section class="bg-teal-50 rounded-lg overflow-hidden border border-teal-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-teal-50 rounded-lg overflow-hidden border border-teal-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-tree-fill mr-2 text-teal-600"></i>Environmental and Climate Sustainability Data
@@ -547,7 +544,7 @@
                             <div *ngIf="project$ | async as project" class="space-y-6">
 
                                 <!-- Basic Data Section -->
-                                <section class="bg-blue-50 rounded-lg overflow-hidden border border-blue-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-blue-50 rounded-lg overflow-hidden border border-blue-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-info-circle-fill mr-2 text-blue-600"></i>Basic Data
@@ -563,7 +560,7 @@
                                 </section>
 
                                 <!-- Social Sustainability Data Section -->
-                                <section class="bg-purple-50 rounded-lg overflow-hidden border border-purple-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-purple-50 rounded-lg overflow-hidden border border-purple-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-people-fill mr-2 text-purple-600"></i>Social Sustainability Data
@@ -579,7 +576,7 @@
                                 </section>
 
                                 <!-- Environmental and Climate Sustainability Data Section -->
-                                <section class="bg-green-50 rounded-lg overflow-hidden border border-green-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-green-50 rounded-lg overflow-hidden border border-green-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-leaf-fill mr-2 text-green-600"></i>Environmental and Climate Sustainability Data
@@ -595,7 +592,7 @@
                                 </section>
 
                                 <!-- Economic and Financial Sustainability Data Section -->
-                                <section class="bg-yellow-50 rounded-lg overflow-hidden border border-yellow-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-yellow-50 rounded-lg overflow-hidden border border-yellow-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-cash-coin mr-2 text-yellow-600"></i>Economic and Financial Sustainability Data
@@ -611,7 +608,7 @@
                                 </section>
 
                                 <!-- Institutional Sustainability Data Section -->
-                                <section class="bg-indigo-50 rounded-lg overflow-hidden border border-indigo-100">
+                                <section [@fadeInAnimation] class="transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-indigo-50 rounded-lg overflow-hidden border border-indigo-100">
                                     <div class="p-6">
                                         <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                                             <i class="bi bi-building-fill mr-2 text-indigo-600"></i>Institutional Sustainability Data

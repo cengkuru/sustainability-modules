@@ -30,6 +30,12 @@ import { AttachmentListComponent } from "./attachment-list/attachment-list.compo
                 animate('300ms', style({ opacity: 0, transform: 'translateY(10px)' })),
             ]),
         ]),
+        trigger('fadeInAnimation', [
+            transition(':enter', [
+                style({ opacity: 0, transform: 'translateY(20px)' }),
+                animate('500ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+            ])
+        ])
     ],
 })
 export class ProjectDetailsComponent implements OnInit {
@@ -113,6 +119,21 @@ export class ProjectDetailsComponent implements OnInit {
             default:
                 return value.toString();
         }
+    }
+
+    getValueType(key: string): string {
+        const currencyKeys = ['Amount of Investment', 'Project Budget', 'Contract Price', 'Completion Cost'];
+        const dateKeys = ['Project Budget Approval Date', 'Contract Start Date', 'Completion Date'];
+        const numberKeys = ['Number of Beneficiaries', 'Number of Firms Tendering'];
+
+        if (currencyKeys.some(k => key.toLowerCase().includes(k.toLowerCase()))) {
+            return 'currency';
+        } else if (dateKeys.some(k => key.toLowerCase().includes(k.toLowerCase()))) {
+            return 'date';
+        } else if (numberKeys.some(k => key.toLowerCase().includes(k.toLowerCase()))) {
+            return 'number';
+        }
+        return 'text';
     }
 
     formatDate(date: string): string {
