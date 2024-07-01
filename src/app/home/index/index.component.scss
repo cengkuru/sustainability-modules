@@ -1,0 +1,21 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.footer-link {
+  @apply flex items-center justify-center sm:justify-start p-2 rounded-lg hover:bg-secondary hover:text-primary transition-colors duration-300;
+}
+
+.footer-expand-button {
+  @apply text-primary hover:text-accent transition-colors duration-300 flex items-center;
+}
+
+.footer-icon {
+  @apply mr-2 text-lg;
+}
+
+@media (max-width: 640px) {
+  .footer-links {
+    @apply flex flex-col items-center;
+  }
+}

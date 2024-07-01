@@ -1,0 +1,29 @@
+.publication-policy-container {
+  @apply min-h-screen;
+}
+
+.sidebar {
+  @apply shadow-md;
+}
+
+.search-input {
+  @apply bg-primary text-secondary;
+}
+
+.content {
+  @apply bg-primary;
+}
+
+.section, .subsection {
+  @apply bg-white shadow-md rounded-lg p-6 mb-6;
+}
+
+@media (max-width: 768px) {
+  .publication-policy-container {
+    @apply flex-col;
+  }
+
+  .sidebar, .content {
+    @apply w-full;
+  }
+}

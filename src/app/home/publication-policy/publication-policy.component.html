@@ -1,0 +1,38 @@
+<div class="publication-policy-container bg-primary min-h-screen flex flex-col md:flex-row">
+    <div class="sidebar bg-customGray w-full md:w-1/4 p-4">
+        <div class="search-container mb-4">
+            <input
+                    type="text"
+                    [(ngModel)]="searchTerm"
+                    placeholder="Search policy..."
+                    class="search-input w-full p-2 rounded-md border border-secondary focus:outline-none focus:ring-2 focus:ring-accent"
+            >
+        </div>
+        <nav>
+            <ul>
+                <li *ngFor="let section of filteredSections"
+                    (click)="setActiveSection(section.title)"
+                    [class.active]="activeSection === section.title"
+                    class="cursor-pointer p-2 rounded-md mb-2 hover:bg-secondary hover:text-primary transition-colors duration-200"
+                    [ngClass]="{'bg-secondary text-primary': activeSection === section.title}">
+                    {{ section.title }}
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="content w-full md:w-3/4 p-4 overflow-y-auto">
+        <ng-container *ngFor="let section of filteredSections">
+            <div *ngIf="activeSection === section.title" class="section mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-secondary">{{ section.title }}</h2>
+                <p class="mb-4 text-customBlueLight">{{ section.content }}</p>
+                <ng-container *ngIf="section.subsections">
+                    <div *ngFor="let subsection of section.subsections" class="subsection mb-4">
+                        <h3 class="text-xl font-semibold mb-2 text-secondary">{{ subsection.title }}</h3>
+                        <p class="text-customBlueLight">{{ subsection.content }}</p>
+                    </div>
+                </ng-container>
+            </div>
+        </ng-container>
+    </div>
+</div>

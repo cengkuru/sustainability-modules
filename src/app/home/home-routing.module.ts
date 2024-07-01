@@ -8,6 +8,7 @@ import {OpenDataComponent} from "./open-data/open-data.component";
 import {FeedbackComponent} from "./feedback/feedback.component";
 import {DataAnalysisComponent} from "./data-analysis/data-analysis.component";
 import {ProjectDetailsComponent} from "./project-details/project-details.component";
+import {PublicationPolicyComponent} from "./publication-policy/publication-policy.component";
 
 const routes: Routes = [
     // public route with children
@@ -27,6 +28,11 @@ const routes: Routes = [
             { path: 'feedback', component: FeedbackComponent },
             // data-analytics route
             { path: 'data-analytics', component: DataAnalysisComponent },
+
+            // publication-policy route
+            { path: 'publication-policy', component: PublicationPolicyComponent },
+
+
 
         ],
     },
