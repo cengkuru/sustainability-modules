@@ -17,7 +17,7 @@ html, body, #map {
   margin: 0;
   padding: 0;
   height: 100%;
-  color: $color-black;
+  color: $color-secondary;
   font-family: $font-family;
   font-weight: $font-weight-thin;
 }
@@ -29,6 +29,7 @@ body, h1, h2, h3, h4, h5, h6, p, a, li {
 
 body {
   font-size: 1rem; // or use any Tailwind class like text-base if you prefer using utility classes
+  line-height: 1.5;
   line-height: 1.5;
 }
 
@@ -44,15 +45,17 @@ body {
 
 .bg-accent {
   background-color: $color-accent!important;
-  color: $color-black;
-}
-
-.text-primary {
   color: $color-black !important;
 }
 
+.text-primary {
+  color: $color-primary !important;
+}
+.text-secondary {
+  color: $color-secondary !important;
+}
 .text-accent {
-  color: $color-accent;
+  color: $color-accent !important;
 }
 
 .H_ib_body {
@@ -336,4 +339,18 @@ a.text-accent:hover {
 #climateFinanceChart, #mitigationAdaptationChart {
   border-radius: 10px;
   padding: 10px;
+}
+
+
+/* Add these styles to your global styles (e.g., styles.css or styles.scss) */
+
+.animate-hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.animate-slideUp {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }

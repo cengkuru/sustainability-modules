@@ -4,18 +4,20 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, map } from 'rxjs/operators';
 import { RouterLink } from "@angular/router";
-import {EmailService} from "../services/email.service";
+import { EmailService } from "../services/email.service";
+import { IntersectionObserverDirective } from "../../directives/intersection-observer.directive";
 
 @Component({
     selector: 'app-project-list',
     standalone: true,
-    imports: [CommonModule, RouterLink],
+    imports: [CommonModule, RouterLink, IntersectionObserverDirective],
     templateUrl: './project-list.component.html',
     styleUrls: ['./project-list.component.scss']
 })
 export class ProjectListComponent implements OnInit {
     projects$: Observable<any[]> | undefined;
     totalProjects$: Observable<number> | undefined;
+    totalValueOfProjects$: Observable<number> | undefined;
     searchTerm = new BehaviorSubject<string>('');
 
     constructor(private firestore: AngularFirestore, private emailService: EmailService) {}
@@ -25,48 +27,36 @@ export class ProjectListComponent implements OnInit {
             debounceTime(300),
             distinctUntilChanged(),
             switchMap(term => {
-                if (term) {
-                    return this.firestore.collection('projects').snapshotChanges().pipe(
-                        map(actions => actions.map(a => {
-                            const data = a.payload.doc.data() as any;
-                            const id = a.payload.doc.id;
-                            return { id, ...data };
-                        }).filter(project => project.name.toLowerCase().includes(term.toLowerCase())))
-                    );
-                } else {
-                    return this.firestore.collection('projects').snapshotChanges().pipe(
-                        map(actions => actions.map(a => {
-                            const data = a.payload.doc.data() as any;
-                            const id = a.payload.doc.id;
-                            return { id, ...data };
-                        }))
-                    );
-                }
+                return this.firestore.collection('projects').snapshotChanges().pipe(
+                    map(actions => actions.map(a => {
+                        const data = a.payload.doc.data() as any;
+                        const id = a.payload.doc.id;
+                        return { id, ...data };
+                    }).filter(project => !term || project.name.toLowerCase().includes(term.toLowerCase())))
+                );
             })
         );
-
-        // Log projects to console
-        this.projects$.subscribe(projects => {
-            console.log('Projects:', projects);
-        });
 
         this.totalProjects$ = this.firestore.collection('projects').valueChanges().pipe(
             map(projects => projects.length)
         );
 
-        this.sendTestEmail();
+        this.totalValueOfProjects$ = this.firestore.collection('projects').valueChanges().pipe(
+            map((projects: any) => {
+                let total = 0;
+                projects.forEach((project: any) => {
+                    const contractPrice = project.stages?.tenderManagement?.basicData?.contractPrice;
+                    if (contractPrice) {
+                        total += parseFloat(contractPrice.replace(/[^0-9.-]+/g, ""));
+                    }
+                });
+                return total;
+            })
+        );
     }
 
     onSearchChange(event: Event): void {
         const target = event.target as HTMLInputElement;
         this.searchTerm.next(target.value);
     }
-
-    sendTestEmail(): void {
-        this.emailService.sendEmail('michael@cengkuru.com', 'Test Email', 'Hi, this is an email from Cloud Functions.')
-            .then(response => console.log('Email sent successfully', response))
-            .catch(error => console.error('Error sending email', error));
-    }
-
-
 }

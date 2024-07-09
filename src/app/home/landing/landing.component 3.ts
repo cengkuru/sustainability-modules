@@ -1,13 +1,12 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import { formatCurrency, getCurrencySymbol } from '@angular/common';
 import {animate, query, stagger, style, transition, trigger} from "@angular/animations";
+import {HttpClient} from "@angular/common/http";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  selector: 'app-landing',
+  templateUrl: './landing.component.html',
+  styleUrl: './landing.component.scss',
   encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('fadeInOut', [
@@ -31,7 +30,7 @@ import {AngularFirestore} from "@angular/fire/compat/firestore";
     ])
   ]
 })
-export class AppComponent implements OnInit {
+export class LandingComponent implements OnInit {
   activeTab = 'sample-projects';  // Default active tab
   tabs = [
     { id: 'sample-projects', label: 'Sample Projects' },
@@ -66,15 +65,20 @@ export class AppComponent implements OnInit {
   }
 
 
-  addItem(item: any) {
-    this.firestore.collection('items').add(item).then(() => {
-      console.log('Item added successfully!');
-    }).catch(error => {
-      console.error('Error adding item: ', error);
-    });
-  }
 
   loadJsonData(): void {
+    this.http.get<any>('/assets/data/oc4ids.json').subscribe(data => {
+      this.jsonData = data;
+    }, error => console.error('Error loading the JSON data:', error));
+
+    this.http.get<any>('/assets/data/example.json').subscribe(data => {
+      this.exampleData = data;
+    }, error => console.error('Error loading the JSON data:', error));
+
+    this.http.get<any>('/assets/data/sample-projects.json').subscribe(data => {
+      this.sampleProjects = data;
+      this.extractUniquePhases();
+    }, error => console.error('Error loading the JSON data:', error));
   }
 
   switchTab(tabId: string) {
@@ -98,13 +102,13 @@ export class AppComponent implements OnInit {
 // Helper method to toggle the project details view
   toggleProjectDetails(project: any): void {
     if (this.selectedProject && this.selectedProject.id === project.id) {
-      this.selectedProject = null;
-      this.activePhase = 'identification'; // Reset to default phase
-    } else {
-      this.selectedProject = project;
-      this.activePhase = 'identification'; // Reset to default phase
-    }
+    this.selectedProject = null;
+    this.activePhase = 'identification'; // Reset to default phase
+  } else {
+    this.selectedProject = project;
+    this.activePhase = 'identification'; // Reset to default phase
   }
+}
 
   setActivePhase(phase: string) {
     this.activePhase = phase;
@@ -117,21 +121,6 @@ export class AppComponent implements OnInit {
     console.log(selectedProject);
     return selectedProject;
   }
-
-
-
-  // In your component.ts
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

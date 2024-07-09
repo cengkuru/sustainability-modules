@@ -4,7 +4,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { environment } from "../../../environments/environment";
-import projectsData from '../../../assets/data/projects.json';
+import * as projectsData from '../../../assets/data/projects.json';
 import {IntersectionObserverDirective} from "../../directives/intersection-observer.directive";
 import {animate, style, transition, trigger} from "@angular/animations";
 
@@ -75,7 +75,6 @@ export class LandingComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     // this.addProjectsToFirebase();
     this.loadProjects();
     window.addEventListener('viewProjectDetails', this.handleViewProjectDetails as EventListener);

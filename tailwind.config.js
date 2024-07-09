@@ -4,14 +4,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#FAFAFA', // Light Gray
-        secondary: '#58707B', // Muted Blue
+        primary: '#fff', // white
+        secondary: '#333333', // Muted Blue
         accent: '#FFCE32', // Bright Yellow
+        customGray: '#F7F7F7', // Custom gray color
+        customBlueLight: '#61A8BD', // Custom light blue color
       },
       typography: {
         DEFAULT: {
           css: {
-            color: '#58707B', // Secondary color for text
+            color: '#333333', // Secondary color for text
             a: {
               color: '#FFCE32', // Accent color for links
               '&:hover': {
@@ -19,13 +21,13 @@ module.exports = {
               },
             },
             h1: {
-              color: '#58707B', // Secondary color for headings
+              color: '#333333', // Secondary color for headings
             },
             h2: {
-              color: '#58707B',
+              color: '#333333',
             },
             h3: {
-              color: '#58707B',
+              color: '#333333',
             },
             p: {
               marginBottom: '1.5em',
@@ -36,6 +38,15 @@ module.exports = {
       },
       fontSize: {
         base: ['16px', '1.5'], // Set the base font size and line height
+      },
+      keyframes: {
+        slideUp: {
+          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+      },
+      animation: {
+        slideUp: 'slideUp 0.5s ease-in-out',
       },
     },
   },

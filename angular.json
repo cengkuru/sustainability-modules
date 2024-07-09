@@ -37,11 +37,11 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/new-modules-app",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -54,7 +54,6 @@
             "styles": [
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "src/styles.scss"
-
             ],
             "scripts": []
           },
@@ -86,10 +85,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "new-modules-app:build:production"
+              "browserTarget": "new-modules-app:build:production"
             },
             "development": {
-              "buildTarget": "new-modules-app:build:development"
+              "browserTarget": "new-modules-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -97,7 +96,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "new-modules-app:build"
+            "browserTarget": "new-modules-app:build"
           }
         },
         "test": {
@@ -114,7 +113,6 @@
               "src/assets"
             ],
             "styles": [
-
               "node_modules/ngx-toastr/toastr.css",
               "src/styles.scss"
             ],
