@@ -1,63 +1,69 @@
 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="fixed inset-0 flex items-center justify-center bg-white bg-opacity-75 z-50" @fadeInAnimation>
+        <div class="w-16 h-16 border-4 border-gray-200 border-t-accent rounded-full animate-spin"></div>
+    </div>
+
     <!-- Main section -->
-    <div appIntersectionObserver [@slideInAnimation] class="bg-primary rounded min-h-screen flex flex-col lg:flex-row items-center justify-between text-secondary p-4">
+    <div appIntersectionObserver [@slideInAnimation] class="bg-primary rounded-2xl min-h-screen flex flex-col lg:flex-row items-center justify-between text-secondary p-6 lg:p-12 mb-12">
         <div class="w-full lg:w-1/2 text-center lg:text-left lg:pr-8">
-            <h1 class="text-4xl sm:text-5xl lg:text-4xl font-bold leading-tight text-secondary">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-secondary mb-6">
                 {{ mainSection.title }}
             </h1>
-            <p class="mt-4 text-base sm:text-lg">
+            <p class="text-base sm:text-lg lg:text-xl mb-8">
                 {{ mainSection.description }}
             </p>
-            <button (click)="navigateToProjects()" class="mt-8 px-6 sm:px-8 py-3 bg-accent text-secondary text-base sm:text-lg font-medium rounded hover:bg-secondary hover:text-primary transition">
+            <button (click)="navigateToProjects()" class="px-8 py-4 bg-accent text-secondary text-lg font-medium rounded-full hover:bg-secondary hover:text-primary transition-all duration-300 transform hover:scale-105">
                 {{ mainSection.buttonText }}
             </button>
             <div class="flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-8 mt-8">
                 <div class="text-center">
-                    <span class="block text-2xl sm:text-3xl font-bold">{{ numberOfProjects }}</span>
-                    <span class="block mt-2 text-sm">Projects Published</span>
+                    <span class="block text-3xl sm:text-4xl font-bold">{{ numberOfProjects }}</span>
+                    <span class="block mt-2 text-sm sm:text-base">Projects Published</span>
                 </div>
                 <div class="text-center">
-                    <span class="block text-2xl sm:text-3xl font-bold">{{ totalValueOfProjects | currency:'USD':true }}</span>
-                    <span class="block mt-2 text-sm">Total Value</span>
+                    <span class="block text-3xl sm:text-4xl font-bold">{{ totalValueOfProjects | currency:'USD':'symbol':'1.0-0' }}</span>
+                    <span class="block mt-2 text-sm sm:text-base">Total Value</span>
                 </div>
             </div>
         </div>
-        <div class="relative mt-4 lg:mt-0 w-full lg:w-1/2 flex items-center justify-center">
-            <div id="map" class="w-full h-64 sm:h-96 rounded-lg border-4 shadow-lg"></div>
+        <div class="relative mt-8 lg:mt-0 w-full lg:w-1/2 flex items-center justify-center">
+            <div id="map" class="w-full h-64 sm:h-96 rounded-2xl shadow-lg overflow-hidden"></div>
         </div>
     </div>
 
     <!-- Featured Projects Section -->
-    <div appIntersectionObserver [@slideInAnimation] class="bg-primary py-12 sm:py-16 my-10 rounded-sm">
+    <div appIntersectionObserver [@slideInAnimation] class="bg-primary py-12 sm:py-16 rounded-2xl mb-12">
         <div class="container mx-auto px-6 lg:flex lg:items-center">
             <div class="lg:w-1/2">
-                <h2 class="text-4xl font-bold mb-4">{{ featuredProjectsSection.title }}</h2>
-                <p class="mb-6 text-lg">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-6">{{ featuredProjectsSection.title }}</h2>
+                <p class="text-base sm:text-lg mb-8">
                     {{ featuredProjectsSection.description }}
                 </p>
-                <button (click)="navigateToFeaturedProjects()" class="inline-block px-8 py-4 bg-accent text-black text-lg font-medium rounded hover:bg-gray-800 transition duration-300 ease-in-out">
+                <button (click)="navigateToFeaturedProjects()" class="px-8 py-4 bg-accent text-secondary text-lg font-medium rounded-full hover:bg-secondary hover:text-primary transition-all duration-300 transform hover:scale-105">
                     {{ featuredProjectsSection.buttonText }}
                 </button>
             </div>
             <div class="lg:w-1/2 lg:pl-12 mt-8 lg:mt-0 relative">
-                <img src="../../../assets/featured.png" alt="Featured Project" class="w-full h-auto rounded-lg">
+                <img src="../../../assets/featured.png" alt="Featured Project" class="w-full h-auto rounded-2xl shadow-lg">
             </div>
         </div>
     </div>
+
     <!-- Recent and High-Value Projects Section -->
-    <div class="container mx-auto px-4 py-14 rounded-lg my-10">
+    <div class="container mx-auto px-4 py-12 rounded-2xl mb-12 bg-gray-50">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Recent Projects Section -->
             <div class="animate-hidden" appIntersectionObserver>
-                <div class="flex items-center mb-4">
-                    <i class="bi bi-stars text-secondary text-2xl"></i>
-                    <h2 class="text-2xl font-semibold ml-2">Recent Projects</h2>
-                </div>
-                <ul class="pl-6">
-                    <li *ngFor="let project of recentProjects" class="mb-2 flex items-center">
-                        <i class="bi bi-file-earmark-text text-gray-500 mr-2"></i>
-                        <a [routerLink]="['/public/projects', project.id]" class="hover:underline">
-                            {{ project.name }}
+                <h2 class="text-2xl sm:text-3xl font-semibold mb-6 flex items-center">
+                    <i class="bi bi-stars text-accent text-3xl mr-2"></i>
+                    Recent Projects
+                </h2>
+                <ul class="space-y-4" [@listAnimation]="recentProjects.length">
+                    <li *ngFor="let project of recentProjects" class="bg-white rounded-lg shadow-sm p-4 hover:shadow-md transition-shadow duration-300">
+                        <a [routerLink]="['/public/projects', project.id]" class="flex items-center text-secondary hover:text-accent transition-colors duration-300">
+                            <i class="bi bi-file-earmark-text text-gray-500 mr-3 text-xl"></i>
+                            <span class="text-base sm:text-lg">{{ project.name }}</span>
                         </a>
                     </li>
                 </ul>
@@ -65,15 +71,15 @@
 
             <!-- High-Value Projects Section -->
             <div class="animate-hidden" appIntersectionObserver>
-                <div class="flex items-center mb-4">
-                    <i class="bi bi-graph-up text-secondary text-2xl"></i>
-                    <h2 class="text-2xl font-semibold ml-2">High-Value Projects</h2>
-                </div>
-                <ul class="pl-6">
-                    <li *ngFor="let project of highValueProjects" class="mb-2 flex items-center">
-                        <i class="bi bi-file-earmark-text text-gray-500 mr-2"></i>
-                        <a [routerLink]="['/public/projects', project.id]" class="hover:underline">
-                            {{ project.name }} - {{ project.contractPrice | currency:'USD':true }}
+                <h2 class="text-2xl sm:text-3xl font-semibold mb-6 flex items-center">
+                    <i class="bi bi-graph-up text-accent text-3xl mr-2"></i>
+                    High-Value Projects
+                </h2>
+                <ul class="space-y-4" [@listAnimation]="highValueProjects.length">
+                    <li *ngFor="let project of highValueProjects" class="bg-white rounded-lg shadow-sm p-4 hover:shadow-md transition-shadow duration-300">
+                        <a [routerLink]="['/public/projects', project.id]" class="flex items-center justify-between text-secondary hover:text-accent transition-colors duration-300">
+                            <span class="text-base sm:text-lg">{{ project.name }}</span>
+                            <span class="text-sm font-semibold">{{ project.contractPrice | currency:'USD':'symbol':'1.0-0' }}</span>
                         </a>
                     </li>
                 </ul>
@@ -81,14 +87,55 @@
         </div>
     </div>
 
-    <!-- Sponsors section -->
+
     <section class="py-16 bg-gray-50">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl font-semibold text-center text-gray-800 mb-12">{{ sponsorsSection.title }}</h2>
+            <h2 class="text-3xl font-semibold text-center text-gray-900 mb-8">{{ oc4idsDocsSection.title }}</h2>
+            <p class="text-center text-gray-600 mb-12">{{ oc4idsDocsSection.description }}</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <a [href]="oc4idsDocsSection.fullDocsLink" target="_blank" rel="noopener noreferrer" class="block">
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-105">
+                        <div class="p-8">
+                            <div class="flex items-center justify-center w-16 h-16 bg-accent rounded-full mb-4">
+                                <i class="bi bi-book text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Full Documentation</h3>
+                            <p class="text-gray-600">Access comprehensive guides and references for implementing OC4IDS</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a [href]="oc4idsDocsSection.schemaLink" target="_blank" rel="noopener noreferrer" class="block">
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-105">
+                        <div class="p-8">
+                            <div class="flex items-center justify-center w-16 h-16 bg-accent rounded-full mb-4">
+                                <i class="bi bi-code-square text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Schema Reference</h3>
+                            <p class="text-gray-600">Explore the detailed schema for infrastructure project data</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="mt-12 text-center">
+                <a [href]="oc4idsDocsSection.mainLink" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-accent hover:bg-accent-dark transition-colors duration-300">
+                    Visit OC4IDS Documentation
+                    <i class="bi bi-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sponsors section -->
+    <section class="py-16 bg-gray-50 rounded-2xl">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mb-12">{{ sponsorsSection.title }}</h2>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
                 <div *ngFor="let sponsor of sponsorsSection.sponsors" class="flex justify-center">
                     <a [href]="sponsor.link" target="_blank" rel="noopener noreferrer"
-                       class="group flex items-center justify-center w-full h-32 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 ease-in-out">
+                       class="group flex items-center justify-center w-full h-32 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 ease-in-out transform hover:scale-105">
                         <img [src]="sponsor.image" [alt]="sponsor.name"
                              class="max-h-16 w-auto object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
                     </a>

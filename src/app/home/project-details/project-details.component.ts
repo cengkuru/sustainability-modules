@@ -29,6 +29,7 @@ import { AttachmentListComponent } from "./attachment-list/attachment-list.compo
             ]),
         ]),
     ],
+    providers: [ProjectService, DatePipe]
 })
 export class ProjectDetailsComponent implements OnInit {
 
@@ -52,7 +53,8 @@ export class ProjectDetailsComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private projectService: ProjectService
+        private projectService: ProjectService,
+        private datePipe: DatePipe
     ) {}
 
     ngOnInit(): void {
@@ -87,6 +89,12 @@ export class ProjectDetailsComponent implements OnInit {
     selectTab(tabId: string): void {
         this.selectedTab = tabId;
     }
+
+    formatHumanFriendlyDate(dateString: string): string {
+        if (!dateString) return '';
+        return this.datePipe.transform(dateString, 'MMMM d, y, h:mm a') || '';
+    }
+
 
     getBasicDataItems(basicData: any) {
         if (!basicData) return {};
@@ -150,7 +158,7 @@ export class ProjectDetailsComponent implements OnInit {
             'Contact Details': basicData.contactDetails,
             'Funding Sources': basicData.fundingSources,
             'Project Budget': basicData.projectBudget,
-            'Project Budget Approval Date': basicData.projectBudgetApprovalDate
+            'Project Budget Approval Date': this.formatHumanFriendlyDate(basicData.projectBudgetApprovalDate)
         };
     }
 
@@ -252,7 +260,7 @@ export class ProjectDetailsComponent implements OnInit {
             'Contract Firm': basicData.contractFirm,
             'Contract Price': basicData.contractPrice,
             'Contract Scope of Work': basicData.contractScopeOfWork,
-            'Contract Start Date': basicData.contractStartDate,
+            'Contract Start Date': this.formatHumanFriendlyDate(basicData.contractStartDate),
             'Contract Duration': basicData.contractDuration,
             'Contract Status': basicData.contractStatus
         };
@@ -372,7 +380,7 @@ export class ProjectDetailsComponent implements OnInit {
         return {
             'Project Status': basicData.projectStatus,
             'Completion Cost': basicData.completionCost,
-            'Completion Date': basicData.completionDate,
+            'Completion Date': this.formatHumanFriendlyDate(basicData.completionDate),
             'Scope at Completion': basicData.scopeAtCompletion,
             'Reasons for Project Changes': basicData.reasonsForProjectChanges
         };

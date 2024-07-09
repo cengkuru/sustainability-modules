@@ -5,8 +5,8 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { environment } from "../../../environments/environment";
 import projectsData from '../../../assets/data/projects.json';
-import {IntersectionObserverDirective} from "../../directives/intersection-observer.directive";
-import {animate, style, transition, trigger} from "@angular/animations";
+import { IntersectionObserverDirective } from "../../directives/intersection-observer.directive";
+import { animate, style, transition, trigger, query, stagger } from "@angular/animations";
 
 declare var H: any;
 
@@ -29,6 +29,20 @@ interface ViewProjectDetailsEvent extends CustomEvent {
       transition(':enter', [
         style({ transform: 'translateY(20px)', opacity: 0 }),
         animate('1000ms ease-out', style({ transform: 'translateY(0)', opacity: 1 }))
+      ])
+    ]),
+    trigger('fadeInAnimation', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('500ms', style({ opacity: 1 }))
+      ])
+    ]),
+    trigger('listAnimation', [
+      transition('* <=> *', [
+        query(':enter',
+            [style({ opacity: 0, transform: 'translateY(50px)' }), stagger('50ms', animate('500ms ease-out', style({ opacity: 1, transform: 'translateY(0px)' })))],
+            { optional: true }
+        )
       ])
     ])
   ]
@@ -58,6 +72,14 @@ export class LandingComponent implements OnInit, OnDestroy {
     buttonLink: "/projects/featured"
   };
 
+  oc4idsDocsSection = {
+    title: "Explore OC4IDS Documentation",
+    description: "Dive deeper into the Open Contracting for Infrastructure Data Standard",
+    fullDocsLink: "https://standard.open-contracting.org/infrastructure/latest/en/projects/",
+    schemaLink: "https://standard.open-contracting.org/infrastructure/latest/en/reference/#",
+    mainLink: "https://standard.open-contracting.org/infrastructure/latest/en/"
+  };
+
   sponsorsSection = {
     title: "Supported by",
     sponsors: [
@@ -68,8 +90,10 @@ export class LandingComponent implements OnInit, OnDestroy {
   };
 
 
+
+  isLoading: boolean = true;
+
   constructor(private http: HttpClient, private firestore: AngularFirestore, private router: Router) {
-    console.log('markers: ', this.markers);
     this.platform = new H.service.Platform({
       apikey: environment.hereMapsApiKey
     });
@@ -156,12 +180,15 @@ export class LandingComponent implements OnInit, OnDestroy {
   }
 
   loadProjects() {
+    this.isLoading = true;
     this.firestore.collection('projects').get().subscribe(
         (querySnapshot) => {
           const projects: any[] = [];
           let totalValue = 0;
+          this.isLoading = false;
           querySnapshot.forEach((doc) => {
             const project = doc.data() as any;
+
             projects.push(project);
             const contractPrice = project.stages?.tenderManagement?.basicData?.contractPrice;
             if (contractPrice) {
@@ -183,6 +210,7 @@ export class LandingComponent implements OnInit, OnDestroy {
           this.initializeMap();
         },
         (error) => {
+            this.isLoading = false;
           console.error('Error loading projects:', error);
         }
     );
@@ -234,4 +262,5 @@ export class LandingComponent implements OnInit, OnDestroy {
   navigateToFeaturedProjects(): void {
     this.router.navigate(['/public/projects'], { queryParams: { featured: 'true' } });
   }
+
 }

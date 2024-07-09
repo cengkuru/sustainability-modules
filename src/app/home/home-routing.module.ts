@@ -4,11 +4,11 @@ import {LandingComponent} from "./landing/landing.component";
 import {LoginComponent} from "./login/login.component";
 import {IndexComponent} from "./index/index.component";
 import {ProjectListComponent} from "./project-list/project-list.component";
-import {AboutComponent} from "./about/about.component";
 import {OpenDataComponent} from "./open-data/open-data.component";
 import {FeedbackComponent} from "./feedback/feedback.component";
 import {DataAnalysisComponent} from "./data-analysis/data-analysis.component";
 import {ProjectDetailsComponent} from "./project-details/project-details.component";
+import {PublicationPolicyComponent} from "./publication-policy/publication-policy.component";
 
 const routes: Routes = [
     // public route with children
@@ -29,11 +29,12 @@ const routes: Routes = [
             // data-analytics route
             { path: 'data-analytics', component: DataAnalysisComponent },
 
-            // about route
-            { path: 'about', component: AboutComponent },
-            { path: '', redirectTo: 'home', pathMatch: 'full' }
-        ],
+            // publication-policy route
+            { path: 'publication-policy', component: PublicationPolicyComponent },
 
+
+
+        ],
     },
 
 ];

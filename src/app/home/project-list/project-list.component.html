@@ -1,6 +1,8 @@
 <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 mt-5">
-
-
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="fixed inset-0 flex items-center justify-center bg-white bg-opacity-75 z-50" @fadeInAnimation>
+        <div class="w-16 h-16 border-4 border-gray-200 border-t-accent rounded-full animate-spin"></div>
+    </div>
     <div class="container mx-auto px-4 py-8 my-14">
 
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -60,4 +62,5 @@
             </div>
         </div>
     </div>
+
 </div>

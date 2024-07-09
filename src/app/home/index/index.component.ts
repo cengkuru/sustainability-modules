@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from "@angular/common";
-import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-index',
@@ -12,13 +13,25 @@ import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/route
     RouterLinkActive,
   ],
   templateUrl: './index.component.html',
-  styleUrls: ['./index.component.scss']
+  styleUrls: ['./index.component.scss'],
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [
+        animate('300ms', style({ opacity: 0 })),
+      ]),
+    ]),
+  ],
 })
 export class IndexComponent {
   pageTitle = 'The National Infrastructure Disclosure Platform';
   isProfileDropdownOpen = false;
   isMobileMenuOpen = false;
-  isLoggedIn = false; // Simulating the login status. You should replace this with actual authentication status.
+  isLoggedIn = false;
+  isFooterExpanded = false;
 
   currentYear = new Date().getFullYear();
   owner = 'CoST Infrastructure Transparency Initiative';
@@ -28,8 +41,19 @@ export class IndexComponent {
     { path: 'home', label: 'Home', icon: 'bi-house-fill' },
     { path: 'projects', label: 'Projects', icon: 'bi-kanban-fill' },
     { path: 'data-analytics', label: 'Analysis', icon: 'bi-graph-up-arrow' },
+    { path: 'downloads', label: 'Downloads', icon: 'bi-cloud-download-fill' },
     { path: 'feedback', label: 'Feedback', icon: 'bi-chat-left-text-fill' },
   ];
+
+  footerLinks = [
+    { path: 'publication-policy', label: 'Publication Policy', icon: 'bi-file-text' }
+  ];
+
+  creativeCommonsLicense = {
+    name: 'Creative Commons Attribution 4.0 International License',
+    icon: 'bi-creative-commons',
+    link: 'https://creativecommons.org/licenses/by/4.0/'
+  };
 
   constructor(public router: Router) { }
 
@@ -46,7 +70,6 @@ export class IndexComponent {
   }
 
   login() {
-    // Redirect to the login page
     this.router.navigate(['/public/login']);
   }
 }

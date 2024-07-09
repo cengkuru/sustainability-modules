@@ -17,7 +17,6 @@ import {environment} from "../environments/environment";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {ToastrModule} from "ngx-toastr";
-
 @NgModule({
   declarations: [
     AppComponent,

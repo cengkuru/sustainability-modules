@@ -40,6 +40,10 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/new-modules-app",
+            "allowedCommonJsDependencies": [
+              "xlsx",
+              "file-saver"
+            ],
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
