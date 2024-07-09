@@ -229,4 +229,8 @@ export class LandingComponent implements OnInit, OnDestroy {
     const suffix = Math.random().toString(36).substr(2, 6);
     return prefix + suffix;
   }
+
+  navigateToFeaturedProjects(): void {
+    this.router.navigate(['/public/projects'], { queryParams: { featured: 'true' } });
+  }
 }
