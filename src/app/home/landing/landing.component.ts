@@ -61,11 +61,12 @@ export class LandingComponent implements OnInit, OnDestroy {
   sponsorsSection = {
     title: "Supported by",
     sponsors: [
-      { name: "GIZ", link: "https://www.giz.de", image: "../../../assets/giz.png" },
-      { name: "FCDO", link: "https://www.fcdo.gov.uk", image: "../../../assets/fcdo.png" },
-      { name: "CoST", link: "#", image: "../../../assets/cost-logo-transparent.png" }
+      { name: "GIZ", link: "https://www.giz.de/en/html/index.html", image: "../../../assets/giz.png" },
+      { name: "FCDO", link: "https://www.gov.uk/government/organisations/foreign-commonwealth-development-office", image: "../../../assets/uk.png" },
+      { name: "CoST", link: "https://infrastructuretransparency.org/", image: "../../../assets/cost-logo-transparent.png" }
     ]
   };
+
 
   constructor(private http: HttpClient, private firestore: AngularFirestore, private router: Router) {
     console.log('markers: ', this.markers);
