@@ -1,14 +1,22 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ElementRef,
+  ViewChild,
+  AfterViewInit,
+  ChangeDetectorRef,
+  NgZone
+} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { environment } from "../../../environments/environment";
 import projectsData from '../../../assets/data/projects.json';
 import { IntersectionObserverDirective } from "../../directives/intersection-observer.directive";
 import { animate, style, transition, trigger, query, stagger } from "@angular/animations";
-
-declare var H: any;
+import * as L from 'leaflet';
+import { ScriptLoaderService } from "../../services/scriptLoader.service";
 
 interface ViewProjectDetailsEvent extends CustomEvent {
   detail: string;
@@ -22,7 +30,7 @@ interface ViewProjectDetailsEvent extends CustomEvent {
   imports: [
     CommonModule,
     RouterLink,
-    IntersectionObserverDirective
+    IntersectionObserverDirective,
   ],
   animations: [
     trigger('slideInAnimation', [
@@ -47,17 +55,20 @@ interface ViewProjectDetailsEvent extends CustomEvent {
     ])
   ]
 })
-export class LandingComponent implements OnInit, OnDestroy {
-  pageTitle = 'Click Map Markers for More on Climate Finance Projects';
-  private platform: any;
-  private map: any;
+export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('mapContainer') mapContainer!: ElementRef;
+
+  private map!: L.Map;
   recentProjects: any[] = [];
   highValueProjects: any[] = [];
   markers: { lat: number; lng: number; popup: string; }[] = [];
   numberOfProjects: number = 0;
   totalValueOfProjects: number = 0;
 
-
+  isLoading: boolean = true;
+  mapInitialized: boolean = false;
+  projectsLoaded: boolean = false;
+  private viewInitialized: boolean = false;
 
   mainSection = {
     title: "Explore GCF Projects: Boosting Climate Finance Investments in South Africa",
@@ -72,14 +83,6 @@ export class LandingComponent implements OnInit, OnDestroy {
     buttonLink: "/projects/featured"
   };
 
-  oc4idsDocsSection = {
-    title: "Explore OC4IDS Documentation",
-    description: "Dive deeper into the Open Contracting for Infrastructure Data Standard",
-    fullDocsLink: "https://standard.open-contracting.org/infrastructure/latest/en/projects/",
-    schemaLink: "https://standard.open-contracting.org/infrastructure/latest/en/reference/#",
-    mainLink: "https://standard.open-contracting.org/infrastructure/latest/en/"
-  };
-
   sponsorsSection = {
     title: "Supported by",
     sponsors: [
@@ -89,106 +92,137 @@ export class LandingComponent implements OnInit, OnDestroy {
     ]
   };
 
+  constructor(
+      private http: HttpClient,
+      private firestore: AngularFirestore,
+      private router: Router,
+      private scriptLoader: ScriptLoaderService,
+      private cdr: ChangeDetectorRef,
+      private ngZone: NgZone
+  ) {}
 
+  async ngOnInit(): Promise<void> {
+    console.log('ngOnInit called');
+    try {
+      await this.loadLeafletScripts();
+      this.loadProjects();
+      window.addEventListener('viewProjectDetails', this.handleViewProjectDetails as EventListener);
+    } catch (error) {
+      console.error('Error during component initialization:', error);
+    }
+  }
 
-  isLoading: boolean = true;
-
-  constructor(private http: HttpClient, private firestore: AngularFirestore, private router: Router) {
-    this.platform = new H.service.Platform({
-      apikey: environment.hereMapsApiKey
+  ngAfterViewInit() {
+    console.log('ngAfterViewInit called');
+    this.viewInitialized = true;
+    this.ngZone.runOutsideAngular(() => {
+      setTimeout(() => {
+        this.checkAndInitializeMap();
+      }, 0);
     });
   }
 
-  ngOnInit(): void {
-
-    // this.addProjectsToFirebase();
-    this.loadProjects();
-    window.addEventListener('viewProjectDetails', this.handleViewProjectDetails as EventListener);
-  }
 
   ngOnDestroy(): void {
+    console.log('ngOnDestroy called');
     window.removeEventListener('viewProjectDetails', this.handleViewProjectDetails as EventListener);
+    if (this.map) {
+      this.map.remove();
+    }
+  }
+
+  private async loadLeafletScripts(): Promise<void> {
+    console.log('loadLeafletScripts called');
+    const scripts = [
+      'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js'
+    ];
+    const styles = [
+      'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css'
+    ];
+
+    try {
+      await this.scriptLoader.loadScripts(scripts);
+      await this.scriptLoader.loadStyles(styles);
+      console.log('Leaflet scripts and styles loaded successfully');
+    } catch (error) {
+      console.error('Error loading Leaflet scripts or styles:', error);
+      throw error;
+    }
   }
 
   handleViewProjectDetails = (event: ViewProjectDetailsEvent) => {
+    console.log('handleViewProjectDetails called', event.detail);
     this.viewProjectDetails(event.detail);
   };
 
+  checkAndInitializeMap(): void {
+    console.log('checkAndInitializeMap called');
+    console.log('viewInitialized:', this.viewInitialized);
+    console.log('projectsLoaded:', this.projectsLoaded);
+    console.log('mapContainer:', this.mapContainer);
+
+    if (this.viewInitialized && this.projectsLoaded && this.mapContainer && this.mapContainer.nativeElement) {
+      this.initializeMap();
+    } else {
+      console.log('Map initialization deferred');
+      if (!this.mapContainer) {
+        console.error('Map container is not available');
+      }
+      // Retry after a short delay
+      setTimeout(() => this.checkAndInitializeMap(), 100);
+    }
+  }
+
   initializeMap(): void {
-    const defaultLayers = this.platform.createDefaultLayers();
-    this.map = new H.Map(
-        document.getElementById('map'),
-        defaultLayers.vector.normal.map,
-        {
-          zoom: 6,
-          center: { lat: -28.4793, lng: 24.6727 }
-        }
-    );
+    console.log('initializeMap called');
+    if (this.mapInitialized) {
+      console.log('Map already initialized');
+      return;
+    }
 
-    const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map));
-    const ui = H.ui.UI.createDefault(this.map, defaultLayers);
+    console.log('Creating map instance');
+    this.map = L.map(this.mapContainer.nativeElement).setView([-28.4793, 24.6727], 6);
 
+    console.log('Adding tile layer');
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(this.map);
+
+    console.log('Adding markers', this.markers);
     this.markers.forEach(markerData => {
-      const marker = new H.map.Marker({ lat: markerData.lat, lng: markerData.lng });
-      marker.setData(markerData.popup);
-      marker.addEventListener('tap', (event: any) => {
-        const bubble = new H.ui.InfoBubble(event.target.getGeometry(), {
-          content: event.target.getData()
-        });
-        ui.addBubble(bubble);
-        this.map.setCenter(event.target.getGeometry());
-        this.map.setZoom(12); // Adjust zoom level as needed to focus on the marker
-      });
-      this.map.addObject(marker);
+      const marker = L.marker([markerData.lat, markerData.lng]).addTo(this.map);
+      marker.bindPopup(markerData.popup);
     });
 
     this.fitMapBounds();
-  }
-
-  calculateBounds(): any {
-    if (this.markers.length === 0) {
-      return null;
-    }
-
-    let bounds = new H.geo.Rect(
-        this.markers[0].lat, this.markers[0].lng,
-        this.markers[0].lat, this.markers[0].lng
-    );
-
-    this.markers.forEach(markerData => {
-      if (markerData.lat !== undefined && markerData.lng !== undefined) {
-        bounds = bounds.mergePoint(new H.geo.Point(markerData.lat, markerData.lng));
-      }
-    });
-
-    return bounds;
+    this.mapInitialized = true;
+    console.log('Map initialized successfully');
   }
 
   fitMapBounds() {
-    const bounds = this.calculateBounds();
-    if (bounds) {
-      this.map.getViewModel().setLookAtData({
-        bounds: bounds
-      });
+    console.log('fitMapBounds called', this.markers.length);
+    if (this.markers.length > 0 && this.map) {
+      const bounds = L.latLngBounds(this.markers.map(m => [m.lat, m.lng]));
+      this.map.fitBounds(bounds);
     }
   }
 
   viewProjectDetails(projectId: string) {
+    console.log('viewProjectDetails called', projectId);
     this.router.navigate(['/public/projects', projectId]).then(
         r => console.log('Navigated to project details:', r ? 'success' : 'failed')
     );
   }
 
   loadProjects() {
+    console.log('loadProjects called');
     this.isLoading = true;
     this.firestore.collection('projects').get().subscribe(
         (querySnapshot) => {
           const projects: any[] = [];
           let totalValue = 0;
-          this.isLoading = false;
           querySnapshot.forEach((doc) => {
             const project = doc.data() as any;
-
             projects.push(project);
             const contractPrice = project.stages?.tenderManagement?.basicData?.contractPrice;
             if (contractPrice) {
@@ -196,29 +230,31 @@ export class LandingComponent implements OnInit, OnDestroy {
             }
           });
 
-          this.recentProjects = projects.slice(0, 5); // Display only the first 5 projects
+          console.log('Projects loaded:', projects.length);
+          this.recentProjects = projects.slice(0, 5);
           this.highValueProjects = projects.sort((a, b) => {
-            const aPrice = parseFloat(a.stages?.tenderManagement?.basicData?.contractPrice.replace(/[^0-9.-]+/g, "") || '0');
-            const bPrice = parseFloat(b.stages?.tenderManagement?.basicData?.contractPrice.replace(/[^0-9.-]+/g, "") || '0');
+            const aPrice = parseFloat(a.stages?.tenderManagement?.basicData?.contractPrice?.replace(/[^0-9.-]+/g, "") || '0');
+            const bPrice = parseFloat(b.stages?.tenderManagement?.basicData?.contractPrice?.replace(/[^0-9.-]+/g, "") || '0');
             return bPrice - aPrice;
-          }).slice(0, 5); // Display top 5 high-value projects
+          }).slice(0, 5);
 
           this.numberOfProjects = projects.length;
           this.totalValueOfProjects = totalValue;
-          console.log('Loaded projects:', projects);
           this.generateMarkers();
-          this.initializeMap();
+          this.projectsLoaded = true;
+          this.isLoading = false;
+          this.checkAndInitializeMap();
+          this.cdr.detectChanges();
         },
         (error) => {
-            this.isLoading = false;
+          this.isLoading = false;
           console.error('Error loading projects:', error);
         }
     );
   }
 
-
-
   generateMarkers() {
+    console.log('generateMarkers called');
     this.markers = this.recentProjects.map(project => {
       if (project.location && project.location.coordinates) {
         const popup = `
@@ -232,13 +268,14 @@ export class LandingComponent implements OnInit, OnDestroy {
           </div>
         `;
         return {
-          lat: parseFloat(project.location.coordinates.lat),
-          lng: parseFloat(project.location.coordinates.lng),
+          lat: project.location.coordinates.lat,
+          lng: project.location.coordinates.lng,
           popup: popup
         };
       }
       return null;
     }).filter((marker): marker is { lat: number; lng: number; popup: string } => marker !== null);
+    console.log('Generated markers:', this.markers);
   }
 
   navigateToProjects() {
@@ -262,5 +299,4 @@ export class LandingComponent implements OnInit, OnDestroy {
   navigateToFeaturedProjects(): void {
     this.router.navigate(['/public/projects'], { queryParams: { featured: 'true' } });
   }
-
 }

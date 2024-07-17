@@ -5,15 +5,15 @@
     </div>
 
     <!-- Main section -->
-    <div appIntersectionObserver [@slideInAnimation] class="bg-primary rounded-2xl min-h-screen flex flex-col lg:flex-row items-center justify-between text-secondary p-6 lg:p-12 mb-12">
+    <div appIntersectionObserver [@slideInAnimation] class="bg-primary rounded-2xl min-h-screen flex flex-col lg:flex-row items-center justify-between text-black p-6 lg:p-12 mb-12">
         <div class="w-full lg:w-1/2 text-center lg:text-left lg:pr-8">
-            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-secondary mb-6">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-black mb-6">
                 {{ mainSection.title }}
             </h1>
             <p class="text-base sm:text-lg lg:text-xl mb-8">
                 {{ mainSection.description }}
             </p>
-            <button (click)="navigateToProjects()" class="px-8 py-4 bg-accent text-secondary text-lg font-medium rounded-full hover:bg-secondary hover:text-primary transition-all duration-300 transform hover:scale-105">
+            <button (click)="navigateToProjects()" class="px-8 py-4 bg-accent text-black text-lg font-medium rounded hover:bg-secondary hover:text-primary transition-all duration-300 transform hover:scale-105">
                 {{ mainSection.buttonText }}
             </button>
             <div class="flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-8 mt-8">
@@ -28,24 +28,38 @@
             </div>
         </div>
         <div class="relative mt-8 lg:mt-0 w-full lg:w-1/2 flex items-center justify-center">
-            <div id="map" class="w-full h-64 sm:h-96 rounded-2xl shadow-lg overflow-hidden"></div>
+            <div class="w-full h-80 sm:h-96 md:h-[28rem] lg:h-[32rem] xl:h-[36rem]  overflow-hidden">
+                <ng-container *ngIf="!isLoading; else mapLoading">
+                    <div #mapContainer id="map" class="w-full h-full"></div>
+                </ng-container>
+                <ng-template #mapLoading>
+                    <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="w-16 h-16 border-4 border-gray-300 border-t-accent rounded-full animate-spin mx-auto mb-4"></div>
+                            <p class="text-gray-600">Loading map...</p>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
         </div>
+
     </div>
+
 
     <!-- Featured Projects Section -->
     <div appIntersectionObserver [@slideInAnimation] class="bg-primary py-12 sm:py-16 rounded-2xl mb-12">
         <div class="container mx-auto px-6 lg:flex lg:items-center">
             <div class="lg:w-1/2">
-                <h2 class="text-3xl sm:text-4xl font-bold mb-6">{{ featuredProjectsSection.title }}</h2>
-                <p class="text-base sm:text-lg mb-8">
+                <h2 class="text-3xl sm:text-4xl font-bold text-black mb-6">{{ featuredProjectsSection.title }}</h2>
+                <p class="text-base sm:text-lg text-black mb-8">
                     {{ featuredProjectsSection.description }}
                 </p>
-                <button (click)="navigateToFeaturedProjects()" class="px-8 py-4 bg-accent text-secondary text-lg font-medium rounded-full hover:bg-secondary hover:text-primary transition-all duration-300 transform hover:scale-105">
+                <button (click)="navigateToFeaturedProjects()" class="px-8 py-4 bg-accent text-black text-lg font-medium rounded hover:bg-secondary hover:text-primary transition-all duration-300 transform hover:scale-105">
                     {{ featuredProjectsSection.buttonText }}
                 </button>
             </div>
             <div class="lg:w-1/2 lg:pl-12 mt-8 lg:mt-0 relative">
-                <img src="../../../assets/featured.png" alt="Featured Project" class="w-full h-auto rounded-2xl shadow-lg">
+                <img src="../../../assets/featured.png" alt="Featured Project" class="w-full h-auto ">
             </div>
         </div>
     </div>
@@ -61,7 +75,7 @@
                 </h2>
                 <ul class="space-y-4" [@listAnimation]="recentProjects.length">
                     <li *ngFor="let project of recentProjects" class="bg-white rounded-lg shadow-sm p-4 hover:shadow-md transition-shadow duration-300">
-                        <a [routerLink]="['/public/projects', project.id]" class="flex items-center text-secondary hover:text-accent transition-colors duration-300">
+                        <a [routerLink]="['/public/projects', project.id]" class="flex items-center text-black hover:text-accent transition-colors duration-300">
                             <i class="bi bi-file-earmark-text text-gray-500 mr-3 text-xl"></i>
                             <span class="text-base sm:text-lg">{{ project.name }}</span>
                         </a>
@@ -77,7 +91,7 @@
                 </h2>
                 <ul class="space-y-4" [@listAnimation]="highValueProjects.length">
                     <li *ngFor="let project of highValueProjects" class="bg-white rounded-lg shadow-sm p-4 hover:shadow-md transition-shadow duration-300">
-                        <a [routerLink]="['/public/projects', project.id]" class="flex items-center justify-between text-secondary hover:text-accent transition-colors duration-300">
+                        <a [routerLink]="['/public/projects', project.id]" class="flex items-center justify-between text-black hover:text-accent transition-colors duration-300">
                             <span class="text-base sm:text-lg">{{ project.name }}</span>
                             <span class="text-sm font-semibold">{{ project.contractPrice | currency:'USD':'symbol':'1.0-0' }}</span>
                         </a>
@@ -87,46 +101,6 @@
         </div>
     </div>
 
-
-    <section class="py-16 bg-gray-50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-semibold text-center text-gray-900 mb-8">{{ oc4idsDocsSection.title }}</h2>
-            <p class="text-center text-gray-600 mb-12">{{ oc4idsDocsSection.description }}</p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <a [href]="oc4idsDocsSection.fullDocsLink" target="_blank" rel="noopener noreferrer" class="block">
-                    <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-105">
-                        <div class="p-8">
-                            <div class="flex items-center justify-center w-16 h-16 bg-accent rounded-full mb-4">
-                                <i class="bi bi-book text-2xl text-white"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Full Documentation</h3>
-                            <p class="text-gray-600">Access comprehensive guides and references for implementing OC4IDS</p>
-                        </div>
-                    </div>
-                </a>
-
-                <a [href]="oc4idsDocsSection.schemaLink" target="_blank" rel="noopener noreferrer" class="block">
-                    <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-105">
-                        <div class="p-8">
-                            <div class="flex items-center justify-center w-16 h-16 bg-accent rounded-full mb-4">
-                                <i class="bi bi-code-square text-2xl text-white"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Schema Reference</h3>
-                            <p class="text-gray-600">Explore the detailed schema for infrastructure project data</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="mt-12 text-center">
-                <a [href]="oc4idsDocsSection.mainLink" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-accent hover:bg-accent-dark transition-colors duration-300">
-                    Visit OC4IDS Documentation
-                    <i class="bi bi-arrow-right ml-2"></i>
-                </a>
-            </div>
-        </div>
-    </section>
 
     <!-- Sponsors section -->
     <section class="py-16 bg-gray-50 rounded-2xl">

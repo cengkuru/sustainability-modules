@@ -24,7 +24,7 @@
                             (click)="toggleFeatured()"
                             [class.bg-white]="!(showFeatured | async)"
                             [class.shadow-sm]="!(showFeatured | async)"
-                            class="px-4 py-2 rounded-md text-sm font-medium transition-all duration-300"
+                            class="px-4 py-2 rounded-md text-sm font-medium  text-black transition-all duration-300"
                     >
                         All Projects
                     </button>
@@ -32,7 +32,7 @@
                             (click)="toggleFeatured()"
                             [class.bg-white]="showFeatured | async"
                             [class.shadow-sm]="showFeatured | async"
-                            class="px-4 py-2 rounded-md text-sm font-medium transition-all duration-300"
+                            class="px-4 py-2 rounded-md text-sm font-medium text-black transition-all duration-300"
                     >
                         Featured
                     </button>
@@ -41,11 +41,11 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div *ngFor="let project of projects$ | async" class="relative overflow-hidden rounded-lg border bg-customGray text-black transition duration-300 ease-in-out transform hover:bg-accent hover:-translate-y-1 animate-slide-up">
+            <div *ngFor="let project of projects$ | async" class="relative overflow-hidden rounded-lg  bg-customGray text-black transition duration-300 ease-in-out transform hover:bg-secondary hover:-translate-y-1 animate-slide-up">
                 <div class="p-6">
                     <a [routerLink]="['/public/projects', project.id]" class="block">
                         <div class="flex justify-between items-center mb-2">
-                            <h3 class="text-xl font-semibold hover:underline">{{ project.name }}</h3>
+                            <h3 class="text-xl font-semibold ">{{ project.name }}</h3>
                             <i class="bi bi-arrow-right text-xl"></i>
                         </div>
                         <p class="text-sm mb-5">
@@ -54,7 +54,7 @@
                         <p>{{ project.stages.identification.basicData.projectDescription }}</p>
                     </a>
                     <div *ngIf="project.featured" class="absolute top-4 right-4">
-                        <span class="bg-accent text-secondary text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                        <span class="bg-secondary  text-xs font-semibold px-2.5 py-0.5 rounded-full">
                             Featured
                         </span>
                     </div>

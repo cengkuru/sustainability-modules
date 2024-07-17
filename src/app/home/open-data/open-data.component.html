@@ -1,25 +1,25 @@
 <div class="min-h-screen bg-primary py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-3xl mx-auto">
-        <div class="bg-white shadow-xl rounded-2xl overflow-hidden">
+        <div class="bg-white  overflow-hidden">
             <div class="px-6 py-8 sm:p-10">
-                <h2 class="text-3xl font-bold text-secondary text-center mb-8">Download Project Data</h2>
-                <p class="mt-4 text-lg text-secondary text-center mb-8">
+                <h2 class="text-3xl font-bold text-primary text-center mb-8">Download Project Data</h2>
+                <p class="mt-4 text-lg text-primary text-center mb-8">
                     Access all project data in bulk in various open formats. Choose your preferred format to download:
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
-                    <button (click)="downloadFile('csv')" class="download-button" [disabled]="downloading">
+                    <button (click)="downloadFile('csv')" class="download-button text-secondary" [disabled]="downloading">
                         <i class="bi bi-filetype-csv mr-2"></i>
                         <span>CSV</span>
                     </button>
-                    <button (click)="downloadFile('json')" class="download-button" [disabled]="downloading">
+                    <button (click)="downloadFile('json')" class="download-button text-secondary" [disabled]="downloading">
                         <i class="bi bi-filetype-json mr-2"></i>
                         <span>JSON</span>
                     </button>
-                    <button (click)="downloadFile('txt')" class="download-button" [disabled]="downloading">
+                    <button (click)="downloadFile('txt')" class="download-button text-secondary" [disabled]="downloading">
                         <i class="bi bi-filetype-txt mr-2"></i>
                         <span>TXT</span>
                     </button>
-                    <button (click)="downloadFile('xlsx')" class="download-button" [disabled]="downloading">
+                    <button (click)="downloadFile('xlsx')" class="download-button text-secondary" [disabled]="downloading">
                         <i class="bi bi-file-earmark-excel mr-2"></i>
                         <span>Excel</span>
                     </button>

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from "@angular/common";
-import { Router, RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
+import { Router, RouterLink, RouterLinkActive, RouterOutlet, NavigationEnd } from "@angular/router";
 import { trigger, transition, style, animate } from '@angular/animations';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-index',
@@ -26,7 +27,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
     ]),
   ],
 })
-export class IndexComponent {
+export class IndexComponent implements OnInit {
   pageTitle = 'The National Infrastructure Disclosure Platform';
   isProfileDropdownOpen = false;
   isMobileMenuOpen = false;
@@ -55,7 +56,22 @@ export class IndexComponent {
     link: 'https://creativecommons.org/licenses/by/4.0/'
   };
 
-  constructor(public router: Router) { }
+  constructor(public router: Router) {}
+
+  ngOnInit() {
+    // Navigate to the default route if the current route is empty
+    if (this.router.url === '/public' || this.router.url === '/public/') {
+      this.router.navigate(['/public/home']);
+    }
+
+    // Subscribe to router events to handle navigation
+    this.router.events.pipe(
+        filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      // Perform any necessary actions after navigation, such as scrolling to top
+      window.scrollTo(0, 0);
+    });
+  }
 
   toggleProfileDropdown() {
     this.isProfileDropdownOpen = !this.isProfileDropdownOpen;

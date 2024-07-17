@@ -1,8 +1,9 @@
-import {Component, OnInit, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { CommonModule } from "@angular/common";
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 import * as echarts from 'echarts';
-import jsPDF from 'jspdf';
+import { jsPDF } from "jspdf";
+import { EChartsOption, BarSeriesOption, PieSeriesOption } from 'echarts';
 
 @Component({
     selector: 'app-data-analysis',
@@ -13,24 +14,25 @@ import jsPDF from 'jspdf';
 })
 export class DataAnalysisComponent implements OnInit, AfterViewInit {
     @ViewChild('investmentTrendsChart', { static: false }) investmentTrendsChartElement!: ElementRef;
-    projectCompletionRatesChart: any;
-    totalClimateFinanceChart: any;
-    transparencyImpactChart: any;
-    stakeholderEngagementChart: any;
-    totalBudgetVsActualExpenditureChart: any;
-    budgetVariancesChart: any;
+    @ViewChild('investmentByRegionChart', { static: false }) investmentByRegionChartElement!: ElementRef;
+    @ViewChild('projectsByRegionChart', { static: false }) projectsByRegionChartElement!: ElementRef;
+    @ViewChild('projectsByClimateObjectivesChart', { static: false }) projectsByClimateObjectivesChartElement!: ElementRef;
+    @ViewChild('investmentsByClimateObjectivesChart', { static: false }) investmentsByClimateObjectivesChartElement!: ElementRef;
+    @ViewChild('totalProjectsBySectorChart', { static: false }) totalProjectsBySectorChartElement!: ElementRef;
+
     investmentByRegionChart: echarts.ECharts | null = null;
+    projectsByRegionChart: echarts.ECharts | null = null;
+    projectsByClimateObjectivesChart: echarts.ECharts | null = null;
+    investmentsByClimateObjectivesChart: echarts.ECharts | null = null;
+    totalProjectsBySectorChart: echarts.ECharts | null = null;
 
     dropdownOpen: { [key: string]: boolean } = {
-        projectCompletionRates: false,
-        totalClimateFinance: false,
-        transparencyImpact: false,
-        stakeholderEngagement: false,
-        totalBudgetVsActualExpenditure: false,
-        budgetVariances: false,
-        investmentTrends: false
+        investmentByRegion: false,
+        projectsByRegion: false,
+        projectsByClimateObjectives: false,
+        investmentsByClimateObjectives: false,
+        totalProjectsBySector: false
     };
-
 
     private investmentData = [
         { region: 'Gauteng', '2019': 1800, '2020': 2000, '2021': 2200, '2022': 2500 },
@@ -44,9 +46,6 @@ export class DataAnalysisComponent implements OnInit, AfterViewInit {
         { region: 'Northern Cape', '2019': 400, '2020': 450, '2021': 500, '2022': 600 }
     ];
 
-
-
-
     constructor(private http: HttpClient) { }
 
     ngOnInit(): void {
@@ -54,39 +53,45 @@ export class DataAnalysisComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
+        // Wait for the DOM to be ready
         setTimeout(() => {
-            this.invesChart();
-            this.createProjectCompletionRatesChart();
-            this.createTotalClimateFinanceChart();
-            this.createTransparencyImpactChart();
-            this.createStakeholderEngagementChart();
-            this.createTotalBudgetVsActualExpenditureChart();
-            this.createBudgetVariancesChart();
+            this.initializeCharts();
         }, 0);
     }
 
-    private invesChart(): void {
-        if (!this.investmentTrendsChartElement) {
-            console.error('Investment Trends Chart element not found');
-            return;
-        }
+    private initializeCharts(): void {
+        this.initChart(this.investmentByRegionChartElement, this.createInvestmentByRegionChart.bind(this));
+        this.initChart(this.projectsByRegionChartElement, this.createProjectsByRegionChart.bind(this));
+        this.initChart(this.projectsByClimateObjectivesChartElement, this.createProjectsByClimateObjectivesChart.bind(this));
+        this.initChart(this.investmentsByClimateObjectivesChartElement, this.createInvestmentsByClimateObjectivesChart.bind(this));
+        this.initChart(this.totalProjectsBySectorChartElement, this.createTotalProjectsBySectorChart.bind(this));
+    }
 
-        const chartDom = this.investmentTrendsChartElement.nativeElement;
+    private initChart(chartElement: ElementRef, chartInitFunction: () => void): void {
+        if (chartElement && chartElement.nativeElement) {
+            chartInitFunction();
+        } else {
+            console.error('DOM element for chart not found');
+        }
+    }
+
+    private createInvestmentByRegionChart(): void {
+        const chartDom = this.investmentByRegionChartElement.nativeElement;
         this.investmentByRegionChart = echarts.init(chartDom);
 
         const years = ['2019', '2020', '2021', '2022'];
         const regions = this.investmentData.map(item => item.region);
 
-        const series: echarts.SeriesOption[] = years.map(year => ({
+        const series: BarSeriesOption[] = years.map(year => ({
             name: year,
             type: 'bar',
             data: this.investmentData.map(item => item[year as keyof typeof item] as number)
         }));
 
-        const option: echarts.EChartsOption = {
+        const option: EChartsOption = {
             title: {
-                text: 'Infrastructure Investment Trends by Region',
-                subtext: 'Based on OC4IDS data standard',
+                text: 'Infrastructure Investment by Region',
+                
                 left: 'center'
             },
             tooltip: {
@@ -125,25 +130,238 @@ export class DataAnalysisComponent implements OnInit, AfterViewInit {
                 name: 'Investment (Million $)'
             },
             series: series,
+            color: ['#19BC9B', '#DBFAF4', '#C6D316', '#69B0DE', '#E7F2FA', '#FB5F44']
+        };
+
+        this.investmentByRegionChart.setOption(option);
+
+        window.addEventListener('resize', () => {
+            this.investmentByRegionChart?.resize();
+        });
+    }
+
+    private createProjectsByRegionChart(): void {
+        const chartDom = this.projectsByRegionChartElement.nativeElement;
+        this.projectsByRegionChart = echarts.init(chartDom);
+
+        const data = [
+            { region: 'Gauteng', projects: 45 },
+            { region: 'Western Cape', projects: 35 },
+            { region: 'KwaZulu-Natal', projects: 40 },
+            { region: 'Eastern Cape', projects: 30 },
+            { region: 'Free State', projects: 20 },
+            { region: 'Limpopo', projects: 25 },
+            { region: 'Mpumalanga', projects: 28 },
+            { region: 'North West', projects: 15 },
+            { region: 'Northern Cape', projects: 10 }
+        ];
+
+        const series: BarSeriesOption[] = [
+            {
+                name: 'Projects',
+                type: 'bar',
+                data: data.map(item => item.projects)
+            }
+        ];
+
+        const option: EChartsOption = {
+            title: {
+                text: 'Projects per Region',
+                
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{b}: {c} projects'
+            },
+            xAxis: {
+                type: 'category',
+                data: data.map(item => item.region),
+                axisLabel: {
+                    rotate: 45,
+                    interval: 0
+                }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Number of Projects'
+            },
+            series: series,
+            color: ['#69B0DE'],
             animationDuration: 1000,
             animationEasing: 'cubicOut',
             animationDelay: (idx: number) => idx * 100
         };
 
-        this.investmentByRegionChart.setOption(option);
+        this.projectsByRegionChart.setOption(option);
 
         // Add resize listener
         window.addEventListener('resize', () => {
-            this.investmentByRegionChart!.resize();
+            this.projectsByRegionChart!.resize();
         });
     }
 
+    private createProjectsByClimateObjectivesChart(): void {
+        const chartDom = this.projectsByClimateObjectivesChartElement.nativeElement;
+        this.projectsByClimateObjectivesChart = echarts.init(chartDom);
+
+        const data = [
+            { objective: 'Adaptation', projects: 60 },
+            { objective: 'Mitigation', projects: 50 },
+            { objective: 'Cross Cutting', projects: 30 }
+        ];
+
+        const series: PieSeriesOption[] = [
+            {
+                name: 'Projects',
+                type: 'pie',
+                radius: '50%',
+                data: data.map(item => ({ value: item.projects, name: item.objective }))
+            }
+        ];
+
+        const option: EChartsOption = {
+            title: {
+                text: 'Projects per Climate Objective',
+                
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{b}: {c} projects'
+            },
+            series: series,
+            color: ['#19BC9B', '#C6D316', '#FB5F44'],
+            label: {
+                formatter: '{b}: {d}%',
+                position: 'outside'
+            },
+            animationDuration: 1000,
+            animationEasing: 'cubicOut',
+            animationDelay: (idx: number) => idx * 100
+        };
+
+        this.projectsByClimateObjectivesChart.setOption(option);
+
+        window.addEventListener('resize', () => {
+            this.projectsByClimateObjectivesChart!.resize();
+        });
+    }
+
+    private createInvestmentsByClimateObjectivesChart(): void {
+        const chartDom = this.investmentsByClimateObjectivesChartElement.nativeElement;
+        this.investmentsByClimateObjectivesChart = echarts.init(chartDom);
+
+        const data = [
+            { objective: 'Adaptation', investment: 3000 },
+            { objective: 'Mitigation', investment: 2500 },
+            { objective: 'Cross Cutting', investment: 1500 }
+        ];
+
+        const series: PieSeriesOption[] = [
+            {
+                name: 'Investments',
+                type: 'pie',
+                radius: '50%',
+                data: data.map(item => ({ value: item.investment, name: item.objective }))
+            }
+        ];
+
+        const option: EChartsOption = {
+            title: {
+                text: 'Investments per Climate Objective',
+                
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{b}: ${c} million'
+            },
+            series: series,
+            color: ['#19BC9B', '#C6D316', '#FB5F44'],
+            label: {
+                formatter: '{b}: ${c}M',
+                position: 'outside'
+            },
+            animationDuration: 1000,
+            animationEasing: 'cubicOut',
+            animationDelay: (idx: number) => idx * 100
+        };
+
+        this.investmentsByClimateObjectivesChart.setOption(option);
+
+        window.addEventListener('resize', () => {
+            this.investmentsByClimateObjectivesChart!.resize();
+        });
+    }
+
+    private createTotalProjectsBySectorChart(): void {
+        const chartDom = this.totalProjectsBySectorChartElement.nativeElement;
+        this.totalProjectsBySectorChart = echarts.init(chartDom);
+
+        const data = [
+            { sector: 'Water', projects: 40 },
+            { sector: 'Energy', projects: 35 },
+            { sector: 'Transport', projects: 30 },
+            { sector: 'Agriculture', projects: 25 }
+        ];
+
+        const series: BarSeriesOption[] = [
+            {
+                name: 'Projects',
+                type: 'bar',
+                data: data.map(item => item.projects)
+            }
+        ];
+
+        const option: EChartsOption = {
+            title: {
+                text: 'Total Projects per Sector',
+                
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{b}: {c} projects'
+            },
+            xAxis: {
+                type: 'category',
+                data: data.map(item => item.sector),
+                axisLabel: {
+                    rotate: 45,
+                    interval: 0
+                }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Number of Projects'
+            },
+            series: series,
+            color: ['#C6D316'],
+            animationDuration: 1000,
+            animationEasing: 'cubicOut',
+            animationDelay: (idx: number) => idx * 100
+        };
+
+        this.totalProjectsBySectorChart.setOption(option);
+
+        // Add resize listener
+        window.addEventListener('resize', () => {
+            this.totalProjectsBySectorChart!.resize();
+        });
+    }
 
     toggleDropdown(chartName: string): void {
         this.dropdownOpen[chartName] = !this.dropdownOpen[chartName];
     }
 
-    downloadChartData(chart: any, format: string): void {
+    downloadChartData(chartName: string, format: string): void {
+        const chart = this.getChartInstance(chartName);
+        if (!chart) {
+            console.error(`Chart instance for ${chartName} not found`);
+            return;
+        }
+
         const dataURL = chart.getDataURL({
             type: format === 'png' ? 'png' : 'svg',
         });
@@ -175,291 +393,36 @@ export class DataAnalysisComponent implements OnInit, AfterViewInit {
         }
     }
 
-    convertChartToCSV(chart: any): string {
+    convertChartToCSV(chart: echarts.ECharts): string {
         const option = chart.getOption();
         let csv = '';
-        if (option && option.series) {
-            option.series.forEach((series: any) => {
+        if (option && Array.isArray(option['series'])) {
+            option['series'].forEach((series: any) => {
                 csv += series.name + '\n';
-                csv += series.data.map((d: any) => d.join(',')).join('\n') + '\n\n';
+                if (Array.isArray(series.data)) {
+                    csv += series.data.map((d: any) =>
+                        (typeof d === 'object' ? `${d.name},${d.value}` : d)
+                    ).join('\n') + '\n\n';
+                }
             });
         }
         return csv;
     }
 
-    createProjectCompletionRatesChart(): void {
-        const chartDom = document.getElementById('projectCompletionRatesChart')!;
-        this.projectCompletionRatesChart = echarts.init(chartDom);
-
-        const option: any = {
-            title: {
-                text: 'Project Completion Rates by Region',
-                left: 'center'
-            },
-            tooltip: {
-                trigger: 'axis',
-                formatter: (params: any) => {
-                    let tooltipText = `${params[0].name}<br/>`;
-                    tooltipText += `${params[0].marker} Completion Rate: ${params[0].value}%<br/>`;
-                    tooltipText += 'Project completion rate in this region';
-                    return tooltipText;
-                }
-            },
-            xAxis: {
-                type: 'category',
-                data: ['Gauteng', 'Western Cape', 'KwaZulu-Natal', 'Eastern Cape']
-            },
-            yAxis: {
-                type: 'value',
-                max: 100
-            },
-            series: [
-                {
-                    data: [90, 75, 85, 80],
-                    type: 'bar',
-                    color: '#FFCE32',
-                    label: {
-                        show: true,
-                        position: 'top',
-                        formatter: '{c}%'
-                    }
-                }
-            ]
-        };
-
-        this.projectCompletionRatesChart.setOption(option);
+    private getChartInstance(chartName: string): echarts.ECharts | null {
+        switch (chartName) {
+            case 'investmentByRegion':
+                return this.investmentByRegionChart;
+            case 'projectsByRegion':
+                return this.projectsByRegionChart;
+            case 'projectsByClimateObjectives':
+                return this.projectsByClimateObjectivesChart;
+            case 'investmentsByClimateObjectives':
+                return this.investmentsByClimateObjectivesChart;
+            case 'totalProjectsBySector':
+                return this.totalProjectsBySectorChart;
+            default:
+                return null;
+        }
     }
-
-    createTotalClimateFinanceChart(): void {
-        const chartDom = document.getElementById('totalClimateFinanceChart')!;
-        this.totalClimateFinanceChart = echarts.init(chartDom);
-        const option: any = {
-            title: {
-                text: 'Total Climate Finance by Sector',
-                left: 'center'
-            },
-            tooltip: {
-                trigger: 'item',
-                formatter: (params: any) => {
-                    return `${params.marker} ${params.name}: $${params.value} million<br/>Total climate finance allocated to the ${params.name} sector.`;
-                }
-            },
-            legend: {
-                bottom: '0%'
-            },
-            series: [
-                {
-                    name: 'Total Climate Finance',
-                    type: 'pie',
-                    radius: '50%',
-                    data: [
-                        { value: 120, name: 'Water' },
-                        { value: 150, name: 'Energy' },
-                        { value: 90, name: 'Transport' },
-                        { value: 110, name: 'Agriculture' }
-                    ],
-                    color: ['#FFCE32', '#333333', '#61A8BD', '#D60000'],
-                    label: {
-                        formatter: '{b}: ${c}M',
-                        position: 'outside'
-                    }
-                }
-            ]
-        };
-        this.totalClimateFinanceChart.setOption(option);
-    }
-
-    createTransparencyImpactChart(): void {
-        const chartDom = document.getElementById('transparencyImpactChart')!;
-        this.transparencyImpactChart = echarts.init(chartDom);
-        const option: any = {
-            title: {
-                text: 'Impact of Transparency on Project Outcomes',
-                left: 'center'
-            },
-            tooltip: {
-                trigger: 'axis',
-                formatter: (params: any) => {
-                    return `${params[0].name}<br/>Transparency Impact: ${params[0].value}%<br/>Higher transparency leads to better project outcomes.`;
-                }
-            },
-            xAxis: {
-                type: 'category',
-                data: ['Q1', 'Q2', 'Q3', 'Q4']
-            },
-            yAxis: {
-                type: 'value',
-                max: 100
-            },
-            series: [
-                {
-                    data: [65, 75, 70, 80],
-                    type: 'bar',
-                    color: '#FFCE32',
-                    label: {
-                        show: true,
-                        position: 'top',
-                        formatter: '{c}%'
-                    }
-                }
-            ]
-        };
-        this.transparencyImpactChart.setOption(option);
-    }
-
-    createStakeholderEngagementChart(): void {
-        const chartDom = document.getElementById('stakeholderEngagementChart')!;
-        this.stakeholderEngagementChart = echarts.init(chartDom);
-        const option: any = {
-            title: {
-                text: 'Stakeholder Engagement Activities',
-                left: 'center'
-            },
-            tooltip: {
-                trigger: 'item',
-                formatter: (params: any) => {
-                    return `${params.marker} ${params.name}: ${params.value}%<br/>Engagement with ${params.name} sector.`;
-                }
-            },
-            legend: {
-                bottom: '0%'
-            },
-            series: [
-                {
-                    name: 'Engagement Activities',
-                    type: 'pie',
-                    radius: '50%',
-                    data: [
-                        { value: 40, name: 'Government' },
-                        { value: 30, name: 'Private Sector' },
-                        { value: 20, name: 'Civil Society' },
-                        { value: 10, name: 'Others' }
-                    ],
-                    color: ['#FFCE32', '#333333', '#61A8BD', '#D60000'],
-                    label: {
-                        formatter: '{b}: {d}%',
-                        position: 'outside'
-                    }
-                }
-            ]
-        };
-        this.stakeholderEngagementChart.setOption(option);
-    }
-
-
-
-    createTotalBudgetVsActualExpenditureChart(): void {
-        const chartDom = document.getElementById('totalBudgetVsActualExpenditureChart')!;
-        this.totalBudgetVsActualExpenditureChart = echarts.init(chartDom);
-        const option: any = {
-            title: {
-                text: 'Total Budget vs. Actual Expenditure',
-                left: 'center'
-            },
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'shadow'
-                },
-                formatter: (params: any) => {
-                    let tooltipText = `${params[0].name}<br/>`;
-                    params.forEach((item: any) => {
-                        tooltipText += `${item.marker} ${item.seriesName}: $${item.value}M<br/>`;
-                    });
-                    tooltipText += 'The total budget and actual expenditure for each project.';
-                    return tooltipText;
-                }
-            },
-            legend: {
-                bottom: '0%'
-            },
-            xAxis: {
-                type: 'category',
-                data: ['Water Treatment Plant', 'Solar Energy Farm', 'Highway Expansion', 'Urban Development']
-            },
-            yAxis: {
-                type: 'value',
-                name: 'USD (millions)',
-                axisLabel: {
-                    formatter: '{value}M'
-                }
-            },
-            series: [
-                {
-                    name: 'Total Budget',
-                    type: 'bar',
-                    data: [200, 150, 300, 250],
-                    color: '#61A8BD'
-                },
-                {
-                    name: 'Actual Expenditure',
-                    type: 'bar',
-                    data: [180, 130, 290, 240],
-                    color: '#D60000'
-                }
-            ]
-        };
-        this.totalBudgetVsActualExpenditureChart.setOption(option);
-    }
-
-    createBudgetVariancesChart(): void {
-        const chartDom = document.getElementById('budgetVariancesChart')!;
-        this.budgetVariancesChart = echarts.init(chartDom);
-        const option: any = {
-            title: {
-                text: 'Budget Variances (Planned vs. Actual)',
-                left: 'center'
-            },
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'shadow'
-                },
-                formatter: (params: any) => {
-                    let tooltipText = `${params[0].name}<br/>`;
-                    params.forEach((item: any) => {
-                        tooltipText += `${item.marker} ${item.seriesName}: $${item.value}M<br/>`;
-                    });
-                    tooltipText += 'Variances between the planned budget and actual expenditure for each project.';
-                    return tooltipText;
-                }
-            },
-            legend: {
-                bottom: '0%'
-            },
-            xAxis: {
-                type: 'category',
-                data: ['Water Treatment Plant', 'Solar Energy Farm', 'Highway Expansion', 'Urban Development']
-            },
-            yAxis: {
-                type: 'value',
-                name: 'USD (millions)',
-                axisLabel: {
-                    formatter: '{value}M'
-                }
-            },
-            series: [
-                {
-                    name: 'Planned Budget',
-                    type: 'bar',
-                    data: [200, 150, 300, 250],
-                    color: '#61A8BD'
-                },
-                {
-                    name: 'Actual Expenditure',
-                    type: 'bar',
-                    data: [180, 130, 290, 240],
-                    color: '#D60000'
-                },
-                {
-                    name: 'Variance',
-                    type: 'line',
-                    data: [20, 20, 10, 10],
-                    color: '#FFCE32'
-                }
-            ]
-        };
-        this.budgetVariancesChart.setOption(option);
-    }
-
 }
