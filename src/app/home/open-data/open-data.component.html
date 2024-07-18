@@ -1,36 +1,39 @@
-<div class="min-h-screen bg-primary py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-3xl mx-auto">
-        <div class="bg-white  overflow-hidden">
-            <div class="px-6 py-8 sm:p-10">
-                <h2 class="text-3xl font-bold text-primary text-center mb-8">Download Project Data</h2>
-                <p class="mt-4 text-lg text-primary text-center mb-8">
-                    Access all project data in bulk in various open formats. Choose your preferred format to download:
+<div class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-primary font-inter text-accent">
+    <div class="w-full max-w-3xl">
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="px-6 py-12 sm:px-12">
+                <h2 class="text-4xl font-bold text-center mb-8">Download Project Data</h2>
+                <p class="mt-4 text-lg text-center mb-12 text-accent3 max-w-2xl mx-auto">
+                    Access all project data in bulk. Choose your preferred open format:
                 </p>
-                <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
-                    <button (click)="downloadFile('csv')" class="download-button text-secondary" [disabled]="downloading">
-                        <i class="bi bi-filetype-csv mr-2"></i>
-                        <span>CSV</span>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+                    <button (click)="downloadFile('csv')" [disabled]="downloading" class="download-button flex flex-col items-center justify-center p-6 rounded-xl bg-accent2 text-accent3 hover:bg-accent1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-12 h-12 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path></svg>
+                        <span class="font-semibold">CSV</span>
                     </button>
-                    <button (click)="downloadFile('json')" class="download-button text-secondary" [disabled]="downloading">
-                        <i class="bi bi-filetype-json mr-2"></i>
-                        <span>JSON</span>
+                    <button (click)="downloadFile('json')" [disabled]="downloading" class="download-button flex flex-col items-center justify-center p-6 rounded-xl bg-accent2 text-accent3 hover:bg-accent1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-12 h-12 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path></svg>
+                        <span class="font-semibold">JSON</span>
                     </button>
-                    <button (click)="downloadFile('txt')" class="download-button text-secondary" [disabled]="downloading">
-                        <i class="bi bi-filetype-txt mr-2"></i>
-                        <span>TXT</span>
+                    <button (click)="downloadFile('txt')" [disabled]="downloading" class="download-button flex flex-col items-center justify-center p-6 rounded-xl bg-accent2 text-accent3 hover:bg-accent1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-12 h-12 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path></svg>
+                        <span class="font-semibold">TXT</span>
                     </button>
-                    <button (click)="downloadFile('xlsx')" class="download-button text-secondary" [disabled]="downloading">
-                        <i class="bi bi-file-earmark-excel mr-2"></i>
-                        <span>Excel</span>
+                    <button (click)="downloadFile('xlsx')" [disabled]="downloading" class="download-button flex flex-col items-center justify-center p-6 rounded-xl bg-accent2 text-accent3 hover:bg-accent1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-12 h-12 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path></svg>
+                        <span class="font-semibold">Excel</span>
                     </button>
                 </div>
-                <div *ngIf="error" class="mt-4 text-red-500 text-center">
+                <div *ngIf="error" class="mt-8 text-secondary text-center">
                     {{ error }}
                 </div>
             </div>
-            <div *ngIf="downloading" class="bg-customGray px-6 py-4 flex items-center justify-center">
-                <i class="bi bi-arrow-down-circle text-secondary animate-bounce mr-2"></i>
-                <span class="text-sm text-secondary">Downloading...</span>
+            <div *ngIf="downloading" class="glass-effect px-6 py-4 flex items-center justify-center">
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-accent6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span class="text-sm text-accent6">Downloading...</span>
             </div>
         </div>
     </div>

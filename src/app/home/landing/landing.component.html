@@ -1,82 +1,79 @@
-<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 font-inter">
     <!-- Loading State -->
-    <div *ngIf="isLoading" class="fixed inset-0 flex items-center justify-center bg-white bg-opacity-75 z-50" @fadeInAnimation>
-        <div class="w-16 h-16 border-4 border-gray-200 border-t-accent rounded-full animate-spin"></div>
+    <div *ngIf="isLoading" class="fixed inset-0 flex items-center justify-center bg-primary bg-opacity-75 z-50" @fadeInAnimation>
+        <div class="w-16 h-16 border-4 border-accent2 border-t-accent rounded-full animate-spin"></div>
     </div>
 
     <!-- Main section -->
-    <div appIntersectionObserver [@slideInAnimation] class="bg-primary rounded-2xl min-h-screen flex flex-col lg:flex-row items-center justify-between text-black p-6 lg:p-12 mb-12">
+    <div appIntersectionObserver [@slideInAnimation] class="bg-primary rounded-apple-lg min-h-screen flex flex-col lg:flex-row items-center justify-between text-accent p-6 lg:p-6 mb-12">
         <div class="w-full lg:w-1/2 text-center lg:text-left lg:pr-8">
-            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-black mb-6">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6">
                 {{ mainSection.title }}
             </h1>
-            <p class="text-base sm:text-lg lg:text-xl mb-8">
+            <p class="text-base sm:text-lg lg:text-xl mb-8 text-accent opacity-80">
                 {{ mainSection.description }}
             </p>
-            <button (click)="navigateToProjects()" class="px-8 py-4 bg-accent text-black text-lg font-medium rounded hover:bg-secondary hover:text-primary transition-all duration-300 transform hover:scale-105">
+            <button (click)="navigateToProjects()" class="px-8 py-4 bg-accent1 text-accent text-lg font-medium rounded-apple-md hover:bg-opacity-90 transition-all duration-250 ease-apple-ease focus:outline-none focus:ring-2 focus:ring-accent6">
                 {{ mainSection.buttonText }}
             </button>
             <div class="flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-8 mt-8">
                 <div class="text-center">
                     <span class="block text-3xl sm:text-4xl font-bold">{{ numberOfProjects }}</span>
-                    <span class="block mt-2 text-sm sm:text-base">Projects Published</span>
+                    <span class="block mt-2 text-sm sm:text-base text-accent opacity-60">Projects Published</span>
                 </div>
                 <div class="text-center">
                     <span class="block text-3xl sm:text-4xl font-bold">{{ totalValueOfProjects | currency:'USD':'symbol':'1.0-0' }}</span>
-                    <span class="block mt-2 text-sm sm:text-base">Total Value</span>
+                    <span class="block mt-2 text-sm sm:text-base text-accent opacity-60">Total Value</span>
                 </div>
             </div>
         </div>
         <div class="relative mt-8 lg:mt-0 w-full lg:w-1/2 flex items-center justify-center">
-            <div class="w-full h-80 sm:h-96 md:h-[28rem] lg:h-[32rem] xl:h-[36rem]  overflow-hidden">
+            <div class="w-full h-80 sm:h-96 md:h-[28rem] lg:h-[32rem] xl:h-[36rem] overflow-hidden rounded-apple-lg shadow-apple-md">
                 <ng-container *ngIf="!isLoading; else mapLoading">
                     <div #mapContainer id="map" class="w-full h-full"></div>
                 </ng-container>
                 <ng-template #mapLoading>
-                    <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+                    <div class="w-full h-full bg-accent2 flex items-center justify-center">
                         <div class="text-center">
-                            <div class="w-16 h-16 border-4 border-gray-300 border-t-accent rounded-full animate-spin mx-auto mb-4"></div>
-                            <p class="text-gray-600">Loading map...</p>
+                            <div class="w-16 h-16 border-4 border-accent2 border-t-accent rounded-full animate-spin mx-auto mb-4"></div>
+                            <p class="text-accent opacity-60">Loading map...</p>
                         </div>
                     </div>
                 </ng-template>
             </div>
         </div>
-
     </div>
 
-
     <!-- Featured Projects Section -->
-    <div appIntersectionObserver [@slideInAnimation] class="bg-primary py-12 sm:py-16 rounded-2xl mb-12">
+    <div appIntersectionObserver [@slideInAnimation] class="bg-primary py-12 sm:py-16 rounded-apple-lg mb-12 shadow-apple-sm">
         <div class="container mx-auto px-6 lg:flex lg:items-center">
             <div class="lg:w-1/2">
-                <h2 class="text-3xl sm:text-4xl font-bold text-black mb-6">{{ featuredProjectsSection.title }}</h2>
-                <p class="text-base sm:text-lg text-black mb-8">
+                <h2 class="text-3xl sm:text-4xl font-bold text-accent mb-6">{{ featuredProjectsSection.title }}</h2>
+                <p class="text-base sm:text-lg text-accent opacity-80 mb-8">
                     {{ featuredProjectsSection.description }}
                 </p>
-                <button (click)="navigateToFeaturedProjects()" class="px-8 py-4 bg-accent text-black text-lg font-medium rounded hover:bg-secondary hover:text-primary transition-all duration-300 transform hover:scale-105">
+                <button (click)="navigateToFeaturedProjects()" class="px-8 py-4 bg-accent1 text-accent text-lg font-medium rounded-apple-md hover:bg-opacity-90 transition-all duration-250 ease-apple-ease focus:outline-none focus:ring-2 focus:ring-accent6">
                     {{ featuredProjectsSection.buttonText }}
                 </button>
             </div>
             <div class="lg:w-1/2 lg:pl-12 mt-8 lg:mt-0 relative">
-                <img src="../../../assets/featured.png" alt="Featured Project" class="w-full h-auto ">
+                <img src="../../../assets/featured.png" alt="Featured Project" class="w-full h-auto rounded-apple-lg ">
             </div>
         </div>
     </div>
 
-    <!-- Recent and High-Value Projects Section -->
-    <div class="container mx-auto px-4 py-12 rounded-2xl mb-12 bg-gray-50">
+    <div class="container mx-auto px-4 py-12 rounded-apple-lg mb-12 bg-accent2 bg-opacity-10">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Recent Projects Section -->
             <div class="animate-hidden" appIntersectionObserver>
-                <h2 class="text-2xl sm:text-3xl font-semibold mb-6 flex items-center">
-                    <i class="bi bi-stars text-accent text-3xl mr-2"></i>
+                <h2 class="text-2xl sm:text-3xl font-semibold mb-6 flex items-center text-accent">
+                    <i class="bi bi-stars text-accent3 text-3xl mr-2"></i>
                     Recent Projects
                 </h2>
                 <ul class="space-y-4" [@listAnimation]="recentProjects.length">
-                    <li *ngFor="let project of recentProjects" class="bg-white rounded-lg shadow-sm p-4 hover:shadow-md transition-shadow duration-300">
-                        <a [routerLink]="['/public/projects', project.id]" class="flex items-center text-black hover:text-accent transition-colors duration-300">
-                            <i class="bi bi-file-earmark-text text-gray-500 mr-3 text-xl"></i>
+                    <li *ngFor="let project of recentProjects" class="bg-primary rounded-apple-md shadow-apple-sm p-4 hover:shadow-apple-md transition-shadow duration-250 ease-apple-ease">
+                        <a [routerLink]="['/public/projects', project.id]" class="flex items-center text-accent hover:text-accent4 transition-colors duration-250 ease-apple-ease">
+                            <i class="bi bi-file-earmark-text text-accent3 mr-3 text-xl"></i>
                             <span class="text-base sm:text-lg">{{ project.name }}</span>
                         </a>
                     </li>
@@ -85,33 +82,31 @@
 
             <!-- High-Value Projects Section -->
             <div class="animate-hidden" appIntersectionObserver>
-                <h2 class="text-2xl sm:text-3xl font-semibold mb-6 flex items-center">
-                    <i class="bi bi-graph-up text-accent text-3xl mr-2"></i>
+                <h2 class="text-2xl sm:text-3xl font-semibold mb-6 flex items-center text-accent">
+                    <i class="bi bi-graph-up text-accent3 text-3xl mr-2"></i>
                     High-Value Projects
                 </h2>
                 <ul class="space-y-4" [@listAnimation]="highValueProjects.length">
-                    <li *ngFor="let project of highValueProjects" class="bg-white rounded-lg shadow-sm p-4 hover:shadow-md transition-shadow duration-300">
-                        <a [routerLink]="['/public/projects', project.id]" class="flex items-center justify-between text-black hover:text-accent transition-colors duration-300">
+                    <li *ngFor="let project of highValueProjects" class="bg-primary rounded-apple-md shadow-apple-sm p-4 hover:shadow-apple-md transition-shadow duration-250 ease-apple-ease">
+                        <a [routerLink]="['/public/projects', project.id]" class="flex items-center justify-between text-accent hover:text-accent4 transition-colors duration-250 ease-apple-ease">
                             <span class="text-base sm:text-lg">{{ project.name }}</span>
-                            <span class="text-sm font-semibold">{{ project.contractPrice | currency:'USD':'symbol':'1.0-0' }}</span>
+                            <span class="text-sm font-semibold text-accent3">{{ project.contractPrice | currency:'USD':'symbol':'1.0-0' }}</span>
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-
-
     <!-- Sponsors section -->
-    <section class="py-16 bg-gray-50 rounded-2xl">
+    <section class="py-16 bg-accent2 bg-opacity-10 rounded-apple-lg">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mb-12">{{ sponsorsSection.title }}</h2>
+            <h2 class="text-2xl sm:text-3xl font-semibold text-center text-accent mb-12">{{ sponsorsSection.title }}</h2>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
                 <div *ngFor="let sponsor of sponsorsSection.sponsors" class="flex justify-center">
                     <a [href]="sponsor.link" target="_blank" rel="noopener noreferrer"
-                       class="group flex items-center justify-center w-full h-32 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 ease-in-out transform hover:scale-105">
+                       class="group flex items-center justify-center w-full h-32 bg-primary rounded-apple-md shadow-apple-sm hover:shadow-apple-md transition-all duration-250 ease-apple-ease transform hover:scale-105">
                         <img [src]="sponsor.image" [alt]="sponsor.name"
-                             class="max-h-16 w-auto object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+                             class="max-h-16 w-auto object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-250 ease-apple-ease">
                     </a>
                 </div>
             </div>

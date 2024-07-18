@@ -3,1146 +3,954 @@
 
 
     {
-      "id": "project-9876",
       "metadata": {
-        "dateCreated": "2024-06-26T00:00:00Z",
-        "dateUpdated": "2024-06-26T00:00:00Z",
-        "datePublished": "2024-06-26T00:00:00Z",
-        "version": "1.0",
+        "dateUpdated": "2024-07-18T00:00:00Z",
         "language": "en",
         "lastModifiedBy": "admin",
         "changeLog": [
           {
-            "date": "2024-06-26T00:00:00Z",
-            "change": "Initial creation",
-            "changedBy": "admin"
+            "date": "2024-07-18T00:00:00Z",
+            "changedBy": "admin",
+            "change": "Initial creation"
           }
-        ]
+        ],
+        "version": "1.0",
+        "datePublished": "2024-07-18T00:00:00Z",
+        "dateCreated": "2024-07-18T00:00:00Z"
       },
+      "location": {
+        "name": "Cape Town, Western Cape, South Africa",
+        "coordinates": {
+          "lat": -33.9249,
+          "lng": 18.4241,
+          "popup": "Cape Town, Western Cape, South Africa"
+        }
+      },
+      "name": "Cape Town Water and Sanitation Improvement Project",
       "stages": {
         "identification": {
           "basicData": {
-            "projectReferenceNumber": "TR-SA-2024-001",
-            "projectOwner": "Department of Transport, South Africa",
-            "sectorSubsector": "Transportation",
-            "projectName": "Johannesburg Rapid Transit System Upgrade",
-            "projectLocation": "Johannesburg, Gauteng, South Africa",
-            "purpose": "To enhance public transportation efficiency and reduce traffic congestion in Johannesburg",
-            "projectDescription": "This project aims to upgrade the existing rapid transit system, including the expansion of bus rapid transit lines, modernization of stations, and the integration of advanced ticketing systems to improve public transportation services in Johannesburg.",
+            "projectBriefOrFeasibilityStudy": "A detailed feasibility study completed in 2023 identified critical water and sanitation needs in Cape Town to address water scarcity and improve sanitation facilities.",
+            "attachments": [
+              {
+                "documentType": "Report",
+                "title": "Feasibility Study Report",
+                "pages": 100,
+                "datePublished": "2023-10-01T00:00:00Z",
+                "description": "Comprehensive feasibility study detailing project scope, cost, and impact.",
+                "url": "http://example.com/feasibility-study-cape-town.pdf",
+                "dateModified": "2023-11-01T00:00:00Z",
+                "format": "PDF",
+                "language": "en"
+              }
+            ],
+            "sectorSubsector": "Water and Sanitation",
+            "purpose": "To improve water supply and sanitation services in Cape Town",
+            "projectName": "Cape Town Water and Sanitation Improvement Project",
+            "projectOwner": "Department of Water and Sanitation, South Africa",
+            "projectReferenceNumber": "WS-SA-2024-002",
             "projectOfficialsAndRoles": [
               {
-                "name": "Charles Williams",
+                "name": "John Smith",
                 "role": "Project Manager"
               },
               {
-                "name": "David Miller",
+                "name": "Emma Johnson",
                 "role": "Lead Engineer"
               }
             ],
-            "projectBriefOrFeasibilityStudy": "A comprehensive feasibility study completed in 2023 identified the need for an upgrade to accommodate increasing commuter numbers and improve service efficiency.",
-            "attachments": [
-              {
-                "title": "Feasibility Study Report",
-                "description": "Comprehensive feasibility study detailing project scope, cost, and impact.",
-                "url": "http://example.com/feasibility-study-johannesburg.pdf",
-                "documentType": "Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": 150,
-                "datePublished": "2023-11-01T00:00:00Z",
-                "dateModified": "2023-12-01T00:00:00Z"
-              }
-            ]
-          },
-          "climateFinanceData": {
-            "climateObjective": "Reduce greenhouse gas emissions and promote sustainable transportation",
-            "financialInstrument": "Loan",
-            "climateTransformation": "Adoption of electric buses and installation of solar-powered charging stations",
-            "climateFinanceDecisionMaking": "Aligned with South Africa's Integrated Transport Plan",
-            "nationallyDeterminedContributions": "Supports South Africa's NDC to promote low-emission transport solutions",
-            "parisAgreement": "Contributes to the goals of the Paris Agreement",
-            "amountOfInvestment": "15000000",
-            "attachments": [
-              {
-                "title": "Climate Finance Agreement",
-                "description": "Agreement outlining the climate finance details and terms.",
-                "url": "http://example.com/climate-finance-agreement-johannesburg.pdf",
-                "documentType": "Agreement",
-                "format": "PDF",
-                "language": "en",
-                "pages": 40,
-                "datePublished": "2024-03-01T00:00:00Z",
-                "dateModified": "2024-03-15T00:00:00Z"
-              }
-            ]
+            "projectDescription": "This project aims to enhance water supply and sanitation infrastructure in Cape Town, including the construction of new water treatment facilities, upgrading existing sewerage systems, and implementing advanced water conservation technologies.",
+            "projectLocation": "Cape Town, Western Cape, South Africa"
           },
           "institutionalSustainabilityData": {
-            "numberOfLobbyingActivities": 5,
-            "numberOfFreedomOfInformationRequests": 7,
-            "numberOfFreedomOfInformationAnswers": 6,
-            "policyCoherenceDocumentation": "Documentation aligning project policies with national and local regulations.",
-            "freedomOfInformationRequestsAndAnswers": "Summary of FOI requests and responses related to the project.",
-            "lobbyingMeetingsMinutes": "Minutes from lobbying meetings with stakeholders.",
+            "numberOfFreedomOfInformationRequests": 5,
             "attachments": [
               {
-                "title": "Policy Coherence Report",
-                "description": "Report on policy coherence and regulatory alignment.",
-                "url": "http://example.com/policy-coherence-report-johannesburg.pdf",
+                "language": "en",
                 "documentType": "Report",
+                "datePublished": "2023-11-01T00:00:00Z",
+                "description": "Report on policy coherence and regulatory alignment.",
+                "url": "http://example.com/policy-coherence-report-cape-town.pdf",
+                "title": "Policy Coherence Report",
+                "dateModified": "2023-11-10T00:00:00Z",
                 "format": "PDF",
-                "language": "en",
-                "pages": 35,
-                "datePublished": "2024-04-01T00:00:00Z",
-                "dateModified": "2024-04-10T00:00:00Z"
+                "pages": 30
               },
               {
-                "title": "Freedom of Information Requests and Answers",
-                "description": "Records of FOI requests and responses.",
-                "url": "http://example.com/foi-requests-answers-johannesburg.pdf",
-                "documentType": "Record",
-                "format": "PDF",
-                "language": "en",
                 "pages": 20,
-                "datePublished": "2024-05-01T00:00:00Z",
-                "dateModified": "2024-05-10T00:00:00Z"
+                "description": "Records of FOI requests and responses.",
+                "title": "Freedom of Information Requests and Answers",
+                "dateModified": "2023-12-10T00:00:00Z",
+                "language": "en",
+                "datePublished": "2023-12-01T00:00:00Z",
+                "url": "http://example.com/foi-requests-answers-cape-town.pdf",
+                "documentType": "Record",
+                "format": "PDF"
               },
               {
-                "title": "Lobbying Meetings Minutes",
-                "description": "Minutes from meetings with stakeholders.",
-                "url": "http://example.com/lobbying-meetings-minutes-johannesburg.pdf",
-                "documentType": "Minutes",
-                "format": "PDF",
+                "dateModified": "2024-01-10T00:00:00Z",
                 "language": "en",
                 "pages": 15,
-                "datePublished": "2024-06-01T00:00:00Z",
-                "dateModified": "2024-06-10T00:00:00Z"
+                "datePublished": "2024-01-01T00:00:00Z",
+                "description": "Minutes from meetings with stakeholders.",
+                "title": "Lobbying Meetings Minutes",
+                "url": "http://example.com/lobbying-meetings-minutes-cape-town.pdf",
+                "documentType": "Minutes",
+                "format": "PDF"
               }
-            ]
+            ],
+            "numberOfFreedomOfInformationAnswers": 4,
+            "lobbyingMeetingsMinutes": "Minutes from lobbying meetings with stakeholders.",
+            "numberOfLobbyingActivities": 3,
+            "policyCoherenceDocumentation": "Documentation aligning project policies with national and local regulations.",
+            "freedomOfInformationRequestsAndAnswers": "Summary of FOI requests and responses related to the project."
+          },
+          "climateFinanceData": {
+            "financialInstrument": "Grant",
+            "climateTransformation": "Implementation of water-efficient technologies and renewable energy solutions",
+            "nationallyDeterminedContributions": "Supports South Africa's NDC to improve water security and sanitation",
+            "climateObjective": "Enhance water resource management and sanitation facilities",
+            "parisAgreement": "Contributes to the goals of the Paris Agreement",
+            "amountOfInvestment": "20000000",
+            "attachments": [
+              {
+                "url": "http://example.com/climate-finance-agreement-cape-town.pdf",
+                "dateModified": "2024-03-15T00:00:00Z",
+                "datePublished": "2024-03-01T00:00:00Z",
+                "title": "Climate Finance Agreement",
+                "description": "Agreement outlining the climate finance details and terms.",
+                "documentType": "Agreement",
+                "format": "PDF",
+                "pages": 40,
+                "language": "en"
+              }
+            ],
+            "climateFinanceDecisionMaking": "Aligned with South Africa's National Water and Sanitation Master Plan"
           }
         },
         "preparation": {
-          "basicData": {
-            "projectScope": "Expansion and modernization of rapid transit lines and stations.",
-            "contactDetails": "Project Manager: Jane Doe, Email: jane.doe@example.com, Phone: +27 11 123 4567",
-            "fundingSources": "National government, Climate finance loans",
-            "projectBudget": "100000000",
-            "projectBudgetApprovalDate": "2024-02-15T00:00:00Z",
+          "economicAndFinancialSustainabilityData": {
+            "maintenancePlan": "Comprehensive maintenance plan developed",
+            "costBenefitAnalysis": "Positive with high benefit-to-cost ratio",
+            "lifeCycleCostCalculationMethodology": "Standard LCC methodology",
+            "budgetForPreparation": "3000000",
+            "fundingSourceForPreparation": "National government and international grants",
             "attachments": [
               {
-                "title": "Environmental and Social Impact Assessment",
-                "description": "Detailed assessment of the environmental and social impacts.",
-                "url": "http://example.com/environmental-assessment-johannesburg.pdf",
-                "documentType": "Assessment",
-                "format": "PDF",
-                "language": "en",
-                "pages": 120,
-                "datePublished": "2024-04-01T00:00:00Z",
-                "dateModified": "2024-04-15T00:00:00Z"
-              },
-              {
-                "title": "Resettlement and Compensation Plan",
-                "description": "Plan detailing resettlement and compensation.",
-                "url": "http://example.com/resettlement-plan-johannesburg.pdf",
-                "documentType": "Plan",
-                "format": "PDF",
-                "language": "en",
-                "pages": 60,
-                "datePublished": "2024-04-01T00:00:00Z",
-                "dateModified": "2024-04-15T00:00:00Z"
-              },
-              {
-                "title": "Financial Agreement",
-                "description": "Agreement outlining financial aspects.",
-                "url": "http://example.com/financial-agreement-johannesburg.pdf",
-                "documentType": "Agreement",
-                "format": "PDF",
-                "language": "en",
-                "pages": 45,
-                "datePublished": "2024-04-01T00:00:00Z",
-                "dateModified": "2024-04-15T00:00:00Z"
-              },
-              {
-                "title": "Multiyear Programme and Budget",
-                "description": "Programme and budget plan for multiple years.",
-                "url": "http://example.com/multiyear-budget-johannesburg.pdf",
-                "documentType": "Budget",
-                "format": "PDF",
-                "language": "en",
-                "pages": 35,
-                "datePublished": "2024-04-01T00:00:00Z",
-                "dateModified": "2024-04-15T00:00:00Z"
-              },
-              {
-                "title": "Procurement Plan",
-                "description": "Plan detailing procurement strategy.",
-                "url": "http://example.com/procurement-plan-johannesburg.pdf",
-                "documentType": "Plan",
-                "format": "PDF",
-                "language": "en",
+                "title": "Procurement Strategy",
                 "pages": 25,
+                "url": "http://example.com/procurement-strategy-cape-town.pdf",
+                "description": "Document detailing procurement strategy.",
+                "documentType": "Strategy",
+                "format": "PDF",
                 "datePublished": "2024-04-01T00:00:00Z",
-                "dateModified": "2024-04-15T00:00:00Z"
+                "language": "en",
+                "dateModified": "2024-04-10T00:00:00Z"
               },
               {
-                "title": "Project Approval Decision",
-                "description": "Document detailing project approval.",
-                "url": "http://example.com/project-approval-johannesburg.pdf",
-                "documentType": "Decision",
+                "title": "Maintenance Plan",
+                "datePublished": "2024-04-01T00:00:00Z",
+                "documentType": "Plan",
+                "url": "http://example.com/maintenance-plan-cape-town.pdf",
+                "pages": 30,
+                "description": "Document detailing maintenance plan.",
+                "language": "en",
+                "format": "PDF",
+                "dateModified": "2024-04-10T00:00:00Z"
+              }
+            ],
+            "valueForMoney": "High",
+            "assetLifetime": "50 years",
+            "procurementStrategy": "Open competitive bidding",
+            "lifeCycleCost": "150000000",
+            "budgetProjections": "Annual budget projections included in the financial plan"
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "environmentalImpactCategory": "Significant",
+            "climateMeasures": "Integration of climate resilience measures and renewable energy sources",
+            "attachments": [
+              {
+                "dateModified": "2024-04-10T00:00:00Z",
+                "url": "http://example.com/environmental-licenses-cape-town.pdf",
+                "datePublished": "2024-04-01T00:00:00Z",
+                "format": "PDF",
+                "documentType": "License",
+                "title": "Environmental Licenses and Exemptions",
+                "language": "en",
+                "description": "Document detailing environmental licenses and exemptions.",
+                "pages": 25
+              },
+              {
+                "title": "Climate and Disaster Risk Assessment",
+                "documentType": "Assessment",
+                "dateModified": "2024-04-10T00:00:00Z",
+                "pages": 30,
                 "format": "PDF",
                 "language": "en",
-                "pages": 20,
+                "url": "http://example.com/climate-risk-assessment-cape-town.pdf",
                 "datePublished": "2024-04-01T00:00:00Z",
-                "dateModified": "2024-04-15T00:00:00Z"
+                "description": "Document detailing climate and disaster risk assessment."
               }
-            ]
+            ],
+            "conservationMeasures": "Conservation measures included in the project plan",
+            "forecastOfGreenhouseGasEmissions": "Projected reduction in emissions",
+            "environmentalLicensesAndExemptions": "Secured all necessary environmental licenses",
+            "protectedArea": "No impact on protected areas",
+            "climateAndDisasterRiskAssessment": "Comprehensive risk assessment conducted",
+            "environmentalMeasures": "Implementation of sustainable and environmentally friendly practices"
           },
           "climateFinanceData": {
-            "fundingSource": "World Bank",
-            "greenClimateFundAccreditedEntity": "Gauteng Department of Transport",
-            "accreditedEntityType": "Government",
-            "projectPreparationCosts": "5000000",
-            "projectPreparationPeriod": "2024-01-01T00:00:00Z to 2024-12-31T00:00:00Z",
-            "projectApprovalPeriod": "2025-01-01T00:00:00Z to 2025-12-31T00:00:00Z",
-            "ratioOfCoFinance": "40%",
-            "termsOfClimateFinance": "Loan with low-interest rates for sustainable transport",
-            "carbonEfficiency": "Moderate",
-            "nonClimateCoBenefits": "Improved urban mobility, reduced traffic congestion",
+            "projectPreparationCosts": "6000000",
             "attachments": [
               {
-                "title": "Terms of Climate Finance",
-                "description": "Document detailing terms of climate finance.",
-                "url": "http://example.com/climate-finance-terms-johannesburg.pdf",
-                "documentType": "Terms",
+                "dateModified": "2024-03-10T00:00:00Z",
+                "datePublished": "2024-03-01T00:00:00Z",
+                "url": "http://example.com/climate-finance-terms-cape-town.pdf",
+                "pages": 20,
                 "format": "PDF",
                 "language": "en",
-                "pages": 15,
-                "datePublished": "2024-03-01T00:00:00Z",
-                "dateModified": "2024-03-10T00:00:00Z"
+                "documentType": "Terms",
+                "description": "Document detailing terms of climate finance.",
+                "title": "Terms of Climate Finance"
               },
               {
-                "title": "Carbon Efficiency Report",
-                "description": "Report detailing carbon efficiency.",
-                "url": "http://example.com/carbon-efficiency-johannesburg.pdf",
-                "documentType": "Report",
                 "format": "PDF",
-                "language": "en",
-                "pages": 25,
+                "title": "Carbon Efficiency Report",
                 "datePublished": "2024-03-01T00:00:00Z",
+                "pages": 30,
+                "description": "Report detailing carbon efficiency.",
+                "language": "en",
+                "url": "http://example.com/carbon-efficiency-cape-town.pdf",
+                "documentType": "Report",
                 "dateModified": "2024-03-10T00:00:00Z"
+              }
+            ],
+            "projectPreparationPeriod": "2024-01-01T00:00:00Z to 2024-12-31T00:00:00Z",
+            "nonClimateCoBenefits": "Improved public health, increased access to clean water",
+            "fundingSource": "World Bank",
+            "accreditedEntityType": "Government",
+            "carbonEfficiency": "High",
+            "projectApprovalPeriod": "2025-01-01T00:00:00Z to 2025-12-31T00:00:00Z",
+            "ratioOfCoFinance": "50%",
+            "termsOfClimateFinance": "Grant for sustainable water and sanitation solutions",
+            "greenClimateFundAccreditedEntity": "Western Cape Department of Water and Sanitation"
+          },
+          "institutionalSustainabilityData": {
+            "policyCoherenceDocumentation": "Documentation ensuring policy coherence.",
+            "riskManagementPlans": "Comprehensive risk management plan addressing potential project risks.",
+            "freedomOfInformationRequestsAndAnswers": "Records of FOI requests and responses.",
+            "numberOfFreedomOfInformationAnswers": 6,
+            "numberOfFreedomOfInformationRequests": 7,
+            "attachments": [
+              {
+                "url": "http://example.com/foi-requests-cape-town.pdf",
+                "title": "Freedom of Information Requests and Answers",
+                "documentType": "Document",
+                "datePublished": "2024-05-01T00:00:00Z",
+                "format": "PDF",
+                "description": "Documentation of FOI requests and answers.",
+                "dateModified": "2024-05-10T00:00:00Z",
+                "pages": 30,
+                "language": "en"
+              },
+              {
+                "format": "PDF",
+                "url": "http://example.com/risk-management-cape-town.pdf",
+                "pages": 40,
+                "dateModified": "2024-06-10T00:00:00Z",
+                "language": "en",
+                "documentType": "Plan",
+                "datePublished": "2024-06-01T00:00:00Z",
+                "title": "Risk Management Plan",
+                "description": "Detailed risk management plan for the project."
               }
             ]
           },
           "socialSustainabilityData": {
-            "beneficiaries": "Residents of Johannesburg",
-            "numberOfBeneficiaries": 7000000,
-            "inclusiveDesign": "Ensuring access for all community members, including marginalized groups",
-            "indigenousLand": "No impact on indigenous lands",
-            "publicConsultationMeetings": "Regular meetings held with community stakeholders",
-            "landCompensationBudget": "1000000",
-            "laborObligations": "Adherence to labor laws and regulations",
+            "numberOfBeneficiaries": 1000000,
             "attachments": [
               {
-                "title": "Inclusive Design Document",
                 "description": "Document detailing inclusive design.",
-                "url": "http://example.com/inclusive-design-johannesburg.pdf",
                 "documentType": "Document",
-                "format": "PDF",
+                "url": "http://example.com/inclusive-design-cape-town.pdf",
                 "language": "en",
+                "title": "Inclusive Design Document",
                 "pages": 20,
-                "datePublished": "2024-04-01T00:00:00Z",
-                "dateModified": "2024-04-10T00:00:00Z"
+                "format": "PDF",
+                "dateModified": "2024-04-10T00:00:00Z",
+                "datePublished": "2024-04-01T00:00:00Z"
               },
               {
+                "url": "http://example.com/public-consultation-cape-town.pdf",
+                "pages": 50,
                 "title": "Public Consultation Report",
                 "description": "Report on public consultations and stakeholder engagement.",
-                "url": "http://example.com/public-consultation-johannesburg.pdf",
+                "dateModified": "2024-05-10T00:00:00Z",
                 "documentType": "Report",
                 "format": "PDF",
                 "language": "en",
-                "pages": 60,
-                "datePublished": "2024-05-01T00:00:00Z",
-                "dateModified": "2024-05-10T00:00:00Z"
+                "datePublished": "2024-05-01T00:00:00Z"
               }
-            ]
+            ],
+            "landCompensationBudget": "1500000",
+            "beneficiaries": "Residents of Cape Town",
+            "publicConsultationMeetings": "Regular meetings held with community stakeholders",
+            "inclusiveDesign": "Ensuring access for all community members, including marginalized groups",
+            "laborObligations": "Adherence to labor laws and regulations",
+            "indigenousLand": "No impact on indigenous lands"
           },
-          "institutionalSustainabilityData": {
-            "numberOfFreedomOfInformationRequests": 8,
-            "numberOfFreedomOfInformationAnswers": 7,
-            "policyCoherenceDocumentation": "Documentation ensuring policy coherence.",
-            "freedomOfInformationRequestsAndAnswers": "Records of FOI requests and responses.",
-            "riskManagementPlans": "Comprehensive risk management plan addressing potential project risks.",
+          "basicData": {
+            "fundingSources": "National government, International grants",
+            "projectBudget": "200000000",
             "attachments": [
               {
-                "title": "Freedom of Information Requests and Answers",
-                "description": "Documentation of FOI requests and answers.",
-                "url": "http://example.com/foi-requests-johannesburg.pdf",
-                "documentType": "Document",
-                "format": "PDF",
-                "language": "en",
-                "pages": 30,
-                "datePublished": "2024-05-01T00:00:00Z",
-                "dateModified": "2024-05-10T00:00:00Z"
-              },
-              {
-                "title": "Risk Management Plan",
-                "description": "Detailed risk management plan for the project.",
-                "url": "http://example.com/risk-management-johannesburg.pdf",
-                "documentType": "Plan",
-                "format": "PDF",
-                "language": "en",
-                "pages": 40,
-                "datePublished": "2024-06-01T00:00:00Z",
-                "dateModified": "2024-06-10T00:00:00Z"
-              }
-            ]
-          },
-          "economicAndFinancialSustainabilityData": {
-            "procurementStrategy": "Open competitive bidding",
-            "lifeCycleCost": "120000000",
-            "lifeCycleCostCalculationMethodology": "Standard LCC methodology",
-            "fundingSourceForPreparation": "National government",
-            "budgetForPreparation": "2000000",
-            "costBenefitAnalysis": "Positive with high benefit-to-cost ratio",
-            "valueForMoney": "High",
-            "assetLifetime": "40 years",
-            "budgetProjections": "Annual budget projections included in the financial plan",
-            "maintenancePlan": "Comprehensive maintenance plan developed",
-            "attachments": [
-              {
-                "title": "Procurement Strategy",
-                "description": "Document detailing procurement strategy.",
-                "url": "http://example.com/procurement-strategy-johannesburg.pdf",
-                "documentType": "Strategy",
-                "format": "PDF",
-                "language": "en",
-                "pages": 20,
-                "datePublished": "2024-05-01T00:00:00Z",
-                "dateModified": "2024-05-10T00:00:00Z"
-              },
-              {
-                "title": "Maintenance Plan",
-                "description": "Document detailing maintenance plan.",
-                "url": "http://example.com/maintenance-plan-johannesburg.pdf",
-                "documentType": "Plan",
-                "format": "PDF",
-                "language": "en",
-                "pages": 25,
-                "datePublished": "2024-05-01T00:00:00Z",
-                "dateModified": "2024-05-10T00:00:00Z"
-              }
-            ]
-          },
-          "environmentalAndClimateSustainabilityData": {
-            "environmentalImpactCategory": "Moderate",
-            "environmentalMeasures": "Implementation of sustainable and environmentally friendly practices",
-            "environmentalLicensesAndExemptions": "Secured all necessary environmental licenses",
-            "protectedArea": "No impact on protected areas",
-            "conservationMeasures": "Conservation measures included in the project plan",
-            "climateAndDisasterRiskAssessment": "Comprehensive risk assessment conducted",
-            "climateMeasures": "Integration of climate resilience measures",
-            "forecastOfGreenhouseGasEmissions": "Projected reduction in emissions",
-            "attachments": [
-              {
-                "title": "Environmental Licenses and Exemptions",
-                "description": "Document detailing environmental licenses and exemptions.",
-                "url": "http://example.com/environmental-licenses-johannesburg.pdf",
-                "documentType": "License",
-                "format": "PDF",
-                "language": "en",
-                "pages": 20,
-                "datePublished": "2024-05-01T00:00:00Z",
-                "dateModified": "2024-05-10T00:00:00Z"
-              },
-              {
-                "title": "Climate and Disaster Risk Assessment",
-                "description": "Document detailing climate and disaster risk assessment.",
-                "url": "http://example.com/climate-risk-assessment-johannesburg.pdf",
                 "documentType": "Assessment",
+                "pages": 80,
+                "dateModified": "2024-04-15T00:00:00Z",
+                "url": "http://example.com/environmental-assessment-cape-town.pdf",
+                "datePublished": "2024-04-01T00:00:00Z",
+                "language": "en",
+                "description": "Detailed assessment of the environmental and social impacts.",
+                "format": "PDF",
+                "title": "Environmental and Social Impact Assessment"
+              },
+              {
+                "documentType": "Plan",
+                "dateModified": "2024-04-15T00:00:00Z",
+                "pages": 60,
+                "title": "Resettlement and Compensation Plan",
                 "format": "PDF",
                 "language": "en",
-                "pages": 25,
-                "datePublished": "2024-05-01T00:00:00Z",
-                "dateModified": "2024-05-10T00:00:00Z"
+                "url": "http://example.com/resettlement-plan-cape-town.pdf",
+                "datePublished": "2024-04-01T00:00:00Z",
+                "description": "Plan detailing resettlement and compensation."
+              },
+              {
+                "pages": 50,
+                "language": "en",
+                "documentType": "Agreement",
+                "description": "Agreement outlining financial aspects.",
+                "datePublished": "2024-04-01T00:00:00Z",
+                "dateModified": "2024-04-15T00:00:00Z",
+                "url": "http://example.com/financial-agreement-cape-town.pdf",
+                "format": "PDF",
+                "title": "Financial Agreement"
+              },
+              {
+                "dateModified": "2024-04-15T00:00:00Z",
+                "title": "Multiyear Programme and Budget",
+                "datePublished": "2024-04-01T00:00:00Z",
+                "language": "en",
+                "url": "http://example.com/multiyear-budget-cape-town.pdf",
+                "pages": 40,
+                "documentType": "Budget",
+                "format": "PDF",
+                "description": "Programme and budget plan for multiple years."
+              },
+              {
+                "pages": 30,
+                "datePublished": "2024-04-01T00:00:00Z",
+                "format": "PDF",
+                "url": "http://example.com/procurement-plan-cape-town.pdf",
+                "documentType": "Plan",
+                "language": "en",
+                "title": "Procurement Plan",
+                "dateModified": "2024-04-15T00:00:00Z",
+                "description": "Plan detailing procurement strategy."
+              },
+              {
+                "title": "Project Approval Decision",
+                "pages": 20,
+                "url": "http://example.com/project-approval-cape-town.pdf",
+                "format": "PDF",
+                "dateModified": "2024-04-15T00:00:00Z",
+                "language": "en",
+                "documentType": "Decision",
+                "datePublished": "2024-04-01T00:00:00Z",
+                "description": "Document detailing project approval."
               }
-            ]
+            ],
+            "projectBudgetApprovalDate": "2024-02-15T00:00:00Z",
+            "projectScope": "Enhancement of water supply and sanitation infrastructure.",
+            "contactDetails": "Project Manager: John Smith, Email: john.smith@example.com, Phone: +27 21 123 4567"
           }
         },
         "tenderManagement": {
           "basicData": {
-            "procuringEntity": "Gauteng Department of Transport, South Africa",
-            "procuringEntityContactDetails": "Contact: Jane Doe, Email: jane.doe@example.com, Phone: +27 11 123 4567",
-            "procurementProcess": "Open competitive bidding",
-            "procurementMethod": "Open tender",
-            "numberOfFirmsTendering": 8,
-            "costEstimate": "120000000",
-            "contractType": "Construction",
-            "contractAdministrationEntity": "Gauteng Transport Authority",
             "contractOfficialsAndRoles": [
               {
                 "name": "Michael Brown",
                 "role": "Contract Administrator"
               }
             ],
-            "contractTitle": "Johannesburg Rapid Transit System Upgrade Contract",
-            "contractFirm": "XYZ Construction Ltd.",
-            "contractPrice": "110000000",
-            "contractScopeOfWork": "Upgrade of rapid transit system including expansion of lines, station modernization, and advanced ticketing systems.",
-            "contractStartDate": "2024-09-01T00:00:00Z",
-            "contractDuration": "36 months",
-            "contractStatus": "Signed",
+            "procuringEntity": "Western Cape Department of Water and Sanitation, South Africa",
+            "contractType": "Construction",
+            "contractTitle": "Cape Town Water and Sanitation Improvement Contract",
+            "procuringEntityContactDetails": "Contact: John Smith, Email: john.smith@example.com, Phone: +27 21 123 4567",
             "attachments": [
               {
+                "language": "en",
+                "url": "http://example.com/tender-documents-cape-town.pdf",
                 "title": "Tender Documents",
-                "description": "Documents related to the tender process.",
-                "url": "http://example.com/tender-documents-johannesburg.pdf",
-                "documentType": "Documents",
                 "format": "PDF",
-                "language": "en",
                 "pages": 60,
+                "description": "Documents related to the tender process.",
+                "documentType": "Documents",
+                "datePublished": "2024-04-01T00:00:00Z",
+                "dateModified": "2024-04-10T00:00:00Z"
+              },
+              {
                 "datePublished": "2024-05-01T00:00:00Z",
-                "dateModified": "2024-05-10T00:00:00Z"
-              },
-              {
+                "url": "http://example.com/tender-evaluation-results-cape-town.pdf",
+                "dateModified": "2024-05-10T00:00:00Z",
                 "title": "Tender Evaluation Results",
-                "description": "Results of the tender evaluation.",
-                "url": "http://example.com/tender-evaluation-results-johannesburg.pdf",
-                "documentType": "Report",
-                "format": "PDF",
-                "language": "en",
                 "pages": 35,
-                "datePublished": "2024-06-01T00:00:00Z",
-                "dateModified": "2024-06-10T00:00:00Z"
-              },
-              {
-                "title": "Project Design Report",
-                "description": "Detailed design report for the project.",
-                "url": "http://example.com/project-design-report-johannesburg.pdf",
                 "documentType": "Report",
-                "format": "PDF",
+                "description": "Results of the tender evaluation.",
                 "language": "en",
-                "pages": 150,
-                "datePublished": "2024-07-01T00:00:00Z",
-                "dateModified": "2024-07-10T00:00:00Z"
+                "format": "PDF"
               },
               {
-                "title": "Contract Agreement and Conditions",
-                "description": "Signed contract agreement and conditions.",
-                "url": "http://example.com/contract-agreement-johannesburg.pdf",
-                "documentType": "Agreement",
-                "format": "PDF",
                 "language": "en",
-                "pages": 30,
-                "datePublished": "2024-09-01T00:00:00Z",
-                "dateModified": "2024-09-10T00:00:00Z"
-              },
-              {
-                "title": "Registration and Ownership of Firms",
-                "description": "Details of the firms' registration and ownership.",
-                "url": "http://example.com/registration-ownership-johannesburg.pdf",
-                "documentType": "Documents",
+                "dateModified": "2024-06-10T00:00:00Z",
+                "title": "Project Design Report",
                 "format": "PDF",
-                "language": "en",
-                "pages": 20,
                 "datePublished": "2024-06-01T00:00:00Z",
-                "dateModified": "2024-06-10T00:00:00Z"
+                "description": "Detailed design report for the project.",
+                "url": "http://example.com/project-design-report-cape-town.pdf",
+                "documentType": "Report",
+                "pages": 150
               },
               {
+                "pages": 30,
+                "datePublished": "2024-07-01T00:00:00Z",
+                "title": "Contract Agreement and Conditions",
+                "url": "http://example.com/contract-agreement-cape-town.pdf",
+                "language": "en",
+                "dateModified": "2024-07-10T00:00:00Z",
+                "format": "PDF",
+                "description": "Signed contract agreement and conditions.",
+                "documentType": "Agreement"
+              },
+              {
+                "pages": 20,
+                "datePublished": "2024-05-01T00:00:00Z",
+                "format": "PDF",
+                "url": "http://example.com/registration-ownership-cape-town.pdf",
+                "dateModified": "2024-05-10T00:00:00Z",
+                "description": "Details of the firms' registration and ownership.",
+                "title": "Registration and Ownership of Firms",
+                "language": "en",
+                "documentType": "Documents"
+              },
+              {
+                "pages": 90,
+                "format": "PDF",
+                "dateModified": "2024-06-10T00:00:00Z",
+                "datePublished": "2024-06-01T00:00:00Z",
+                "url": "http://example.com/specifications-drawings-cape-town.pdf",
                 "title": "Specifications and Drawings",
-                "description": "Technical specifications and project drawings.",
-                "url": "http://example.com/specifications-drawings-johannesburg.pdf",
+                "language": "en",
+                "documentType": "Documents",
+                "description": "Technical specifications and project drawings."
+              }
+            ],
+            "contractStatus": "Signed",
+            "contractPrice": "150000000",
+            "costEstimate": "160000000",
+            "contractFirm": "ABC Construction Ltd.",
+            "contractAdministrationEntity": "Western Cape Water Authority",
+            "contractDuration": "24 months",
+            "procurementMethod": "Open tender",
+            "contractScopeOfWork": "Construction of new water treatment facilities, upgrading sewerage systems, and implementation of water conservation technologies.",
+            "numberOfFirmsTendering": 10,
+            "procurementProcess": "Open competitive bidding",
+            "contractStartDate": "2024-07-01T00:00:00Z"
+          },
+          "institutionalSustainabilityData": {
+            "freedomOfInformationRequestsAndAnswers": "Records of FOI requests and responses.",
+            "numberOfFreedomOfInformationAnswers": 5,
+            "antiCorruptionCertifications": "Certified by the South African Anti-Corruption Commission",
+            "numberOfFreedomOfInformationRequests": 6,
+            "attachments": [
+              {
                 "documentType": "Documents",
                 "format": "PDF",
                 "language": "en",
-                "pages": 90,
-                "datePublished": "2024-07-01T00:00:00Z",
-                "dateModified": "2024-07-10T00:00:00Z"
+                "title": "Freedom of Information Requests and Answers",
+                "dateModified": "2024-06-10T00:00:00Z",
+                "datePublished": "2024-06-01T00:00:00Z",
+                "url": "http://example.com/foi-requests-answers-cape-town.pdf",
+                "description": "Documents detailing FOI requests and responses.",
+                "pages": 25
+              },
+              {
+                "pages": 15,
+                "format": "PDF",
+                "datePublished": "2024-06-01T00:00:00Z",
+                "description": "Certifications for anti-corruption compliance.",
+                "url": "http://example.com/anti-corruption-certifications-cape-town.pdf",
+                "title": "Anti-Corruption Certifications",
+                "dateModified": "2024-06-10T00:00:00Z",
+                "language": "en",
+                "documentType": "Certification"
               }
-            ]
+            ],
+            "beneficialOwnership": "ABC Construction Ltd. is privately owned by DEF Holdings.",
+            "sustainabilityCriteria": "Adherence to national and international sustainability standards."
           },
           "socialSustainabilityData": {
-            "laborBudget": "1500000",
             "healthAndSafetyCertifications": "Certified by the South African Health and Safety Authority",
             "attachments": [
               {
+                "format": "PDF",
+                "documentType": "Certification",
                 "title": "Health and Safety Certifications",
-                "description": "Certifications for health and safety standards.",
-                "url": "http://example.com/health-safety-certifications-johannesburg.pdf",
-                "documentType": "Certification",
-                "format": "PDF",
-                "language": "en",
+                "dateModified": "2024-06-10T00:00:00Z",
                 "pages": 15,
-                "datePublished": "2024-06-01T00:00:00Z",
-                "dateModified": "2024-06-10T00:00:00Z"
-              }
-            ]
-          },
-          "institutionalSustainabilityData": {
-            "numberOfFreedomOfInformationRequests": 7,
-            "numberOfFreedomOfInformationAnswers": 6,
-            "beneficialOwnership": "XYZ Construction Ltd. is privately owned by ABC Holdings.",
-            "sustainabilityCriteria": "Adherence to national and international sustainability standards.",
-            "freedomOfInformationRequestsAndAnswers": "Records of FOI requests and responses.",
-            "antiCorruptionCertifications": "Certified by the South African Anti-Corruption Commission",
-            "attachments": [
-              {
-                "title": "Freedom of Information Requests and Answers",
-                "description": "Documents detailing FOI requests and responses.",
-                "url": "http://example.com/foi-requests-answers-johannesburg.pdf",
-                "documentType": "Documents",
-                "format": "PDF",
+                "description": "Certifications for health and safety standards.",
                 "language": "en",
-                "pages": 25,
                 "datePublished": "2024-06-01T00:00:00Z",
-                "dateModified": "2024-06-10T00:00:00Z"
-              },
-              {
-                "title": "Anti-Corruption Certifications",
-                "description": "Certifications for anti-corruption compliance.",
-                "url": "http://example.com/anti-corruption-certifications-johannesburg.pdf",
-                "documentType": "Certification",
-                "format": "PDF",
-                "language": "en",
-                "pages": 10,
-                "datePublished": "2024-06-01T00:00:00Z",
-                "dateModified": "2024-06-10T00:00:00Z"
+                "url": "http://example.com/health-safety-certifications-cape-town.pdf"
               }
-            ]
+            ],
+            "laborBudget": "2000000"
           },
           "environmentalAndClimateSustainabilityData": {
-            "numberOfEnvironmentalCertifications": 4,
             "environmentalCertifications": "Certified by the South African Environmental Protection Agency",
             "attachments": [
               {
-                "title": "Environmental Certifications",
                 "description": "Documents detailing environmental certifications.",
-                "url": "http://example.com/environmental-certifications-johannesburg.pdf",
+                "title": "Environmental Certifications",
                 "documentType": "Certification",
-                "format": "PDF",
                 "language": "en",
-                "pages": 30,
                 "datePublished": "2024-05-01T00:00:00Z",
+                "url": "http://example.com/environmental-certifications-cape-town.pdf",
+                "pages": 30,
+                "format": "PDF",
                 "dateModified": "2024-05-10T00:00:00Z"
               }
-            ]
+            ],
+            "numberOfEnvironmentalCertifications": 5
           }
         },
         "implementation": {
-          "basicData": {
-            "variationToContractPrice": "8%",
-            "escalationOfContractPrice": "3%",
-            "variationToContractDuration": "4 months",
-            "variationToContractScope": "Added new bus lanes",
-            "reasonsForPriceChanges": "Inflation and additional scope",
-            "reasonsForScope": "To enhance transit system capacity",
-            "reasonsForDurationChanges": "Delays in procurement",
-            "attachments": [
-              {
-                "title": "List of Variations, Changes, Amendments",
-                "description": "Detailed list of all variations, changes, and amendments to the contract.",
-                "url": "http://example.com/variations-changes-johannesburg.pdf",
-                "documentType": "Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": 25,
-                "datePublished": "2024-06-01T00:00:00Z",
-                "dateModified": "2024-06-10T00:00:00Z"
-              },
-              {
-                "title": "List of Escalation Approvals",
-                "description": "Approvals for cost escalations due to various factors.",
-                "url": "http://example.com/escalation-approvals-johannesburg.pdf",
-                "documentType": "Approval Document",
-                "format": "PDF",
-                "language": "en",
-                "pages": 20,
-                "datePublished": "2024-06-05T00:00:00Z",
-                "dateModified": "2024-06-15T00:00:00Z"
-              },
-              {
-                "title": "Quality Assurance Reports",
-                "description": "Reports on quality assurance checks and measures.",
-                "url": "http://example.com/quality-assurance-reports-johannesburg.pdf",
-                "documentType": "Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": 30,
-                "datePublished": "2024-06-10T00:00:00Z",
-                "dateModified": "2024-06-20T00:00:00Z"
-              },
-              {
-                "title": "Payment Certificates",
-                "description": "Certificates for payments made during the implementation phase.",
-                "url": "http://example.com/payment-certificates-johannesburg.pdf",
-                "documentType": "Certificate",
-                "format": "PDF",
-                "language": "en",
-                "pages": 15,
-                "datePublished": "2024-06-15T00:00:00Z",
-                "dateModified": "2024-06-25T00:00:00Z"
-              },
-              {
-                "title": "Contract Amendments",
-                "description": "Details of amendments made to the original contract.",
-                "url": "http://example.com/contract-amendments-johannesburg.pdf",
-                "documentType": "Amendment Document",
-                "format": "PDF",
-                "language": "en",
-                "pages": 18,
-                "datePublished": "2024-06-20T00:00:00Z",
-                "dateModified": "2024-06-30T00:00:00Z"
-              }
-            ]
-          },
-          "climateFinanceData": {
-            "disbursementRecords": "Initial and ongoing disbursements for the project",
-            "typeOfMonitoring": "Regular financial audits",
-            "performanceMonitoring": "Quarterly performance reviews",
-            "reportingPeriod": "2024-06-01T00:00:00Z to 2025-06-01T00:00:00Z",
-            "independentMonitoring": "Conducted by third-party auditors",
-            "attachments": [
-              {
-                "title": "Independent Monitoring",
-                "description": "Reports on independent monitoring activities.",
-                "url": "http://example.com/independent-monitoring-johannesburg.pdf",
-                "documentType": "Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": 35,
-                "datePublished": "2024-06-25T00:00:00Z",
-                "dateModified": "2024-07-05T00:00:00Z"
-              }
-            ]
-          },
           "socialSustainabilityData": {
-            "jobsGenerated": 200,
+            "workersAccidents": 0,
             "inclusiveImplementation": "Ensuring job opportunities for marginalized communities",
-            "workersAccidents": 1,
+            "jobsGenerated": 300,
             "attachments": [
               {
+                "pages": 50,
                 "title": "Construction Materials Testing",
-                "description": "Testing reports for construction materials used.",
-                "url": "http://example.com/materials-testing-johannesburg.pdf",
-                "documentType": "Testing Report",
                 "format": "PDF",
+                "dateModified": "2024-08-15T00:00:00Z",
+                "datePublished": "2024-07-01T00:00:00Z",
+                "documentType": "Testing Report",
+                "url": "http://example.com/materials-testing-cape-town.pdf",
                 "language": "en",
-                "pages": 45,
-                "datePublished": "2024-06-01T00:00:00Z",
-                "dateModified": "2024-06-15T00:00:00Z"
+                "description": "Testing reports for construction materials used."
               },
               {
+                "documentType": "Inspection Report",
+                "dateModified": "2024-09-20T00:00:00Z",
+                "language": "en",
                 "title": "Building Inspections",
                 "description": "Inspection reports for the buildings constructed.",
-                "url": "http://example.com/building-inspections-johannesburg.pdf",
-                "documentType": "Inspection Report",
+                "datePublished": "2024-08-10T00:00:00Z",
+                "url": "http://example.com/building-inspections-cape-town.pdf",
                 "format": "PDF",
-                "language": "en",
-                "pages": 60,
-                "datePublished": "2024-06-10T00:00:00Z",
-                "dateModified": "2024-06-20T00:00:00Z"
-              }
-            ]
-          },
-          "institutionalSustainabilityData": {
-            "numberOfFreedomOfInformationRequests": 5,
-            "numberOfFreedomOfInformationAnswers": 4,
-            "attachments": [
-              {
-                "title": "Freedom of Information Requests and Answers",
-                "description": "Details of FOI requests and responses.",
-                "url": "http://example.com/foi-requests-answers-johannesburg.pdf",
-                "documentType": "Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": 25,
-                "datePublished": "2024-06-01T00:00:00Z",
-                "dateModified": "2024-06-10T00:00:00Z"
-              },
-              {
-                "title": "Oversight Reports",
-                "description": "Reports from oversight bodies on project implementation.",
-                "url": "http://example.com/oversight-reports-johannesburg.pdf",
-                "documentType": "Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": 35,
-                "datePublished": "2024-06-15T00:00:00Z",
-                "dateModified": "2024-06-25T00:00:00Z"
-              },
-              {
-                "title": "Independent Mid Term Evaluation",
-                "description": "Mid-term evaluation conducted by an independent party.",
-                "url": "http://example.com/mid-term-evaluation-johannesburg.pdf",
-                "documentType": "Evaluation Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": 30,
-                "datePublished": "2024-06-20T00:00:00Z",
-                "dateModified": "2024-06-30T00:00:00Z"
+                "pages": 60
               }
             ]
           },
           "economicAndFinancialSustainabilityData": {
-            "budgetShortfall": "12%",
-            "fundingSourceForImplementation": "National government and international loans",
-            "budgetForImplementation": "15000000",
+            "fundingSourceForImplementation": "National government and international grants",
             "attachments": [
               {
+                "url": "http://example.com/financial-plan-cape-town.pdf",
                 "title": "Financial Implementation Plan",
+                "datePublished": "2024-07-01T00:00:00Z",
+                "pages": 40,
+                "format": "PDF",
                 "description": "Detailed financial plan for project implementation.",
-                "url": "http://example.com/financial-plan-johannesburg.pdf",
-                "documentType": "Plan",
-                "format": "PDF",
                 "language": "en",
-                "pages": 40,
-                "datePublished": "2024-06-01T00:00:00Z",
-                "dateModified": "2024-06-10T00:00:00Z"
+                "dateModified": "2024-08-10T00:00:00Z",
+                "documentType": "Plan"
               }
-            ]
+            ],
+            "budgetForImplementation": "170000000",
+            "budgetShortfall": "10%"
           },
-          "environmentalAndClimateSustainabilityData": {
-            "environmentalMeasures": "Use of eco-friendly materials",
-            "conservationMeasures": "Protecting local wildlife habitats",
-            "climateMeasures": "Integrating renewable energy sources",
+          "institutionalSustainabilityData": {
             "attachments": [
               {
-                "title": "Environmental Licenses and Exemptions",
-                "description": "Details of environmental licenses obtained for the project.",
-                "url": "http://example.com/environmental-licenses-johannesburg.pdf",
-                "documentType": "License",
-                "format": "PDF",
-                "language": "en",
-                "pages": 20,
-                "datePublished": "2024-06-05T00:00:00Z",
-                "dateModified": "2024-06-15T00:00:00Z"
-              }
-            ]
-          }
-        },
-        "completion": {
-          "basicData": {
-            "projectStatus": "Completed",
-            "completionCost": "110000000",
-            "completionDate": "2027-09-30T00:00:00Z",
-            "scopeAtCompletion": "Upgrade of rapid transit system including expansion of lines, station modernization, and advanced ticketing systems.",
-            "reasonsForProjectChanges": "Scope was expanded to include additional stations.",
-            "attachments": [
-              {
-                "title": "Implementation Progress Reports",
-                "description": "Reports detailing the progress of the project implementation.",
-                "url": "http://example.com/implementation-progress-reports-johannesburg.pdf",
+                "pages": 25,
+                "description": "Details of FOI requests and responses.",
                 "documentType": "Report",
+                "datePublished": "2024-07-01T00:00:00Z",
+                "dateModified": "2024-08-10T00:00:00Z",
                 "format": "PDF",
+                "title": "Freedom of Information Requests and Answers",
                 "language": "en",
-                "pages": 40,
-                "datePublished": "2024-06-01T00:00:00Z",
-                "dateModified": "2024-06-10T00:00:00Z"
+                "url": "http://example.com/foi-requests-answers-cape-town.pdf"
               },
               {
-                "title": "Budget Amendment Decision",
-                "description": "Official document outlining the budget amendments.",
-                "url": "http://example.com/budget-amendment-decision-johannesburg.pdf",
-                "documentType": "Decision",
+                "url": "http://example.com/oversight-reports-cape-town.pdf",
+                "format": "PDF",
+                "pages": 35,
+                "title": "Oversight Reports",
+                "dateModified": "2024-09-25T00:00:00Z",
+                "description": "Reports from oversight bodies on project implementation.",
+                "language": "en",
+                "datePublished": "2024-08-15T00:00:00Z",
+                "documentType": "Report"
+              },
+              {
+                "documentType": "Evaluation Report",
+                "title": "Independent Mid Term Evaluation",
+                "format": "PDF",
+                "datePublished": "2024-08-20T00:00:00Z",
+                "language": "en",
+                "dateModified": "2024-09-30T00:00:00Z",
+                "url": "http://example.com/mid-term-evaluation-cape-town.pdf",
+                "pages": 30,
+                "description": "Mid-term evaluation conducted by an independent party."
+              }
+            ],
+            "numberOfFreedomOfInformationAnswers": 4,
+            "numberOfFreedomOfInformationRequests": 5
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "attachments": [
+              {
+                "dateModified": "2024-08-15T00:00:00Z",
+                "language": "en",
+                "url": "http://example.com/environmental-licenses-cape-town.pdf",
+                "title": "Environmental Licenses and Exemptions",
+                "format": "PDF",
+                "description": "Details of environmental licenses obtained for the project.",
+                "pages": 20,
+                "documentType": "License",
+                "datePublished": "2024-07-05T00:00:00Z"
+              }
+            ],
+            "environmentalMeasures": "Use of eco-friendly materials",
+            "climateMeasures": "Integrating renewable energy sources",
+            "conservationMeasures": "Protecting local wildlife habitats"
+          },
+          "climateFinanceData": {
+            "attachments": [
+              {
+                "pages": 35,
+                "title": "Independent Monitoring",
+                "description": "Reports on independent monitoring activities.",
+                "format": "PDF",
+                "language": "en",
+                "dateModified": "2024-10-05T00:00:00Z",
+                "url": "http://example.com/independent-monitoring-cape-town.pdf",
+                "documentType": "Report",
+                "datePublished": "2024-09-25T00:00:00Z"
+              }
+            ],
+            "performanceMonitoring": "Quarterly performance reviews",
+            "reportingPeriod": "2024-07-01T00:00:00Z to 2025-07-01T00:00:00Z",
+            "independentMonitoring": "Conducted by third-party auditors",
+            "typeOfMonitoring": "Regular financial audits",
+            "disbursementRecords": "Initial and ongoing disbursements for the project"
+          },
+          "basicData": {
+            "escalationOfContractPrice": "5%",
+            "reasonsForScope": "To improve water and sanitation infrastructure",
+            "attachments": [
+              {
+                "format": "PDF",
+                "url": "http://example.com/variations-changes-cape-town.pdf",
+                "dateModified": "2024-08-10T00:00:00Z",
+                "title": "List of Variations, Changes, Amendments",
+                "documentType": "Report",
+                "description": "Detailed list of all variations, changes, and amendments to the contract.",
+                "language": "en",
+                "datePublished": "2024-07-01T00:00:00Z",
+                "pages": 25
+              },
+              {
+                "documentType": "Approval Document",
+                "format": "PDF",
+                "dateModified": "2024-08-15T00:00:00Z",
+                "title": "List of Escalation Approvals",
+                "datePublished": "2024-07-05T00:00:00Z",
+                "language": "en",
+                "pages": 20,
+                "url": "http://example.com/escalation-approvals-cape-town.pdf",
+                "description": "Approvals for cost escalations due to various factors."
+              },
+              {
+                "documentType": "Report",
+                "url": "http://example.com/quality-assurance-reports-cape-town.pdf",
+                "description": "Reports on quality assurance checks and measures.",
+                "language": "en",
+                "format": "PDF",
+                "dateModified": "2024-09-20T00:00:00Z",
+                "datePublished": "2024-08-10T00:00:00Z",
+                "title": "Quality Assurance Reports",
+                "pages": 30
+              },
+              {
+                "dateModified": "2024-09-25T00:00:00Z",
+                "url": "http://example.com/payment-certificates-cape-town.pdf",
+                "title": "Payment Certificates",
                 "format": "PDF",
                 "language": "en",
                 "pages": 15,
-                "datePublished": "2024-07-01T00:00:00Z",
-                "dateModified": "2024-07-10T00:00:00Z"
+                "documentType": "Certificate",
+                "description": "Certificates for payments made during the implementation phase.",
+                "datePublished": "2024-08-15T00:00:00Z"
               },
               {
-                "title": "Project Completion Report",
-                "description": "Comprehensive report on the completion of the project.",
-                "url": "http://example.com/project-completion-report-johannesburg.pdf",
-                "documentType": "Report",
+                "url": "http://example.com/contract-amendments-cape-town.pdf",
                 "format": "PDF",
+                "documentType": "Amendment Document",
                 "language": "en",
-                "pages": 60,
-                "datePublished": "2027-09-30T00:00:00Z",
-                "dateModified": "2027-10-10T00:00:00Z"
-              },
-              {
-                "title": "Project Evaluation Report",
-                "description": "Evaluation report of the project outcomes.",
-                "url": "http://example.com/project-evaluation-report-johannesburg.pdf",
-                "documentType": "Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": 50,
-                "datePublished": "2027-10-20T00:00:00Z",
-                "dateModified": "2027-10-30T00:00:00Z"
-              },
-              {
-                "title": "Technical Audit Reports",
-                "description": "Technical audit of the project.",
-                "url": "http://example.com/technical-audit-reports-johannesburg.pdf",
-                "documentType": "Audit Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": 30,
-                "datePublished": "2027-11-01T00:00:00Z",
-                "dateModified": "2027-11-10T00:00:00Z"
-              },
-              {
-                "title": "Financial Audit Reports",
-                "description": "Financial audit of the project.",
-                "url": "http://example.com/financial-audit-reports-johannesburg.pdf",
-                "documentType": "Audit Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": 35,
-                "datePublished": "2027-11-15T00:00:00Z",
-                "dateModified": "2027-11-20T00:00:00Z"
+                "title": "Contract Amendments",
+                "dateModified": "2024-09-30T00:00:00Z",
+                "description": "Details of amendments made to the original contract.",
+                "datePublished": "2024-09-20T00:00:00Z",
+                "pages": 18
               }
-            ]
-          },
-          "institutionalSustainabilityData": {
-            "numberOfFreedomOfInformationRequests": 7,
-            "numberOfFreedomOfInformationAnswers": 6,
-            "attachments": [
-              {
-                "title": "Freedom of Information Requests and Answers",
-                "description": "Documentation of FOI requests and answers.",
-                "url": "http://example.com/foi-requests-answers-johannesburg.pdf",
-                "documentType": "Documentation",
-                "format": "PDF",
-                "language": "en",
-                "pages": 25,
-                "datePublished": "2027-12-01T00:00:00Z",
-                "dateModified": "2027-12-10T00:00:00Z"
-              }
-            ]
+            ],
+            "reasonsForDurationChanges": "Delays in procurement",
+            "variationToContractDuration": "6 months",
+            "variationToContractScope": "Added new water treatment facilities",
+            "variationToContractPrice": "7%",
+            "reasonsForPriceChanges": "Inflation and additional scope"
           }
         },
         "operationsAndMaintenance": {
+          "socialSustainabilityData": {
+            "jobsGenerated": 150,
+            "inclusiveImplementation": "Ensuring employment opportunities for local communities and marginalized groups",
+            "workersAccidents": 0,
+            "attachments": [
+              {
+                "url": "http://example.com/jobs-generated-cape-town.pdf",
+                "format": "PDF",
+                "description": "Report on the number of jobs generated through maintenance activities.",
+                "documentType": "Report",
+                "pages": 20,
+                "datePublished": "2024-07-01T00:00:00Z",
+                "title": "Jobs Generated",
+                "dateModified": "2024-08-10T00:00:00Z",
+                "language": "en"
+              },
+              {
+                "description": "Report on the testing of materials used in maintenance.",
+                "language": "en",
+                "datePublished": "2024-07-01T00:00:00Z",
+                "pages": 30,
+                "url": "http://example.com/materials-testing-cape-town.pdf",
+                "documentType": "Report",
+                "title": "Construction Materials Testing",
+                "dateModified": "2024-08-10T00:00:00Z",
+                "format": "PDF"
+              }
+            ]
+          },
           "basicData": {
-            "assetName": "Johannesburg Rapid Transit System",
-            "assetLocation": "Johannesburg, Gauteng, South Africa",
             "typeOfMaintenanceWorks": "Routine and preventive maintenance",
-            "worksDescription": "Routine inspection and maintenance of transit lines, stations, and ticketing systems",
+            "attachments": [
+              {
+                "language": "en",
+                "datePublished": "2024-07-01T00:00:00Z",
+                "pages": 50,
+                "format": "PDF",
+                "url": "http://example.com/maintenance-plan-cape-town.pdf",
+                "description": "Detailed maintenance plan outlining routine and preventive maintenance activities.",
+                "title": "Maintenance Plan",
+                "dateModified": "2024-08-10T00:00:00Z",
+                "documentType": "Plan"
+              }
+            ],
+            "assetLocation": "Cape Town, Western Cape, South Africa",
             "projectOfficialsAndRoles": [
               {
                 "name": "Michael Green",
                 "role": "Maintenance Manager"
               }
             ],
-            "maintenanceScope": "Routine maintenance, emergency repairs, and preventive measures to ensure continuous transit service",
-            "attachments": [
-              {
-                "title": "Maintenance Plan",
-                "description": "Detailed maintenance plan outlining routine and preventive maintenance activities.",
-                "url": "http://example.com/maintenance-plan-johannesburg.pdf",
-                "documentType": "Plan",
-                "format": "PDF",
-                "language": "en",
-                "pages": 45,
-                "datePublished": "2024-06-01T00:00:00Z",
-                "dateModified": "2024-06-10T00:00:00Z"
-              }
-            ]
+            "worksDescription": "Routine inspection and maintenance of water treatment facilities, sewerage systems, and water conservation technologies",
+            "maintenanceScope": "Routine maintenance, emergency repairs, and preventive measures to ensure continuous water supply and sanitation services",
+            "assetName": "Cape Town Water and Sanitation Infrastructure"
           },
           "climateFinanceData": {
-            "impactMeasurement": "Reduction in traffic congestion and emissions",
-            "carbonFootprint": "Estimated reduction of 1500 tons of CO2 annually",
+            "carbonFootprint": "Estimated reduction of 2000 tons of CO2 annually",
+            "impactMeasurement": "Improved water efficiency and reduced emissions",
             "attachments": [
               {
-                "title": "Carbon Footprint Document",
+                "documentType": "Report",
+                "language": "en",
                 "description": "Report on the carbon footprint of the maintenance activities.",
-                "url": "http://example.com/carbon-footprint-johannesburg.pdf",
-                "documentType": "Report",
+                "url": "http://example.com/carbon-footprint-cape-town.pdf",
                 "format": "PDF",
-                "language": "en",
-                "pages": 25,
-                "datePublished": "2024-06-01T00:00:00Z",
-                "dateModified": "2024-06-10T00:00:00Z"
-              }
-            ]
-          },
-          "socialSustainabilityData": {
-            "jobsGenerated": 80,
-            "inclusiveImplementation": "Ensuring employment opportunities for local communities and marginalized groups",
-            "workersAccidents": 1,
-            "attachments": [
-              {
-                "title": "Jobs Generated",
-                "description": "Report on the number of jobs generated through maintenance activities.",
-                "url": "http://example.com/jobs-generated-johannesburg.pdf",
-                "documentType": "Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": 20,
-                "datePublished": "2024-06-01T00:00:00Z",
-                "dateModified": "2024-06-10T00:00:00Z"
-              },
-              {
-                "title": "Construction Materials Testing",
-                "description": "Report on the testing of materials used in maintenance.",
-                "url": "http://example.com/materials-testing-johannesburg.pdf",
-                "documentType": "Report",
-                "format": "PDF",
-                "language": "en",
                 "pages": 30,
-                "datePublished": "2024-06-01T00:00:00Z",
-                "dateModified": "2024-06-10T00:00:00Z"
+                "title": "Carbon Footprint Document",
+                "dateModified": "2024-08-10T00:00:00Z",
+                "datePublished": "2024-07-01T00:00:00Z"
               }
             ]
           },
           "institutionalSustainabilityData": {
-            "numberOfFreedomOfInformationRequests": 7,
-            "numberOfFreedomOfInformationAnswers": 6,
+            "numberOfFreedomOfInformationRequests": 8,
+            "numberOfFreedomOfInformationAnswers": 7,
             "attachments": [
               {
+                "url": "http://example.com/foi-requests-cape-town.pdf",
                 "title": "Freedom of Information Requests and Answers",
-                "description": "Summary of FOI requests and responses related to maintenance activities.",
-                "url": "http://example.com/foi-requests-johannesburg.pdf",
                 "documentType": "Report",
-                "format": "PDF",
                 "language": "en",
-                "pages": 15,
-                "datePublished": "2024-06-01T00:00:00Z",
-                "dateModified": "2024-06-10T00:00:00Z"
+                "pages": 20,
+                "format": "PDF",
+                "dateModified": "2024-08-10T00:00:00Z",
+                "datePublished": "2024-07-01T00:00:00Z",
+                "description": "Summary of FOI requests and responses related to maintenance activities."
+              }
+            ]
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "conservationMeasures": "Reduction of emissions and energy use",
+            "climateMeasures": "Integration of renewable energy sources",
+            "environmentalMeasures": "Implementation of sustainable practices in maintenance activities",
+            "attachments": [
+              {
+                "url": "http://example.com/environmental-licenses-cape-town.pdf",
+                "dateModified": "2024-08-10T00:00:00Z",
+                "pages": 25,
+                "title": "Environmental Licenses and Exemptions",
+                "documentType": "License",
+                "datePublished": "2024-07-01T00:00:00Z",
+                "format": "PDF",
+                "description": "Documents related to environmental licenses and exemptions for maintenance activities.",
+                "language": "en"
               }
             ]
           },
           "economicAndFinancialSustainabilityData": {
-            "fundingSourceForMaintenance": "National government, Climate finance loans",
-            "budgetForMaintenance": "3000000",
+            "budgetForMaintenance": "5000000",
             "attachments": [
               {
                 "title": "Maintenance Budget Report",
-                "description": "Detailed report on the budget allocated for maintenance activities.",
-                "url": "http://example.com/maintenance-budget-johannesburg.pdf",
+                "dateModified": "2024-08-10T00:00:00Z",
+                "language": "en",
                 "documentType": "Report",
+                "datePublished": "2024-07-01T00:00:00Z",
+                "url": "http://example.com/maintenance-budget-cape-town.pdf",
                 "format": "PDF",
-                "language": "en",
-                "pages": 25,
-                "datePublished": "2024-06-01T00:00:00Z",
-                "dateModified": "2024-06-10T00:00:00Z"
-              }
-            ]
-          },
-          "environmentalAndClimateSustainabilityData": {
-            "environmentalMeasures": "Implementation of sustainable practices in maintenance activities",
-            "conservationMeasures": "Reduction of emissions and energy use",
-            "climateMeasures": "Integration of renewable energy sources",
-            "attachments": [
-              {
-                "title": "Environmental Licenses and Exemptions",
-                "description": "Documents related to environmental licenses and exemptions for maintenance activities.",
-                "url": "http://example.com/environmental-licenses-johannesburg.pdf",
-                "documentType": "License",
-                "format": "PDF",
-                "language": "en",
-                "pages": 25,
-                "datePublished": "2024-06-01T00:00:00Z",
-                "dateModified": "2024-06-10T00:00:00Z"
-              }
-            ]
-          }
-        },
-        "decommissioning": {
-          "basicData": {
-            "assetName": "Old Bus Depot",
-            "assetLocation": "Johannesburg, Gauteng, South Africa",
-            "typeOfMaintenanceWorks": "Dismantling and site restoration",
-            "worksDescription": "Complete decommissioning of the old bus depot, including dismantling structures and site restoration.",
-            "projectOfficialsAndRoles": [
-              {
-                "name": "Alice Johnson",
-                "role": "Decommissioning Manager"
-              },
-              {
-                "name": "Robert White",
-                "role": "Lead Engineer"
+                "description": "Detailed report on the budget allocated for maintenance activities.",
+                "pages": 25
               }
             ],
-            "maintenanceScope": "Dismantling all structures and restoring the site to its natural state.",
+            "fundingSourceForMaintenance": "National government, International grants"
+          }
+        },
+        "completion": {
+          "institutionalSustainabilityData": {
+            "numberOfFreedomOfInformationRequests": 8,
             "attachments": [
               {
-                "title": "Decision of Asset Disposal",
-                "description": "Official document outlining the decision to decommission the asset.",
-                "url": "http://example.com/decision-asset-disposal-johannesburg.pdf",
+                "pages": 25,
+                "language": "en",
+                "url": "http://example.com/foi-requests-answers-cape-town.pdf",
+                "documentType": "Documentation",
+                "dateModified": "2026-12-10T00:00:00Z",
+                "title": "Freedom of Information Requests and Answers",
+                "format": "PDF",
+                "datePublished": "2026-12-01T00:00:00Z",
+                "description": "Documentation of FOI requests and answers."
+              }
+            ],
+            "numberOfFreedomOfInformationAnswers": 7
+          },
+          "basicData": {
+            "completionDate": "2026-09-30T00:00:00Z",
+            "attachments": [
+              {
+                "description": "Reports detailing the progress of the project implementation.",
+                "format": "PDF",
+                "dateModified": "2024-08-10T00:00:00Z",
+                "datePublished": "2024-08-01T00:00:00Z",
+                "url": "http://example.com/implementation-progress-reports-cape-town.pdf",
+                "documentType": "Report",
+                "pages": 40,
+                "title": "Implementation Progress Reports",
+                "language": "en"
+              },
+              {
+                "title": "Budget Amendment Decision",
+                "dateModified": "2024-09-10T00:00:00Z",
+                "datePublished": "2024-09-01T00:00:00Z",
+                "pages": 15,
                 "documentType": "Decision",
                 "format": "PDF",
+                "url": "http://example.com/budget-amendment-decision-cape-town.pdf",
                 "language": "en",
-                "pages": 12,
-                "datePublished": "2024-04-01T00:00:00Z",
-                "dateModified": "2024-04-10T00:00:00Z"
+                "description": "Official document outlining the budget amendments."
               },
               {
-                "title": "Tender Documents",
-                "description": "All tender documents related to the decommissioning process.",
-                "url": "http://example.com/tender-documents-johannesburg.pdf",
-                "documentType": "Tender",
-                "format": "PDF",
+                "datePublished": "2026-09-30T00:00:00Z",
+                "description": "Comprehensive report on the completion of the project.",
+                "dateModified": "2026-10-10T00:00:00Z",
                 "language": "en",
-                "pages": 50,
-                "datePublished": "2024-05-01T00:00:00Z",
-                "dateModified": "2024-05-10T00:00:00Z"
+                "url": "http://example.com/project-completion-report-cape-town.pdf",
+                "format": "PDF",
+                "title": "Project Completion Report",
+                "documentType": "Report",
+                "pages": 60
               },
               {
-                "title": "Tender Evaluation Results",
-                "description": "Results of the tender evaluation process.",
-                "url": "http://example.com/tender-evaluation-results-johannesburg.pdf",
-                "documentType": "Evaluation",
                 "format": "PDF",
                 "language": "en",
+                "url": "http://example.com/project-evaluation-report-cape-town.pdf",
+                "documentType": "Report",
+                "description": "Evaluation report of the project outcomes.",
+                "datePublished": "2026-10-20T00:00:00Z",
+                "dateModified": "2026-10-30T00:00:00Z",
+                "title": "Project Evaluation Report",
+                "pages": 50
+              },
+              {
+                "dateModified": "2026-11-10T00:00:00Z",
+                "language": "en",
+                "datePublished": "2026-11-01T00:00:00Z",
+                "url": "http://example.com/technical-audit-reports-cape-town.pdf",
+                "title": "Technical Audit Reports",
+                "format": "PDF",
+                "documentType": "Audit Report",
+                "description": "Technical audit of the project.",
+                "pages": 30
+              },
+              {
+                "datePublished": "2026-11-15T00:00:00Z",
+                "dateModified": "2026-11-20T00:00:00Z",
+                "language": "en",
+                "url": "http://example.com/financial-audit-reports-cape-town.pdf",
                 "pages": 35,
-                "datePublished": "2024-06-01T00:00:00Z",
-                "dateModified": "2024-06-10T00:00:00Z"
-              },
-              {
-                "title": "Project Design Report",
-                "description": "Report detailing the design of the decommissioning process.",
-                "url": "http://example.com/project-design-report-johannesburg.pdf",
-                "documentType": "Report",
                 "format": "PDF",
-                "language": "en",
-                "pages": 40,
-                "datePublished": "2024-07-01T00:00:00Z",
-                "dateModified": "2024-07-10T00:00:00Z"
-              },
-              {
-                "title": "Contract Agreement and Conditions",
-                "description": "Agreement and conditions of the decommissioning contract.",
-                "url": "http://example.com/contract-agreement-conditions-johannesburg.pdf",
-                "documentType": "Agreement",
-                "format": "PDF",
-                "language": "en",
-                "pages": 20,
-                "datePublished": "2024-08-01T00:00:00Z",
-                "dateModified": "2024-08-10T00:00:00Z"
-              },
-              {
-                "title": "Registration and Ownership of Firms",
-                "description": "Details of the firms involved in the decommissioning process.",
-                "url": "http://example.com/registration-ownership-firms-johannesburg.pdf",
-                "documentType": "Registration",
-                "format": "PDF",
-                "language": "en",
-                "pages": 18,
-                "datePublished": "2024-09-01T00:00:00Z",
-                "dateModified": "2024-09-10T00:00:00Z"
-              },
-              {
-                "title": "Specifications and Drawings",
-                "description": "Technical specifications and drawings for the decommissioning.",
-                "url": "http://example.com/specifications-drawings-johannesburg.pdf",
-                "documentType": "Specifications",
-                "format": "PDF",
-                "language": "en",
-                "pages": 25,
-                "datePublished": "2024-10-01T00:00:00Z",
-                "dateModified": "2024-10-10T00:00:00Z"
+                "title": "Financial Audit Reports",
+                "description": "Financial audit of the project.",
+                "documentType": "Audit Report"
               }
-            ]
-          },
-          "climateFinanceData": {
-            "decommissionPeriod": "2024-01-01 to 2024-12-31",
-            "decommissionCosts": "20000000",
-            "carbonDecommissionSavings": "7000",
-            "attachments": [
-              {
-                "title": "Decommission Plans",
-                "description": "Comprehensive plans for the decommissioning process.",
-                "url": "http://example.com/decommission-plans-johannesburg.pdf",
-                "documentType": "Plans",
-                "format": "PDF",
-                "language": "en",
-                "pages": 35,
-                "datePublished": "2024-11-01T00:00:00Z",
-                "dateModified": "2024-11-10T00:00:00Z"
-              }
-            ]
-          },
-          "socialSustainabilityData": {
-            "jobsGenerated": "250",
-            "workersAccidents": "3",
-            "attachments": [
-              {
-                "title": "Jobs Generated",
-                "description": "Details of jobs generated during the decommissioning process.",
-                "url": "http://example.com/jobs-generated-johannesburg.pdf",
-                "documentType": "Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": 20,
-                "datePublished": "2024-12-01T00:00:00Z",
-                "dateModified": "2024-12-10T00:00:00Z"
-              },
-              {
-                "title": "Workers' Accidents Report",
-                "description": "Report on accidents involving workers during the decommissioning.",
-                "url": "http://example.com/workers-accidents-johannesburg.pdf",
-                "documentType": "Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": 8,
-                "datePublished": "2024-12-15T00:00:00Z",
-                "dateModified": "2024-12-20T00:00:00Z"
-              }
-            ]
-          },
-          "institutionalSustainabilityData": {
-            "numberOfFreedomOfInformationRequests": "10",
-            "numberOfFreedomOfInformationAnswers": "9",
-            "attachments": [
-              {
-                "title": "Freedom of Information Requests and Answers",
-                "description": "Details of freedom of information requests and responses.",
-                "url": "http://example.com/foi-requests-answers-johannesburg.pdf",
-                "documentType": "Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": 20,
-                "datePublished": "2025-01-01T00:00:00Z",
-                "dateModified": "2025-01-10T00:00:00Z"
-              }
-            ]
-          },
-          "economicAndFinancialSustainabilityData": {
-            "decommissionCostForecast": "22000000",
-            "attachments": [
-              {
-                "title": "Decommission Cost Forecast",
-                "description": "Forecast of the costs involved in the decommissioning.",
-                "url": "http://example.com/decommission-cost-forecast-johannesburg.pdf",
-                "documentType": "Forecast",
-                "format": "PDF",
-                "language": "en",
-                "pages": 25,
-                "datePublished": "2025-02-01T00:00:00Z",
-                "dateModified": "2025-02-10T00:00:00Z"
-              }
-            ]
-          },
-          "environmentalAndClimateSustainabilityData": {
-            "decommissionMitigationPlan": "Plan to mitigate environmental impact during decommissioning.",
-            "attachments": [
-              {
-                "title": "Decommission Mitigation Plan",
-                "description": "Detailed plan for mitigating environmental impacts during decommissioning.",
-                "url": "http://example.com/decommission-mitigation-plan-johannesburg.pdf",
-                "documentType": "Plan",
-                "format": "PDF",
-                "language": "en",
-                "pages": 35,
-                "datePublished": "2025-03-01T00:00:00Z",
-                "dateModified": "2025-03-10T00:00:00Z"
-              }
-            ]
+            ],
+            "scopeAtCompletion": "Construction of new water treatment facilities, upgrading sewerage systems, and implementation of water conservation technologies.",
+            "projectStatus": "Completed",
+            "reasonsForProjectChanges": "Scope was expanded to include additional water treatment facilities.",
+            "completionCost": "160000000"
           }
         }
       },
-      "name": "Johannesburg Rapid Transit System Upgrade",
-      "featured": false,
-      "location": {
-        "coordinates": {
-          "lat": -26.2041,
-          "lng": 28.0473,
-          "popup": "Johannesburg, Gauteng, South Africa"
-        },
-        "name": "Johannesburg, Gauteng, South Africa"
-      }
+      "id": "project-1234",
+      "featured": false
     }
+
 
 
 

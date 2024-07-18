@@ -1,194 +1,109 @@
-<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="py-5">
-        <h1 class="text-4xl font-semibold leading-6 text-primary">Analytical Dashboard</h1>
-        <dl class="mt-5 grid grid-cols-1 divide-y divide-customGray overflow-hidden rounded-lg bg-customGray shadow md:grid-cols-3 md:divide-x md:divide-y-0">
-            <!-- Total Projects Reviewed -->
-            <div class="px-4 py-5 sm:p-6">
-                <dt class="text-base font-normal text-primary flex items-center">
-                    <i class="bi bi-folder-fill text-primary mr-2"></i>
-                    Total Projects Reviewed
-                </dt>
-                <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
-                    <div class="flex items-baseline text-2xl font-semibold text-primary">
-                        278
-                        <span class="ml-2 text-sm font-medium text-primary">from 5 Regions</span>
-                    </div>
-                    <div class="inline-flex items-baseline rounded-full px-2.5 py-0.5 text-sm font-medium bg-secondary text-green-800 md:mt-2 lg:mt-0">
-                        <i class="bi bi-arrow-up-circle-fill text-accent mr-1"></i>
-                        <span class="sr-only text-primary">Increased by </span>
-                        12%
-                    </div>
-                </dd>
-            </div>
-            <!-- Project Status -->
-            <div class="px-4 py-5 sm:p-6">
-                <dt class="text-base font-normal text-primary flex items-center">
-                    <i class="bi bi-clipboard-check-fill text-primary mr-2"></i>
-                    Project Status
-                </dt>
-                <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
-                    <div class="flex items-baseline text-2xl font-semibold text-primary">
-                        85% Completed
-                        <span class="ml-2 text-sm font-medium text-primary">15% In Progress</span>
-                    </div>
-                    <div class="inline-flex items-baseline rounded-full px-2.5 py-0.5 text-sm font-medium bg-secondary text-green-800 md:mt-2 lg:mt-0">
-                        <i class="bi bi-arrow-up-circle-fill text-accent mr-1"></i>
-                        <span class="sr-only">Increased by </span>
-                        5%
-                    </div>
-                </dd>
-            </div>
-            <!-- Jobs Created -->
-            <div class="px-4 py-5 sm:p-6">
-                <dt class="text-base font-normal text-primary flex items-center">
-                    <i class="bi bi-people-fill text-primary mr-2"></i>
-                    Jobs Created
-                </dt>
-                <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
-                    <div class="flex items-baseline text-2xl font-semibold text-primary">
-                        72,000
-                        <span class="ml-2 text-sm font-medium text-primary">in the last year</span>
-                    </div>
-                    <div class="inline-flex items-baseline rounded-full px-2.5 py-0.5 text-sm font-medium bg-secondary text-green-800 md:mt-2 lg:mt-0">
-                        <i class="bi bi-arrow-up-circle-fill text-accent mr-1"></i>
-                        <span class="sr-only text-primary">Increased by </span>
-                        4%
-                    </div>
-                </dd>
-            </div>
-        </dl>
-    </div>
+<div class="bg-primary min-h-screen font-inter">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h1 class="text-4xl font-semibold text-accent mb-8 apple-text-balance">Analytical Dashboard</h1>
 
-    <div class="container mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Investment by Region Chart -->
-            <div class="bg-customGray rounded-lg shadow p-6">
-                <div id="investmentByRegionChart" #investmentByRegionChart style="height: 400px;"></div>
-                <div class="relative inline-block text-left mt-4">
-                    <button type="button" (click)="toggleDropdown('investmentByRegion')" class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-expanded="true" aria-haspopup="true">
-                        <i class="bi bi-download mr-2"></i>Download
-                    </button>
-                    <div *ngIf="dropdownOpen['investmentByRegion']" class="absolute right-0 z-20 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <div class="py-1">
-                            <button (click)="downloadChartData('investmentByRegion', 'pdf')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
-                                <i class="bi bi-file-pdf mr-2"></i>Download PDF
-                            </button>
-                            <button (click)="downloadChartData('investmentByRegion', 'json')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
-                                <i class="bi bi-file-earmark-code mr-2"></i>Download JSON
-                            </button>
-                            <button (click)="downloadChartData('investmentByRegion', 'csv')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
-                                <i class="bi bi-file-earmark-spreadsheet mr-2"></i>Download CSV
-                            </button>
-                            <button (click)="downloadChartData('investmentByRegion', 'png')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
-                                <i class="bi bi-file-earmark-image mr-2"></i>Download PNG
-                            </button>
-                        </div>
-                    </div>
+        <!-- Key Metrics -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-white rounded-apple-lg shadow-apple-md p-6 apple-hover-lift">
+                <div class="flex items-center mb-4">
+                    <svg class="w-6 h-6 text-accent6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                    <h2 class="text-xl font-semibold text-accent">Total Projects Reviewed</h2>
+                </div>
+                <p class="text-3xl font-bold text-accent mb-2">278</p>
+                <p class="text-sm text-accent4">from 5 Regions</p>
+                <div class="mt-4 flex items-center text-accent6">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    <span class="text-sm font-medium">12% increase</span>
                 </div>
             </div>
 
-            <!-- Projects by Region Chart -->
-            <div class="bg-customGray rounded-lg shadow p-6">
-                <div id="projectsByRegionChart" #projectsByRegionChart style="height: 400px;"></div>
-                <div class="relative inline-block text-left mt-4">
-                    <button type="button" (click)="toggleDropdown('projectsByRegion')" class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-expanded="true" aria-haspopup="true">
-                        <i class="bi bi-download mr-2"></i>Download
-                    </button>
-                    <div *ngIf="dropdownOpen['projectsByRegion']" class="absolute right-0 z-20 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <div class="py-1">
-                            <button (click)="downloadChartData('projectsByRegion', 'pdf')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
-                                <i class="bi bi-file-pdf mr-2"></i>Download PDF
-                            </button>
-                            <button (click)="downloadChartData('projectsByRegion', 'json')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
-                                <i class="bi bi-file-earmark-code mr-2"></i>Download JSON
-                            </button>
-                            <button (click)="downloadChartData('projectsByRegion', 'csv')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
-                                <i class="bi bi-file-earmark-spreadsheet mr-2"></i>Download CSV
-                            </button>
-                            <button (click)="downloadChartData('projectsByRegion', 'png')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
-                                <i class="bi bi-file-earmark-image mr-2"></i>Download PNG
-                            </button>
-                        </div>
-                    </div>
+            <div class="bg-white rounded-apple-lg shadow-apple-md p-6 apple-hover-lift">
+                <div class="flex items-center mb-4">
+                    <svg class="w-6 h-6 text-accent6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                    <h2 class="text-xl font-semibold text-accent">Project Status</h2>
+                </div>
+                <p class="text-3xl font-bold text-accent mb-2">85%</p>
+                <p class="text-sm text-accent4">Completed</p>
+                <div class="mt-4 flex items-center text-accent6">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    <span class="text-sm font-medium">5% increase</span>
                 </div>
             </div>
 
-            <!-- Projects by Climate Objectives Chart -->
-            <div class="bg-customGray rounded-lg shadow p-6">
-                <div id="projectsByClimateObjectivesChart" #projectsByClimateObjectivesChart style="height: 400px;"></div>
-                <div class="relative inline-block text-left mt-4">
-                    <button type="button" (click)="toggleDropdown('projectsByClimateObjectives')" class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-expanded="true" aria-haspopup="true">
-                        <i class="bi bi-download mr-2"></i>Download
-                    </button>
-                    <div *ngIf="dropdownOpen['projectsByClimateObjectives']" class="absolute right-0 z-20 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <div class="py-1">
-                            <button (click)="downloadChartData('projectsByClimateObjectives', 'pdf')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
-                                <i class="bi bi-file-pdf mr-2"></i>Download PDF
-                            </button>
-                            <button (click)="downloadChartData('projectsByClimateObjectives', 'json')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
-                                <i class="bi bi-file-earmark-code mr-2"></i>Download JSON
-                            </button>
-                            <button (click)="downloadChartData('projectsByClimateObjectives', 'csv')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
-                                <i class="bi bi-file-earmark-spreadsheet mr-2"></i>Download CSV
-                            </button>
-                            <button (click)="downloadChartData('projectsByClimateObjectives', 'png')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
-                                <i class="bi bi-file-earmark-image mr-2"></i>Download PNG
-                            </button>
-                        </div>
-                    </div>
+            <div class="bg-white rounded-apple-lg shadow-apple-md p-6 apple-hover-lift">
+                <div class="flex items-center mb-4">
+                    <svg class="w-6 h-6 text-accent6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <h2 class="text-xl font-semibold text-accent">Jobs Created</h2>
+                </div>
+                <p class="text-3xl font-bold text-accent mb-2">72,000</p>
+                <p class="text-sm text-accent4">in the last year</p>
+                <div class="mt-4 flex items-center text-accent6">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    <span class="text-sm font-medium">4% increase</span>
                 </div>
             </div>
+        </div>
 
-            <!-- Investments by Climate Objectives Chart -->
-            <div class="bg-customGray rounded-lg shadow p-6">
-                <div id="investmentsByClimateObjectivesChart" #investmentsByClimateObjectivesChart style="height: 400px;"></div>
-                <div class="relative inline-block text-left mt-4">
-                    <button type="button" (click)="toggleDropdown('investmentsByClimateObjectives')" class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-expanded="true" aria-haspopup="true">
-                        <i class="bi bi-download mr-2"></i>Download
-                    </button>
-                    <div *ngIf="dropdownOpen['investmentsByClimateObjectives']" class="absolute right-0 z-20 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <div class="py-1">
-                            <button (click)="downloadChartData('investmentsByClimateObjectives', 'pdf')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
-                                <i class="bi bi-file-pdf mr-2"></i>Download PDF
-                            </button>
-                            <button (click)="downloadChartData('investmentsByClimateObjectives', 'json')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
-                                <i class="bi bi-file-earmark-code mr-2"></i>Download JSON
-                            </button>
-                            <button (click)="downloadChartData('investmentsByClimateObjectives', 'csv')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
-                                <i class="bi bi-file-earmark-spreadsheet mr-2"></i>Download CSV
-                            </button>
-                            <button (click)="downloadChartData('investmentsByClimateObjectives', 'png')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
-                                <i class="bi bi-file-earmark-image mr-2"></i>Download PNG
-                            </button>
-                        </div>
-                    </div>
-                </div>
+        <div class="bg-white rounded-apple-lg shadow-apple-md p-6 mb-8 apple-hover-lift">
+            <h3 class="text-lg font-semibold text-accent mb-4">Infrastructure Projects in South Africa</h3>
+            <div #mapContainer class="w-full h-[500px] rounded-apple-lg overflow-hidden"></div>
+        </div>
+
+        <!-- Charts -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white rounded-apple-lg shadow-apple-md p-6 apple-hover-lift">
+                <h3 class="text-lg font-semibold text-accent mb-4">Investment by Region</h3>
+                <div class="h-64 mb-4" id="investmentByRegionChart"></div>
+                <button class="apple-button" (click)="toggleDropdown('investmentByRegion')">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Download
+                </button>
             </div>
 
-            <!-- Total Projects by Sector Chart -->
-            <div class="bg-customGray rounded-lg shadow p-6">
-                <div id="totalProjectsBySectorChart" #totalProjectsBySectorChart style="height: 400px;"></div>
-                <div class="relative inline-block text-left mt-4">
-                    <button type="button" (click)="toggleDropdown('totalProjectsBySector')" class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-expanded="true" aria-haspopup="true">
-                        <i class="bi bi-download mr-2"></i>Download
-                    </button>
-                    <div *ngIf="dropdownOpen['totalProjectsBySector']" class="absolute right-0 z-20 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <div class="py-1">
-                            <button (click)="downloadChartData('totalProjectsBySector', 'pdf')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
-                                <i class="bi bi-file-pdf mr-2"></i>Download PDF
-                            </button>
-                            <button (click)="downloadChartData('totalProjectsBySector', 'json')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
-                                <i class="bi bi-file-earmark-code mr-2"></i>Download JSON
-                            </button>
-                            <button (click)="downloadChartData('totalProjectsBySector', 'csv')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
-                                <i class="bi bi-file-earmark-spreadsheet mr-2"></i>Download CSV
-                            </button>
-                            <button (click)="downloadChartData('totalProjectsBySector', 'png')" class="text-gray-700 group flex items-center px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900">
-                                <i class="bi bi-file-earmark-image mr-2"></i>Download PNG
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            <div class="bg-white rounded-apple-lg shadow-apple-md p-6 apple-hover-lift">
+                <h3 class="text-lg font-semibold text-accent mb-4">Projects by Region</h3>
+                <div class="h-64 mb-4" id="projectsByRegionChart"></div>
+                <button class="apple-button" (click)="toggleDropdown('projectsByRegion')">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Download
+                </button>
+            </div>
+
+            <div class="bg-white rounded-apple-lg shadow-apple-md p-6 apple-hover-lift">
+                <h3 class="text-lg font-semibold text-accent mb-4">Projects by Climate Objectives</h3>
+                <div class="h-64 mb-4" id="projectsByClimateObjectivesChart"></div>
+                <button class="apple-button" (click)="toggleDropdown('projectsByClimateObjectives')">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Download
+                </button>
+            </div>
+
+            <div class="bg-white rounded-apple-lg shadow-apple-md p-6 apple-hover-lift">
+                <h3 class="text-lg font-semibold text-accent mb-4">Investments by Climate Objectives</h3>
+                <div class="h-64 mb-4" id="investmentsByClimateObjectivesChart"></div>
+                <button class="apple-button" (click)="toggleDropdown('investmentsByClimateObjectives')">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Download
+                </button>
+            </div>
+
+            <div class="bg-white rounded-apple-lg shadow-apple-md p-6 apple-hover-lift">
+                <h3 class="text-lg font-semibold text-accent mb-4">Total Projects by Sector</h3>
+                <div class="h-64 mb-4" id="totalProjectsBySectorChart"></div>
+                <button class="apple-button" (click)="toggleDropdown('totalProjectsBySector')">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Download
+                </button>
+            </div>
+
+            <!-- New Project Types Chart -->
+            <div class="bg-white rounded-apple-lg shadow-apple-md p-6 apple-hover-lift">
+                <h3 class="text-lg font-semibold text-accent mb-4">Project Types Distribution</h3>
+                <div class="h-64 mb-4" id="projectTypesChart"></div>
+                <button class="apple-button" (click)="toggleDropdown('projectTypes')">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Download
+                </button>
             </div>
         </div>
     </div>

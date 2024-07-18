@@ -5,9 +5,9 @@
     </button>
 
     <!-- Sidebar -->
-    <div [@fadeInOut] class="sidebar bg-gray-100 w-full md:w-1/4 p-4 fixed md:static inset-0 z-40"
-         [ngClass]="{'hidden': !isSidebarOpen, 'flex': isSidebarOpen}"
-         [class.md:flex]="true">
+    <div [@sidebarAnimation]="isSidebarOpen ? 'open' : 'closed'"
+         class="sidebar bg-gray-100 w-full md:w-1/4 p-4 fixed md:static inset-0 z-40 transform transition-transform duration-300 ease-in-out"
+         [ngClass]="{'translate-x-0': isSidebarOpen, '-translate-x-full md:translate-x-0': !isSidebarOpen}">
         <div class="w-full">
             <div class="search-container mb-6">
                 <div class="relative">
@@ -40,7 +40,7 @@
                 <h2 class="text-3xl font-bold mb-4 text-gray-800">{{ section.title }}</h2>
                 <p class="mb-6 text-gray-600 leading-relaxed">{{ section.content }}</p>
                 <ng-container *ngIf="section.subsections">
-                    <div *ngFor="let subsection of section.subsections" class="subsection mb-6 bg-gray-50 p-6 ">
+                    <div *ngFor="let subsection of section.subsections" class="subsection mb-6 bg-gray-50 p-6 rounded-lg">
                         <h3 class="text-xl font-semibold mb-3 text-gray-700 flex items-center">
                             <i class="bi bi-info-circle mr-2 text-accent"></i>
                             {{ subsection.title }}

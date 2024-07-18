@@ -1,356 +1,182 @@
-// Importing Tailwind's layers
+// Import Tailwind base styles
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-@import 'ngx-toastr/toastr';
-@import 'styles.variables.scss';
 
-// Custom styles
+// Import Inter font
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  // Color variables
+  --color-primary: #F7F7F7;
+  --color-secondary: #D60000;
+  --color-accent: #333333;
+  --color-accent1: #ffce32;
+  --color-accent2: #d8d8cd;
+  --color-accent3: #2c4143;
+  --color-accent4: #58707b;
+  --color-accent6: #61a8bd;
+
+  // Typography
+  --font-family-base: 'Inter', sans-serif;
+  --line-height-base: 1.5;
+  --font-size-base: 16px;
+
+  // Transitions
+  --transition-base: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+// Global styles
 body {
-  @apply text-base;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-accent);
+  background-color: var(--color-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-
-
-html, body, #map {
-  background: $color-primary;
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  color: $color-secondary;
-  font-family: $font-family;
-  font-weight: $font-weight-thin;
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.2;
 }
 
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
 
-body, h1, h2, h3, h4, h5, h6, p, a, li {
-  font-family: $font-family;
+p {
+  margin-bottom: 1rem;
 }
 
-body {
-  font-size: 1rem; // or use any Tailwind class like text-base if you prefer using utility classes
-  line-height: 1.5;
-  line-height: 1.5;
-}
-
-
-.bg-primary {
-  background-color: $color-primary;
-}
-
-.bg-secondary {
-  background-color: $color-secondary !important;
-  color: $color-white !important;
-}
-
-.bg-accent {
-  background-color: $color-accent!important;
-  color: $color-white !important;
-}
-
-.text-primary {
-  color: $color-black !important;
-}
-.text-secondary {
-  color: $color-white !important;
-}
-.text-accent {
-  color: $color-accent !important;
-}
-
-.H_ib_body {
-  min-width: 300px !important;
-}
-
-.H_ib_header {
-  background-color: $color-primary;
-  color: $color-primary;
-}
-
-// H_ib button
-.H_ib_button {
-  background-color: $color-primary;
-  color: $color-secondary;
-  border-radius: 4px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: var(--transition-base);
 
   &:hover {
-    background-color: $color-accent;
-    color: $color-secondary;
+    color: var(--color-accent1);
   }
 }
 
-
-// Styling for ngx-json-viewer
-ngx-json-viewer .ngx-json-viewer {
-  --ngx-json-string: #e06c75; // softer red for strings
-  --ngx-json-number: #dcdcaa; // soft yellow for numbers
-  --ngx-json-boolean: #56b6c2; // cyan for booleans
-  --ngx-json-null: #d19a66; // softer orange for nulls
-  --ngx-json-null-bg: #282c34; // dark background for null values
-  --ngx-json-undefined: #e07628; // orange for undefined
-  --ngx-json-toggler: #abb2bf; // light grey for toggler
-  --ngx-json-key: #61afef; // blue for keys
-  --ngx-json-separator: #abb2bf; // light grey for separators
-  --ngx-json-value: #98c379; // soft green for values
-  --ngx-json-undefined-key: #c678dd; // purple for undefined keys
-  --ngx-json-font-family: 'Fira Code', 'Courier New', monospace; // modern monospace font
-  --ngx-json-font-size: 14px; // appropriate font size for readability
-
-  background-color: #282c34; // dark background similar to a code editor
-  color: #abb2bf; // primary text color for good readability
-  padding: 1rem; // Increased padding around the JSON viewer
-  border-radius: 0.5rem; // Soften the corners
-  margin: 0.5rem; // Ensure there's space around the viewer
-  overflow: auto; // Add scroll for overflow content
-}
-
-// Styling for tabs
-.tab-link {
-  @apply rounded-lg px-4 py-2 text-sm font-medium cursor-pointer transition-colors duration-150 ease-in-out;
-
-  &.active, &:hover {
-    @apply bg-secondary text-white; // Using secondary color for active and hover background
-  }
-
-  dt {
-    cursor: pointer;
-  }
-
-  dd {
-    background-color: $color-primary; // Light gray for dropdown details
-    border: 1px solid $color-gray; // Light gray border for dropdown details
-    border-top: none;
-    padding: 1rem;
-  }
-
-  svg {
-    transition: transform 0.2s ease-in-out;
-  }
-
-  div[aria-expanded="true"] svg {
-    transform: rotate(180deg);
-  }
-
-  &:hover {
-    @apply bg-gray-400; // Slightly lighter gray for hover effect
-  }
-}
-
-#map {
-  width: 100%;
-  height: 500px;
-}
-
-
-// Tab button styling
-.tab-button {
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.tab-button.bg-gray-100 {
-  background-color: $color-primary; // Primary background color for active tab
-  color: $color-secondary; // Secondary text color for active tab
-}
-
-.tab-button:hover {
-  background-color: $color-primary; // Primary background color for hover effect
-  color: $color-secondary; // Secondary text color for hover effect
-}
-.project-link {
-  transition: color 0.3s ease, background-color 0.3s ease;
-}
-
-li:hover .project-link {
-  color: $color-black; // Assuming $color-black is defined as black in your variables file
-  background-color: $color-accent;
-}
-
-.text-secondary {
-  color: $color-secondary;
-}
-
-.tab-button {
-  display: flex;
-  align-items: center;
-  padding: 1rem;
+// Buttons
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
   font-size: 1rem;
   font-weight: 500;
-  color: #4a5568;
-  background-color: transparent;
-  border: none;
-  text-align: left;
-  width: 100%;
+  text-align: center;
+  text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+  border: none;
+  border-radius: 0.5rem;
+  transition: var(--transition-base);
+
+  &-primary {
+    background-color: var(--color-accent1);
+    color: var(--color-accent);
+
+    &:hover {
+      background-color: darken(#ffce32, 10%);
+    }
+  }
+
+  &-secondary {
+    background-color: var(--color-accent2);
+    color: var(--color-accent);
+
+    &:hover {
+      background-color: darken(#d8d8cd, 10%);
+    }
+  }
 }
 
-.tab-button:hover {
-  background-color: #e2e8f0;
-  color: #2d3748;
+// Form elements
+input, textarea, select {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid var(--color-accent2);
+  border-radius: 0.5rem;
+  background-color: var(--color-primary);
+  transition: var(--transition-base);
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-accent1);
+    box-shadow: 0 0 0 2px rgba(255, 206, 50, 0.3);
+  }
 }
 
-.tab-button.bg-accent-light {
-  background-color: #ffeb3b;
-  color: #2d3748;
+// Custom utilities
+.text-balance {
+  text-wrap: balance;
 }
 
-.bg-accent-light {
-  background-color: #ffeb3b;
+.glass-effect {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
 }
 
-.timeline-step {
-  width: 2rem;
-  height: 2rem;
-  background-color: #edf2f7;
-  border-radius: 50%;
-  position: relative;
-  margin-bottom: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+// Animations
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.timeline-step.bg-primary {
-  background-color: #3182ce;
-  color: white;
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
-
-.tab-content {
-  transition: opacity 0.3s ease-in-out;
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
 }
 
-
-.text-light {
-  color: #abb2bf;
+.slide-in {
+  animation: slideIn 0.5s ease-out;
 }
 
+// Responsive utilities
+@media (max-width: 640px) {
+  :root {
+    --font-size-base: 14px;
+  }
 
-
-
-
-.text-light {
-  color: #e8e8e8;
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.5rem; }
 }
 
-.bg-editor-dark {
-  background-color: #F1F1F1 !important;
+// Accessibility
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
-.text-heading {
-  color: $color-black !important;
-  border-bottom: #333333 !important;
-}
+// Print styles
+@media print {
+  body {
+    font-size: 12pt;
+  }
 
+  a {
+    text-decoration: underline;
+  }
 
-
-
-a.text-accent {
-  color: #66d9ef;
-}
-
-a.text-accent:hover {
-  color: #a6e22e;
-  text-decoration: underline;
-}
-
-.font-mono {
-  font-family: 'Source Code Pro', monospace;
-}
-
-.bg-editor-dark {
-  background-color: #333333; /* dark background similar to a code editor */
-}
-
-
-.text-key {
-  color: #333333 !important;
-    font-size: 14px;
-}
-
-.text-value {
-  color: #333333 !important;
-    font-size: 13px;
-
-}
-
-a.text-accent {
-  color: #D60000; /* yellow for links */
-}
-
-a.text-accent:hover {
-  color: #F06666; /* red for hover state */
-  text-decoration: underline;
-}
-
-.font-mono {
-  font-family: 'Fira Code', 'Courier New', monospace; /* modern monospace font */
-}
-
-
-
-.text-light {
-  color: #FAFAFA; /* primary text color for good readability */
-}
-
-.list-disc.list-inside {
-  list-style-type: disc;
-  list-style-position: inside;
-}
-
-.space-y-4 > * + * {
-  margin-top: 1rem;
-}
-
-.space-y-2 > * + * {
-  margin-top: 0.5rem;
-}
-
-
-
-.flex {
-  display: flex;
-}
-
-.charts-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-#budgetPieChart, #completionPieChart, #suppliersBarChart, #tendersBarChart, #jobsLineChart, #satisfactionGaugeChart {
-  background-color: #FAFAFA;
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.charts-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-#climateFinanceChart, #mitigationAdaptationChart {
-  border-radius: 10px;
-  padding: 10px;
-}
-
-
-/* Add these styles to your global styles (e.g., styles.css or styles.scss) */
-
-.animate-hidden {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-}
-
-.animate-slideUp {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
+  .no-print {
+    display: none;
+  }
 }

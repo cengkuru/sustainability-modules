@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
-import {PolicyService} from "../../core/services/policy.service";
-import {Policy, Section} from "../../core/models/polict.model";
+import { PolicyService } from "../../core/services/policy.service";
+import { Policy, Section } from "../../core/models/polict.model";
 
 @Component({
   selector: 'app-publication-policy',
@@ -30,6 +30,15 @@ import {Policy, Section} from "../../core/models/polict.model";
         ),
       ]),
     ]),
+    trigger('sidebarAnimation', [
+      transition('closed => open', [
+        style({ transform: 'translateX(-100%)' }),
+        animate('300ms ease-in-out', style({ transform: 'translateX(0)' })),
+      ]),
+      transition('open => closed', [
+        animate('300ms ease-in-out', style({ transform: 'translateX(-100%)' })),
+      ]),
+    ]),
   ],
 })
 export class PublicationPolicyComponent implements OnInit {
@@ -37,11 +46,26 @@ export class PublicationPolicyComponent implements OnInit {
   activeSection: string = '';
   searchTerm: string = '';
   isSidebarOpen: boolean = false;
+  isMobile: boolean = false;
 
-  constructor(private policyService: PolicyService) { }
+  constructor(private policyService: PolicyService) {
+    this.checkScreenSize();
+  }
 
   ngOnInit(): void {
     this.loadPolicy();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkScreenSize();
+  }
+
+  checkScreenSize() {
+    this.isMobile = window.innerWidth < 768;
+    if (!this.isMobile) {
+      this.isSidebarOpen = true;
+    }
   }
 
   loadPolicy(): void {
@@ -61,7 +85,7 @@ export class PublicationPolicyComponent implements OnInit {
 
   setActiveSection(title: string): void {
     this.activeSection = title;
-    if (window.innerWidth < 768) {
+    if (this.isMobile) {
       this.isSidebarOpen = false;
     }
   }

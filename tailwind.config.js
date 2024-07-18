@@ -8,8 +8,8 @@ module.exports = {
       colors: {
         primary: '#F7F7F7',
         secondary: '#D60000',
-        accent: '#ffce32',
-        accent1: '#333333',
+        accent: '#333333',
+        accent1: '#ffce32',
         accent2: '#d8d8cd',
         accent3: '#2c4143',
         accent4: '#58707b',
@@ -110,6 +110,10 @@ module.exports = {
         'apple-bounce': 'apple-bounce 1s ease-in-out infinite',
         'apple-fade-in': 'apple-fade-in 0.5s ease-out',
         'apple-scale': 'apple-scale 0.3s ease-in-out',
+      },
+      height: {
+        '128': '32rem',
+        '160': '40rem',
       },
     },
   },

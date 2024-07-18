@@ -1,22 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { AngularFirestore } from "@angular/fire/compat/firestore";
+import { HttpClient } from '@angular/common/http';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { firstValueFrom } from 'rxjs';
 import {Policy} from "./core/models/polict.model";
+import {Project} from "./models/projects.model";
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
   private readonly policyDocId = 'current';
   private readonly policyCollectionName = 'policies';
+  private readonly projectsCollectionName = 'projects';
 
-  constructor(private http: HttpClient, private firestore: AngularFirestore) {}
+  constructor(private http: HttpClient, private firestore: AngularFirestore) {
+  }
 
   async ngOnInit(): Promise<void> {
     // await this.initializePolicyDataIfNeeded();
+    // await this.initializeProjectsData();
   }
 
   private async initializePolicyDataIfNeeded(): Promise<void> {
@@ -37,13 +42,34 @@ export class AppComponent implements OnInit {
   private async initializePolicyData(): Promise<void> {
     try {
       const policyData: Policy[] = await firstValueFrom(this.http.get<Policy[]>('/assets/data/policy.json'));
-      const policyObject = { sections: policyData }; // Wrap the array in an object
+      const policyObject = {sections: policyData}; // Wrap the array in an object
       await this.firestore.collection(this.policyCollectionName).doc(this.policyDocId).set(policyObject);
       console.log('Policy data successfully initialized in Firestore');
     } catch (error) {
       console.error('Error initializing policy data:', error);
-      // Instead of throwing, we'll just log the error
       console.error('Detailed error:', JSON.stringify(error));
     }
   }
+
+  private async initializeProjectsData(): Promise<void> {
+    try {
+      const projectsData = await firstValueFrom(this.http.get<{ projects: Project[] }>('/assets/data/projects.json'));
+
+      if (projectsData.projects && Array.isArray(projectsData.projects)) {
+        for (const project of projectsData.projects) {
+          await this.firestore.collection(this.projectsCollectionName).doc(project.id).set(project);
+          console.log(`Project with ID ${project.id} successfully added to Firestore`);
+        }
+      } else {
+        console.error('Invalid projects data format');
+      }
+    } catch (error) {
+      console.error('Error initializing projects data:', error);
+      console.error('Detailed error:', JSON.stringify(error));
+    }
+  }
+
+
+
 }
+

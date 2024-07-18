@@ -215,7 +215,6 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   loadProjects() {
-    console.log('loadProjects called');
     this.isLoading = true;
     this.firestore.collection('projects').get().subscribe(
         (querySnapshot) => {
@@ -231,6 +230,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
           });
 
           console.log('Projects loaded:', projects.length);
+          console.log('Projects:', projects);
           this.recentProjects = projects.slice(0, 5);
           this.highValueProjects = projects.sort((a, b) => {
             const aPrice = parseFloat(a.stages?.tenderManagement?.basicData?.contractPrice?.replace(/[^0-9.-]+/g, "") || '0');

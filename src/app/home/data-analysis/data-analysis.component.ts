@@ -1,9 +1,12 @@
 import { CommonModule } from "@angular/common";
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import {Component, AfterViewInit, ElementRef, ViewChild, NgZone, HostListener, ChangeDetectorRef} from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import * as echarts from 'echarts';
 import { jsPDF } from "jspdf";
 import { EChartsOption, BarSeriesOption, PieSeriesOption } from 'echarts';
+import * as L from 'leaflet';
+import { ScriptLoaderService } from "../../services/scriptLoader.service";
+
 
 @Component({
     selector: 'app-data-analysis',
@@ -12,26 +15,31 @@ import { EChartsOption, BarSeriesOption, PieSeriesOption } from 'echarts';
     templateUrl: './data-analysis.component.html',
     styleUrls: ['./data-analysis.component.scss']
 })
-export class DataAnalysisComponent implements OnInit, AfterViewInit {
-    @ViewChild('investmentTrendsChart', { static: false }) investmentTrendsChartElement!: ElementRef;
-    @ViewChild('investmentByRegionChart', { static: false }) investmentByRegionChartElement!: ElementRef;
-    @ViewChild('projectsByRegionChart', { static: false }) projectsByRegionChartElement!: ElementRef;
-    @ViewChild('projectsByClimateObjectivesChart', { static: false }) projectsByClimateObjectivesChartElement!: ElementRef;
-    @ViewChild('investmentsByClimateObjectivesChart', { static: false }) investmentsByClimateObjectivesChartElement!: ElementRef;
-    @ViewChild('totalProjectsBySectorChart', { static: false }) totalProjectsBySectorChartElement!: ElementRef;
+export class DataAnalysisComponent implements AfterViewInit {
+    @ViewChild('mapContainer') mapContainer!: ElementRef;
 
     investmentByRegionChart: echarts.ECharts | null = null;
     projectsByRegionChart: echarts.ECharts | null = null;
     projectsByClimateObjectivesChart: echarts.ECharts | null = null;
     investmentsByClimateObjectivesChart: echarts.ECharts | null = null;
     totalProjectsBySectorChart: echarts.ECharts | null = null;
+    projectTypesChart: echarts.ECharts | null = null;
+
+    private map!: L.Map;
+
+    markers: { lat: number; lng: number; popup: string; }[] = [];
+    isLoading: boolean = true;
+    mapInitialized: boolean = false;
+    projectsLoaded: boolean = false;
+    private viewInitialized: boolean = false;
 
     dropdownOpen: { [key: string]: boolean } = {
         investmentByRegion: false,
         projectsByRegion: false,
         projectsByClimateObjectives: false,
         investmentsByClimateObjectives: false,
-        totalProjectsBySector: false
+        totalProjectsBySector: false,
+        projectTypes: false
     };
 
     private investmentData = [
@@ -46,37 +54,226 @@ export class DataAnalysisComponent implements OnInit, AfterViewInit {
         { region: 'Northern Cape', '2019': 400, '2020': 450, '2021': 500, '2022': 600 }
     ];
 
-    constructor(private http: HttpClient) { }
+    constructor(
+        private http: HttpClient,
+        private ngZone: NgZone,
+        private scriptLoader: ScriptLoaderService,
+        private cdr: ChangeDetectorRef,
+        ) { }
 
-    ngOnInit(): void {
-        // Initialization code if needed
-    }
-
-    ngAfterViewInit(): void {
-        // Wait for the DOM to be ready
-        setTimeout(() => {
-            this.initializeCharts();
-        }, 0);
-    }
-
-    private initializeCharts(): void {
-        this.initChart(this.investmentByRegionChartElement, this.createInvestmentByRegionChart.bind(this));
-        this.initChart(this.projectsByRegionChartElement, this.createProjectsByRegionChart.bind(this));
-        this.initChart(this.projectsByClimateObjectivesChartElement, this.createProjectsByClimateObjectivesChart.bind(this));
-        this.initChart(this.investmentsByClimateObjectivesChartElement, this.createInvestmentsByClimateObjectivesChart.bind(this));
-        this.initChart(this.totalProjectsBySectorChartElement, this.createTotalProjectsBySectorChart.bind(this));
-    }
-
-    private initChart(chartElement: ElementRef, chartInitFunction: () => void): void {
-        if (chartElement && chartElement.nativeElement) {
-            chartInitFunction();
-        } else {
-            console.error('DOM element for chart not found');
+    async ngOnInit(): Promise<void> {
+        console.log('ngOnInit called');
+        try {
+            await this.loadLeafletScripts();
+            this.loadProjects();
+        } catch (error) {
+            console.error('Error during component initialization:', error);
         }
     }
 
+    ngAfterViewInit() {
+        console.log('ngAfterViewInit called');
+        this.viewInitialized = true;
+        this.ngZone.runOutsideAngular(() => {
+            setTimeout(() => {
+                this.checkAndInitializeMap();
+            }, 0);
+        });
+    }
+
+    ngOnDestroy(): void {
+        console.log('ngOnDestroy called');
+        if (this.map) {
+            this.map.remove();
+        }
+    }
+
+    private async loadLeafletScripts(): Promise<void> {
+        console.log('loadLeafletScripts called');
+        const scripts = [
+            'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js'
+        ];
+        const styles = [
+            'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css'
+        ];
+
+        try {
+            await this.scriptLoader.loadScripts(scripts);
+            await this.scriptLoader.loadStyles(styles);
+            console.log('Leaflet scripts and styles loaded successfully');
+        } catch (error) {
+            console.error('Error loading Leaflet scripts or styles:', error);
+            throw error;
+        }
+    }
+
+    checkAndInitializeMap(): void {
+        console.log('checkAndInitializeMap called');
+        console.log('viewInitialized:', this.viewInitialized);
+        console.log('projectsLoaded:', this.projectsLoaded);
+        console.log('mapContainer:', this.mapContainer);
+
+        if (this.viewInitialized && this.projectsLoaded && this.mapContainer && this.mapContainer.nativeElement) {
+            this.initializeMap();
+        } else {
+            console.log('Map initialization deferred');
+            if (!this.mapContainer) {
+                console.error('Map container is not available');
+            }
+            // Retry after a short delay
+            setTimeout(() => this.checkAndInitializeMap(), 100);
+        }
+    }
+
+
+    initializeMap(): void {
+        console.log('initializeMap called');
+        if (this.mapInitialized) {
+            console.log('Map already initialized');
+            return;
+        }
+
+        console.log('Creating map instance');
+        this.map = L.map(this.mapContainer.nativeElement).setView([-28.4793, 24.6727], 6);
+
+        console.log('Adding tile layer');
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(this.map);
+
+        console.log('Adding markers', this.markers);
+        this.markers.forEach(markerData => {
+            const marker = L.marker([markerData.lat, markerData.lng]).addTo(this.map);
+            marker.bindPopup(markerData.popup);
+        });
+
+        this.fitMapBounds();
+        this.mapInitialized = true;
+        console.log('Map initialized successfully');
+    }
+
+    fitMapBounds() {
+        console.log('fitMapBounds called', this.markers.length);
+        if (this.markers.length > 0 && this.map) {
+            const bounds = L.latLngBounds(this.markers.map(m => [m.lat, m.lng]));
+            this.map.fitBounds(bounds);
+        }
+    }
+
+    loadProjects() {
+        this.isLoading = true;
+        // Simulate loading projects
+        setTimeout(() => {
+            this.generateRandomMarkers();
+            this.projectsLoaded = true;
+            this.isLoading = false;
+            this.checkAndInitializeMap();
+            this.initializeCharts();
+            this.cdr.detectChanges();
+        }, 1000);
+    }
+
+    generateRandomMarkers() {
+        console.log('generateMarkers called');
+        const projectTypes = ['Water', 'Energy', 'Transport', 'Agriculture'];
+        const regions = ['Gauteng', 'Western Cape', 'KwaZulu-Natal', 'Eastern Cape', 'Free State', 'Limpopo', 'Mpumalanga', 'North West', 'Northern Cape'];
+
+        for (let i = 0; i < 50; i++) {
+            const lat = Math.random() * ((-22) - (-34)) + (-34);
+            const lng = Math.random() * (32 - 16) + 16;
+            const projectType = projectTypes[Math.floor(Math.random() * projectTypes.length)];
+            const region = regions[Math.floor(Math.random() * regions.length)];
+
+            const popup = `
+                <div class="p-4 max-w-sm">
+                    <h3 class="text-lg font-semibold mb-2">${projectType} Project</h3>
+                    <p class="mb-2">Region: ${region}</p>
+                    <p class="mb-4">Investment: $${Math.floor(Math.random() * 100 + 1)} million</p>
+                    <button class="view-details-button px-4 py-2 bg-accent text-secondary rounded hover:bg-secondary hover:text-accent transition duration-300">
+                        View Details
+                    </button>
+                </div>
+            `;
+            this.markers.push({ lat, lng, popup });
+        }
+        console.log('Generated markers:', this.markers);
+    }
+
+    @HostListener('window:resize')
+    onResize() {
+        if (this.map) {
+            this.map.invalidateSize();
+        }
+    }
+
+    private initializeCharts(): void {
+        this.createInvestmentByRegionChart();
+        this.createProjectsByRegionChart();
+        this.createProjectsByClimateObjectivesChart();
+        this.createInvestmentsByClimateObjectivesChart();
+        this.createTotalProjectsBySectorChart();
+        this.createProjectTypesChart();
+    }
+
+
+    private createProjectTypesChart(): void {
+        const chartDom = document.getElementById('projectTypesChart');
+        if (!chartDom) return;
+        this.projectTypesChart = echarts.init(chartDom);
+
+        const data = [
+            { type: 'Solar Energy', projects: 50 },
+            { type: 'Wind Energy', projects: 40 },
+            { type: 'Water Management', projects: 35 },
+            { type: 'Sustainable Agriculture', projects: 30 },
+            { type: 'Green Buildings', projects: 25 }
+        ];
+
+        const series: PieSeriesOption[] = [
+            {
+                name: 'Project Types',
+                type: 'pie',
+                radius: '50%',
+                data: data.map(item => ({ value: item.projects, name: item.type }))
+            }
+        ];
+
+        const option: EChartsOption = {
+            title: {
+                text: 'Project Types Distribution',
+                left: 'center',
+                textStyle: {
+                    color: '#333333',
+                    fontWeight: 'normal'
+                }
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b}: {c} ({d}%)'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                textStyle: {
+                    color: '#333333'
+                }
+            },
+            series: series,
+            color: ['#FF9500', '#34C759', '#5AC8FA', '#FF2D55', '#AF52DE'],
+            animationDuration: 1000,
+            animationEasing: 'cubicOut',
+            animationDelay: (idx: number) => idx * 100
+        };
+
+        this.projectTypesChart.setOption(option);
+    }
+
+
+
+
     private createInvestmentByRegionChart(): void {
-        const chartDom = this.investmentByRegionChartElement.nativeElement;
+        const chartDom = document.getElementById('investmentByRegionChart');
+        if (!chartDom) return;
         this.investmentByRegionChart = echarts.init(chartDom);
 
         const years = ['2019', '2020', '2021', '2022'];
@@ -91,16 +288,25 @@ export class DataAnalysisComponent implements OnInit, AfterViewInit {
         const option: EChartsOption = {
             title: {
                 text: 'Infrastructure Investment by Region',
-                
-                left: 'center'
+                left: 'center',
+                textStyle: {
+                    color: '#333333',
+                    fontWeight: 'normal'
+                }
             },
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
                     type: 'shadow'
                 },
+                backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                borderColor: '#ccc',
+                borderWidth: 1,
+                textStyle: {
+                    color: '#333'
+                },
                 formatter: (params: any) => {
-                    let tooltipContent = `${params[0].axisValue}<br/>`;
+                    let tooltipContent = `<strong>${params[0].axisValue}</strong><br/>`;
                     params.forEach((item: any) => {
                         tooltipContent += `${item.marker} ${item.seriesName}: $${item.value} million<br/>`;
                     });
@@ -109,12 +315,15 @@ export class DataAnalysisComponent implements OnInit, AfterViewInit {
             },
             legend: {
                 data: years,
-                bottom: 0
+                bottom: 0,
+                textStyle: {
+                    color: '#333333'
+                }
             },
             grid: {
                 left: '3%',
                 right: '4%',
-                bottom: '10%',
+                bottom: '15%',
                 containLabel: true
             },
             xAxis: {
@@ -122,26 +331,27 @@ export class DataAnalysisComponent implements OnInit, AfterViewInit {
                 data: regions,
                 axisLabel: {
                     rotate: 45,
-                    interval: 0
+                    interval: 0,
+                    color: '#333333'
                 }
             },
             yAxis: {
                 type: 'value',
-                name: 'Investment (Million $)'
+                name: 'Investment (Million $)',
+                axisLabel: {
+                    color: '#333333'
+                }
             },
             series: series,
-            color: ['#19BC9B', '#DBFAF4', '#C6D316', '#69B0DE', '#E7F2FA', '#FB5F44']
+            color: ['#007AFF', '#34C759', '#FF9500', '#FF3B30']
         };
 
         this.investmentByRegionChart.setOption(option);
-
-        window.addEventListener('resize', () => {
-            this.investmentByRegionChart?.resize();
-        });
     }
 
     private createProjectsByRegionChart(): void {
-        const chartDom = this.projectsByRegionChartElement.nativeElement;
+        const chartDom = document.getElementById('projectsByRegionChart');
+        if (!chartDom) return;
         this.projectsByRegionChart = echarts.init(chartDom);
 
         const data = [
@@ -167,11 +377,20 @@ export class DataAnalysisComponent implements OnInit, AfterViewInit {
         const option: EChartsOption = {
             title: {
                 text: 'Projects per Region',
-                
-                left: 'center'
+                left: 'center',
+                textStyle: {
+                    color: '#333333',
+                    fontWeight: 'normal'
+                }
             },
             tooltip: {
                 trigger: 'item',
+                backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                borderColor: '#ccc',
+                borderWidth: 1,
+                textStyle: {
+                    color: '#333'
+                },
                 formatter: '{b}: {c} projects'
             },
             xAxis: {
@@ -179,30 +398,30 @@ export class DataAnalysisComponent implements OnInit, AfterViewInit {
                 data: data.map(item => item.region),
                 axisLabel: {
                     rotate: 45,
-                    interval: 0
+                    interval: 0,
+                    color: '#333333'
                 }
             },
             yAxis: {
                 type: 'value',
-                name: 'Number of Projects'
+                name: 'Number of Projects',
+                axisLabel: {
+                    color: '#333333'
+                }
             },
             series: series,
-            color: ['#69B0DE'],
+            color: ['#5856D6'],
             animationDuration: 1000,
             animationEasing: 'cubicOut',
             animationDelay: (idx: number) => idx * 100
         };
 
         this.projectsByRegionChart.setOption(option);
-
-        // Add resize listener
-        window.addEventListener('resize', () => {
-            this.projectsByRegionChart!.resize();
-        });
     }
 
     private createProjectsByClimateObjectivesChart(): void {
-        const chartDom = this.projectsByClimateObjectivesChartElement.nativeElement;
+        const chartDom = document.getElementById('projectsByClimateObjectivesChart');
+        if (!chartDom) return;
         this.projectsByClimateObjectivesChart = echarts.init(chartDom);
 
         const data = [
@@ -223,18 +442,28 @@ export class DataAnalysisComponent implements OnInit, AfterViewInit {
         const option: EChartsOption = {
             title: {
                 text: 'Projects per Climate Objective',
-                
-                left: 'center'
+                left: 'center',
+                textStyle: {
+                    color: '#333333',
+                    fontWeight: 'normal'
+                }
             },
             tooltip: {
                 trigger: 'item',
-                formatter: '{b}: {c} projects'
+                backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                borderColor: '#ccc',
+                borderWidth: 1,
+                textStyle: {
+                    color: '#333'
+                },
+                formatter: '{b}: {c} projects ({d}%)'
             },
             series: series,
-            color: ['#19BC9B', '#C6D316', '#FB5F44'],
+            color: ['#FF2D55', '#5AC8FA', '#FFCC00'],
             label: {
                 formatter: '{b}: {d}%',
-                position: 'outside'
+                position: 'outside',
+                color: '#333333'
             },
             animationDuration: 1000,
             animationEasing: 'cubicOut',
@@ -242,14 +471,11 @@ export class DataAnalysisComponent implements OnInit, AfterViewInit {
         };
 
         this.projectsByClimateObjectivesChart.setOption(option);
-
-        window.addEventListener('resize', () => {
-            this.projectsByClimateObjectivesChart!.resize();
-        });
     }
 
     private createInvestmentsByClimateObjectivesChart(): void {
-        const chartDom = this.investmentsByClimateObjectivesChartElement.nativeElement;
+        const chartDom = document.getElementById('investmentsByClimateObjectivesChart');
+        if (!chartDom) return;
         this.investmentsByClimateObjectivesChart = echarts.init(chartDom);
 
         const data = [
@@ -270,18 +496,28 @@ export class DataAnalysisComponent implements OnInit, AfterViewInit {
         const option: EChartsOption = {
             title: {
                 text: 'Investments per Climate Objective',
-                
-                left: 'center'
+                left: 'center',
+                textStyle: {
+                    color: '#333333',
+                    fontWeight: 'normal'
+                }
             },
             tooltip: {
                 trigger: 'item',
-                formatter: '{b}: ${c} million'
+                backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                borderColor: '#ccc',
+                borderWidth: 1,
+                textStyle: {
+                    color: '#333'
+                },
+                formatter: '{b}: ${c} million ({d}%)'
             },
             series: series,
-            color: ['#19BC9B', '#C6D316', '#FB5F44'],
+            color: ['#FF2D55', '#5AC8FA', '#FFCC00'],
             label: {
                 formatter: '{b}: ${c}M',
-                position: 'outside'
+                position: 'outside',
+                color: '#333333'
             },
             animationDuration: 1000,
             animationEasing: 'cubicOut',
@@ -289,14 +525,11 @@ export class DataAnalysisComponent implements OnInit, AfterViewInit {
         };
 
         this.investmentsByClimateObjectivesChart.setOption(option);
-
-        window.addEventListener('resize', () => {
-            this.investmentsByClimateObjectivesChart!.resize();
-        });
     }
 
     private createTotalProjectsBySectorChart(): void {
-        const chartDom = this.totalProjectsBySectorChartElement.nativeElement;
+        const chartDom = document.getElementById('totalProjectsBySectorChart');
+        if (!chartDom) return;
         this.totalProjectsBySectorChart = echarts.init(chartDom);
 
         const data = [
@@ -317,11 +550,20 @@ export class DataAnalysisComponent implements OnInit, AfterViewInit {
         const option: EChartsOption = {
             title: {
                 text: 'Total Projects per Sector',
-                
-                left: 'center'
+                left: 'center',
+                textStyle: {
+                    color: '#333333',
+                    fontWeight: 'normal'
+                }
             },
             tooltip: {
                 trigger: 'item',
+                backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                borderColor: '#ccc',
+                borderWidth: 1,
+                textStyle: {
+                    color: '#333'
+                },
                 formatter: '{b}: {c} projects'
             },
             xAxis: {
@@ -329,26 +571,25 @@ export class DataAnalysisComponent implements OnInit, AfterViewInit {
                 data: data.map(item => item.sector),
                 axisLabel: {
                     rotate: 45,
-                    interval: 0
+                    interval: 0,
+                    color: '#333333'
                 }
             },
             yAxis: {
                 type: 'value',
-                name: 'Number of Projects'
+                name: 'Number of Projects',
+                axisLabel: {
+                    color: '#333333'
+                }
             },
             series: series,
-            color: ['#C6D316'],
+            color: ['#007AFF'],
             animationDuration: 1000,
             animationEasing: 'cubicOut',
             animationDelay: (idx: number) => idx * 100
         };
 
         this.totalProjectsBySectorChart.setOption(option);
-
-        // Add resize listener
-        window.addEventListener('resize', () => {
-            this.totalProjectsBySectorChart!.resize();
-        });
     }
 
     toggleDropdown(chartName: string): void {

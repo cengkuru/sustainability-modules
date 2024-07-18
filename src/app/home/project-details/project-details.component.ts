@@ -49,6 +49,7 @@ export class ProjectDetailsComponent implements OnInit {
     previousProject$!: Observable<any>;
     currentProjectIndex: number = 0;
     selectedTab: string = 'Identification';
+    isLoading: boolean = true;
 
     constructor(
         private route: ActivatedRoute,
@@ -58,6 +59,7 @@ export class ProjectDetailsComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        this.isLoading = true;
         this.project$ = this.route.paramMap.pipe(
             switchMap(params => {
                 const projectId = params.get('id');
@@ -71,7 +73,9 @@ export class ProjectDetailsComponent implements OnInit {
                     this.nextProject$ = this.projectService.getNextProject(project.id);
                     this.previousProject$ = this.projectService.getPreviousProject(project.id);
                 }
+                this.isLoading = false;
             })
+
         );
     }
 
@@ -81,10 +85,28 @@ export class ProjectDetailsComponent implements OnInit {
         }
     }
 
+    getCurrentStageName(): string {
+        const currentStage = this.stages.find(stage => stage.id === this.selectedTab);
+        return currentStage ? currentStage.label : '';
+    }
+
+
+
     onTabChange(event: Event): void {
         const target = event.target as HTMLSelectElement;
         this.selectedTab = target.value;
     }
+
+    getCurrentProjectIndex(): number {
+        return this.currentProjectIndex + 1;
+    }
+
+    getTotalProjects(): number {
+        return this.projectIds.length;
+    }
+
+
+
 
     selectTab(tabId: string): void {
         this.selectedTab = tabId;
