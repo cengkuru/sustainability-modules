@@ -17,6 +17,18 @@ import { IntersectionObserverDirective } from "../../directives/intersection-obs
 import { animate, style, transition, trigger, query, stagger } from "@angular/animations";
 import * as L from 'leaflet';
 import { ScriptLoaderService } from "../../services/scriptLoader.service";
+import {NgIconComponent, provideIcons} from "@ng-icons/core";
+import {
+  heroArrowRight, heroArrowRightOnRectangle, heroBars3,
+  heroChartBar,
+  heroDocumentText,
+  heroHome,
+  heroStar,
+  heroUser,
+  heroUsers, heroXMark
+} from "@ng-icons/heroicons/outline";
+
+
 
 interface ViewProjectDetailsEvent extends CustomEvent {
   detail: string;
@@ -31,6 +43,8 @@ interface ViewProjectDetailsEvent extends CustomEvent {
     CommonModule,
     RouterLink,
     IntersectionObserverDirective,
+    NgIconComponent,
+
   ],
   animations: [
     trigger('slideInAnimation', [
@@ -53,7 +67,19 @@ interface ViewProjectDetailsEvent extends CustomEvent {
         )
       ])
     ])
-  ]
+  ],
+  providers: [provideIcons({
+    heroArrowRight,
+    heroHome,
+    heroUser,
+    heroStar,
+    heroDocumentText,
+    heroChartBar,
+    heroBars3,
+    heroXMark,
+    heroArrowRightOnRectangle
+  })],
+
 })
 export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('mapContainer') mapContainer!: ElementRef;
@@ -130,6 +156,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
       this.map.remove();
     }
   }
+
 
   private async loadLeafletScripts(): Promise<void> {
     console.log('loadLeafletScripts called');

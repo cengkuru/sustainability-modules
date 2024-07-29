@@ -12,6 +12,7 @@ import { ScriptLoaderService } from "../../services/scriptLoader.service";
     selector: 'app-data-analysis',
     standalone: true,
     imports: [CommonModule],
+
     templateUrl: './data-analysis.component.html',
     styleUrls: ['./data-analysis.component.scss']
 })
@@ -101,10 +102,58 @@ export class DataAnalysisComponent implements AfterViewInit {
             await this.scriptLoader.loadScripts(scripts);
             await this.scriptLoader.loadStyles(styles);
             console.log('Leaflet scripts and styles loaded successfully');
+
+            // After loading Leaflet, apply custom styles to align with Tailwind config
+            this.applyLeafletCustomStyles();
         } catch (error) {
             console.error('Error loading Leaflet scripts or styles:', error);
             throw error;
         }
+    }
+
+    private applyLeafletCustomStyles(): void {
+        // This function will be called after Leaflet is loaded
+        // Here you can apply custom styles to Leaflet elements using your Tailwind config colors
+
+        const style = document.createElement('style');
+        style.textContent = `
+        /* Custom Leaflet styles using Tailwind config colors */
+        
+        /* Map container */
+        .leaflet-container {
+            background-color: #F7F7F7; /* primary color */
+        }
+
+        /* Popup */
+        .leaflet-popup-content-wrapper {
+            background-color: #F7F7F7; /* primary color */
+            color: #333333; /* accent color */
+            border-radius: 10px; /* rounded-apple-lg */
+        }
+        .leaflet-popup-tip {
+            background-color: #F7F7F7; /* primary color */
+        }
+
+        /* Controls */
+        .leaflet-control-zoom a {
+            background-color: #F7F7F7; /* primary color */
+            color: #333333; /* accent color */
+            border-color: #d8d8cd; /* accent2 color */
+        }
+        .leaflet-control-zoom a:hover {
+            background-color: #D60000; /* secondary color */
+            color: #F7F7F7; /* primary color */
+        }
+
+        /* Attribution */
+        .leaflet-control-attribution {
+            background-color: rgba(247, 247, 247, 0.7) !important; /* primary color with opacity */
+            color: #333333 !important; /* accent color */
+        }
+
+        /* You can add more custom styles here as needed */
+    `;
+        document.head.appendChild(style);
     }
 
     checkAndInitializeMap(): void {
@@ -233,36 +282,74 @@ export class DataAnalysisComponent implements AfterViewInit {
             {
                 name: 'Project Types',
                 type: 'pie',
-                radius: '50%',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    borderRadius: 10,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '18',
+                        fontWeight: 'bold',
+                        color: '#333333' // accent color for emphasized text
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
                 data: data.map(item => ({ value: item.projects, name: item.type }))
             }
         ];
 
         const option: EChartsOption = {
+            backgroundColor: '#F7F7F7', // primary color as background
             title: {
                 text: 'Project Types Distribution',
                 left: 'center',
+                top: '5%',
                 textStyle: {
-                    color: '#333333',
-                    fontWeight: 'normal'
+                    color: '#333333', // accent color for title
+                    fontSize: 18,
+                    fontWeight: 'bold',
+                    fontFamily: 'Inter, sans-serif' // Using Inter font as specified in Tailwind config
                 }
             },
             tooltip: {
                 trigger: 'item',
-                formatter: '{a} <br/>{b}: {c} ({d}%)'
+                formatter: '{b}: {c} projects ({d}%)',
+                backgroundColor: 'rgba(247, 247, 247, 0.9)', // primary color with opacity
+                borderColor: '#d8d8cd', // accent2 color for border
+                borderWidth: 1,
+                textStyle: {
+                    color: '#333333', // accent color for tooltip text
+                    fontFamily: 'Inter, sans-serif'
+                }
             },
             legend: {
                 orient: 'vertical',
-                left: 'left',
+                left: '5%',
+                top: 'center',
+                itemWidth: 25,
+                itemHeight: 14,
+                itemGap: 12,
                 textStyle: {
-                    color: '#333333'
+                    color: '#333333', // accent color for legend text
+                    fontSize: 14,
+                    fontFamily: 'Inter, sans-serif'
                 }
             },
             series: series,
-            color: ['#FF9500', '#34C759', '#5AC8FA', '#FF2D55', '#AF52DE'],
+            color: ['#D60000', '#2c4143', '#58707b', '#ffce32', '#61a8bd'], // Using secondary, accent3, accent4, accent5, accent6 colors
             animationDuration: 1000,
-            animationEasing: 'cubicOut',
-            animationDelay: (idx: number) => idx * 100
+            animationEasing: 'cubicInOut',
+            animationDelay: (idx: number) => idx * 150
         };
 
         this.projectTypesChart.setOption(option);
@@ -282,16 +369,25 @@ export class DataAnalysisComponent implements AfterViewInit {
         const series: BarSeriesOption[] = years.map(year => ({
             name: year,
             type: 'bar',
-            data: this.investmentData.map(item => item[year as keyof typeof item] as number)
+            data: this.investmentData.map(item => item[year as keyof typeof item] as number),
+            barGap: '10%',
+            barCategoryGap: '20%',
+            itemStyle: {
+                borderRadius: [4, 4, 0, 0]
+            }
         }));
 
         const option: EChartsOption = {
+            backgroundColor: '#F7F7F7', // primary color as background
             title: {
                 text: 'Infrastructure Investment by Region',
                 left: 'center',
+                top: '20px',
                 textStyle: {
-                    color: '#333333',
-                    fontWeight: 'normal'
+                    color: '#333333', // accent color for title
+                    fontWeight: 'bold',
+                    fontSize: 18,
+                    fontFamily: 'Inter, sans-serif'
                 }
             },
             tooltip: {
@@ -299,31 +395,34 @@ export class DataAnalysisComponent implements AfterViewInit {
                 axisPointer: {
                     type: 'shadow'
                 },
-                backgroundColor: 'rgba(255, 255, 255, 0.8)',
-                borderColor: '#ccc',
+                backgroundColor: 'rgba(247, 247, 247, 0.9)', // primary color with opacity
+                borderColor: '#d8d8cd', // accent2 color for border
                 borderWidth: 1,
                 textStyle: {
-                    color: '#333'
+                    color: '#333333', // accent color for tooltip text
+                    fontFamily: 'Inter, sans-serif'
                 },
                 formatter: (params: any) => {
                     let tooltipContent = `<strong>${params[0].axisValue}</strong><br/>`;
                     params.forEach((item: any) => {
-                        tooltipContent += `${item.marker} ${item.seriesName}: $${item.value} million<br/>`;
+                        tooltipContent += `${item.marker} ${item.seriesName}: $${item.value.toLocaleString()} million<br/>`;
                     });
                     return tooltipContent;
                 }
             },
             legend: {
                 data: years,
-                bottom: 0,
+                bottom: '10px',
                 textStyle: {
-                    color: '#333333'
+                    color: '#333333', // accent color for legend text
+                    fontFamily: 'Inter, sans-serif'
                 }
             },
             grid: {
                 left: '3%',
                 right: '4%',
                 bottom: '15%',
+                top: '15%',
                 containLabel: true
             },
             xAxis: {
@@ -332,18 +431,41 @@ export class DataAnalysisComponent implements AfterViewInit {
                 axisLabel: {
                     rotate: 45,
                     interval: 0,
-                    color: '#333333'
+                    color: '#333333', // accent color for axis labels
+                    fontFamily: 'Inter, sans-serif'
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#d8d8cd' // accent2 color for axis line
+                    }
                 }
             },
             yAxis: {
                 type: 'value',
                 name: 'Investment (Million $)',
+                nameTextStyle: {
+                    color: '#333333', // accent color for axis name
+                    fontFamily: 'Inter, sans-serif'
+                },
                 axisLabel: {
-                    color: '#333333'
+                    color: '#333333', // accent color for axis labels
+                    fontFamily: 'Inter, sans-serif'
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#d8d8cd' // accent2 color for axis line
+                    }
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: '#d8d8cd' // accent2 color for split lines
+                    }
                 }
             },
             series: series,
-            color: ['#007AFF', '#34C759', '#FF9500', '#FF3B30']
+            color: ['#D60000', '#2c4143', '#58707b', '#61a8bd'], // Using secondary, accent3, accent4, accent6 colors
+            animationDuration: 1000,
+            animationEasing: 'cubicInOut'
         };
 
         this.investmentByRegionChart.setOption(option);
@@ -370,28 +492,48 @@ export class DataAnalysisComponent implements AfterViewInit {
             {
                 name: 'Projects',
                 type: 'bar',
-                data: data.map(item => item.projects)
+                data: data.map(item => item.projects),
+                itemStyle: {
+                    borderRadius: [4, 4, 0, 0]
+                },
+                emphasis: {
+                    itemStyle: {
+                        color: '#58707b' // accent4 color for hover effect
+                    }
+                }
             }
         ];
 
         const option: EChartsOption = {
+            backgroundColor: '#F7F7F7', // primary color as background
             title: {
                 text: 'Projects per Region',
                 left: 'center',
+                top: '20px',
                 textStyle: {
-                    color: '#333333',
-                    fontWeight: 'normal'
+                    color: '#333333', // accent color for title
+                    fontWeight: 'bold',
+                    fontSize: 18,
+                    fontFamily: 'Inter, sans-serif'
                 }
             },
             tooltip: {
                 trigger: 'item',
-                backgroundColor: 'rgba(255, 255, 255, 0.8)',
-                borderColor: '#ccc',
+                backgroundColor: 'rgba(247, 247, 247, 0.9)', // primary color with opacity
+                borderColor: '#d8d8cd', // accent2 color for border
                 borderWidth: 1,
                 textStyle: {
-                    color: '#333'
+                    color: '#333333', // accent color for tooltip text
+                    fontFamily: 'Inter, sans-serif'
                 },
                 formatter: '{b}: {c} projects'
+            },
+            grid: {
+                left: '5%',
+                right: '5%',
+                bottom: '15%',
+                top: '15%',
+                containLabel: true
             },
             xAxis: {
                 type: 'category',
@@ -399,20 +541,41 @@ export class DataAnalysisComponent implements AfterViewInit {
                 axisLabel: {
                     rotate: 45,
                     interval: 0,
-                    color: '#333333'
+                    color: '#333333', // accent color for axis labels
+                    fontFamily: 'Inter, sans-serif'
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#d8d8cd' // accent2 color for axis line
+                    }
                 }
             },
             yAxis: {
                 type: 'value',
                 name: 'Number of Projects',
+                nameTextStyle: {
+                    color: '#333333', // accent color for axis name
+                    fontFamily: 'Inter, sans-serif'
+                },
                 axisLabel: {
-                    color: '#333333'
+                    color: '#333333', // accent color for axis labels
+                    fontFamily: 'Inter, sans-serif'
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#d8d8cd' // accent2 color for axis line
+                    }
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: '#d8d8cd' // accent2 color for split lines
+                    }
                 }
             },
             series: series,
-            color: ['#5856D6'],
+            color: ['#D60000'], // Using secondary color for bars
             animationDuration: 1000,
-            animationEasing: 'cubicOut',
+            animationEasing: 'cubicInOut',
             animationDelay: (idx: number) => idx * 100
         };
 
@@ -434,40 +597,74 @@ export class DataAnalysisComponent implements AfterViewInit {
             {
                 name: 'Projects',
                 type: 'pie',
-                radius: '50%',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    borderRadius: 10,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '18',
+                        fontWeight: 'bold',
+                        color: '#333333'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
                 data: data.map(item => ({ value: item.projects, name: item.objective }))
             }
         ];
 
         const option: EChartsOption = {
+            backgroundColor: '#F7F7F7', // primary color as background
             title: {
                 text: 'Projects per Climate Objective',
                 left: 'center',
+                top: '5%',
                 textStyle: {
-                    color: '#333333',
-                    fontWeight: 'normal'
+                    color: '#333333', // accent color for title
+                    fontWeight: 'bold',
+                    fontSize: 18,
+                    fontFamily: 'Inter, sans-serif'
                 }
             },
             tooltip: {
                 trigger: 'item',
-                backgroundColor: 'rgba(255, 255, 255, 0.8)',
-                borderColor: '#ccc',
+                backgroundColor: 'rgba(247, 247, 247, 0.9)', // primary color with opacity
+                borderColor: '#d8d8cd', // accent2 color for border
                 borderWidth: 1,
                 textStyle: {
-                    color: '#333'
+                    color: '#333333', // accent color for tooltip text
+                    fontFamily: 'Inter, sans-serif'
                 },
                 formatter: '{b}: {c} projects ({d}%)'
             },
-            series: series,
-            color: ['#FF2D55', '#5AC8FA', '#FFCC00'],
-            label: {
-                formatter: '{b}: {d}%',
-                position: 'outside',
-                color: '#333333'
+            legend: {
+                orient: 'vertical',
+                left: '5%',
+                top: 'center',
+                itemWidth: 25,
+                itemHeight: 14,
+                itemGap: 12,
+                textStyle: {
+                    color: '#333333', // accent color for legend text
+                    fontSize: 14,
+                    fontFamily: 'Inter, sans-serif'
+                }
             },
+            series: series,
+            color: ['#D60000', '#2c4143', '#58707b'], // Using secondary, accent3, accent4 colors
             animationDuration: 1000,
-            animationEasing: 'cubicOut',
-            animationDelay: (idx: number) => idx * 100
+            animationEasing: 'cubicInOut',
+            animationDelay: (idx: number) => idx * 150
         };
 
         this.projectsByClimateObjectivesChart.setOption(option);
@@ -488,40 +685,77 @@ export class DataAnalysisComponent implements AfterViewInit {
             {
                 name: 'Investments',
                 type: 'pie',
-                radius: '50%',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    borderRadius: 10,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '18',
+                        fontWeight: 'bold',
+                        color: '#333333'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
                 data: data.map(item => ({ value: item.investment, name: item.objective }))
             }
         ];
 
         const option: EChartsOption = {
+            backgroundColor: '#F7F7F7', // primary color as background
             title: {
                 text: 'Investments per Climate Objective',
                 left: 'center',
+                top: '5%',
                 textStyle: {
-                    color: '#333333',
-                    fontWeight: 'normal'
+                    color: '#333333', // accent color for title
+                    fontWeight: 'bold',
+                    fontSize: 18,
+                    fontFamily: 'Inter, sans-serif'
                 }
             },
             tooltip: {
                 trigger: 'item',
-                backgroundColor: 'rgba(255, 255, 255, 0.8)',
-                borderColor: '#ccc',
+                backgroundColor: 'rgba(247, 247, 247, 0.9)', // primary color with opacity
+                borderColor: '#d8d8cd', // accent2 color for border
                 borderWidth: 1,
                 textStyle: {
-                    color: '#333'
+                    color: '#333333', // accent color for tooltip text
+                    fontFamily: 'Inter, sans-serif'
                 },
-                formatter: '{b}: ${c} million ({d}%)'
+                formatter: (params: any) => {
+                    const value = params.value.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 });
+                    return `${params.name}: ${value} million (${params.percent}%)`;
+                }
+            },
+            legend: {
+                orient: 'vertical',
+                left: '5%',
+                top: 'center',
+                itemWidth: 25,
+                itemHeight: 14,
+                itemGap: 12,
+                textStyle: {
+                    color: '#333333', // accent color for legend text
+                    fontSize: 14,
+                    fontFamily: 'Inter, sans-serif'
+                }
             },
             series: series,
-            color: ['#FF2D55', '#5AC8FA', '#FFCC00'],
-            label: {
-                formatter: '{b}: ${c}M',
-                position: 'outside',
-                color: '#333333'
-            },
+            color: ['#D60000', '#2c4143', '#58707b'], // Using secondary, accent3, accent4 colors
             animationDuration: 1000,
-            animationEasing: 'cubicOut',
-            animationDelay: (idx: number) => idx * 100
+            animationEasing: 'cubicInOut',
+            animationDelay: (idx: number) => idx * 150
         };
 
         this.investmentsByClimateObjectivesChart.setOption(option);
@@ -543,28 +777,48 @@ export class DataAnalysisComponent implements AfterViewInit {
             {
                 name: 'Projects',
                 type: 'bar',
-                data: data.map(item => item.projects)
+                data: data.map(item => item.projects),
+                itemStyle: {
+                    borderRadius: [4, 4, 0, 0]
+                },
+                emphasis: {
+                    itemStyle: {
+                        color: '#58707b' // accent4 color for hover effect
+                    }
+                }
             }
         ];
 
         const option: EChartsOption = {
+            backgroundColor: '#F7F7F7', // primary color as background
             title: {
                 text: 'Total Projects per Sector',
                 left: 'center',
+                top: '20px',
                 textStyle: {
-                    color: '#333333',
-                    fontWeight: 'normal'
+                    color: '#333333', // accent color for title
+                    fontWeight: 'bold',
+                    fontSize: 18,
+                    fontFamily: 'Inter, sans-serif'
                 }
             },
             tooltip: {
                 trigger: 'item',
-                backgroundColor: 'rgba(255, 255, 255, 0.8)',
-                borderColor: '#ccc',
+                backgroundColor: 'rgba(247, 247, 247, 0.9)', // primary color with opacity
+                borderColor: '#d8d8cd', // accent2 color for border
                 borderWidth: 1,
                 textStyle: {
-                    color: '#333'
+                    color: '#333333', // accent color for tooltip text
+                    fontFamily: 'Inter, sans-serif'
                 },
                 formatter: '{b}: {c} projects'
+            },
+            grid: {
+                left: '5%',
+                right: '5%',
+                bottom: '15%',
+                top: '15%',
+                containLabel: true
             },
             xAxis: {
                 type: 'category',
@@ -572,20 +826,41 @@ export class DataAnalysisComponent implements AfterViewInit {
                 axisLabel: {
                     rotate: 45,
                     interval: 0,
-                    color: '#333333'
+                    color: '#333333', // accent color for axis labels
+                    fontFamily: 'Inter, sans-serif'
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#d8d8cd' // accent2 color for axis line
+                    }
                 }
             },
             yAxis: {
                 type: 'value',
                 name: 'Number of Projects',
+                nameTextStyle: {
+                    color: '#333333', // accent color for axis name
+                    fontFamily: 'Inter, sans-serif'
+                },
                 axisLabel: {
-                    color: '#333333'
+                    color: '#333333', // accent color for axis labels
+                    fontFamily: 'Inter, sans-serif'
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#d8d8cd' // accent2 color for axis line
+                    }
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: '#d8d8cd' // accent2 color for split lines
+                    }
                 }
             },
             series: series,
-            color: ['#007AFF'],
+            color: ['#D60000'], // Using secondary color for bars
             animationDuration: 1000,
-            animationEasing: 'cubicOut',
+            animationEasing: 'cubicInOut',
             animationDelay: (idx: number) => idx * 100
         };
 
@@ -596,74 +871,5 @@ export class DataAnalysisComponent implements AfterViewInit {
         this.dropdownOpen[chartName] = !this.dropdownOpen[chartName];
     }
 
-    downloadChartData(chartName: string, format: string): void {
-        const chart = this.getChartInstance(chartName);
-        if (!chart) {
-            console.error(`Chart instance for ${chartName} not found`);
-            return;
-        }
 
-        const dataURL = chart.getDataURL({
-            type: format === 'png' ? 'png' : 'svg',
-        });
-
-        if (format === 'pdf') {
-            const pdf = new jsPDF();
-            pdf.addImage(dataURL, 'PNG', 10, 10, 180, 160);
-            pdf.save('chart.pdf');
-        } else if (format === 'json') {
-            const json = chart.getOption();
-            const blob = new Blob([JSON.stringify(json)], { type: 'application/json' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'chart.json';
-            a.click();
-            window.URL.revokeObjectURL(url);
-        } else if (format === 'csv') {
-            const csvData = 'data:text/csv;charset=utf-8,' + encodeURI(this.convertChartToCSV(chart));
-            const link = document.createElement('a');
-            link.setAttribute('href', csvData);
-            link.setAttribute('download', 'chart.csv');
-            link.click();
-        } else if (format === 'png') {
-            const link = document.createElement('a');
-            link.href = dataURL;
-            link.download = 'chart.png';
-            link.click();
-        }
-    }
-
-    convertChartToCSV(chart: echarts.ECharts): string {
-        const option = chart.getOption();
-        let csv = '';
-        if (option && Array.isArray(option['series'])) {
-            option['series'].forEach((series: any) => {
-                csv += series.name + '\n';
-                if (Array.isArray(series.data)) {
-                    csv += series.data.map((d: any) =>
-                        (typeof d === 'object' ? `${d.name},${d.value}` : d)
-                    ).join('\n') + '\n\n';
-                }
-            });
-        }
-        return csv;
-    }
-
-    private getChartInstance(chartName: string): echarts.ECharts | null {
-        switch (chartName) {
-            case 'investmentByRegion':
-                return this.investmentByRegionChart;
-            case 'projectsByRegion':
-                return this.projectsByRegionChart;
-            case 'projectsByClimateObjectives':
-                return this.projectsByClimateObjectivesChart;
-            case 'investmentsByClimateObjectives':
-                return this.investmentsByClimateObjectivesChart;
-            case 'totalProjectsBySector':
-                return this.totalProjectsBySectorChart;
-            default:
-                return null;
-        }
-    }
 }

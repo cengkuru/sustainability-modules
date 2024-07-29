@@ -8,7 +8,7 @@
 
                 <div class="flex justify-between items-center mt-6">
                     <div class="text-sm text-accent4">
-                       <!-- Project {{ getCurrentProjectIndex() }} of {{ getTotalProjects() }}-->
+                        <!-- Project {{ getCurrentProjectIndex() }} of {{ getTotalProjects() }} -->
                     </div>
                     <div class="flex space-x-3">
                         <button
@@ -17,9 +17,7 @@
                                 class="px-4 py-2 bg-accent2 text-accent3 rounded-full text-sm font-medium transition-all duration-300 ease-apple-ease hover:bg-accent1 focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2"
                         >
         <span class="flex items-center">
-          <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-          </svg>
+          <ng-icon name="heroChevronLeft" class="w-4 h-4 mr-1"></ng-icon>
           Previous
         </span>
                         </button>
@@ -30,14 +28,13 @@
                         >
         <span class="flex items-center">
           Next
-          <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-          </svg>
+          <ng-icon name="heroChevronRight" class="w-4 h-4 ml-1"></ng-icon>
         </span>
                         </button>
                     </div>
                 </div>
             </header>
+
 
             <div class="flex flex-col lg:flex-row">
                 <!-- Dropdown for mobile view -->
@@ -54,16 +51,15 @@
                             </option>
                         </select>
                         <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                            <svg class="w-6 h-6 text-accent3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
+                            <ng-icon name="heroChevronDown" class="w-6 h-6 text-accent3"></ng-icon>
                         </div>
                     </div>
                     <div class="mt-4 flex items-center text-sm text-accent4">
-                        <div class="w-4 h-4 rounded-full bg-accent6 mr-2"></div>
+                        <ng-icon name="heroCheckCircle" class="w-4 h-4 text-accent6 mr-2"></ng-icon>
                         <span>Current Stage: {{ getCurrentStageName() }}</span>
                     </div>
                 </div>
+
                 <!-- Vertical Tabs for larger screens -->
                 <div class="hidden lg:flex flex-col w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-gray-200">
                     <nav class="font-sans max-w-sm p-6 bg-white rounded-lg shadow-sm">
@@ -74,8 +70,8 @@
                                     class="flex items-center text-left w-full transition-all duration-300 ease-apple-ease group"
                                     [ngClass]="{'text-accent3 font-medium': selectedTab === stage.id, 'text-accent4 hover:text-accent3': selectedTab !== stage.id}">
                                 <div class="relative w-6 h-6 mr-4 flex items-center justify-center">
-                                    <div class="absolute w-4 h-4 rounded-full transition-all duration-300"
-                                         [ngClass]="{'bg-accent6 scale-125': selectedTab === stage.id, 'bg-accent4 group-hover:bg-accent6 group-hover:scale-110': selectedTab !== stage.id}"></div>
+                                    <ng-icon name="heroChevronRight" *ngIf="selectedTab !== stage.id" class="w-4 h-4 text-accent4 group-hover:text-accent6 transition-all duration-300"></ng-icon>
+                                    <ng-icon name="heroCheckCircle" *ngIf="selectedTab === stage.id" class="w-4 h-4 text-accent6 transition-all duration-300"></ng-icon>
                                     <div *ngIf="i < stages.length - 1" class="absolute top-6 left-1/2 w-0.5 h-6 bg-accent4 -translate-x-1/2"></div>
                                 </div>
                                 <span class="text-lg transition-all duration-300" [ngClass]="{'transform translate-x-1': selectedTab === stage.id}">{{ stage.label }}</span>
@@ -94,12 +90,12 @@
                                 <section class="bg-primary rounded-apple-lg overflow-hidden shadow-apple-md">
                                     <div class="p-6 sm:p-8">
                                         <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
-                                            <i class="bi bi-info-circle-fill mr-3 text-secondary"></i>Basic Data
+                                            <ng-icon name="heroInformationCircle" class="w-6 h-6 text-secondary mr-3"></ng-icon>Basic Data
                                         </h3>
                                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                             <div class="space-y-3" *ngFor="let item of getBasicDataItems(project.stages.identification.basicData) | keyvalue">
-                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
-                                                <p class="text-base text-accent">{{item.value}}</p>
+                                                <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
+                                                <p class="text-base text-accent">{{ item.value }}</p>
                                             </div>
                                         </div>
                                         <app-attachment-list [attachments]="project.stages.identification.basicData.attachments" class="mt-6"></app-attachment-list>
@@ -110,12 +106,12 @@
                                 <section class="bg-accent2 rounded-apple-lg overflow-hidden shadow-apple-md">
                                     <div class="p-6 sm:p-8">
                                         <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
-                                            <i class="bi bi-leaf-fill mr-3 text-accent6"></i>Climate Finance Data
+                                            <ng-icon name="heroGlobeAmericas" class="w-6 h-6 text-accent6 mr-3"></ng-icon>Climate Finance Data
                                         </h3>
                                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                             <div class="space-y-3" *ngFor="let item of getClimateFinanceDataItems(project.stages.identification.climateFinanceData) | keyvalue">
-                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
-                                                <p class="text-base text-accent">{{item.value}}</p>
+                                                <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
+                                                <p class="text-base text-accent">{{ item.value }}</p>
                                             </div>
                                         </div>
                                         <app-attachment-list [attachments]="project.stages.identification.climateFinanceData.attachments" class="mt-6"></app-attachment-list>
@@ -126,12 +122,12 @@
                                 <section class="bg-accent1 rounded-apple-lg overflow-hidden shadow-apple-md">
                                     <div class="p-6 sm:p-8">
                                         <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
-                                            <i class="bi bi-building-fill mr-3 text-accent3"></i>Institutional Sustainability Data
+                                            <ng-icon name="heroBuildingOffice" class="w-6 h-6 text-accent3 mr-3"></ng-icon>Institutional Sustainability Data
                                         </h3>
                                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                             <div class="space-y-3" *ngFor="let item of getInstitutionalSustainabilityDataItems(project.stages.identification.institutionalSustainabilityData) | keyvalue">
-                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
-                                                <p class="text-base text-accent">{{item.value}}</p>
+                                                <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
+                                                <p class="text-base text-accent">{{ item.value }}</p>
                                             </div>
                                         </div>
                                         <app-attachment-list [attachments]="project.stages.identification.institutionalSustainabilityData.attachments" class="mt-6"></app-attachment-list>

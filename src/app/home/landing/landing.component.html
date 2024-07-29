@@ -5,7 +5,8 @@
     </div>
 
     <!-- Main section -->
-    <div appIntersectionObserver [@slideInAnimation] class="bg-primary rounded-apple-lg min-h-screen flex flex-col lg:flex-row items-center justify-between text-accent p-6 lg:p-6 mb-12">
+    <!-- landing.component.html -->
+    <div appIntersectionObserver [@slideInAnimation] class="bg-primary rounded-apple min-h-screen flex flex-col lg:flex-row items-center justify-between text-accent p-6 lg:p-6 mb-12">
         <div class="w-full lg:w-1/2 text-center lg:text-left lg:pr-8">
             <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6">
                 {{ mainSection.title }}
@@ -13,22 +14,25 @@
             <p class="text-base sm:text-lg lg:text-xl mb-8 text-accent opacity-80">
                 {{ mainSection.description }}
             </p>
-            <button (click)="navigateToProjects()" class="px-8 py-4 bg-accent1 text-accent text-lg font-medium rounded-apple-md hover:bg-opacity-90 transition-all duration-250 ease-apple-ease focus:outline-none focus:ring-2 focus:ring-accent6">
+            <button (click)="navigateToProjects()" class="px-8 py-4 bg-accent6 text-primary text-lg font-medium rounded-apple hover:bg-opacity-90 transition-all duration-400 ease-apple focus:outline-none focus:ring-2 focus:ring-accent6 apple-hover-lift">
+                <ng-icon [name]="'heroArrowRight'" class="w-5 h-5 inline-block mr-2"></ng-icon>
                 {{ mainSection.buttonText }}
             </button>
             <div class="flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-8 mt-8">
                 <div class="text-center">
+                    <ng-icon [name]="'heroHome'" class="w-5 h-5 inline-block mr-2"></ng-icon>
                     <span class="block text-3xl sm:text-4xl font-bold">{{ numberOfProjects }}</span>
                     <span class="block mt-2 text-sm sm:text-base text-accent opacity-60">Projects Published</span>
                 </div>
                 <div class="text-center">
+                    <ng-icon [name]="'heroUser'" class="w-5 h-5 inline-block mr-2"></ng-icon>
                     <span class="block text-3xl sm:text-4xl font-bold">{{ totalValueOfProjects | currency:'USD':'symbol':'1.0-0' }}</span>
                     <span class="block mt-2 text-sm sm:text-base text-accent opacity-60">Total Value</span>
                 </div>
             </div>
         </div>
         <div class="relative mt-8 lg:mt-0 w-full lg:w-1/2 flex items-center justify-center">
-            <div class="w-full h-80 sm:h-96 md:h-[28rem] lg:h-[32rem] xl:h-[36rem] overflow-hidden rounded-apple-lg shadow-apple-md">
+            <div class="w-full h-80 sm:h-96 md:h-[28rem] lg:h-[32rem] xl:h-[36rem] overflow-hidden rounded-apple shadow-apple-md">
                 <ng-container *ngIf="!isLoading; else mapLoading">
                     <div #mapContainer id="map" class="w-full h-full"></div>
                 </ng-container>
@@ -44,36 +48,45 @@
         </div>
     </div>
 
+
+
+
     <!-- Featured Projects Section -->
     <div appIntersectionObserver [@slideInAnimation] class="bg-primary py-12 sm:py-16 rounded-apple-lg mb-12 shadow-apple-sm">
         <div class="container mx-auto px-6 lg:flex lg:items-center">
-            <div class="lg:w-1/2">
+            <div class="lg:w-1/2 text-center lg:text-left">
                 <h2 class="text-3xl sm:text-4xl font-bold text-accent mb-6">{{ featuredProjectsSection.title }}</h2>
                 <p class="text-base sm:text-lg text-accent opacity-80 mb-8">
                     {{ featuredProjectsSection.description }}
                 </p>
-                <button (click)="navigateToFeaturedProjects()" class="px-8 py-4 bg-accent1 text-accent text-lg font-medium rounded-apple-md hover:bg-opacity-90 transition-all duration-250 ease-apple-ease focus:outline-none focus:ring-2 focus:ring-accent6">
+                <button (click)="navigateToFeaturedProjects()" class="flex items-center justify-center px-8 py-4 bg-accent6 text-primary text-lg font-medium rounded-apple-md hover:bg-opacity-90 transition-all duration-400 ease-apple focus:outline-none focus:ring-2 focus:ring-accent6 apple-hover-lift">
+                    <ng-icon [name]="'heroArrowRight'" class="w-5 h-5 inline-block mr-2"></ng-icon>
                     {{ featuredProjectsSection.buttonText }}
                 </button>
             </div>
             <div class="lg:w-1/2 lg:pl-12 mt-8 lg:mt-0 relative">
-                <img src="../../../assets/featured.png" alt="Featured Project" class="w-full h-auto rounded-apple-lg ">
+                <img src="../../../assets/featured.png" alt="Featured Project" class="w-full h-auto rounded-apple-lg shadow-apple-md">
             </div>
         </div>
     </div>
+
+
+
+
+
 
     <div class="container mx-auto px-4 py-12 rounded-apple-lg mb-12 bg-accent2 bg-opacity-10">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Recent Projects Section -->
             <div class="animate-hidden" appIntersectionObserver>
                 <h2 class="text-2xl sm:text-3xl font-semibold mb-6 flex items-center text-accent">
-                    <i class="bi bi-stars text-accent3 text-3xl mr-2"></i>
+                    <ng-icon [name]="'heroStar'" class="text-accent3 text-3xl mr-2"></ng-icon>
                     Recent Projects
                 </h2>
                 <ul class="space-y-4" [@listAnimation]="recentProjects.length">
-                    <li *ngFor="let project of recentProjects" class="bg-primary rounded-apple-md shadow-apple-sm p-4 hover:shadow-apple-md transition-shadow duration-250 ease-apple-ease">
-                        <a [routerLink]="['/public/projects', project.id]" class="flex items-center text-accent hover:text-accent4 transition-colors duration-250 ease-apple-ease">
-                            <i class="bi bi-file-earmark-text text-accent3 mr-3 text-xl"></i>
+                    <li *ngFor="let project of recentProjects" class="bg-primary rounded-apple-md shadow-apple-sm p-4 hover:shadow-apple-md transition-shadow duration-400 ease-apple">
+                        <a [routerLink]="['/public/projects', project.id]" class="flex items-center text-accent hover:text-accent4 transition-colors duration-400 ease-apple">
+                            <ng-icon [name]="'heroDocumentText'" class="text-accent3 mr-3 text-xl"></ng-icon>
                             <span class="text-base sm:text-lg">{{ project.name }}</span>
                         </a>
                     </li>
@@ -83,12 +96,12 @@
             <!-- High-Value Projects Section -->
             <div class="animate-hidden" appIntersectionObserver>
                 <h2 class="text-2xl sm:text-3xl font-semibold mb-6 flex items-center text-accent">
-                    <i class="bi bi-graph-up text-accent3 text-3xl mr-2"></i>
+                    <ng-icon [name]="'heroChartBar'" class="text-accent3 text-3xl mr-2"></ng-icon>
                     High-Value Projects
                 </h2>
                 <ul class="space-y-4" [@listAnimation]="highValueProjects.length">
-                    <li *ngFor="let project of highValueProjects" class="bg-primary rounded-apple-md shadow-apple-sm p-4 hover:shadow-apple-md transition-shadow duration-250 ease-apple-ease">
-                        <a [routerLink]="['/public/projects', project.id]" class="flex items-center justify-between text-accent hover:text-accent4 transition-colors duration-250 ease-apple-ease">
+                    <li *ngFor="let project of highValueProjects" class="bg-primary rounded-apple-md shadow-apple-sm p-4 hover:shadow-apple-md transition-shadow duration-400 ease-apple">
+                        <a [routerLink]="['/public/projects', project.id]" class="flex items-center justify-between text-accent hover:text-accent4 transition-colors duration-400 ease-apple">
                             <span class="text-base sm:text-lg">{{ project.name }}</span>
                             <span class="text-sm font-semibold text-accent3">{{ project.contractPrice | currency:'USD':'symbol':'1.0-0' }}</span>
                         </a>
@@ -97,6 +110,7 @@
             </div>
         </div>
     </div>
+
     <!-- Sponsors section -->
     <section class="py-16 bg-accent2 bg-opacity-10 rounded-apple-lg">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -104,12 +118,13 @@
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
                 <div *ngFor="let sponsor of sponsorsSection.sponsors" class="flex justify-center">
                     <a [href]="sponsor.link" target="_blank" rel="noopener noreferrer"
-                       class="group flex items-center justify-center w-full h-32 bg-primary rounded-apple-md shadow-apple-sm hover:shadow-apple-md transition-all duration-250 ease-apple-ease transform hover:scale-105">
+                       class="group flex items-center justify-center w-full h-32 bg-primary rounded-apple-md shadow-apple-sm hover:shadow-apple-md transition-all duration-400 ease-apple transform hover:scale-105">
                         <img [src]="sponsor.image" [alt]="sponsor.name"
-                             class="max-h-16 w-auto object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-250 ease-apple-ease">
+                             class="max-h-16 w-auto object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-400 ease-apple">
                     </a>
                 </div>
             </div>
         </div>
     </section>
+
 </div>

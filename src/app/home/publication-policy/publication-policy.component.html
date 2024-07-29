@@ -1,22 +1,22 @@
-<div class="publication-policy-container bg-white min-h-screen flex flex-col md:flex-row">
+<div class="publication-policy-container bg-primary min-h-screen flex flex-col md:flex-row font-inter">
     <!-- Mobile Sidebar Toggle -->
-    <button (click)="toggleSidebar()" class="md:hidden fixed top-4 left-4 z-50 bg-accent text-white p-2 rounded-full shadow-lg">
+    <button (click)="toggleSidebar()" class="md:hidden fixed top-4 left-4 z-50 bg-secondary text-primary p-2 rounded-full shadow-apple-md transition duration-300 ease-apple-ease-out apple-press-effect">
         <i class="bi" [ngClass]="{'bi-list': !isSidebarOpen, 'bi-x': isSidebarOpen}"></i>
     </button>
 
     <!-- Sidebar -->
     <div [@sidebarAnimation]="isSidebarOpen ? 'open' : 'closed'"
-         class="sidebar bg-gray-100 w-full md:w-1/4 p-4 fixed md:static inset-0 z-40 transform transition-transform duration-300 ease-in-out"
+         class="sidebar bg-white w-full md:w-1/4 p-6 fixed md:static inset-0 z-40 transform transition-transform duration-300 ease-apple-ease-out shadow-apple-lg md:shadow-none"
          [ngClass]="{'translate-x-0': isSidebarOpen, '-translate-x-full md:translate-x-0': !isSidebarOpen}">
         <div class="w-full">
             <div class="search-container mb-6">
                 <div class="relative">
-                    <i class="bi bi-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    <i class="bi bi-search absolute left-3 top-1/2 transform -translate-y-1/2 text-accent3"></i>
                     <input
                             type="text"
                             [(ngModel)]="searchTerm"
                             placeholder="Search policy..."
-                            class="search-input w-full p-2 pl-10 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent shadow-sm"
+                            class="search-input w-full p-3 pl-10 rounded-apple-md border-accent2 focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-opacity-50 shadow-apple-sm transition duration-300 ease-apple-ease-out"
                     >
                 </div>
             </div>
@@ -24,8 +24,8 @@
                 <ul [@listAnimation]="filteredSections.length">
                     <li *ngFor="let section of filteredSections"
                         (click)="setActiveSection(section.title)"
-                        class="cursor-pointer p-3 rounded-lg mb-2 transition-all duration-300 ease-in-out text-black"
-                        [ngClass]="{'bg-accent text-white shadow-md': activeSection === section.title, 'hover:bg-gray-200': activeSection !== section.title}">
+                        class="cursor-pointer p-3 rounded-apple-md mb-2 transition-all duration-300 ease-apple-ease-out text-accent"
+                        [ngClass]="{'bg-accent6 text-primary shadow-apple-md': activeSection === section.title, 'hover:bg-accent2': activeSection !== section.title}">
                         {{ section.title }}
                     </li>
                 </ul>
@@ -37,15 +37,15 @@
     <div class="content w-full md:w-3/4 p-4 md:p-8 overflow-y-auto mt-16 md:mt-0">
         <ng-container *ngFor="let section of filteredSections">
             <div *ngIf="activeSection === section.title" [@fadeInOut] class="section mb-8">
-                <h2 class="text-3xl font-bold mb-4 text-gray-800">{{ section.title }}</h2>
-                <p class="mb-6 text-gray-600 leading-relaxed">{{ section.content }}</p>
+                <h2 class="text-3xl font-bold mb-4 text-accent">{{ section.title }}</h2>
+                <p class="mb-6 text-accent3 leading-relaxed">{{ section.content }}</p>
                 <ng-container *ngIf="section.subsections">
-                    <div *ngFor="let subsection of section.subsections" class="subsection mb-6 bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-xl font-semibold mb-3 text-gray-700 flex items-center">
-                            <i class="bi bi-info-circle mr-2 text-accent"></i>
+                    <div *ngFor="let subsection of section.subsections" class="subsection mb-6 bg-white p-6 rounded-apple-lg shadow-apple-sm">
+                        <h3 class="text-xl font-semibold mb-3 text-accent flex items-center">
+                            <i class="bi bi-info-circle mr-2 text-secondary"></i>
                             {{ subsection.title }}
                         </h3>
-                        <p class="text-gray-600 leading-relaxed">{{ subsection.content }}</p>
+                        <p class="text-accent3 leading-relaxed">{{ subsection.content }}</p>
                     </div>
                 </ng-container>
             </div>

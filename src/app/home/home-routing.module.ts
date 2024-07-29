@@ -9,6 +9,7 @@ import {FeedbackComponent} from "./feedback/feedback.component";
 import {DataAnalysisComponent} from "./data-analysis/data-analysis.component";
 import {ProjectDetailsComponent} from "./project-details/project-details.component";
 import {PublicationPolicyComponent} from "./publication-policy/publication-policy.component";
+import {ApiDocsComponent} from "./api-docs/api-docs.component";
 
 const routes: Routes = [
     // public route with children
@@ -31,6 +32,8 @@ const routes: Routes = [
 
             // publication-policy route
             { path: 'publication-policy', component: PublicationPolicyComponent },
+
+            { path: 'api-documentation', component: ApiDocsComponent }, // Add the new route
 
 
 

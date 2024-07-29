@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import {Observable, BehaviorSubject, combineLatest} from 'rxjs';
+import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, map } from 'rxjs/operators';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
-
-
-import {ActivatedRoute, RouterLink} from "@angular/router";
+import { ActivatedRoute, RouterLink } from "@angular/router";
 import { EmailService } from "../services/email.service";
 import { IntersectionObserverDirective } from "../../directives/intersection-observer.directive";
+import { NgIconComponent, provideIcons } from "@ng-icons/core";
+import { heroMagnifyingGlass, heroArrowRight, heroMapPin } from "@ng-icons/heroicons/outline";
 
 @Component({
     selector: 'app-project-list',
     standalone: true,
-    imports: [CommonModule, RouterLink, IntersectionObserverDirective],
+    imports: [CommonModule, RouterLink, IntersectionObserverDirective, NgIconComponent],
     templateUrl: './project-list.component.html',
     styleUrls: ['./project-list.component.scss'],
     animations: [
@@ -41,7 +41,12 @@ import { IntersectionObserverDirective } from "../../directives/intersection-obs
                 animate('300ms', style({ opacity: 1 })),
             ]),
         ]),
-    ]
+    ],
+    providers: [provideIcons({
+        heroMagnifyingGlass,
+        heroArrowRight,
+        heroMapPin
+    })],
 })
 export class ProjectListComponent implements OnInit {
     projects$: Observable<any[]> | undefined;
@@ -64,6 +69,7 @@ export class ProjectListComponent implements OnInit {
             const featured = params['featured'] === 'true';
             this.showFeatured.next(featured);
         });
+
         this.projects$ = combineLatest([
             this.searchTerm.pipe(debounceTime(300), distinctUntilChanged()),
             this.showFeatured
@@ -87,9 +93,7 @@ export class ProjectListComponent implements OnInit {
             map(projects => projects.length)
         );
 
-
         this.totalValueOfProjects$ = this.projects$.pipe(
-
             map((projects: any) => {
                 let total = 0;
                 projects.forEach((project: any) => {
@@ -101,7 +105,6 @@ export class ProjectListComponent implements OnInit {
                 return total;
             })
         );
-
     }
 
     onSearchChange(event: Event): void {
@@ -111,6 +114,5 @@ export class ProjectListComponent implements OnInit {
 
     toggleFeatured(): void {
         this.showFeatured.next(!this.showFeatured.value);
-
     }
 }

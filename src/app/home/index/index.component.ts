@@ -3,6 +3,18 @@ import { CommonModule } from "@angular/common";
 import { Router, RouterLink, RouterLinkActive, RouterOutlet, NavigationEnd } from "@angular/router";
 import { trigger, transition, style, animate } from '@angular/animations';
 import { filter } from 'rxjs/operators';
+import { NgIconComponent, provideIcons } from "@ng-icons/core";
+import {
+  heroArrowRight,
+  heroHome,
+  heroUser,
+  heroStar,
+  heroDocumentText,
+  heroChartBar,
+  heroBars3,
+  heroXMark,
+  heroArrowRightOnRectangle
+} from "@ng-icons/heroicons/outline";
 
 @Component({
   selector: 'app-index',
@@ -12,6 +24,7 @@ import { filter } from 'rxjs/operators';
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
+    NgIconComponent,
   ],
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
@@ -26,6 +39,17 @@ import { filter } from 'rxjs/operators';
       ]),
     ]),
   ],
+  providers: [provideIcons({
+    heroArrowRight,
+    heroHome,
+    heroUser,
+    heroStar,
+    heroDocumentText,
+    heroChartBar,
+    heroBars3,
+    heroXMark,
+    heroArrowRightOnRectangle
+  })],
 })
 export class IndexComponent implements OnInit {
   pageTitle = 'The National Infrastructure Disclosure Platform';
@@ -39,20 +63,21 @@ export class IndexComponent implements OnInit {
   appName = 'CoST Data Portal: Prototype';
 
   navLinks = [
-    { path: 'home', label: 'Home', icon: 'bi-house-fill' },
-    { path: 'projects', label: 'Projects', icon: 'bi-kanban-fill' },
-    { path: 'data-analytics', label: 'Analysis', icon: 'bi-graph-up-arrow' },
-    { path: 'downloads', label: 'Downloads', icon: 'bi-cloud-download-fill' },
-    { path: 'feedback', label: 'Feedback', icon: 'bi-chat-left-text-fill' },
+    { path: 'home', label: 'Home', icon: 'heroHome' },
+    { path: 'projects', label: 'Projects', icon: 'heroDocumentText' },
+    { path: 'data-analytics', label: 'Analysis', icon: 'heroChartBar' },
+    { path: 'downloads', label: 'Downloads', icon: 'heroArrowRight' },
+    { path: 'feedback', label: 'Feedback', icon: 'heroStar' },
+    { path: 'api-documentation', label: 'API Documentation', icon: 'heroDocumentText' }  // New link added
   ];
 
   footerLinks = [
-    { path: 'publication-policy', label: 'Publication Policy', icon: 'bi-file-text' }
+    { path: 'publication-policy', label: 'Publication Policy', icon: 'heroDocumentText' }
   ];
 
   creativeCommonsLicense = {
     name: 'Creative Commons Attribution 4.0 International License',
-    icon: 'bi-creative-commons',
+    icon: 'heroDocumentText',
     link: 'https://creativecommons.org/licenses/by/4.0/'
   };
 

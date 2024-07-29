@@ -6,6 +6,15 @@ import { switchMap, tap } from "rxjs/operators";
 import { animate, style, transition, trigger } from "@angular/animations";
 import { ProjectService } from "../../services/project.service";
 import { AttachmentListComponent } from "./attachment-list/attachment-list.component";
+import { NgIconComponent, provideIcons } from "@ng-icons/core";
+import {
+    heroChevronDown,
+    heroCheckCircle,
+    heroChevronRight,
+    heroChevronLeft,
+    heroInformationCircle, heroBuildingOffice, heroGlobeAmericas
+} from "@ng-icons/heroicons/outline";
+
 
 @Component({
     selector: 'app-project-details',
@@ -14,7 +23,8 @@ import { AttachmentListComponent } from "./attachment-list/attachment-list.compo
         DatePipe,
         NgForOf,
         CommonModule,
-        AttachmentListComponent
+        AttachmentListComponent,
+        NgIconComponent
     ],
     templateUrl: './project-details.component.html',
     styleUrls: ['./project-details.component.scss'],
@@ -29,7 +39,15 @@ import { AttachmentListComponent } from "./attachment-list/attachment-list.compo
             ]),
         ]),
     ],
-    providers: [ProjectService, DatePipe]
+    providers: [ProjectService, DatePipe,provideIcons({
+        heroChevronDown,
+        heroCheckCircle,
+        heroChevronRight,
+        heroChevronLeft,
+        heroInformationCircle,
+        heroGlobeAmericas,
+        heroBuildingOffice
+    })]
 })
 export class ProjectDetailsComponent implements OnInit {
 
