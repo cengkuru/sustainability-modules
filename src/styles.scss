@@ -205,3 +205,41 @@ input, textarea, select {
   border-radius: 10px;
   box-shadow: 0 3px 14px rgba(0,0,0,0.2);
 }
+
+@keyframes apple-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes apple-slide-down {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-apple-fade-in {
+  animation: apple-fade-in 0.8s ease-out;
+}
+
+.animate-apple-slide-down {
+  animation: apple-slide-down 0.8s ease-out;
+}
+
+.animate-apple-fade-in-delay-1 {
+  animation: apple-fade-in 0.8s ease-out 0.2s both;
+}
+
+.animate-apple-fade-in-delay-2 {
+  animation: apple-fade-in 0.8s ease-out 0.4s both;
+}
+
+.ease-apple-out {
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.shadow-apple-sm {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.shadow-apple-md {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+}

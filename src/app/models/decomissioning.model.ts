@@ -1,9 +1,9 @@
-import {SocialSustainabilityData} from "./socialsustainabilitydata.model";
-import {EconomicAndFinancialSustainabilityData} from "./economocandfinancialsustainabilitydata.model";
-import {EnvironmentalAndClimateSustainabilityData} from "./environmentalandclimatesustainabilitydata.model";
-import {InstitutionalSustainabilityData} from "./institutionalsustainabilitydata.model";
-import {ClimateFinanceData} from "./climatefinance.model";
 import {BasicData} from "./basicdata.model";
+import {
+    ClimateFinanceData, EconomicAndFinancialSustainabilityData,
+    EnvironmentalAndClimateSustainabilityData,
+    InstitutionalSustainabilityData, SocialSustainabilityData
+} from "./operationandmaintenance.model";
 
 export interface Decommissioning {
     socialSustainabilityData: SocialSustainabilityData;

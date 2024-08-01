@@ -1,11 +1,12 @@
-import {SocialSustainabilityData} from "./socialsustainabilitydata.model";
-import {EconomicAndFinancialSustainabilityData} from "./economocandfinancialsustainabilitydata.model";
-import {InstitutionalSustainabilityData} from "./institutionalsustainabilitydata.model";
-import {EnvironmentalAndClimateSustainabilityData} from "./environmentalandclimatesustainabilitydata.model";
-import {ClimateFinanceData} from "./climatefinance.model";
 import {BasicData} from "./basicdata.model";
 import {Transaction} from "./transaction.model";
 import {Milestone} from "./milestone.model";
+import {
+    ClimateFinanceData,
+    EconomicAndFinancialSustainabilityData, EnvironmentalAndClimateSustainabilityData,
+    InstitutionalSustainabilityData,
+    SocialSustainabilityData
+} from "./operationandmaintenance.model";
 
 export interface Implementation {
     socialSustainabilityData: SocialSustainabilityData;

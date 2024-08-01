@@ -1,0 +1,633 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="p-6" *ngIf="project$ | async as project">
+            <header class="mb-8">
+                <h1 class="text-3xl font-semibold text-accent3 mb-4 tracking-tight">
+                    {{ project.name }}
+                </h1>
+
+                <div class="flex justify-between items-center mt-6">
+                    <div class="text-sm text-accent4">
+                        <!-- Project {{ getCurrentProjectIndex() }} of {{ getTotalProjects() }} -->
+                    </div>
+                    <div class="flex space-x-3">
+                        <button
+                                *ngIf="(previousProject$ | async) as previousProject"
+                                (click)="navigateToProject(previousProject)"
+                                class="px-4 py-2 bg-accent2 text-accent3 rounded-full text-sm font-medium transition-all duration-300 ease-apple-ease hover:bg-accent1 focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2"
+                        >
+        <span class="flex items-center">
+          <ng-icon name="heroChevronLeft" class="w-4 h-4 mr-1"></ng-icon>
+          Previous
+        </span>
+                        </button>
+                        <button
+                                *ngIf="(nextProject$ | async) as nextProject"
+                                (click)="navigateToProject(nextProject)"
+                                class="px-4 py-2 bg-accent1 text-accent3 rounded-full text-sm font-medium transition-all duration-300 ease-apple-ease hover:bg-accent6 hover:text-white focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2"
+                        >
+        <span class="flex items-center">
+          Next
+          <ng-icon name="heroChevronRight" class="w-4 h-4 ml-1"></ng-icon>
+        </span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+
+            <div class="flex flex-col lg:flex-row">
+                <!-- Dropdown for mobile view -->
+                <div class="lg:hidden mb-6">
+                    <label for="stage-select" class="block text-lg font-bold text-accent3 mb-2">PROJECT STAGES</label>
+                    <div class="relative">
+                        <select
+                                id="stage-select"
+                                class="w-full px-4 py-3 pr-10 rounded-lg bg-white border-2 border-accent4 text-accent3 text-lg font-medium appearance-none focus:outline-none focus:border-accent6 focus:ring-2 focus:ring-accent6 transition-all duration-300 ease-apple-ease"
+                                (change)="onTabChange($event)"
+                        >
+                            <option *ngFor="let stage of stages" [value]="stage.id" [selected]="selectedTab === stage.id">
+                                {{ stage.label }}
+                            </option>
+                        </select>
+                        <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                            <ng-icon name="heroChevronDown" class="w-6 h-6 text-accent3"></ng-icon>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center text-sm text-accent4">
+                        <ng-icon name="heroCheckCircle" class="w-4 h-4 text-accent6 mr-2"></ng-icon>
+                        <span>Current Stage: {{ getCurrentStageName() }}</span>
+                    </div>
+                </div>
+
+                <!-- Vertical Tabs for larger screens -->
+                <div class="hidden lg:flex flex-col w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-gray-200">
+                    <nav class="font-sans max-w-sm p-6 bg-white rounded-lg shadow-sm">
+                        <h2 class="text-2xl font-bold text-accent3 mb-6">PROJECT STAGES</h2>
+                        <div class="flex flex-col space-y-4">
+                            <button *ngFor="let stage of stages; let i = index"
+                                    (click)="selectTab(stage.id)"
+                                    class="flex items-center text-left w-full transition-all duration-300 ease-apple-ease group"
+                                    [ngClass]="{'text-accent3 font-medium': selectedTab === stage.id, 'text-accent4 hover:text-accent3': selectedTab !== stage.id}">
+                                <div class="relative w-6 h-6 mr-4 flex items-center justify-center">
+                                    <ng-icon name="heroChevronRight" *ngIf="selectedTab !== stage.id" class="w-4 h-4 text-accent4 group-hover:text-accent6 transition-all duration-300"></ng-icon>
+                                    <ng-icon name="heroCheckCircle" *ngIf="selectedTab === stage.id" class="w-4 h-4 text-accent6 transition-all duration-300"></ng-icon>
+                                    <div *ngIf="i < stages.length - 1" class="absolute top-6 left-1/2 w-0.5 h-6 bg-accent4 -translate-x-1/2"></div>
+                                </div>
+                                <span class="text-lg transition-all duration-300" [ngClass]="{'transform translate-x-1': selectedTab === stage.id}">{{ stage.label }}</span>
+                            </button>
+                        </div>
+                    </nav>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="w-full lg:w-3/4 p-4" [@fadeSlideInOut]>
+                    <!-- Content for Identification Tab -->
+                    <ng-container [ngSwitch]="selectedTab" >
+                        <div *ngSwitchCase="'Identification'" [@fadeSlideInOut] class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                            <div *ngIf="project$ | async as project" class="space-y-8">
+                                <!-- Basic Data Section -->
+                                <section class="bg-primary rounded-apple-lg overflow-hidden shadow-apple-md">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <ng-icon name="heroInformationCircle" class="w-6 h-6 text-secondary mr-3"></ng-icon>Basic Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getBasicDataItems(project.stages.identification.basicData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
+                                                <p class="text-base text-accent">{{ item.value }}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.identification.basicData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Climate Finance Data Section -->
+                                <section class="bg-accent2 rounded-apple-lg overflow-hidden shadow-apple-md">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <ng-icon name="heroGlobeAmericas" class="w-6 h-6 text-accent6 mr-3"></ng-icon>Climate Finance Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getClimateFinanceDataItems(project.stages.identification.climateFinanceData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
+                                                <p class="text-base text-accent">{{ item.value }}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.identification.climateFinanceData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Institutional Sustainability Data Section -->
+                                <section class="bg-accent1 rounded-apple-lg overflow-hidden shadow-apple-md">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <ng-icon name="heroBuildingOffice" class="w-6 h-6 text-accent3 mr-3"></ng-icon>Institutional Sustainability Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getInstitutionalSustainabilityDataItems(project.stages.identification.institutionalSustainabilityData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
+                                                <p class="text-base text-accent">{{ item.value }}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.identification.institutionalSustainabilityData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <!-- Content for Preparation Tab -->
+                        <div *ngSwitchCase="'Preparation'" [@fadeSlideInOut] class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                            <div *ngIf="project$ | async as project" class="space-y-8">
+                                <!-- Basic Data Section -->
+                                <section class="bg-primary rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-info-circle-fill mr-3 text-secondary"></i>Basic Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getBasicDataItemsPreparation(project.stages.preparation.basicData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.preparation.basicData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Climate Finance Data Section -->
+                                <section class="bg-accent2 rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-cloud mr-3 text-accent6"></i>Climate Finance Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getClimateFinanceDataItemsPreparation(project.stages.preparation.climateFinanceData.attachments) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.preparation.climateFinanceData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Social Sustainability Data Section -->
+                                <section class="bg-accent1 rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-people-fill mr-3 text-accent3"></i>Social Sustainability Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getSocialSustainabilityDataItemsPreparation(project.stages.preparation.socialSustainabilityData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.preparation.socialSustainabilityData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Institutional Sustainability Data Section -->
+                                <section class="bg-primary rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-building-fill mr-3 text-secondary"></i>Institutional Sustainability Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getInstitutionalSustainabilityDataItemsPreparation(project.stages.preparation.institutionalSustainabilityData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.preparation.institutionalSustainabilityData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Economic and Financial Sustainability Data Section -->
+                                <section class="bg-accent2 rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-cash-coin mr-3 text-accent6"></i>Economic and Financial Sustainability Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getEconomicFinancialSustainabilityDataItemsPreparation(project.stages.preparation.economicAndFinancialSustainabilityData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!-- Environmental and Climate Sustainability Data Section -->
+                                <section class="bg-accent1 rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-tree-fill mr-3 text-accent3"></i>Environmental and Climate Sustainability Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getEnvironmentalClimateSustainabilityDataItemsPreparation(project.stages.preparation.environmentalAndClimateSustainabilityData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.preparation.environmentalAndClimateSustainabilityData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <!-- Content for Tender Management Tab -->
+                        <div *ngSwitchCase="'TenderManagement'" [@fadeSlideInOut] class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                            <div *ngIf="project$ | async as project" class="space-y-8">
+                                <!-- Basic Data Section -->
+                                <section class="bg-primary rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-info-circle-fill mr-3 text-secondary"></i>Basic Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getBasicDataItemsTenderManagement(project.stages.tenderManagement.basicData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.tenderManagement.basicData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Social Sustainability Data Section -->
+                                <section class="bg-accent2 rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-people-fill mr-3 text-accent6"></i>Social Sustainability Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getSocialSustainabilityDataItemsTenderManagement(project.stages.tenderManagement.socialSustainabilityData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.tenderManagement.socialSustainabilityData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Institutional Sustainability Data Section -->
+                                <section class="bg-accent1 rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-building-fill mr-3 text-accent3"></i>Institutional Sustainability Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getInstitutionalSustainabilityDataItemsTenderManagement(project.stages.tenderManagement.institutionalSustainabilityData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.tenderManagement.institutionalSustainabilityData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Environmental and Climate Sustainability Data Section -->
+                                <section class="bg-primary rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-tree-fill mr-3 text-secondary"></i>Environmental and Climate Sustainability Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getEnvironmentalClimateSustainabilityDataItemsTenderManagement(project.stages.tenderManagement.environmentalAndClimateSustainabilityData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.tenderManagement.environmentalAndClimateSustainabilityData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <!-- Content for Implementation Tab -->
+                        <div *ngSwitchCase="'Implementation'" [@fadeSlideInOut] class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                            <div *ngIf="project$ | async as project" class="space-y-8">
+                                <!-- Basic Data Section -->
+                                <section class="bg-primary rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-info-circle-fill mr-3 text-secondary"></i>Basic Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getBasicDataItemsImplementation(project.stages.implementation.basicData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.implementation.basicData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Climate Finance Data Section -->
+                                <section class="bg-accent2 rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-leaf-fill mr-3 text-accent6"></i>Climate Finance Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getClimateFinanceDataItemsImplementation(project.stages.implementation.climateFinanceData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.implementation.climateFinanceData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Social Sustainability Data Section -->
+                                <section class="bg-accent1 rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-people-fill mr-3 text-accent3"></i>Social Sustainability Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getSocialSustainabilityDataItemsImplementation(project.stages.implementation.socialSustainabilityData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.implementation.socialSustainabilityData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Institutional Sustainability Data Section -->
+                                <section class="bg-primary rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-building-fill mr-3 text-secondary"></i>Institutional Sustainability Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getInstitutionalSustainabilityDataItemsImplementation(project.stages.implementation.institutionalSustainabilityData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.implementation.institutionalSustainabilityData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Economic and Financial Sustainability Data Section -->
+                                <section class="bg-accent2 rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-cash-coin mr-3 text-accent6"></i>Economic and Financial Sustainability Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getEconomicAndFinancialSustainabilityDataItemsImplementation(project.stages.implementation.economicAndFinancialSustainabilityData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.implementation.economicAndFinancialSustainabilityData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Environmental and Climate Sustainability Data Section -->
+                                <section class="bg-accent1 rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-tree-fill mr-3 text-accent3"></i>Environmental and Climate Sustainability Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getEnvironmentalAndClimateSustainabilityDataItemsImplementation(project.stages.implementation.environmentalAndClimateSustainabilityData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.implementation.environmentalAndClimateSustainabilityData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <!-- Content for Completion Tab -->
+                        <div *ngSwitchCase="'Completion'" [@fadeSlideInOut] class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                            <div *ngIf="project$ | async as project" class="space-y-8">
+                                <!-- Basic Data Section -->
+                                <section class="bg-primary rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-info-circle-fill mr-3 text-secondary"></i>Basic Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getBasicDataItemsCompletion(project.stages.completion.basicData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.completion.basicData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Institutional Sustainability Data Section -->
+                                <section class="bg-accent2 rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-building-fill mr-3 text-accent6"></i>Institutional Sustainability Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getInstitutionalSustainabilityDataItemsCompletion(project.stages.completion.institutionalSustainabilityData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.completion.institutionalSustainabilityData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <!-- Content for Operation and Maintenance Tab -->
+                        <div *ngSwitchCase="'OperationAndMaintenance'" [@fadeSlideInOut] class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                            <div *ngIf="project$ | async as project" class="space-y-8">
+                                <!-- Basic Data Section -->
+                                <section class="bg-primary rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-info-circle-fill mr-3 text-secondary"></i>Basic Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getBasicDataItemsOandM(project.stages.operationsAndMaintenance.basicData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.operationsAndMaintenance.basicData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Climate Finance Data Section -->
+                                <section class="bg-accent2 rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-leaf-fill mr-3 text-accent6"></i>Climate Finance Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getClimateFinanceDataItemsOandM(project.stages.operationsAndMaintenance.climateFinanceData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.operationsAndMaintenance.climateFinanceData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Social Sustainability Data Section -->
+                                <section class="bg-accent1 rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-people-fill mr-3 text-accent3"></i>Social Sustainability Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getSocialSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.socialSustainabilityData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.operationsAndMaintenance.socialSustainabilityData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Institutional Sustainability Data Section -->
+                                <section class="bg-primary rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-building-fill mr-3 text-secondary"></i>Institutional Sustainability Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getInstitutionalSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.institutionalSustainabilityData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.operationsAndMaintenance.institutionalSustainabilityData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Economic and Financial Sustainability Data Section -->
+                                <section class="bg-accent2 rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-cash-coin mr-3 text-accent6"></i>Economic and Financial Sustainability Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getEconomicFinancialSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.economicAndFinancialSustainabilityData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.operationsAndMaintenance.economicAndFinancialSustainabilityData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Environmental and Climate Sustainability Data Section -->
+                                <section class="bg-accent1 rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-tree-fill mr-3 text-accent3"></i>Environmental and Climate Sustainability Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getEnvironmentalClimateSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <!-- Content for Decommissioning Tab -->
+                        <div *ngSwitchCase="'Decommissioning'" [@fadeSlideInOut] class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                            <div *ngIf="project$ | async as project" class="space-y-8">
+                                <!-- Basic Data Section -->
+                                <section class="bg-primary rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-info-circle-fill mr-3 text-secondary"></i>Basic Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getBasicDataItemsDecommissioning(project.stages.decommissioning.basicData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.decommissioning.basicData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Social Sustainability Data Section -->
+                                <section class="bg-accent2 rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-people-fill mr-3 text-accent6"></i>Social Sustainability Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getSocialSustainabilityDataItemsDecommissioning(project.stages.decommissioning.socialSustainabilityData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.decommissioning.socialSustainabilityData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Environmental and Climate Sustainability Data Section -->
+                                <section class="bg-accent1 rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-leaf-fill mr-3 text-accent3"></i>Environmental and Climate Sustainability Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getEnvironmentalClimateSustainabilityDataItemsDecommissioning(project.stages.decommissioning.environmentalAndClimateSustainabilityData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.decommissioning.environmentalAndClimateSustainabilityData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Economic and Financial Sustainability Data Section -->
+                                <section class="bg-primary rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-cash-coin mr-3 text-secondary"></i>Economic and Financial Sustainability Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getEconomicFinancialSustainabilityDataItemsDecommissioning(project.stages.decommissioning.economicAndFinancialSustainabilityData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.decommissioning.economicAndFinancialSustainabilityData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+
+                                <!-- Institutional Sustainability Data Section -->
+                                <section class="bg-accent2 rounded-apple-lg shadow-apple-md overflow-hidden">
+                                    <div class="p-6 sm:p-8">
+                                        <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
+                                            <i class="bi bi-building-fill mr-3 text-accent6"></i>Institutional Sustainability Data
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div class="space-y-3" *ngFor="let item of getInstitutionalSustainabilityDataItemsDecommissioning(project.stages.decommissioning.institutionalSustainabilityData) | keyvalue">
+                                                <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                <p class="text-base text-accent">{{item.value}}</p>
+                                            </div>
+                                        </div>
+                                        <app-attachment-list [attachments]="project.stages.decommissioning.institutionalSustainabilityData.attachments" class="mt-6"></app-attachment-list>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

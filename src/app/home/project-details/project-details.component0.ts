@@ -6,6 +6,15 @@ import { switchMap, tap } from "rxjs/operators";
 import { animate, style, transition, trigger } from "@angular/animations";
 import { ProjectService } from "../../services/project.service";
 import { AttachmentListComponent } from "./attachment-list/attachment-list.component";
+import { NgIconComponent, provideIcons } from "@ng-icons/core";
+import {
+    heroChevronDown,
+    heroCheckCircle,
+    heroChevronRight,
+    heroChevronLeft,
+    heroInformationCircle, heroBuildingOffice, heroGlobeAmericas
+} from "@ng-icons/heroicons/outline";
+
 
 @Component({
     selector: 'app-project-details',
@@ -14,7 +23,8 @@ import { AttachmentListComponent } from "./attachment-list/attachment-list.compo
         DatePipe,
         NgForOf,
         CommonModule,
-        AttachmentListComponent
+        AttachmentListComponent,
+        NgIconComponent
     ],
     templateUrl: './project-details.component.html',
     styleUrls: ['./project-details.component.scss'],
@@ -22,21 +32,22 @@ import { AttachmentListComponent } from "./attachment-list/attachment-list.compo
         trigger('fadeSlideInOut', [
             transition(':enter', [
                 style({ opacity: 0, transform: 'translateY(10px)' }),
-                animate('300ms ease-apple', style({ opacity: 1, transform: 'translateY(0)' })),
+                animate('300ms', style({ opacity: 1, transform: 'translateY(0)' })),
             ]),
-
             transition(':leave', [
-                animate('300ms ease-apple', style({ opacity: 0, transform: 'translateY(10px)' })),
+                animate('300ms', style({ opacity: 0, transform: 'translateY(10px)' })),
             ]),
-        ]),
-        trigger('stageAnimation', [
-            transition(':enter', [
-                style({ opacity: 0, transform: 'translateY(20px)' }),
-                animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
-            ], { delay: '{{ delay }}' })
         ]),
     ],
-    providers: [ProjectService, DatePipe]
+    providers: [ProjectService, DatePipe,provideIcons({
+        heroChevronDown,
+        heroCheckCircle,
+        heroChevronRight,
+        heroChevronLeft,
+        heroInformationCircle,
+        heroGlobeAmericas,
+        heroBuildingOffice
+    })]
 })
 export class ProjectDetailsComponent implements OnInit {
 
@@ -49,7 +60,6 @@ export class ProjectDetailsComponent implements OnInit {
         { id: 'OperationAndMaintenance', icon: 'bi-gear', label: 'Operation and Maintenance' },
         { id: 'Decommissioning', icon: 'bi-x-circle', label: 'Decommissioning' }
     ];
-    hoveredStage: string | null = null;
 
     project$: Observable<any> | undefined;
     projectIds: string[] = [];
@@ -83,12 +93,8 @@ export class ProjectDetailsComponent implements OnInit {
                 }
                 this.isLoading = false;
             })
-        );
 
-        // Fetch all project IDs to calculate total projects
-        this.projectService.getAllProjectIds().subscribe(ids => {
-            this.projectIds = ids;
-        });
+        );
     }
 
     navigateToProject(project: any): void {
@@ -102,11 +108,6 @@ export class ProjectDetailsComponent implements OnInit {
         return currentStage ? currentStage.label : '';
     }
 
-    getTotalProjects(): number {
-        return this.projectIds.length;
-    }
-
-
 
 
     onTabChange(event: Event): void {
@@ -118,20 +119,15 @@ export class ProjectDetailsComponent implements OnInit {
         return this.currentProjectIndex + 1;
     }
 
-
+    getTotalProjects(): number {
+        return this.projectIds.length;
+    }
 
 
 
 
     selectTab(tabId: string): void {
         this.selectedTab = tabId;
-    }
-
-    getStageStatus(index: number): 'completed' | 'current' | 'upcoming' {
-        const selectedIndex = this.stages.findIndex(stage => stage.id === this.selectedTab);
-        if (index < selectedIndex) return 'completed';
-        if (index === selectedIndex) return 'current';
-        return 'upcoming';
     }
 
     formatHumanFriendlyDate(dateString: string): string {
@@ -566,28 +562,6 @@ export class ProjectDetailsComponent implements OnInit {
             ...(stage.economicAndFinancialSustainabilityData?.attachments || []),
             ...(stage.institutionalSustainabilityData?.attachments || [])
         ];
-    }
-
-    getIconClass(key: string): string {
-        if (key.includes('Requests')) {
-            return 'bi-file-earmark-text-fill';
-        } else if (key.includes('Answers')) {
-            return 'bi-chat-square-text-fill';
-        }
-        return 'bi-info-circle-fill';  // default icon
-    }
-
-    getSocialIconClass(key: string): string {
-        switch (key) {
-            case 'Jobs Generated':
-                return 'bi-briefcase-fill text-accent6';
-            case 'Inclusive Implementation':
-                return 'bi-diagram-3-fill text-accent5';
-            case 'Workers\' Accidents':
-                return 'bi-exclamation-triangle-fill text-secondary-300';
-            default:
-                return 'bi-info-circle-fill text-accent4';
-        }
     }
 
 

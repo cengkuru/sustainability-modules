@@ -126,5 +126,13 @@ export class ProjectService {
         );
     }
 
+    // New method to get all project IDs
+    getAllProjectIds(): Observable<string[]> {
+        return this.firestore.collection('projects').get().pipe(
+            map(snapshot => snapshot.docs.map(doc => doc.id))
+        );
+    }
+
+
 
 }

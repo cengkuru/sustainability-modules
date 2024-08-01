@@ -1,6 +1,6 @@
-import {Component, Input} from '@angular/core';
-import {CommonModule, DatePipe} from "@angular/common";
-import {animate, style, transition, trigger} from "@angular/animations";
+import { Component, Input } from '@angular/core';
+import { CommonModule, DatePipe } from "@angular/common";
+import { animate, style, transition, trigger } from "@angular/animations";
 
 @Component({
   selector: 'app-attachment-list',
@@ -12,14 +12,29 @@ import {animate, style, transition, trigger} from "@angular/animations";
     trigger('fadeSlideInOut', [
       transition(':enter', [
         style({ opacity: 0, transform: 'translateY(10px)' }),
-        animate('300ms', style({ opacity: 1, transform: 'translateY(0)' })),
+        animate('300ms ease-apple', style({ opacity: 1, transform: 'translateY(0)' })),
       ]),
       transition(':leave', [
-        animate('300ms', style({ opacity: 0, transform: 'translateY(10px)' })),
+        animate('300ms ease-apple', style({ opacity: 0, transform: 'translateY(10px)' })),
       ]),
     ]),
   ],
 })
-export class AttachmentListComponent  {
+export class AttachmentListComponent {
   @Input() attachments: any[] = [];
+
+  getTooltipContent(attachment: any): string {
+    return `
+      Document Type: ${attachment.documentType}
+      Format: ${attachment.format}
+      Language: ${attachment.language}
+      Pages: ${attachment.pages}
+      Date Published: ${this.formatDate(attachment.datePublished)}
+      Date Modified: ${this.formatDate(attachment.dateModified)}
+    `;
+  }
+
+  private formatDate(date: string | Date): string {
+    return new DatePipe('en-US').transform(date, 'mediumDate') || '';
+  }
 }
