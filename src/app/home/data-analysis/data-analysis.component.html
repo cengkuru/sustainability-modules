@@ -1,109 +1,88 @@
-<div class="bg-primary min-h-screen font-inter">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 class="text-5xl font-bold text-accent mb-12 tracking-tight apple-text-balance">Analytical Dashboard</h1>
-
-        <!-- Key Metrics -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            <div class="bg-white rounded-apple-lg shadow-apple-md p-8 transition duration-300 ease-apple-ease-out hover:shadow-apple-lg apple-hover-lift">
-                <div class="flex items-center mb-6">
-                    <i class="bi bi-folder2-open text-accent6 text-3xl mr-3"></i>
-                    <h2 class="text-2xl font-semibold text-accent">Total Projects Reviewed</h2>
-                </div>
-                <p class="text-4xl font-bold text-accent mb-3">278</p>
-                <p class="text-base text-accent4 mb-4">from 5 Regions</p>
-                <div class="flex items-center text-accent6">
-                    <i class="bi bi-graph-up-arrow text-xl mr-2"></i>
-                    <span class="text-base font-medium">12% increase</span>
-                </div>
+<div class="container mx-auto px-4 py-8">
+    <!-- Universal Filters -->
+    <div class="bg-white rounded-apple-lg shadow-apple-md p-6 mb-8">
+        <h2 class="text-2xl font-semibold text-accent mb-4">Filters</h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div>
+                <label for="region" class="block text-sm font-medium text-accent4">Region</label>
+                <select id="region" [(ngModel)]="selectedRegion" (change)="applyFilters()" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-accent6 focus:ring focus:ring-accent6 focus:ring-opacity-50">
+                    <option *ngFor="let region of regions" [value]="region">{{region}}</option>
+                </select>
             </div>
-
-            <div class="bg-white rounded-apple-lg shadow-apple-md p-8 transition duration-300 ease-apple-ease-out hover:shadow-apple-lg apple-hover-lift">
-                <div class="flex items-center mb-6">
-                    <i class="bi bi-clipboard2-check text-accent6 text-3xl mr-3"></i>
-                    <h2 class="text-2xl font-semibold text-accent">Project Status</h2>
-                </div>
-                <p class="text-4xl font-bold text-accent mb-3">85%</p>
-                <p class="text-base text-accent4 mb-4">Completed</p>
-                <div class="flex items-center text-accent6">
-                    <i class="bi bi-graph-up-arrow text-xl mr-2"></i>
-                    <span class="text-base font-medium">5% increase</span>
-                </div>
+            <div>
+                <label for="sector" class="block text-sm font-medium text-accent4">Sector</label>
+                <select id="sector" [(ngModel)]="selectedSector" (change)="applyFilters()" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-accent6 focus:ring focus:ring-accent6 focus:ring-opacity-50">
+                    <option *ngFor="let sector of sectors" [value]="sector">{{sector}}</option>
+                </select>
             </div>
-
-            <div class="bg-white rounded-apple-lg shadow-apple-md p-8 transition duration-300 ease-apple-ease-out hover:shadow-apple-lg apple-hover-lift">
-                <div class="flex items-center mb-6">
-                    <i class="bi bi-people text-accent6 text-3xl mr-3"></i>
-                    <h2 class="text-2xl font-semibold text-accent">Jobs Created</h2>
-                </div>
-                <p class="text-4xl font-bold text-accent mb-3">72,000</p>
-                <p class="text-base text-accent4 mb-4">in the last year</p>
-                <div class="flex items-center text-accent6">
-                    <i class="bi bi-graph-up-arrow text-xl mr-2"></i>
-                    <span class="text-base font-medium">4% increase</span>
+            <div>
+                <label for="climateObjective" class="block text-sm font-medium text-accent4">Climate Objective</label>
+                <select id="climateObjective" [(ngModel)]="selectedClimateObjective" (change)="applyFilters()" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-accent6 focus:ring focus:ring-accent6 focus:ring-opacity-50">
+                    <option *ngFor="let objective of climateObjectives" [value]="objective">{{objective}}</option>
+                </select>
+            </div>
+            <div>
+                <label for="yearRange" class="block text-sm font-medium text-accent4">Year Range</label>
+                <div class="flex items-center space-x-2">
+                    <input type="number" [(ngModel)]="startYear" (change)="applyFilters()" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-accent6 focus:ring focus:ring-accent6 focus:ring-opacity-50" min="{{startYear}}" max="{{endYear}}">
+                    <span>to</span>
+                    <input type="number" [(ngModel)]="endYear" (change)="applyFilters()" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-accent6 focus:ring focus:ring-accent6 focus:ring-opacity-50" min="{{startYear}}" max="{{endYear}}">
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="bg-white rounded-apple-lg shadow-apple-md p-8 mb-16 transition duration-300 ease-apple-ease-out hover:shadow-apple-lg apple-hover-lift">
-            <h3 class="text-2xl font-semibold text-accent mb-6">Infrastructure Projects in South Africa</h3>
-            <div #mapContainer class="w-full h-[600px] rounded-apple-lg overflow-hidden"></div>
+    <!-- Key Metrics -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div class="bg-white rounded-apple-lg shadow-apple-md p-8 transition duration-300 ease-apple-ease-out hover:shadow-apple-lg apple-hover-lift">
+            <div class="flex items-center mb-6">
+                <i class="bi bi-folder2-open text-accent6 text-3xl mr-3"></i>
+                <h2 class="text-2xl font-semibold text-accent">Total Projects</h2>
+            </div>
+            <p class="text-4xl font-bold text-accent mb-3">{{totalProjects}}</p>
+            <p class="text-base text-accent4 mb-4">from {{regions.length - 1}} Regions</p>
         </div>
 
-        <!-- Charts -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-            <div class="bg-white rounded-apple-lg shadow-apple-md p-8 transition duration-300 ease-apple-ease-out hover:shadow-apple-lg apple-hover-lift">
-                <h3 class="text-2xl font-semibold text-accent mb-6">Investment by Region</h3>
-                <div class="h-64 mb-6" id="investmentByRegionChart"></div>
-                <button class="apple-button flex items-center justify-center w-full" (click)="toggleDropdown('investmentByRegion')">
-                    <i class="bi bi-download text-xl mr-2"></i>
-                    Download
-                </button>
-            </div>
 
-            <div class="bg-white rounded-apple-lg shadow-apple-md p-8 transition duration-300 ease-apple-ease-out hover:shadow-apple-lg apple-hover-lift">
-                <h3 class="text-2xl font-semibold text-accent mb-6">Projects by Region</h3>
-                <div class="h-64 mb-6" id="projectsByRegionChart"></div>
-                <button class="apple-button flex items-center justify-center w-full" (click)="toggleDropdown('projectsByRegion')">
-                    <i class="bi bi-download text-xl mr-2"></i>
-                    Download
-                </button>
+        <div class="bg-white rounded-apple-lg shadow-apple-md p-8 transition duration-300 ease-apple-ease-out hover:shadow-apple-lg apple-hover-lift">
+            <div class="flex items-center mb-6">
+                <i class="bi bi-people text-accent6 text-3xl mr-3"></i>
+                <h2 class="text-2xl font-semibold text-accent">Jobs Created</h2>
             </div>
-
-            <div class="bg-white rounded-apple-lg shadow-apple-md p-8 transition duration-300 ease-apple-ease-out hover:shadow-apple-lg apple-hover-lift">
-                <h3 class="text-2xl font-semibold text-accent mb-6">Projects by Climate Objectives</h3>
-                <div class="h-64 mb-6" id="projectsByClimateObjectivesChart"></div>
-                <button class="apple-button flex items-center justify-center w-full" (click)="toggleDropdown('projectsByClimateObjectives')">
-                    <i class="bi bi-download text-xl mr-2"></i>
-                    Download
-                </button>
-            </div>
-
-            <div class="bg-white rounded-apple-lg shadow-apple-md p-8 transition duration-300 ease-apple-ease-out hover:shadow-apple-lg apple-hover-lift">
-                <h3 class="text-2xl font-semibold text-accent mb-6">Investments by Climate Objectives</h3>
-                <div class="h-64 mb-6" id="investmentsByClimateObjectivesChart"></div>
-                <button class="apple-button flex items-center justify-center w-full" (click)="toggleDropdown('investmentsByClimateObjectives')">
-                    <i class="bi bi-download text-xl mr-2"></i>
-                    Download
-                </button>
-            </div>
-
-            <div class="bg-white rounded-apple-lg shadow-apple-md p-8 transition duration-300 ease-apple-ease-out hover:shadow-apple-lg apple-hover-lift">
-                <h3 class="text-2xl font-semibold text-accent mb-6">Total Projects by Sector</h3>
-                <div class="h-64 mb-6" id="totalProjectsBySectorChart"></div>
-                <button class="apple-button flex items-center justify-center w-full" (click)="toggleDropdown('totalProjectsBySector')">
-                    <i class="bi bi-download text-xl mr-2"></i>
-                    Download
-                </button>
-            </div>
-
-            <div class="bg-white rounded-apple-lg shadow-apple-md p-8 transition duration-300 ease-apple-ease-out hover:shadow-apple-lg apple-hover-lift">
-                <h3 class="text-2xl font-semibold text-accent mb-6">Project Types Distribution</h3>
-                <div class="h-64 mb-6" id="projectTypesChart"></div>
-                <button class="apple-button flex items-center justify-center w-full" (click)="toggleDropdown('projectTypes')">
-                    <i class="bi bi-download text-xl mr-2"></i>
-                    Download
-                </button>
-            </div>
+            <p class="text-4xl font-bold text-accent mb-3">{{jobsCreated | number}}</p>
+            <p class="text-base text-accent4 mb-4">estimated</p>
         </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Total Projects by Sector Chart -->
+        <div class="bg-white rounded-apple-lg shadow-apple-md p-6">
+            <h3 class="text-xl font-semibold text-accent mb-4">Total Projects by Sector</h3>
+            <div id="totalProjectsBySectorChart" style="width: 100%; height: 400px;"></div>
+        </div>
+
+        <!-- Infrastructure Investment Chart -->
+        <div class="bg-white rounded-apple-lg shadow-apple-md p-6">
+            <h3 class="text-xl font-semibold text-accent mb-4">Infrastructure Investment by Sector</h3>
+            <div id="infrastructureInvestmentChart" style="width: 100%; height: 400px;"></div>
+        </div>
+
+        <!-- Investment by Region Chart -->
+        <div class="bg-white rounded-apple-lg shadow-apple-md p-6">
+            <div id="investmentByRegionChart" style="width: 100%; height: 400px;"></div>
+        </div>
+
+        <!-- Investments by Climate Objectives Chart -->
+        <div class="bg-white rounded-apple-lg shadow-apple-md p-6">
+            <div id="investmentsByClimateObjectivesChart" style="width: 100%; height: 400px;"></div>
+        </div>
+
+
+    </div>
+
+    <!-- Map -->
+    <div class="mt-8 bg-white rounded-apple-lg shadow-apple-md p-6">
+        <div #mapContainer style="height: 400px;"></div>
     </div>
 </div>

@@ -1,32 +1,40 @@
 import { CommonModule } from "@angular/common";
-import {Component, AfterViewInit, ElementRef, ViewChild, NgZone, HostListener, ChangeDetectorRef} from "@angular/core";
+import { Component, AfterViewInit, ElementRef, ViewChild, NgZone, HostListener, ChangeDetectorRef } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
 import * as echarts from 'echarts';
-import { jsPDF } from "jspdf";
 import { EChartsOption, BarSeriesOption, PieSeriesOption } from 'echarts';
 import * as L from 'leaflet';
 import { ScriptLoaderService } from "../../services/scriptLoader.service";
+import { Project } from "../../models/vizprojects.model";
 
+type ChartName = 'investmentByRegion' | 'projectsByRegion' | 'projectsByClimateObjectives' |
+    'investmentsByClimateObjectives' | 'totalProjectsBySector' | 'projectTypes' |
+    'infrastructureInvestment';
 
 @Component({
     selector: 'app-data-analysis',
     standalone: true,
-    imports: [CommonModule],
-
+    imports: [CommonModule, FormsModule],
     templateUrl: './data-analysis.component.html',
     styleUrls: ['./data-analysis.component.scss']
 })
 export class DataAnalysisComponent implements AfterViewInit {
     @ViewChild('mapContainer') mapContainer!: ElementRef;
 
-    investmentByRegionChart: echarts.ECharts | null = null;
-    projectsByRegionChart: echarts.ECharts | null = null;
-    projectsByClimateObjectivesChart: echarts.ECharts | null = null;
-    investmentsByClimateObjectivesChart: echarts.ECharts | null = null;
-    totalProjectsBySectorChart: echarts.ECharts | null = null;
-    projectTypesChart: echarts.ECharts | null = null;
+    charts: { [key: string]: echarts.ECharts | null } = {
+        investmentByRegion: null,
+        projectsByRegion: null,
+        projectsByClimateObjectives: null,
+        investmentsByClimateObjectives: null,
+        totalProjectsBySector: null,
+        projectTypes: null,
+        infrastructureInvestment: null
+    };
 
     private map!: L.Map;
+    projects: Project[] = [];
+    filteredProjects: Project[] = [];
 
     markers: { lat: number; lng: number; popup: string; }[] = [];
     isLoading: boolean = true;
@@ -34,39 +42,47 @@ export class DataAnalysisComponent implements AfterViewInit {
     projectsLoaded: boolean = false;
     private viewInitialized: boolean = false;
 
-    dropdownOpen: { [key: string]: boolean } = {
+
+
+    dropdownOpen: Record<ChartName, boolean> = {
         investmentByRegion: false,
         projectsByRegion: false,
         projectsByClimateObjectives: false,
         investmentsByClimateObjectives: false,
         totalProjectsBySector: false,
-        projectTypes: false
+        projectTypes: false,
+        infrastructureInvestment: false
     };
 
-    private investmentData = [
-        { region: 'Gauteng', '2019': 1800, '2020': 2000, '2021': 2200, '2022': 2500 },
-        { region: 'Western Cape', '2019': 1500, '2020': 1600, '2021': 1700, '2022': 1800 },
-        { region: 'KwaZulu-Natal', '2019': 1700, '2020': 1800, '2021': 1900, '2022': 2100 },
-        { region: 'Eastern Cape', '2019': 900, '2020': 1000, '2021': 1100, '2022': 1200 },
-        { region: 'Free State', '2019': 700, '2020': 750, '2021': 800, '2022': 900 },
-        { region: 'Limpopo', '2019': 800, '2020': 850, '2021': 900, '2022': 1000 },
-        { region: 'Mpumalanga', '2019': 900, '2020': 950, '2021': 1000, '2022': 1100 },
-        { region: 'North West', '2019': 600, '2020': 650, '2021': 700, '2022': 800 },
-        { region: 'Northern Cape', '2019': 400, '2020': 450, '2021': 500, '2022': 600 }
-    ];
+
+
+    // Filters
+    regions: string[] = [];
+    sectors: string[] = [];
+    climateObjectives: string[] = [];
+    selectedRegion: string = 'All';
+    selectedSector: string = 'All';
+    selectedClimateObjective: string = 'All';
+    startYear: number = 0;
+    endYear: number = 0;
+
+    // Key Metrics
+    totalProjects: number = 0;
+    projectCompletionRate: number = 0;
+    jobsCreated: number = 0;
 
     constructor(
         private http: HttpClient,
         private ngZone: NgZone,
         private scriptLoader: ScriptLoaderService,
         private cdr: ChangeDetectorRef,
-        ) { }
+    ) { }
 
     async ngOnInit(): Promise<void> {
         console.log('ngOnInit called');
         try {
             await this.loadLeafletScripts();
-            this.loadProjects();
+            await this.loadProjects();
         } catch (error) {
             console.error('Error during component initialization:', error);
         }
@@ -157,10 +173,6 @@ export class DataAnalysisComponent implements AfterViewInit {
     }
 
     checkAndInitializeMap(): void {
-        console.log('checkAndInitializeMap called');
-        console.log('viewInitialized:', this.viewInitialized);
-        console.log('projectsLoaded:', this.projectsLoaded);
-        console.log('mapContainer:', this.mapContainer);
 
         if (this.viewInitialized && this.projectsLoaded && this.mapContainer && this.mapContainer.nativeElement) {
             this.initializeMap();
@@ -173,7 +185,6 @@ export class DataAnalysisComponent implements AfterViewInit {
             setTimeout(() => this.checkAndInitializeMap(), 100);
         }
     }
-
 
     initializeMap(): void {
         console.log('initializeMap called');
@@ -191,9 +202,18 @@ export class DataAnalysisComponent implements AfterViewInit {
         }).addTo(this.map);
 
         console.log('Adding markers', this.markers);
-        this.markers.forEach(markerData => {
-            const marker = L.marker([markerData.lat, markerData.lng]).addTo(this.map);
-            marker.bindPopup(markerData.popup);
+        this.projects.forEach(project => {
+            const marker = L.marker([project.location.lat, project.location.lng]).addTo(this.map);
+            marker.bindPopup(`
+                <div class="p-4 max-w-sm">
+                    <h3 class="text-lg font-semibold mb-2">${project.name}</h3>
+                    <p class="mb-2">Region: ${project.region.name}</p>
+                    <p class="mb-4">Budget: $${project.budget.toLocaleString()}</p>
+                    <button class="view-details-button px-4 py-2 bg-accent text-secondary rounded hover:bg-secondary hover:text-accent transition duration-300">
+                        View Details
+                    </button>
+                </div>
+            `);
         });
 
         this.fitMapBounds();
@@ -202,73 +222,236 @@ export class DataAnalysisComponent implements AfterViewInit {
     }
 
     fitMapBounds() {
-        console.log('fitMapBounds called', this.markers.length);
-        if (this.markers.length > 0 && this.map) {
-            const bounds = L.latLngBounds(this.markers.map(m => [m.lat, m.lng]));
+        if (this.projects.length > 0 && this.map) {
+            const bounds = L.latLngBounds(this.projects.map(p => [p.location.lat, p.location.lng]));
             this.map.fitBounds(bounds);
         }
     }
 
-    loadProjects() {
+    async loadProjects() {
         this.isLoading = true;
-        // Simulate loading projects
-        setTimeout(() => {
-            this.generateRandomMarkers();
+        try {
+            const data = await this.http.get<Project[]>('/assets/data/vizProjects.json').toPromise();
+            this.projects = data || [];
+            this.filteredProjects = [...this.projects];
             this.projectsLoaded = true;
             this.isLoading = false;
+            this.initializeFilters();
+            this.updateKeyMetrics();
             this.checkAndInitializeMap();
             this.initializeCharts();
             this.cdr.detectChanges();
-        }, 1000);
+        } catch (error) {
+            console.error('Error loading projects:', error);
+            this.isLoading = false;
+        }
     }
 
-    generateRandomMarkers() {
-        console.log('generateMarkers called');
-        const projectTypes = ['Water', 'Energy', 'Transport', 'Agriculture'];
-        const regions = ['Gauteng', 'Western Cape', 'KwaZulu-Natal', 'Eastern Cape', 'Free State', 'Limpopo', 'Mpumalanga', 'North West', 'Northern Cape'];
-
-        for (let i = 0; i < 50; i++) {
-            const lat = Math.random() * ((-22) - (-34)) + (-34);
-            const lng = Math.random() * (32 - 16) + 16;
-            const projectType = projectTypes[Math.floor(Math.random() * projectTypes.length)];
-            const region = regions[Math.floor(Math.random() * regions.length)];
-
-            const popup = `
-                <div class="p-4 max-w-sm">
-                    <h3 class="text-lg font-semibold mb-2">${projectType} Project</h3>
-                    <p class="mb-2">Region: ${region}</p>
-                    <p class="mb-4">Investment: $${Math.floor(Math.random() * 100 + 1)} million</p>
-                    <button class="view-details-button px-4 py-2 bg-accent text-secondary rounded hover:bg-secondary hover:text-accent transition duration-300">
-                        View Details
-                    </button>
-                </div>
-            `;
-            this.markers.push({ lat, lng, popup });
-        }
-        console.log('Generated markers:', this.markers);
+    initializeFilters() {
+        this.regions = ['All', ...new Set(this.projects.map(p => p.region.name))];
+        this.sectors = ['All', ...new Set(this.projects.map(p => p.sector))];
+        this.climateObjectives = ['All', ...new Set(this.projects.map(p => p.climateObjective))];
+        const years = this.projects.flatMap(p => Object.keys(p.yearlyInvestment).map(Number));
+        this.startYear = Math.min(...years);
+        this.endYear = Math.max(...years);
     }
 
-    @HostListener('window:resize')
-    onResize() {
-        if (this.map) {
-            this.map.invalidateSize();
-        }
+    applyFilters() {
+        this.filteredProjects = this.projects.filter(p =>
+            (this.selectedRegion === 'All' || p.region.name === this.selectedRegion) &&
+            (this.selectedSector === 'All' || p.sector === this.selectedSector) &&
+            (this.selectedClimateObjective === 'All' || p.climateObjective === this.selectedClimateObjective) &&
+            Object.keys(p.yearlyInvestment).some(year => {
+                const y = Number(year);
+                return y >= this.startYear && y <= this.endYear;
+            })
+        );
+        this.updateKeyMetrics();
+        this.updateAllCharts();
+    }
+
+    updateKeyMetrics() {
+        this.totalProjects = this.filteredProjects.length;
+        // Assuming a project is completed if it has no investment in the last year
+        const completedProjects = this.filteredProjects.filter(p =>
+            !p.yearlyInvestment[this.endYear.toString()]
+        ).length;
+        this.projectCompletionRate = (completedProjects / this.totalProjects) * 100;
+        // Assuming each project creates a random number of jobs between 100 and 1000
+        this.jobsCreated = this.filteredProjects.reduce((sum, p) =>
+            sum + Math.floor(Math.random() * 900 + 100), 0
+        );
     }
 
     private initializeCharts(): void {
-        this.createInvestmentByRegionChart();
-        this.createProjectsByRegionChart();
-        this.createProjectsByClimateObjectivesChart();
-        this.createInvestmentsByClimateObjectivesChart();
-        this.createTotalProjectsBySectorChart();
-        this.createProjectTypesChart();
+        Object.keys(this.charts).forEach(chartName => {
+            const chartDom = document.getElementById(chartName + 'Chart');
+            if (chartDom) {
+                this.charts[chartName] = echarts.init(chartDom);
+                this.updateChart(chartName);
+            }
+        });
     }
 
+    private updateAllCharts(): void {
+        Object.keys(this.charts).forEach(chartName => {
+            this.updateChart(chartName);
+        });
+    }
+
+    private updateChart(chartName: string): void {
+        switch (chartName) {
+            case 'totalProjectsBySector':
+                this.createTotalProjectsBySectorChart();
+                break;
+            case 'infrastructureInvestment':
+                this.createInfrastructureInvestmentChart();
+                break;
+            case 'projectTypes':
+                this.createProjectTypesChart();
+                break;
+            case 'investmentByRegion':
+                this.createInvestmentByRegionChart();
+                break;
+            case 'projectsByRegion':
+                this.createProjectsByRegionChart();
+                break;
+            case 'projectsByClimateObjectives':
+                this.createProjectsByClimateObjectivesChart();
+                break;
+            case 'investmentsByClimateObjectives':
+                this.createInvestmentsByClimateObjectivesChart();
+                break;
+        }
+    }
+
+    private createTotalProjectsBySectorChart(): void {
+        const chart = this.charts['totalProjectsBySector'];
+        if (!chart) return;
+
+        const projectsBySector = this.filteredProjects.reduce((acc, project) => {
+            acc[project.sector] = (acc[project.sector] || 0) + 1;
+            return acc;
+        }, {} as { [key: string]: number });
+
+        const data = Object.entries(projectsBySector)
+            .map(([sector, count]) => ({ sector, projects: count }))
+            .sort((a, b) => b.projects - a.projects);
+
+        const option: EChartsOption = {
+            title: {
+                text: 'Total Projects per Sector',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                },
+                formatter: '{b}: {c} projects'
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'value',
+                name: 'Number of Projects'
+            },
+            yAxis: {
+                type: 'category',
+                data: data.map(item => item.sector),
+                axisTick: {
+                    alignWithLabel: true
+                }
+            },
+            series: [{
+                name: 'Projects',
+                type: 'bar',
+                data: data.map(item => item.projects),
+                itemStyle: {
+                    borderRadius: [0, 4, 4, 0]
+                }
+            }]
+        };
+
+        chart.setOption(option);
+    }
+
+    private createInfrastructureInvestmentChart(): void {
+        const chart = this.charts['infrastructureInvestment'];
+        if (!chart) return;
+
+        const investmentBySector = this.filteredProjects.reduce((acc, project) => {
+            acc[project.sector] = (acc[project.sector] || 0) + project.budget;
+            return acc;
+        }, {} as { [key: string]: number });
+
+        const data = Object.entries(investmentBySector).map(([sector, budget]) => ({
+            name: sector,
+            value: budget
+        }));
+
+        const option: EChartsOption = {
+            title: {
+                text: 'Infrastructure Investment by Sector',
+                left: 'center'
+            },
+            tooltip: {
+                formatter: function(info: any) {
+                    const value = info.value.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'ZAR',
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0
+                    });
+                    return `<b>${info.name}</b>: ${value}`;
+                }
+            },
+            series: [{
+                name: 'Infrastructure Investment',
+                type: 'treemap',
+                data: data,
+                label: {
+                    show: true,
+                    formatter: '{b}\n{c}',
+                    fontSize: 14
+                },
+                itemStyle: {
+                    borderColor: '#fff'
+                },
+                levels: [
+                    {
+                        itemStyle: {
+                            borderWidth: 0,
+                            gapWidth: 5
+                        }
+                    },
+                    {
+                        itemStyle: {
+                            gapWidth: 1
+                        }
+                    },
+                    {
+                        colorSaturation: [0.35, 0.5],
+                        itemStyle: {
+                            gapWidth: 1,
+                            borderColorSaturation: 0.6
+                        }
+                    }
+                ]
+            }]
+        };
+
+        chart.setOption(option);
+    }
 
     private createProjectTypesChart(): void {
         const chartDom = document.getElementById('projectTypesChart');
         if (!chartDom) return;
-        this.projectTypesChart = echarts.init(chartDom);
+        this.charts['projectTypes'] = echarts.init(chartDom);
 
         const data = [
             { type: 'Solar Energy', projects: 50 },
@@ -352,24 +535,25 @@ export class DataAnalysisComponent implements AfterViewInit {
             animationDelay: (idx: number) => idx * 150
         };
 
-        this.projectTypesChart.setOption(option);
+        this.charts['projectTypes']!.setOption(option);
     }
-
-
-
 
     private createInvestmentByRegionChart(): void {
         const chartDom = document.getElementById('investmentByRegionChart');
         if (!chartDom) return;
-        this.investmentByRegionChart = echarts.init(chartDom);
+        this.charts['investmentByRegion'] = echarts.init(chartDom);
 
-        const years = ['2019', '2020', '2021', '2022'];
-        const regions = this.investmentData.map(item => item.region);
+        const regions = Array.from(new Set(this.projects.map(p => p.region.name)));
+        const years = Object.keys(this.projects[0].yearlyInvestment);
 
         const series: BarSeriesOption[] = years.map(year => ({
             name: year,
             type: 'bar',
-            data: this.investmentData.map(item => item[year as keyof typeof item] as number),
+            data: regions.map(region =>
+                this.projects
+                    .filter(p => p.region.name === region)
+                    .reduce((sum, p) => sum + (p.yearlyInvestment[year] || 0), 0)
+            ),
             barGap: '10%',
             barCategoryGap: '20%',
             itemStyle: {
@@ -468,41 +652,36 @@ export class DataAnalysisComponent implements AfterViewInit {
             animationEasing: 'cubicInOut'
         };
 
-        this.investmentByRegionChart.setOption(option);
+        this.charts['investmentByRegion']!.setOption(option);
     }
 
     private createProjectsByRegionChart(): void {
         const chartDom = document.getElementById('projectsByRegionChart');
         if (!chartDom) return;
-        this.projectsByRegionChart = echarts.init(chartDom);
+        this.charts['projectsByRegion'] = echarts.init(chartDom);
 
-        const data = [
-            { region: 'Gauteng', projects: 45 },
-            { region: 'Western Cape', projects: 35 },
-            { region: 'KwaZulu-Natal', projects: 40 },
-            { region: 'Eastern Cape', projects: 30 },
-            { region: 'Free State', projects: 20 },
-            { region: 'Limpopo', projects: 25 },
-            { region: 'Mpumalanga', projects: 28 },
-            { region: 'North West', projects: 15 },
-            { region: 'Northern Cape', projects: 10 }
-        ];
+        const projectsByRegion = this.projects.reduce((acc, project) => {
+            acc[project.region.name] = (acc[project.region.name] || 0) + 1;
+            return acc;
+        }, {} as { [key: string]: number });
 
-        const series: BarSeriesOption[] = [
-            {
-                name: 'Projects',
-                type: 'bar',
-                data: data.map(item => item.projects),
+        const data = Object.entries(projectsByRegion)
+            .map(([region, count]) => ({ region, projects: count }))
+            .sort((a, b) => b.projects - a.projects);
+
+        const series: BarSeriesOption[] = [{
+            name: 'Projects',
+            type: 'bar',
+            data: data.map(item => item.projects),
+            itemStyle: {
+                borderRadius: [4, 4, 0, 0]
+            },
+            emphasis: {
                 itemStyle: {
-                    borderRadius: [4, 4, 0, 0]
-                },
-                emphasis: {
-                    itemStyle: {
-                        color: '#58707b' // accent4 color for hover effect
-                    }
+                    color: '#58707b'
                 }
             }
-        ];
+        }];
 
         const option: EChartsOption = {
             backgroundColor: '#F7F7F7', // primary color as background
@@ -518,13 +697,9 @@ export class DataAnalysisComponent implements AfterViewInit {
                 }
             },
             tooltip: {
-                trigger: 'item',
-                backgroundColor: 'rgba(247, 247, 247, 0.9)', // primary color with opacity
-                borderColor: '#d8d8cd', // accent2 color for border
-                borderWidth: 1,
-                textStyle: {
-                    color: '#333333', // accent color for tooltip text
-                    fontFamily: 'Inter, sans-serif'
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
                 },
                 formatter: '{b}: {c} projects'
             },
@@ -579,49 +754,51 @@ export class DataAnalysisComponent implements AfterViewInit {
             animationDelay: (idx: number) => idx * 100
         };
 
-        this.projectsByRegionChart.setOption(option);
+        this.charts['projectsByRegion']!.setOption(option);
     }
 
     private createProjectsByClimateObjectivesChart(): void {
         const chartDom = document.getElementById('projectsByClimateObjectivesChart');
         if (!chartDom) return;
-        this.projectsByClimateObjectivesChart = echarts.init(chartDom);
+        this.charts['projectsByClimateObjectives'] = echarts.init(chartDom);
 
-        const data = [
-            { objective: 'Adaptation', projects: 60 },
-            { objective: 'Mitigation', projects: 50 },
-            { objective: 'Cross Cutting', projects: 30 }
-        ];
+        const projectsByObjective = this.projects.reduce((acc, project) => {
+            acc[project.climateObjective] = (acc[project.climateObjective] || 0) + 1;
+            return acc;
+        }, {} as { [key: string]: number });
 
-        const series: PieSeriesOption[] = [
-            {
-                name: 'Projects',
-                type: 'pie',
-                radius: ['40%', '70%'],
-                avoidLabelOverlap: false,
-                itemStyle: {
-                    borderRadius: 10,
-                    borderColor: '#fff',
-                    borderWidth: 2
-                },
+        const data = Object.entries(projectsByObjective).map(([objective, count]) => ({
+            value: count,
+            name: objective
+        }));
+
+        const series: PieSeriesOption[] = [{
+            name: 'Projects',
+            type: 'pie',
+            radius: ['40%', '70%'],
+            avoidLabelOverlap: false,
+            itemStyle: {
+                borderRadius: 10,
+                borderColor: '#fff',
+                borderWidth: 2
+            },
+            label: {
+                show: false,
+                position: 'center'
+            },
+            emphasis: {
                 label: {
-                    show: false,
-                    position: 'center'
-                },
-                emphasis: {
-                    label: {
-                        show: true,
-                        fontSize: '18',
-                        fontWeight: 'bold',
-                        color: '#333333'
-                    }
-                },
-                labelLine: {
-                    show: false
-                },
-                data: data.map(item => ({ value: item.projects, name: item.objective }))
-            }
-        ];
+                    show: true,
+                    fontSize: '18',
+                    fontWeight: 'bold',
+                    color: '#333333' // accent color for emphasized text
+                }
+            },
+            labelLine: {
+                show: false
+            },
+            data: data
+        }];
 
         const option: EChartsOption = {
             backgroundColor: '#F7F7F7', // primary color as background
@@ -667,19 +844,23 @@ export class DataAnalysisComponent implements AfterViewInit {
             animationDelay: (idx: number) => idx * 150
         };
 
-        this.projectsByClimateObjectivesChart.setOption(option);
+        this.charts['projectsByClimateObjectives']!.setOption(option);
     }
 
     private createInvestmentsByClimateObjectivesChart(): void {
         const chartDom = document.getElementById('investmentsByClimateObjectivesChart');
         if (!chartDom) return;
-        this.investmentsByClimateObjectivesChart = echarts.init(chartDom);
+        this.charts['investmentsByClimateObjectives'] = echarts.init(chartDom);
 
-        const data = [
-            { objective: 'Adaptation', investment: 3000 },
-            { objective: 'Mitigation', investment: 2500 },
-            { objective: 'Cross Cutting', investment: 1500 }
-        ];
+        const investmentsByObjective = this.projects.reduce((acc, project) => {
+            acc[project.climateObjective] = (acc[project.climateObjective] || 0) + project.budget;
+            return acc;
+        }, {} as { [key: string]: number });
+
+        const data = Object.entries(investmentsByObjective).map(([objective, investment]) => ({
+            value: investment,
+            name: objective
+        }));
 
         const series: PieSeriesOption[] = [
             {
@@ -707,7 +888,7 @@ export class DataAnalysisComponent implements AfterViewInit {
                 labelLine: {
                     show: false
                 },
-                data: data.map(item => ({ value: item.investment, name: item.objective }))
+                data: data.map(item => ({ value: item.value, name: item.name }))
             }
         ];
 
@@ -758,118 +939,21 @@ export class DataAnalysisComponent implements AfterViewInit {
             animationDelay: (idx: number) => idx * 150
         };
 
-        this.investmentsByClimateObjectivesChart.setOption(option);
+        this.charts['investmentsByClimateObjectives']!.setOption(option);
     }
 
-    private createTotalProjectsBySectorChart(): void {
-        const chartDom = document.getElementById('totalProjectsBySectorChart');
-        if (!chartDom) return;
-        this.totalProjectsBySectorChart = echarts.init(chartDom);
-
-        const data = [
-            { sector: 'Water', projects: 40 },
-            { sector: 'Energy', projects: 35 },
-            { sector: 'Transport', projects: 30 },
-            { sector: 'Agriculture', projects: 25 }
-        ];
-
-        const series: BarSeriesOption[] = [
-            {
-                name: 'Projects',
-                type: 'bar',
-                data: data.map(item => item.projects),
-                itemStyle: {
-                    borderRadius: [4, 4, 0, 0]
-                },
-                emphasis: {
-                    itemStyle: {
-                        color: '#58707b' // accent4 color for hover effect
-                    }
-                }
-            }
-        ];
-
-        const option: EChartsOption = {
-            backgroundColor: '#F7F7F7', // primary color as background
-            title: {
-                text: 'Total Projects per Sector',
-                left: 'center',
-                top: '20px',
-                textStyle: {
-                    color: '#333333', // accent color for title
-                    fontWeight: 'bold',
-                    fontSize: 18,
-                    fontFamily: 'Inter, sans-serif'
-                }
-            },
-            tooltip: {
-                trigger: 'item',
-                backgroundColor: 'rgba(247, 247, 247, 0.9)', // primary color with opacity
-                borderColor: '#d8d8cd', // accent2 color for border
-                borderWidth: 1,
-                textStyle: {
-                    color: '#333333', // accent color for tooltip text
-                    fontFamily: 'Inter, sans-serif'
-                },
-                formatter: '{b}: {c} projects'
-            },
-            grid: {
-                left: '5%',
-                right: '5%',
-                bottom: '15%',
-                top: '15%',
-                containLabel: true
-            },
-            xAxis: {
-                type: 'category',
-                data: data.map(item => item.sector),
-                axisLabel: {
-                    rotate: 45,
-                    interval: 0,
-                    color: '#333333', // accent color for axis labels
-                    fontFamily: 'Inter, sans-serif'
-                },
-                axisLine: {
-                    lineStyle: {
-                        color: '#d8d8cd' // accent2 color for axis line
-                    }
-                }
-            },
-            yAxis: {
-                type: 'value',
-                name: 'Number of Projects',
-                nameTextStyle: {
-                    color: '#333333', // accent color for axis name
-                    fontFamily: 'Inter, sans-serif'
-                },
-                axisLabel: {
-                    color: '#333333', // accent color for axis labels
-                    fontFamily: 'Inter, sans-serif'
-                },
-                axisLine: {
-                    lineStyle: {
-                        color: '#d8d8cd' // accent2 color for axis line
-                    }
-                },
-                splitLine: {
-                    lineStyle: {
-                        color: '#d8d8cd' // accent2 color for split lines
-                    }
-                }
-            },
-            series: series,
-            color: ['#D60000'], // Using secondary color for bars
-            animationDuration: 1000,
-            animationEasing: 'cubicInOut',
-            animationDelay: (idx: number) => idx * 100
-        };
-
-        this.totalProjectsBySectorChart.setOption(option);
+    @HostListener('window:resize')
+    onResize() {
+        if (this.map) {
+            this.map.invalidateSize();
+        }
+        Object.values(this.charts).forEach(chart => chart?.resize());
     }
 
-    toggleDropdown(chartName: string): void {
+    toggleDropdown(chartName: ChartName): void {
         this.dropdownOpen[chartName] = !this.dropdownOpen[chartName];
+        setTimeout(() => {
+            this.charts[chartName]?.resize();
+        }, 0);
     }
-
-
 }

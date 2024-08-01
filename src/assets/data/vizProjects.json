@@ -1,0 +1,2027 @@
+[
+  {
+    "id": "project001",
+    "name": "Education",
+    "budget": 626122088.0,
+    "region": {
+      "name": "Northern Cape",
+      "code": "ZA-NC",
+      "population": 1650058
+    },
+    "location": {
+      "lat": -29.0467,
+      "lng": 21.8569
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Education",
+    "subsector": "Education",
+    "projectType": "Education",
+    "date": "2024-01-13",
+    "yearlyInvestment": {
+      "2019": 142068713,
+      "2020": 168856601,
+      "2021": 119141644,
+      "2022": 46486815
+    }
+  },
+  {
+    "id": "project002",
+    "name": "Education",
+    "budget": 807146282.0,
+    "region": {
+      "name": "Gauteng",
+      "code": "ZA-GT",
+      "population": 2483978
+    },
+    "location": {
+      "lat": -26.2708,
+      "lng": 28.1123
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Education",
+    "subsector": "Education",
+    "projectType": "Education",
+    "date": "2020-07-16",
+    "yearlyInvestment": {
+      "2019": 139563742,
+      "2020": 155227055,
+      "2021": 178948631,
+      "2022": 182357626
+    }
+  },
+  {
+    "id": "project003",
+    "name": "Health",
+    "budget": 199202597.0,
+    "region": {
+      "name": "Limpopo",
+      "code": "ZA-LP",
+      "population": 2721691
+    },
+    "location": {
+      "lat": -23.4013,
+      "lng": 29.4179
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Health",
+    "subsector": "Health",
+    "projectType": "Health",
+    "date": "2020-12-19",
+    "yearlyInvestment": {
+      "2019": 161756847,
+      "2020": 116833610,
+      "2021": 178227365,
+      "2022": 160641291
+    }
+  },
+  {
+    "id": "project004",
+    "name": "Governance",
+    "budget": 604272710.0,
+    "region": {
+      "name": "KwaZulu-Natal",
+      "code": "ZA-NL",
+      "population": 2752049
+    },
+    "location": {
+      "lat": -29.0,
+      "lng": 31.0
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Governance",
+    "subsector": "Governance",
+    "projectType": "Governance",
+    "date": "2022-11-26",
+    "yearlyInvestment": {
+      "2019": 131032686,
+      "2020": 133085176,
+      "2021": 148990822,
+      "2022": 183066311
+    }
+  },
+  {
+    "id": "project005",
+    "name": "Communications",
+    "budget": 475683832.0,
+    "region": {
+      "name": "Northern Cape",
+      "code": "ZA-NC",
+      "population": 2055986
+    },
+    "location": {
+      "lat": -29.0467,
+      "lng": 21.8569
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Communications",
+    "subsector": "Communications",
+    "projectType": "Communications",
+    "date": "2023-08-26",
+    "yearlyInvestment": {
+      "2019": 191143040,
+      "2020": 122485464,
+      "2021": 123692018,
+      "2022": 2329991
+    }
+  },
+  {
+    "id": "project006",
+    "name": "Education",
+    "budget": 647163953.0,
+    "region": {
+      "name": "Northern Cape",
+      "code": "ZA-NC",
+      "population": 2621438
+    },
+    "location": {
+      "lat": -29.0467,
+      "lng": 21.8569
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Education",
+    "subsector": "Education",
+    "projectType": "Education",
+    "date": "2022-03-27",
+    "yearlyInvestment": {
+      "2019": 176912561,
+      "2020": 115111891,
+      "2021": 197442534,
+      "2022": 177032495
+    }
+  },
+  {
+    "id": "project007",
+    "name": "Water and waste",
+    "budget": 37282093.0,
+    "region": {
+      "name": "Limpopo",
+      "code": "ZA-LP",
+      "population": 3839861
+    },
+    "location": {
+      "lat": -23.4013,
+      "lng": 29.4179
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Water and waste",
+    "subsector": "Water and waste",
+    "projectType": "Water and waste",
+    "date": "2021-09-08",
+    "yearlyInvestment": {
+      "2019": 138514488,
+      "2020": 147303235,
+      "2021": 198908275,
+      "2022": 127576072
+    }
+  },
+  {
+    "id": "project008",
+    "name": "Urban transport",
+    "budget": 168126021.0,
+    "region": {
+      "name": "Western Cape",
+      "code": "ZA-WC",
+      "population": 2793414
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Transport",
+    "subsector": "Urban transport",
+    "projectType": "Urban transport",
+    "date": "2024-02-17",
+    "yearlyInvestment": {
+      "2019": 171359198,
+      "2020": 168996580,
+      "2021": 148964483,
+      "2022": 69780646
+    }
+  },
+  {
+    "id": "project009",
+    "name": "Urban transport",
+    "budget": 74431229.0,
+    "region": {
+      "name": "Eastern Cape",
+      "code": "ZA-EC",
+      "population": 1606612
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Transport",
+    "subsector": "Urban transport",
+    "projectType": "Urban transport",
+    "date": "2023-08-11",
+    "yearlyInvestment": {
+      "2019": 160621411,
+      "2020": 108341261,
+      "2021": 155401444,
+      "2022": 190482506
+    }
+  },
+  {
+    "id": "project010",
+    "name": "Education",
+    "budget": 27719548.0,
+    "region": {
+      "name": "Northern Cape",
+      "code": "ZA-NC",
+      "population": 1114895
+    },
+    "location": {
+      "lat": -29.0467,
+      "lng": 21.8569
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Education",
+    "subsector": "Education",
+    "projectType": "Education",
+    "date": "2023-05-27",
+    "yearlyInvestment": {
+      "2019": 155291996,
+      "2020": 175468299,
+      "2021": 185273492,
+      "2022": 11854075
+    }
+  },
+  {
+    "id": "project011",
+    "name": "Other energy",
+    "budget": 635794397.0,
+    "region": {
+      "name": "KwaZulu-Natal",
+      "code": "ZA-NL",
+      "population": 1174948
+    },
+    "location": {
+      "lat": -29.0,
+      "lng": 31.0
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Energy",
+    "subsector": "Other energy",
+    "projectType": "Other energy",
+    "date": "2020-08-19",
+    "yearlyInvestment": {
+      "2019": 103402025,
+      "2020": 178513502,
+      "2021": 122625418,
+      "2022": 88503812
+    }
+  },
+  {
+    "id": "project012",
+    "name": "Education",
+    "budget": 455568237.0,
+    "region": {
+      "name": "Free State",
+      "code": "ZA-FS",
+      "population": 4314301
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Education",
+    "subsector": "Education",
+    "projectType": "Education",
+    "date": "2024-04-29",
+    "yearlyInvestment": {
+      "2019": 124758705,
+      "2020": 105911047,
+      "2021": 145964018,
+      "2022": 171850398
+    }
+  },
+  {
+    "id": "project013",
+    "name": "Governance",
+    "budget": 322888502.0,
+    "region": {
+      "name": "Northern Cape",
+      "code": "ZA-NC",
+      "population": 1544615
+    },
+    "location": {
+      "lat": -29.0467,
+      "lng": 21.8569
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Governance",
+    "subsector": "Governance",
+    "projectType": "Governance",
+    "date": "2020-05-06",
+    "yearlyInvestment": {
+      "2019": 162355557,
+      "2020": 177488586,
+      "2021": 167339519,
+      "2022": 181800427
+    }
+  },
+  {
+    "id": "project014",
+    "name": "Hydropower energy",
+    "budget": 424374111.0,
+    "region": {
+      "name": "North West",
+      "code": "ZA-NW",
+      "population": 4677913
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Energy",
+    "subsector": "Hydropower energy",
+    "projectType": "Hydropower energy",
+    "date": "2023-02-09",
+    "yearlyInvestment": {
+      "2019": 107476236,
+      "2020": 125280495,
+      "2021": 188405207,
+      "2022": 25600906
+    }
+  },
+  {
+    "id": "project015",
+    "name": "Biomass energy",
+    "budget": 801913972.0,
+    "region": {
+      "name": "Northern Cape",
+      "code": "ZA-NC",
+      "population": 3332401
+    },
+    "location": {
+      "lat": -29.0467,
+      "lng": 21.8569
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Energy",
+    "subsector": "Biomass energy",
+    "projectType": "Biomass energy",
+    "date": "2023-01-08",
+    "yearlyInvestment": {
+      "2019": 131643124,
+      "2020": 167572578,
+      "2021": 162429137,
+      "2022": 62517896
+    }
+  },
+  {
+    "id": "project016",
+    "name": "Health",
+    "budget": 441647654.0,
+    "region": {
+      "name": "Free State",
+      "code": "ZA-FS",
+      "population": 3699707
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Health",
+    "subsector": "Health",
+    "projectType": "Health",
+    "date": "2020-04-20",
+    "yearlyInvestment": {
+      "2019": 118808214,
+      "2020": 150476211,
+      "2021": 121293931,
+      "2022": 126430179
+    }
+  },
+  {
+    "id": "project017",
+    "name": "Communications",
+    "budget": 122916609.0,
+    "region": {
+      "name": "Mpumalanga",
+      "code": "ZA-MP",
+      "population": 4865913
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Communications",
+    "subsector": "Communications",
+    "projectType": "Communications",
+    "date": "2023-07-09",
+    "yearlyInvestment": {
+      "2019": 132952395,
+      "2020": 145481447,
+      "2021": 139009448,
+      "2022": 100447774
+    }
+  },
+  {
+    "id": "project018",
+    "name": "Governance",
+    "budget": 247650578.0,
+    "region": {
+      "name": "Mpumalanga",
+      "code": "ZA-MP",
+      "population": 1796016
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Governance",
+    "subsector": "Governance",
+    "projectType": "Governance",
+    "date": "2023-10-05",
+    "yearlyInvestment": {
+      "2019": 169650373,
+      "2020": 178290109,
+      "2021": 127233615,
+      "2022": 179564321
+    }
+  },
+  {
+    "id": "project019",
+    "name": "Water and waste",
+    "budget": 461601156.0,
+    "region": {
+      "name": "Eastern Cape",
+      "code": "ZA-EC",
+      "population": 4386077
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Water and waste",
+    "subsector": "Water and waste",
+    "projectType": "Water and waste",
+    "date": "2021-11-06",
+    "yearlyInvestment": {
+      "2019": 144386506,
+      "2020": 141428842,
+      "2021": 178983913,
+      "2022": 24826266
+    }
+  },
+  {
+    "id": "project020",
+    "name": "Air transport",
+    "budget": 69234764.0,
+    "region": {
+      "name": "Limpopo",
+      "code": "ZA-LP",
+      "population": 3188797
+    },
+    "location": {
+      "lat": -23.4013,
+      "lng": 29.4179
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Transport",
+    "subsector": "Air transport",
+    "projectType": "Air transport",
+    "date": "2023-04-11",
+    "yearlyInvestment": {
+      "2019": 119983680,
+      "2020": 165242501,
+      "2021": 173815048,
+      "2022": 112724094
+    }
+  },
+  {
+    "id": "project021",
+    "name": "Health",
+    "budget": 294302352.0,
+    "region": {
+      "name": "Western Cape",
+      "code": "ZA-WC",
+      "population": 1174482
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Health",
+    "subsector": "Health",
+    "projectType": "Health",
+    "date": "2021-07-30",
+    "yearlyInvestment": {
+      "2019": 104192848,
+      "2020": 121237704,
+      "2021": 187429601,
+      "2022": 37541379
+    }
+  },
+  {
+    "id": "project022",
+    "name": "Communications",
+    "budget": 932222340.0,
+    "region": {
+      "name": "KwaZulu-Natal",
+      "code": "ZA-NL",
+      "population": 4320769
+    },
+    "location": {
+      "lat": -29.0,
+      "lng": 31.0
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Communications",
+    "subsector": "Communications",
+    "projectType": "Communications",
+    "date": "2021-02-03",
+    "yearlyInvestment": {
+      "2019": 144025827,
+      "2020": 192245912,
+      "2021": 109193899,
+      "2022": 191573990
+    }
+  },
+  {
+    "id": "project023",
+    "name": "Economy",
+    "budget": 29315236.0,
+    "region": {
+      "name": "Western Cape",
+      "code": "ZA-WC",
+      "population": 4980717
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Economy",
+    "subsector": "Economy",
+    "projectType": "Economy",
+    "date": "2023-08-17",
+    "yearlyInvestment": {
+      "2019": 191172186,
+      "2020": 178526211,
+      "2021": 164665660,
+      "2022": 25341796
+    }
+  },
+  {
+    "id": "project024",
+    "name": "Flood protection",
+    "budget": 789838883.0,
+    "region": {
+      "name": "KwaZulu-Natal",
+      "code": "ZA-NL",
+      "population": 1228293
+    },
+    "location": {
+      "lat": -29.0,
+      "lng": 31.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Natural resources",
+    "subsector": "Flood protection",
+    "projectType": "Flood protection",
+    "date": "2022-01-20",
+    "yearlyInvestment": {
+      "2019": 168010231,
+      "2020": 107066187,
+      "2021": 114688149,
+      "2022": 194289140
+    }
+  },
+  {
+    "id": "project025",
+    "name": "Health",
+    "budget": 733917831.0,
+    "region": {
+      "name": "Northern Cape",
+      "code": "ZA-NC",
+      "population": 1837263
+    },
+    "location": {
+      "lat": -29.0467,
+      "lng": 21.8569
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Health",
+    "subsector": "Health",
+    "projectType": "Health",
+    "date": "2020-02-01",
+    "yearlyInvestment": {
+      "2019": 133532322,
+      "2020": 142636338,
+      "2021": 173815386,
+      "2022": 173202953
+    }
+  },
+  {
+    "id": "project026",
+    "name": "Health",
+    "budget": 462907279.0,
+    "region": {
+      "name": "Mpumalanga",
+      "code": "ZA-MP",
+      "population": 2321349
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Health",
+    "subsector": "Health",
+    "projectType": "Health",
+    "date": "2020-08-27",
+    "yearlyInvestment": {
+      "2019": 119424390,
+      "2020": 145196671,
+      "2021": 150207485,
+      "2022": 32182203
+    }
+  },
+  {
+    "id": "project027",
+    "name": "Communications",
+    "budget": 349097768.0,
+    "region": {
+      "name": "Eastern Cape",
+      "code": "ZA-EC",
+      "population": 1271212
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Communications",
+    "subsector": "Communications",
+    "projectType": "Communications",
+    "date": "2021-08-07",
+    "yearlyInvestment": {
+      "2019": 181656708,
+      "2020": 135310329,
+      "2021": 190981562,
+      "2022": 157798063
+    }
+  },
+  {
+    "id": "project028",
+    "name": "Social housing",
+    "budget": 336506164.0,
+    "region": {
+      "name": "North West",
+      "code": "ZA-NW",
+      "population": 1772495
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Social housing",
+    "subsector": "Social housing",
+    "projectType": "Social housing",
+    "date": "2020-07-31",
+    "yearlyInvestment": {
+      "2019": 115310346,
+      "2020": 129061905,
+      "2021": 152689384,
+      "2022": 18042630
+    }
+  },
+  {
+    "id": "project029",
+    "name": "Economy",
+    "budget": 682240473.0,
+    "region": {
+      "name": "KwaZulu-Natal",
+      "code": "ZA-NL",
+      "population": 1055188
+    },
+    "location": {
+      "lat": -29.0,
+      "lng": 31.0
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Economy",
+    "subsector": "Economy",
+    "projectType": "Economy",
+    "date": "2021-03-12",
+    "yearlyInvestment": {
+      "2019": 174337884,
+      "2020": 140846096,
+      "2021": 147800270,
+      "2022": 100028665
+    }
+  },
+  {
+    "id": "project030",
+    "name": "Health",
+    "budget": 291863926.0,
+    "region": {
+      "name": "KwaZulu-Natal",
+      "code": "ZA-NL",
+      "population": 3715650
+    },
+    "location": {
+      "lat": -29.0,
+      "lng": 31.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Health",
+    "subsector": "Health",
+    "projectType": "Health",
+    "date": "2024-02-04",
+    "yearlyInvestment": {
+      "2019": 129872388,
+      "2020": 194789211,
+      "2021": 118655130,
+      "2022": 183156519
+    }
+  },
+  {
+    "id": "project031",
+    "name": "Social housing",
+    "budget": 914551976.0,
+    "region": {
+      "name": "Northern Cape",
+      "code": "ZA-NC",
+      "population": 1113253
+    },
+    "location": {
+      "lat": -29.0467,
+      "lng": 21.8569
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Social housing",
+    "subsector": "Social housing",
+    "projectType": "Social housing",
+    "date": "2021-07-17",
+    "yearlyInvestment": {
+      "2019": 179854679,
+      "2020": 162951416,
+      "2021": 133446667,
+      "2022": 196825871
+    }
+  },
+  {
+    "id": "project032",
+    "name": "Health",
+    "budget": 150209316.0,
+    "region": {
+      "name": "Free State",
+      "code": "ZA-FS",
+      "population": 4601909
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Health",
+    "subsector": "Health",
+    "projectType": "Health",
+    "date": "2020-02-10",
+    "yearlyInvestment": {
+      "2019": 170770256,
+      "2020": 174119490,
+      "2021": 102721498,
+      "2022": 36820196
+    }
+  },
+  {
+    "id": "project033",
+    "name": "Economy",
+    "budget": 298893095.0,
+    "region": {
+      "name": "Limpopo",
+      "code": "ZA-LP",
+      "population": 3180261
+    },
+    "location": {
+      "lat": -23.4013,
+      "lng": 29.4179
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Economy",
+    "subsector": "Economy",
+    "projectType": "Economy",
+    "date": "2021-08-20",
+    "yearlyInvestment": {
+      "2019": 144849959,
+      "2020": 164340633,
+      "2021": 151640500,
+      "2022": 85905708
+    }
+  },
+  {
+    "id": "project034",
+    "name": "Rail transport",
+    "budget": 298249133.0,
+    "region": {
+      "name": "Eastern Cape",
+      "code": "ZA-EC",
+      "population": 2438630
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Transport",
+    "subsector": "Rail transport",
+    "projectType": "Rail transport",
+    "date": "2022-06-25",
+    "yearlyInvestment": {
+      "2019": 111737751,
+      "2020": 195949085,
+      "2021": 192837260,
+      "2022": 176357445
+    }
+  },
+  {
+    "id": "project035",
+    "name": "Biomass energy",
+    "budget": 347285345.0,
+    "region": {
+      "name": "Mpumalanga",
+      "code": "ZA-MP",
+      "population": 4720013
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Energy",
+    "subsector": "Biomass energy",
+    "projectType": "Biomass energy",
+    "date": "2020-09-22",
+    "yearlyInvestment": {
+      "2019": 154181040,
+      "2020": 184797444,
+      "2021": 168950006,
+      "2022": 52923153
+    }
+  },
+  {
+    "id": "project036",
+    "name": "Communications",
+    "budget": 648047993.0,
+    "region": {
+      "name": "North West",
+      "code": "ZA-NW",
+      "population": 3888233
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Communications",
+    "subsector": "Communications",
+    "projectType": "Communications",
+    "date": "2024-01-11",
+    "yearlyInvestment": {
+      "2019": 123994614,
+      "2020": 118734232,
+      "2021": 177030454,
+      "2022": 112747310
+    }
+  },
+  {
+    "id": "project037",
+    "name": "Governance",
+    "budget": 231827447.0,
+    "region": {
+      "name": "Western Cape",
+      "code": "ZA-WC",
+      "population": 2255415
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Governance",
+    "subsector": "Governance",
+    "projectType": "Governance",
+    "date": "2021-03-29",
+    "yearlyInvestment": {
+      "2019": 122941094,
+      "2020": 170401303,
+      "2021": 167375421,
+      "2022": 155610910
+    }
+  },
+  {
+    "id": "project038",
+    "name": "Economy",
+    "budget": 449302016.0,
+    "region": {
+      "name": "Eastern Cape",
+      "code": "ZA-EC",
+      "population": 4192456
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Economy",
+    "subsector": "Economy",
+    "projectType": "Economy",
+    "date": "2023-09-05",
+    "yearlyInvestment": {
+      "2019": 162617939,
+      "2020": 196244396,
+      "2021": 175649693,
+      "2022": 80999655
+    }
+  },
+  {
+    "id": "project039",
+    "name": "Flood protection",
+    "budget": 51018809.0,
+    "region": {
+      "name": "Mpumalanga",
+      "code": "ZA-MP",
+      "population": 4976202
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Natural resources",
+    "subsector": "Flood protection",
+    "projectType": "Flood protection",
+    "date": "2024-04-17",
+    "yearlyInvestment": {
+      "2019": 166983367,
+      "2020": 187071658,
+      "2021": 113097078,
+      "2022": 130134352
+    }
+  },
+  {
+    "id": "project040",
+    "name": "Governance",
+    "budget": 110832137.0,
+    "region": {
+      "name": "Free State",
+      "code": "ZA-FS",
+      "population": 4261811
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Governance",
+    "subsector": "Governance",
+    "projectType": "Governance",
+    "date": "2024-06-04",
+    "yearlyInvestment": {
+      "2019": 166689378,
+      "2020": 169909077,
+      "2021": 170678519,
+      "2022": 35747402
+    }
+  },
+  {
+    "id": "project041",
+    "name": "Education",
+    "budget": 497832904.0,
+    "region": {
+      "name": "Free State",
+      "code": "ZA-FS",
+      "population": 1837382
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Education",
+    "subsector": "Education",
+    "projectType": "Education",
+    "date": "2023-10-15",
+    "yearlyInvestment": {
+      "2019": 158443315,
+      "2020": 164285495,
+      "2021": 141453933,
+      "2022": 25144102
+    }
+  },
+  {
+    "id": "project042",
+    "name": "Flood protection",
+    "budget": 307369618.0,
+    "region": {
+      "name": "Eastern Cape",
+      "code": "ZA-EC",
+      "population": 2156686
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Natural resources",
+    "subsector": "Flood protection",
+    "projectType": "Flood protection",
+    "date": "2022-05-04",
+    "yearlyInvestment": {
+      "2019": 185903034,
+      "2020": 140650184,
+      "2021": 148620999,
+      "2022": 99941612
+    }
+  },
+  {
+    "id": "project043",
+    "name": "Hydropower energy",
+    "budget": 560795249.0,
+    "region": {
+      "name": "Free State",
+      "code": "ZA-FS",
+      "population": 2104442
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Energy",
+    "subsector": "Hydropower energy",
+    "projectType": "Hydropower energy",
+    "date": "2020-10-03",
+    "yearlyInvestment": {
+      "2019": 134734763,
+      "2020": 176079275,
+      "2021": 168311402,
+      "2022": 80480190
+    }
+  },
+  {
+    "id": "project044",
+    "name": "Social housing",
+    "budget": 516216901.0,
+    "region": {
+      "name": "Gauteng",
+      "code": "ZA-GT",
+      "population": 3871013
+    },
+    "location": {
+      "lat": -26.2708,
+      "lng": 28.1123
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Social housing",
+    "subsector": "Social housing",
+    "projectType": "Social housing",
+    "date": "2024-02-02",
+    "yearlyInvestment": {
+      "2019": 164090583,
+      "2020": 168690240,
+      "2021": 104348816,
+      "2022": 79494391
+    }
+  },
+  {
+    "id": "project045",
+    "name": "Education",
+    "budget": 785202696.0,
+    "region": {
+      "name": "Northern Cape",
+      "code": "ZA-NC",
+      "population": 3469226
+    },
+    "location": {
+      "lat": -29.0467,
+      "lng": 21.8569
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Education",
+    "subsector": "Education",
+    "projectType": "Education",
+    "date": "2022-07-30",
+    "yearlyInvestment": {
+      "2019": 186847489,
+      "2020": 199903202,
+      "2021": 161212520,
+      "2022": 83591576
+    }
+  },
+  {
+    "id": "project046",
+    "name": "Health",
+    "budget": 378782433.0,
+    "region": {
+      "name": "Western Cape",
+      "code": "ZA-WC",
+      "population": 3293654
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Health",
+    "subsector": "Health",
+    "projectType": "Health",
+    "date": "2021-08-24",
+    "yearlyInvestment": {
+      "2019": 113787620,
+      "2020": 182713503,
+      "2021": 126957937,
+      "2022": 98131935
+    }
+  },
+  {
+    "id": "project047",
+    "name": "Water and waste",
+    "budget": 333543206.0,
+    "region": {
+      "name": "KwaZulu-Natal",
+      "code": "ZA-NL",
+      "population": 2513102
+    },
+    "location": {
+      "lat": -29.0,
+      "lng": 31.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Water and waste",
+    "subsector": "Water and waste",
+    "projectType": "Water and waste",
+    "date": "2023-04-08",
+    "yearlyInvestment": {
+      "2019": 106835812,
+      "2020": 102798283,
+      "2021": 122839978,
+      "2022": 13743718
+    }
+  },
+  {
+    "id": "project048",
+    "name": "Economy",
+    "budget": 109498379.0,
+    "region": {
+      "name": "North West",
+      "code": "ZA-NW",
+      "population": 1318342
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Economy",
+    "subsector": "Economy",
+    "projectType": "Economy",
+    "date": "2023-03-18",
+    "yearlyInvestment": {
+      "2019": 164003447,
+      "2020": 169548757,
+      "2021": 160939046,
+      "2022": 178998726
+    }
+  },
+  {
+    "id": "project049",
+    "name": "Education",
+    "budget": 243635183.0,
+    "region": {
+      "name": "Gauteng",
+      "code": "ZA-GT",
+      "population": 1085743
+    },
+    "location": {
+      "lat": -26.2708,
+      "lng": 28.1123
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Education",
+    "subsector": "Education",
+    "projectType": "Education",
+    "date": "2021-11-28",
+    "yearlyInvestment": {
+      "2019": 138709625,
+      "2020": 187554289,
+      "2021": 117481840,
+      "2022": 121984769
+    }
+  },
+  {
+    "id": "project050",
+    "name": "Governance",
+    "budget": 579725982.0,
+    "region": {
+      "name": "Limpopo",
+      "code": "ZA-LP",
+      "population": 4947874
+    },
+    "location": {
+      "lat": -23.4013,
+      "lng": 29.4179
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Governance",
+    "subsector": "Governance",
+    "projectType": "Governance",
+    "date": "2024-06-27",
+    "yearlyInvestment": {
+      "2019": 116524529,
+      "2020": 120339979,
+      "2021": 196539598,
+      "2022": 40870704
+    }
+  },
+  {
+    "id": "project051",
+    "name": "Culture, sports and recreation",
+    "budget": 635668667.0,
+    "region": {
+      "name": "Western Cape",
+      "code": "ZA-WC",
+      "population": 2307825
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Culture, sports and recreation",
+    "subsector": "Culture, sports and recreation",
+    "projectType": "Culture, sports and recreation",
+    "date": "2023-04-11",
+    "yearlyInvestment": {
+      "2019": 168260831,
+      "2020": 185826172,
+      "2021": 146337215,
+      "2022": 81827114
+    }
+  },
+  {
+    "id": "project052",
+    "name": "Low-carbon transport",
+    "budget": 804463757.0,
+    "region": {
+      "name": "Mpumalanga",
+      "code": "ZA-MP",
+      "population": 2331491
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Transport",
+    "subsector": "Low-carbon transport",
+    "projectType": "Low-carbon transport",
+    "date": "2020-10-30",
+    "yearlyInvestment": {
+      "2019": 108544023,
+      "2020": 194941653,
+      "2021": 182131693,
+      "2022": 160520448
+    }
+  },
+  {
+    "id": "project053",
+    "name": "Social housing",
+    "budget": 926787232.0,
+    "region": {
+      "name": "Western Cape",
+      "code": "ZA-WC",
+      "population": 3767597
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Social housing",
+    "subsector": "Social housing",
+    "projectType": "Social housing",
+    "date": "2022-07-09",
+    "yearlyInvestment": {
+      "2019": 179243961,
+      "2020": 195827565,
+      "2021": 116314238,
+      "2022": 195751764
+    }
+  },
+  {
+    "id": "project054",
+    "name": "Health",
+    "budget": 761335031.0,
+    "region": {
+      "name": "Northern Cape",
+      "code": "ZA-NC",
+      "population": 2023841
+    },
+    "location": {
+      "lat": -29.0467,
+      "lng": 21.8569
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Health",
+    "subsector": "Health",
+    "projectType": "Health",
+    "date": "2021-07-12",
+    "yearlyInvestment": {
+      "2019": 198592052,
+      "2020": 196327506,
+      "2021": 133214263,
+      "2022": 128961456
+    }
+  },
+  {
+    "id": "project055",
+    "name": "Hydropower energy",
+    "budget": 762358784.0,
+    "region": {
+      "name": "North West",
+      "code": "ZA-NW",
+      "population": 3255175
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Energy",
+    "subsector": "Hydropower energy",
+    "projectType": "Hydropower energy",
+    "date": "2020-01-13",
+    "yearlyInvestment": {
+      "2019": 127916731,
+      "2020": 142555613,
+      "2021": 175234194,
+      "2022": 110860556
+    }
+  },
+  {
+    "id": "project056",
+    "name": "Water and waste",
+    "budget": 819317066.0,
+    "region": {
+      "name": "Mpumalanga",
+      "code": "ZA-MP",
+      "population": 4507887
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Water and waste",
+    "subsector": "Water and waste",
+    "projectType": "Water and waste",
+    "date": "2023-06-23",
+    "yearlyInvestment": {
+      "2019": 169305433,
+      "2020": 161721843,
+      "2021": 194012201,
+      "2022": 50843751
+    }
+  },
+  {
+    "id": "project057",
+    "name": "Social housing",
+    "budget": 334328673.0,
+    "region": {
+      "name": "Eastern Cape",
+      "code": "ZA-EC",
+      "population": 4544731
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Social housing",
+    "subsector": "Social housing",
+    "projectType": "Social housing",
+    "date": "2022-03-29",
+    "yearlyInvestment": {
+      "2019": 102509767,
+      "2020": 127236380,
+      "2021": 140526571,
+      "2022": 61328116
+    }
+  },
+  {
+    "id": "project058",
+    "name": "Health",
+    "budget": 327162422.0,
+    "region": {
+      "name": "North West",
+      "code": "ZA-NW",
+      "population": 4250557
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Health",
+    "subsector": "Health",
+    "projectType": "Health",
+    "date": "2022-12-03",
+    "yearlyInvestment": {
+      "2019": 173358785,
+      "2020": 171042584,
+      "2021": 151558925,
+      "2022": 84813923
+    }
+  },
+  {
+    "id": "project059",
+    "name": "Education",
+    "budget": 6885681.0,
+    "region": {
+      "name": "Northern Cape",
+      "code": "ZA-NC",
+      "population": 3025036
+    },
+    "location": {
+      "lat": -29.0467,
+      "lng": 21.8569
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Education",
+    "subsector": "Education",
+    "projectType": "Education",
+    "date": "2021-10-01",
+    "yearlyInvestment": {
+      "2019": 122439711,
+      "2020": 139028662,
+      "2021": 176126513,
+      "2022": 122272243
+    }
+  },
+  {
+    "id": "project060",
+    "name": "Water and waste",
+    "budget": 56673391.0,
+    "region": {
+      "name": "Eastern Cape",
+      "code": "ZA-EC",
+      "population": 4920772
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Water and waste",
+    "subsector": "Water and waste",
+    "projectType": "Water and waste",
+    "date": "2020-01-25",
+    "yearlyInvestment": {
+      "2019": 112238725,
+      "2020": 179671364,
+      "2021": 160468042,
+      "2022": 199055576
+    }
+  },
+  {
+    "id": "project061",
+    "name": "Communications",
+    "budget": 876873139.0,
+    "region": {
+      "name": "North West",
+      "code": "ZA-NW",
+      "population": 1901737
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Communications",
+    "subsector": "Communications",
+    "projectType": "Communications",
+    "date": "2020-01-01",
+    "yearlyInvestment": {
+      "2019": 195334826,
+      "2020": 145362837,
+      "2021": 153483787,
+      "2022": 97581614
+    }
+  },
+  {
+    "id": "project062",
+    "name": "Air transport",
+    "budget": 458942430.0,
+    "region": {
+      "name": "Eastern Cape",
+      "code": "ZA-EC",
+      "population": 2317396
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Transport",
+    "subsector": "Air transport",
+    "projectType": "Air transport",
+    "date": "2023-09-21",
+    "yearlyInvestment": {
+      "2019": 141951243,
+      "2020": 101607652,
+      "2021": 129323727,
+      "2022": 111085699
+    }
+  },
+  {
+    "id": "project063",
+    "name": "Communications",
+    "budget": 692396527.0,
+    "region": {
+      "name": "Limpopo",
+      "code": "ZA-LP",
+      "population": 1439237
+    },
+    "location": {
+      "lat": -23.4013,
+      "lng": 29.4179
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Communications",
+    "subsector": "Communications",
+    "projectType": "Communications",
+    "date": "2020-11-18",
+    "yearlyInvestment": {
+      "2019": 116256778,
+      "2020": 166437644,
+      "2021": 127885376,
+      "2022": 30098579
+    }
+  },
+  {
+    "id": "project064",
+    "name": "Communications",
+    "budget": 848930348.0,
+    "region": {
+      "name": "Northern Cape",
+      "code": "ZA-NC",
+      "population": 2749668
+    },
+    "location": {
+      "lat": -29.0467,
+      "lng": 21.8569
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Communications",
+    "subsector": "Communications",
+    "projectType": "Communications",
+    "date": "2022-01-02",
+    "yearlyInvestment": {
+      "2019": 118743199,
+      "2020": 192149642,
+      "2021": 130116298,
+      "2022": 119135062
+    }
+  },
+  {
+    "id": "project065",
+    "name": "Governance",
+    "budget": 725781643.0,
+    "region": {
+      "name": "KwaZulu-Natal",
+      "code": "ZA-NL",
+      "population": 3823601
+    },
+    "location": {
+      "lat": -29.0,
+      "lng": 31.0
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Governance",
+    "subsector": "Governance",
+    "projectType": "Governance",
+    "date": "2023-05-20",
+    "yearlyInvestment": {
+      "2019": 195115397,
+      "2020": 183443913,
+      "2021": 129903857,
+      "2022": 1993835
+    }
+  },
+  {
+    "id": "project066",
+    "name": "Economy",
+    "budget": 374181765.0,
+    "region": {
+      "name": "Limpopo",
+      "code": "ZA-LP",
+      "population": 3381714
+    },
+    "location": {
+      "lat": -23.4013,
+      "lng": 29.4179
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Economy",
+    "subsector": "Economy",
+    "projectType": "Economy",
+    "date": "2023-01-26",
+    "yearlyInvestment": {
+      "2019": 143213107,
+      "2020": 116304655,
+      "2021": 154996387,
+      "2022": 124975324
+    }
+  },
+  {
+    "id": "project067",
+    "name": "Water and waste",
+    "budget": 113468573.0,
+    "region": {
+      "name": "North West",
+      "code": "ZA-NW",
+      "population": 4523946
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Water and waste",
+    "subsector": "Water and waste",
+    "projectType": "Water and waste",
+    "date": "2021-12-22",
+    "yearlyInvestment": {
+      "2019": 110426786,
+      "2020": 171438986,
+      "2021": 121870290,
+      "2022": 51333969
+    }
+  },
+  {
+    "id": "project068",
+    "name": "Economy",
+    "budget": 649984102.0,
+    "region": {
+      "name": "Free State",
+      "code": "ZA-FS",
+      "population": 1158141
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Economy",
+    "subsector": "Economy",
+    "projectType": "Economy",
+    "date": "2021-07-10",
+    "yearlyInvestment": {
+      "2019": 195700297,
+      "2020": 129257680,
+      "2021": 173565888,
+      "2022": 74029493
+    }
+  },
+  {
+    "id": "project069",
+    "name": "Health",
+    "budget": 171547749.0,
+    "region": {
+      "name": "KwaZulu-Natal",
+      "code": "ZA-NL",
+      "population": 1272282
+    },
+    "location": {
+      "lat": -29.0,
+      "lng": 31.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Health",
+    "subsector": "Health",
+    "projectType": "Health",
+    "date": "2020-08-10",
+    "yearlyInvestment": {
+      "2019": 103178739,
+      "2020": 116595994,
+      "2021": 137675655,
+      "2022": 1450517
+    }
+  },
+  {
+    "id": "project070",
+    "name": "Other transport",
+    "budget": 319566101.0,
+    "region": {
+      "name": "North West",
+      "code": "ZA-NW",
+      "population": 1133641
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Transport",
+    "subsector": "Other transport",
+    "projectType": "Other transport",
+    "date": "2023-09-11",
+    "yearlyInvestment": {
+      "2019": 141154639,
+      "2020": 188434486,
+      "2021": 194173298,
+      "2022": 51124276
+    }
+  },
+  {
+    "id": "project071",
+    "name": "Education",
+    "budget": 378093305.0,
+    "region": {
+      "name": "Mpumalanga",
+      "code": "ZA-MP",
+      "population": 1339871
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Education",
+    "subsector": "Education",
+    "projectType": "Education",
+    "date": "2020-05-30",
+    "yearlyInvestment": {
+      "2019": 164092702,
+      "2020": 188331346,
+      "2021": 189471632,
+      "2022": 187239059
+    }
+  },
+  {
+    "id": "project072",
+    "name": "Rail transport",
+    "budget": 107260704.0,
+    "region": {
+      "name": "Free State",
+      "code": "ZA-FS",
+      "population": 1000935
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Transport",
+    "subsector": "Rail transport",
+    "projectType": "Rail transport",
+    "date": "2022-04-18",
+    "yearlyInvestment": {
+      "2019": 190736582,
+      "2020": 102222671,
+      "2021": 199430948,
+      "2022": 19388934
+    }
+  },
+  {
+    "id": "project073",
+    "name": "Communications",
+    "budget": 559282067.0,
+    "region": {
+      "name": "Free State",
+      "code": "ZA-FS",
+      "population": 4623590
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Communications",
+    "subsector": "Communications",
+    "projectType": "Communications",
+    "date": "2021-12-20",
+    "yearlyInvestment": {
+      "2019": 146854603,
+      "2020": 190867739,
+      "2021": 194406268,
+      "2022": 12024790
+    }
+  },
+  {
+    "id": "project074",
+    "name": "Education",
+    "budget": 735471306.0,
+    "region": {
+      "name": "Limpopo",
+      "code": "ZA-LP",
+      "population": 3479703
+    },
+    "location": {
+      "lat": -23.4013,
+      "lng": 29.4179
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Education",
+    "subsector": "Education",
+    "projectType": "Education",
+    "date": "2023-05-20",
+    "yearlyInvestment": {
+      "2019": 136303280,
+      "2020": 167493637,
+      "2021": 104114314,
+      "2022": 87556236
+    }
+  },
+  {
+    "id": "project075",
+    "name": "Urban transport",
+    "budget": 46732968.0,
+    "region": {
+      "name": "KwaZulu-Natal",
+      "code": "ZA-NL",
+      "population": 3561775
+    },
+    "location": {
+      "lat": -29.0,
+      "lng": 31.0
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Transport",
+    "subsector": "Urban transport",
+    "projectType": "Urban transport",
+    "date": "2020-03-31",
+    "yearlyInvestment": {
+      "2019": 183567050,
+      "2020": 159289953,
+      "2021": 135482646,
+      "2022": 146883887
+    }
+  },
+  {
+    "id": "project076",
+    "name": "Communications",
+    "budget": 783379827.0,
+    "region": {
+      "name": "Eastern Cape",
+      "code": "ZA-EC",
+      "population": 2605245
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Communications",
+    "subsector": "Communications",
+    "projectType": "Communications",
+    "date": "2022-11-03",
+    "yearlyInvestment": {
+      "2019": 164469825,
+      "2020": 183658583,
+      "2021": 181709257,
+      "2022": 132297241
+    }
+  },
+  {
+    "id": "project077",
+    "name": "Flood protection",
+    "budget": 885714291.0,
+    "region": {
+      "name": "Mpumalanga",
+      "code": "ZA-MP",
+      "population": 3689737
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Cross-cutting",
+    "sector": "Natural resources",
+    "subsector": "Flood protection",
+    "projectType": "Flood protection",
+    "date": "2021-09-20",
+    "yearlyInvestment": {
+      "2019": 100026312,
+      "2020": 197791749,
+      "2021": 165842040,
+      "2022": 195604144
+    }
+  },
+  {
+    "id": "project078",
+    "name": "Education",
+    "budget": 128010658.0,
+    "region": {
+      "name": "Gauteng",
+      "code": "ZA-GT",
+      "population": 3668313
+    },
+    "location": {
+      "lat": -26.2708,
+      "lng": 28.1123
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Education",
+    "subsector": "Education",
+    "projectType": "Education",
+    "date": "2022-10-09",
+    "yearlyInvestment": {
+      "2019": 120532100,
+      "2020": 115722025,
+      "2021": 191570262,
+      "2022": 84627663
+    }
+  },
+  {
+    "id": "project079",
+    "name": "Other natural resources",
+    "budget": 892666961.0,
+    "region": {
+      "name": "North West",
+      "code": "ZA-NW",
+      "population": 2591532
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Mitigation",
+    "sector": "Natural resources",
+    "subsector": "Other natural resources",
+    "projectType": "Other natural resources",
+    "date": "2023-04-19",
+    "yearlyInvestment": {
+      "2019": 151991714,
+      "2020": 187309940,
+      "2021": 136364907,
+      "2022": 175075698
+    }
+  },
+  {
+    "id": "project080",
+    "name": "Health",
+    "budget": 455458660.0,
+    "region": {
+      "name": "Free State",
+      "code": "ZA-FS",
+      "population": 1670395
+    },
+    "location": {
+      "lat": 0.0,
+      "lng": 0.0
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Health",
+    "subsector": "Health",
+    "projectType": "Health",
+    "date": "2020-08-09",
+    "yearlyInvestment": {
+      "2019": 140881391,
+      "2020": 144394606,
+      "2021": 171356563,
+      "2022": 69896163
+    }
+  },
+  {
+    "id": "project081",
+    "name": "Hydropower energy",
+    "budget": 339126517.0,
+    "region": {
+      "name": "Northern Cape",
+      "code": "ZA-NC",
+      "population": 4170733
+    },
+    "location": {
+      "lat": -29.0467,
+      "lng": 21.8569
+    },
+    "climateObjective": "Adaptation",
+    "sector": "Energy",
+    "subsector": "Hydropower energy",
+    "projectType": "Hydropower energy",
+    "date": "2020-12-08",
+    "yearlyInvestment": {
+      "2019": 108698971,
+      "2020": 106795532,
+      "2021": 149964094,
+      "2022": 4160340
+    }
+  }
+]

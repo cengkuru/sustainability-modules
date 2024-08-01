@@ -17,18 +17,7 @@ import { IntersectionObserverDirective } from "../../directives/intersection-obs
 import { animate, style, transition, trigger, query, stagger } from "@angular/animations";
 import * as L from 'leaflet';
 import { ScriptLoaderService } from "../../services/scriptLoader.service";
-import {NgIconComponent, provideIcons} from "@ng-icons/core";
-import {
-  heroArrowRight, heroArrowRightOnRectangle, heroBars3,
-  heroChartBar,
-  heroDocumentText,
-  heroHome,
-  heroStar,
-  heroUser,
-  heroUsers, heroXMark
-} from "@ng-icons/heroicons/outline";
-
-
+import { NgIconComponent } from "@ng-icons/core";
 
 interface ViewProjectDetailsEvent extends CustomEvent {
   detail: string;
@@ -44,7 +33,6 @@ interface ViewProjectDetailsEvent extends CustomEvent {
     RouterLink,
     IntersectionObserverDirective,
     NgIconComponent,
-
   ],
   animations: [
     trigger('slideInAnimation', [
@@ -67,19 +55,7 @@ interface ViewProjectDetailsEvent extends CustomEvent {
         )
       ])
     ])
-  ],
-  providers: [provideIcons({
-    heroArrowRight,
-    heroHome,
-    heroUser,
-    heroStar,
-    heroDocumentText,
-    heroChartBar,
-    heroBars3,
-    heroXMark,
-    heroArrowRightOnRectangle
-  })],
-
+  ]
 })
 export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('mapContainer') mapContainer!: ElementRef;
@@ -87,7 +63,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   private map!: L.Map;
   recentProjects: any[] = [];
   highValueProjects: any[] = [];
-  markers: { lat: number; lng: number; popup: string; }[] = [];
+  markers: { lat: number; lng: number; popup: string; status: string; }[] = [];
   numberOfProjects: number = 0;
   totalValueOfProjects: number = 0;
 
@@ -148,7 +124,6 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-
   ngOnDestroy(): void {
     console.log('ngOnDestroy called');
     window.removeEventListener('viewProjectDetails', this.handleViewProjectDetails as EventListener);
@@ -156,7 +131,6 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
       this.map.remove();
     }
   }
-
 
   private async loadLeafletScripts(): Promise<void> {
     console.log('loadLeafletScripts called');
@@ -195,7 +169,6 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
       if (!this.mapContainer) {
         console.error('Map container is not available');
       }
-      // Retry after a short delay
       setTimeout(() => this.checkAndInitializeMap(), 100);
     }
   }
@@ -217,7 +190,9 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
 
     console.log('Adding markers', this.markers);
     this.markers.forEach(markerData => {
-      const marker = L.marker([markerData.lat, markerData.lng]).addTo(this.map);
+      const marker = L.marker([markerData.lat, markerData.lng], {
+        icon: this.getPulsingIcon(markerData.status)
+      }).addTo(this.map);
       marker.bindPopup(markerData.popup);
     });
 
@@ -257,7 +232,6 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
           });
 
           console.log('Projects loaded:', projects.length);
-          console.log('Projects:', projects);
           this.recentProjects = projects.slice(0, 5);
           this.highValueProjects = projects.sort((a, b) => {
             const aPrice = parseFloat(a.stages?.tenderManagement?.basicData?.contractPrice?.replace(/[^0-9.-]+/g, "") || '0');
@@ -285,11 +259,16 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     this.markers = this.recentProjects.map(project => {
       if (project.location && project.location.coordinates) {
         const popup = `
-          <div class="p-4 max-w-sm">
-            <h3 class="text-lg font-semibold mb-2">${project.name}</h3>
-            <p class="mb-2">Cost Estimate: ${project.stages?.tenderManagement?.basicData?.contractPrice || 'N/A'}</p>
-            <p class="mb-4">Location: ${project.location.name}</p>
-            <button class="view-details-button px-4 py-2 bg-accent text-secondary rounded hover:bg-secondary hover:text-accent transition duration-300" data-project-id="${project.id}">
+          <div class="p-6 max-w-sm bg-primary-100 rounded-apple ">
+            <h3 class="text-lg font-semibold mb-2 text-accent-300">${project.name}</h3>
+            <p class="mb-2 text-accent-100">
+              <span class="font-medium">Cost Estimate:</span> 
+              ${project.stages?.tenderManagement?.basicData?.contractPrice || 'N/A'}
+            </p>
+            <p class="mb-4 text-accent-100">
+              <span class="font-medium">Location:</span> ${project.location.name}
+            </p>
+            <button class="apple-button w-full text-center" data-project-id="${project.id}">
               View Details
             </button>
           </div>
@@ -297,12 +276,39 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
         return {
           lat: project.location.coordinates.lat,
           lng: project.location.coordinates.lng,
-          popup: popup
+          popup: popup,
+          status: project.status || 'Other'
         };
       }
       return null;
-    }).filter((marker): marker is { lat: number; lng: number; popup: string } => marker !== null);
+    }).filter((marker): marker is { lat: number; lng: number; popup: string; status: string } => marker !== null);
     console.log('Generated markers:', this.markers);
+  }
+
+  private getPulsingIcon(status: string): L.DivIcon {
+    const color = this.getColorForStatus(status);
+    return L.divIcon({
+      className: 'pulsing-icon',
+      html: `
+        <div class="relative w-10 h-10">
+          <div class="absolute inset-0 pulse-ring rounded-full border-2" style="border-color: ${color};"></div>
+          <div class="absolute inset-2 rounded-full bg-white shadow-md" style="background-color: ${color};"></div>
+        </div>
+      `,
+      iconSize: [40, 40],
+      iconAnchor: [20, 20]
+    });
+  }
+
+  private getColorForStatus(status: string): string {
+    const statusColors: { [key: string]: string } = {
+      'Active': '#61a8bd',
+      'Completed': '#4caf50',
+      'In Progress': '#ffc107',
+      'Planned': '#2196f3',
+      'Other': '#D60000'
+    };
+    return statusColors[status] || statusColors['Other'];
   }
 
   navigateToProjects() {
@@ -325,5 +331,25 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
 
   navigateToFeaturedProjects(): void {
     this.router.navigate(['/public/projects'], { queryParams: { featured: 'true' } });
+  }
+
+  formatLargeNumber(num: number): string {
+    if (num >= 1000000) {
+      return (num / 1000000).toFixed(1) + 'M';
+    } else if (num >= 1000) {
+      return (num / 1000).toFixed(1) + 'K';
+    }
+    return num.toString();
+  }
+
+  formatCurrency(value: number): string {
+    if (value >= 1000000000) {
+      return '$' + (value / 1000000000).toFixed(1) + 'B';
+    } else if (value >= 1000000) {
+      return '$' + (value / 1000000).toFixed(1) + 'M';
+    } else if (value >= 1000) {
+      return '$' + (value / 1000).toFixed(1) + 'K';
+    }
+    return '$' + value.toFixed(0);
   }
 }

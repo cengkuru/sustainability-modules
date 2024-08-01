@@ -1,0 +1,66 @@
+{
+  "sections": [
+    {
+      "title": "Purpose of Publication",
+      "content": "The publication of OC4IDS data aligns with the Open Contracting principles of transparency and accountability in public infrastructure projects.",
+      "subsections": [
+        {
+          "title": "Uses of the Data",
+          "content": "The National Infrastructure Disclosure Platform data empowers various stakeholders: government agencies can improve project management and resource allocation; civil society organizations can monitor project progress and impacts; businesses can identify opportunities and enhance competitiveness; and citizens can engage in informed discussions about public infrastructure investments. Specific use cases include budget monitoring, performance analysis, and environmental impact assessments."
+        }
+      ]
+    },
+    {
+      "title": "Data Generation",
+      "content": "We are committed to providing high-quality, timely, and comprehensive data in line with Open Contracting for Infrastructure Data Standards (OC4IDS).",
+      "subsections": [
+        {
+          "title": "Creation of OC4IDS Datasets",
+          "content": "Our data undergoes rigorous quality checks during the nightly refresh process. We ensure data completeness, accuracy, and compliance with the OC4IDS schema before publication. Data is collected from various government systems, including procurement platforms, project management tools, and financial systems. It is then processed, transformed into the OC4IDS format, and validated against the schema."
+        },
+        {
+          "title": "Project Identifier Generation",
+          "content": "Our project identifier system ensures unique identification of each infrastructure project, facilitating data linking and tracking throughout the project lifecycle. Each identifier is generated using the project's unique identifier from our internal systems, prefixed with 'OC4IDS-[COUNTRY_CODE]-', ensuring no conflicts or duplications across different publishing entities."
+        }
+      ]
+    },
+    {
+      "title": "Scope and Format",
+      "content": "Our publication scope is designed to provide a comprehensive view of public infrastructure projects, supporting informed decision-making and public oversight.",
+      "subsections": [
+        {
+          "title": "Inclusions and Exclusions",
+          "content": "Included: All major public infrastructure projects from 2018 onwards, across all government levels, with a total value exceeding $1 million. This covers sectors such as transportation, energy, water and sanitation, and public buildings. Excluded: Projects involving national security, sensitive data, or below the $1 million threshold."
+        },
+        {
+          "title": "Data Formats",
+          "content": "Data is available via our data portal at https://infrastructure.opendata.gov, RESTful API, and bulk downloads in various formats including JSON and CSV. Our API documentation is available at https://infrastructure.opendata.gov/api-docs."
+        }
+      ]
+    },
+    {
+      "title": "Data Reuse",
+      "content": "Our choice of the Creative Commons Attribution 4.0 International (CC BY 4.0) license reflects our commitment to the Open Contracting principle of open data.",
+      "subsections": [
+        {
+          "title": "Terms of Use",
+          "content": "Under the CC BY 4.0 license, you are free to share (copy and redistribute the material in any medium or format) and adapt (remix, transform, and build upon the material) for any purpose, even commercially. The licensor cannot revoke these freedoms as long as you follow the license terms. For more details, visit https://creativecommons.org/licenses/by/4.0/."
+        }
+      ]
+    },
+    {
+      "title": "Contact Information",
+      "content": "In line with Open Contracting principles of participation and collaboration, we welcome feedback and engagement from all stakeholders.",
+      "subsections": [
+        {
+          "title": "How to Reach Us",
+          "content": "For inquiries or feedback, please contact our Open Data Team at opendata@publicworks.gov. For technical support, reach out to techsupport@publicworks.gov. Our physical address is 123 Government Street, Capital City."
+        },
+        {
+          "title": "Feedback Mechanism",
+          "content": "We value your input. You can provide feedback through our online form at https://infrastructure.opendata.gov/feedback or during our quarterly stakeholder meetings. All feedback is reviewed and considered for future improvements to our data publication process."
+        }
+      ]
+    }
+  ]
+}
