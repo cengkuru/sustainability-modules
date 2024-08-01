@@ -22,15 +22,7 @@ type ChartName = 'investmentByRegion' | 'projectsByRegion' | 'projectsByClimateO
 export class DataAnalysisComponent implements AfterViewInit {
     @ViewChild('mapContainer') mapContainer!: ElementRef;
 
-    charts: { [key: string]: echarts.ECharts | null } = {
-        investmentByRegion: null,
-        projectsByRegion: null,
-        projectsByClimateObjectives: null,
-        investmentsByClimateObjectives: null,
-        totalProjectsBySector: null,
-        projectTypes: null,
-        infrastructureInvestment: null
-    };
+    charts: { [key in ChartName]?: echarts.ECharts } = {};
 
     private map!: L.Map;
     projects: Project[] = [];
@@ -45,14 +37,21 @@ export class DataAnalysisComponent implements AfterViewInit {
 
 
     dropdownOpen: Record<ChartName, boolean> = {
-        investmentByRegion: false,
-        projectsByRegion: false,
-        projectsByClimateObjectives: false,
-        investmentsByClimateObjectives: false,
-        totalProjectsBySector: false,
-        projectTypes: false,
-        infrastructureInvestment: false
+        investmentByRegion: true,
+        projectsByRegion: true,
+        projectsByClimateObjectives: true,
+        investmentsByClimateObjectives: true,
+        totalProjectsBySector: true,
+        projectTypes: true,
+        infrastructureInvestment: true
     };
+
+    chartNames: ChartName[] = [
+        'totalProjectsBySector',
+        'infrastructureInvestment',
+        'projectsByRegion',
+        'investmentsByClimateObjectives'
+    ];
 
 
 
@@ -126,6 +125,86 @@ export class DataAnalysisComponent implements AfterViewInit {
             throw error;
         }
     }
+
+
+    getChartTitle(chartName: ChartName): string {
+        const titles: Record<ChartName, string> = {
+            totalProjectsBySector: 'Projects by Sector',
+            infrastructureInvestment: 'Investment by Sector',
+            projectsByRegion: 'Projects by Region',
+            investmentsByClimateObjectives: 'Investment by Climate Objective',
+            investmentByRegion: 'Investment by Region',
+            projectsByClimateObjectives: 'Projects by Climate Objectives',
+            projectTypes: 'Project Types'
+        };
+        return titles[chartName] || 'Chart';
+    }
+
+    toggleDropdown(chartName: ChartName): void {
+        this.dropdownOpen[chartName] = !this.dropdownOpen[chartName];
+        setTimeout(() => {
+            this.charts[chartName]?.resize();
+        }, 0);
+    }
+
+    // Update the chart creation methods to use Apple-inspired styles
+    private updateChartStyles(option: EChartsOption): EChartsOption {
+        const appleStyling: Partial<EChartsOption> = {
+            backgroundColor: '#FFFFFF',
+            textStyle: {
+                fontFamily: 'Inter, sans-serif',
+                color: '#333333'
+            },
+            title: {
+                textStyle: {
+                    color: '#333333',
+                    fontWeight: 'bold',
+                    fontSize: 18
+                }
+            },
+            tooltip: {
+                backgroundColor: 'rgba(247, 247, 247, 0.9)',
+                borderColor: '#d8d8cd',
+                borderWidth: 1,
+                textStyle: {
+                    color: '#333333'
+                }
+            },
+            legend: {
+                textStyle: {
+                    color: '#333333'
+                }
+            },
+            xAxis: {
+                axisLine: {
+                    lineStyle: {
+                        color: '#d8d8cd'
+                    }
+                },
+                axisLabel: {
+                    color: '#333333'
+                }
+            },
+            yAxis: {
+                axisLine: {
+                    lineStyle: {
+                        color: '#d8d8cd'
+                    }
+                },
+                axisLabel: {
+                    color: '#333333'
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: '#d8d8cd'
+                    }
+                }
+            }
+        };
+
+        return { ...option, ...appleStyling };
+    }
+
 
     private applyLeafletCustomStyles(): void {
         // This function will be called after Leaflet is loaded
@@ -284,7 +363,7 @@ export class DataAnalysisComponent implements AfterViewInit {
     }
 
     private initializeCharts(): void {
-        Object.keys(this.charts).forEach(chartName => {
+        this.chartNames.forEach(chartName => {
             const chartDom = document.getElementById(chartName + 'Chart');
             if (chartDom) {
                 this.charts[chartName] = echarts.init(chartDom);
@@ -341,30 +420,71 @@ export class DataAnalysisComponent implements AfterViewInit {
         const option: EChartsOption = {
             title: {
                 text: 'Total Projects per Sector',
-                left: 'center'
+                left: 'center',
+                top: 10,
+                textStyle: {
+                    color: '#333333',
+                    fontWeight: 'bold',
+                    fontSize: 18,
+                    fontFamily: 'Inter, sans-serif'
+                }
             },
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
                     type: 'shadow'
                 },
-                formatter: '{b}: {c} projects'
+                formatter: '{b}: {c} projects',
+                backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                borderColor: '#d8d8cd',
+                borderWidth: 1,
+                textStyle: {
+                    color: '#333333',
+                    fontFamily: 'Inter, sans-serif'
+                }
             },
             grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
+                left: '5%',
+                right: '5%',
+                bottom: '10%',
                 containLabel: true
             },
             xAxis: {
                 type: 'value',
-                name: 'Number of Projects'
+                name: 'Number of Projects',
+                nameTextStyle: {
+                    color: '#333333',
+                    fontFamily: 'Inter, sans-serif'
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#d8d8cd'
+                    }
+                },
+                axisLabel: {
+                    color: '#333333',
+                    fontFamily: 'Inter, sans-serif'
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: '#f0f0f0'
+                    }
+                }
             },
             yAxis: {
                 type: 'category',
                 data: data.map(item => item.sector),
+                axisLine: {
+                    lineStyle: {
+                        color: '#d8d8cd'
+                    }
+                },
                 axisTick: {
                     alignWithLabel: true
+                },
+                axisLabel: {
+                    color: '#333333',
+                    fontFamily: 'Inter, sans-serif'
                 }
             },
             series: [{
@@ -372,12 +492,47 @@ export class DataAnalysisComponent implements AfterViewInit {
                 type: 'bar',
                 data: data.map(item => item.projects),
                 itemStyle: {
+                    color: {
+                        type: 'linear',
+                        x: 0,
+                        y: 0,
+                        x2: 1,
+                        y2: 0,
+                        colorStops: [{
+                            offset: 0,
+                            color: '#D60000' // secondary color
+                        }, {
+                            offset: 1,
+                            color: '#61a8bd' // accent6 color
+                        }]
+                    },
                     borderRadius: [0, 4, 4, 0]
-                }
-            }]
+                },
+                emphasis: {
+                    itemStyle: {
+                        color: {
+                            type: 'linear',
+                            x: 0,
+                            y: 0,
+                            x2: 1,
+                            y2: 0,
+                            colorStops: [{
+                                offset: 0,
+                                color: '#AD0000' // darker secondary color
+                            }, {
+                                offset: 1,
+                                color: '#4d8a9e' // darker accent6 color
+                            }]
+                        }
+                    }
+                },
+                barWidth: '60%'
+            }],
+            animationDuration: 1000,
+            animationEasing: 'cubicInOut'
         };
 
-        chart.setOption(option);
+        chart.setOption(this.updateChartStyles(option));
     }
 
     private createInfrastructureInvestmentChart(): void {
@@ -944,16 +1099,8 @@ export class DataAnalysisComponent implements AfterViewInit {
 
     @HostListener('window:resize')
     onResize() {
-        if (this.map) {
-            this.map.invalidateSize();
-        }
         Object.values(this.charts).forEach(chart => chart?.resize());
     }
 
-    toggleDropdown(chartName: ChartName): void {
-        this.dropdownOpen[chartName] = !this.dropdownOpen[chartName];
-        setTimeout(() => {
-            this.charts[chartName]?.resize();
-        }, 0);
-    }
+
 }

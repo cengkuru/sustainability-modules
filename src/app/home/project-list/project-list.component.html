@@ -1,38 +1,40 @@
 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-12 font-inter">
     <!-- Loading State -->
-    <div *ngIf="isLoading" class="fixed inset-0 flex items-center justify-center bg-primary bg-opacity-75 backdrop-blur-sm z-50" @fadeInAnimation>
-        <div class="w-16 h-16 border-4 border-accent2 border-t-accent6 rounded-full animate-spin"></div>
+    <div *ngIf="isLoading" class="fixed inset-0 flex items-center justify-center bg-primary bg-opacity-75 backdrop-filter backdrop-blur-lg z-50" @fadeInAnimation>
+        <div class="w-16 h-16 border-4 border-accent6 border-t-accent5 rounded-full animate-apple-spin"></div>
     </div>
 
     <div class="container mx-auto py-8">
-        <h1 class="text-4xl font-bold text-accent mb-8 text-center">Projects</h1>
+        <h1 class="text-4xl font-bold text-accent mb-8 text-center animate-apple-fade-in">Projects</h1>
 
-        <div class="max-w-2xl mx-auto mb-12">
-            <div class="relative mb-8">
+        <div class="max-w-2xl mx-auto mb-12 animate-apple-fade-in">
+            <div class="relative mb-8 group">
                 <input
                         type="text"
-                        class="w-full px-4 py-3 pl-12 rounded-full bg-accent2 bg-opacity-20 border-none focus:outline-none focus:ring-2 focus:ring-accent6 transition-all duration-250 ease-apple-ease text-accent placeholder-accent4"
+                        class="w-full px-4 py-3 pl-12 rounded-apple bg-primary shadow-apple-inner border-none focus:outline-none focus:ring-2 focus:ring-accent6 transition-all duration-250 ease-apple text-accent placeholder-accent4"
                         placeholder="Search projects..."
                         (input)="onSearchChange($event)"
                 />
-                <ng-icon name="heroMagnifyingGlass" class="w-6 h-6 text-accent4 absolute left-4 top-1/2 transform -translate-y-1/2"></ng-icon>
+                <ng-icon name="heroMagnifyingGlass" class="w-6 h-6 text-accent4 absolute left-4 top-1/2 transform -translate-y-1/2 transition-all duration-250 group-hover:text-accent6"></ng-icon>
             </div>
 
             <div class="flex justify-center">
-                <div class="inline-flex rounded-full bg-accent2 bg-opacity-20 p-1">
+                <div class="inline-flex rounded-apple-full bg-primary shadow-apple-md p-1">
                     <button
                             (click)="toggleFeatured()"
-                            [class.bg-primary]="!(showFeatured | async)"
-                            [class.shadow-apple-sm]="!(showFeatured | async)"
-                            class="px-6 py-2 rounded-full text-sm font-medium text-accent transition-all duration-250 ease-apple-ease"
+                            [class.bg-accent6]="!(showFeatured | async)"
+                            [class.text-primary]="!(showFeatured | async)"
+                            [class.shadow-apple-inner]="!(showFeatured | async)"
+                            class="px-6 py-2 rounded-apple-full text-sm font-medium transition-all duration-250 ease-apple apple-press-effect"
                     >
                         All Projects
                     </button>
                     <button
                             (click)="toggleFeatured()"
-                            [class.bg-primary]="showFeatured | async"
-                            [class.shadow-apple-sm]="showFeatured | async"
-                            class="px-6 py-2 rounded-full text-sm font-medium text-accent transition-all duration-250 ease-apple-ease"
+                            [class.bg-accent6]="showFeatured | async"
+                            [class.text-primary]="showFeatured | async"
+                            [class.shadow-apple-inner]="showFeatured | async"
+                            class="px-6 py-2 rounded-apple-full text-sm font-medium transition-all duration-250 ease-apple apple-press-effect"
                     >
                         Featured
                     </button>
@@ -40,28 +42,34 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div *ngFor="let project of projects$ | async"
-                 class="relative overflow-hidden rounded-2xl bg-primary shadow-apple-md transition-all duration-300 ease-apple-ease transform hover:-translate-y-1 hover:shadow-apple-lg group">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" @listAnimation>
+            <div *ngFor="let project of projects$ | async; let i = index"
+                 class="relative overflow-hidden rounded-apple bg-primary shadow-apple-md transition-all duration-300 ease-apple transform hover:-translate-y-1 hover:shadow-apple-lg group apple-hover-lift"
+                 [style.animation-delay]="i * 50 + 'ms'">
                 <div class="p-6">
                     <a [routerLink]="['/public/projects', project.id]" class="block">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-xl font-semibold text-accent group-hover:text-accent6 transition-colors duration-250 ease-apple-ease">{{ project.name }}</h3>
-                            <ng-icon name="heroArrowRight" class="w-6 h-6 text-accent4 group-hover:text-accent6 transition-colors duration-250 ease-apple-ease transform group-hover:translate-x-1"></ng-icon>
+                            <h3 class="text-xl font-semibold text-accent group-hover:text-accent6 transition-colors duration-250 ease-apple">{{ project.name }}</h3>
+                            <ng-icon name="heroArrowRight" class="w-6 h-6 text-accent4 group-hover:text-accent6 transition-all duration-250 ease-apple transform group-hover:translate-x-1"></ng-icon>
                         </div>
-                        <p class="text-sm mb-4 text-accent4">
-                            <ng-icon name="heroMapPin" class="w-4 h-4 inline-block mr-1"></ng-icon>
+                        <p class="text-sm mb-4 text-accent4 flex items-center">
+                            <ng-icon name="heroMapPin" class="w-4 h-4 mr-1 text-accent6"></ng-icon>
                             {{ project.location.name }}
                         </p>
                         <p class="text-accent text-opacity-80 line-clamp-3">{{ project.stages.identification.basicData.projectDescription }}</p>
                     </a>
-                    <div *ngIf="project.featured" class="absolute top-4 right-4">
-            <span class="bg-accent1 text-accent text-xs font-semibold px-3 py-1 rounded-full shadow-apple-sm">
-              Featured
-            </span>
+                    <div *ngIf="project.featured" class="absolute top-4 right-4 animate-apple-pulse">
+                        <span class="bg-accent5 text-accent text-xs font-semibold px-3 py-1 rounded-apple-full shadow-apple-sm">
+                            Featured
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="mt-12 text-center animate-apple-fade-in">
+        <p class="text-lg text-accent mb-2">Total Projects: <span class="font-semibold">{{ totalProjects$ | async }}</span></p>
+        <p class="text-lg text-accent">Total Value: <span class="font-semibold">{{ totalValueOfProjects$ | async | currency }}</span></p>
     </div>
 </div>

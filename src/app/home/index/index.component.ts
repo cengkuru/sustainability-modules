@@ -1,20 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { Router, RouterLink, RouterLinkActive, RouterOutlet, NavigationEnd } from "@angular/router";
-import { trigger, transition, style, animate } from '@angular/animations';
+import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 import { filter } from 'rxjs/operators';
-import { NgIconComponent, provideIcons } from "@ng-icons/core";
-import {
-  heroArrowRight,
-  heroHome,
-  heroUser,
-  heroStar,
-  heroDocumentText,
-  heroChartBar,
-  heroBars3,
-  heroXMark,
-  heroArrowRightOnRectangle
-} from "@ng-icons/heroicons/outline";
 
 @Component({
   selector: 'app-index',
@@ -24,7 +12,6 @@ import {
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
-    NgIconComponent,
   ],
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
@@ -32,24 +19,21 @@ import {
     trigger('fadeInOut', [
       transition(':enter', [
         style({ opacity: 0 }),
-        animate('300ms', style({ opacity: 1 })),
+        animate('300ms ease-out', style({ opacity: 1 })),
       ]),
       transition(':leave', [
-        animate('300ms', style({ opacity: 0 })),
+        animate('300ms ease-in', style({ opacity: 0 })),
       ]),
     ]),
+    trigger('staggerList', [
+      transition('* <=> *', [
+        query(':enter', [
+          style({ opacity: 0, transform: 'translateY(10px)' }),
+          stagger('60ms', animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })))
+        ], { optional: true }),
+      ])
+    ]),
   ],
-  providers: [provideIcons({
-    heroArrowRight,
-    heroHome,
-    heroUser,
-    heroStar,
-    heroDocumentText,
-    heroChartBar,
-    heroBars3,
-    heroXMark,
-    heroArrowRightOnRectangle
-  })],
 })
 export class IndexComponent implements OnInit {
   pageTitle = 'The National Infrastructure Disclosure Platform';
@@ -57,45 +41,56 @@ export class IndexComponent implements OnInit {
   isMobileMenuOpen = false;
   isLoggedIn = false;
   isFooterExpanded = false;
+  isHeaderVisible = true;
+  lastScrollPosition = 0;
 
   currentYear = new Date().getFullYear();
   owner = 'CoST Infrastructure Transparency Initiative';
   appName = 'CoST Data Portal: Prototype';
 
   navLinks = [
-    { path: 'home', label: 'Home', icon: 'heroHome' },
-    { path: 'projects', label: 'Projects', icon: 'heroDocumentText' },
-    { path: 'data-analytics', label: 'Analysis', icon: 'heroChartBar' },
-    { path: 'downloads', label: 'Downloads', icon: 'heroArrowRight' },
-    { path: 'feedback', label: 'Feedback', icon: 'heroStar' },
-    { path: 'api-documentation', label: 'API Documentation', icon: 'heroDocumentText' }  // New link added
+    { path: 'home', label: 'Home', icon: 'bi bi-house' },
+    { path: 'projects', label: 'Projects', icon: 'bi bi-file-text' },
+    { path: 'data-analytics', label: 'Analysis', icon: 'bi bi-bar-chart' },
+    { path: 'downloads', label: 'Downloads', icon: 'bi bi-download' },
+    { path: 'feedback', label: 'Feedback', icon: 'bi bi-star' },
+    { path: 'api-documentation', label: 'API Documentation', icon: 'bi bi-code-square' }
   ];
 
   footerLinks = [
-    { path: 'publication-policy', label: 'Publication Policy', icon: 'heroDocumentText' }
+    { path: 'publication-policy', label: 'Publication Policy', icon: 'bi bi-file-text' }
   ];
 
   creativeCommonsLicense = {
     name: 'Creative Commons Attribution 4.0 International License',
-    icon: 'heroDocumentText',
+    icon: 'bi bi-file-text',
     link: 'https://creativecommons.org/licenses/by/4.0/'
   };
 
   constructor(public router: Router) {}
 
   ngOnInit() {
-    // Navigate to the default route if the current route is empty
     if (this.router.url === '/public' || this.router.url === '/public/') {
       this.router.navigate(['/public/home']);
     }
 
-    // Subscribe to router events to handle navigation
     this.router.events.pipe(
         filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
-      // Perform any necessary actions after navigation, such as scrolling to top
       window.scrollTo(0, 0);
+      this.closeMobileMenu();
     });
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll() {
+    const currentScrollPosition = window.pageYOffset;
+    if (currentScrollPosition > this.lastScrollPosition && currentScrollPosition > 100) {
+      this.isHeaderVisible = false;
+    } else {
+      this.isHeaderVisible = true;
+    }
+    this.lastScrollPosition = currentScrollPosition;
   }
 
   toggleProfileDropdown() {
@@ -112,5 +107,9 @@ export class IndexComponent implements OnInit {
 
   login() {
     this.router.navigate(['/public/login']);
+  }
+
+  expandFooter() {
+    this.isFooterExpanded = !this.isFooterExpanded;
   }
 }

@@ -1,35 +1,35 @@
-<div class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-primary font-inter text-accent">
+<div class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-primary-300 font-inter text-accent-300 dark:bg-background-dark dark:text-text-dark">
     <div class="w-full max-w-3xl">
-        <div class="bg-white rounded-apple-lg shadow-apple-xl overflow-hidden">
+        <div class="bg-primary-100 dark:bg-accent-400 rounded-apple shadow-apple-lg overflow-hidden transition-all duration-300">
             <div class="px-6 py-12 sm:px-12">
-                <h2 class="text-4xl font-bold text-center mb-8 text-accent">Download Project Data</h2>
-                <p class="mt-4 text-lg text-center mb-12 text-accent3 max-w-2xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-accent-300 dark:text-text-dark">Download Project Data</h2>
+                <p class="mt-4 text-base md:text-lg text-center mb-10 text-accent-100 dark:text-text-dark max-w-2xl mx-auto">
                     Access all project data in bulk. Choose your preferred open format:
                 </p>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
-                    <button (click)="downloadFile('csv')" [disabled]="downloading" class="download-button flex flex-col items-center justify-center p-6 rounded-apple-md bg-accent2 text-accent3 hover:bg-accent1 transition-all duration-300 ease-apple-ease-out disabled:opacity-50 disabled:cursor-not-allowed apple-hover-lift">
-                        <i class="bi bi-file-earmark-spreadsheet text-4xl mb-4"></i>
+                    <button (click)="downloadFile('csv')" [disabled]="downloading" class="download-button flex flex-col items-center justify-center p-6 rounded-apple bg-primary-400 dark:bg-accent-300 text-accent-300 dark:text-text-dark hover:bg-primary-500 dark:hover:bg-accent-200 transition-all duration-250 ease-apple disabled:opacity-50 disabled:cursor-not-allowed apple-hover-lift group">
+                        <i class="bi bi-file-earmark-spreadsheet text-4xl mb-4 text-secondary-300 dark:text-secondary-200 group-hover:text-secondary-400 transition-colors duration-250"></i>
                         <span class="font-semibold">CSV</span>
                     </button>
-                    <button (click)="downloadFile('json')" [disabled]="downloading" class="download-button flex flex-col items-center justify-center p-6 rounded-apple-md bg-accent2 text-accent3 hover:bg-accent1 transition-all duration-300 ease-apple-ease-out disabled:opacity-50 disabled:cursor-not-allowed apple-hover-lift">
-                        <i class="bi bi-file-earmark-code text-4xl mb-4"></i>
+                    <button (click)="downloadFile('json')" [disabled]="downloading" class="download-button flex flex-col items-center justify-center p-6 rounded-apple bg-primary-400 dark:bg-accent-300 text-accent-300 dark:text-text-dark hover:bg-primary-500 dark:hover:bg-accent-200 transition-all duration-250 ease-apple disabled:opacity-50 disabled:cursor-not-allowed apple-hover-lift group">
+                        <i class="bi bi-file-earmark-code text-4xl mb-4 text-secondary-300 dark:text-secondary-200 group-hover:text-secondary-400 transition-colors duration-250"></i>
                         <span class="font-semibold">JSON</span>
                     </button>
-                    <button (click)="downloadFile('txt')" [disabled]="downloading" class="download-button flex flex-col items-center justify-center p-6 rounded-apple-md bg-accent2 text-accent3 hover:bg-accent1 transition-all duration-300 ease-apple-ease-out disabled:opacity-50 disabled:cursor-not-allowed apple-hover-lift">
-                        <i class="bi bi-file-earmark-text text-4xl mb-4"></i>
+                    <button (click)="downloadFile('txt')" [disabled]="downloading" class="download-button flex flex-col items-center justify-center p-6 rounded-apple bg-primary-400 dark:bg-accent-300 text-accent-300 dark:text-text-dark hover:bg-primary-500 dark:hover:bg-accent-200 transition-all duration-250 ease-apple disabled:opacity-50 disabled:cursor-not-allowed apple-hover-lift group">
+                        <i class="bi bi-file-earmark-text text-4xl mb-4 text-secondary-300 dark:text-secondary-200 group-hover:text-secondary-400 transition-colors duration-250"></i>
                         <span class="font-semibold">TXT</span>
                     </button>
-                    <button (click)="downloadFile('xlsx')" [disabled]="downloading" class="download-button flex flex-col items-center justify-center p-6 rounded-apple-md bg-accent2 text-accent3 hover:bg-accent1 transition-all duration-300 ease-apple-ease-out disabled:opacity-50 disabled:cursor-not-allowed apple-hover-lift">
-                        <i class="bi bi-file-earmark-excel text-4xl mb-4"></i>
+                    <button (click)="downloadFile('xlsx')" [disabled]="downloading" class="download-button flex flex-col items-center justify-center p-6 rounded-apple bg-primary-400 dark:bg-accent-300 text-accent-300 dark:text-text-dark hover:bg-primary-500 dark:hover:bg-accent-200 transition-all duration-250 ease-apple disabled:opacity-50 disabled:cursor-not-allowed apple-hover-lift group">
+                        <i class="bi bi-file-earmark-excel text-4xl mb-4 text-secondary-300 dark:text-secondary-200 group-hover:text-secondary-400 transition-colors duration-250"></i>
                         <span class="font-semibold">Excel</span>
                     </button>
                 </div>
-                <div *ngIf="error" class="mt-8 text-secondary text-center">
+                <div *ngIf="error" class="mt-8 text-secondary-400 text-center animate-apple-fade-in">
                     {{ error }}
                 </div>
             </div>
-            <div *ngIf="downloading" class="apple-glass px-6 py-4 flex items-center justify-center">
-                <i class="bi bi-arrow-repeat animate-spin text-xl mr-3 text-accent6"></i>
+            <div *ngIf="downloading" class="apple-glass px-6 py-4 flex items-center justify-center animate-apple-fade-in">
+                <i class="bi bi-arrow-repeat animate-apple-spin text-xl mr-3 text-accent6"></i>
                 <span class="text-sm text-accent6">Downloading...</span>
             </div>
         </div>

@@ -1,85 +1,100 @@
-<div class="api-documentation-container bg-primary min-h-screen flex flex-col md:flex-row font-inter">
+<div class="bg-primary min-h-screen font-inter text-accent">
     <!-- Mobile Sidebar Toggle -->
-    <button (click)="toggleSidebar()" class="md:hidden fixed top-4 left-4 z-50 bg-secondary text-primary p-2 rounded-full shadow-apple-md transition duration-300 ease-apple-ease-out apple-press-effect">
+    <button (click)="toggleSidebar()" class="md:hidden fixed top-4 left-4 z-50 bg-accent6 text-primary p-2 rounded-full shadow-apple-md transition duration-250 ease-apple hover:bg-accent6/90 active:scale-95">
         <i class="bi" [ngClass]="{'bi-list': !isSidebarOpen, 'bi-x': isSidebarOpen}"></i>
     </button>
 
-    <!-- Sidebar -->
-    <div [ngClass]="{'translate-x-0': isSidebarOpen, '-translate-x-full': !isSidebarOpen}"
-         class="sidebar bg-white w-full md:w-1/4 p-6 fixed md:static inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-apple-ease-out shadow-apple-lg md:shadow-none md:translate-x-0">
-        <!-- Search Bar -->
-        <div class="search-container mb-6">
-            <div class="relative">
-                <i class="bi bi-search absolute left-3 top-1/2 transform -translate-y-1/2 text-accent3"></i>
-                <input
-                        type="text"
-                        [(ngModel)]="searchTerm"
-                        placeholder="Search API endpoint..."
-                        class="search-input w-full p-3 pl-10 rounded-apple-md border-accent2 focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-opacity-50 shadow-apple-sm transition duration-300 ease-apple-ease-out"
-                >
+    <div class="flex flex-col md:flex-row">
+        <!-- Sidebar -->
+        <aside [ngClass]="{'translate-x-0': isSidebarOpen, '-translate-x-full': !isSidebarOpen}"
+               class="w-full md:w-64 lg:w-80 bg-primary-100 fixed md:sticky top-0 h-screen overflow-y-auto transition-transform duration-300 ease-apple z-40 md:translate-x-0 shadow-apple-lg md:shadow-none">
+            <div class="p-6">
+                <!-- Search Bar -->
+                <div class="mb-6 relative">
+                    <i class="bi bi-search absolute left-3 top-1/2 transform -translate-y-1/2 text-accent4"></i>
+                    <input
+                            type="text"
+                            [(ngModel)]="searchTerm"
+                            placeholder="Search API endpoints..."
+                            class="w-full p-3 pl-10 rounded-apple border border-accent2 focus:outline-none focus:ring-2 focus:ring-accent6 bg-primary-200 text-accent placeholder-accent4"
+                    >
+                </div>
+
+                <!-- Navigation -->
+                <nav class="w-full bg-primary p-4">
+                    <ul [@listAnimation]="filteredEndpoints.length" class="space-y-2">
+                        <li *ngFor="let endpoint of filteredEndpoints"
+                            (click)="setActiveEndpoint(endpoint.title)"
+                            class="cursor-pointer rounded-apple transition-colors duration-250 ease-apple hover:bg-accent-100 hover:text-accent hover:shadow-apple-md"
+                            [ngClass]="{'bg-accent6 text-primary shadow-apple-md': activeEndpoint === endpoint.title, 'hover:bg-primary-400 hover:text-accent': activeEndpoint !== endpoint.title}">
+                            <a class="block px-4 py-3">
+                                <span class="font-semibold">{{ endpoint.method }}</span> {{ endpoint.title }}
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
             </div>
-        </div>
-        <nav>
-            <ul [@listAnimation]="filteredEndpoints.length">
-                <li *ngFor="let endpoint of filteredEndpoints"
-                    (click)="setActiveEndpoint(endpoint.title)"
-                    class="cursor-pointer p-3 rounded-apple-md mb-2 transition-all duration-300 ease-apple-ease-out text-accent"
-                    [ngClass]="{'bg-accent6 text-primary shadow-apple-md': activeEndpoint === endpoint.title, 'hover:bg-accent2': activeEndpoint !== endpoint.title}">
-                    <span class="font-semibold">{{ endpoint.method }}</span> {{ endpoint.title }}
-                </li>
-            </ul>
-        </nav>
-    </div>
+        </aside>
 
-    <!-- Content -->
-    <div class="content w-full md:w-3/4 p-4 md:p-8 overflow-y-auto mt-16 md:mt-0">
-        <ng-container *ngFor="let endpoint of filteredEndpoints">
-            <div *ngIf="activeEndpoint === endpoint.title" [@fadeInOut] class="endpoint mb-8">
-                <h2 class="text-3xl font-bold mb-4 text-accent">{{ endpoint.title }}</h2>
-                <div class="bg-accent text-primary px-4 py-2 rounded-md inline-block mb-4">
-                    <span class="font-semibold">{{ endpoint.method }}</span> {{ endpoint.path }}
-                </div>
-                <p class="mb-6 text-accent3 leading-relaxed">{{ endpoint.description }}</p>
+        <!-- Main Content -->
+        <main class="flex-1 p-6 md:p-8 mt-16 md:mt-0">
+            <ng-container *ngFor="let endpoint of filteredEndpoints">
+                <section *ngIf="activeEndpoint === endpoint.title" [@fadeInOut] class="max-w-3xl mx-auto space-y-8">
+                    <header>
+                        <h1 class="text-3xl font-bold mb-2">{{ endpoint.title }}</h1>
+                        <div class="inline-flex items-center px-3 py-1 rounded-apple-full bg-accent text-primary text-sm font-medium">
+                            <span class="mr-2 font-semibold">{{ endpoint.method }}</span>
+                            <span>{{ endpoint.path }}</span>
+                        </div>
+                    </header>
 
-                <!-- Example URL -->
-                <div class="mb-6">
-                    <h3 class="text-2xl font-semibold mb-2 text-accent">Example URL</h3>
-                    <code class="bg-gray-100 p-2 rounded block">{{ endpoint.exampleUrl }}</code>
-                </div>
+                    <p class="text-lg text-accent4">{{ endpoint.description }}</p>
 
-                <!-- Parameters -->
-                <div class="parameters mb-8">
-                    <h3 class="text-2xl font-semibold mb-4 text-accent">Parameters</h3>
-                    <div *ngFor="let param of endpoint.parameters" class="parameter bg-white p-4 mb-4 rounded-apple-lg shadow-apple-sm">
-                        <h4 class="text-xl font-semibold text-accent">{{ param.name }}</h4>
-                        <p class="text-accent3 mb-2">{{ param.description }}</p>
-                        <p class="text-sm text-accent3">
-                            <span class="font-semibold">In:</span> {{ param.in }} |
-                            <span class="font-semibold">Type:</span> {{ param.type }} |
-                            <span class="font-semibold">Required:</span> {{ param.required ? 'Yes' : 'No' }}
-                        </p>
+                    <!-- Example URL -->
+                    <div class="bg-primary-200 rounded-apple p-4">
+                        <h2 class="text-xl font-semibold mb-2">Example URL</h2>
+                        <code class="block text-accent3 bg-primary-300 p-2 rounded">{{ endpoint.exampleUrl }}</code>
                     </div>
-                </div>
 
-                <!-- Request Body Example -->
-                <div *ngIf="endpoint.requestBodyExample" class="mb-8">
-                    <h3 class="text-2xl font-semibold mb-4 text-accent">Request Body Example</h3>
-                    <pre class="bg-gray-100 p-4 rounded overflow-x-auto"><code>{{ endpoint.requestBodyExample }}</code></pre>
-                </div>
-
-                <!-- Responses -->
-                <div class="responses mb-8">
-                    <h3 class="text-2xl font-semibold mb-4 text-accent">Responses</h3>
-                    <div *ngFor="let response of endpoint.responses" class="response bg-white p-4 mb-4 rounded-apple-lg shadow-apple-sm">
-                        <h4 class="text-xl font-semibold text-accent">Status: {{ response.status }}</h4>
-                        <p class="text-accent3 mb-4">{{ response.description }}</p>
-                        <div *ngIf="response.example">
-                            <h5 class="font-semibold mb-2">Example Response:</h5>
-                            <pre class="bg-gray-100 p-4 rounded overflow-x-auto"><code>{{ response.example }}</code></pre>
+                    <!-- Parameters -->
+                    <div>
+                        <h2 class="text-2xl font-semibold mb-4">Parameters</h2>
+                        <div class="space-y-4">
+                            <div *ngFor="let param of endpoint.parameters" class="bg-primary-100 p-4 rounded-apple">
+                                <h3 class="text-xl font-semibold">{{ param.name }}</h3>
+                                <p class="text-accent4 mb-2">{{ param.description }}</p>
+                                <div class="flex space-x-4 text-sm">
+                                    <span><strong>In:</strong> {{ param.in }}</span>
+                                    <span><strong>Type:</strong> {{ param.type }}</span>
+                                    <span><strong>Required:</strong> {{ param.required ? 'Yes' : 'No' }}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </ng-container>
+
+                    <!-- Request Body Example -->
+                    <div *ngIf="endpoint.requestBodyExample">
+                        <h2 class="text-2xl font-semibold mb-4">Request Body Example</h2>
+                        <pre class="bg-primary-200 p-4 rounded-apple overflow-x-auto"><code class="text-accent3">{{ endpoint.requestBodyExample }}</code></pre>
+                    </div>
+
+                    <!-- Responses -->
+                    <div>
+                        <h2 class="text-2xl font-semibold mb-4">Responses</h2>
+                        <div class="space-y-4">
+                            <div *ngFor="let response of endpoint.responses" class="bg-primary-100 p-4 rounded-apple">
+                                <h3 class="text-xl font-semibold">Status: {{ response.status }}</h3>
+                                <p class="text-accent4 mb-4">{{ response.description }}</p>
+                                <div *ngIf="response.example">
+                                    <h4 class="font-semibold mb-2">Example Response:</h4>
+                                    <pre class="bg-primary-200 p-4 rounded-apple overflow-x-auto"><code class="text-accent3">{{ response.example }}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </ng-container>
+        </main>
     </div>
 </div>
