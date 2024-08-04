@@ -31,6 +31,8 @@ export class AppComponent implements OnInit {
         count => console.log(`Migration completed. ${count} projects migrated.`),
         error => console.error('Error during migration:', error)
     );*/
+
+    // await this.updateProjects();
   }
 
   private async initializePolicyDataIfNeeded(): Promise<void> {
@@ -76,6 +78,12 @@ export class AppComponent implements OnInit {
       console.error('Error initializing projects data:', error);
       console.error('Detailed error:', JSON.stringify(error));
     }
+  }
+
+  async updateProjects() {
+    await this.migrationService.updateAllProjects();
+    // After updating, you might want to reload your projects
+    // this.loadProjects();
   }
 
 

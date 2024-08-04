@@ -12,6 +12,13 @@ import {Project} from "../models/vizprojects.model";
 export class MigrationService {
     private readonly COLLECTION_NAME = 'dataVizProjects';
 
+    private sustainableSubsectors = [
+        'Renewable energy', 'Solar', 'Wind', 'Hydropower', 'Biomass', 'Geothermal',
+        'Water and wastewater management', 'Transport', 'Low carbon transport',
+        'Natural resource management', 'Flood protection'
+    ];
+
+
     constructor(
         private firestore: AngularFirestore,
         private http: HttpClient
@@ -40,5 +47,40 @@ export class MigrationService {
                 }
             })
         );
+    }
+
+
+    async updateAllProjects() {
+        const snapshot = await this.firestore.collection<Project>('dataVizProjects').get().toPromise();
+        if (!snapshot) {
+            console.error('No projects found to update');
+            return;
+        }
+
+        const updatePromises = snapshot.docs.map(doc => {
+            const project = doc.data() as Project;
+            const updatedProject = this.addNewIndicators(project);
+            return this.firestore.collection('dataVizProjects').doc(doc.id).update(updatedProject);
+        });
+
+        try {
+            await Promise.all(updatePromises);
+            console.log('All projects updated successfully');
+        } catch (error) {
+            console.error('Error updating projects:', error);
+        }
+    }
+
+    private addNewIndicators(project: Project): Partial<Project> {
+        return {
+            climateAndDisasterRiskAssessmentPublished: Math.random() < 0.7, // 70% chance of being true
+            assetLifetime: Math.floor(Math.random() * (50 - 10 + 1)) + 10, // Random number between 10 and 50 years
+            sustainableSubsector: this.getRandomSubsector()
+        };
+    }
+
+    private getRandomSubsector(): string {
+        const index = Math.floor(Math.random() * this.sustainableSubsectors.length);
+        return this.sustainableSubsectors[index];
     }
 }

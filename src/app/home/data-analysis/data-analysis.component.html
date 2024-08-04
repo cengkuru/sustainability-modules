@@ -1,72 +1,82 @@
-<div class="bg-primary-100 min-h-screen font-inter">
-    <header class="bg-white shadow-apple-md p-4">
-        <h1 class="text-2xl font-bold text-accent">Infrastructure Investment Dashboard</h1>
-    </header>
-
+<div class=" min-h-screen font-inter">
     <main class="container mx-auto px-4 py-8">
         <!-- Universal Filters -->
         <section class="bg-white rounded-apple shadow-apple-md p-6 mb-8">
-            <h2 class="text-xl font-semibold text-accent mb-4">Filters</h2>
+            <h2 class="text-xl font-semibold text-accent3 mb-4">Filters</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div>
                     <label for="region" class="block text-sm font-medium text-accent4 mb-1">Region</label>
-                    <select id="region" [(ngModel)]="selectedRegion" (change)="applyFilters()" class="w-full rounded-apple-sm border-gray-300 shadow-sm focus:border-accent6 focus:ring focus:ring-accent6 focus:ring-opacity-50">
+                    <select id="region" [(ngModel)]="selectedRegion" (change)="applyFilters()"
+                            class="w-full rounded-apple-sm border border-gray-300 shadow-sm focus:border-accent6 focus:ring focus:ring-accent6 focus:ring-opacity-50">
                         <option *ngFor="let region of regions" [value]="region">{{region}}</option>
                     </select>
                 </div>
                 <div>
                     <label for="sector" class="block text-sm font-medium text-accent4 mb-1">Sector</label>
-                    <select id="sector" [(ngModel)]="selectedSector" (change)="applyFilters()" class="w-full rounded-apple-sm border-gray-300 shadow-sm focus:border-accent6 focus:ring focus:ring-accent6 focus:ring-opacity-50">
+                    <select id="sector" [(ngModel)]="selectedSector" (change)="applyFilters()"
+                            class="w-full rounded-apple-sm border border-gray-300 shadow-sm focus:border-accent6 focus:ring focus:ring-accent6 focus:ring-opacity-50">
                         <option *ngFor="let sector of sectors" [value]="sector">{{sector}}</option>
                     </select>
                 </div>
                 <div>
                     <label for="climateObjective" class="block text-sm font-medium text-accent4 mb-1">Climate Objective</label>
-                    <select id="climateObjective" [(ngModel)]="selectedClimateObjective" (change)="applyFilters()" class="w-full rounded-apple-sm border-gray-300 shadow-sm focus:border-accent6 focus:ring focus:ring-accent6 focus:ring-opacity-50">
+                    <select id="climateObjective" [(ngModel)]="selectedClimateObjective" (change)="applyFilters()"
+                            class="w-full rounded-apple-sm border border-gray-300 shadow-sm focus:border-accent6 focus:ring focus:ring-accent6 focus:ring-opacity-50">
                         <option *ngFor="let objective of climateObjectives" [value]="objective">{{objective}}</option>
                     </select>
                 </div>
                 <div>
                     <label for="yearRange" class="block text-sm font-medium text-accent4 mb-1">Year Range</label>
                     <div class="flex items-center space-x-2">
-                        <input type="number" [(ngModel)]="startYear" (change)="applyFilters()" class="w-full rounded-apple-sm border-gray-300 shadow-sm focus:border-accent6 focus:ring focus:ring-accent6 focus:ring-opacity-50" min="{{startYear}}" max="{{endYear}}">
-                        <span class="text-accent4">to</span>
-                        <input type="number" [(ngModel)]="endYear" (change)="applyFilters()" class="w-full rounded-apple-sm border-gray-300 shadow-sm focus:border-accent6 focus:ring focus:ring-accent6 focus:ring-opacity-50" min="{{startYear}}" max="{{endYear}}">
+                        <input type="number" [(ngModel)]="startYear" (change)="applyFilters()"
+                               class="w-1/2 rounded-apple-sm border border-gray-300 shadow-sm focus:border-accent6 focus:ring focus:ring-accent6 focus:ring-opacity-50"
+                               min="{{startYear}}" max="{{endYear}}">
+                        <span class="text-accent4">-</span>
+                        <input type="number" [(ngModel)]="endYear" (change)="applyFilters()"
+                               class="w-1/2 rounded-apple-sm border border-gray-300 shadow-sm focus:border-accent6 focus:ring focus:ring-accent6 focus:ring-opacity-50"
+                               min="{{startYear}}" max="{{endYear}}">
                     </div>
                 </div>
             </div>
         </section>
-
         <!-- Key Metrics -->
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            <div class="bg-white rounded-apple shadow-apple-md p-8 transition duration-300 ease-apple-ease-out hover:shadow-apple-lg apple-hover-lift">
-                <div class="flex items-center mb-6">
-                    <i class="bi bi-folder2-open text-accent6 text-3xl mr-3"></i>
-                    <h2 class="text-2xl font-semibold text-accent">Total Projects</h2>
-                </div>
-                <p class="text-4xl font-bold text-accent mb-3">{{totalProjects}}</p>
-                <p class="text-base text-accent4">from {{regions.length - 1}} Regions</p>
-            </div>
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-16">
+            <div *ngFor="let stat of stats; let i = index"
+                 class="bg-white rounded-apple shadow-apple-md p-6 transition-all duration-300 ease-apple hover:shadow-apple-lg hover:-translate-y-1 group"
+                 [ngClass]="{'animate-apple-fade-in': true}"
+                 [style.animation-delay]="i * 100 + 'ms'">
 
-            <div class="bg-white rounded-apple shadow-apple-md p-8 transition duration-300 ease-apple-ease-out hover:shadow-apple-lg apple-hover-lift">
-                <div class="flex items-center mb-6">
-                    <i class="bi bi-graph-up text-accent6 text-3xl mr-3"></i>
-                    <h2 class="text-2xl font-semibold text-accent">Project Completion</h2>
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-semibold text-accent3">{{ stat.title }}</h2>
+                    <i class="bi {{ stat.icon }} text-accent6 text-2xl transition-all duration-300 ease-apple group-hover:scale-110"></i>
                 </div>
-                <p class="text-4xl font-bold text-accent mb-3">{{projectCompletionRate | number:'1.0-0'}}%</p>
-                <p class="text-base text-accent4">of projects completed</p>
-            </div>
 
-            <div class="bg-white rounded-apple shadow-apple-md p-8 transition duration-300 ease-apple-ease-out hover:shadow-apple-lg apple-hover-lift">
-                <div class="flex items-center mb-6">
-                    <i class="bi bi-people text-accent6 text-3xl mr-3"></i>
-                    <h2 class="text-2xl font-semibold text-accent">Jobs Created</h2>
-                </div>
-                <p class="text-4xl font-bold text-accent mb-3">{{jobsCreated | number}}</p>
-                <p class="text-base text-accent4">estimated new jobs</p>
+                <p class="text-3xl font-bold text-accent mb-2">
+                    {{ stat.value | number:stat.format }}
+                </p>
+                <p class="text-sm text-accent4 leading-tight">
+                    {{ stat.description }}
+                </p>
             </div>
         </section>
 
+
+        <!-- Sustainable Subsector Breakdown -->
+        <section class="bg-white rounded-apple shadow-apple-md p-8 mb-16 transition duration-300 ease-apple-ease-out hover:shadow-apple-lg apple-hover-lift">
+            <div class="flex items-center mb-6">
+                <i class="bi bi-diagram-3 text-accent6 text-2xl mr-3" aria-hidden="true"></i>
+                <h3 class="text-3xl font-semibold text-accent">Sustainable Subsector Breakdown</h3>
+            </div>
+            <p class="text-lg text-accent mb-4">Total Projects: {{totalProjects}}</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div *ngFor="let item of sortedSubsectorBreakdown" class="bg-accent1 rounded-apple p-6 flex flex-col items-center">
+                    <i [class]="getSubsectorIcon(item.key)" class="text-accent6 text-2xl mb-2" [attr.aria-label]="item.key + ' icon'"></i>
+                    <p class="text-lg font-semibold text-accent text-center mb-2">{{item.key}}</p>
+                    <p class="text-3xl font-bold text-accent6">{{item.value}}</p>
+                    <p class="text-sm text-accent mt-1">{{item.percentage.toFixed(1)}}% of total</p>
+                </div>
+            </div>
+        </section>
         <!-- Charts -->
         <!-- Charts -->
         <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">

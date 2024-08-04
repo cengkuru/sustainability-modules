@@ -19,14 +19,25 @@ export interface Project {
     id: string;
     name: string;
     budget: number;
-    region: Region;
-    location: Location;
+    region: {
+        name: string;
+        code: string;
+        population: number;
+    };
+    location: {
+        lat: number;
+        lng: number;
+    };
     climateObjective: string;
     sector: string;
     subsector: string;
     projectType: string;
     date: string;
-    yearlyInvestment: YearlyInvestment;
+    yearlyInvestment: { [year: string]: number };
+    // New fields
+    climateAndDisasterRiskAssessmentPublished: boolean;
+    assetLifetime: number; // in years
+    sustainableSubsector: string;
 }
 
 // Example usage:
@@ -54,4 +65,8 @@ const exampleProject: Project = {
         "2021": 276122088,
         "2022": 0,
     },
+    // New fields
+    climateAndDisasterRiskAssessmentPublished: true,
+    assetLifetime: 25, // Assuming a 25-year lifetime for a solar farm
+    sustainableSubsector: "Solar"
 };
