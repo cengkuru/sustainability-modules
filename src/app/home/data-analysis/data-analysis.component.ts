@@ -7,6 +7,9 @@ import { EChartsOption, BarSeriesOption, PieSeriesOption } from 'echarts';
 import * as L from 'leaflet';
 import { ScriptLoaderService } from "../../services/scriptLoader.service";
 import { Project } from "../../models/vizprojects.model";
+import {AngularFirestore} from "@angular/fire/compat/firestore";
+import firebase from "firebase/compat";
+import DocumentData = firebase.firestore.DocumentData;
 
 type ChartName = 'investmentByRegion' | 'projectsByRegion' | 'projectsByClimateObjectives' |
     'investmentsByClimateObjectives' | 'totalProjectsBySector' | 'projectTypes' |
@@ -75,10 +78,10 @@ export class DataAnalysisComponent implements AfterViewInit {
         private ngZone: NgZone,
         private scriptLoader: ScriptLoaderService,
         private cdr: ChangeDetectorRef,
+        private firestore: AngularFirestore,
     ) { }
 
     async ngOnInit(): Promise<void> {
-        console.log('ngOnInit called');
         try {
             await this.loadLeafletScripts();
             await this.loadProjects();
@@ -88,7 +91,6 @@ export class DataAnalysisComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        console.log('ngAfterViewInit called');
         this.viewInitialized = true;
         this.ngZone.runOutsideAngular(() => {
             setTimeout(() => {
@@ -98,14 +100,12 @@ export class DataAnalysisComponent implements AfterViewInit {
     }
 
     ngOnDestroy(): void {
-        console.log('ngOnDestroy called');
         if (this.map) {
             this.map.remove();
         }
     }
 
     private async loadLeafletScripts(): Promise<void> {
-        console.log('loadLeafletScripts called');
         const scripts = [
             'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js'
         ];
@@ -116,8 +116,6 @@ export class DataAnalysisComponent implements AfterViewInit {
         try {
             await this.scriptLoader.loadScripts(scripts);
             await this.scriptLoader.loadStyles(styles);
-            console.log('Leaflet scripts and styles loaded successfully');
-
             // After loading Leaflet, apply custom styles to align with Tailwind config
             this.applyLeafletCustomStyles();
         } catch (error) {
@@ -256,7 +254,6 @@ export class DataAnalysisComponent implements AfterViewInit {
         if (this.viewInitialized && this.projectsLoaded && this.mapContainer && this.mapContainer.nativeElement) {
             this.initializeMap();
         } else {
-            console.log('Map initialization deferred');
             if (!this.mapContainer) {
                 console.error('Map container is not available');
             }
@@ -266,21 +263,17 @@ export class DataAnalysisComponent implements AfterViewInit {
     }
 
     initializeMap(): void {
-        console.log('initializeMap called');
         if (this.mapInitialized) {
             console.log('Map already initialized');
             return;
         }
 
-        console.log('Creating map instance');
         this.map = L.map(this.mapContainer.nativeElement).setView([-28.4793, 24.6727], 6);
 
-        console.log('Adding tile layer');
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
         }).addTo(this.map);
 
-        console.log('Adding markers', this.markers);
         this.projects.forEach(project => {
             const marker = L.marker([project.location.lat, project.location.lng]).addTo(this.map);
             marker.bindPopup(`
@@ -297,7 +290,6 @@ export class DataAnalysisComponent implements AfterViewInit {
 
         this.fitMapBounds();
         this.mapInitialized = true;
-        console.log('Map initialized successfully');
     }
 
     fitMapBounds() {
@@ -310,21 +302,46 @@ export class DataAnalysisComponent implements AfterViewInit {
     async loadProjects() {
         this.isLoading = true;
         try {
-            const data = await this.http.get<Project[]>('/assets/data/vizProjects.json').toPromise();
-            this.projects = data || [];
-            this.filteredProjects = [...this.projects];
-            this.projectsLoaded = true;
-            this.isLoading = false;
-            this.initializeFilters();
-            this.updateKeyMetrics();
-            this.checkAndInitializeMap();
-            this.initializeCharts();
-            this.cdr.detectChanges();
+            const snapshot = await this.firestore.collection<Project>('dataVizProjects').get().toPromise();
+            if (snapshot) {
+                this.projects = snapshot.docs.map(doc => this.convertToProject(doc.id, doc.data()));
+                this.filteredProjects = [...this.projects];
+                this.projectsLoaded = true;
+                this.initializeFilters();
+                this.updateKeyMetrics();
+                this.checkAndInitializeMap();
+                this.initializeCharts();
+            } else {
+                console.error('No data received from Firestore');
+                this.projects = [];
+                this.filteredProjects = [];
+            }
         } catch (error) {
             console.error('Error loading projects:', error);
+            this.projects = [];
+            this.filteredProjects = [];
+        } finally {
             this.isLoading = false;
+            this.cdr.detectChanges();
         }
     }
+
+    private convertToProject(id: string, data: DocumentData): Project {
+        return {
+            id,
+            name: data['name'] || '',
+            budget: data['budget'] || 0,
+            region: data['region'] || { name: '', code: '', population: 0 },
+            location: data['location'] || { lat: 0, lng: 0 },
+            climateObjective: data['climateObjective'] || '',
+            sector: data['sector'] || '',
+            subsector: data['subsector'] || '',
+            projectType: data['projectType'] || '',
+            date: data['date'] || '',
+            yearlyInvestment: data['yearlyInvestment'] || {}
+        };
+    }
+
 
     initializeFilters() {
         this.regions = ['All', ...new Set(this.projects.map(p => p.region.name))];

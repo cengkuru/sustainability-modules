@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { firstValueFrom } from 'rxjs';
 import {Policy} from "./core/models/polict.model";
 import {Project} from "./models/projects.model";
+import {MigrationService} from "./services/migration.service";
 
 
 @Component({
@@ -16,12 +17,20 @@ export class AppComponent implements OnInit {
   private readonly policyCollectionName = 'policies';
   private readonly projectsCollectionName = 'projects';
 
-  constructor(private http: HttpClient, private firestore: AngularFirestore) {
+  constructor(
+      private http: HttpClient,
+      private firestore: AngularFirestore,
+      private migrationService: MigrationService
+  ) {
   }
 
   async ngOnInit(): Promise<void> {
     // await this.initializePolicyDataIfNeeded();
     // await this.initializeProjectsData();
+    /*this.migrationService.migrateProjects().subscribe(
+        count => console.log(`Migration completed. ${count} projects migrated.`),
+        error => console.error('Error during migration:', error)
+    );*/
   }
 
   private async initializePolicyDataIfNeeded(): Promise<void> {
