@@ -1,0 +1,119 @@
+{
+  "completion": {
+    "institutionalSustainabilityData": {
+      "numberOfFreedomOfInformationAnswers": 6,
+      "numberOfFreedomOfInformationRequests": 7,
+      "attachments": [
+        {
+          "description": "Documentation of FOI requests and answers.",
+          "documentType": "Documentation",
+          "pages": 25,
+          "url": "http://example.com/foi-requests-answers-johannesburg.pdf",
+          "language": "en",
+          "title": "Freedom of Information Requests and Answers",
+          "format": "PDF",
+          "datePublished": "2027-12-01T00:00:00Z",
+          "dateModified": "2027-12-10T00:00:00Z"
+        }
+      ]
+    },
+    "basicData": {
+      "scopeAtCompletion": "Upgrade of rapid transit system including expansion of lines, station modernization, and advanced ticketing systems.",
+      "projectStatus": "Completed",
+      "completionCost": "110000000",
+      "completionDate": "2027-09-30T00:00:00Z",
+      "reasonsForProjectChanges": "Scope was expanded to include additional stations.",
+      "attachments": [
+        {
+          "description": "Final project completion report.",
+          "documentType": "Report",
+          "pages": 30,
+          "url": "http://example.com/project-completion-report-johannesburg.pdf",
+          "language": "en",
+          "title": "Project Completion Report",
+          "format": "PDF",
+          "datePublished": "2027-10-01T00:00:00Z",
+          "dateModified": "2027-10-15T00:00:00Z"
+        }
+      ],
+      "environmentalImpactData": {
+        "postProjectEnvironmentalImpact": {
+          "assessment": "The project has resulted in a 10% increase in local air quality due to reduced vehicle emissions.",
+          "mitigationMeasures": "Implementation of green spaces around stations, increased use of electric buses."
+        },
+        "sustainabilityMeasures": {
+          "description": "Continuation of environmental monitoring and adaptation of green technology in future expansions.",
+          "status": "Ongoing"
+        }
+      },
+      "socialSustainability": {
+        "communityFeedback": {
+          "satisfactionRate": "85%",
+          "publicMeetings": [
+            {
+              "date": "2027-10-15T00:00:00Z",
+              "summary": "Positive feedback on service quality, suggestions for further accessibility improvements."
+            }
+          ]
+        },
+        "employmentAndTraining": {
+          "localEmployment": "500 new jobs created",
+          "trainingPrograms": "10 workshops on sustainable urban transport"
+        }
+      },
+      "economicSustainability": {
+        "costBenefitAnalysis": {
+          "benefitCostRatio": "1.5",
+          "economicImpact": "Increased local GDP by 2% due to construction and operation."
+        },
+        "revenueGeneration": {
+          "annualRevenue": "20000000",
+          "source": "Ticket sales, advertising"
+        }
+      },
+      "operationalSustainability": {
+        "maintenancePlans": {
+          "contract": "http://example.com/maintenance-contract-johannesburg.pdf",
+          "duration": "10 years"
+        },
+        "performanceMetrics": {
+          "uptime": "99.5%",
+          "passengerSatisfaction": "90%"
+        }
+      },
+      "institutionalAndGovernanceSustainability": {
+        "governanceStructure": {
+          "body": "Johannesburg Transit Authority",
+          "oversight": "Regular board meetings, public accountability sessions"
+        },
+        "policyCompliance": {
+          "sustainabilityPolicies": "Adherence to national environmental and transport policies."
+        }
+      },
+      "technologicalSustainability": {
+        "technologyTransfer": {
+          "description": "Local training programs for maintenance of advanced ticketing systems.",
+          "beneficiaries": "Local tech colleges"
+        },
+        "upgradePlans": {
+          "nextUpgrade": "2030",
+          "features": "AI-based traffic management, further electrification"
+        }
+      },
+      "riskManagement": {
+        "sustainabilityRisks": [
+          {
+            "type": "Economic",
+            "description": "Potential decrease in ridership due to economic downturns.",
+            "mitigation": "Flexible pricing models"
+          },
+          {
+            "type": "Environmental",
+            "description": "Climate change impacts on infrastructure.",
+            "mitigation": "Climate-resilient design standards"
+          }
+        ]
+      }
+    }
+  }
+}

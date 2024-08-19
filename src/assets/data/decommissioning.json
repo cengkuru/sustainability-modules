@@ -1,0 +1,166 @@
+{
+  "decommissioning": {
+    "economicAndFinancialSustainabilityData": {
+      "decommissionCostForecast": "22000000",
+      "actualDecommissionCosts": "22500000",
+      "costVarianceAnalysis": "5% over budget due to unforeseen environmental remediation costs",
+      "fundingSources": ["Government Grant", "Insurance Payout", "Private Investment"],
+      "attachments": [
+        {
+          "format": "PDF",
+          "description": "Forecast of the costs involved in the decommissioning.",
+          "pages": 25,
+          "datePublished": "2025-02-01T00:00:00Z",
+          "documentType": "Forecast",
+          "language": "en",
+          "url": "http://example.com/decommission-cost-forecast-johannesburg.pdf",
+          "title": "Decommission Cost Forecast",
+          "dateModified": "2025-02-10T00:00:00Z"
+        },
+        {
+          "format": "PDF",
+          "description": "Actual costs and variance analysis.",
+          "pages": 15,
+          "datePublished": "2025-05-01T00:00:00Z",
+          "documentType": "Report",
+          "language": "en",
+          "url": "http://example.com/decommission-cost-variance-johannesburg.pdf",
+          "title": "Cost Variance Analysis",
+          "dateModified": "2025-05-10T00:00:00Z"
+        }
+      ]
+    },
+    "environmentalAndClimateSustainabilityData": {
+      "decommissionMitigationPlan": "Plan to mitigate environmental impact during decommissioning.",
+      "actualEnvironmentalImpact": "Restoration completed with 95% of native vegetation replanted.",
+      "wasteManagement": {
+        "recycledWaste": "70%",
+        "landfillWaste": "30%",
+        "hazardousWaste": "5%"
+      },
+      "biodiversityImpact": "No significant impact on local species; habitat restoration ongoing.",
+      "attachments": [
+        {
+          "format": "PDF",
+          "documentType": "Plan",
+          "datePublished": "2025-03-01T00:00:00Z",
+          "url": "http://example.com/decommission-mitigation-plan-johannesburg.pdf",
+          "pages": 35,
+          "title": "Decommission Mitigation Plan",
+          "language": "en",
+          "description": "Detailed plan for mitigating environmental impacts during decommissioning.",
+          "dateModified": "2025-03-10T00:00:00Z"
+        },
+        {
+          "format": "PDF",
+          "documentType": "Report",
+          "datePublished": "2025-06-01T00:00:00Z",
+          "url": "http://example.com/environmental-impact-assessment-johannesburg.pdf",
+          "pages": 20,
+          "title": "Environmental Impact Assessment",
+          "language": "en",
+          "description": "Post-decommissioning environmental impact assessment.",
+          "dateModified": "2025-06-10T00:00:00Z"
+        }
+      ]
+    },
+    "basicData": {
+      "maintenanceScope": "Dismantling all structures and restoring the site to its natural state.",
+      "decommissioningTimeline": {
+        "start": "2024-01-01",
+        "end": "2024-12-31",
+        "milestones": ["Site Clearance", "Structure Dismantling", "Environmental Restoration"]
+      },
+      "safetyMeasures": {
+        "trainingHoursPerWorker": "10",
+        "safetyIncidents": "3",
+        "safetyProtocolCompliance": "98%"
+      },
+      "attachments": [
+        {
+          "format": "PDF",
+          "documentType": "Plan",
+          "datePublished": "2025-01-01T00:00:00Z",
+          "url": "http://example.com/decommissioning-plan-johannesburg.pdf",
+          "pages": 30,
+          "title": "Decommissioning Plan",
+          "language": "en",
+          "description": "Detailed plan for decommissioning activities.",
+          "dateModified": "2025-01-10T00:00:00Z"
+        }
+      ]
+    },
+    "climateFinanceData": {
+      "carbonDecommissionSavings": "7000",
+      "energyConsumption": {
+        "renewable": "30%",
+        "nonRenewable": "70%"
+      },
+      "decommissionPeriod": "2024-01-01 to 2024-12-31",
+      "decommissionCosts": "20000000",
+      "attachments": [
+        {
+          "format": "PDF",
+          "documentType": "Report",
+          "datePublished": "2025-04-01T00:00:00Z",
+          "url": "http://example.com/carbon-savings-johannesburg.pdf",
+          "pages": 25,
+          "title": "Carbon Savings Report",
+          "language": "en",
+          "description": "Report on carbon savings achieved during decommissioning.",
+          "dateModified": "2025-04-10T00:00:00Z"
+        }
+      ]
+    },
+    "institutionalSustainabilityData": {
+      "stakeholderEngagement": {
+        "publicHearings": "3",
+        "consultationMeetings": "5"
+      },
+      "regulatoryCompliance": {
+        "complianceStatus": "Fully Compliant",
+        "regulatoryBodies": ["Department of Environmental Affairs", "City of Johannesburg"]
+      },
+      "numberOfFreedomOfInformationAnswers": "9",
+      "numberOfFreedomOfInformationRequests": "10",
+      "attachments": [
+        {
+          "format": "PDF",
+          "documentType": "Report",
+          "datePublished": "2025-07-01T00:00:00Z",
+          "url": "http://example.com/stakeholder-engagement-johannesburg.pdf",
+          "pages": 20,
+          "title": "Stakeholder Engagement Report",
+          "language": "en",
+          "description": "Report on stakeholder engagement activities during decommissioning.",
+          "dateModified": "2025-07-10T00:00:00Z"
+        }
+      ]
+    },
+    "socialSustainabilityData": {
+      "jobsGenerated": "250",
+      "communityImpact": {
+        "localEconomicImpact": "Positive due to local hiring",
+        "healthServices": "No change reported"
+      },
+      "trainingAndDevelopment": {
+        "workersTrained": "100",
+        "trainingPrograms": ["Safety", "Environmental Awareness", "Job Transition"]
+      },
+      "workersAccidents": "3",
+      "attachments": [
+        {
+          "format": "PDF",
+          "documentType": "Report",
+          "datePublished": "2025-08-01T00:00:00Z",
+          "url": "http://example.com/social-impact-johannesburg.pdf",
+          "pages": 25,
+          "title": "Social Impact Report",
+          "language": "en",
+          "description": "Report on social impact of decommissioning on local community.",
+          "dateModified": "2025-08-10T00:00:00Z"
+        }
+      ]
+    }
+  }
+}

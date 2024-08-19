@@ -1,0 +1,203 @@
+{
+  "implementation": {
+    "climateFinanceData": {
+      "disbursementRecords": "Initial and ongoing disbursements for the project",
+      "independentMonitoring": "Conducted by third-party auditors",
+      "typeOfMonitoring": "Regular financial audits",
+      "reportingPeriod": "2024-06-01T00:00:00Z to 2025-06-01T00:00:00Z",
+      "attachments": [
+        {
+          "datePublished": "2024-06-25T00:00:00Z",
+          "title": "Independent Monitoring",
+          "dateModified": "2024-07-05T00:00:00Z",
+          "language": "en",
+          "pages": 35,
+          "description": "Reports on independent monitoring activities.",
+          "format": "PDF",
+          "documentType": "Report",
+          "url": "http://example.com/independent-monitoring-johannesburg.pdf"
+        }
+      ],
+      "performanceMonitoring": "Quarterly performance reviews"
+    },
+    "socialSustainabilityData": {
+      "workersAccidents": 1,
+      "attachments": [
+        {
+          "datePublished": "2024-06-01T00:00:00Z",
+          "title": "Construction Materials Testing",
+          "url": "http://example.com/materials-testing-johannesburg.pdf",
+          "documentType": "Testing Report",
+          "language": "en",
+          "pages": 45,
+          "description": "Testing reports for construction materials used.",
+          "format": "PDF",
+          "dateModified": "2024-06-15T00:00:00Z"
+        },
+        {
+          "title": "Building Inspections",
+          "url": "http://example.com/building-inspections-johannesburg.pdf",
+          "format": "PDF",
+          "pages": 60,
+          "datePublished": "2024-06-10T00:00:00Z",
+          "documentType": "Inspection Report",
+          "description": "Inspection reports for the buildings constructed.",
+          "language": "en",
+          "dateModified": "2024-06-20T00:00:00Z"
+        }
+      ],
+      "inclusiveImplementation": "Ensuring job opportunities for marginalized communities",
+      "jobsGenerated": 200,
+      "communityImpact": "Monthly community feedback sessions to assess social impact."
+    },
+    "economicAndFinancialSustainabilityData": {
+      "budgetForImplementation": "15000000",
+      "attachments": [
+        {
+          "pages": 40,
+          "description": "Detailed financial plan for project implementation.",
+          "language": "en",
+          "documentType": "Plan",
+          "title": "Financial Implementation Plan",
+          "datePublished": "2024-06-01T00:00:00Z",
+          "url": "http://example.com/financial-plan-johannesburg.pdf",
+          "dateModified": "2024-06-10T00:00:00Z",
+          "format": "PDF"
+        }
+      ],
+      "fundingSourceForImplementation": "National government and international loans",
+      "budgetShortfall": "12%"
+    },
+    "institutionalSustainabilityData": {
+      "attachments": [
+        {
+          "pages": 25,
+          "dateModified": "2024-06-10T00:00:00Z",
+          "title": "Freedom of Information Requests and Answers",
+          "format": "PDF",
+          "description": "Details of FOI requests and responses.",
+          "documentType": "Report",
+          "url": "http://example.com/foi-requests-answers-johannesburg.pdf",
+          "language": "en",
+          "datePublished": "2024-06-01T00:00:00Z"
+        },
+        {
+          "pages": 35,
+          "documentType": "Report",
+          "datePublished": "2024-06-15T00:00:00Z",
+          "description": "Reports from oversight bodies on project implementation.",
+          "url": "http://example.com/oversight-reports-johannesburg.pdf",
+          "title": "Oversight Reports",
+          "dateModified": "2024-06-25T00:00:00Z",
+          "language": "en",
+          "format": "PDF"
+        },
+        {
+          "pages": 30,
+          "url": "http://example.com/mid-term-evaluation-johannesburg.pdf",
+          "title": "Independent Mid Term Evaluation",
+          "description": "Mid-term evaluation conducted by an independent party.",
+          "format": "PDF",
+          "documentType": "Evaluation Report",
+          "language": "en",
+          "dateModified": "2024-06-30T00:00:00Z",
+          "datePublished": "2024-06-20T00:00:00Z"
+        }
+      ],
+      "numberOfFreedomOfInformationAnswers": 4,
+      "numberOfFreedomOfInformationRequests": 5
+    },
+    "basicData": {
+      "variationToContractPrice": "8%",
+      "attachments": [
+        {
+          "documentType": "Report",
+          "pages": 25,
+          "datePublished": "2024-06-01T00:00:00Z",
+          "dateModified": "2024-06-10T00:00:00Z",
+          "format": "PDF",
+          "url": "http://example.com/variations-changes-johannesburg.pdf",
+          "title": "List of Variations, Changes, Amendments",
+          "language": "en",
+          "description": "Detailed list of all variations, changes, and amendments to the contract."
+        },
+        {
+          "title": "List of Escalation Approvals",
+          "language": "en",
+          "dateModified": "2024-06-15T00:00:00Z",
+          "documentType": "Approval Document",
+          "description": "Approvals for cost escalations due to various factors.",
+          "datePublished": "2024-06-05T00:00:00Z",
+          "format": "PDF",
+          "url": "http://example.com/escalation-approvals-johannesburg.pdf",
+          "pages": 20
+        },
+        {
+          "description": "Reports on quality assurance checks and measures.",
+          "dateModified": "2024-06-20T00:00:00Z",
+          "url": "http://example.com/quality-assurance-reports-johannesburg.pdf",
+          "language": "en",
+          "datePublished": "2024-06-10T00:00:00Z",
+          "documentType": "Report",
+          "pages": 30,
+          "title": "Quality Assurance Reports",
+          "format": "PDF"
+        },
+        {
+          "pages": 15,
+          "language": "en",
+          "dateModified": "2024-06-25T00:00:00Z",
+          "format": "PDF",
+          "description": "Certificates for payments made during the implementation phase.",
+          "datePublished": "2024-06-15T00:00:00Z",
+          "documentType": "Certificate",
+          "url": "http://example.com/payment-certificates-johannesburg.pdf",
+          "title": "Payment Certificates"
+        },
+        {
+          "pages": 18,
+          "format": "PDF",
+          "url": "http://example.com/contract-amendments-johannesburg.pdf",
+          "language": "en",
+          "dateModified": "2024-06-30T00:00:00Z",
+          "documentType": "Amendment Document",
+          "datePublished": "2024-06-20T00:00:00Z",
+          "description": "Details of amendments made to the original contract.",
+          "title": "Contract Amendments"
+        }
+      ],
+      "escalationOfContractPrice": "3%",
+      "reasonsForDurationChanges": "Delays in procurement",
+      "reasonsForScope": "To enhance transit system capacity",
+      "variationToContractDuration": "4 months",
+      "reasonsForPriceChanges": "Inflation and additional scope",
+      "variationToContractScope": "Added new bus lanes"
+    },
+    "environmentalAndClimateSustainabilityData": {
+      "environmentalMeasures": "Use of eco-friendly materials",
+      "climateMeasures": "Integrating renewable energy sources",
+      "attachments": [
+        {
+          "description": "Details of environmental licenses obtained for the project.",
+          "datePublished": "2024-06-05T00:00:00Z",
+          "url": "http://example.com/environmental-licenses-johannesburg.pdf",
+          "language": "en",
+          "title": "Environmental Licenses and Exemptions",
+          "pages": 20,
+          "dateModified": "2024-06-15T00:00:00Z",
+          "documentType": "License",
+          "format": "PDF"
+        }
+      ],
+      "conservationMeasures": "Protecting local wildlife habitats",
+      "environmentalImpactMonitoring": "Quarterly assessments of environmental impact, including soil, water, and air quality.",
+      "energyUsage": "Monthly report on energy consumption with a breakdown of renewable vs. non-renewable sources.",
+      "wasteManagement": "Strategies for waste reduction, recycling rates, and disposal methods.",
+      "carbonFootprint": "Annual carbon emissions data, including efforts to offset or reduce emissions.",
+      "materialSustainability": "Details on the lifecycle assessment of materials used, including certifications like FSC for wood.",
+      "longTermSustainabilityPlan": "Strategies for maintaining environmental and social sustainability after project completion.",
+      "supplyChainSustainability": "Criteria for selecting suppliers based on environmental and social sustainability practices."
+    }
+  }
+}
+

@@ -1,4 +1,4 @@
-<div class="bg-primary-100 dark:bg-accent3 rounded-apple-lg mt-5 overflow-hidden  p-6 transition-all duration-300 ease-apple hover:shadow-apple-lg">
+<div class="bg-primary-100 dark:bg-accent3 rounded-apple-lg mt-5 overflow-hidden  p-6 transition-all duration-300  hover:shadow-apple-lg">
     <h4 class="text-xl font-semibold text-accent dark:text-primary-100 mb-6 flex items-center">
         <i class="bi bi-file-earmark-text mr-3 text-secondary"></i>
         Files
@@ -6,13 +6,13 @@
     <p class="text-sm text-accent4 dark:text-primary-300 mb-4 italic">Hover over items for more details</p>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div *ngFor="let attachment of attachments; let i = index"
-             class="bg-primary-200 dark:bg-accent4 rounded-apple p-4 shadow-apple-sm hover:shadow-apple-md transition-all duration-250 ease-apple group relative"
+             class="bg-primary-200 dark:bg-accent4 rounded-apple p-4 shadow-apple-sm hover:shadow-apple-md transition-all duration-250  group relative"
              [@fadeSlideInOut]
              [style.animation-delay]="i * 100 + 'ms'"
              [title]="getTooltipContent(attachment)">
             <div class="flex flex-col h-full">
                 <div class="flex items-start space-x-3 mb-3">
-                    <i class="bi bi-file-earmark text-2xl text-secondary group-hover:text-accent5 transition-colors duration-250 ease-apple flex-shrink-0"></i>
+                    <i class="bi bi-file-earmark text-2xl text-secondary group-hover:text-accent5 transition-colors duration-250  flex-shrink-0"></i>
                     <h5 class="text-lg font-semibold text-accent dark:text-primary-100 break-words">{{attachment.title}}</h5>
                 </div>
                 <p class="text-sm text-accent4 dark:text-primary-300 mb-4 line-clamp-2 flex-grow">{{attachment.description}}</p>
@@ -22,7 +22,7 @@
           </span>
                     <a [href]="attachment.url"
                        target="_blank"
-                       class="inline-flex items-center px-3 py-1 bg-accent6 text-primary-100 rounded-apple-full text-sm font-medium shadow-apple-sm hover:bg-accent5 transition-all duration-250 ease-apple hover:shadow-apple-md active:scale-95 hover:text-black">
+                       class="inline-flex items-center px-3 py-1 bg-accent6 text-primary-100 rounded-apple-full text-sm font-medium shadow-apple-sm hover:bg-accent5 transition-all duration-250  hover:shadow-apple-md active:scale-95 hover:text-black">
                         <i class="bi bi-download mr-2"></i>Download
                     </a>
                 </div>

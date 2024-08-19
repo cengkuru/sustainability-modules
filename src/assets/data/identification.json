@@ -1,0 +1,108 @@
+{
+  "identification": {
+    "institutionalSustainabilityData": {
+      "numberOfFreedomOfInformationRequests": 7,
+      "freedomOfInformationRequestsAndAnswers": "Summary of FOI requests and responses related to the project.",
+      "numberOfFreedomOfInformationAnswers": 6,
+      "numberOfLobbyingActivities": 5,
+      "attachments": [],
+      "lobbyingMeetingsMinutes": "Minutes from lobbying meetings with stakeholders.",
+      "policyCoherenceDocumentation": "Documentation aligning project policies with national and local regulations.",
+      "communityEngagement": {
+        "engagementMethods": ["Public consultations", "Stakeholder workshops"],
+        "numberOfEngagements": 3,
+        "engagementOutcomes": "Community feedback incorporated into project design."
+      }
+    },
+    "environmentalImpactData": {
+      "preliminaryEIA": {
+        "documentType": "Report",
+        "title": "Preliminary Environmental Impact Assessment",
+        "datePublished": "2024-08-01T00:00:00Z",
+        "url": "http://example.com/preliminary-eia-johannesburg.pdf",
+        "description": "Initial assessment of environmental impacts.",
+        "pages": 50,
+        "format": "PDF",
+        "language": "en"
+      },
+      "biodiversityImpact": {
+        "affectedSpecies": ["Local flora", "Bird species"],
+        "mitigationMeasures": "Habitat restoration plans."
+      },
+      "ecosystemServicesImpact": "Assessment of impact on local water bodies and air quality."
+    },
+    "sustainabilityGoals": {
+      "carbonReductionTarget": "Reduce project emissions by 30% compared to similar projects.",
+      "waterUsage": "Implement water recycling systems for construction.",
+      "wasteManagement": "Zero waste to landfill goal through recycling and composting."
+    },
+    "lifeCycleAnalysis": {
+      "lifeCycleCosting": {
+        "totalCost": "20000000",
+        "maintenanceCost": "5000000",
+        "decommissioningCost": "2000000"
+      },
+      "environmentalFootprint": "Estimation of total CO2 emissions over project life."
+    },
+    "materialAndResourceUse": {
+      "sustainableMaterials": {
+        "recycledContent": "20% of materials to be recycled or reused."
+      }
+    },
+    "energyEfficiencyAndRenewables": {
+      "energyEfficiencyPlan": "Implement LED lighting and energy-efficient systems.",
+      "renewableEnergyIntegration": "10% of energy from solar panels."
+    },
+    "wasteManagementPlan": {
+      "wasteReduction": "Reduction of construction waste by 50% through planning.",
+      "recyclingGoals": "90% of waste to be recycled or repurposed."
+    },
+    "stakeholderEngagement": {
+      "environmentalNGOs": {
+        "consultedOrganizations": ["Greenpeace", "WWF"],
+        "consultationOutcome": "Feedback integrated into environmental management plan."
+      }
+    },
+    "regulatoryComplianceAndStandards": {
+      "sustainabilityCertifications": {
+        "LEED": "Targeting LEED Gold certification.",
+        "BREEAM": "Consideration for BREEAM Excellent."
+      }
+    },
+    "climateChangeResilience": {
+      "adaptationMeasures": "Design for flood resilience and heatwave mitigation.",
+      "futureClimateProjections": "Incorporation of climate models for infrastructure design."
+    },
+    "climateFinanceData": {
+      "attachments": [],
+      "nationallyDeterminedContributions": "Supports South Africa's NDC to promote low-emission transport solutions",
+      "climateTransformation": "Adoption of electric buses and installation of solar-powered charging stations",
+      "financialInstrument": "Loan",
+      "parisAgreement": "Contributes to the goals of the Paris Agreement",
+      "amountOfInvestment": "15000000",
+      "climateFinanceDecisionMaking": "Aligned with South Africa's Integrated Transport Plan",
+      "climateObjective": "Reduce greenhouse gas emissions and promote sustainable transportation"
+    },
+    "basicData": {
+      "projectBriefOrFeasibilityStudy": "A comprehensive feasibility study completed in 2023 identified the need for an upgrade to accommodate increasing commuter numbers and improve service efficiency.",
+      "projectLocation": "Johannesburg, Gauteng, South Africa",
+      "projectReferenceNumber": "TR-SA-2024-001",
+      "projectName": "Johannesburg Rapid Transit System Upgrade",
+      "projectOfficialsAndRoles": [
+        {
+          "role": "Project Manager",
+          "name": "Charles Williams"
+        },
+        {
+          "name": "David Miller",
+          "role": "Lead Engineer"
+        }
+      ],
+      "sectorSubsector": "Transportation",
+      "purpose": "To enhance public transportation efficiency and reduce traffic congestion in Johannesburg",
+      "attachments": [],
+      "projectOwner": "Department of Transport, South Africa",
+      "projectDescription": "This project aims to upgrade the existing rapid transit system, including the expansion of bus rapid transit lines, modernization of stations, and the integration of advanced ticketing systems to improve public transportation services in Johannesburg."
+    }
+  }
+}

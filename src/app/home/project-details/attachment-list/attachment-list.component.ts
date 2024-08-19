@@ -12,10 +12,10 @@ import { animate, style, transition, trigger } from "@angular/animations";
     trigger('fadeSlideInOut', [
       transition(':enter', [
         style({ opacity: 0, transform: 'translateY(10px)' }),
-        animate('300ms ease-apple', style({ opacity: 1, transform: 'translateY(0)' })),
+        animate('300ms cubic-bezier(0.2, 0.0, 0.0, 1.0)', style({ opacity: 1, transform: 'translateY(0)' })),
       ]),
       transition(':leave', [
-        animate('300ms ease-apple', style({ opacity: 0, transform: 'translateY(10px)' })),
+        animate('300ms cubic-bezier(0.2, 0.0, 0.0, 1.0)', style({ opacity: 0, transform: 'translateY(10px)' })),
       ]),
     ]),
   ],

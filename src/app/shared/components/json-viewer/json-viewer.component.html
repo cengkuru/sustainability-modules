@@ -1,0 +1,11 @@
+<div class="json-viewer-container" [ngClass]="{'dark-mode': isDarkMode}">
+    <div class="flex justify-between items-center mb-2">
+        <h3 class="text-lg font-semibold">JSON Viewer</h3>
+        <button (click)="toggleDarkMode()" class="px-3 py-1 rounded-md text-sm" [ngClass]="{'bg-gray-200 text-gray-800': !isDarkMode, 'bg-gray-700 text-white': isDarkMode}">
+            {{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}
+        </button>
+    </div>
+    <pre class="json-content p-4 rounded-lg overflow-x-auto text-sm" [ngClass]="{'bg-gray-100': !isDarkMode, 'bg-gray-800': isDarkMode}">
+    <code [innerHTML]="formattedJson"></code>
+  </pre>
+</div>

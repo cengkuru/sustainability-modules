@@ -1,0 +1,144 @@
+{
+  "operationsAndMaintenance": {
+    "environmentalAndClimateSustainabilityData": {
+      "attachments": [
+        {
+          "dateModified": "2024-08-18T00:00:00Z",
+          "title": "Environmental Licenses and Exemptions",
+          "url": "http://example.com/environmental-licenses-johannesburg.pdf",
+          "pages": 25,
+          "datePublished": "2024-06-01T00:00:00Z",
+          "description": "Documents related to environmental licenses and exemptions for maintenance activities.",
+          "language": "en",
+          "documentType": "License",
+          "format": "PDF"
+        },
+        {
+          "dateModified": "2024-08-18T00:00:00Z",
+          "title": "Waste Management Plan",
+          "url": "http://example.com/waste-management-johannesburg.pdf",
+          "pages": 15,
+          "datePublished": "2024-08-01T00:00:00Z",
+          "description": "Plan for managing waste during maintenance, including recycling and disposal methods.",
+          "language": "en",
+          "documentType": "Plan",
+          "format": "PDF"
+        }
+      ],
+      "conservationMeasures": "Reduction of emissions and energy use",
+      "climateMeasures": "Integration of renewable energy sources",
+      "environmentalMeasures": "Implementation of sustainable practices in maintenance activities",
+      "waterManagement": "Water recycling systems installed, reduction in water use by 10% annually",
+      "biodiversityImpact": "Monitoring of local biodiversity, planting of native species",
+      "sustainableProcurement": "Materials sourced with FSC certification for wood, high recycled content for metals"
+    },
+    "basicData": {
+      "typeOfMaintenanceWorks": "Routine and preventive maintenance",
+      "worksDescription": "Routine inspection and maintenance of transit lines, stations, and ticketing systems",
+      "assetLocation": "Johannesburg, Gauteng, South Africa",
+      "maintenanceScope": "Routine maintenance, emergency repairs, and preventive measures to ensure continuous transit service",
+      "attachments": [
+        {
+          "format": "PDF",
+          "datePublished": "2024-06-01T00:00:00Z",
+          "dateModified": "2024-06-10T00:00:00Z",
+          "documentType": "Plan",
+          "title": "Maintenance Plan",
+          "description": "Detailed maintenance plan outlining routine and preventive maintenance activities.",
+          "url": "http://example.com/maintenance-plan-johannesburg.pdf",
+          "pages": 45,
+          "language": "en"
+        }
+      ],
+      "assetName": "Johannesburg Rapid Transit System",
+      "projectOfficialsAndRoles": [
+        {
+          "name": "Michael Green",
+          "role": "Maintenance Manager"
+        }
+      ],
+      "healthAndSafetyMeasures": "Use of non-toxic materials, safety training for environmental sustainability"
+    },
+    "institutionalSustainabilityData": {
+      "numberOfFreedomOfInformationAnswers": 6,
+      "attachments": [
+        {
+          "dateModified": "2024-06-10T00:00:00Z",
+          "title": "Freedom of Information Requests and Answers",
+          "description": "Summary of FOI requests and responses related to maintenance activities.",
+          "format": "PDF",
+          "datePublished": "2024-06-01T00:00:00Z",
+          "language": "en",
+          "documentType": "Report",
+          "url": "http://example.com/foi-requests-johannesburg.pdf",
+          "pages": 15
+        }
+      ],
+      "numberOfFreedomOfInformationRequests": 7
+    },
+    "socialSustainabilityData": {
+      "jobsGenerated": 80,
+      "inclusiveImplementation": "Ensuring employment opportunities for local communities and marginalized groups",
+      "attachments": [
+        {
+          "datePublished": "2024-06-01T00:00:00Z",
+          "documentType": "Report",
+          "format": "PDF",
+          "language": "en",
+          "dateModified": "2024-06-10T00:00:00Z",
+          "title": "Jobs Generated",
+          "url": "http://example.com/jobs-generated-johannesburg.pdf",
+          "description": "Report on the number of jobs generated through maintenance activities.",
+          "pages": 20
+        },
+        {
+          "format": "PDF",
+          "dateModified": "2024-06-10T00:00:00Z",
+          "datePublished": "2024-06-01T00:00:00Z",
+          "title": "Construction Materials Testing",
+          "url": "http://example.com/materials-testing-johannesburg.pdf",
+          "documentType": "Report",
+          "description": "Report on the testing of materials used in maintenance.",
+          "pages": 30,
+          "language": "en"
+        }
+      ],
+      "workersAccidents": 1
+    },
+    "economicAndFinancialSustainabilityData": {
+      "fundingSourceForMaintenance": "National government, Climate finance loans",
+      "attachments": [
+        {
+          "documentType": "Report",
+          "title": "Maintenance Budget Report",
+          "language": "en",
+          "dateModified": "2024-06-10T00:00:00Z",
+          "datePublished": "2024-06-01T00:00:00Z",
+          "url": "http://example.com/maintenance-budget-johannesburg.pdf",
+          "description": "Detailed report on the budget allocated for maintenance activities.",
+          "format": "PDF",
+          "pages": 25
+        }
+      ],
+      "budgetForMaintenance": "3000000",
+      "sustainableProcurementCost": "Increased by 10% due to sustainable sourcing"
+    },
+    "climateFinanceData": {
+      "attachments": [
+        {
+          "datePublished": "2024-06-01T00:00:00Z",
+          "format": "PDF",
+          "language": "en",
+          "title": "Carbon Footprint Document",
+          "documentType": "Report",
+          "pages": 25,
+          "url": "http://example.com/carbon-footprint-johannesburg.pdf",
+          "description": "Report on the carbon footprint of the maintenance activities.",
+          "dateModified": "2024-06-10T00:00:00Z"
+        }
+      ],
+      "carbonFootprint": "Estimated reduction of 1500 tons of CO2 annually",
+      "impactMeasurement": "Reduction in traffic congestion and emissions"
+    }
+  }
+}

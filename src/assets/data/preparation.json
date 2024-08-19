@@ -1,0 +1,147 @@
+{
+  "preparation": {
+    "climateFinanceData": {
+      "projectPreparationCosts": "$50,000",
+      "attachments": [
+        {
+          "description": "Climate Finance Proposal",
+          "title": "Proposal for Green Funding",
+          "language": "English",
+          "url": "https://example.com/climate_finance_proposal.pdf",
+          "pages": 10,
+          "format": "PDF",
+          "documentType": "Proposal",
+          "datePublished": "2024-01-15",
+          "dateModified": "2024-01-15"
+        }
+      ],
+      "carbonEfficiency": "10% reduction per $1000 spent",
+      "accreditedEntityType": "National Environmental Agency",
+      "termsOfClimateFinance": "Grant with 5-year performance review",
+      "fundingSource": "Green Climate Fund",
+      "ratioOfCoFinance": "1:3",
+      "nonClimateCoBenefits": "Improved local water quality",
+      "greenClimateFundAccreditedEntity": "Yes",
+      "projectPreparationPeriod": "6 months",
+      "projectApprovalPeriod": "3 months"
+    },
+    "environmentalAndClimateSustainabilityData": {
+      "environmentalLicensesAndExemptions": "Permit #ENV-2024-001",
+      "conservationMeasures": "Replanting with native species",
+      "environmentalImpactCategory": "Biodiversity",
+      "climateMeasures": "Carbon capture technology",
+      "environmentalMeasures": "Waste recycling program",
+      "protectedArea": "No",
+      "attachments": [
+        {
+          "format": "PDF",
+          "documentType": "Environmental Impact Assessment",
+          "language": "English",
+          "url": "https://example.com/eia_report.pdf",
+          "pages": 20,
+          "dateModified": "2024-02-01",
+          "datePublished": "2024-02-01",
+          "description": "EIA for Project X",
+          "title": "Environmental Impact Report"
+        }
+      ],
+      "forecastOfGreenhouseGasEmissions": {
+        "measure": "1000",
+        "unit": {
+          "name": "Tonne (metric ton)",
+          "scheme": "UNCEFACT",
+          "id": "TNE"
+        },
+        "period": "2024-2029"
+      },
+      "climateAndDisasterRiskAssessment": "Flood risk mitigation plan"
+    },
+    "basicData": {
+      "projectBudget": "$1,000,000",
+      "fundingSources": "Government, Private Investors",
+      "projectScope": "Infrastructure for renewable energy",
+      "contactDetails": "email@example.com",
+      "attachments": [
+        {
+          "url": "https://example.com/project_budget.pdf",
+          "pages": 15,
+          "language": "English",
+          "title": "Project Budget",
+          "documentType": "Budget Document",
+          "description": "Detailed budget breakdown",
+          "dateModified": "2024-01-01",
+          "datePublished": "2024-01-01",
+          "format": "PDF"
+        }
+      ],
+      "projectBudgetApprovalDate": "2024-03-01"
+    },
+    "economicAndFinancialSustainabilityData": {
+      "budgetProjections": "Annual increase by 5%",
+      "attachments": [
+        {
+          "language": "English",
+          "documentType": "Financial Analysis",
+          "url": "https://example.com/financial_analysis.pdf",
+          "pages": 30,
+          "dateModified": "2024-01-15",
+          "format": "PDF",
+          "datePublished": "2024-01-15",
+          "description": "Financial sustainability analysis",
+          "title": "Financial Projections"
+        }
+      ],
+      "costBenefitAnalysis": "Net Present Value: $500,000",
+      "procurementStrategy": "Local sourcing for 70% of materials",
+      "assetLifetime": "30 years",
+      "lifeCycleCostCalculationMethodology": "ISO 15686-5",
+      "lifeCycleCost": "$2,000,000",
+      "fundingSourceForPreparation": "National Development Bank",
+      "budgetForPreparation": "$100,000",
+      "valueForMoney": "High, due to long-term savings",
+      "maintenancePlan": "Annual inspections with 5-year major overhaul"
+    },
+    "institutionalSustainabilityData": {
+      "policyCoherenceDocumentation": "National Energy Policy 2023",
+      "freedomOfInformationRequestsAndAnswers": "Available on project website",
+      "riskManagementPlans": "Comprehensive risk assessment",
+      "numberOfFreedomOfInformationAnswers": 10,
+      "attachments": [
+        {
+          "description": "Risk Management Strategy",
+          "language": "English",
+          "title": "Risk Management",
+          "pages": 5,
+          "dateModified": "2024-01-30",
+          "documentType": "Strategy Document",
+          "format": "PDF",
+          "datePublished": "2024-01-30",
+          "url": "https://example.com/risk_management.pdf"
+        }
+      ],
+      "numberOfFreedomOfInformationRequests": 15
+    },
+    "socialSustainabilityData": {
+      "landCompensationBudget": "$20,000",
+      "publicConsultationMeetings": "4 meetings held",
+      "inclusiveDesign": "Accessible infrastructure",
+      "beneficiaries": "Local community and businesses",
+      "attachments": [
+        {
+          "format": "PDF",
+          "pages": 12,
+          "title": "Public Consultation Summary",
+          "documentType": "Report",
+          "datePublished": "2024-02-20",
+          "language": "English",
+          "dateModified": "2024-02-20",
+          "url": "https://example.com/public_consultation.pdf",
+          "description": "Summary of public consultations"
+        }
+      ],
+      "numberOfBeneficiaries": 1000,
+      "laborObligations": "Fair wage practices",
+      "indigenousLand": "Consultation with local tribes"
+    }
+  }
+}

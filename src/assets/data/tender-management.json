@@ -1,0 +1,70 @@
+{
+  "tenderManagement": {
+    "environmentalAndClimateSustainabilityData": {
+      "attachments": [
+        {
+          "datePublished": "2024-08-15T00:00:00Z",
+          "title": "Environmental Impact Assessment",
+          "pages": 50,
+          "dateModified": "2024-08-17T00:00:00Z",
+          "description": "Detailed environmental impact assessment for the project.",
+          "url": "http://example.com/environmental-impact-assessment-johannesburg.pdf",
+          "language": "en",
+          "format": "PDF",
+          "documentType": "Assessment"
+        }
+      ],
+      "sustainabilityCertifications": [
+        "ISO 14001 Certification",
+        "LEED Gold Certification for Design"
+      ],
+      "carbonFootprint": {
+        "constructionPhase": "50000 tonnes CO2e",
+        "operationPhase": "10000 tonnes CO2e/year",
+        "offsetStrategies": "Tree planting, renewable energy credits"
+      },
+      "materialUsage": {
+        "recycledContent": "20%",
+        "localSourcing": "80% within 100 km radius"
+      },
+      "energyEfficiency": {
+        "standards": "Energy Star for all new equipment",
+        "renewableEnergy": "30% from solar panels"
+      }
+    },
+    "socialSustainabilityData": {
+      "communityEngagement": {
+        "strategy": "Public consultations, local hiring initiatives",
+        "outcomes": "50% local employment"
+      },
+      "wasteManagement": {
+        "strategy": "Recycling 80% of construction waste",
+        "facilities": "On-site waste sorting facility"
+      }
+    },
+    "institutionalSustainabilityData": {
+      "sustainabilityReporting": {
+        "frequency": "Quarterly",
+        "KPIs": [
+          "Carbon emissions",
+          "Energy consumption",
+          "Local employment rate"
+        ]
+      },
+      "compliance": {
+        "laws": "South African Environmental Management Act",
+        "standards": "Global Reporting Initiative (GRI)"
+      },
+      "innovationInSustainability": {
+        "description": "Use of AI for optimizing energy use in construction",
+        "benefit": "Reduced operational costs by 15%"
+      }
+    },
+    "basicData": {
+      "sustainabilityCriteriaInEvaluation": {
+        "weight": "5%",
+        "criteria": "Environmental impact, social benefits, innovation"
+      }
+    }
+  }
+}
