@@ -3,154 +3,133 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-// Import Inter font
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
+// Custom variables
 :root {
-  // Color variables
-  --color-primary: #F7F7F7;
-  --color-secondary: #D60000;
-  --color-accent: #333333;
-  --color-accent1: #ffce32;
-  --color-accent2: #d8d8cd;
-  --color-accent3: #2c4143;
-  --color-accent4: #58707b;
-  --color-accent6: #61a8bd;
-
-  // Typography
-  --font-family-base: 'Inter', sans-serif;
-  --line-height-base: 1.5;
-  --font-size-base: 16px;
-
-  // Transitions
-  --transition-base: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
+  --primary: #f7f7f7;
+  --secondary: #d60000;
+  --accent: #333333;
+  --accent1: #ffce32;
+  --accent2: #d8d8cd;
+  --accent3: #2c4143;
+  --accent4: #58707b;
+  --accent5: #9bcbd9;
+  --accent6: #61a8bd;
 }
 
-// Global styles
+// Base styles
 body {
-  font-family: var(--font-family-base);
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-base);
-  color: var(--color-accent);
-  background-color: var(--color-primary);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--primary);
+  color: var(--accent);
+  line-height: 1.5;
 }
 
 // Typography
 h1, h2, h3, h4, h5, h6 {
+  font-family: 'SF Pro Display', 'Inter', system-ui, sans-serif;
   font-weight: 600;
-  line-height: 1.2;
+  letter-spacing: -0.025em;
 }
 
-h1 { font-size: 2.5rem; }
-h2 { font-size: 2rem; }
-h3 { font-size: 1.75rem; }
-h4 { font-size: 1.5rem; }
-h5 { font-size: 1.25rem; }
-h6 { font-size: 1rem; }
+h1 { @apply text-4xl md:text-5xl mb-6; }
+h2 { @apply text-3xl md:text-4xl mb-5; }
+h3 { @apply text-2xl md:text-3xl mb-4; }
+h4 { @apply text-xl md:text-2xl mb-3; }
+h5 { @apply text-lg md:text-xl mb-2; }
+h6 { @apply text-base md:text-lg mb-2; }
 
-p {
-  margin-bottom: 1rem;
-}
+p { @apply mb-4; }
 
 a {
-  color: var(--color-accent);
+  color: var(--accent6);
   text-decoration: none;
-  transition: var(--transition-base);
+  transition: color 0.3s ease;
 
   &:hover {
-    color: var(--color-accent1);
+    color: var(--accent5);
   }
 }
 
 // Buttons
 .btn {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 500;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  border: none;
-  border-radius: 0.5rem;
-  transition: var(--transition-base);
+  @apply px-4 py-2 rounded-apple-md transition duration-300 ease-apple-ease;
 
   &-primary {
-    background-color: var(--color-accent1);
-    color: var(--color-accent);
-
-    &:hover {
-      background-color: darken(#ffce32, 10%);
-    }
+    @apply bg-accent6 text-primary hover:bg-accent5;
   }
 
   &-secondary {
-    background-color: var(--color-accent2);
-    color: var(--color-accent);
-
-    &:hover {
-      background-color: darken(#d8d8cd, 10%);
-    }
+    @apply bg-accent text-primary hover:bg-accent4;
   }
 }
 
-// Form elements
+// Forms
 input, textarea, select {
-  width: 100%;
-  padding: 0.75rem;
-  font-size: 1rem;
-  border: 1px solid var(--color-accent2);
-  border-radius: 0.5rem;
-  background-color: var(--color-primary);
-  transition: var(--transition-base);
-
-  &:focus {
-    outline: none;
-    border-color: var(--color-accent1);
-    box-shadow: 0 0 0 2px rgba(255, 206, 50, 0.3);
-  }
+  @apply border border-accent2 rounded-apple-sm px-3 py-2 w-full;
+  @apply focus:outline-none focus:ring-2 focus:ring-accent6 focus:border-transparent;
 }
 
-// Custom utilities
+// Cards
+.card {
+  @apply bg-white rounded-apple-lg shadow-apple-md p-6;
+  @apply transition duration-300 ease-apple-ease;
+  @apply hover:shadow-apple-lg;
+}
+
+// Utility classes
 .text-balance {
   text-wrap: balance;
 }
 
-.glass-effect {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
+.apple-glass {
+  @apply bg-white bg-opacity-70 backdrop-filter backdrop-blur-lg;
+}
+
+.apple-gradient-text {
+  @apply bg-gradient-to-r from-accent5 to-accent6 text-transparent bg-clip-text;
 }
 
 // Animations
-@keyframes fadeIn {
+@keyframes apple-fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-@keyframes slideIn {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+@keyframes apple-scale {
+  from { transform: scale(0.95); }
+  to { transform: scale(1); }
 }
 
-.fade-in {
-  animation: fadeIn 0.5s ease-out;
+.animate-fade-in {
+  animation: apple-fade-in 0.5s ease-out;
 }
 
-.slide-in {
-  animation: slideIn 0.5s ease-out;
+.animate-scale {
+  animation: apple-scale 0.3s ease-in-out;
 }
 
-// Responsive utilities
-@media (max-width: 640px) {
-  :root {
-    --font-size-base: 14px;
+// Dark mode
+@media (prefers-color-scheme: dark) {
+  body {
+    @apply bg-accent3 text-primary;
   }
 
-  h1 { font-size: 2rem; }
-  h2 { font-size: 1.75rem; }
-  h3 { font-size: 1.5rem; }
+  .card {
+    @apply bg-accent4;
+  }
+
+  .apple-glass {
+    @apply bg-accent3 bg-opacity-70;
+  }
+}
+
+// Responsive design
+@media (max-width: 640px) {
+  h1 { @apply text-3xl; }
+  h2 { @apply text-2xl; }
+  h3 { @apply text-xl; }
+  h4 { @apply text-lg; }
+  h5, h6 { @apply text-base; }
 }
 
 // Accessibility

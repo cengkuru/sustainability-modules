@@ -18,8 +18,10 @@
                                 class="px-4 py-2 bg-primary-100 mt-10text-accent3 rounded-full text-sm font-semibold transition-all duration-300  -out hover:bg-primary-100 mt-10 focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
                         >
                 <span class="flex items-center">
-                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M15 19l-7-7 7-7"></path>
                     </svg>
                     Previous
                 </span>
@@ -31,7 +33,8 @@
                         >
                 <span class="flex items-center">
                     Next
-                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
                 </span>
@@ -43,14 +46,16 @@
             <div class="flex flex-col lg:flex-row">
                 <!-- Dropdown for mobile view -->
                 <div class="lg:hidden mb-6 animate-apple-fade-in">
-                    <label for="stage-select" class="block text-lg font-semibold text-accent3 mb-2">Project Stages</label>
+                    <label for="stage-select" class="block text-lg font-semibold text-accent3 mb-2">Project
+                        Stages</label>
                     <div class="relative">
                         <select
                                 id="stage-select"
                                 class="w-full px-4 py-3 pr-10 rounded-apple-md bg-white border border-accent4 text-accent3 text-base font-medium appearance-none focus:outline-none focus:border-accent6 focus:ring-2 focus:ring-accent6 transition-all duration-250  -ease"
                                 (change)="onTabChange($event)"
                         >
-                            <option *ngFor="let stage of stages" [value]="stage.id" [selected]="selectedTab === stage.id">
+                            <option *ngFor="let stage of stages" [value]="stage.id"
+                                    [selected]="selectedTab === stage.id">
                                 {{ stage.label }}
                             </option>
                         </select>
@@ -89,14 +94,17 @@
                 'ring-4 ring-accent6 ring-opacity-30': selectedTab === stage.id
               }"
                                         >
-                                            <i *ngIf="getStageStatus(i) === 'completed'" class="bi bi-check-lg text-xl"></i>
-                                            <span *ngIf="getStageStatus(i) !== 'completed'" class="text-lg font-semibold">{{i + 1}}</span>
+                                            <i *ngIf="getStageStatus(i) === 'completed'"
+                                               class="bi bi-check-lg text-xl"></i>
+                                            <span *ngIf="getStageStatus(i) !== 'completed'"
+                                                  class="text-lg font-semibold">{{ i + 1 }}</span>
                                         </div>
-                                        <div *ngIf="i < stages.length - 1" class="absolute top-10 left-1/2 w-0.5 h-8 bg-gray-200 -translate-x-1/2 transition-all duration-250  -ease"
+                                        <div *ngIf="i < stages.length - 1"
+                                             class="absolute top-10 left-1/2 w-0.5 h-8 bg-gray-200 -translate-x-1/2 transition-all duration-250  -ease"
                                              [ngClass]="{'bg-accent6': getStageStatus(i) === 'completed'}"></div>
                                     </div>
                                     <div class="flex flex-col items-start">
-                                        <span class="text-lg font-semibold mb-1">{{stage.label}}</span>
+                                        <span class="text-lg font-semibold mb-1">{{ stage.label }}</span>
                                         <span class="text-sm text-accent4 group-hover:text-accent6 transition-colors duration-250  -ease">
               {{ getStageStatus(i) | titlecase }}
             </span>
@@ -115,7 +123,8 @@
 
                         <!-- Identification Tab -->
                         <ng-container *ngSwitchCase="'Identification'">
-                            <section class="p-6 sm:p-8  bg-primary mt-10dark:bg-accent3 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300   hover:shadow-apple-lg">
+                            <section
+                                    class="p-6 sm:p-8  bg-primary mt-10  rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300   hover:shadow-apple-lg">
                                 <div class="flex items-center justify-between mb-6">
                                     <h3 class="text-2xl font-semibold text-accent flex items-center">
                                         <i class="bi bi-clipboard-data mr-3 text-secondary"></i>
@@ -130,7 +139,8 @@
                                 </div>
 
                                 <!-- Basic Data Section -->
-                                <section class="bg-primary-100 mt-10dark:bg-accent3 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300   hover:shadow-apple-lg">
+                                <section
+                                        class="bg-white mt-10  rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300   hover:shadow-apple-lg">
                                     <div class="p-6 sm:p-8">
                                         <h3 class="text-2xl font-semibold text-accent dark:text-primary-100 mb-6 flex items-center group">
                                             <i class="bi bi-info-circle-fill w-6 h-6 text-secondary mr-3 transition-transform duration-300   group-hover:rotate-12"></i>
@@ -142,14 +152,16 @@
                                                 <div class="flex items-start space-x-4">
                                                     <i class="bi bi-hash text-2xl text-secondary flex-shrink-0 mt-1"></i>
                                                     <div>
-                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Project Reference Number</p>
+                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">
+                                                            Project Reference Number</p>
                                                         <p class="text-base text-accent dark:text-primary-100">{{ getBasicDataItems(project.stages.identification.basicData)['Project Reference Number'] }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="flex items-start space-x-4">
                                                     <i class="bi bi-person text-2xl text-secondary flex-shrink-0 mt-1"></i>
                                                     <div>
-                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Project Owner</p>
+                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">
+                                                            Project Owner</p>
                                                         <p class="text-base text-accent dark:text-primary-100">{{ getBasicDataItems(project.stages.identification.basicData)['Project Owner'] }}</p>
                                                     </div>
                                                 </div>
@@ -160,50 +172,58 @@
                                                 <div class="flex items-start space-x-4">
                                                     <i class="bi bi-diagram-3 text-2xl text-secondary flex-shrink-0 mt-1"></i>
                                                     <div>
-                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Sector, Subsector</p>
+                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">
+                                                            Sector, Subsector</p>
                                                         <p class="text-base text-accent dark:text-primary-100">{{ getBasicDataItems(project.stages.identification.basicData)['Sector, Subsector'] }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="flex items-start space-x-4">
                                                     <i class="bi bi-geo-alt text-2xl text-secondary flex-shrink-0 mt-1"></i>
                                                     <div>
-                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Project Location</p>
+                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">
+                                                            Project Location</p>
                                                         <p class="text-base text-accent dark:text-primary-100">{{ getBasicDataItems(project.stages.identification.basicData)['Project Location'] }}</p>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <!-- Project Name and Description -->
-                                            <div class="space-y-6 animate-apple-fade-in lg:col-span-2" style="animation-delay: 200ms">
+                                            <div class="space-y-6 animate-apple-fade-in lg:col-span-2"
+                                                 style="animation-delay: 200ms">
                                                 <div class="flex items-start space-x-4">
                                                     <i class="bi bi-briefcase text-2xl text-secondary flex-shrink-0 mt-1"></i>
                                                     <div>
-                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Project Name</p>
+                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">
+                                                            Project Name</p>
                                                         <p class="text-base text-accent dark:text-primary-100 font-semibold">{{ getBasicDataItems(project.stages.identification.basicData)['Project Name'] }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="flex items-start space-x-4">
                                                     <i class="bi bi-card-text text-2xl text-secondary flex-shrink-0 mt-1"></i>
                                                     <div>
-                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Project Description</p>
+                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">
+                                                            Project Description</p>
                                                         <p class="text-base text-accent dark:text-primary-100">{{ getBasicDataItems(project.stages.identification.basicData)['Project Description'] }}</p>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <!-- Purpose and Feasibility -->
-                                            <div class="space-y-6 animate-apple-fade-in lg:col-span-2" style="animation-delay: 300ms">
+                                            <div class="space-y-6 animate-apple-fade-in lg:col-span-2"
+                                                 style="animation-delay: 300ms">
                                                 <div class="flex items-start space-x-4">
                                                     <i class="bi bi-bullseye text-2xl text-secondary flex-shrink-0 mt-1"></i>
                                                     <div>
-                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Purpose</p>
+                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">
+                                                            Purpose</p>
                                                         <p class="text-base text-accent dark:text-primary-100">{{ getBasicDataItems(project.stages.identification.basicData)['Purpose'] }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="flex items-start space-x-4">
                                                     <i class="bi bi-file-earmark-text text-2xl text-secondary flex-shrink-0 mt-1"></i>
                                                     <div>
-                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Project Brief or Feasibility Study</p>
+                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">
+                                                            Project Brief or Feasibility Study</p>
                                                         <p class="text-base text-accent dark:text-primary-100">{{ getBasicDataItems(project.stages.identification.basicData)['Project Brief or Feasibility Study'] }}</p>
                                                     </div>
                                                 </div>
@@ -217,7 +237,8 @@
                                     </div>
                                 </section>
                                 <!-- Climate Finance Data Section -->
-                                <section class="bg-primary-100 mt-10 dark:bg-accent3  rounded-apple-lg shadow-apple-md overflow-hidden   animate-apple-fade-in transition-all duration-300   hover:shadow-apple-lg">
+                                <section
+                                        class="bg-white mt-10    rounded-apple-lg shadow-apple-md overflow-hidden   animate-apple-fade-in transition-all duration-300   hover:shadow-apple-lg">
                                     <div class="p-6 sm:p-8">
                                         <h3 class="text-2xl font-semibold text-accent dark:text-primary-100 mb-6 flex items-center group">
                                             <i class="bi bi-globe w-8 h-8 text-accent6 mr-3 transition-transform duration-300   group-hover:rotate-12"></i>
@@ -230,14 +251,16 @@
                                                 <div class="flex items-start space-x-4">
                                                     <i class="bi bi-bullseye text-2xl text-accent6 flex-shrink-0 mt-1"></i>
                                                     <div>
-                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Climate Objective</p>
+                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">
+                                                            Climate Objective</p>
                                                         <p class="text-base text-accent dark:text-primary-100">{{ getClimateFinanceDataItems(project.stages.identification.climateFinanceData)['Climate Objective'] }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="flex items-start space-x-4">
                                                     <i class="bi bi-arrow-repeat text-2xl text-accent6 flex-shrink-0 mt-1"></i>
                                                     <div>
-                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Climate Transformation</p>
+                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">
+                                                            Climate Transformation</p>
                                                         <p class="text-base text-accent dark:text-primary-100">{{ getClimateFinanceDataItems(project.stages.identification.climateFinanceData)['Climate Transformation'] }}</p>
                                                     </div>
                                                 </div>
@@ -248,32 +271,37 @@
                                                 <div class="flex items-start space-x-4">
                                                     <i class="bi bi-cash-stack text-2xl text-accent6 flex-shrink-0 mt-1"></i>
                                                     <div>
-                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Financial Instrument</p>
+                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">
+                                                            Financial Instrument</p>
                                                         <p class="text-base text-accent dark:text-primary-100">{{ getClimateFinanceDataItems(project.stages.identification.climateFinanceData)['Financial Instrument'] }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="flex items-start space-x-4">
                                                     <i class="bi bi-currency-dollar text-2xl text-accent6 flex-shrink-0 mt-1"></i>
                                                     <div>
-                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Amount of Investment</p>
+                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">
+                                                            Amount of Investment</p>
                                                         <p class="text-base text-accent dark:text-primary-100 font-semibold">{{ getClimateFinanceDataItems(project.stages.identification.climateFinanceData)['Amount of Investment'] }}</p>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <!-- Policy and Decision Making -->
-                                            <div class="space-y-6 animate-apple-fade-in lg:col-span-2" style="animation-delay: 200ms">
+                                            <div class="space-y-6 animate-apple-fade-in lg:col-span-2"
+                                                 style="animation-delay: 200ms">
                                                 <div class="flex items-start space-x-4">
                                                     <i class="bi bi-clipboard-data text-2xl text-accent6 flex-shrink-0 mt-1"></i>
                                                     <div>
-                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Climate Finance Decision-Making</p>
+                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">
+                                                            Climate Finance Decision-Making</p>
                                                         <p class="text-base text-accent dark:text-primary-100">{{ getClimateFinanceDataItems(project.stages.identification.climateFinanceData)['Climate Finance Decision-Making'] }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="flex items-start space-x-4">
                                                     <i class="bi bi-diagram-3 text-2xl text-accent6 flex-shrink-0 mt-1"></i>
                                                     <div>
-                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Policy Coherence</p>
+                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">
+                                                            Policy Coherence</p>
                                                         <p class="text-base text-accent dark:text-primary-100">{{ getClimateFinanceDataItems(project.stages.identification.climateFinanceData)['Policy Coherence'] }}</p>
                                                     </div>
                                                 </div>
@@ -284,14 +312,16 @@
                                                 <div class="flex items-start space-x-4">
                                                     <i class="bi bi-flag text-2xl text-accent6 flex-shrink-0 mt-1"></i>
                                                     <div>
-                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Nationally Determined Contributions</p>
+                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">
+                                                            Nationally Determined Contributions</p>
                                                         <p class="text-base text-accent dark:text-primary-100">{{ getClimateFinanceDataItems(project.stages.identification.climateFinanceData)['Nationally Determined Contributions'] }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="flex items-start space-x-4">
                                                     <i class="bi bi-globe-americas text-2xl text-accent6 flex-shrink-0 mt-1"></i>
                                                     <div>
-                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Paris Agreement</p>
+                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">
+                                                            Paris Agreement</p>
                                                         <p class="text-base text-accent dark:text-primary-100">{{ getClimateFinanceDataItems(project.stages.identification.climateFinanceData)['Paris Agreement'] }}</p>
                                                     </div>
                                                 </div>
@@ -302,7 +332,8 @@
                                                 <div class="flex items-start space-x-4">
                                                     <i class="bi bi-people text-2xl text-accent6 flex-shrink-0 mt-1"></i>
                                                     <div>
-                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Beneficiaries</p>
+                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">
+                                                            Beneficiaries</p>
                                                         <p class="text-base text-accent dark:text-primary-100">{{ getClimateFinanceDataItems(project.stages.identification.climateFinanceData)['Beneficiaries'] }}</p>
                                                     </div>
                                                 </div>
@@ -317,7 +348,8 @@
                                     </div>
                                 </section>
                                 <!-- Institutional Sustainability Data Section -->
-                                <section class="bg-primary-100 mt-10  dark:bg-accent4  rounded-apple-lg shadow-apple-md overflow-hidden  shadow-apple-md animate-apple-fade-in transition-all duration-300   hover:shadow-apple-lg">
+                                <section
+                                        class="bg-white mt-10     rounded-apple-lg shadow-apple-md overflow-hidden  shadow-apple-md animate-apple-fade-in transition-all duration-300   hover:shadow-apple-lg">
                                     <div class="p-6 sm:p-8">
                                         <h3 class="text-2xl font-semibold text-accent dark:text-primary-100 mb-6 flex items-center group">
                                             <i class="bi bi-building w-8 h-8 text-accent3 dark:text-accent6 mr-3 transition-transform duration-300   group-hover:rotate-12"></i>
@@ -326,11 +358,13 @@
 
                                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                             <!-- Policy Coherence -->
-                                            <div class="space-y-6 animate-apple-fade-in lg:col-span-2" style="animation-delay: 0ms">
+                                            <div class="space-y-6 animate-apple-fade-in lg:col-span-2"
+                                                 style="animation-delay: 0ms">
                                                 <div class="flex items-start space-x-4">
                                                     <i class="bi bi-file-text text-2xl text-accent3 dark:text-accent6 flex-shrink-0 mt-1"></i>
                                                     <div>
-                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Policy Coherence Documentation</p>
+                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">
+                                                            Policy Coherence Documentation</p>
                                                         <p class="text-base text-accent dark:text-primary-100">{{ getInstitutionalSustainabilityDataItems(project.stages.identification.institutionalSustainabilityData)['Policy Coherence Documentation'] }}</p>
                                                     </div>
                                                 </div>
@@ -341,14 +375,16 @@
                                                 <div class="flex items-start space-x-4">
                                                     <i class="bi bi-question-circle text-2xl text-accent3 dark:text-accent6 flex-shrink-0 mt-1"></i>
                                                     <div>
-                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Number of Freedom of Information Requests</p>
+                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">
+                                                            Number of Freedom of Information Requests</p>
                                                         <p class="text-base text-accent dark:text-primary-100 font-semibold">{{ getInstitutionalSustainabilityDataItems(project.stages.identification.institutionalSustainabilityData)['Number of Freedom of Information Requests'] }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="flex items-start space-x-4">
                                                     <i class="bi bi-chat-left-text text-2xl text-accent3 dark:text-accent6 flex-shrink-0 mt-1"></i>
                                                     <div>
-                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Number of Freedom of Information Answers</p>
+                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">
+                                                            Number of Freedom of Information Answers</p>
                                                         <p class="text-base text-accent dark:text-primary-100 font-semibold">{{ getInstitutionalSustainabilityDataItems(project.stages.identification.institutionalSustainabilityData)['Number of Freedom of Information Answers'] }}</p>
                                                     </div>
                                                 </div>
@@ -359,25 +395,29 @@
                                                 <div class="flex items-start space-x-4">
                                                     <i class="bi bi-people text-2xl text-accent3 dark:text-accent6 flex-shrink-0 mt-1"></i>
                                                     <div>
-                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Number of Lobbying Activities</p>
+                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">
+                                                            Number of Lobbying Activities</p>
                                                         <p class="text-base text-accent dark:text-primary-100 font-semibold">{{ getInstitutionalSustainabilityDataItems(project.stages.identification.institutionalSustainabilityData)['Number of Lobbying Activities'] }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="flex items-start space-x-4">
                                                     <i class="bi bi-clipboard text-2xl text-accent3 dark:text-accent6 flex-shrink-0 mt-1"></i>
                                                     <div>
-                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Lobbying Meetings Minutes</p>
+                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">
+                                                            Lobbying Meetings Minutes</p>
                                                         <p class="text-base text-accent dark:text-primary-100">{{ getInstitutionalSustainabilityDataItems(project.stages.identification.institutionalSustainabilityData)['Lobbying Meetings Minutes'] }}</p>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <!-- Detailed Information -->
-                                            <div class="space-y-6 animate-apple-fade-in lg:col-span-2" style="animation-delay: 300ms">
+                                            <div class="space-y-6 animate-apple-fade-in lg:col-span-2"
+                                                 style="animation-delay: 300ms">
                                                 <div class="flex items-start space-x-4">
                                                     <i class="bi bi-info-circle text-2xl text-accent3 dark:text-accent6 flex-shrink-0 mt-1"></i>
                                                     <div>
-                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Freedom of Information Requests and Answers</p>
+                                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">
+                                                            Freedom of Information Requests and Answers</p>
                                                         <p class="text-base text-accent dark:text-primary-100">{{ getInstitutionalSustainabilityDataItems(project.stages.identification.institutionalSustainabilityData)['Freedom of Information Requests and Answers'] }}</p>
                                                     </div>
                                                 </div>
@@ -400,11 +440,13 @@
                                  role="dialog"
                                  aria-labelledby="modalTitle"
                                  aria-modal="true">
-                                <div class="bg-white dark:bg-accent3 rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
+                                <div class="bg-white   rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
                                      (click)="$event.stopPropagation()">
                                     <div class="p-6 space-y-6">
                                         <div class="flex justify-between items-center">
-                                            <h2 id="modalTitle" class="text-2xl font-bold text-accent3 dark:text-primary">Identification Phase Data Guide</h2>
+                                            <h2 id="modalTitle"
+                                                class="text-2xl font-bold text-accent3 dark:text-primary">Identification
+                                                Phase Data Guide</h2>
                                             <button (click)="closeIdentificationModal()"
                                                     class="text-accent4 hover:text-accent3 dark:text-primary dark:hover:text-accent1 transition-colors duration-200"
                                                     aria-label="Close modal">
@@ -413,21 +455,24 @@
                                         </div>
                                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                             <div class="space-y-6 overflow-y-auto max-h-[calc(90vh-12rem)]">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data Point Explanations</h3>
+                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data
+                                                    Point Explanations</h3>
                                                 <ng-container *ngFor="let section of getSections()">
                                                     <div *ngIf="identificationStructure && identificationStructure[section]"
                                                          class="mb-6 animate-apple-fade-in"
                                                          [style.animation-delay]="(getSections().indexOf(section) * 100) + 'ms'">
                                                         <h4 class="text-lg font-medium text-accent3 dark:text-primary mb-3">{{ section | formatSectionTitle }}</h4>
-                                                        <ng-container *ngIf="isObject(identificationStructure[section])">
+                                                        <ng-container
+                                                                *ngIf="isObject(identificationStructure[section])">
                                                             <div *ngFor="let key of getOrderedKeys(section)"
-                                                                 class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
+                                                                 class="bg-accent2   p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
                                                                 <h5 class="font-medium text-accent3 dark:text-primary mb-2">{{ key }}</h5>
                                                                 <p class="text-sm text-accent4 dark:text-accent2">{{ getExplanation(key) }}</p>
                                                             </div>
                                                         </ng-container>
-                                                        <ng-container *ngIf="!isObject(identificationStructure[section])">
-                                                            <div class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md mb-3">
+                                                        <ng-container
+                                                                *ngIf="!isObject(identificationStructure[section])">
+                                                            <div class="bg-accent2   p-4 rounded-apple-md mb-3">
                                                                 <p class="text-sm text-accent4 dark:text-accent2">{{ identificationStructure[section] }}</p>
                                                             </div>
                                                         </ng-container>
@@ -435,8 +480,9 @@
                                                 </ng-container>
                                             </div>
                                             <div class="space-y-6">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON Structure</h3>
-                                                <div class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
+                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON
+                                                    Structure</h3>
+                                                <div class="bg-accent2   p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
                                                     <app-json-viewer [json]="identificationStructure"></app-json-viewer>
                                                 </div>
                                             </div>
@@ -466,14 +512,16 @@
 
                                 <div *ngIf="project$ | async as project" class="space-y-8">
                                     <!-- Basic Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
                                                 <i class="bi bi-info-circle-fill mr-3 text-secondary-300"></i>
                                                 Basic Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getBasicDataItemsPreparation(project.stages.preparation.basicData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getBasicDataItemsPreparation(project.stages.preparation.basicData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
                                                             'bi-bullseye text-accent6': item.key === 'Project Scope',
@@ -482,23 +530,27 @@
                                                             'bi-wallet2 text-secondary-200': item.key === 'Project Budget',
                                                             'bi-calendar-check text-accent3': item.key === 'Project Budget Approval Date'
                                                           }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.preparation.basicData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.preparation.basicData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
                                     <!-- Climate Finance Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
                                                 <i class="bi bi-cloud-fill mr-3 text-accent6"></i>
                                                 Climate Finance Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getClimateFinanceDataItemsPreparation(project.stages.preparation.climateFinanceData) | keyvalue">
+                                                <div class="hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getClimateFinanceDataItemsPreparation(project.stages.preparation.climateFinanceData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
             'bi-bank text-accent6': item.key === 'Green Climate Fund Accredited Entity',
@@ -512,23 +564,27 @@
             'bi-receipt text-accent4': item.key === 'Project Preparation Costs',
             'bi-piggy-bank-fill text-accent5': item.key === 'Funding Source'
           }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.preparation.climateFinanceData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.preparation.climateFinanceData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
                                     <!-- Social Sustainability Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
                                                 <i class="bi bi-people-fill mr-3 text-accent3"></i>
                                                 Social Sustainability Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="apple-card hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getSocialSustainabilityDataItemsPreparation(project.stages.preparation.socialSustainabilityData) | keyvalue">
+                                                <div class="apple-card hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getSocialSustainabilityDataItemsPreparation(project.stages.preparation.socialSustainabilityData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
             'bi-calendar-event text-accent6': item.key === 'Public Consultation Meetings',
@@ -539,24 +595,28 @@
             'bi-person-check-fill text-accent6': item.key === 'Beneficiaries',
             'bi-people-fill text-accent4': item.key === 'Number of Beneficiaries'
           }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.preparation.socialSustainabilityData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.preparation.socialSustainabilityData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
 
                                     <!-- Institutional Sustainability Data Section -->
-                                    <section class="bg-primary-100 mt rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                    <section
+                                            class="bg-white mt rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
                                                 <i class="bi bi-building-fill mr-3 text-secondary"></i>
                                                 Institutional Sustainability Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="apple-card hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getInstitutionalSustainabilityDataItemsPreparation(project.stages.preparation.institutionalSustainabilityData) | keyvalue">
+                                                <div class="apple-card hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getInstitutionalSustainabilityDataItemsPreparation(project.stages.preparation.institutionalSustainabilityData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
             'bi-file-earmark-text text-accent6': item.key === 'Number of Freedom of Information Requests',
@@ -565,23 +625,27 @@
             'bi-chat-square-text text-secondary-200': item.key === 'Freedom of Information Requests and Answers',
             'bi-shield-check text-accent3': item.key === 'Risk Management Plans'
           }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.preparation.institutionalSustainabilityData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.preparation.institutionalSustainabilityData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
                                     <!-- Economic and Financial Sustainability Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
                                                 <i class="bi bi-cash-coin mr-3 text-accent6"></i>
                                                 Economic and Financial Sustainability Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="apple-card hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getEconomicFinancialSustainabilityDataItemsPreparation(project.stages.preparation.economicAndFinancialSustainabilityData) | keyvalue">
+                                                <div class="apple-card hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getEconomicFinancialSustainabilityDataItemsPreparation(project.stages.preparation.economicAndFinancialSustainabilityData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
             'bi-trophy-fill text-accent5': item.key === 'Value for Money',
@@ -595,23 +659,25 @@
             'bi-calculator-fill text-secondary-200': item.key === 'Life Cycle Cost Calculation Methodology',
             'bi-currency-dollar text-accent6': item.key === 'Life Cycle Cost'
           }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </section>
 
                                     <!-- Environmental and Climate Sustainability Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent mb-6 flex items-center">
                                                 <i class="bi bi-tree-fill mr-3 text-accent3"></i>
                                                 Environmental and Climate Sustainability Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="apple-card hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getEnvironmentalClimateSustainabilityDataItemsPreparation(project.stages.preparation.environmentalAndClimateSustainabilityData) | keyvalue">
+                                                <div class="apple-card hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getEnvironmentalClimateSustainabilityDataItemsPreparation(project.stages.preparation.environmentalAndClimateSustainabilityData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
             'bi-file-earmark-check-fill text-accent6': item.key === 'Environmental Licenses and Exemptions',
@@ -623,12 +689,14 @@
             'bi-exclamation-triangle-fill text-accent4': item.key === 'Climate and Disaster Risk Assessment',
             'bi-tree text-accent5': item.key === 'Conservation Measures'
           }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.preparation.environmentalAndClimateSustainabilityData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.preparation.environmentalAndClimateSustainabilityData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
                                 </div>
@@ -641,11 +709,13 @@
                                  role="dialog"
                                  aria-labelledby="prepModalTitle"
                                  aria-modal="true">
-                                <div class="bg-white dark:bg-accent3 rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
+                                <div class="bg-white   rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
                                      (click)="$event.stopPropagation()">
                                     <div class="p-6 space-y-6">
                                         <div class="flex justify-between items-center">
-                                            <h2 id="prepModalTitle" class="text-2xl font-bold text-accent3 dark:text-primary">Preparation Phase Data Guide</h2>
+                                            <h2 id="prepModalTitle"
+                                                class="text-2xl font-bold text-accent3 dark:text-primary">Preparation
+                                                Phase Data Guide</h2>
                                             <button (click)="closePreparationModal()"
                                                     class="text-accent4 hover:text-accent3 dark:text-primary dark:hover:text-accent1 transition-colors duration-200"
                                                     aria-label="Close modal">
@@ -654,7 +724,8 @@
                                         </div>
                                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                             <div class="space-y-6 overflow-y-auto max-h-[calc(90vh-12rem)]">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data Point Explanations</h3>
+                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data
+                                                    Point Explanations</h3>
                                                 <ng-container *ngFor="let section of getSectionsPreparation()">
                                                     <div *ngIf="preparationStructure && preparationStructure[section]"
                                                          class="mb-6 animate-apple-fade-in"
@@ -662,13 +733,13 @@
                                                         <h4 class="text-lg font-medium text-accent3 dark:text-primary mb-3">{{ section | formatSectionTitle }}</h4>
                                                         <ng-container *ngIf="isObject(preparationStructure[section])">
                                                             <div *ngFor="let key of getOrderedKeysPreparation(section)"
-                                                                 class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
+                                                                 class="bg-accent2   p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
                                                                 <h5 class="font-medium text-accent3 dark:text-primary mb-2">{{ key }}</h5>
                                                                 <p class="text-sm text-accent4 dark:text-accent2">{{ getExplanationPreparation(key) }}</p>
                                                             </div>
                                                         </ng-container>
                                                         <ng-container *ngIf="!isObject(preparationStructure[section])">
-                                                            <div class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md mb-3">
+                                                            <div class="bg-accent2   p-4 rounded-apple-md mb-3">
                                                                 <p class="text-sm text-accent4 dark:text-accent2">{{ preparationStructure[section] }}</p>
                                                             </div>
                                                         </ng-container>
@@ -676,8 +747,9 @@
                                                 </ng-container>
                                             </div>
                                             <div class="space-y-6">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON Structure</h3>
-                                                <div class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
+                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON
+                                                    Structure</h3>
+                                                <div class="bg-accent2   p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
                                                     <app-json-viewer [json]="preparationStructure"></app-json-viewer>
                                                 </div>
                                             </div>
@@ -706,14 +778,15 @@
                                     <!-- Tender Management content -->
                                     <section class="space-y-6">
                                         <!-- Basic Data Section -->
-                                        <div class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                        <div class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                             <div class="p-6 sm:p-8">
                                                 <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                     <i class="bi bi-info-circle-fill mr-3 text-secondary-400"></i>
                                                     Basic Data
                                                 </h3>
                                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                    <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getBasicDataItemsTenderManagement(project.stages.tenderManagement.basicData) | keyvalue">
+                                                    <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                         *ngFor="let item of getBasicDataItemsTenderManagement(project.stages.tenderManagement.basicData) | keyvalue">
                                                         <div class="flex items-center mb-2">
                                                             <i class="bi mr-2 text-lg" [ngClass]="{
               'bi-building text-accent6': item.key === 'Procuring Entity',
@@ -733,48 +806,54 @@
               'bi-hourglass-split text-accent3': item.key === 'Contract Duration',
               'bi-flag text-accent6': item.key === 'Contract Status'
             }"></i>
-                                                            <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                            <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                         </div>
-                                                        <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                        <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                     </div>
                                                 </div>
-                                                <app-attachment-list [attachments]="project.stages.tenderManagement.basicData.attachments" class="mt-8"></app-attachment-list>
+                                                <app-attachment-list
+                                                        [attachments]="project.stages.tenderManagement.basicData.attachments"
+                                                        class="mt-8"></app-attachment-list>
                                             </div>
                                         </div>
 
                                         <!-- Social Sustainability Data Section -->
-                                        <div class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                        <div class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                             <div class="p-6 sm:p-8">
                                                 <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                     <i class="bi bi-people-fill mr-3 text-accent6"></i>
                                                     Social Sustainability Data
                                                 </h3>
                                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                    <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getSocialSustainabilityDataItemsTenderManagement(project.stages.tenderManagement.socialSustainabilityData) | keyvalue">
+                                                    <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                         *ngFor="let item of getSocialSustainabilityDataItemsTenderManagement(project.stages.tenderManagement.socialSustainabilityData) | keyvalue">
                                                         <div class="flex items-center mb-2">
                                                             <i class="bi mr-2 text-lg" [ngClass]="{
               'bi-cash text-accent6': item.key === 'Labor Budget',
               'bi-shield-check text-accent4': item.key === 'Health and Safety Certifications'
             }"></i>
-                                                            <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                            <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                         </div>
-                                                        <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                        <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                     </div>
                                                 </div>
-                                                <app-attachment-list [attachments]="project.stages.tenderManagement.socialSustainabilityData.attachments" class="mt-8"></app-attachment-list>
+                                                <app-attachment-list
+                                                        [attachments]="project.stages.tenderManagement.socialSustainabilityData.attachments"
+                                                        class="mt-8"></app-attachment-list>
                                             </div>
                                         </div>
                                     </section>
                                     <section class="space-y-6">
                                         <!-- Institutional Sustainability Data Section -->
-                                        <div class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                        <div class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                             <div class="p-6 sm:p-8">
                                                 <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                     <i class="bi bi-building-fill mr-3 text-accent3"></i>
                                                     Institutional Sustainability Data
                                                 </h3>
                                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                    <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getInstitutionalSustainabilityDataItemsTenderManagement(project.stages.tenderManagement.institutionalSustainabilityData) | keyvalue">
+                                                    <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                         *ngFor="let item of getInstitutionalSustainabilityDataItemsTenderManagement(project.stages.tenderManagement.institutionalSustainabilityData) | keyvalue">
                                                         <div class="flex items-center mb-2">
                                                             <i class="bi mr-2 text-lg" [ngClass]="{
               'bi-file-earmark-text text-accent6': item.key === 'Number of Freedom of Information Requests',
@@ -784,35 +863,40 @@
               'bi-file-earmark-richtext text-accent3': item.key === 'Freedom of Information Requests and Answers',
               'bi-shield-check text-accent6': item.key === 'Anti-Corruption Certifications'
             }"></i>
-                                                            <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                            <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                         </div>
-                                                        <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                        <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                     </div>
                                                 </div>
-                                                <app-attachment-list [attachments]="project.stages.tenderManagement.institutionalSustainabilityData.attachments" class="mt-8"></app-attachment-list>
+                                                <app-attachment-list
+                                                        [attachments]="project.stages.tenderManagement.institutionalSustainabilityData.attachments"
+                                                        class="mt-8"></app-attachment-list>
                                             </div>
                                         </div>
 
                                         <!-- Environmental and Climate Sustainability Data Section -->
-                                        <div class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                        <div class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                             <div class="p-6 sm:p-8">
                                                 <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                     <i class="bi bi-tree-fill mr-3 text-accent6"></i>
                                                     Environmental and Climate Sustainability Data
                                                 </h3>
                                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                    <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getEnvironmentalClimateSustainabilityDataItemsTenderManagement(project.stages.tenderManagement.environmentalAndClimateSustainabilityData) | keyvalue">
+                                                    <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                         *ngFor="let item of getEnvironmentalClimateSustainabilityDataItemsTenderManagement(project.stages.tenderManagement.environmentalAndClimateSustainabilityData) | keyvalue">
                                                         <div class="flex items-center mb-2">
                                                             <i class="bi mr-2 text-lg" [ngClass]="{
               'bi-award text-accent6': item.key === 'Number of Environmental Certifications',
               'bi-file-earmark-check text-accent4': item.key === 'Environmental Certifications'
             }"></i>
-                                                            <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                            <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                         </div>
-                                                        <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                        <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                     </div>
                                                 </div>
-                                                <app-attachment-list [attachments]="project.stages.tenderManagement.environmentalAndClimateSustainabilityData.attachments" class="mt-8"></app-attachment-list>
+                                                <app-attachment-list
+                                                        [attachments]="project.stages.tenderManagement.environmentalAndClimateSustainabilityData.attachments"
+                                                        class="mt-8"></app-attachment-list>
                                             </div>
                                         </div>
                                     </section>
@@ -825,11 +909,13 @@
                                  role="dialog"
                                  aria-labelledby="tenderModalTitle"
                                  aria-modal="true">
-                                <div class="bg-white dark:bg-accent3 rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
+                                <div class="bg-white   rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
                                      (click)="$event.stopPropagation()">
                                     <div class="p-6 space-y-6">
                                         <div class="flex justify-between items-center">
-                                            <h2 id="tenderModalTitle" class="text-2xl font-bold text-accent3 dark:text-primary">Tender Management Phase Data Guide</h2>
+                                            <h2 id="tenderModalTitle"
+                                                class="text-2xl font-bold text-accent3 dark:text-primary">Tender
+                                                Management Phase Data Guide</h2>
                                             <button (click)="closeTenderManagementModal()"
                                                     class="text-accent4 hover:text-accent3 dark:text-primary dark:hover:text-accent1 transition-colors duration-200"
                                                     aria-label="Close modal">
@@ -838,21 +924,24 @@
                                         </div>
                                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                             <div class="space-y-6 overflow-y-auto max-h-[calc(90vh-12rem)]">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data Point Explanations</h3>
+                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data
+                                                    Point Explanations</h3>
                                                 <ng-container *ngFor="let section of getSectionsTenderManagement()">
                                                     <div *ngIf="tenderManagementStructure && tenderManagementStructure[section]"
                                                          class="mb-6 animate-apple-fade-in"
                                                          [style.animation-delay]="(getSectionsTenderManagement().indexOf(section) * 100) + 'ms'">
                                                         <h4 class="text-lg font-medium text-accent3 dark:text-primary mb-3">{{ section | formatSectionTitle }}</h4>
-                                                        <ng-container *ngIf="isObject(tenderManagementStructure[section])">
+                                                        <ng-container
+                                                                *ngIf="isObject(tenderManagementStructure[section])">
                                                             <div *ngFor="let key of getOrderedKeysTenderManagement(section)"
-                                                                 class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
+                                                                 class="bg-accent2   p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
                                                                 <h5 class="font-medium text-accent3 dark:text-primary mb-2">{{ key }}</h5>
                                                                 <p class="text-sm text-accent4 dark:text-accent2">{{ getExplanationTenderManagement(key) }}</p>
                                                             </div>
                                                         </ng-container>
-                                                        <ng-container *ngIf="!isObject(tenderManagementStructure[section])">
-                                                            <div class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md mb-3">
+                                                        <ng-container
+                                                                *ngIf="!isObject(tenderManagementStructure[section])">
+                                                            <div class="bg-accent2   p-4 rounded-apple-md mb-3">
                                                                 <p class="text-sm text-accent4 dark:text-accent2">{{ tenderManagementStructure[section] }}</p>
                                                             </div>
                                                         </ng-container>
@@ -860,9 +949,11 @@
                                                 </ng-container>
                                             </div>
                                             <div class="space-y-6">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON Structure</h3>
-                                                <div class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
-                                                    <app-json-viewer [json]="tenderManagementStructure"></app-json-viewer>
+                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON
+                                                    Structure</h3>
+                                                <div class="bg-accent2   p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
+                                                    <app-json-viewer
+                                                            [json]="tenderManagementStructure"></app-json-viewer>
                                                 </div>
                                             </div>
                                         </div>
@@ -888,14 +979,16 @@
                                         </button>
                                     </div>
                                     <!-- Implementation content -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-info-circle-fill mr-3 text-secondary-400"></i>
                                                 Basic Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getBasicDataItemsImplementation(project.stages.implementation.basicData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getBasicDataItemsImplementation(project.stages.implementation.basicData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
             'bi-currency-dollar text-accent6': item.key === 'Variation to Contract Price',
@@ -906,22 +999,26 @@
             'bi-list-ul text-accent6': item.key === 'Reasons for Scope',
             'bi-clock-history text-accent4': item.key === 'Reasons for Duration Changes'
           }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.implementation.basicData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.implementation.basicData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-leaf-fill mr-3 text-accent6"></i>
                                                 Climate Finance Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getClimateFinanceDataItemsImplementation(project.stages.implementation.climateFinanceData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getClimateFinanceDataItemsImplementation(project.stages.implementation.climateFinanceData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
             'bi-receipt text-accent6': item.key === 'Disbursement Records',
@@ -930,101 +1027,119 @@
             'bi-calendar-event text-secondary-200': item.key === 'Reporting Period',
             'bi-clipboard-check text-accent3': item.key === 'Independent Monitoring'
           }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.implementation.climateFinanceData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.implementation.climateFinanceData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-people-fill mr-3 text-accent3"></i>
                                                 Social Sustainability Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getSocialSustainabilityDataItemsImplementation(project.stages.implementation.socialSustainabilityData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getSocialSustainabilityDataItemsImplementation(project.stages.implementation.socialSustainabilityData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
             'bi-briefcase-fill text-accent6': item.key === 'Jobs Generated',
             'bi-people-fill text-accent4': item.key === 'Inclusive Implementation',
             'bi-exclamation-triangle-fill text-accent5': item.key === 'Workers Accidents'
           }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.implementation.socialSustainabilityData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.implementation.socialSustainabilityData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section><!-- Institutional Sustainability Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-building-fill mr-3 text-secondary-400"></i>
                                                 Institutional Sustainability Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getInstitutionalSustainabilityDataItemsImplementation(project.stages.implementation.institutionalSustainabilityData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getInstitutionalSustainabilityDataItemsImplementation(project.stages.implementation.institutionalSustainabilityData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
             'bi-file-earmark-text text-accent6': item.key === 'Number of Freedom of Information Requests',
             'bi-file-earmark-check text-accent4': item.key === 'Number of Freedom of Information Answers'
           }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.implementation.institutionalSustainabilityData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.implementation.institutionalSustainabilityData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
                                     <!-- Economic and Financial Sustainability Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-cash-coin mr-3 text-accent6"></i>
                                                 Economic and Financial Sustainability Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getEconomicAndFinancialSustainabilityDataItemsImplementation(project.stages.implementation.economicAndFinancialSustainabilityData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getEconomicAndFinancialSustainabilityDataItemsImplementation(project.stages.implementation.economicAndFinancialSustainabilityData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
             'bi-graph-down-arrow text-accent5': item.key === 'Budget Shortfall',
             'bi-bank text-accent4': item.key === 'Funding Source for Implementation',
             'bi-wallet2 text-accent3': item.key === 'Budget for Implementation'
           }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.implementation.economicAndFinancialSustainabilityData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.implementation.economicAndFinancialSustainabilityData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
                                     <!-- Environmental and Climate Sustainability Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-tree-fill mr-3 text-accent3"></i>
                                                 Environmental and Climate Sustainability Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getEnvironmentalAndClimateSustainabilityDataItemsImplementation(project.stages.implementation.environmentalAndClimateSustainabilityData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getEnvironmentalAndClimateSustainabilityDataItemsImplementation(project.stages.implementation.environmentalAndClimateSustainabilityData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
             'bi-flower1 text-accent6': item.key === 'Environmental Measures',
             'bi-shield-fill-check text-accent4': item.key === 'Conservation Measures',
             'bi-thermometer-half text-accent5': item.key === 'Climate Measures'
           }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.implementation.environmentalAndClimateSustainabilityData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.implementation.environmentalAndClimateSustainabilityData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
                                 </div>
@@ -1036,11 +1151,13 @@
                                  role="dialog"
                                  aria-labelledby="implementationModalTitle"
                                  aria-modal="true">
-                                <div class="bg-white dark:bg-accent3 rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
+                                <div class="bg-white   rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
                                      (click)="$event.stopPropagation()">
                                     <div class="p-6 space-y-6">
                                         <div class="flex justify-between items-center">
-                                            <h2 id="implementationModalTitle" class="text-2xl font-bold text-accent3 dark:text-primary">Implementation Phase Data Guide</h2>
+                                            <h2 id="implementationModalTitle"
+                                                class="text-2xl font-bold text-accent3 dark:text-primary">Implementation
+                                                Phase Data Guide</h2>
                                             <button (click)="closeImplementationModal()"
                                                     class="text-accent4 hover:text-accent3 dark:text-primary dark:hover:text-accent1 transition-colors duration-200"
                                                     aria-label="Close modal">
@@ -1049,21 +1166,24 @@
                                         </div>
                                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                             <div class="space-y-6 overflow-y-auto max-h-[calc(90vh-12rem)]">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data Point Explanations</h3>
+                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data
+                                                    Point Explanations</h3>
                                                 <ng-container *ngFor="let section of getSectionsImplementation()">
                                                     <div *ngIf="implementationStructure && implementationStructure[section]"
                                                          class="mb-6 animate-apple-fade-in"
                                                          [style.animation-delay]="(getSectionsImplementation().indexOf(section) * 100) + 'ms'">
                                                         <h4 class="text-lg font-medium text-accent3 dark:text-primary mb-3">{{ section | formatSectionTitle }}</h4>
-                                                        <ng-container *ngIf="isObject(implementationStructure[section])">
+                                                        <ng-container
+                                                                *ngIf="isObject(implementationStructure[section])">
                                                             <div *ngFor="let key of getOrderedKeysImplementation(section)"
-                                                                 class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
+                                                                 class="bg-accent2   p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
                                                                 <h5 class="font-medium text-accent3 dark:text-primary mb-2">{{ key }}</h5>
                                                                 <p class="text-sm text-accent4 dark:text-accent2">{{ getExplanationImplementation(key) }}</p>
                                                             </div>
                                                         </ng-container>
-                                                        <ng-container *ngIf="!isObject(implementationStructure[section])">
-                                                            <div class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md mb-3">
+                                                        <ng-container
+                                                                *ngIf="!isObject(implementationStructure[section])">
+                                                            <div class="bg-accent2   p-4 rounded-apple-md mb-3">
                                                                 <p class="text-sm text-accent4 dark:text-accent2">{{ implementationStructure[section] }}</p>
                                                             </div>
                                                         </ng-container>
@@ -1071,8 +1191,9 @@
                                                 </ng-container>
                                             </div>
                                             <div class="space-y-6">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON Structure</h3>
-                                                <div class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
+                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON
+                                                    Structure</h3>
+                                                <div class="bg-accent2   p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
                                                     <app-json-viewer [json]="implementationStructure"></app-json-viewer>
                                                 </div>
                                             </div>
@@ -1099,14 +1220,16 @@
                                         </button>
                                     </div>
                                     <!-- Basic Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-clipboard-data-fill mr-3 text-secondary-300"></i>
                                                 Basic Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getBasicDataItemsCompletion(project.stages.completion.basicData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getBasicDataItemsCompletion(project.stages.completion.basicData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
                         'bi-check-circle-fill text-accent6': item.key === 'Project Status',
@@ -1115,35 +1238,41 @@
                         'bi-arrows-fullscreen text-secondary-200': item.key === 'Scope at Completion',
                         'bi-arrow-repeat text-accent3': item.key === 'Reasons for Project Changes'
                     }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.completion.basicData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.completion.basicData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
 
                                     <!-- Institutional Sustainability Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-building-fill mr-3 text-accent6"></i>
                                                 Institutional Sustainability Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getInstitutionalSustainabilityDataItemsCompletion(project.stages.completion.institutionalSustainabilityData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getInstitutionalSustainabilityDataItemsCompletion(project.stages.completion.institutionalSustainabilityData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
                         'bi-file-earmark-text-fill text-accent5': item.key === 'Number of Freedom of Information Requests',
                         'bi-chat-square-text-fill text-accent4': item.key === 'Number of Freedom of Information Answers'
                     }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.completion.institutionalSustainabilityData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.completion.institutionalSustainabilityData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
                                 </div>
@@ -1155,11 +1284,13 @@
                                  role="dialog"
                                  aria-labelledby="completionModalTitle"
                                  aria-modal="true">
-                                <div class="bg-white dark:bg-accent3 rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
+                                <div class="bg-white   rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
                                      (click)="$event.stopPropagation()">
                                     <div class="p-6 space-y-6">
                                         <div class="flex justify-between items-center">
-                                            <h2 id="completionModalTitle" class="text-2xl font-bold text-accent3 dark:text-primary">Completion Phase Data Guide</h2>
+                                            <h2 id="completionModalTitle"
+                                                class="text-2xl font-bold text-accent3 dark:text-primary">Completion
+                                                Phase Data Guide</h2>
                                             <button (click)="closeCompletionModal()"
                                                     class="text-accent4 hover:text-accent3 dark:text-primary dark:hover:text-accent1 transition-colors duration-200"
                                                     aria-label="Close modal">
@@ -1168,7 +1299,8 @@
                                         </div>
                                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                             <div class="space-y-6 overflow-y-auto max-h-[calc(90vh-12rem)]">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data Point Explanations</h3>
+                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data
+                                                    Point Explanations</h3>
                                                 <ng-container *ngFor="let section of getSectionsCompletion()">
                                                     <div *ngIf="completionStructure && completionStructure[section]"
                                                          class="mb-6 animate-apple-fade-in"
@@ -1176,13 +1308,13 @@
                                                         <h4 class="text-lg font-medium text-accent3 dark:text-primary mb-3">{{ section | formatSectionTitle }}</h4>
                                                         <ng-container *ngIf="isObject(completionStructure[section])">
                                                             <div *ngFor="let key of getOrderedKeysCompletion(section)"
-                                                                 class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
+                                                                 class="bg-accent2   p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
                                                                 <h5 class="font-medium text-accent3 dark:text-primary mb-2">{{ key }}</h5>
                                                                 <p class="text-sm text-accent4 dark:text-accent2">{{ getExplanationCompletion(key) }}</p>
                                                             </div>
                                                         </ng-container>
                                                         <ng-container *ngIf="!isObject(completionStructure[section])">
-                                                            <div class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md mb-3">
+                                                            <div class="bg-accent2   p-4 rounded-apple-md mb-3">
                                                                 <p class="text-sm text-accent4 dark:text-accent2">{{ completionStructure[section] }}</p>
                                                             </div>
                                                         </ng-container>
@@ -1190,8 +1322,9 @@
                                                 </ng-container>
                                             </div>
                                             <div class="space-y-6">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON Structure</h3>
-                                                <div class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
+                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON
+                                                    Structure</h3>
+                                                <div class="bg-accent2   p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
                                                     <app-json-viewer [json]="completionStructure"></app-json-viewer>
                                                 </div>
                                             </div>
@@ -1219,14 +1352,16 @@
                                     </div>
 
                                     <!-- Basic Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-gear-fill mr-3 text-secondary-300"></i>
                                                 Basic Data (O&M)
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getBasicDataItemsOandM(project.stages.operationsAndMaintenance.basicData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getBasicDataItemsOandM(project.stages.operationsAndMaintenance.basicData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
                         'bi-building-fill text-accent6': item.key === 'Asset Name',
@@ -1237,115 +1372,136 @@
                         'bi-arrows-angle-expand text-accent6': item.key === 'Maintenance Scope',
                         'bi-calendar-check-fill text-accent5': item.key === 'Maintenance Plan'
                     }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.operationsAndMaintenance.basicData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.operationsAndMaintenance.basicData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
 
                                     <!-- Climate Finance Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-leaf-fill mr-3 text-accent6"></i>
                                                 Climate Finance Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getClimateFinanceDataItemsOandM(project.stages.operationsAndMaintenance.climateFinanceData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getClimateFinanceDataItemsOandM(project.stages.operationsAndMaintenance.climateFinanceData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
                         'bi-graph-up-arrow text-accent5': item.key === 'Impact Measurement',
                         'bi-cloud-fill text-accent4': item.key === 'Carbon Footprint'
                     }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.operationsAndMaintenance.climateFinanceData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.operationsAndMaintenance.climateFinanceData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
 
                                     <!-- Social Sustainability Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-people-fill mr-3 text-accent3"></i>
                                                 Social Sustainability Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getSocialSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.socialSustainabilityData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getSocialSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.socialSustainabilityData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
                         'bi-briefcase-fill text-accent6': item.key === 'Jobs Generated',
                         'bi-diagram-3-fill text-accent5': item.key === 'Inclusive Implementation',
                         'bi-exclamation-triangle-fill text-secondary-300': item.key === 'Workers\' Accidents'
                     }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.operationsAndMaintenance.socialSustainabilityData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.operationsAndMaintenance.socialSustainabilityData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
                                     <!-- Institutional Sustainability Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-building-fill mr-3 text-secondary-300"></i>
                                                 Institutional Sustainability Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <ng-container *ngFor="let item of getInstitutionalSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.institutionalSustainabilityData) | keyvalue">
+                                                <ng-container
+                                                        *ngFor="let item of getInstitutionalSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.institutionalSustainabilityData) | keyvalue">
                                                     <div class="space-y-4 hover:apple-hover-lift transition-all duration-300">
                                                         <div class="flex items-center mb-2">
-                                                            <i class="bi mr-2 text-lg text-accent5" [ngClass]="getIconClass(item.key)"></i>
-                                                            <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                            <i class="bi mr-2 text-lg text-accent5"
+                                                               [ngClass]="getIconClass(item.key)"></i>
+                                                            <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                         </div>
-                                                        <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                        <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                     </div>
                                                 </ng-container>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.operationsAndMaintenance.institutionalSustainabilityData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.operationsAndMaintenance.institutionalSustainabilityData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
 
                                     <!-- Economic and Financial Sustainability Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-cash-coin mr-3 text-accent6"></i>
                                                 Economic and Financial Sustainability Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getEconomicFinancialSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.economicAndFinancialSustainabilityData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getEconomicFinancialSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.economicAndFinancialSustainabilityData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
                         'bi-piggy-bank-fill text-accent5': item.key === 'Funding Source for Maintenance',
                         'bi-currency-dollar text-accent4': item.key === 'Budget for Maintenance'
                     }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.operationsAndMaintenance.economicAndFinancialSustainabilityData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.operationsAndMaintenance.economicAndFinancialSustainabilityData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
 
                                     <!-- Environmental and Climate Sustainability Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-tree-fill mr-3 text-accent3"></i>
                                                 Environmental and Climate Sustainability Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getEnvironmentalClimateSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getEnvironmentalClimateSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
                         'bi-flower1 text-accent6': item.key === 'Environmental Measures',
@@ -1353,12 +1509,14 @@
                         'bi-thermometer-half text-accent5': item.key === 'Climate Measures',
                         'bi-file-earmark-text text-secondary-300': item.key === 'Environmental Licenses and Exemptions'
                     }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
                                 </div>
@@ -1370,11 +1528,13 @@
                                  role="dialog"
                                  aria-labelledby="operationsMaintenanceModalTitle"
                                  aria-modal="true">
-                                <div class="bg-white dark:bg-accent3 rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
+                                <div class="bg-white   rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
                                      (click)="$event.stopPropagation()">
                                     <div class="p-6 space-y-6">
                                         <div class="flex justify-between items-center">
-                                            <h2 id="operationsMaintenanceModalTitle" class="text-2xl font-bold text-accent3 dark:text-primary">Operation and Maintenance Phase Data Guide</h2>
+                                            <h2 id="operationsMaintenanceModalTitle"
+                                                class="text-2xl font-bold text-accent3 dark:text-primary">Operation and
+                                                Maintenance Phase Data Guide</h2>
                                             <button (click)="closeOperationsAndMaintenanceModal()"
                                                     class="text-accent4 hover:text-accent3 dark:text-primary dark:hover:text-accent1 transition-colors duration-200"
                                                     aria-label="Close modal">
@@ -1383,21 +1543,25 @@
                                         </div>
                                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                             <div class="space-y-6 overflow-y-auto max-h-[calc(90vh-12rem)]">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data Point Explanations</h3>
-                                                <ng-container *ngFor="let section of getSectionsOperationsAndMaintenance()">
+                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data
+                                                    Point Explanations</h3>
+                                                <ng-container
+                                                        *ngFor="let section of getSectionsOperationsAndMaintenance()">
                                                     <div *ngIf="operationsAndMaintenanceStructure && operationsAndMaintenanceStructure[section]"
                                                          class="mb-6 animate-apple-fade-in"
                                                          [style.animation-delay]="(getSectionsOperationsAndMaintenance().indexOf(section) * 100) + 'ms'">
                                                         <h4 class="text-lg font-medium text-accent3 dark:text-primary mb-3">{{ section | formatSectionTitle }}</h4>
-                                                        <ng-container *ngIf="isObject(operationsAndMaintenanceStructure[section])">
+                                                        <ng-container
+                                                                *ngIf="isObject(operationsAndMaintenanceStructure[section])">
                                                             <div *ngFor="let key of getOrderedKeysOperationsAndMaintenance(section)"
-                                                                 class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
+                                                                 class="bg-accent2   p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
                                                                 <h5 class="font-medium text-accent3 dark:text-primary mb-2">{{ key }}</h5>
                                                                 <p class="text-sm text-accent4 dark:text-accent2">{{ getExplanationOperationsAndMaintenance(key) }}</p>
                                                             </div>
                                                         </ng-container>
-                                                        <ng-container *ngIf="!isObject(operationsAndMaintenanceStructure[section])">
-                                                            <div class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md mb-3">
+                                                        <ng-container
+                                                                *ngIf="!isObject(operationsAndMaintenanceStructure[section])">
+                                                            <div class="bg-accent2   p-4 rounded-apple-md mb-3">
                                                                 <p class="text-sm text-accent4 dark:text-accent2">{{ operationsAndMaintenanceStructure[section] }}</p>
                                                             </div>
                                                         </ng-container>
@@ -1405,9 +1569,11 @@
                                                 </ng-container>
                                             </div>
                                             <div class="space-y-6">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON Structure</h3>
-                                                <div class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
-                                                    <app-json-viewer [json]="operationsAndMaintenanceStructure"></app-json-viewer>
+                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON
+                                                    Structure</h3>
+                                                <div class="bg-accent2   p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
+                                                    <app-json-viewer
+                                                            [json]="operationsAndMaintenanceStructure"></app-json-viewer>
                                                 </div>
                                             </div>
                                         </div>
@@ -1432,14 +1598,16 @@
                                     </div>
 
                                     <!-- Basic Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-gear-fill mr-3 text-secondary-300"></i>
                                                 Basic Data (O&M)
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getBasicDataItemsOandM(project.stages.operationsAndMaintenance.basicData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getBasicDataItemsOandM(project.stages.operationsAndMaintenance.basicData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
                         'bi-building-fill text-accent6': item.key === 'Asset Name',
@@ -1450,115 +1618,136 @@
                         'bi-arrows-angle-expand text-accent6': item.key === 'Maintenance Scope',
                         'bi-calendar-check-fill text-accent5': item.key === 'Maintenance Plan'
                     }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.operationsAndMaintenance.basicData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.operationsAndMaintenance.basicData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
 
                                     <!-- Climate Finance Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-leaf-fill mr-3 text-accent6"></i>
                                                 Climate Finance Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getClimateFinanceDataItemsOandM(project.stages.operationsAndMaintenance.climateFinanceData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getClimateFinanceDataItemsOandM(project.stages.operationsAndMaintenance.climateFinanceData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
                         'bi-graph-up-arrow text-accent5': item.key === 'Impact Measurement',
                         'bi-cloud-fill text-accent4': item.key === 'Carbon Footprint'
                     }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.operationsAndMaintenance.climateFinanceData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.operationsAndMaintenance.climateFinanceData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
 
                                     <!-- Social Sustainability Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-people-fill mr-3 text-accent3"></i>
                                                 Social Sustainability Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getSocialSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.socialSustainabilityData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getSocialSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.socialSustainabilityData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
                         'bi-briefcase-fill text-accent6': item.key === 'Jobs Generated',
                         'bi-diagram-3-fill text-accent5': item.key === 'Inclusive Implementation',
                         'bi-exclamation-triangle-fill text-secondary-300': item.key === 'Workers\' Accidents'
                     }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.operationsAndMaintenance.socialSustainabilityData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.operationsAndMaintenance.socialSustainabilityData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
                                     <!-- Institutional Sustainability Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-building-fill mr-3 text-secondary-300"></i>
                                                 Institutional Sustainability Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <ng-container *ngFor="let item of getInstitutionalSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.institutionalSustainabilityData) | keyvalue">
+                                                <ng-container
+                                                        *ngFor="let item of getInstitutionalSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.institutionalSustainabilityData) | keyvalue">
                                                     <div class="space-y-4 hover:apple-hover-lift transition-all duration-300">
                                                         <div class="flex items-center mb-2">
-                                                            <i class="bi mr-2 text-lg text-accent5" [ngClass]="getIconClass(item.key)"></i>
-                                                            <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                            <i class="bi mr-2 text-lg text-accent5"
+                                                               [ngClass]="getIconClass(item.key)"></i>
+                                                            <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                         </div>
-                                                        <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                        <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                     </div>
                                                 </ng-container>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.operationsAndMaintenance.institutionalSustainabilityData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.operationsAndMaintenance.institutionalSustainabilityData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
 
                                     <!-- Economic and Financial Sustainability Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-cash-coin mr-3 text-accent6"></i>
                                                 Economic and Financial Sustainability Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getEconomicFinancialSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.economicAndFinancialSustainabilityData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getEconomicFinancialSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.economicAndFinancialSustainabilityData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
                         'bi-piggy-bank-fill text-accent5': item.key === 'Funding Source for Maintenance',
                         'bi-currency-dollar text-accent4': item.key === 'Budget for Maintenance'
                     }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.operationsAndMaintenance.economicAndFinancialSustainabilityData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.operationsAndMaintenance.economicAndFinancialSustainabilityData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
 
                                     <!-- Environmental and Climate Sustainability Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-tree-fill mr-3 text-accent3"></i>
                                                 Environmental and Climate Sustainability Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getEnvironmentalClimateSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getEnvironmentalClimateSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
                         'bi-flower1 text-accent6': item.key === 'Environmental Measures',
@@ -1566,12 +1755,14 @@
                         'bi-thermometer-half text-accent5': item.key === 'Climate Measures',
                         'bi-file-earmark-text text-secondary-300': item.key === 'Environmental Licenses and Exemptions'
                     }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
                                 </div>
@@ -1583,11 +1774,13 @@
                                  role="dialog"
                                  aria-labelledby="operationsMaintenanceModalTitle"
                                  aria-modal="true">
-                                <div class="bg-white dark:bg-accent3 rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
+                                <div class="bg-white   rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
                                      (click)="$event.stopPropagation()">
                                     <div class="p-6 space-y-6">
                                         <div class="flex justify-between items-center">
-                                            <h2 id="operationsMaintenanceModalTitle" class="text-2xl font-bold text-accent3 dark:text-primary">Operation and Maintenance Phase Data Guide</h2>
+                                            <h2 id="operationsMaintenanceModalTitle"
+                                                class="text-2xl font-bold text-accent3 dark:text-primary">Operation and
+                                                Maintenance Phase Data Guide</h2>
                                             <button (click)="closeOperationsAndMaintenanceModal()"
                                                     class="text-accent4 hover:text-accent3 dark:text-primary dark:hover:text-accent1 transition-colors duration-200"
                                                     aria-label="Close modal">
@@ -1596,21 +1789,25 @@
                                         </div>
                                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                             <div class="space-y-6 overflow-y-auto max-h-[calc(90vh-12rem)]">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data Point Explanations</h3>
-                                                <ng-container *ngFor="let section of getSectionsOperationsAndMaintenance()">
+                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data
+                                                    Point Explanations</h3>
+                                                <ng-container
+                                                        *ngFor="let section of getSectionsOperationsAndMaintenance()">
                                                     <div *ngIf="operationsAndMaintenanceStructure && operationsAndMaintenanceStructure[section]"
                                                          class="mb-6 animate-apple-fade-in"
                                                          [style.animation-delay]="(getSectionsOperationsAndMaintenance().indexOf(section) * 100) + 'ms'">
                                                         <h4 class="text-lg font-medium text-accent3 dark:text-primary mb-3">{{ section | formatSectionTitle }}</h4>
-                                                        <ng-container *ngIf="isObject(operationsAndMaintenanceStructure[section])">
+                                                        <ng-container
+                                                                *ngIf="isObject(operationsAndMaintenanceStructure[section])">
                                                             <div *ngFor="let key of getOrderedKeysOperationsAndMaintenance(section)"
-                                                                 class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
+                                                                 class="bg-accent2   p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
                                                                 <h5 class="font-medium text-accent3 dark:text-primary mb-2">{{ key }}</h5>
                                                                 <p class="text-sm text-accent4 dark:text-accent2">{{ getExplanationOperationsAndMaintenance(key) }}</p>
                                                             </div>
                                                         </ng-container>
-                                                        <ng-container *ngIf="!isObject(operationsAndMaintenanceStructure[section])">
-                                                            <div class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md mb-3">
+                                                        <ng-container
+                                                                *ngIf="!isObject(operationsAndMaintenanceStructure[section])">
+                                                            <div class="bg-accent2   p-4 rounded-apple-md mb-3">
                                                                 <p class="text-sm text-accent4 dark:text-accent2">{{ operationsAndMaintenanceStructure[section] }}</p>
                                                             </div>
                                                         </ng-container>
@@ -1618,9 +1815,11 @@
                                                 </ng-container>
                                             </div>
                                             <div class="space-y-6">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON Structure</h3>
-                                                <div class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
-                                                    <app-json-viewer [json]="operationsAndMaintenanceStructure"></app-json-viewer>
+                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON
+                                                    Structure</h3>
+                                                <div class="bg-accent2   p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
+                                                    <app-json-viewer
+                                                            [json]="operationsAndMaintenanceStructure"></app-json-viewer>
                                                 </div>
                                             </div>
                                         </div>
@@ -1646,14 +1845,16 @@
                                         </button>
                                     </div>
                                     <!-- Basic Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-info-circle-fill mr-3 text-secondary-300"></i>
                                                 Basic Data (Decommissioning)
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getBasicDataItemsDecommissioning(project.stages.decommissioning.basicData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getBasicDataItemsDecommissioning(project.stages.decommissioning.basicData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
                         'bi-currency-dollar text-accent6': item.key === 'Decommission Cost Forecast',
@@ -1664,97 +1865,115 @@
                         'bi-clipboard2-check-fill text-accent6': item.key === 'Decommission Plan',
                         'bi-shield-fill-check text-accent5': item.key === 'Decommission Mitigation Plan'
                     }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.decommissioning.basicData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.decommissioning.basicData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
 
                                     <!-- Social Sustainability Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-people-fill mr-3 text-accent6"></i>
                                                 Social Sustainability Data (Decommissioning)
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getSocialSustainabilityDataItemsDecommissioning(project.stages.decommissioning.socialSustainabilityData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getSocialSustainabilityDataItemsDecommissioning(project.stages.decommissioning.socialSustainabilityData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
                         'bi-briefcase-fill text-accent6': item.key === 'Jobs Generated',
                         'bi-exclamation-triangle-fill text-secondary-300': item.key === 'Workers\' Accidents'
                     }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.decommissioning.socialSustainabilityData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.decommissioning.socialSustainabilityData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
                                     <!-- Environmental and Climate Sustainability Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-leaf-fill mr-3 text-accent3"></i>
                                                 Environmental and Climate Sustainability Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getEnvironmentalClimateSustainabilityDataItemsDecommissioning(project.stages.decommissioning.environmentalAndClimateSustainabilityData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getEnvironmentalClimateSustainabilityDataItemsDecommissioning(project.stages.decommissioning.environmentalAndClimateSustainabilityData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi bi-shield-fill-check mr-2 text-lg text-accent5"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.decommissioning.environmentalAndClimateSustainabilityData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.decommissioning.environmentalAndClimateSustainabilityData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
 
                                     <!-- Economic and Financial Sustainability Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-cash-coin mr-3 text-secondary-300"></i>
                                                 Economic and Financial Sustainability Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getEconomicFinancialSustainabilityDataItemsDecommissioning(project.stages.decommissioning.economicAndFinancialSustainabilityData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getEconomicFinancialSustainabilityDataItemsDecommissioning(project.stages.decommissioning.economicAndFinancialSustainabilityData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi bi-graph-down-arrow mr-2 text-lg text-accent6"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.decommissioning.economicAndFinancialSustainabilityData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.decommissioning.economicAndFinancialSustainabilityData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
                                     <!-- Institutional Sustainability Data Section -->
                                     <!-- Institutional Sustainability Data Section -->
-                                    <section class="bg-primary-100 mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
+                                    <section
+                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
                                         <div class="p-6 sm:p-8">
                                             <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
                                                 <i class="bi bi-building-fill mr-3 text-accent6"></i>
                                                 Institutional Sustainability Data
                                             </h3>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300" *ngFor="let item of getInstitutionalSustainabilityDataItemsDecommissioning(project.stages.decommissioning.institutionalSustainabilityData) | keyvalue">
+                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+                                                     *ngFor="let item of getInstitutionalSustainabilityDataItemsDecommissioning(project.stages.decommissioning.institutionalSustainabilityData) | keyvalue">
                                                     <div class="flex items-center mb-2">
                                                         <i class="bi mr-2 text-lg" [ngClass]="{
                         'bi-file-earmark-text-fill text-accent5': item.key.includes('Requests'),
                         'bi-chat-square-text-fill text-accent4': item.key.includes('Answers')
                     }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{item.key}}</p>
+                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
                                                     </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{item.value}}</p>
+                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
                                                 </div>
                                             </div>
-                                            <app-attachment-list [attachments]="project.stages.decommissioning.institutionalSustainabilityData.attachments" class="mt-8"></app-attachment-list>
+                                            <app-attachment-list
+                                                    [attachments]="project.stages.decommissioning.institutionalSustainabilityData.attachments"
+                                                    class="mt-8"></app-attachment-list>
                                         </div>
                                     </section>
                                 </div>
@@ -1767,11 +1986,13 @@
                                  role="dialog"
                                  aria-labelledby="decommissioningModalTitle"
                                  aria-modal="true">
-                                <div class="bg-white dark:bg-accent3 rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
+                                <div class="bg-white   rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
                                      (click)="$event.stopPropagation()">
                                     <div class="p-6 space-y-6">
                                         <div class="flex justify-between items-center">
-                                            <h2 id="decommissioningModalTitle" class="text-2xl font-bold text-accent3 dark:text-primary">Decommissioning Phase Data Guide</h2>
+                                            <h2 id="decommissioningModalTitle"
+                                                class="text-2xl font-bold text-accent3 dark:text-primary">
+                                                Decommissioning Phase Data Guide</h2>
                                             <button (click)="closeDecommissioningModal()"
                                                     class="text-accent4 hover:text-accent3 dark:text-primary dark:hover:text-accent1 transition-colors duration-200"
                                                     aria-label="Close modal">
@@ -1780,21 +2001,24 @@
                                         </div>
                                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                             <div class="space-y-6 overflow-y-auto max-h-[calc(90vh-12rem)]">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data Point Explanations</h3>
+                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data
+                                                    Point Explanations</h3>
                                                 <ng-container *ngFor="let section of getSectionsDecommissioning()">
                                                     <div *ngIf="decommissioningStructure && decommissioningStructure[section]"
                                                          class="mb-6 animate-apple-fade-in"
                                                          [style.animation-delay]="(getSectionsDecommissioning().indexOf(section) * 100) + 'ms'">
                                                         <h4 class="text-lg font-medium text-accent3 dark:text-primary mb-3">{{ section | formatSectionTitle }}</h4>
-                                                        <ng-container *ngIf="isObject(decommissioningStructure[section])">
+                                                        <ng-container
+                                                                *ngIf="isObject(decommissioningStructure[section])">
                                                             <div *ngFor="let key of getOrderedKeysDecommissioning(section)"
-                                                                 class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
+                                                                 class="bg-accent2   p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
                                                                 <h5 class="font-medium text-accent3 dark:text-primary mb-2">{{ key }}</h5>
                                                                 <p class="text-sm text-accent4 dark:text-accent2">{{ getExplanationDecommissioning(key) }}</p>
                                                             </div>
                                                         </ng-container>
-                                                        <ng-container *ngIf="!isObject(decommissioningStructure[section])">
-                                                            <div class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md mb-3">
+                                                        <ng-container
+                                                                *ngIf="!isObject(decommissioningStructure[section])">
+                                                            <div class="bg-accent2   p-4 rounded-apple-md mb-3">
                                                                 <p class="text-sm text-accent4 dark:text-accent2">{{ decommissioningStructure[section] }}</p>
                                                             </div>
                                                         </ng-container>
@@ -1802,9 +2026,11 @@
                                                 </ng-container>
                                             </div>
                                             <div class="space-y-6">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON Structure</h3>
-                                                <div class="bg-accent2 dark:bg-accent4 p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
-                                                    <app-json-viewer [json]="decommissioningStructure"></app-json-viewer>
+                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON
+                                                    Structure</h3>
+                                                <div class="bg-accent2   p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
+                                                    <app-json-viewer
+                                                            [json]="decommissioningStructure"></app-json-viewer>
                                                 </div>
                                             </div>
                                         </div>
@@ -1812,16 +2038,6 @@
                                 </div>
                             </div>
                         </ng-container>
-
-
-
-
-
-
-
-
-
-
 
 
                     </ng-container>

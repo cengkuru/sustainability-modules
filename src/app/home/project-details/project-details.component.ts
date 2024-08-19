@@ -9,6 +9,7 @@ import { AttachmentListComponent } from "./attachment-list/attachment-list.compo
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {FormatSectionTitlePipe} from "../../pipes/format-section-title.pipe";
 import {JsonViewerComponent} from "../../shared/components/json-viewer/json-viewer.component";
+import {DataItemComponent} from "../../shared/components/data-item/data-item.component";
 
 @Component({
     selector: 'app-project-details',
@@ -20,7 +21,8 @@ import {JsonViewerComponent} from "../../shared/components/json-viewer/json-view
         HttpClientModule,
         AttachmentListComponent,
         FormatSectionTitlePipe,
-        JsonViewerComponent
+        JsonViewerComponent,
+        DataItemComponent
 
     ],
     templateUrl: './project-details.component.html',

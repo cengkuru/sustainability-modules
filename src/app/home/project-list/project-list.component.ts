@@ -13,7 +13,10 @@ import { heroMagnifyingGlass, heroArrowRight, heroMapPin } from "@ng-icons/heroi
 @Component({
     selector: 'app-project-list',
     standalone: true,
-    imports: [CommonModule, RouterLink, IntersectionObserverDirective, NgIconComponent],
+    imports: [
+        CommonModule,
+        RouterLink,
+        IntersectionObserverDirective, NgIconComponent],
     templateUrl: './project-list.component.html',
     styleUrls: ['./project-list.component.scss'],
     animations: [
@@ -114,5 +117,9 @@ export class ProjectListComponent implements OnInit {
 
     toggleFeatured(): void {
         this.showFeatured.next(!this.showFeatured.value);
+    }
+
+    onProjectInView(project: any): void {
+        project.inView = true;
     }
 }
