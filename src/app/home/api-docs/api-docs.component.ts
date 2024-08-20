@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { ApiEndpoint } from "../../models/api-endpoint.model";
 import { ApiService } from "../../services/api.service";
 import { CommonModule } from "@angular/common";
@@ -40,11 +40,14 @@ export class ApiDocsComponent implements OnInit {
     activeEndpoint: string = '';
     searchTerm: string = '';
     isSidebarOpen: boolean = false;
+    isDarkMode: boolean = false;
+    showApiInfoModal: boolean = false;
 
-    constructor(private apiService: ApiService) {}
+    constructor(private apiService: ApiService, private renderer: Renderer2) {}
 
     ngOnInit(): void {
         this.loadApiEndpoints();
+        this.initializeDarkMode();
     }
 
     loadApiEndpoints(): void {
@@ -57,7 +60,7 @@ export class ApiDocsComponent implements OnInit {
             },
             (error) => {
                 console.error('Error fetching API endpoints:', error);
-                // Handle error (e.g., show error message to user)
+                // TODO: Implement error handling (e.g., show error message to user)
             }
         );
     }
@@ -71,6 +74,26 @@ export class ApiDocsComponent implements OnInit {
 
     toggleSidebar(): void {
         this.isSidebarOpen = !this.isSidebarOpen;
+    }
+
+    toggleDarkMode(): void {
+        this.isDarkMode = !this.isDarkMode;
+        localStorage.setItem('darkMode', this.isDarkMode.toString());
+        this.updateDarkMode();
+    }
+
+    initializeDarkMode(): void {
+        const savedDarkMode = localStorage.getItem('darkMode');
+        this.isDarkMode = savedDarkMode === 'true';
+        this.updateDarkMode();
+    }
+
+    updateDarkMode(): void {
+        if (this.isDarkMode) {
+            this.renderer.addClass(document.body, 'dark');
+        } else {
+            this.renderer.removeClass(document.body, 'dark');
+        }
     }
 
     get filteredEndpoints(): ApiEndpoint[] {
@@ -88,4 +111,26 @@ export class ApiDocsComponent implements OnInit {
             )
         );
     }
+
+    copyToClipboard(text: string | undefined): void {
+        if (text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // TODO: Show a brief success message to the user
+                console.log('Text copied to clipboard');
+            }, (err) => {
+                console.error('Could not copy text: ', err);
+            });
+        } else {
+            console.warn('Attempted to copy undefined text');
+        }
+    }
+
+    getCopyableText(text: string | undefined): string {
+        return text || 'N/A';
+    }
+
+    toggleApiInfoModal(): void {
+        this.showApiInfoModal = !this.showApiInfoModal;
+    }
+
 }
