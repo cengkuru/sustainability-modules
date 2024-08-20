@@ -7,8 +7,6 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { EmailService } from "../services/email.service";
 import { IntersectionObserverDirective } from "../../directives/intersection-observer.directive";
-import { NgIconComponent, provideIcons } from "@ng-icons/core";
-import { heroMagnifyingGlass, heroArrowRight, heroMapPin } from "@ng-icons/heroicons/outline";
 
 @Component({
     selector: 'app-project-list',
@@ -16,7 +14,8 @@ import { heroMagnifyingGlass, heroArrowRight, heroMapPin } from "@ng-icons/heroi
     imports: [
         CommonModule,
         RouterLink,
-        IntersectionObserverDirective, NgIconComponent],
+        IntersectionObserverDirective
+    ],
     templateUrl: './project-list.component.html',
     styleUrls: ['./project-list.component.scss'],
     animations: [
@@ -45,11 +44,6 @@ import { heroMagnifyingGlass, heroArrowRight, heroMapPin } from "@ng-icons/heroi
             ]),
         ]),
     ],
-    providers: [provideIcons({
-        heroMagnifyingGlass,
-        heroArrowRight,
-        heroMapPin
-    })],
 })
 export class ProjectListComponent implements OnInit {
     projects$: Observable<any[]> | undefined;
@@ -57,8 +51,18 @@ export class ProjectListComponent implements OnInit {
     totalValueOfProjects$: Observable<number> | undefined;
     searchTerm = new BehaviorSubject<string>('');
     showFeatured = new BehaviorSubject<boolean>(false);
+    selectedSectors = new BehaviorSubject<string[]>([]);
+    selectedStatus = new BehaviorSubject<string>('');
+    sortOption = new BehaviorSubject<string>('name');
 
+    sectors: string[] = ['Transportation', 'Energy', 'Water', 'Healthcare', 'Education'];
     isLoading: boolean = true;
+    showModal: boolean = false;
+
+    // Pagination
+    currentPage = 1;
+    pageSize = 10;
+    totalPages = 1;
 
     constructor(
         private firestore: AngularFirestore,
@@ -75,19 +79,37 @@ export class ProjectListComponent implements OnInit {
 
         this.projects$ = combineLatest([
             this.searchTerm.pipe(debounceTime(300), distinctUntilChanged()),
-            this.showFeatured
+            this.showFeatured,
+            this.selectedSectors,
+            this.selectedStatus,
+            this.sortOption
         ]).pipe(
-            switchMap(([term, showFeatured]) => {
+            switchMap(([term, showFeatured, sectors, status, sortBy]) => {
                 return this.firestore.collection('projects').snapshotChanges().pipe(
                     map(actions => actions.map(a => {
                         const data = a.payload.doc.data() as any;
                         const id = a.payload.doc.id;
-                        this.isLoading = false;
                         return { id, ...data };
                     }).filter(project =>
                         (!term || project.name.toLowerCase().includes(term.toLowerCase())) &&
-                        (!showFeatured || project.featured)
-                    ))
+                        (!showFeatured || project.featured) &&
+                        (sectors.length === 0 || sectors.includes(project.stages.identification.basicData.sectorSubsector)) &&
+                        (!status || project.status === status)
+                    )),
+                    map(projects => {
+                        // Sort projects
+                        projects.sort((a, b) => {
+                            if (sortBy === 'name') return a.name.localeCompare(b.name);
+                            if (sortBy === 'budget') return a.stages.preparation.basicData.projectBudget - b.stages.preparation.basicData.projectBudget;
+                            if (sortBy === 'date') return new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
+                            return 0;
+                        });
+
+                        this.isLoading = false;
+                        this.totalPages = Math.ceil(projects.length / this.pageSize);
+                        const startIndex = (this.currentPage - 1) * this.pageSize;
+                        return projects.slice(startIndex, startIndex + this.pageSize);
+                    })
                 );
             })
         );
@@ -119,7 +141,46 @@ export class ProjectListComponent implements OnInit {
         this.showFeatured.next(!this.showFeatured.value);
     }
 
+    toggleSector(sector: string): void {
+        const currentSectors = this.selectedSectors.value;
+        const updatedSectors = currentSectors.includes(sector)
+            ? currentSectors.filter(s => s !== sector)
+            : [...currentSectors, sector];
+        this.selectedSectors.next(updatedSectors);
+        this.applyFilters();
+    }
+
+    onStatusChange(event: Event): void {
+        const target = event.target as HTMLSelectElement;
+        this.selectedStatus.next(target.value);
+        this.applyFilters();
+    }
+
+    onSortChange(event: Event): void {
+        const target = event.target as HTMLSelectElement;
+        this.sortOption.next(target.value);
+        this.applyFilters();
+    }
+
+    applyFilters(): void {
+        this.currentPage = 1; // Reset to first page when applying filters
+    }
+
     onProjectInView(project: any): void {
         project.inView = true;
+    }
+
+    toggleModal(): void {
+        this.showModal = !this.showModal;
+    }
+
+    changePage(newPage: number): void {
+        if (newPage >= 1 && newPage <= this.totalPages) {
+            this.currentPage = newPage;
+        }
+    }
+
+    isSectorSelected(sector: string): boolean {
+        return this.selectedSectors.value.includes(sector);
     }
 }

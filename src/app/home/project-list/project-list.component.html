@@ -5,71 +5,231 @@
     </div>
 
     <div class="container mx-auto py-8">
-        <h1 class="text-4xl font-bold text-accent mb-8 text-center animate-apple-fade-in">Projects</h1>
+        <h1 class="text-4xl font-bold text-accent mb-8 text-center animate-apple-fade-in">Infrastructure Projects</h1>
 
-        <div class="max-w-2xl mx-auto mb-12 animate-apple-fade-in">
-            <div class="relative mb-8 group">
-                <input
-                        type="text"
-                        class="w-full px-4 py-3 pl-12 rounded-apple bg-primary shadow-apple-inner border-none focus:outline-none focus:ring-2 focus:ring-accent6 transition-all duration-250 ease-apple text-accent placeholder-accent4"
-                        placeholder="Search projects..."
-                        (input)="onSearchChange($event)"
-                />
-                <ng-icon name="heroMagnifyingGlass" class="w-6 h-6 text-accent4 absolute left-4 top-1/2 transform -translate-y-1/2 transition-all duration-250 group-hover:text-accent6"></ng-icon>
-            </div>
-
-            <div class="flex justify-center">
-                <div class="inline-flex rounded-apple-full bg-primary shadow-apple-md p-1">
-                    <button
-                            (click)="toggleFeatured()"
-                            [class.bg-accent6]="!(showFeatured | async)"
-                            [class.text-primary]="!(showFeatured | async)"
-                            [class.shadow-apple-inner]="!(showFeatured | async)"
-                            class="px-6 py-2 rounded-apple-full text-sm font-medium transition-all duration-250 ease-apple apple-press-effect"
-                    >
-                        All Projects
-                    </button>
-                    <button
-                            (click)="toggleFeatured()"
-                            [class.bg-accent6]="showFeatured | async"
-                            [class.text-primary]="showFeatured | async"
-                            [class.shadow-apple-inner]="showFeatured | async"
-                            class="px-6 py-2 rounded-apple-full text-sm font-medium transition-all duration-250 ease-apple apple-press-effect"
-                    >
-                        Featured
-                    </button>
-                </div>
-            </div>
+        <div class="flex justify-between items-center mb-6">
+            <a href="/bulk-download" class="flex items-center text-accent6 hover:text-accent5 transition-colors duration-250 apple-hover-lift">
+                <i class="bi bi-download mr-2"></i>
+                Bulk Download
+            </a>
+            <button (click)="toggleModal()" class="flex items-center bg-accent6 text-primary px-4 py-2 rounded-apple shadow-apple-md hover:bg-accent5 transition-colors duration-250 apple-hover-lift">
+                <i class="bi bi-info-circle mr-2"></i>
+                OC4IDS Best Practices
+            </button>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" @listAnimation>
-            <div *ngFor="let project of projects$ | async; let i = index"
-                 class="relative overflow-hidden rounded-apple bg-primary shadow-apple-md transition-all duration-300 ease-apple transform hover:-translate-y-1 hover:shadow-apple-lg group apple-hover-lift"
-                 [style.animation-delay]="i * 50 + 'ms'">
-                <div class="p-6">
-                    <a [routerLink]="['/public/projects', project.id]" class="block">
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-xl font-semibold text-accent group-hover:text-accent6 transition-colors duration-250 ease-apple">{{ project.name }}</h3>
-                            <ng-icon name="heroArrowRight" class="w-6 h-6 text-accent4 group-hover:text-accent6 transition-all duration-250 ease-apple transform group-hover:translate-x-1"></ng-icon>
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <!-- Filters Aside -->
+            <aside class="lg:col-span-1">
+                <div class="bg-primary rounded-apple shadow-apple-md p-6 sticky top-6">
+                    <h2 class="text-xl font-semibold mb-4">Filters</h2>
+
+                    <div class="mb-4">
+                        <label for="search" class="block text-sm font-medium text-accent mb-1">Search Projects</label>
+                        <div class="relative">
+                            <input
+                                    id="search"
+                                    type="text"
+                                    class="w-full pl-10 pr-3 py-2 rounded-apple bg-primary shadow-apple-inner border-none focus:outline-none focus:ring-2 focus:ring-accent6 transition-all duration-250 ease-apple text-accent placeholder-accent4"
+                                    placeholder="Search..."
+                                    (input)="onSearchChange($event)"
+                            />
+                            <i class="bi bi-search absolute left-3 top-1/2 transform -translate-y-1/2 text-accent4 transition-colors duration-250" [class.text-accent6]="searchTerm"></i>
                         </div>
-                        <p class="text-sm mb-4 text-accent4 flex items-center">
-                            <ng-icon name="heroMapPin" class="w-4 h-4 mr-1 text-accent6"></ng-icon>
-                            {{ project.location.name }}
-                        </p>
-                        <p class="text-accent text-opacity-80 line-clamp-3">{{ project.stages.identification.basicData.projectDescription }}</p>
-                    </a>
-                    <div *ngIf="project.featured" class="absolute top-4 right-4 animate-apple-pulse">
-                        <span class="bg-accent5 text-accent text-xs font-semibold px-3 py-1 rounded-apple-full shadow-apple-sm">
-                            Featured
-                        </span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="flex items-center group cursor-pointer">
+                            <input
+                                    type="checkbox"
+                                    class="form-checkbox text-accent6 transition-colors duration-250 rounded focus:ring-2 focus:ring-offset-2 focus:ring-accent6 focus:outline-none"
+                                    [checked]="showFeatured | async"
+                                    (change)="toggleFeatured()"
+                            />
+                            <span class="ml-2 transition-colors duration-250 group-hover:text-accent6">Featured Projects</span>
+                        </label>
+                    </div>
+
+                    <div class="mb-4">
+                        <h3 class="font-semibold mb-2">Sectors</h3>
+                        <div *ngFor="let sector of sectors" class="flex items-center mb-2">
+                            <label class="flex items-center group cursor-pointer">
+                                <input
+                                        type="checkbox"
+                                        class="form-checkbox text-accent6 transition-colors duration-250 rounded focus:ring-2 focus:ring-offset-2 focus:ring-accent6 focus:outline-none"
+                                        [checked]="isSectorSelected(sector)"
+                                        (change)="toggleSector(sector)"
+                                />
+                                <span class="ml-2 transition-colors duration-250 group-hover:text-accent6">{{ sector }}</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="font-semibold mb-2">Project Status</h3>
+                        <select
+                                class="w-full px-3 py-2 rounded-apple bg-primary shadow-apple-inner border-none focus:outline-none focus:ring-2 focus:ring-accent6 transition-all duration-250 ease-apple text-accent"
+                                (change)="onStatusChange($event)"
+                        >
+                            <option value="">All Statuses</option>
+                            <option value="planning">Planning</option>
+                            <option value="implementation">Implementation</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+
+                    <button
+                            class="w-full px-4 py-2 bg-accent6 text-primary rounded-apple shadow-apple-md font-medium transition-all duration-250 ease-apple hover:bg-accent5 hover:shadow-apple-lg"
+                            (click)="applyFilters()"
+                    >
+                        Apply Filters
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="lg:col-span-3">
+                <div class="mb-4 flex justify-between items-center">
+                    <p class="text-accent text-sm">Showing {{ (projects$ | async)?.length || 0 }} of {{ totalProjects$ | async }} projects</p>
+                    <div class="flex items-center">
+                        <label for="sort" class="mr-2 text-accent">Sort by:</label>
+                        <select
+                                id="sort"
+                                class="px-3 py-2 rounded-apple bg-primary shadow-apple-inner border-none focus:outline-none focus:ring-2 focus:ring-accent6 transition-all duration-250 ease-apple text-accent"
+                                (change)="onSortChange($event)"
+                        >
+                            <option value="name">Name</option>
+                            <option value="budget">Budget</option>
+                            <option value="date">Start Date</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="space-y-4" @listAnimation>
+                    <div *ngFor="let project of projects$ | async; let i = index"
+                         class="relative overflow-hidden rounded-apple bg-primary shadow-apple-md transition-all duration-300 ease-apple hover:shadow-apple-lg group apple-hover-lift"
+                         [style.animation-delay]="i * 50 + 'ms'">
+                        <div class="p-6">
+                            <a [routerLink]="['/public/projects', project.id]" class="block">
+                                <div class="flex justify-between items-center mb-2">
+                                    <h3 class="text-xl font-semibold text-accent group-hover:text-accent6 transition-colors duration-250 ease-apple">{{ project.name }}</h3>
+                                    <i class="bi bi-arrow-right text-accent4 group-hover:text-accent6 transition-all duration-250 ease-apple transform group-hover:translate-x-1"></i>
+                                </div>
+                                <p class="text-sm mb-2 text-accent4 flex items-center">
+                                    <i class="bi bi-geo-alt-fill mr-1.5 text-accent6"></i>
+                                    {{ project.location.name }}
+                                </p>
+                                <p class="text-accent text-opacity-80 line-clamp-2">{{ project.stages.identification.basicData.projectDescription }}</p>
+                                <div class="mt-4 grid grid-cols-2 gap-2">
+                                    <div class="flex items-center text-sm text-accent4">
+                                        <i class="bi bi-grid-fill mr-1.5 text-accent6"></i>
+                                        {{ project.stages.identification.basicData.sectorSubsector }}
+                                    </div>
+                                    <div class="flex items-center justify-end text-sm font-semibold text-accent6">
+                                        <i class="bi bi-cash-coin mr-1.5"></i>
+                                        {{ project.stages.preparation.basicData.projectBudget | currency }}
+                                    </div>
+                                    <div class="flex items-center text-sm text-accent4 col-span-2">
+                                        <i class="bi bi-info-circle-fill mr-1.5 text-accent6"></i>
+                                        {{ project.status | titlecase }}
+                                    </div>
+                                </div>
+                            </a>
+                            <div *ngIf="project.featured" class="absolute top-4 right-4 animate-apple-pulse">
+                                <span class="bg-accent5 text-accent text-xs font-semibold px-3 py-1 rounded-apple-full shadow-apple-sm">
+                                    Featured
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="flex justify-center mt-8">
+                    <button
+                            *ngFor="let page of [].constructor(totalPages); let i = index"
+                            (click)="changePage(i + 1)"
+                            [class.bg-accent6]="currentPage === i + 1"
+                            [class.text-primary]="currentPage === i + 1"
+                            [class.shadow-apple-md]="currentPage === i + 1"
+                            class="mx-1 px-3 py-1 rounded-full transition-colors duration-250 ease-apple hover:bg-accent5 hover:text-primary hover:shadow-apple-md"
+                    >
+                        {{ i + 1 }}
+                    </button>
+                </div>
+            </main>
+        </div>
+
+        <div class="mt-12 text-center animate-apple-fade-in">
+            <p class="text-lg text-accent mb-2">Total Projects: <span class="font-semibold">{{ totalProjects$ | async }}</span></p>
+            <p class="text-lg text-accent">Total Value: <span class="font-semibold">{{ totalValueOfProjects$ | async | currency }}</span></p>
+        </div>
+    </div>
+</div><!-- Tailwind CSS Modal -->
+<div *ngIf="showModal" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="sm:flex sm:items-start">
+                    <div class="text-center sm:mt-0 sm:text-left">
+                        <h3 class="text-lg leading-6 font-medium text-accent mb-4 flex items-center" id="modal-title">
+                            <i class="bi bi-info-circle-fill text-accent mr-2"></i> Best Practices for OC4IDS Project Information
+                        </h3>
+                        <div class="mt-2">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <h4 class="text-accent font-semibold mb-2">Project Stages and Details</h4>
+                                    <ul class="list-disc pl-5 text-sm text-gray-500 space-y-1">
+                                        <li>Ensure all project stages are documented</li>
+                                        <li>Provide detailed information on project scope, budget, and timeline</li>
+                                        <li>Include relevant documents and attachments for each stage</li>
+                                        <li>Use standardized sector classifications</li>
+                                        <li>Regularly update project information to maintain accuracy</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="text-accent font-semibold mb-2">Data and Transparency</h4>
+                                    <ul class="list-disc pl-5 text-sm text-gray-500 space-y-1">
+                                        <li>Include geographical data for project locations</li>
+                                        <li>Provide information on environmental and social impact assessments</li>
+                                        <li>Include details on procurement processes and contract awards</li>
+                                        <li>Document any project variations or changes</li>
+                                        <li>Ensure data is machine-readable and follows OC4IDS schema</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <h4 class="text-accent font-semibold mb-2">User Experience and Interaction</h4>
+                                <ul class="list-disc pl-5 text-sm text-gray-500 columns-2 gap-4">
+                                    <li>Organize information by project stages</li>
+                                    <li>Use simple, jargon-free language</li>
+                                    <li>Implement filters for easy project discovery</li>
+                                    <li>Include robust search functionality</li>
+                                    <li>Use pagination or infinite scrolling for long project lists</li>
+                                    <li>Display count of projects matching current filters</li>
+                                    <li>Offer bulk and individual project data downloads</li>
+                                    <li>Utilize maps, charts, and graphs for data visualization</li>
+                                    <li>Provide direct links to key project documents</li>
+                                    <li>Show audit trails of project updates for accountability</li>
+                                    <li>Ensure responsive design across devices</li>
+                                    <li>Adhere to web accessibility guidelines</li>
+                                    <li>Implement real-time or frequent data updates</li>
+                                    <li>Include user feedback and issue reporting mechanisms</li>
+                                    <li>Provide user guides, tutorials, and FAQs</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button type="button" (click)="toggleModal()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-accent6 text-base font-medium text-white hover:bg-accent5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent6 sm:ml-3 sm:w-auto sm:text-sm">
+                    Close
+                </button>
+            </div>
         </div>
-    </div>
-
-    <div class="mt-12 text-center animate-apple-fade-in">
-        <p class="text-lg text-accent mb-2">Total Projects: <span class="font-semibold">{{ totalProjects$ | async }}</span></p>
-        <p class="text-lg text-accent">Total Value: <span class="font-semibold">{{ totalValueOfProjects$ | async | currency }}</span></p>
     </div>
 </div>
