@@ -435,54 +435,51 @@
 
                             <!-- Identification Data Modal -->
                             <div *ngIf="showIdentificationModal"
-                                 class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center overflow-auto"
+                                 class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center overflow-auto animate-apple-fade-in"
                                  (click)="closeModalOnOverlayClick($event)"
                                  role="dialog"
                                  aria-labelledby="modalTitle"
                                  aria-modal="true">
-                                <div class="bg-white   rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
+                                <div class="bg-white dark:bg-accent3 rounded-apple-xl w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-2xl transform transition-all duration-300 scale-100 hover:scale-[1.01]"
                                      (click)="$event.stopPropagation()">
-                                    <div class="p-6 space-y-6">
+                                    <div class="p-8 space-y-8">
                                         <div class="flex justify-between items-center">
                                             <h2 id="modalTitle"
-                                                class="text-2xl font-bold text-accent3 dark:text-primary">Identification
-                                                Phase Data Guide</h2>
+                                                class="text-3xl font-semibold text-accent apple-gradient-text">Identification Phase Data Guide</h2>
                                             <button (click)="closeIdentificationModal()"
-                                                    class="text-accent4 hover:text-accent3 dark:text-primary dark:hover:text-accent1 transition-colors duration-200"
+                                                    class="text-accent4 hover:text-accent3 dark:text-primary dark:hover:text-accent1 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent6 rounded-full"
                                                     aria-label="Close modal">
-                                                <i class="bi bi-x-lg text-2xl"></i>
+                                                <i class="bi bi-x-lg text-3xl"></i>
                                             </button>
                                         </div>
-                                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                                            <div class="space-y-6 overflow-y-auto max-h-[calc(90vh-12rem)]">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data
-                                                    Point Explanations</h3>
+                                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                                            <div class="space-y-8 overflow-y-auto max-h-[calc(90vh-16rem)] pr-4"
+                                                 style="scrollbar-width: thin; scrollbar-color: #61a8bd #f7f7f7;">
+                                                <h3 class="text-2xl font-semibold text-accent3 dark:text-primary">Data Point Explanations</h3>
                                                 <ng-container *ngFor="let section of getSections()">
                                                     <div *ngIf="identificationStructure && identificationStructure[section]"
-                                                         class="mb-6 animate-apple-fade-in"
+                                                         class="mb-8 animate-apple-fade-in"
                                                          [style.animation-delay]="(getSections().indexOf(section) * 100) + 'ms'">
-                                                        <h4 class="text-lg font-medium text-accent3 dark:text-primary mb-3">{{ section | formatSectionTitle }}</h4>
-                                                        <ng-container
-                                                                *ngIf="isObject(identificationStructure[section])">
+                                                        <h4 class="text-xl font-medium text-accent3 dark:text-primary mb-4">{{ section | formatSectionTitle }}</h4>
+                                                        <ng-container *ngIf="isObject(identificationStructure[section])">
                                                             <div *ngFor="let key of getOrderedKeys(section)"
-                                                                 class="bg-accent2   p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
-                                                                <h5 class="font-medium text-accent3 dark:text-primary mb-2">{{ key }}</h5>
-                                                                <p class="text-sm text-accent4 dark:text-accent2">{{ getExplanation(key) }}</p>
+                                                                 class="bg-accent2 dark:bg-accent4 p-5 rounded-apple-lg mb-4 transition-all duration-300 hover:shadow-apple-xl group">
+                                                                <h5 class="font-medium text-accent-900 dark:text-primary mb-2 transition-colors duration-300 group-hover:text-accent1">{{ key }}</h5>
+                                                                <p class="text-base text-accent-700 dark:text-accent2 transition-colors duration-300 group-hover:text-primary">{{ getExplanation(key) }}</p>
                                                             </div>
                                                         </ng-container>
-                                                        <ng-container
-                                                                *ngIf="!isObject(identificationStructure[section])">
-                                                            <div class="bg-accent2   p-4 rounded-apple-md mb-3">
-                                                                <p class="text-sm text-accent4 dark:text-accent2">{{ identificationStructure[section] }}</p>
+                                                        <ng-container *ngIf="!isObject(identificationStructure[section])">
+                                                            <div class="bg-accent2 dark:bg-accent4 p-5 rounded-apple-lg mb-4">
+                                                                <p class="text-base text-accent-700 dark:text-accent2">{{ identificationStructure[section] }}</p>
                                                             </div>
                                                         </ng-container>
                                                     </div>
                                                 </ng-container>
                                             </div>
-                                            <div class="space-y-6">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON
-                                                    Structure</h3>
-                                                <div class="bg-accent2   p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
+                                            <div class="space-y-8">
+                                                <h3 class="text-2xl font-semibold text-accent3 dark:text-primary">JSON Structure</h3>
+                                                <div class="bg-accent2 dark:bg-accent4 p-6 rounded-apple-lg overflow-y-auto max-h-[calc(90vh-20rem)]"
+                                                     style="scrollbar-width: thin; scrollbar-color: #61a8bd #f7f7f7;">
                                                     <app-json-viewer [json]="identificationStructure"></app-json-viewer>
                                                 </div>
                                             </div>
@@ -704,52 +701,51 @@
 
                             <!-- Preparation Data Modal -->
                             <div *ngIf="showPreparationModal"
-                                 class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center overflow-auto"
+                                 class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center overflow-auto animate-apple-fade-in"
                                  (click)="closeModalOnOverlayClick($event)"
                                  role="dialog"
                                  aria-labelledby="prepModalTitle"
                                  aria-modal="true">
-                                <div class="bg-white   rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
+                                <div class="bg-white dark:bg-accent3 rounded-apple-xl w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-2xl transform transition-all duration-300 scale-100 hover:scale-[1.01]"
                                      (click)="$event.stopPropagation()">
-                                    <div class="p-6 space-y-6">
+                                    <div class="p-8 space-y-8">
                                         <div class="flex justify-between items-center">
                                             <h2 id="prepModalTitle"
-                                                class="text-2xl font-bold text-accent3 dark:text-primary">Preparation
-                                                Phase Data Guide</h2>
+                                                class="text-3xl font-semibold text-accent apple-gradient-text">Preparation Phase Data Guide</h2>
                                             <button (click)="closePreparationModal()"
-                                                    class="text-accent4 hover:text-accent3 dark:text-primary dark:hover:text-accent1 transition-colors duration-200"
+                                                    class="text-accent4 hover:text-accent3 dark:text-primary dark:hover:text-accent1 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent6 rounded-full"
                                                     aria-label="Close modal">
-                                                <i class="bi bi-x-lg text-2xl"></i>
+                                                <i class="bi bi-x-lg text-3xl"></i>
                                             </button>
                                         </div>
-                                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                                            <div class="space-y-6 overflow-y-auto max-h-[calc(90vh-12rem)]">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data
-                                                    Point Explanations</h3>
+                                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                                            <div class="space-y-8 overflow-y-auto max-h-[calc(90vh-16rem)] pr-4"
+                                                 style="scrollbar-width: thin; scrollbar-color: #61a8bd #f7f7f7;">
+                                                <h3 class="text-2xl font-semibold text-accent3 dark:text-primary">Data Point Explanations</h3>
                                                 <ng-container *ngFor="let section of getSectionsPreparation()">
                                                     <div *ngIf="preparationStructure && preparationStructure[section]"
-                                                         class="mb-6 animate-apple-fade-in"
+                                                         class="mb-8 animate-apple-fade-in"
                                                          [style.animation-delay]="(getSectionsPreparation().indexOf(section) * 100) + 'ms'">
-                                                        <h4 class="text-lg font-medium text-accent3 dark:text-primary mb-3">{{ section | formatSectionTitle }}</h4>
+                                                        <h4 class="text-xl font-medium text-accent3 dark:text-primary mb-4">{{ section | formatSectionTitle }}</h4>
                                                         <ng-container *ngIf="isObject(preparationStructure[section])">
                                                             <div *ngFor="let key of getOrderedKeysPreparation(section)"
-                                                                 class="bg-accent2   p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
-                                                                <h5 class="font-medium text-accent3 dark:text-primary mb-2">{{ key }}</h5>
-                                                                <p class="text-sm text-accent4 dark:text-accent2">{{ getExplanationPreparation(key) }}</p>
+                                                                 class="bg-accent2 dark:bg-accent4 p-5 rounded-apple-lg mb-4 transition-all duration-300 hover:shadow-apple-xl group">
+                                                                <h5 class="font-medium text-accent-900 dark:text-primary mb-2 transition-colors duration-300 group-hover:text-accent1">{{ key }}</h5>
+                                                                <p class="text-base text-accent-700 dark:text-accent2 transition-colors duration-300 group-hover:text-primary">{{ getExplanationPreparation(key) }}</p>
                                                             </div>
                                                         </ng-container>
                                                         <ng-container *ngIf="!isObject(preparationStructure[section])">
-                                                            <div class="bg-accent2   p-4 rounded-apple-md mb-3">
-                                                                <p class="text-sm text-accent4 dark:text-accent2">{{ preparationStructure[section] }}</p>
+                                                            <div class="bg-accent2 dark:bg-accent4 p-5 rounded-apple-lg mb-4">
+                                                                <p class="text-base text-accent-700 dark:text-accent2">{{ preparationStructure[section] }}</p>
                                                             </div>
                                                         </ng-container>
                                                     </div>
                                                 </ng-container>
                                             </div>
-                                            <div class="space-y-6">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON
-                                                    Structure</h3>
-                                                <div class="bg-accent2   p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
+                                            <div class="space-y-8">
+                                                <h3 class="text-2xl font-semibold text-accent3 dark:text-primary">JSON Structure</h3>
+                                                <div class="bg-accent2 dark:bg-accent4 p-6 rounded-apple-lg overflow-y-auto max-h-[calc(90vh-20rem)]"
+                                                     style="scrollbar-width: thin; scrollbar-color: #61a8bd #f7f7f7;">
                                                     <app-json-viewer [json]="preparationStructure"></app-json-viewer>
                                                 </div>
                                             </div>
@@ -904,56 +900,52 @@
                             </section>
                             <!-- Tender Management Data Modal -->
                             <div *ngIf="showTenderManagementModal"
-                                 class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center overflow-auto"
+                                 class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center overflow-auto animate-apple-fade-in"
                                  (click)="closeModalOnOverlayClick($event)"
                                  role="dialog"
                                  aria-labelledby="tenderModalTitle"
                                  aria-modal="true">
-                                <div class="bg-white   rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
+                                <div class="bg-white dark:bg-accent3 rounded-apple-xl w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-2xl transform transition-all duration-300 scale-100 hover:scale-[1.01]"
                                      (click)="$event.stopPropagation()">
-                                    <div class="p-6 space-y-6">
+                                    <div class="p-8 space-y-8">
                                         <div class="flex justify-between items-center">
                                             <h2 id="tenderModalTitle"
-                                                class="text-2xl font-bold text-accent3 dark:text-primary">Tender
-                                                Management Phase Data Guide</h2>
+                                                class="text-3xl font-semibold text-accent apple-gradient-text">Tender Management Phase Data Guide</h2>
                                             <button (click)="closeTenderManagementModal()"
-                                                    class="text-accent4 hover:text-accent3 dark:text-primary dark:hover:text-accent1 transition-colors duration-200"
+                                                    class="text-accent4 hover:text-accent3 dark:text-primary dark:hover:text-accent1 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent6 rounded-full"
                                                     aria-label="Close modal">
-                                                <i class="bi bi-x-lg text-2xl"></i>
+                                                <i class="bi bi-x-lg text-3xl"></i>
                                             </button>
                                         </div>
-                                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                                            <div class="space-y-6 overflow-y-auto max-h-[calc(90vh-12rem)]">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data
-                                                    Point Explanations</h3>
+                                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                                            <div class="space-y-8 overflow-y-auto max-h-[calc(90vh-16rem)] pr-4"
+                                                 style="scrollbar-width: thin; scrollbar-color: #61a8bd #f7f7f7;">
+                                                <h3 class="text-2xl font-semibold text-accent3 dark:text-primary">Data Point Explanations</h3>
                                                 <ng-container *ngFor="let section of getSectionsTenderManagement()">
                                                     <div *ngIf="tenderManagementStructure && tenderManagementStructure[section]"
-                                                         class="mb-6 animate-apple-fade-in"
+                                                         class="mb-8 animate-apple-fade-in"
                                                          [style.animation-delay]="(getSectionsTenderManagement().indexOf(section) * 100) + 'ms'">
-                                                        <h4 class="text-lg font-medium text-accent3 dark:text-primary mb-3">{{ section | formatSectionTitle }}</h4>
-                                                        <ng-container
-                                                                *ngIf="isObject(tenderManagementStructure[section])">
+                                                        <h4 class="text-xl font-medium text-accent3 dark:text-primary mb-4">{{ section | formatSectionTitle }}</h4>
+                                                        <ng-container *ngIf="isObject(tenderManagementStructure[section])">
                                                             <div *ngFor="let key of getOrderedKeysTenderManagement(section)"
-                                                                 class="bg-accent2   p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
-                                                                <h5 class="font-medium text-accent3 dark:text-primary mb-2">{{ key }}</h5>
-                                                                <p class="text-sm text-accent4 dark:text-accent2">{{ getExplanationTenderManagement(key) }}</p>
+                                                                 class="bg-accent2 dark:bg-accent4 p-5 rounded-apple-lg mb-4 transition-all duration-300 hover:shadow-apple-xl group">
+                                                                <h5 class="font-medium text-accent-900 dark:text-primary mb-2 transition-colors duration-300 group-hover:text-accent1">{{ key }}</h5>
+                                                                <p class="text-base text-accent-700 dark:text-accent2 transition-colors duration-300 group-hover:text-primary">{{ getExplanationTenderManagement(key) }}</p>
                                                             </div>
                                                         </ng-container>
-                                                        <ng-container
-                                                                *ngIf="!isObject(tenderManagementStructure[section])">
-                                                            <div class="bg-accent2   p-4 rounded-apple-md mb-3">
-                                                                <p class="text-sm text-accent4 dark:text-accent2">{{ tenderManagementStructure[section] }}</p>
+                                                        <ng-container *ngIf="!isObject(tenderManagementStructure[section])">
+                                                            <div class="bg-accent2 dark:bg-accent4 p-5 rounded-apple-lg mb-4">
+                                                                <p class="text-base text-accent-700 dark:text-accent2">{{ tenderManagementStructure[section] }}</p>
                                                             </div>
                                                         </ng-container>
                                                     </div>
                                                 </ng-container>
                                             </div>
-                                            <div class="space-y-6">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON
-                                                    Structure</h3>
-                                                <div class="bg-accent2   p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
-                                                    <app-json-viewer
-                                                            [json]="tenderManagementStructure"></app-json-viewer>
+                                            <div class="space-y-8">
+                                                <h3 class="text-2xl font-semibold text-accent3 dark:text-primary">JSON Structure</h3>
+                                                <div class="bg-accent2 dark:bg-accent4 p-6 rounded-apple-lg overflow-y-auto max-h-[calc(90vh-20rem)]"
+                                                     style="scrollbar-width: thin; scrollbar-color: #61a8bd #f7f7f7;">
+                                                    <app-json-viewer [json]="tenderManagementStructure"></app-json-viewer>
                                                 </div>
                                             </div>
                                         </div>
@@ -1146,54 +1138,51 @@
                             </section>
                             <!-- Implementation Data Modal -->
                             <div *ngIf="showImplementationModal"
-                                 class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center overflow-auto"
+                                 class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center overflow-auto animate-apple-fade-in"
                                  (click)="closeModalOnOverlayClick($event)"
                                  role="dialog"
                                  aria-labelledby="implementationModalTitle"
                                  aria-modal="true">
-                                <div class="bg-white   rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
+                                <div class="bg-white dark:bg-accent3 rounded-apple-xl w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-2xl transform transition-all duration-300 scale-100 hover:scale-[1.01]"
                                      (click)="$event.stopPropagation()">
-                                    <div class="p-6 space-y-6">
+                                    <div class="p-8 space-y-8">
                                         <div class="flex justify-between items-center">
                                             <h2 id="implementationModalTitle"
-                                                class="text-2xl font-bold text-accent3 dark:text-primary">Implementation
-                                                Phase Data Guide</h2>
+                                                class="text-3xl font-semibold text-accent apple-gradient-text">Implementation Phase Data Guide</h2>
                                             <button (click)="closeImplementationModal()"
-                                                    class="text-accent4 hover:text-accent3 dark:text-primary dark:hover:text-accent1 transition-colors duration-200"
+                                                    class="text-accent4 hover:text-accent3 dark:text-primary dark:hover:text-accent1 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent6 rounded-full"
                                                     aria-label="Close modal">
-                                                <i class="bi bi-x-lg text-2xl"></i>
+                                                <i class="bi bi-x-lg text-3xl"></i>
                                             </button>
                                         </div>
-                                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                                            <div class="space-y-6 overflow-y-auto max-h-[calc(90vh-12rem)]">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data
-                                                    Point Explanations</h3>
+                                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                                            <div class="space-y-8 overflow-y-auto max-h-[calc(90vh-16rem)] pr-4"
+                                                 style="scrollbar-width: thin; scrollbar-color: #61a8bd #f7f7f7;">
+                                                <h3 class="text-2xl font-semibold text-accent3 dark:text-primary">Data Point Explanations</h3>
                                                 <ng-container *ngFor="let section of getSectionsImplementation()">
                                                     <div *ngIf="implementationStructure && implementationStructure[section]"
-                                                         class="mb-6 animate-apple-fade-in"
+                                                         class="mb-8 animate-apple-fade-in"
                                                          [style.animation-delay]="(getSectionsImplementation().indexOf(section) * 100) + 'ms'">
-                                                        <h4 class="text-lg font-medium text-accent3 dark:text-primary mb-3">{{ section | formatSectionTitle }}</h4>
-                                                        <ng-container
-                                                                *ngIf="isObject(implementationStructure[section])">
+                                                        <h4 class="text-xl font-medium text-accent3 dark:text-primary mb-4">{{ section | formatSectionTitle }}</h4>
+                                                        <ng-container *ngIf="isObject(implementationStructure[section])">
                                                             <div *ngFor="let key of getOrderedKeysImplementation(section)"
-                                                                 class="bg-accent2   p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
-                                                                <h5 class="font-medium text-accent3 dark:text-primary mb-2">{{ key }}</h5>
-                                                                <p class="text-sm text-accent4 dark:text-accent2">{{ getExplanationImplementation(key) }}</p>
+                                                                 class="bg-accent2 dark:bg-accent4 p-5 rounded-apple-lg mb-4 transition-all duration-300 hover:shadow-apple-xl group">
+                                                                <h5 class="font-medium text-accent-900 dark:text-primary mb-2 transition-colors duration-300 group-hover:text-accent1">{{ key }}</h5>
+                                                                <p class="text-base text-accent-700 dark:text-accent2 transition-colors duration-300 group-hover:text-primary">{{ getExplanationImplementation(key) }}</p>
                                                             </div>
                                                         </ng-container>
-                                                        <ng-container
-                                                                *ngIf="!isObject(implementationStructure[section])">
-                                                            <div class="bg-accent2   p-4 rounded-apple-md mb-3">
-                                                                <p class="text-sm text-accent4 dark:text-accent2">{{ implementationStructure[section] }}</p>
+                                                        <ng-container *ngIf="!isObject(implementationStructure[section])">
+                                                            <div class="bg-accent2 dark:bg-accent4 p-5 rounded-apple-lg mb-4">
+                                                                <p class="text-base text-accent-700 dark:text-accent2">{{ implementationStructure[section] }}</p>
                                                             </div>
                                                         </ng-container>
                                                     </div>
                                                 </ng-container>
                                             </div>
-                                            <div class="space-y-6">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON
-                                                    Structure</h3>
-                                                <div class="bg-accent2   p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
+                                            <div class="space-y-8">
+                                                <h3 class="text-2xl font-semibold text-accent3 dark:text-primary">JSON Structure</h3>
+                                                <div class="bg-accent2 dark:bg-accent4 p-6 rounded-apple-lg overflow-y-auto max-h-[calc(90vh-20rem)]"
+                                                     style="scrollbar-width: thin; scrollbar-color: #61a8bd #f7f7f7;">
                                                     <app-json-viewer [json]="implementationStructure"></app-json-viewer>
                                                 </div>
                                             </div>
@@ -1279,52 +1268,51 @@
                             </section>
                             <!-- Completion Data Modal -->
                             <div *ngIf="showCompletionModal"
-                                 class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center overflow-auto"
+                                 class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center overflow-auto animate-apple-fade-in"
                                  (click)="closeModalOnOverlayClick($event)"
                                  role="dialog"
                                  aria-labelledby="completionModalTitle"
                                  aria-modal="true">
-                                <div class="bg-white   rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
+                                <div class="bg-white dark:bg-accent3 rounded-apple-xl w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-2xl transform transition-all duration-300 scale-100 hover:scale-[1.01]"
                                      (click)="$event.stopPropagation()">
-                                    <div class="p-6 space-y-6">
+                                    <div class="p-8 space-y-8">
                                         <div class="flex justify-between items-center">
                                             <h2 id="completionModalTitle"
-                                                class="text-2xl font-bold text-accent3 dark:text-primary">Completion
-                                                Phase Data Guide</h2>
+                                                class="text-3xl font-semibold text-accent apple-gradient-text">Completion Phase Data Guide</h2>
                                             <button (click)="closeCompletionModal()"
-                                                    class="text-accent4 hover:text-accent3 dark:text-primary dark:hover:text-accent1 transition-colors duration-200"
+                                                    class="text-accent4 hover:text-accent3 dark:text-primary dark:hover:text-accent1 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent6 rounded-full"
                                                     aria-label="Close modal">
-                                                <i class="bi bi-x-lg text-2xl"></i>
+                                                <i class="bi bi-x-lg text-3xl"></i>
                                             </button>
                                         </div>
-                                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                                            <div class="space-y-6 overflow-y-auto max-h-[calc(90vh-12rem)]">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data
-                                                    Point Explanations</h3>
+                                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                                            <div class="space-y-8 overflow-y-auto max-h-[calc(90vh-16rem)] pr-4"
+                                                 style="scrollbar-width: thin; scrollbar-color: #61a8bd #f7f7f7;">
+                                                <h3 class="text-2xl font-semibold text-accent3 dark:text-primary">Data Point Explanations</h3>
                                                 <ng-container *ngFor="let section of getSectionsCompletion()">
                                                     <div *ngIf="completionStructure && completionStructure[section]"
-                                                         class="mb-6 animate-apple-fade-in"
+                                                         class="mb-8 animate-apple-fade-in"
                                                          [style.animation-delay]="(getSectionsCompletion().indexOf(section) * 100) + 'ms'">
-                                                        <h4 class="text-lg font-medium text-accent3 dark:text-primary mb-3">{{ section | formatSectionTitle }}</h4>
+                                                        <h4 class="text-xl font-medium text-accent3 dark:text-primary mb-4">{{ section | formatSectionTitle }}</h4>
                                                         <ng-container *ngIf="isObject(completionStructure[section])">
                                                             <div *ngFor="let key of getOrderedKeysCompletion(section)"
-                                                                 class="bg-accent2   p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
-                                                                <h5 class="font-medium text-accent3 dark:text-primary mb-2">{{ key }}</h5>
-                                                                <p class="text-sm text-accent4 dark:text-accent2">{{ getExplanationCompletion(key) }}</p>
+                                                                 class="bg-accent2 dark:bg-accent4 p-5 rounded-apple-lg mb-4 transition-all duration-300 hover:shadow-apple-xl group">
+                                                                <h5 class="font-medium text-accent-900 dark:text-primary mb-2 transition-colors duration-300 group-hover:text-accent1">{{ key }}</h5>
+                                                                <p class="text-base text-accent-700 dark:text-accent2 transition-colors duration-300 group-hover:text-primary">{{ getExplanationCompletion(key) }}</p>
                                                             </div>
                                                         </ng-container>
                                                         <ng-container *ngIf="!isObject(completionStructure[section])">
-                                                            <div class="bg-accent2   p-4 rounded-apple-md mb-3">
-                                                                <p class="text-sm text-accent4 dark:text-accent2">{{ completionStructure[section] }}</p>
+                                                            <div class="bg-accent2 dark:bg-accent4 p-5 rounded-apple-lg mb-4">
+                                                                <p class="text-base text-accent-700 dark:text-accent2">{{ completionStructure[section] }}</p>
                                                             </div>
                                                         </ng-container>
                                                     </div>
                                                 </ng-container>
                                             </div>
-                                            <div class="space-y-6">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON
-                                                    Structure</h3>
-                                                <div class="bg-accent2   p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
+                                            <div class="space-y-8">
+                                                <h3 class="text-2xl font-semibold text-accent3 dark:text-primary">JSON Structure</h3>
+                                                <div class="bg-accent2 dark:bg-accent4 p-6 rounded-apple-lg overflow-y-auto max-h-[calc(90vh-20rem)]"
+                                                     style="scrollbar-width: thin; scrollbar-color: #61a8bd #f7f7f7;">
                                                     <app-json-viewer [json]="completionStructure"></app-json-viewer>
                                                 </div>
                                             </div>
@@ -1523,57 +1511,52 @@
                             </section>
                             <!-- Operation and Maintenance Data Modal -->
                             <div *ngIf="showOperationsAndMaintenanceModal"
-                                 class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center overflow-auto"
+                                 class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center overflow-auto animate-apple-fade-in"
                                  (click)="closeModalOnOverlayClick($event)"
                                  role="dialog"
                                  aria-labelledby="operationsMaintenanceModalTitle"
                                  aria-modal="true">
-                                <div class="bg-white   rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
+                                <div class="bg-white dark:bg-accent3 rounded-apple-xl w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-2xl transform transition-all duration-300 scale-100 hover:scale-[1.01]"
                                      (click)="$event.stopPropagation()">
-                                    <div class="p-6 space-y-6">
+                                    <div class="p-8 space-y-8">
                                         <div class="flex justify-between items-center">
                                             <h2 id="operationsMaintenanceModalTitle"
-                                                class="text-2xl font-bold text-accent3 dark:text-primary">Operation and
-                                                Maintenance Phase Data Guide</h2>
+                                                class="text-3xl font-semibold text-accent apple-gradient-text">Operation and Maintenance Phase Data Guide</h2>
                                             <button (click)="closeOperationsAndMaintenanceModal()"
-                                                    class="text-accent4 hover:text-accent3 dark:text-primary dark:hover:text-accent1 transition-colors duration-200"
+                                                    class="text-accent4 hover:text-accent3 dark:text-primary dark:hover:text-accent1 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent6 rounded-full"
                                                     aria-label="Close modal">
-                                                <i class="bi bi-x-lg text-2xl"></i>
+                                                <i class="bi bi-x-lg text-3xl"></i>
                                             </button>
                                         </div>
-                                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                                            <div class="space-y-6 overflow-y-auto max-h-[calc(90vh-12rem)]">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data
-                                                    Point Explanations</h3>
-                                                <ng-container
-                                                        *ngFor="let section of getSectionsOperationsAndMaintenance()">
+                                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                                            <div class="space-y-8 overflow-y-auto max-h-[calc(90vh-16rem)] pr-4"
+                                                 style="scrollbar-width: thin; scrollbar-color: #61a8bd #f7f7f7;">
+                                                <h3 class="text-2xl font-semibold text-accent3 dark:text-primary">Data Point Explanations</h3>
+                                                <ng-container *ngFor="let section of getSectionsOperationsAndMaintenance()">
                                                     <div *ngIf="operationsAndMaintenanceStructure && operationsAndMaintenanceStructure[section]"
-                                                         class="mb-6 animate-apple-fade-in"
+                                                         class="mb-8 animate-apple-fade-in"
                                                          [style.animation-delay]="(getSectionsOperationsAndMaintenance().indexOf(section) * 100) + 'ms'">
-                                                        <h4 class="text-lg font-medium text-accent3 dark:text-primary mb-3">{{ section | formatSectionTitle }}</h4>
-                                                        <ng-container
-                                                                *ngIf="isObject(operationsAndMaintenanceStructure[section])">
+                                                        <h4 class="text-xl font-medium text-accent3 dark:text-primary mb-4">{{ section | formatSectionTitle }}</h4>
+                                                        <ng-container *ngIf="isObject(operationsAndMaintenanceStructure[section])">
                                                             <div *ngFor="let key of getOrderedKeysOperationsAndMaintenance(section)"
-                                                                 class="bg-accent2   p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
-                                                                <h5 class="font-medium text-accent3 dark:text-primary mb-2">{{ key }}</h5>
-                                                                <p class="text-sm text-accent4 dark:text-accent2">{{ getExplanationOperationsAndMaintenance(key) }}</p>
+                                                                 class="bg-accent2 dark:bg-accent4 p-5 rounded-apple-lg mb-4 transition-all duration-300 hover:shadow-apple-xl group">
+                                                                <h5 class="font-medium text-accent-900 dark:text-primary mb-2 transition-colors duration-300 group-hover:text-accent1">{{ key }}</h5>
+                                                                <p class="text-base text-accent-700 dark:text-accent2 transition-colors duration-300 group-hover:text-primary">{{ getExplanationOperationsAndMaintenance(key) }}</p>
                                                             </div>
                                                         </ng-container>
-                                                        <ng-container
-                                                                *ngIf="!isObject(operationsAndMaintenanceStructure[section])">
-                                                            <div class="bg-accent2   p-4 rounded-apple-md mb-3">
-                                                                <p class="text-sm text-accent4 dark:text-accent2">{{ operationsAndMaintenanceStructure[section] }}</p>
+                                                        <ng-container *ngIf="!isObject(operationsAndMaintenanceStructure[section])">
+                                                            <div class="bg-accent2 dark:bg-accent4 p-5 rounded-apple-lg mb-4">
+                                                                <p class="text-base text-accent-700 dark:text-accent2">{{ operationsAndMaintenanceStructure[section] }}</p>
                                                             </div>
                                                         </ng-container>
                                                     </div>
                                                 </ng-container>
                                             </div>
-                                            <div class="space-y-6">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON
-                                                    Structure</h3>
-                                                <div class="bg-accent2   p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
-                                                    <app-json-viewer
-                                                            [json]="operationsAndMaintenanceStructure"></app-json-viewer>
+                                            <div class="space-y-8">
+                                                <h3 class="text-2xl font-semibold text-accent3 dark:text-primary">JSON Structure</h3>
+                                                <div class="bg-accent2 dark:bg-accent4 p-6 rounded-apple-lg overflow-y-auto max-h-[calc(90vh-20rem)]"
+                                                     style="scrollbar-width: thin; scrollbar-color: #61a8bd #f7f7f7;">
+                                                    <app-json-viewer [json]="operationsAndMaintenanceStructure"></app-json-viewer>
                                                 </div>
                                             </div>
                                         </div>
@@ -1581,252 +1564,7 @@
                                 </div>
                             </div>
                         </ng-container>
-                        <ng-container *ngSwitchCase="'OperationAndMaintenance'">
-                            <section class="bg-primary rounded-apple-lg shadow-apple-md overflow-hidden">
-                                <div class="p-6 sm:p-8">
-                                    <div class="flex items-center justify-between mb-6">
-                                        <h3 class="text-2xl font-semibold text-accent flex items-center">
-                                            <i class="bi bi-tools mr-3 text-secondary"></i>
-                                            Operation and Maintenance Data
-                                        </h3>
-                                        <button
-                                                (click)="openOperationsAndMaintenanceModal()"
-                                                class="px-3 py-1 bg-accent6 text-white text-sm font-medium rounded-full shadow-sm hover:bg-accent5 transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent6"
-                                        >
-                                            Data Guide
-                                        </button>
-                                    </div>
 
-                                    <!-- Basic Data Section -->
-                                    <section
-                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
-                                        <div class="p-6 sm:p-8">
-                                            <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
-                                                <i class="bi bi-gear-fill mr-3 text-secondary-300"></i>
-                                                Basic Data (O&M)
-                                            </h3>
-                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
-                                                     *ngFor="let item of getBasicDataItemsOandM(project.stages.operationsAndMaintenance.basicData) | keyvalue">
-                                                    <div class="flex items-center mb-2">
-                                                        <i class="bi mr-2 text-lg" [ngClass]="{
-                        'bi-building-fill text-accent6': item.key === 'Asset Name',
-                        'bi-geo-alt-fill text-accent5': item.key === 'Asset Location',
-                        'bi-tools text-accent4': item.key === 'Type of Maintenance Works',
-                        'bi-card-text text-secondary-200': item.key === 'Works Description',
-                        'bi-people-fill text-accent3': item.key === 'Project Officials and Roles',
-                        'bi-arrows-angle-expand text-accent6': item.key === 'Maintenance Scope',
-                        'bi-calendar-check-fill text-accent5': item.key === 'Maintenance Plan'
-                    }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
-                                                    </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
-                                                </div>
-                                            </div>
-                                            <app-attachment-list
-                                                    [attachments]="project.stages.operationsAndMaintenance.basicData.attachments"
-                                                    class="mt-8"></app-attachment-list>
-                                        </div>
-                                    </section>
-
-                                    <!-- Climate Finance Data Section -->
-                                    <section
-                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
-                                        <div class="p-6 sm:p-8">
-                                            <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
-                                                <i class="bi bi-leaf-fill mr-3 text-accent6"></i>
-                                                Climate Finance Data
-                                            </h3>
-                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
-                                                     *ngFor="let item of getClimateFinanceDataItemsOandM(project.stages.operationsAndMaintenance.climateFinanceData) | keyvalue">
-                                                    <div class="flex items-center mb-2">
-                                                        <i class="bi mr-2 text-lg" [ngClass]="{
-                        'bi-graph-up-arrow text-accent5': item.key === 'Impact Measurement',
-                        'bi-cloud-fill text-accent4': item.key === 'Carbon Footprint'
-                    }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
-                                                    </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
-                                                </div>
-                                            </div>
-                                            <app-attachment-list
-                                                    [attachments]="project.stages.operationsAndMaintenance.climateFinanceData.attachments"
-                                                    class="mt-8"></app-attachment-list>
-                                        </div>
-                                    </section>
-
-                                    <!-- Social Sustainability Data Section -->
-                                    <section
-                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
-                                        <div class="p-6 sm:p-8">
-                                            <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
-                                                <i class="bi bi-people-fill mr-3 text-accent3"></i>
-                                                Social Sustainability Data
-                                            </h3>
-                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
-                                                     *ngFor="let item of getSocialSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.socialSustainabilityData) | keyvalue">
-                                                    <div class="flex items-center mb-2">
-                                                        <i class="bi mr-2 text-lg" [ngClass]="{
-                        'bi-briefcase-fill text-accent6': item.key === 'Jobs Generated',
-                        'bi-diagram-3-fill text-accent5': item.key === 'Inclusive Implementation',
-                        'bi-exclamation-triangle-fill text-secondary-300': item.key === 'Workers\' Accidents'
-                    }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
-                                                    </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
-                                                </div>
-                                            </div>
-                                            <app-attachment-list
-                                                    [attachments]="project.stages.operationsAndMaintenance.socialSustainabilityData.attachments"
-                                                    class="mt-8"></app-attachment-list>
-                                        </div>
-                                    </section>
-                                    <!-- Institutional Sustainability Data Section -->
-                                    <section
-                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
-                                        <div class="p-6 sm:p-8">
-                                            <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
-                                                <i class="bi bi-building-fill mr-3 text-secondary-300"></i>
-                                                Institutional Sustainability Data
-                                            </h3>
-                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <ng-container
-                                                        *ngFor="let item of getInstitutionalSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.institutionalSustainabilityData) | keyvalue">
-                                                    <div class="space-y-4 hover:apple-hover-lift transition-all duration-300">
-                                                        <div class="flex items-center mb-2">
-                                                            <i class="bi mr-2 text-lg text-accent5"
-                                                               [ngClass]="getIconClass(item.key)"></i>
-                                                            <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
-                                                        </div>
-                                                        <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
-                                                    </div>
-                                                </ng-container>
-                                            </div>
-                                            <app-attachment-list
-                                                    [attachments]="project.stages.operationsAndMaintenance.institutionalSustainabilityData.attachments"
-                                                    class="mt-8"></app-attachment-list>
-                                        </div>
-                                    </section>
-
-                                    <!-- Economic and Financial Sustainability Data Section -->
-                                    <section
-                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8">
-                                        <div class="p-6 sm:p-8">
-                                            <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
-                                                <i class="bi bi-cash-coin mr-3 text-accent6"></i>
-                                                Economic and Financial Sustainability Data
-                                            </h3>
-                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
-                                                     *ngFor="let item of getEconomicFinancialSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.economicAndFinancialSustainabilityData) | keyvalue">
-                                                    <div class="flex items-center mb-2">
-                                                        <i class="bi mr-2 text-lg" [ngClass]="{
-                        'bi-piggy-bank-fill text-accent5': item.key === 'Funding Source for Maintenance',
-                        'bi-currency-dollar text-accent4': item.key === 'Budget for Maintenance'
-                    }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
-                                                    </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
-                                                </div>
-                                            </div>
-                                            <app-attachment-list
-                                                    [attachments]="project.stages.operationsAndMaintenance.economicAndFinancialSustainabilityData.attachments"
-                                                    class="mt-8"></app-attachment-list>
-                                        </div>
-                                    </section>
-
-                                    <!-- Environmental and Climate Sustainability Data Section -->
-                                    <section
-                                            class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg">
-                                        <div class="p-6 sm:p-8">
-                                            <h3 class="text-2xl font-semibold text-accent-300 mb-6 flex items-center">
-                                                <i class="bi bi-tree-fill mr-3 text-accent3"></i>
-                                                Environmental and Climate Sustainability Data
-                                            </h3>
-                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                <div class="space-y-4 hover:apple-hover-lift transition-all duration-300"
-                                                     *ngFor="let item of getEnvironmentalClimateSustainabilityDataItemsOandM(project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData) | keyvalue">
-                                                    <div class="flex items-center mb-2">
-                                                        <i class="bi mr-2 text-lg" [ngClass]="{
-                        'bi-flower1 text-accent6': item.key === 'Environmental Measures',
-                        'bi-shield-fill-check text-accent4': item.key === 'Conservation Measures',
-                        'bi-thermometer-half text-accent5': item.key === 'Climate Measures',
-                        'bi-file-earmark-text text-secondary-300': item.key === 'Environmental Licenses and Exemptions'
-                    }"></i>
-                                                        <p class="text-sm font-medium text-accent4">{{ item.key }}</p>
-                                                    </div>
-                                                    <p class="text-base text-accent-300 ml-6 transition-all duration-250  ">{{ item.value }}</p>
-                                                </div>
-                                            </div>
-                                            <app-attachment-list
-                                                    [attachments]="project.stages.operationsAndMaintenance.environmentalAndClimateSustainabilityData.attachments"
-                                                    class="mt-8"></app-attachment-list>
-                                        </div>
-                                    </section>
-                                </div>
-                            </section>
-                            <!-- Operation and Maintenance Data Modal -->
-                            <div *ngIf="showOperationsAndMaintenanceModal"
-                                 class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center overflow-auto"
-                                 (click)="closeModalOnOverlayClick($event)"
-                                 role="dialog"
-                                 aria-labelledby="operationsMaintenanceModalTitle"
-                                 aria-modal="true">
-                                <div class="bg-white   rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
-                                     (click)="$event.stopPropagation()">
-                                    <div class="p-6 space-y-6">
-                                        <div class="flex justify-between items-center">
-                                            <h2 id="operationsMaintenanceModalTitle"
-                                                class="text-2xl font-bold text-accent3 dark:text-primary">Operation and
-                                                Maintenance Phase Data Guide</h2>
-                                            <button (click)="closeOperationsAndMaintenanceModal()"
-                                                    class="text-accent4 hover:text-accent3 dark:text-primary dark:hover:text-accent1 transition-colors duration-200"
-                                                    aria-label="Close modal">
-                                                <i class="bi bi-x-lg text-2xl"></i>
-                                            </button>
-                                        </div>
-                                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                                            <div class="space-y-6 overflow-y-auto max-h-[calc(90vh-12rem)]">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data
-                                                    Point Explanations</h3>
-                                                <ng-container
-                                                        *ngFor="let section of getSectionsOperationsAndMaintenance()">
-                                                    <div *ngIf="operationsAndMaintenanceStructure && operationsAndMaintenanceStructure[section]"
-                                                         class="mb-6 animate-apple-fade-in"
-                                                         [style.animation-delay]="(getSectionsOperationsAndMaintenance().indexOf(section) * 100) + 'ms'">
-                                                        <h4 class="text-lg font-medium text-accent3 dark:text-primary mb-3">{{ section | formatSectionTitle }}</h4>
-                                                        <ng-container
-                                                                *ngIf="isObject(operationsAndMaintenanceStructure[section])">
-                                                            <div *ngFor="let key of getOrderedKeysOperationsAndMaintenance(section)"
-                                                                 class="bg-accent2   p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
-                                                                <h5 class="font-medium text-accent3 dark:text-primary mb-2">{{ key }}</h5>
-                                                                <p class="text-sm text-accent4 dark:text-accent2">{{ getExplanationOperationsAndMaintenance(key) }}</p>
-                                                            </div>
-                                                        </ng-container>
-                                                        <ng-container
-                                                                *ngIf="!isObject(operationsAndMaintenanceStructure[section])">
-                                                            <div class="bg-accent2   p-4 rounded-apple-md mb-3">
-                                                                <p class="text-sm text-accent4 dark:text-accent2">{{ operationsAndMaintenanceStructure[section] }}</p>
-                                                            </div>
-                                                        </ng-container>
-                                                    </div>
-                                                </ng-container>
-                                            </div>
-                                            <div class="space-y-6">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON
-                                                    Structure</h3>
-                                                <div class="bg-accent2   p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
-                                                    <app-json-viewer
-                                                            [json]="operationsAndMaintenanceStructure"></app-json-viewer>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </ng-container>
 
                         <!-- Decommissioning Tab -->
                         <ng-container *ngSwitchCase="'Decommissioning'">
@@ -1981,56 +1719,52 @@
 
                             <!-- Decommissioning Data Modal -->
                             <div *ngIf="showDecommissioningModal"
-                                 class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center overflow-auto"
+                                 class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center overflow-auto animate-apple-fade-in"
                                  (click)="closeModalOnOverlayClick($event)"
                                  role="dialog"
                                  aria-labelledby="decommissioningModalTitle"
                                  aria-modal="true">
-                                <div class="bg-white   rounded-apple-lg w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-xl"
+                                <div class="bg-white dark:bg-accent3 rounded-apple-xl w-11/12 max-w-6xl max-h-[90vh] overflow-hidden shadow-apple-2xl transform transition-all duration-300 scale-100 hover:scale-[1.01]"
                                      (click)="$event.stopPropagation()">
-                                    <div class="p-6 space-y-6">
+                                    <div class="p-8 space-y-8">
                                         <div class="flex justify-between items-center">
                                             <h2 id="decommissioningModalTitle"
-                                                class="text-2xl font-bold text-accent3 dark:text-primary">
-                                                Decommissioning Phase Data Guide</h2>
+                                                class="text-3xl font-semibold text-accent apple-gradient-text">Decommissioning Phase Data Guide</h2>
                                             <button (click)="closeDecommissioningModal()"
-                                                    class="text-accent4 hover:text-accent3 dark:text-primary dark:hover:text-accent1 transition-colors duration-200"
+                                                    class="text-accent4 hover:text-accent3 dark:text-primary dark:hover:text-accent1 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent6 rounded-full"
                                                     aria-label="Close modal">
-                                                <i class="bi bi-x-lg text-2xl"></i>
+                                                <i class="bi bi-x-lg text-3xl"></i>
                                             </button>
                                         </div>
-                                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                                            <div class="space-y-6 overflow-y-auto max-h-[calc(90vh-12rem)]">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">Data
-                                                    Point Explanations</h3>
+                                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                                            <div class="space-y-8 overflow-y-auto max-h-[calc(90vh-16rem)] pr-4"
+                                                 style="scrollbar-width: thin; scrollbar-color: #61a8bd #f7f7f7;">
+                                                <h3 class="text-2xl font-semibold text-accent3 dark:text-primary">Data Point Explanations</h3>
                                                 <ng-container *ngFor="let section of getSectionsDecommissioning()">
                                                     <div *ngIf="decommissioningStructure && decommissioningStructure[section]"
-                                                         class="mb-6 animate-apple-fade-in"
+                                                         class="mb-8 animate-apple-fade-in"
                                                          [style.animation-delay]="(getSectionsDecommissioning().indexOf(section) * 100) + 'ms'">
-                                                        <h4 class="text-lg font-medium text-accent3 dark:text-primary mb-3">{{ section | formatSectionTitle }}</h4>
-                                                        <ng-container
-                                                                *ngIf="isObject(decommissioningStructure[section])">
+                                                        <h4 class="text-xl font-medium text-accent3 dark:text-primary mb-4">{{ section | formatSectionTitle }}</h4>
+                                                        <ng-container *ngIf="isObject(decommissioningStructure[section])">
                                                             <div *ngFor="let key of getOrderedKeysDecommissioning(section)"
-                                                                 class="bg-accent2   p-4 rounded-apple-md mb-3 transition-all duration-300 hover:shadow-apple-md">
-                                                                <h5 class="font-medium text-accent3 dark:text-primary mb-2">{{ key }}</h5>
-                                                                <p class="text-sm text-accent4 dark:text-accent2">{{ getExplanationDecommissioning(key) }}</p>
+                                                                 class="bg-accent2 dark:bg-accent4 p-5 rounded-apple-lg mb-4 transition-all duration-300 hover:shadow-apple-xl group">
+                                                                <h5 class="font-medium text-accent-900 dark:text-primary mb-2 transition-colors duration-300 group-hover:text-accent1">{{ key }}</h5>
+                                                                <p class="text-base text-accent-700 dark:text-accent2 transition-colors duration-300 group-hover:text-primary">{{ getExplanationDecommissioning(key) }}</p>
                                                             </div>
                                                         </ng-container>
-                                                        <ng-container
-                                                                *ngIf="!isObject(decommissioningStructure[section])">
-                                                            <div class="bg-accent2   p-4 rounded-apple-md mb-3">
-                                                                <p class="text-sm text-accent4 dark:text-accent2">{{ decommissioningStructure[section] }}</p>
+                                                        <ng-container *ngIf="!isObject(decommissioningStructure[section])">
+                                                            <div class="bg-accent2 dark:bg-accent4 p-5 rounded-apple-lg mb-4">
+                                                                <p class="text-base text-accent-700 dark:text-accent2">{{ decommissioningStructure[section] }}</p>
                                                             </div>
                                                         </ng-container>
                                                     </div>
                                                 </ng-container>
                                             </div>
-                                            <div class="space-y-6">
-                                                <h3 class="text-xl font-semibold text-accent3 dark:text-primary">JSON
-                                                    Structure</h3>
-                                                <div class="bg-accent2   p-4 rounded-apple-md overflow-y-auto max-h-[calc(90vh-16rem)]">
-                                                    <app-json-viewer
-                                                            [json]="decommissioningStructure"></app-json-viewer>
+                                            <div class="space-y-8">
+                                                <h3 class="text-2xl font-semibold text-accent3 dark:text-primary">JSON Structure</h3>
+                                                <div class="bg-accent2 dark:bg-accent4 p-6 rounded-apple-lg overflow-y-auto max-h-[calc(90vh-20rem)]"
+                                                     style="scrollbar-width: thin; scrollbar-color: #61a8bd #f7f7f7;">
+                                                    <app-json-viewer [json]="decommissioningStructure"></app-json-viewer>
                                                 </div>
                                             </div>
                                         </div>
