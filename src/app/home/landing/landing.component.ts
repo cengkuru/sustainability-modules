@@ -74,7 +74,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
 
   mainSection = {
     title: "Explore GCF Projects: Boosting Climate Finance Investments in South Africa",
-    description: "This prototype, developed by the Infrastructure Transparency Initiative (CoST), demonstrates the implementation of the Open Contracting for Infrastructure Data Standard (OC4IDS). It specifically focuses on the climate finance and sustainability modules to highlight their potential applications and benefits. The information shown is based on projects approved by the Green Climate Fund (GCF) for the Republic of South Africa. Values are for illustrative purposes only.",
+    description: "This prototype, developed by the <a href='https://infrastructuretransparency.org/' target='_blank'>Infrastructure Transparency Initiative (CoST)</a>, demonstrates the implementation of the <a href='https://standard.open-contracting.org/infrastructure/latest/en/reference/schema/' target='_blank'>Open Contracting for Infrastructure Data Standard (OC4IDS)</a>. It specifically focuses on the climate finance and sustainability modules to highlight their potential applications and benefits. The information shown is based on projects approved by the <a href='https://www.greenclimate.fund/' target='_blank'>Green Climate Fund (GCF)</a> for the Republic of South Africa. Values are for illustrative purposes only.",
     buttonText: "Explore Projects →"
   };
 
