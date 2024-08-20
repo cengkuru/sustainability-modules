@@ -1,37 +1,105 @@
-<div class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-primary-300 font-inter text-accent-300 dark:bg-background-dark dark:text-text-dark">
+<div class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-primary text-accent">
     <div class="w-full max-w-3xl">
-        <div class="bg-primary-100 dark:bg-accent-400 rounded-apple shadow-apple-lg overflow-hidden transition-all duration-300">
+        <div class="bg-accent2 rounded-lg shadow-lg overflow-hidden transition-all duration-300">
             <div class="px-6 py-12 sm:px-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-accent-300 dark:text-text-dark">Download Project Data</h2>
-                <p class="mt-4 text-base md:text-lg text-center mb-10 text-accent-100 dark:text-text-dark max-w-2xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-accent">Download Project Data</h2>
+                <div class="flex justify-center mb-6">
+                    <button (click)="toggleInfoModal()" class="bg-accent6 text-primary px-4 py-2 rounded-full hover:bg-accent5 transition-colors duration-250 flex items-center">
+                        <i class="bi bi-info-circle mr-2"></i>
+                        About Open Data Formats
+                    </button>
+                </div>
+                <p class="mt-4 text-base md:text-lg text-center mb-10 text-accent4 max-w-2xl mx-auto">
                     Access all project data in bulk. Choose your preferred open format:
                 </p>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
-                    <button (click)="downloadFile('csv')" [disabled]="downloading" class="download-button flex flex-col items-center justify-center p-6 rounded-apple bg-primary-400 dark:bg-accent-300 text-accent-300 dark:text-text-dark hover:bg-primary-500 dark:hover:bg-accent-200 transition-all duration-250 ease-apple disabled:opacity-50 disabled:cursor-not-allowed apple-hover-lift group">
-                        <i class="bi bi-file-earmark-spreadsheet text-4xl mb-4 text-secondary-300 dark:text-secondary-200 group-hover:text-secondary-400 transition-colors duration-250"></i>
-                        <span class="font-semibold">CSV</span>
-                    </button>
-                    <button (click)="downloadFile('json')" [disabled]="downloading" class="download-button flex flex-col items-center justify-center p-6 rounded-apple bg-primary-400 dark:bg-accent-300 text-accent-300 dark:text-text-dark hover:bg-primary-500 dark:hover:bg-accent-200 transition-all duration-250 ease-apple disabled:opacity-50 disabled:cursor-not-allowed apple-hover-lift group">
-                        <i class="bi bi-file-earmark-code text-4xl mb-4 text-secondary-300 dark:text-secondary-200 group-hover:text-secondary-400 transition-colors duration-250"></i>
-                        <span class="font-semibold">JSON</span>
-                    </button>
-                    <button (click)="downloadFile('txt')" [disabled]="downloading" class="download-button flex flex-col items-center justify-center p-6 rounded-apple bg-primary-400 dark:bg-accent-300 text-accent-300 dark:text-text-dark hover:bg-primary-500 dark:hover:bg-accent-200 transition-all duration-250 ease-apple disabled:opacity-50 disabled:cursor-not-allowed apple-hover-lift group">
-                        <i class="bi bi-file-earmark-text text-4xl mb-4 text-secondary-300 dark:text-secondary-200 group-hover:text-secondary-400 transition-colors duration-250"></i>
-                        <span class="font-semibold">TXT</span>
-                    </button>
-                    <button (click)="downloadFile('xlsx')" [disabled]="downloading" class="download-button flex flex-col items-center justify-center p-6 rounded-apple bg-primary-400 dark:bg-accent-300 text-accent-300 dark:text-text-dark hover:bg-primary-500 dark:hover:bg-accent-200 transition-all duration-250 ease-apple disabled:opacity-50 disabled:cursor-not-allowed apple-hover-lift group">
-                        <i class="bi bi-file-earmark-excel text-4xl mb-4 text-secondary-300 dark:text-secondary-200 group-hover:text-secondary-400 transition-colors duration-250"></i>
-                        <span class="font-semibold">Excel</span>
+                    <button *ngFor="let button of downloadButtons"
+                            (click)="downloadFile(button.format)"
+                            [disabled]="downloading"
+                            class="flex flex-col items-center justify-center p-6 rounded-lg bg-accent5 text-accent hover:bg-accent6 transition-all duration-250 disabled:opacity-50 disabled:cursor-not-allowed group">
+                        <i [class]="button.icon + ' text-4xl mb-4 text-secondary group-hover:text-accent1 transition-colors duration-250'"></i>
+                        <span class="font-semibold">{{button.label}}</span>
                     </button>
                 </div>
-                <div *ngIf="error" class="mt-8 text-secondary-400 text-center animate-apple-fade-in">
+                <div *ngIf="error" class="mt-8 p-4 bg-secondary bg-opacity-10 border border-secondary text-secondary rounded-lg animate-fade-in">
                     {{ error }}
                 </div>
             </div>
-            <div *ngIf="downloading" class="apple-glass px-6 py-4 flex items-center justify-center animate-apple-fade-in">
-                <i class="bi bi-arrow-repeat animate-apple-spin text-xl mr-3 text-accent6"></i>
+            <div *ngIf="downloading" class="bg-accent5 bg-opacity-70 backdrop-filter backdrop-blur-lg px-6 py-4 flex items-center justify-center animate-fade-in">
+                <i class="bi bi-arrow-repeat animate-spin text-accent6 mr-3"></i>
                 <span class="text-sm text-accent6">Downloading...</span>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Tailwind CSS Modal -->
+<!-- Enhanced Tailwind CSS Modal -->
+<div *ngIf="showInfoModal" class="fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full z-50 flex items-center justify-center animate-fade-in">
+    <div class="bg-primary p-8 rounded-lg w-full max-w-4xl mx-auto relative max-h-[90vh] overflow-y-auto">
+        <button (click)="toggleInfoModal()" class="absolute top-4 right-4 text-accent hover:text-accent6">
+            <i class="bi bi-x-lg"></i>
+        </button>
+        <h2 class="text-2xl font-bold mb-4 text-accent">Open Data Formats in Infrastructure Projects</h2>
+        <p class="mb-4 text-accent4">Open data formats are standardized ways of structuring and sharing information that anyone can freely use, modify, and share. For infrastructure projects, using open data formats is crucial for transparency and collaboration.</p>
+
+        <h3 class="text-xl font-semibold mb-2 text-accent">Why is it Essential for Data to be Available in Open Formats?</h3>
+        <ul class="space-y-4 mb-6 text-accent4">
+            <li class="flex items-start">
+                <i class="bi bi-eye-fill text-accent6 mr-2 mt-1"></i>
+                <div>
+                    <strong>Transparency:</strong> Allows the public to see exactly what's going on, reducing the chance for corruption or mismanagement in public contracting.
+                </div>
+            </li>
+            <li class="flex items-start">
+                <i class="bi bi-lightbulb-fill text-accent6 mr-2 mt-1"></i>
+                <div>
+                    <strong>Innovation:</strong> Fuels creation of new tools, trend analysis, and identification of inefficiencies, leading to better solutions or products.
+                </div>
+            </li>
+            <li class="flex items-start">
+                <i class="bi bi-puzzle-fill text-accent6 mr-2 mt-1"></i>
+                <div>
+                    <strong>Interoperability:</strong> Ensures different systems can communicate, making it easier to integrate or compare data across departments.
+                </div>
+            </li>
+            <li class="flex items-start">
+                <i class="bi bi-piggy-bank-fill text-accent6 mr-2 mt-1"></i>
+                <div>
+                    <strong>Cost Efficiency:</strong> Eliminates the need for expensive software, democratizing access to information.
+                </div>
+            </li>
+            <li class="flex items-start">
+                <i class="bi bi-check-circle-fill text-accent6 mr-2 mt-1"></i>
+                <div>
+                    <strong>Accountability:</strong> Allows stakeholders to verify and question discrepancies in project costs or timelines.
+                </div>
+            </li>
+        </ul>
+
+        <h3 class="text-xl font-semibold mb-2 text-accent">Open Data Formats in OC4IDS:</h3>
+        <p class="mb-4 text-accent4">While OC4IDS focuses on data structure rather than specific file formats, the data can be published in various open formats:</p>
+        <ul class="list-disc pl-5 mb-4 text-accent4 space-y-2">
+            <li><strong>JSON (JavaScript Object Notation):</strong> A lightweight, easy-to-read format great for structured data and web applications.</li>
+            <li><strong>XML (eXtensible Markup Language):</strong> Versatile format good for complex, hierarchical data structures.</li>
+            <li><strong>CSV (Comma-Separated Values):</strong> Simple tabular format for lists of contracts, costs, or project timelines.</li>
+            <li><strong>RDF (Resource Description Framework):</strong> Used for complex relationships between data points, powerful for data integration.</li>
+            <li><strong>API Endpoints:</strong> Allow real-time data access, typically returning data in JSON or XML.</li>
+            <li><strong>Human-Readable Formats:</strong> Accompanying documents or summaries in PDF or plain text for easy understanding.</li>
+        </ul>
+
+        <p class="text-accent4 mb-4">The essence of OC4IDS is ensuring that infrastructure project data is:</p>
+        <ul class="list-disc pl-5 mb-4 text-accent4 space-y-2">
+            <li><strong>Consistent:</strong> Enabling straightforward comparison of projects across different regions or times.</li>
+            <li><strong>Comprehensive:</strong> Covering all stages from planning to completion.</li>
+            <li><strong>Linkable:</strong> Allowing data from one project or contract to be connected to others, showing full lifecycles or networks of activities.</li>
+        </ul>
+
+        <p class="text-accent4">By using open data formats, OC4IDS aims to make infrastructure data not just available but usable, fostering transparency, efficiency, and innovation in how public infrastructure projects are managed and scrutinized.</p>
+
+        <div class="mt-6 flex justify-end">
+            <button (click)="toggleInfoModal()" class="bg-accent6 text-primary px-4 py-2 rounded hover:bg-accent5 transition-colors duration-250">Close</button>
+        </div>
+    </div>
+</div>
+

@@ -19,6 +19,14 @@ export class OpenDataComponent implements OnInit {
   flattenedProjects$!: Observable<FlattenedProject[]>;
   downloading = false;
   error: string | null = null;
+  showInfoModal = false;
+
+  downloadButtons = [
+    { format: 'csv', icon: 'bi bi-file-earmark-spreadsheet', label: 'CSV' },
+    { format: 'json', icon: 'bi bi-file-earmark-code', label: 'JSON' },
+    { format: 'txt', icon: 'bi bi-file-earmark-text', label: 'TXT' },
+    { format: 'xlsx', icon: 'bi bi-file-earmark-excel', label: 'Excel' },
+  ];
 
   constructor(
       private firestore: AngularFirestore,
@@ -157,4 +165,18 @@ export class OpenDataComponent implements OnInit {
     const excelData: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
     saveAs(excelData, fileName);
   }
+
+
+  toggleInfoModal(): void {
+    this.showInfoModal = !this.showInfoModal;
+    if (this.showInfoModal) {
+      setTimeout(() => {
+        document.body.style.overflow = 'hidden';
+      }, 0);
+    } else {
+      document.body.style.overflow = '';
+    }
+  }
+
+
 }
