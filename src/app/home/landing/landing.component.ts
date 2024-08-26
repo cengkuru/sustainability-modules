@@ -90,7 +90,6 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     sponsors: [
       { name: "GIZ", link: "https://www.giz.de/en/html/index.html", image: "../../../assets/giz.png" },
       { name: "FCDO", link: "https://www.gov.uk/government/organisations/foreign-commonwealth-development-office", image: "../../../assets/uk.png" },
-      { name: "CoST", link: "https://infrastructuretransparency.org/", image: "../../../assets/cost-logo-transparent.png" }
     ]
   };
 

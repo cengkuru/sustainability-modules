@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
 import { ApiEndpoint } from "../../models/api-endpoint.model";
 import { ApiService } from "../../services/api.service";
 import { CommonModule } from "@angular/common";
@@ -42,6 +42,11 @@ export class ApiDocsComponent implements OnInit {
     isSidebarOpen: boolean = false;
     isDarkMode: boolean = false;
     showApiInfoModal: boolean = false;
+
+    showToast: boolean = false;
+    toastMessage: string = '';
+
+    @ViewChild('mainContent') mainContent!: ElementRef;
 
     constructor(private apiService: ApiService, private renderer: Renderer2) {}
 
@@ -112,18 +117,6 @@ export class ApiDocsComponent implements OnInit {
         );
     }
 
-    copyToClipboard(text: string | undefined): void {
-        if (text) {
-            navigator.clipboard.writeText(text).then(() => {
-                // TODO: Show a brief success message to the user
-                console.log('Text copied to clipboard');
-            }, (err) => {
-                console.error('Could not copy text: ', err);
-            });
-        } else {
-            console.warn('Attempted to copy undefined text');
-        }
-    }
 
     getCopyableText(text: string | undefined): string {
         return text || 'N/A';
@@ -131,6 +124,32 @@ export class ApiDocsComponent implements OnInit {
 
     toggleApiInfoModal(): void {
         this.showApiInfoModal = !this.showApiInfoModal;
+    }
+
+    copyToClipboard(text: string | undefined): void {
+        if (text) {
+            navigator.clipboard.writeText(text).then(() => {
+                this.showToastMessage('Copied to clipboard!');
+            }, (err) => {
+                console.error('Could not copy text: ', err);
+                this.showToastMessage('Failed to copy. Please try again.');
+            });
+        } else {
+            console.warn('Attempted to copy undefined text');
+            this.showToastMessage('Nothing to copy.');
+        }
+    }
+
+    showToastMessage(message: string): void {
+        this.toastMessage = message;
+        this.showToast = true;
+        setTimeout(() => {
+            this.showToast = false;
+        }, 3000);
+    }
+
+    scrollToTop(): void {
+        this.mainContent.nativeElement.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
 }

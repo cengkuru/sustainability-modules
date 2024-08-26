@@ -10,7 +10,7 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="relative overflow-hidden bg-gradient-to-br from-primary via-primary-50 to-primary-100 min-h-screen flex items-center">
+    <section class="relative overflow-hidden bg-gradient-to-br from-primary via-primary-50 to-primary-100  flex items-center">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-15 lg:py-25">
             <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                 <div class="space-y-8 text-center lg:text-left" @fadeInAnimation>
@@ -28,34 +28,6 @@
                         <div #mapContainer class="w-full h-full" style="height: 400px;">
                             <div id="map" class="w-full h-full"></div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-primary to-transparent"></div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class=" py-24 sm:py-32">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl sm:text-4xl font-bold text-accent text-center mb-12 ">Project Statistics</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-12">
-                <div class="bg-white bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-apple-xl p-8 shadow-apple-xl transform hover:scale-105 transition-all duration-300 ease-apple" @fadeInAnimation>
-                    <div class="flex items-center justify-center mb-6">
-                        <i class="bi bi-building text-5xl text-accent6"></i>
-                    </div>
-                    <div class="text-center">
-                        <span class="block text-4xl sm:text-5xl lg:text-6xl font-bold text-accent animate-count-up">{{ formatLargeNumber(numberOfProjects) }}</span>
-                        <span class="block mt-3 text-lg sm:text-xl text-accent4 font-medium">Projects Published</span>
-                    </div>
-                </div>
-                <div class="bg-white bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-apple-xl p-8 shadow-apple-xl transform hover:scale-105 transition-all duration-300 ease-apple" @fadeInAnimation>
-                    <div class="flex items-center justify-center mb-6">
-                        <i class="bi bi-cash-stack text-5xl text-accent5"></i>
-                    </div>
-                    <div class="text-center">
-                        <span class="block text-4xl sm:text-5xl lg:text-6xl font-bold text-accent animate-count-up">{{ formatCurrency(totalValueOfProjects) }}</span>
-                        <span class="block mt-3 text-lg sm:text-xl text-accent4 font-medium">Total Project Value</span>
                     </div>
                 </div>
             </div>
@@ -88,28 +60,31 @@
     </section>
 
     <!-- Projects Showcase -->
-    <section class="py-24 sm:py-32">
+    <section class="py-16 sm:py-24 bg-gradient-to-b from-primary to-accent2 dark:from-accent3 dark:to-accent4">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-4xl sm:text-5xl font-bold text-accent text-center mb-16 ">Project Highlights</h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+            <h2 class="text-4xl sm:text-5xl font-bold text-accent dark:text-primary text-center mb-12 tracking-tight">
+                Project Highlights
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
                 <!-- Recent Projects Section -->
-                <div @slideInAnimation class="bg-white bg-opacity-90 backdrop-filter backdrop-blur-lg rounded-apple-xl p-8 shadow-apple-xl">
-                    <h3 class="text-3xl font-semibold mb-8 text-accent flex items-center">
-                        <i class="bi bi-star-fill text-accent5 mr-3 text-4xl"></i>
+                <div @fadeInUp class="bg-white dark:bg-accent3 rounded-apple-xl p-6 shadow-apple-lg transition-all duration-300 hover:shadow-apple-xl">
+                    <h3 class="text-2xl font-semibold mb-6 text-accent dark:text-primary flex items-center">
+                        <i class="bi bi-clock-history text-accent5 dark:text-accent6 mr-3 text-3xl"></i>
                         Recent Projects
                     </h3>
-                    <ul class="space-y-6" [@listAnimation]="recentProjects.length">
+                    <ul class="space-y-4" [@staggeredList]="recentProjects.length">
                         <li *ngFor="let project of recentProjects; let i = index"
-                            class="bg-primary-50 rounded-apple-lg shadow-apple-md p-6 hover:shadow-apple-lg transition-all duration-300 ease-apple transform hover:-translate-y-2 hover:bg-accent5 hover:bg-opacity-10"
-                            [style.animation-delay]="i * 100 + 'ms'">
+                            class="bg-primary dark:bg-accent4 rounded-apple-lg p-4 transition-all duration-300 ease-apple transform hover:-translate-y-1 hover:shadow-apple-md"
+                            [style.animation-delay]="i * 50 + 'ms'">
                             <a [routerLink]="['/public/projects', project.id]" class="block group">
-                                <h4 class="text-xl font-semibold text-accent mb-2 line-clamp-1 group-hover:text-accent5">{{ project.name }}</h4>
-                                <p class="text-accent4 mb-4 line-clamp-2 group-hover:text-accent">{{ project.description || 'No description available' }}</p>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-sm text-accent3 group-hover:text-accent4">{{ project.startDate | date:'mediumDate' }}</span>
-                                    <span class="text-sm font-medium text-accent6 flex items-center group-hover:text-accent5">
+                                <h4 class="text-lg font-semibold text-accent dark:text-primary mb-2 line-clamp-1 group-hover:text-accent5 dark:group-hover:text-accent6">{{ project.name }}</h4>
+                                <p class="text-accent4 dark:text-accent2 mb-3 text-sm line-clamp-2 group-hover:text-accent dark:group-hover:text-primary">{{ project.description }}</p>
+                                <div class="flex justify-between items-center text-sm">
+                                    <span class="text-accent3 dark:text-accent5">{{ project.startDate | date:'mediumDate' }}</span>
+                                    <span class="font-medium text-accent6 dark:text-accent5 flex items-center group-hover:text-accent5 dark:group-hover:text-accent6">
                   View Details
-                  <i class="bi bi-arrow-right ml-2 transition-transform duration-300 ease-apple transform group-hover:translate-x-2"></i>
+                  <i class="bi bi-arrow-right ml-2 transition-transform duration-300 ease-apple transform group-hover:translate-x-1"></i>
                 </span>
                                 </div>
                             </a>
@@ -118,23 +93,25 @@
                 </div>
 
                 <!-- High-Value Projects Section -->
-                <div @slideInAnimation class="bg-white bg-opacity-90 backdrop-filter backdrop-blur-lg rounded-apple-xl p-8 shadow-apple-xl">
-                    <h3 class="text-3xl font-semibold mb-8 text-accent flex items-center">
-                        <i class="bi bi-graph-up text-accent6 mr-3 text-4xl"></i>
+                <div @fadeInUp class="bg-white dark:bg-accent3 rounded-apple-xl p-6 shadow-apple-lg transition-all duration-300 hover:shadow-apple-xl">
+                    <h3 class="text-2xl font-semibold mb-6 text-accent dark:text-primary flex items-center">
+                        <i class="bi bi-bar-chart-fill text-accent6 dark:text-accent5 mr-3 text-3xl"></i>
                         High-Value Projects
                     </h3>
-                    <ul class="space-y-6" [@listAnimation]="highValueProjects.length">
+                    <ul class="space-y-4" [@staggeredList]="highValueProjects.length">
                         <li *ngFor="let project of highValueProjects; let i = index"
-                            class="bg-primary-50 rounded-apple-lg shadow-apple-md p-6 hover:shadow-apple-lg transition-all duration-300 ease-apple transform hover:-translate-y-2 hover:bg-accent6 hover:bg-opacity-10"
-                            [style.animation-delay]="i * 100 + 'ms'">
+                            class="bg-primary dark:bg-accent4 rounded-apple-lg p-4 transition-all duration-300 ease-apple transform hover:-translate-y-1 hover:shadow-apple-md"
+                            [style.animation-delay]="i * 50 + 'ms'">
                             <a [routerLink]="['/public/projects', project.id]" class="block group">
-                                <h4 class="text-xl font-semibold text-accent mb-2 line-clamp-1 group-hover:text-accent6">{{ project.name }}</h4>
-                                <p class="text-accent4 mb-4 line-clamp-2 group-hover:text-accent">{{ project.description || 'No description available' }}</p>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-lg font-bold text-accent5 group-hover:text-accent6">{{ project.contractPrice | currency:'USD':'symbol':'1.0-0' }}</span>
-                                    <span class="text-sm font-medium text-accent6 flex items-center group-hover:text-accent5">
+                                <h4 class="text-lg font-semibold text-accent dark:text-primary mb-2 line-clamp-1 group-hover:text-accent6 dark:group-hover:text-accent5">{{ project.name }}</h4>
+                                <p class="text-accent4 dark:text-accent2 mb-3 text-sm line-clamp-2 group-hover:text-accent dark:group-hover:text-primary">{{ project.description }}</p>
+                                <div class="flex justify-between items-center text-sm">
+                <span class="font-bold text-accent5 dark:text-accent6 group-hover:text-accent6 dark:group-hover:text-accent5">
+                  {{ project.contractPrice | currency:'USD':'symbol':'1.0-0' }}
+                </span>
+                                    <span class="font-medium text-accent6 dark:text-accent5 flex items-center group-hover:text-accent5 dark:group-hover:text-accent6">
                   View Details
-                  <i class="bi bi-arrow-right ml-2 transition-transform duration-300 ease-apple transform group-hover:translate-x-2"></i>
+                  <i class="bi bi-arrow-right ml-2 transition-transform duration-300 ease-apple transform group-hover:translate-x-1"></i>
                 </span>
                                 </div>
                             </a>
@@ -142,14 +119,27 @@
                     </ul>
                 </div>
             </div>
+
+            <!-- Summary Section -->
+            <div class="mt-12 bg-white dark:bg-accent3 rounded-apple-xl p-6 shadow-apple-lg">
+                <div class="flex flex-wrap justify-around items-center">
+                    <div class="text-center p-4">
+                        <p class="text-accent4 dark:text-accent2 text-sm mb-1">Total Projects</p>
+                        <p class="text-3xl font-bold text-accent dark:text-primary">{{ formatLargeNumber(numberOfProjects) }}</p>
+                    </div>
+                    <div class="text-center p-4">
+                        <p class="text-accent4 dark:text-accent2 text-sm mb-1">Total Value</p>
+                        <p class="text-3xl font-bold text-accent dark:text-primary">{{ formatCurrency(totalValueOfProjects) }}</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
-
     <!-- Sponsors Section -->
     <section class="bg-gradient-to-b from-primary-100 to-primary-200 py-20 sm:py-32">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl sm:text-4xl font-semibold text-center text-accent mb-16">{{ sponsorsSection.title }}</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-12">
                 <div *ngFor="let sponsor of sponsorsSection.sponsors" class="flex justify-center" @fadeInAnimation>
                     <a [href]="sponsor.link" target="_blank" rel="noopener noreferrer" class="group relative flex items-center justify-center w-full h-48 bg-white rounded-apple-xl shadow-apple-lg hover:shadow-apple-xl transition-all duration-300 ease-apple transform hover:-translate-y-2 focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-4 focus:ring-offset-primary-100">
                         <img [src]="sponsor.image" [alt]="sponsor.name" class="max-h-28 w-auto object-contain transition-all duration-300 ease-apple group-hover:scale-110">

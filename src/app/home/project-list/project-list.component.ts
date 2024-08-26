@@ -46,9 +46,11 @@ import { IntersectionObserverDirective } from "../../directives/intersection-obs
     ],
 })
 export class ProjectListComponent implements OnInit {
-    projects$: Observable<any[]> | undefined;
-    totalProjects$: Observable<number> | undefined;
-    totalValueOfProjects$: Observable<number> | undefined;
+    projects$!: Observable<any[]>;
+    totalProjects$!: Observable<number>;
+    totalValueOfProjects$!: Observable<number>;
+    averageProjectValue$!: Observable<number>;
+    featuredProjectsCount$!: Observable<number>;
     searchTerm = new BehaviorSubject<string>('');
     showFeatured = new BehaviorSubject<boolean>(false);
     selectedSectors = new BehaviorSubject<string[]>([]);
@@ -119,16 +121,28 @@ export class ProjectListComponent implements OnInit {
         );
 
         this.totalValueOfProjects$ = this.projects$.pipe(
-            map((projects: any) => {
-                let total = 0;
-                projects.forEach((project: any) => {
+            map((projects: any[]) => {
+                return projects.reduce((total, project) => {
                     const contractPrice = project.stages?.tenderManagement?.basicData?.contractPrice;
                     if (contractPrice) {
-                        total += parseFloat(contractPrice.replace(/[^0-9.-]+/g, ""));
+                        return total + parseFloat(contractPrice.replace(/[^0-9.-]+/g, ""));
                     }
-                });
-                return total;
+                    return total;
+                }, 0);
             })
+        );
+
+        this.averageProjectValue$ = combineLatest([
+            this.totalValueOfProjects$,
+            this.totalProjects$
+        ]).pipe(
+            map(([totalValue, totalProjects]) => {
+                return totalProjects > 0 ? totalValue / totalProjects : 0;
+            })
+        );
+
+        this.featuredProjectsCount$ = this.projects$.pipe(
+            map(projects => projects.filter(project => project.featured).length)
         );
     }
 
@@ -182,5 +196,25 @@ export class ProjectListComponent implements OnInit {
 
     isSectorSelected(sector: string): boolean {
         return this.selectedSectors.value.includes(sector);
+    }
+
+    onProjectClick(project: any): void {
+        console.log('Project clicked:', project);
+        // Implement any additional logic you want to execute when a project card is clicked
+    }
+
+    onBulkDownload(): void {
+        console.log('Bulk download initiated');
+        // Implement the logic for bulk download
+        // You might want to call a service method here to handle the actual download
+    }
+
+    resetFilters(): void {
+        this.searchTerm.next('');
+        this.showFeatured.next(false);
+        this.selectedSectors.next([]);
+        this.selectedStatus.next('');
+        this.sortOption.next('name');
+        this.applyFilters();
     }
 }
