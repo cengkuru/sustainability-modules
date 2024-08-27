@@ -47,11 +47,14 @@ export class DataAnalysisComponent implements AfterViewInit {
     projects: Project[] = [];
     filteredProjects: Project[] = [];
 
-    markers: { lat: number; lng: number; popup: string; }[] = [];
     isLoading: boolean = true;
     mapInitialized: boolean = false;
     projectsLoaded: boolean = false;
     private viewInitialized: boolean = false;
+
+
+    markers: { lat: number; lng: number; popup: string; status: string; }[] = [];
+
 
     // Brand Colors
     private readonly brandColors = {
@@ -95,6 +98,9 @@ export class DataAnalysisComponent implements AfterViewInit {
     selectedClimateObjective: string = 'All';
     startYear: number = 0;
     endYear: number = 0;
+
+    minYear: number = 0;
+    maxYear: number = 0;
 
     // Key Metrics
     totalProjects: number = 0;
@@ -283,46 +289,117 @@ export class DataAnalysisComponent implements AfterViewInit {
     }
 
     checkAndInitializeMap(): void {
-
         if (this.viewInitialized && this.projectsLoaded && this.mapContainer && this.mapContainer.nativeElement) {
-            this.initializeMap();
+            setTimeout(() => {
+                this.initializeMap();
+            }, 100);  // 100ms delay
         } else {
             if (!this.mapContainer) {
                 console.error('Map container is not available');
             }
-            // Retry after a short delay
             setTimeout(() => this.checkAndInitializeMap(), 100);
         }
     }
 
+
+    private getPulsingIcon(status: string): L.DivIcon {
+        const color = this.getColorForStatus(status);
+        return L.divIcon({
+            className: 'pulsing-icon',
+            html: `
+            <div class="relative w-6 h-6">
+                <div class="absolute inset-0 pulse-ring rounded-full border-2" style="border-color: ${color};"></div>
+                <div class="absolute inset-0 rounded-full" style="background-color: ${color};"></div>
+            </div>
+        `,
+            iconSize: [24, 24],
+            iconAnchor: [12, 12]
+        });
+    }
+    private getColorForStatus(status: string): string {
+        const statusColors: { [key: string]: string } = {
+            'Completed': '#4caf50',
+            'In Progress': '#ffc107',
+            'Planned': '#2196f3',
+            'Other': '#d60000'
+        };
+        return statusColors[status] || statusColors['Other'];
+    }
     initializeMap(): void {
+        console.log('initializeMap called');
         if (this.mapInitialized) {
             console.log('Map already initialized');
             return;
         }
 
+        console.log('Creating map instance');
         this.map = L.map(this.mapContainer.nativeElement).setView([-28.4793, 24.6727], 6);
 
+        console.log('Adding tile layer');
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
         }).addTo(this.map);
 
-        this.projects.forEach(project => {
-            const marker = L.marker([project.location.lat, project.location.lng]).addTo(this.map);
-            marker.bindPopup(`
-                <div class="p-4 max-w-sm">
-                    <h3 class="text-lg font-semibold mb-2">${project.name}</h3>
-                    <p class="mb-2">Region: ${project.region.name}</p>
-                    <p class="mb-4">Budget: $${project.budget.toLocaleString()}</p>
-                    <button class="view-details-button px-4 py-2 bg-accent text-secondary rounded hover:bg-secondary hover:text-accent transition duration-300">
-                        View Details
-                    </button>
-                </div>
-            `);
+        console.log('Adding markers', this.markers);
+        this.markers.forEach(markerData => {
+            const marker = L.marker([markerData.lat, markerData.lng], {
+                icon: this.getPulsingIcon(markerData.status)
+            }).addTo(this.map);
+            marker.bindPopup(markerData.popup);
         });
 
         this.fitMapBounds();
         this.mapInitialized = true;
+        console.log('Map initialized successfully');
+    }
+
+
+    generateMarkers() {
+        console.log('generateMarkers called');
+        this.markers = this.filteredProjects.map(project => {
+            if (project.location) {
+                const popup = `
+                <div class="p-6 max-w-sm bg-primary-100 rounded-apple ">
+                    <h3 class="text-lg font-semibold mb-2 text-accent-300">${project.name}</h3>
+                    <p class="mb-2 text-accent-100">
+                        <span class="font-medium">Budget:</span> 
+                        ${project.budget.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                    </p>
+                    <p class="mb-4 text-accent-100">
+                        <span class="font-medium">Region:</span> ${project.region.name}
+                    </p>
+                </div>
+            `;
+                return {
+                    lat: project.location.lat,
+                    lng: project.location.lng,
+                    popup: popup,
+                    status: this.getProjectStatus(project)
+                };
+            }
+            return null;
+        }).filter((marker): marker is { lat: number; lng: number; popup: string; status: string } => marker !== null);
+        console.log('Generated markers:', this.markers);
+    }
+
+    private getProjectStatus(project: Project): string {
+        const currentYear = new Date().getFullYear();
+        const investmentYears = Object.keys(project.yearlyInvestment).map(Number);
+
+        if (investmentYears.length === 0) {
+            return 'Planned';
+        }
+
+        const latestInvestmentYear = Math.max(...investmentYears);
+        const earliestInvestmentYear = Math.min(...investmentYears);
+
+        if (latestInvestmentYear < currentYear) {
+            return 'Completed';
+        } else if (earliestInvestmentYear > currentYear) {
+            return 'Planned';
+        } else {
+            return 'In Progress';
+        }
     }
 
     fitMapBounds() {
@@ -340,10 +417,11 @@ export class DataAnalysisComponent implements AfterViewInit {
                 this.projects = snapshot.docs.map(doc => this.convertToProject(doc.id, doc.data()));
                 this.filteredProjects = [...this.projects];
                 this.projectsLoaded = true;
-                console.log(this.projects)
+                console.log(this.projects);
                 this.initializeFilters();
-                this.calculateNewMetrics(); // Add this line
-                this.updateKeyMetrics(); // Make sure this is called after calculateNewMetrics
+                this.calculateNewMetrics();
+                this.updateKeyMetrics();
+                this.generateMarkers(); // Add this line
                 this.checkAndInitializeMap();
             } else {
                 console.error('No data received from Firestore');
@@ -384,8 +462,8 @@ export class DataAnalysisComponent implements AfterViewInit {
         this.sectors = ['All', ...new Set(this.projects.map(p => p.sector))];
         this.climateObjectives = ['All', ...new Set(this.projects.map(p => p.climateObjective))];
         const years = this.projects.flatMap(p => Object.keys(p.yearlyInvestment).map(Number));
-        this.startYear = Math.min(...years);
-        this.endYear = Math.max(...years);
+        this.startYear = this.minYear = Math.min(...years);
+        this.endYear = this.maxYear = Math.max(...years);
     }
 
     getSubsectorIcon(subsector: string): string {
@@ -418,9 +496,33 @@ export class DataAnalysisComponent implements AfterViewInit {
             })
         );
         this.updateKeyMetrics();
-        this.updateSustainableSubsectorBreakdown(); // Add this line
+        this.updateSustainableSubsectorBreakdown();
+        this.generateMarkers(); // Add this line
         this.updateAllCharts();
+        this.updateMapMarkers(); // Add this method to update the map markers
         this.cdr.detectChanges();
+    }
+
+// Add this new method to update the map markers
+    private updateMapMarkers() {
+        if (this.map) {
+            // Clear existing markers
+            this.map.eachLayer((layer) => {
+                if (layer instanceof L.Marker) {
+                    this.map.removeLayer(layer);
+                }
+            });
+
+            // Add new markers
+            this.markers.forEach(markerData => {
+                const marker = L.marker([markerData.lat, markerData.lng], {
+                    icon: this.getPulsingIcon(markerData.status)
+                }).addTo(this.map);
+                marker.bindPopup(markerData.popup);
+            });
+
+            this.fitMapBounds();
+        }
     }
 
     private updateSustainableSubsectorBreakdown() {
@@ -1247,8 +1349,8 @@ export class DataAnalysisComponent implements AfterViewInit {
         this.selectedRegion = 'All';
         this.selectedSector = 'All';
         this.selectedClimateObjective = 'All';
-        this.startYear = this.projects.length > 0 ? Math.min(...Object.keys(this.projects[0].yearlyInvestment).map(Number)) : 0;
-        this.endYear = this.projects.length > 0 ? Math.max(...Object.keys(this.projects[0].yearlyInvestment).map(Number)) : 0;
+        this.startYear = this.minYear;
+        this.endYear = this.maxYear;
         this.applyFilters();
     }
 
