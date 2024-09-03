@@ -117,8 +117,7 @@ export class DataAnalysisComponent implements AfterViewInit {
         { title: 'Total Projects', value: this.totalProjects, icon: 'bi-folder2-open', description: `from ${this.regions.length - 1} Regions`, format: '1.0-0' },
         { title: 'Project Completion', value: this.projectCompletionRate, icon: 'bi-graph-up', description: 'of projects completed', format: '1.0-0' },
         { title: 'Jobs Created', value: this.jobsCreated, icon: 'bi-people', description: 'estimated new jobs', format: '1.0-0' },
-        { title: 'Risk Assessment', value: this.climateRiskAssessmentPercentage, icon: 'bi-clipboard-check', description: 'projects with published assessment', format: '1.0-0' },
-        { title: 'Asset Lifetime', value: this.averageAssetLifetime, icon: 'bi-clock-history', description: 'average years', format: '1.0-1' }
+        { title: 'Risk Assessment', value: this.climateRiskAssessmentPercentage, icon: 'bi-clipboard-check', description: 'projects with published assessment', format: '1.0-0' }
     ];
 
 

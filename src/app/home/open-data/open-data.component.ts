@@ -1,89 +1,76 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, firstValueFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
-import { ProjectService } from "../../services/project.service";
-import {FlattenedProject} from "../../models/flattened-project.model";
+import { ProjectService } from '../../services/project.service';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
+
+type DownloadFormat = 'json' | 'csv' | 'xlsx';
 
 @Component({
   selector: 'app-open-data',
   templateUrl: './open-data.component.html',
   styleUrls: ['./open-data.component.scss'],
-  standalone: true,
   imports: [CommonModule],
+  standalone: true
 })
 export class OpenDataComponent implements OnInit {
-  flattenedProjects$!: Observable<FlattenedProject[]>;
+  flattenedProjects$!: Observable<any[]>;
   downloading = false;
   error: string | null = null;
-  showInfoModal = false;
+  lastUpdated: Date = new Date();
 
-  downloadButtons = [
-    { format: 'csv', icon: 'bi bi-file-earmark-spreadsheet', label: 'CSV' },
-    { format: 'json', icon: 'bi bi-file-earmark-code', label: 'JSON' },
-    { format: 'txt', icon: 'bi bi-file-earmark-text', label: 'TXT' },
-    { format: 'xlsx', icon: 'bi bi-file-earmark-excel', label: 'Excel' },
+  dataFiles = [
+    { id: 'project-overview', name: 'Project Overview' },
+  ];
+
+  downloadFormats: { type: DownloadFormat; label: string }[] = [
+    { type: 'json', label: 'JSON' },
+    { type: 'csv', label: 'CSV' },
+    { type: 'xlsx', label: 'Excel' },
   ];
 
   constructor(
-      private firestore: AngularFirestore,
-      private projectService: ProjectService
+    private firestore: AngularFirestore,
+    private projectService: ProjectService
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.flattenedProjects$ = this.firestore.collection('projects').valueChanges().pipe(
-        map(projects => projects.map(project => this.projectService.flattenProject(project)))
+      map(projects => projects.map(project => this.projectService.flattenProject(project)))
     );
   }
 
-  async downloadFile(format: string): Promise<void> {
+  async downloadFile(fileId: string, format: DownloadFormat) {
     this.downloading = true;
     this.error = null;
-    console.log('Downloading data in ' + format + ' format...');
-
     try {
-      const flattenedProjects = await firstValueFrom(this.flattenedProjects$);
-      if (!flattenedProjects || flattenedProjects.length === 0) {
-        throw new Error('No project data available for download.');
-      }
-
-      let dataStr = '';
-      let fileName = 'projects';
-
+      const projects = await firstValueFrom(this.flattenedProjects$);
+      
       switch (format) {
-        case 'csv':
-          dataStr = this.convertToCSV(flattenedProjects);
-          fileName += '.csv';
-          this.downloadData(dataStr, fileName);
-          break;
         case 'json':
-          dataStr = JSON.stringify(flattenedProjects, null, 2);
-          fileName += '.json';
-          this.downloadData(dataStr, fileName);
+          this.downloadData(JSON.stringify(projects, null, 2), `${fileId}.json`);
           break;
-        case 'txt':
-          dataStr = this.convertToTXT(flattenedProjects);
-          fileName += '.txt';
-          this.downloadData(dataStr, fileName);
+        case 'csv':
+          this.downloadData(this.convertToCSV(projects), `${fileId}.csv`);
           break;
         case 'xlsx':
-          fileName += '.xlsx';
-          this.downloadExcel(flattenedProjects, fileName);
+          this.downloadExcel(projects, `${fileId}.xlsx`);
           break;
+        default:
+          throw new Error('Unsupported format');
       }
-    } catch (error) {
-      console.error('Error downloading data:', error);
-      this.error = 'An error occurred while downloading the data. Please try again.';
+    } catch (err) {
+      console.error('Download error:', err);
+      this.error = 'An error occurred during download. Please try again.';
     } finally {
       this.downloading = false;
     }
   }
 
-
-  private convertToCSV(data: FlattenedProject[]): string {
+  private convertToCSV(data: any[]): string {
     if (!data || data.length === 0) return '';
 
     const headers = Object.keys(data[0]);
@@ -91,17 +78,8 @@ export class OpenDataComponent implements OnInit {
 
     for (const row of data) {
       const values = headers.map(header => {
-        const value = row[header as keyof FlattenedProject];
-        if (typeof value === 'number') {
-          return value.toString();
-        }
-        if (typeof value === 'object' && value !== null) {
-          return `"${JSON.stringify(value).replace(/"/g, '""')}"`;
-        }
-        if (typeof value === 'string' && value.includes(',')) {
-          return `"${value.replace(/"/g, '""')}"`;
-        }
-        return value;
+        const value = row[header];
+        return typeof value === 'string' && value.includes(',') ? `"${value}"` : value;
       });
       csvRows.push(values.join(','));
     }
@@ -109,13 +87,8 @@ export class OpenDataComponent implements OnInit {
     return csvRows.join('\n');
   }
 
-  private convertToTXT(data: FlattenedProject[]): string {
-    if (!data || data.length === 0) return '';
-    return data.map(row => JSON.stringify(row)).join('\n');
-  }
-
-  private downloadData(data: string, fileName: string): void {
-    const blob = new Blob([data], { type: 'text/plain' });
+  private downloadData(data: string | Blob, fileName: string): void {
+    const blob = data instanceof Blob ? data : new Blob([data], { type: 'text/plain' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -124,59 +97,11 @@ export class OpenDataComponent implements OnInit {
     window.URL.revokeObjectURL(url);
   }
 
-  private downloadExcel(data: FlattenedProject[], fileName: string): void {
+  private downloadExcel(data: any[], fileName: string): void {
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
     const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-
-    // Styling
-    const headerStyle = {
-      font: { bold: true, color: { rgb: "FFFFFF" } },
-      fill: { fgColor: { rgb: "4472C4" } },
-      alignment: { horizontal: "center" }
-    };
-
-    // Apply styles to header row
-    const range = XLSX.utils.decode_range(worksheet['!ref'] || 'A1');
-    for (let C = range.s.c; C <= range.e.c; ++C) {
-      const address = XLSX.utils.encode_col(C) + "1";
-      if (!worksheet[address]) continue;
-      worksheet[address].s = headerStyle;
-    }
-
-    // Auto-size columns
-    const max_width = 50;
-    const min_width = 10;
-    const colWidths: number[] = [];
-    for (let C = range.s.c; C <= range.e.c; ++C) {
-      let max_length = min_width;
-      for (let R = range.s.r; R <= range.e.r; ++R) {
-        const address = XLSX.utils.encode_cell({c: C, r: R});
-        if (!worksheet[address]) continue;
-        const cell = worksheet[address];
-        const value = cell.v || '';
-        const length = value.toString().length;
-        if (length > max_length) max_length = length;
-      }
-      colWidths[C] = max_length > max_width ? max_width : max_length;
-    }
-    worksheet['!cols'] = colWidths.map(w => ({width: w}));
-
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
     const excelData: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
     saveAs(excelData, fileName);
   }
-
-
-  toggleInfoModal(): void {
-    this.showInfoModal = !this.showInfoModal;
-    if (this.showInfoModal) {
-      setTimeout(() => {
-        document.body.style.overflow = 'hidden';
-      }, 0);
-    } else {
-      document.body.style.overflow = '';
-    }
-  }
-
-
 }
