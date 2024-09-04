@@ -19,25 +19,17 @@ export interface Project {
     id: string;
     name: string;
     budget: number;
-    region: {
-        name: string;
-        code: string;
-        population: number;
-    };
-    location: {
-        lat: number;
-        lng: number;
-    };
+    region: { name: string; code: string; population: number };
+    location: { lat: number; lng: number };
     climateObjective: string;
     sector: string;
     subsector: string;
     projectType: string;
     date: string;
-    yearlyInvestment: { [year: string]: number };
-    // New fields
+    yearlyInvestment: { [key: string]: number };
     climateAndDisasterRiskAssessmentPublished: boolean;
-    assetLifetime: number; // in years
     sustainableSubsector: string;
+    // Remove the assetLifetime property
 }
 
 // Example usage:
@@ -67,6 +59,5 @@ const exampleProject: Project = {
     },
     // New fields
     climateAndDisasterRiskAssessmentPublished: true,
-    assetLifetime: 25, // Assuming a 25-year lifetime for a solar farm
     sustainableSubsector: "Solar"
 };

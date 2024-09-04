@@ -1,42 +1,65 @@
-<div class="bg-white  rounded-apple-lg mt-5 overflow-hidden p-6 transition-all duration-300 hover:shadow-apple-lg">
-    <h2 class="text-2xl font-semibold text-accent dark:text-primary-100 mb-6 flex items-center">
-        <i class="bi bi-file-earmark-text mr-3 text-secondary" aria-hidden="true"></i>
-        Files
-    </h2>
-    <p class="text-sm text-accent4 dark:text-primary-300 mb-4 italic">Hover or focus on items for more details</p>
+<li *ngFor="let attachment of attachments; let i = index"
+    class="bg-white mt-2 dark:bg-accent2 rounded-apple-lg p-6 shadow-apple-sm hover:shadow-apple-md focus-within:shadow-apple-md transition-all duration-250 group relative overflow-hidden"
+    [@fadeSlideInOut]
+    [style.animation-delay]="i * 100 + 'ms'"
+    [attr.aria-label]="getTooltipContent(attachment)">
+  
+  <div class="flex items-center space-x-6 mb-4">
+    <div class="w-12 h-12 flex-shrink-0 rounded-full bg-accent5 bg-opacity-20 flex items-center justify-center">
+      <i class="bi bi-file-earmark text-2xl text-secondary" aria-hidden="true"></i>
+    </div>
+    
+    <div class="flex-grow min-w-0">
+      <h3 class="text-xl font-semibold text-accent dark:text-primary-100 break-words mb-2">{{attachment.title}}</h3>
+      <p class="text-sm text-accent4 dark:text-primary-300 mb-3 line-clamp-2">{{attachment.description}}</p>
+      
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-accent5 bg-opacity-20 text-accent6">
+          {{attachment.format | uppercase}}
+        </span>
+        <span class="text-xs text-accent4 dark:text-primary-300 flex items-center">
+          <i class="bi bi-clock mr-1"></i>
+          {{formatDate(attachment.dateModified)}}
+        </span>
+      </div>
+    </div>
+    
+    <a [href]="attachment.url"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="inline-flex items-center px-4 py-2 bg-accent6 text-white rounded-full shadow-apple-sm hover:bg-accent5 focus:bg-accent5 transition-all duration-250 hover:shadow-apple-md focus:shadow-apple-md active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent6"
+       [attr.aria-label]="'Download ' + attachment.title">
+      <i class="bi bi-download mr-2" aria-hidden="true"></i>
+      Download
+    </a>
+  </div>
 
-    <ul class="space-y-4" role="list">
-        <li *ngFor="let attachment of attachments; let i = index"
-            class="bg-primary-100 dark:bg-accent2 rounded-apple p-4 shadow-apple-sm hover:shadow-apple-md focus-within:shadow-apple-md transition-all duration-250 group relative"
-            [@fadeSlideInOut]
-            [style.animation-delay]="i * 100 + 'ms'"
-            [attr.aria-label]="getTooltipContent(attachment)">
-
-            <div class="flex items-start space-x-4">
-                <i class="bi bi-file-earmark text-2xl text-secondary group-hover:text-accent5 group-focus-within:text-accent5 transition-colors duration-250 flex-shrink-0" aria-hidden="true"></i>
-
-                <div class="flex-grow min-w-0">
-                    <h3 class="text-lg font-semibold text-accent dark:text-primary-100 break-words mb-2">{{attachment.title}}</h3>
-                    <p class="text-sm text-accent4 dark:text-primary-300 mb-3 line-clamp-2">{{attachment.description}}</p>
-
-                    <div class="flex justify-between items-center">
-            <span class="text-xs text-accent4 dark:text-primary-300 font-medium">
-              {{attachment.format | uppercase}}
-            </span>
-                        <a [href]="attachment.url"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="inline-flex items-center px-4 py-2 bg-accent text-primary-100 rounded-apple-full text-sm font-medium shadow-apple-sm hover:bg-accent5 focus:bg-accent5 transition-all duration-250 hover:shadow-apple-md focus:shadow-apple-md active:scale-95 hover:text-black focus:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent6"
-                           [attr.aria-label]="'Download ' + attachment.title">
-                            <i class="bi bi-download mr-2" aria-hidden="true"></i>Download
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="absolute top-2 right-2 text-accent5 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-250 ease-apple">
-                <i class="bi bi-info-circle" aria-hidden="true"></i>
-            </div>
-        </li>
-    </ul>
-</div>
+  <div class="flex items-center justify-between border-t border-accent5 border-opacity-20 pt-4">
+    <span class="text-sm font-medium text-accent4 dark:text-primary-300">Show details</span>
+    <button 
+      class="relative inline-flex items-center h-6 rounded-full w-11 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent6"
+      [ngClass]="{'bg-accent6': tooltipVisible, 'bg-accent4': !tooltipVisible}"
+      (click)="toggleTooltip($event)"
+      [attr.aria-pressed]="tooltipVisible"
+      aria-labelledby="toggle-label"
+    >
+      <span class="sr-only" id="toggle-label">Toggle additional information</span>
+      <span
+        class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform duration-200 ease-in-out"
+        [ngClass]="{'translate-x-6': tooltipVisible, 'translate-x-1': !tooltipVisible}"
+      ></span>
+    </button>
+  </div>
+  
+  <div 
+    class="mt-4 bg-accent5 bg-opacity-10 rounded-apple-md p-4 text-sm text-accent dark:text-primary-100 transform transition-all duration-300 ease-in-out overflow-hidden"
+    [ngClass]="{'max-h-0 opacity-0 -translate-y-full': !tooltipVisible, 'max-h-96 opacity-100 translate-y-0': tooltipVisible}"
+  >
+    <div class="grid grid-cols-2 gap-3">
+      <p><strong>Document Type:</strong> {{attachment.documentType}}</p>
+      <p><strong>Language:</strong> {{attachment.language}}</p>
+      <p><strong>Pages:</strong> {{attachment.pages}}</p>
+      <p><strong>Published:</strong> {{formatDate(attachment.datePublished)}}</p>
+    </div>
+  </div>
+</li>

@@ -1,17 +1,17 @@
 [
   {
     "title": "Purpose of Publication",
-    "content": "The publication of OC4IDS data aligns with Open Contracting principles, promoting transparency and accountability in public infrastructure projects. By making this information accessible, we aim to build trust, improve efficiency, and drive innovation in the procurement and implementation of infrastructure projects.",
+    "content": "The publication of OC4IDS data aligns with the Open Contracting principles of transparency and accountability in public infrastructure projects. By making this information accessible, we aim to foster trust, efficiency, and innovation in the procurement and implementation of infrastructure projects.",
     "subsections": [
       {
         "title": "Uses of the Data",
-        "content": "The National Infrastructure Disclosure Platform data empowers various stakeholders. Government agencies can enhance project management and resource allocation. Civil society organizations can monitor project progress and impacts. Businesses can identify opportunities and improve competitiveness, while citizens can engage in informed discussions about public infrastructure investments. Specific use cases include budget monitoring, performance analysis, and environmental impact assessments."
+        "content": "The National Infrastructure Disclosure Platform data empowers various stakeholders: government agencies can improve project management and resource allocation; civil society organizations can monitor project progress and impacts; businesses can identify opportunities and enhance competitiveness; and citizens can engage in informed discussions about public infrastructure investments. Specific use cases include budget monitoring, performance analysis, and environmental impact assessments."
       }
     ]
   },
   {
     "title": "Publication Details",
-    "content": "We are committed to delivering high-quality, timely, and comprehensive data in line with the Open Contracting for Infrastructure Data Standards (OC4IDS).",
+    "content": "We are committed to providing high-quality, timely, and comprehensive data in line with Open Contracting for Infrastructure Data Standards (OC4IDS).",
     "subsections": [
       {
         "title": "Creation of OC4IDS Datasets",
@@ -27,7 +27,7 @@
       },
       {
         "title": "Linked Datasets",
-        "content": "Our OC4IDS data is linked to other relevant datasets, including the national company registry and geographical information system. These linkages, using standard identifiers, enhance the richness and usability of the data."
+        "content": "Our OC4IDS data is linked to other relevant datasets, including the national company registry and geographical information system. These linkages are made using standard identifiers, enhancing the richness and usability of the data."
       }
     ]
   },

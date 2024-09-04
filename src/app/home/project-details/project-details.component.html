@@ -527,7 +527,7 @@
                                 getClimateFinanceDataItems(
                                   project.stages.identification
                                     .climateFinanceData
-                                )["Amount of Investment"]
+                                )["Amount of Investment"] | currency:'USD':'symbol':'1.0-0'
                               }}
                             </p>
                           </div>
@@ -904,30 +904,45 @@
                             ) | keyvalue
                           "
                         >
-                          <div class="flex items-center mb-2">
-                            <i
-                              class="bi mr-2 text-lg"
-                              [ngClass]="{
-                                'bi-bullseye text-accent6':
-                                  item.key === 'Project Scope',
-                                'bi-person-lines-fill text-accent4':
-                                  item.key === 'Contact Details',
-                                'bi-cash-coin text-accent5':
-                                  item.key === 'Funding Sources',
-                                'bi-wallet2 text-secondary-200':
-                                  item.key === 'Project Budget',
-                                'bi-calendar-check text-accent3':
-                                  item.key === 'Project Budget Approval Date'
-                              }"
-                            ></i>
-                            <p class="text-sm font-medium text-accent4">
-                              {{ item.key }}
-                            </p>
-                          </div>
+                        <div class="flex items-center mb-2">
+                          <i
+                            class="bi mr-2 text-lg"
+                            [ngClass]="{
+                              'bi-bullseye text-accent6':
+                                item.key === 'Project Scope',
+                              'bi-person-lines-fill text-accent4':
+                                item.key === 'Contact Details',
+                              'bi-cash-coin text-accent5':
+                                item.key === 'Funding Sources',
+                              'bi-wallet2 text-secondary-200':
+                                item.key === 'Project Budget',
+                              'bi-calendar-check text-accent3':
+                                item.key === 'Project Budget Approval Date'
+                            }"
+                          ></i>
+                          <p class="text-sm font-medium text-accent4">
+                            {{ item.key }}
+                          </p>
+                        </div>
+                        <p
+                          class="text-base text-accent ml-6 transition-all duration-250"
+                        >
+                          <ng-container [ngSwitch]="item.key">
+                            <ng-container *ngSwitchCase="'Project Budget'">
+                              {{ item.value | currency:'USD':'symbol':'1.0-0' }}
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'Project Budget Approval Date'">
+                              {{ item.value | date:'mediumDate' }}
+                            </ng-container>
+                            <ng-container *ngSwitchDefault>
+                              {{ item.value }}
+                            </ng-container>
+                          </ng-container>
+                        </p>
                           <p
                             class="text-base text-accent ml-6 transition-all duration-250"
                           >
-                            {{ item.value }}
+                            {{ item.value  }}
                           </p>
                         </div>
                       </div>
@@ -952,50 +967,63 @@
                       </h3>
                       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div
-                          class="hover:apple-hover-lift transition-all duration-300"
-                          *ngFor="
-                            let item of getClimateFinanceDataItemsPreparation(
-                              project.stages.preparation.climateFinanceData
-                            ) | keyvalue
-                          "
-                        >
-                          <div class="flex items-center mb-2">
-                            <i
-                              class="bi mr-2 text-lg"
-                              [ngClass]="{
-                                'bi-bank text-accent6':
-                                  item.key ===
-                                  'Green Climate Fund Accredited Entity',
-                                'bi-building text-accent4':
-                                  item.key === 'Accredited Entity Type',
-                                'bi-pie-chart-fill text-accent5':
-                                  item.key === 'Ratio of Co-Finance',
-                                'bi-calendar-range text-secondary-200':
-                                  item.key === 'Project Approval Period',
-                                'bi-lightning-charge-fill text-accent5':
-                                  item.key === 'Carbon Efficiency',
-                                'bi-hourglass-split text-accent3':
-                                  item.key === 'Project Preparation Period',
-                                'bi-graph-up-arrow text-accent6':
-                                  item.key === 'Non-Climate Co-Benefits',
-                                'bi-cash-stack text-secondary-200':
-                                  item.key === 'Terms of Climate Finance',
-                                'bi-receipt text-accent4':
-                                  item.key === 'Project Preparation Costs',
-                                'bi-piggy-bank-fill text-accent5':
-                                  item.key === 'Funding Source'
-                              }"
-                            ></i>
-                            <p class="text-sm font-medium text-accent4">
-                              {{ item.key }}
-                            </p>
-                          </div>
-                          <p
-                            class="text-base text-accent ml-6 transition-all duration-250"
-                          >
-                            {{ item.value }}
-                          </p>
-                        </div>
+  class="hover:apple-hover-lift transition-all duration-300"
+  *ngFor="
+    let item of getClimateFinanceDataItemsPreparation(
+      project.stages.preparation.climateFinanceData
+    ) | keyvalue
+  "
+>
+  <div class="flex items-center mb-2">
+    <i
+      class="bi mr-2 text-lg"
+      [ngClass]="{
+        'bi-bank text-accent6':
+          item.key ===
+          'Green Climate Fund Accredited Entity',
+        'bi-building text-accent4':
+          item.key === 'Accredited Entity Type',
+        'bi-pie-chart-fill text-accent5':
+          item.key === 'Ratio of Co-Finance',
+        'bi-calendar-range text-secondary-200':
+          item.key === 'Project Approval Period',
+        'bi-lightning-charge-fill text-accent5':
+          item.key === 'Carbon Efficiency',
+        'bi-hourglass-split text-accent3':
+          item.key === 'Project Preparation Period',
+        'bi-graph-up-arrow text-accent6':
+          item.key === 'Non-Climate Co-Benefits',
+        'bi-cash-stack text-secondary-200':
+          item.key === 'Terms of Climate Finance',
+        'bi-receipt text-accent4':
+          item.key === 'Project Preparation Costs',
+        'bi-piggy-bank-fill text-accent5':
+          item.key === 'Funding Source'
+      }"
+    ></i>
+    <p class="text-sm font-medium text-accent4">
+      {{ item.key }}
+    </p>
+  </div>
+  <p
+    class="text-base text-accent ml-6 transition-all duration-250"
+  >
+    <ng-container [ngSwitch]="item.key">
+      <ng-container *ngSwitchCase="'Project Preparation Costs'">
+        {{ item.value | currency:'USD':'symbol':'1.0-0' }}
+      </ng-container>
+      <ng-container *ngSwitchCase="'Project Approval Period'">
+        {{ formatDateRange(item.value) }}
+      </ng-container>
+      <ng-container *ngSwitchCase="'Project Preparation Period'">
+        {{ formatDateRange(item.value) }}
+      </ng-container>
+      <ng-container *ngSwitchDefault>
+        {{ item.value }}
+      </ng-container>
+    </ng-container>
+  </p>
+</div>
                       </div>
                       <app-attachment-list
                         [attachments]="
@@ -1183,7 +1211,7 @@
                           <p
                             class="text-base text-accent ml-6 transition-all duration-250"
                           >
-                            {{ item.value }}
+                            {{ item.value  }}
                           </p>
                         </div>
                       </div>
@@ -1294,63 +1322,76 @@
                         </h3>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                           <div
-                            class="space-y-4 hover:apple-hover-lift transition-all duration-300"
-                            *ngFor="
-                              let item of getBasicDataItemsTenderManagement(
-                                project.stages.tenderManagement.basicData
-                              ) | keyvalue
-                            "
-                          >
-                            <div class="flex items-center mb-2">
-                              <i
-                                class="bi mr-2 text-lg"
-                                [ngClass]="{
-                                  'bi-building text-accent6':
-                                    item.key === 'Procuring Entity',
-                                  'bi-person-lines-fill text-accent4':
-                                    item.key ===
-                                    'Procuring Entity Contact Details',
-                                  'bi-diagram-3 text-accent5':
-                                    item.key === 'Procurement Process',
-                                  'bi-gear text-secondary-200':
-                                    item.key === 'Procurement Method',
-                                  'bi-people text-accent3':
-                                    item.key === 'Number of Firms Tendering',
-                                  'bi-cash-stack text-accent6':
-                                    item.key === 'Cost Estimate',
-                                  'bi-file-earmark-text text-accent4':
-                                    item.key === 'Contract Type',
-                                  'bi-building-gear text-accent5':
-                                    item.key ===
-                                    'Contract Administration Entity',
-                                  'bi-person-badge text-secondary-200':
-                                    item.key === 'Contract Officials and Roles',
-                                  'bi-bookmark text-accent3':
-                                    item.key === 'Contract Title',
-                                  'bi-building-check text-accent6':
-                                    item.key === 'Contract Firm',
-                                  'bi-currency-dollar text-accent4':
-                                    item.key === 'Contract Price',
-                                  'bi-list-check text-accent5':
-                                    item.key === 'Contract Scope of Work',
-                                  'bi-calendar-event text-secondary-200':
-                                    item.key === 'Contract Start Date',
-                                  'bi-hourglass-split text-accent3':
-                                    item.key === 'Contract Duration',
-                                  'bi-flag text-accent6':
-                                    item.key === 'Contract Status'
-                                }"
-                              ></i>
-                              <p class="text-sm font-medium text-accent4">
-                                {{ item.key }}
-                              </p>
-                            </div>
-                            <p
-                              class="text-base text-accent-300 ml-6 transition-all duration-250"
-                            >
-                              {{ item.value }}
-                            </p>
-                          </div>
+  class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+  *ngFor="
+    let item of getBasicDataItemsTenderManagement(
+      project.stages.tenderManagement.basicData
+    ) | keyvalue
+  "
+>
+  <div class="flex items-center mb-2">
+    <i
+      class="bi mr-2 text-lg"
+      [ngClass]="{
+        'bi-building text-accent6':
+          item.key === 'Procuring Entity',
+        'bi-person-lines-fill text-accent4':
+          item.key ===
+          'Procuring Entity Contact Details',
+        'bi-diagram-3 text-accent5':
+          item.key === 'Procurement Process',
+        'bi-gear text-secondary-200':
+          item.key === 'Procurement Method',
+        'bi-people text-accent3':
+          item.key === 'Number of Firms Tendering',
+        'bi-cash-stack text-accent6':
+          item.key === 'Cost Estimate',
+        'bi-file-earmark-text text-accent4':
+          item.key === 'Contract Type',
+        'bi-building-gear text-accent5':
+          item.key ===
+          'Contract Administration Entity',
+        'bi-person-badge text-secondary-200':
+          item.key === 'Contract Officials and Roles',
+        'bi-bookmark text-accent3':
+          item.key === 'Contract Title',
+        'bi-building-check text-accent6':
+          item.key === 'Contract Firm',
+        'bi-currency-dollar text-accent4':
+          item.key === 'Contract Price',
+        'bi-list-check text-accent5':
+          item.key === 'Contract Scope of Work',
+        'bi-calendar-event text-secondary-200':
+          item.key === 'Contract Start Date',
+        'bi-hourglass-split text-accent3':
+          item.key === 'Contract Duration',
+        'bi-flag text-accent6':
+          item.key === 'Contract Status'
+      }"
+    ></i>
+    <p class="text-sm font-medium text-accent4">
+      {{ item.key }}
+    </p>
+  </div>
+  <p
+    class="text-base text-accent-300 ml-6 transition-all duration-250"
+  >
+    <ng-container [ngSwitch]="item.key">
+      <ng-container *ngSwitchCase="'Cost Estimate'">
+        {{ item.value | currency:'USD':'symbol':'1.0-0' }}
+      </ng-container>
+      <ng-container *ngSwitchCase="'Contract Price'">
+        {{ item.value | currency:'USD':'symbol':'1.0-0' }}
+      </ng-container>
+      <ng-container *ngSwitchCase="'Contract Start Date'">
+        {{ item.value | date:'mediumDate' }}
+      </ng-container>
+      <ng-container *ngSwitchDefault>
+        {{ item.value }}
+      </ng-container>
+    </ng-container>
+  </p>
+</div>
                         </div>
                         <app-attachment-list
                           [attachments]="
@@ -1916,39 +1957,49 @@
                       </h3>
                       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div
-                          class="space-y-4 hover:apple-hover-lift transition-all duration-300"
-                          *ngFor="
-                            let item of getBasicDataItemsCompletion(
-                              project.stages.completion.basicData
-                            ) | keyvalue
-                          "
-                        >
-                          <div class="flex items-center mb-2">
-                            <i
-                              class="bi mr-2 text-lg"
-                              [ngClass]="{
-                                'bi-check-circle-fill text-accent6':
-                                  item.key === 'Project Status',
-                                'bi-currency-dollar text-accent5':
-                                  item.key === 'Completion Cost',
-                                'bi-calendar-event-fill text-accent4':
-                                  item.key === 'Completion Date',
-                                'bi-arrows-fullscreen text-secondary-200':
-                                  item.key === 'Scope at Completion',
-                                'bi-arrow-repeat text-accent3':
-                                  item.key === 'Reasons for Project Changes'
-                              }"
-                            ></i>
-                            <p class="text-sm font-medium text-accent4">
-                              {{ item.key }}
-                            </p>
-                          </div>
-                          <p
-                            class="text-base text-accent-300 ml-6 transition-all duration-250"
-                          >
-                            {{ item.value }}
-                          </p>
-                        </div>
+  class="space-y-4 hover:apple-hover-lift transition-all duration-300"
+  *ngFor="
+    let item of getBasicDataItemsCompletion(
+      project.stages.completion.basicData
+    ) | keyvalue
+  "
+>
+  <div class="flex items-center mb-2">
+    <i
+      class="bi mr-2 text-lg"
+      [ngClass]="{
+        'bi-check-circle-fill text-accent6':
+          item.key === 'Project Status',
+        'bi-currency-dollar text-accent5':
+          item.key === 'Completion Cost',
+        'bi-calendar-event-fill text-accent4':
+          item.key === 'Completion Date',
+        'bi-arrows-fullscreen text-secondary-200':
+          item.key === 'Scope at Completion',
+        'bi-arrow-repeat text-accent3':
+          item.key === 'Reasons for Project Changes'
+      }"
+    ></i>
+    <p class="text-sm font-medium text-accent4">
+      {{ item.key }}
+    </p>
+  </div>
+  <p
+    class="text-base text-accent-300 ml-6 transition-all duration-250"
+  >
+    <ng-container [ngSwitch]="item.key">
+      <ng-container *ngSwitchCase="'Completion Cost'">
+        {{ item.value | currency:'USD':'symbol':'1.0-0' }}
+      </ng-container>
+      <ng-container *ngSwitchCase="'Completion Date'">
+        {{ item.value | date:'mediumDate' }}
+      </ng-container>
+      <ng-container *ngSwitchDefault>
+        {{ item.value }}
+      </ng-container>
+    </ng-container>
+  </p>
+</div>
                       </div>
                       <app-attachment-list
                         [attachments]="
@@ -2287,7 +2338,7 @@
                           <p
                             class="text-base text-accent-300 ml-6 transition-all duration-250"
                           >
-                            {{ item.value }}
+                            {{ item.value | currency:'USD':'symbol':'1.0-0' }}
                           </p>
                         </div>
                       </div>
@@ -2571,7 +2622,7 @@
                           <p
                             class="text-base text-accent-300 ml-6 transition-all duration-250"
                           >
-                            {{ item.value }}
+                            {{ item.value | currency:'USD':'symbol':'1.0-0' }}
                           </p>
                         </div>
                       </div>

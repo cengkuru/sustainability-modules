@@ -1,3 +1,4 @@
+import { SharedModule } from './../../dashboard/shared/shared.module';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -14,7 +15,8 @@ import { IntersectionObserverDirective } from "../../directives/intersection-obs
     imports: [
         CommonModule,
         RouterLink,
-        IntersectionObserverDirective
+        IntersectionObserverDirective,
+        SharedModule // Add the pipe to the imports array
     ],
     templateUrl: './project-list.component.html',
     styleUrls: ['./project-list.component.scss'],
@@ -57,7 +59,8 @@ export class ProjectListComponent implements OnInit {
     selectedStatus = new BehaviorSubject<string>('');
     sortOption = new BehaviorSubject<string>('name');
 
-    sectors: string[] = ['Transportation', 'Energy', 'Water', 'Healthcare', 'Education'];
+    sectors: string[] = ['Transport', 'Energy', 'Water and Sanitation', 'Health', 'Education'];
+
     isLoading: boolean = true;
     showModal: boolean = false;
 

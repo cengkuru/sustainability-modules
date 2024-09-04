@@ -5,12 +5,14 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { IsLoadingComponent } from "./is-loading/is-loading.component";
 import {FormatSectionTitlePipe} from "../pipes/format-section-title.pipe";
+import { LargeNumberFormatPipe } from './pipes/large-number-format.pipe';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    IsLoadingComponent
+    IsLoadingComponent,
+    LargeNumberFormatPipe
   ],
   imports: [
     CommonModule,
@@ -19,7 +21,8 @@ import {FormatSectionTitlePipe} from "../pipes/format-section-title.pipe";
   exports: [
     HeaderComponent,
     FooterComponent,
-    IsLoadingComponent
+    IsLoadingComponent,
+    LargeNumberFormatPipe
   ]
 })
 export class SharedModule { }

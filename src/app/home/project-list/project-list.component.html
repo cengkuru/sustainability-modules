@@ -30,7 +30,7 @@
                         <i class="bi bi-cash-stack text-2xl text-accent6"></i>
                     </div>
                     <p class="text-3xl font-bold text-accent6">
-                        {{ totalValueOfProjects$ | async | currency:'USD':'symbol':'1.0-2' }}
+                        {{ totalValueOfProjects$ | async | currency:'USD':'symbol':'1.0-2'  }}
                     </p>
                     <p class="text-sm text-accent4 mt-2">Cumulative project investments</p>
                 </div>
@@ -110,20 +110,6 @@
                             </label>
                         </div>
                     </div>
-
-                    <div class="mb-6">
-                        <h3 class="text-lg font-semibold mb-3 text-accent">Project Status</h3>
-                        <select
-                                class="w-full px-4 py-3 rounded-apple-md bg-primary shadow-apple-inner border-none focus:outline-none focus:ring-2 focus:ring-accent6 transition-all duration-250 ease-apple text-accent"
-                                (change)="onStatusChange($event)"
-                        >
-                            <option value="">All Statuses</option>
-                            <option value="planning">Planning</option>
-                            <option value="implementation">Implementation</option>
-                            <option value="completed">Completed</option>
-                        </select>
-                    </div>
-
                     <button
                             class="w-full px-6 py-3 bg-accent6 text-primary rounded-apple-full font-medium transition-all duration-250 ease-apple hover:bg-accent5 focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2 active:scale-95"
                             (click)="applyFilters()"
@@ -138,7 +124,7 @@
                 <div class="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
                     <p class="text-accent text-lg">Showing <span class="font-semibold">{{ (projects$ | async)?.length || 0 }}</span> of <span class="font-semibold">{{ totalProjects$ | async }}</span> projects</p>
                     <div class="flex items-center">
-                        <label for="sort" class="mr-3 text-accent">Sort by:</label>
+                        <label for="sort" class="mr-3 text-accent">Sort:</label>
                         <select
                                 id="sort"
                                 class="px-4 py-2 rounded-apple-md bg-primary shadow-apple-inner border-none focus:outline-none focus:ring-2 focus:ring-accent6 transition-all duration-250 ease-apple text-accent"

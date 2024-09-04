@@ -43,6 +43,25 @@ import {DataItemComponent} from "../../shared/components/data-item/data-item.com
                 animate('300ms cubic-bezier(0.33, 1, 0.68, 1)', style({ opacity: 1, transform: 'translateY(0)' })),
             ], { delay: '{{ delay }}' })
         ]),
+        trigger('itemAnimation', [ // Example trigger for list items
+            transition(':enter', [
+                style({ opacity: 0, transform: 'scale(0.9)' }),
+                animate('200ms ease-out', style({ opacity: 1, transform: 'scale(1)' })),
+            ]),
+            transition(':leave', [
+                animate('200ms ease-in', style({ opacity: 0, transform: 'scale(0.9)' })),
+            ]),
+        ]),
+        trigger('modalAnimation', [ // Example trigger for modals
+            transition(':enter', [
+                style({ opacity: 0, transform: 'translateY(-50%)' }),
+                animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
+            ]),
+            transition(':leave', [
+                animate('300ms ease-in', style({ opacity: 0, transform: 'translateY(-50%)' })),
+            ]),
+        ]),
+        // Add more triggers as needed based on your HTML structure
     ],
     providers: [ProjectService, DatePipe]
 })
@@ -1277,6 +1296,17 @@ export class ProjectDetailsComponent implements OnInit {
         }
         return 'bi-info-circle-fill';  // default icon
     }
+
+    formatDateRange(dateRange: string): string {
+        if (!dateRange) return '';
+        const [start, end] = dateRange.split(' to ');
+        const formatDate = (date: string) => new Date(date).toLocaleDateString('en-US', { 
+          year: 'numeric', 
+          month: 'short', 
+          day: 'numeric' 
+        });
+        return `${formatDate(start)} to ${formatDate(end)}`;
+      }
 
     getSocialIconClass(key: string): string {
         switch (key) {

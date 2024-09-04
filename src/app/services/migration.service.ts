@@ -74,7 +74,6 @@ export class MigrationService {
     private addNewIndicators(project: Project): Partial<Project> {
         return {
             climateAndDisasterRiskAssessmentPublished: Math.random() < 0.7, // 70% chance of being true
-            assetLifetime: Math.floor(Math.random() * (50 - 10 + 1)) + 10, // Random number between 10 and 50 years
             sustainableSubsector: this.getRandomSubsector()
         };
     }

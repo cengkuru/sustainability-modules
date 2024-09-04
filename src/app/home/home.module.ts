@@ -1,19 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeRoutingModule } from "./home-routing.module";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { NgxJsonViewerModule } from "ngx-json-viewer";
-import {IntersectionObserverDirective} from "../directives/intersection-observer.directive";
+import { ProjectListComponent } from './project-list/project-list.component';
+import { HomeRoutingModule } from './home-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     HomeRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgxJsonViewerModule,
-    IntersectionObserverDirective
-  ]
+    SharedModule,
+    ProjectListComponent // Import the standalone component here
+  ],
+  // Remove declarations array if ProjectListComponent is the only component
 })
 export class HomeModule { }

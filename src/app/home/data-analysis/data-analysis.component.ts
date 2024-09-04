@@ -108,7 +108,6 @@ export class DataAnalysisComponent implements AfterViewInit {
     jobsCreated: number = 0;
 
     climateRiskAssessmentPercentage: number = 0;
-    averageAssetLifetime: number = 0;
     sustainableSubsectorBreakdown: { [key: string]: number } = {};
     sortedSubsectorBreakdown: { key: string; value: number; percentage: number }[] = [];
 
@@ -302,7 +301,7 @@ export class DataAnalysisComponent implements AfterViewInit {
 
 
     private getPulsingIcon(status: string): L.DivIcon {
-        const color = this.getColorForStatus(status);
+        const color = '#D60000';
         return L.divIcon({
             className: 'pulsing-icon',
             html: `
@@ -449,9 +448,7 @@ export class DataAnalysisComponent implements AfterViewInit {
             projectType: data['projectType'] || '',
             date: data['date'] || '',
             yearlyInvestment: data['yearlyInvestment'] || {},
-            // New fields
             climateAndDisasterRiskAssessmentPublished: data['climateAndDisasterRiskAssessmentPublished'] || false,
-            assetLifetime: data['assetLifetime'] || 0,
             sustainableSubsector: data['sustainableSubsector'] || ''
         };
     }
@@ -565,8 +562,7 @@ export class DataAnalysisComponent implements AfterViewInit {
             { title: 'Total Projects', value: this.totalProjects, icon: 'bi-folder2-open', description: `from ${this.regions.length - 1} Regions`, format: '1.0-0' },
             { title: 'Project Completion', value: this.projectCompletionRate, icon: 'bi-graph-up', description: 'of projects completed', format: '1.0-0' },
             { title: 'Jobs Created', value: this.jobsCreated, icon: 'bi-people', description: 'estimated new jobs', format: '1.0-0' },
-            { title: 'Risk Assessment', value: this.climateRiskAssessmentPercentage, icon: 'bi-clipboard-check', description: 'projects with published assessment', format: '1.0-0' },
-            { title: 'Asset Lifetime', value: this.averageAssetLifetime, icon: 'bi-clock-history', description: 'average years', format: '1.0-1' }
+            { title: 'Risk Assessment', value: this.climateRiskAssessmentPercentage, icon: 'bi-clipboard-check', description: 'projects with published assessment', format: '1.0-0' }
         ];
 
         console.log('Updated metrics:', { totalProjects: this.totalProjects, projectCompletionRate: this.projectCompletionRate, jobsCreated: this.jobsCreated });
@@ -731,10 +727,50 @@ export class DataAnalysisComponent implements AfterViewInit {
                     this.brandColors.accent3,
                     this.brandColors.accent4,
                     this.brandColors.accent2
-                ]
+                ],
+                toolbox: {
+                    show: false  // Disable the toolbox completely
+                },
+                dataZoom: [
+                    {
+                        type: 'inside',
+                        disabled: true  // Disable inside zoom
+                    },
+                    {
+                        type: 'slider',
+                        show: false  // Hide zoom slider
+                    }
+                ],
+                grid: {
+                    left: '5%',
+                    right: '5%',
+                    bottom: '10%',
+                    top: '10%',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    data: data.map(item => item.name),
+                    axisLabel: {
+                        rotate: 45,
+                        interval: 0
+                    },
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                animation: false  // Disable animations
             };
 
             chart.setOption(this.updateChartStyles(option));
+
+            // Disable chart dragging
+            chart.getZr().off('mousedown');
+            chart.getZr().off('mousemove');
+            chart.getZr().off('mouseup');
         };
 
         let currentData = processData(this.filteredProjects, 'sector');
@@ -859,156 +895,145 @@ export class DataAnalysisComponent implements AfterViewInit {
     }
 
     private createInvestmentByRegionChart(): void {
-        console.log('Initializing Investment by Region Chart');
         const chartDom = document.getElementById('investmentByRegionChart');
-        if (!chartDom) {
-            console.error('Chart container not found: investmentByRegionChart');
-            return;
-        }
-
-        if (!this.charts['investmentByRegion']) {
-            console.log('Creating new chart instance');
-            this.charts['investmentByRegion'] = echarts.init(chartDom);
-        } else {
-            console.log('Using existing chart instance');
-        }
-
-        if (!this.filteredProjects || this.filteredProjects.length === 0) {
-            console.warn('No filtered projects available for chart');
-            return;
-        }
-
-        const regions = Array.from(new Set(this.filteredProjects.map(p => p.region.name)));
-        const years = Object.keys(this.filteredProjects[0].yearlyInvestment).sort();
-
-        console.log('Regions:', regions);
-        console.log('Years:', years);
-
-        const series: BarSeriesOption[] = years.map(year => ({
-            name: year,
-            type: 'bar',
-            stack: 'total',
-            emphasis: { focus: 'series' },
-            data: regions.map(region =>
-                this.filteredProjects
+        if (!chartDom) return;
+        this.charts['investmentByRegion'] = echarts.init(chartDom);
+    
+        // Extract unique regions and years from the projects
+        const regions = Array.from(new Set(this.projects.map(p => p.region.name))).sort();
+        const years = Array.from(new Set(
+            this.projects.flatMap(p => Object.keys(p.yearlyInvestment))
+        )).sort();
+    
+        // Prepare data for each region
+        const series: BarSeriesOption[] = regions.map(region => {
+            const data = years.map(year => {
+                const yearlyInvestment = this.projects
                     .filter(p => p.region.name === region)
-                    .reduce((sum, p) => sum + (p.yearlyInvestment[year] || 0), 0) / 1e6
-            )
-        }));
-
-        console.log('Series data:', series);
-
+                    .reduce((sum, p) => sum + (p.yearlyInvestment[year] || 0), 0);
+                return yearlyInvestment / 1e9; // Convert to billions
+            });
+    
+            return {
+                name: region,
+                type: 'bar',
+                stack: 'total',
+                emphasis: {
+                    focus: 'series'
+                },
+                data: data
+            };
+        });
+    
         const option: EChartsOption = {
-            backgroundColor: this.brandColors.primary,
+            backgroundColor: '#f7f7f7', // Light gray background
             title: {
-                text: 'Infrastructure Investment by Region',
-                subtext: 'Annual investment in millions of ZAR',
+                text: 'Investment by Region',
                 left: 'center',
                 top: '20px',
                 textStyle: {
-                    color: this.brandColors.accent,
+                    color: '#333333',
                     fontWeight: 'bold',
                     fontSize: 18,
-                    fontFamily: 'Inter, sans-serif'
-                },
-                subtextStyle: {
-                    color: this.brandColors.accent4,
-                    fontSize: 14,
                     fontFamily: 'Inter, sans-serif'
                 }
             },
             tooltip: {
                 trigger: 'axis',
-                axisPointer: { type: 'shadow' },
-                backgroundColor: this.brandColors.primary,
-                borderColor: this.brandColors.accent2,
-                borderWidth: 1,
-                textStyle: {
-                    color: this.brandColors.accent,
-                    fontFamily: 'Inter, sans-serif'
+                axisPointer: {
+                    type: 'shadow'
                 },
                 formatter: (params: any) => {
-                    let tooltipContent = `<strong>${params[0].axisValue}</strong><br/>`;
+                    let tooltip = `${params[0].axisValue}<br/>`;
                     let total = 0;
                     params.forEach((item: any) => {
-                        tooltipContent += `${item.marker} ${item.seriesName}: ${item.value.toFixed(2)}M<br/>`;
+                        const value = item.value.toLocaleString('en-US', {
+                            style: 'currency',
+                            currency: 'ZAR',
+                            minimumFractionDigits: 1,
+                            maximumFractionDigits: 1
+                        });
+                        tooltip += `${item.marker} ${item.seriesName}: ${value}B<br/>`;
                         total += item.value;
                     });
-                    tooltipContent += `<strong>Total: ${total.toFixed(2)}M</strong>`;
-                    return tooltipContent;
+                    tooltip += `<strong>Total: ${total.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'ZAR',
+                        minimumFractionDigits: 1,
+                        maximumFractionDigits: 1
+                    })}B</strong>`;
+                    return tooltip;
                 }
             },
             legend: {
-                data: years,
-                bottom: '10px',
+                data: regions,
+                top: '50px',
                 textStyle: {
-                    color: this.brandColors.accent,
+                    color: '#333333',
                     fontFamily: 'Inter, sans-serif'
-                }
+                },
+                type: 'scroll',
+                pageButtonPosition: 'end'
             },
             grid: {
                 left: '3%',
                 right: '4%',
-                bottom: '15%',
+                bottom: '10%',
                 top: '15%',
                 containLabel: true
             },
             xAxis: {
                 type: 'category',
-                data: regions,
+                data: years,
                 axisLabel: {
-                    rotate: 45,
-                    interval: 0,
-                    color: this.brandColors.accent,
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: 10,
-                    width: 100,
-                    overflow: 'break'
+                    color: '#333333',
+                    fontFamily: 'Inter, sans-serif'
                 },
-                axisLine: { lineStyle: { color: this.brandColors.accent2 } }
+                axisLine: {
+                    lineStyle: {
+                        color: '#d8d8cd'
+                    }
+                }
             },
             yAxis: {
                 type: 'value',
-                name: 'Investment (M ZAR)',
+                name: 'Investment (Billion ZAR)',
                 nameTextStyle: {
-                    color: this.brandColors.accent,
+                    color: '#333333',
                     fontFamily: 'Inter, sans-serif'
                 },
                 axisLabel: {
-                    color: this.brandColors.accent,
-                    fontFamily: 'Inter, sans-serif'
+                    color: '#333333',
+                    fontFamily: 'Inter, sans-serif',
+                    formatter: (value: number) => `${value}`
                 },
-                axisLine: { lineStyle: { color: this.brandColors.accent2 } },
-                splitLine: { lineStyle: { color: this.brandColors.accent2 } }
+                axisLine: {
+                    lineStyle: {
+                        color: '#d8d8cd'
+                    }
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: '#d8d8cd',
+                        type: 'dashed'
+                    }
+                }
             },
             series: series,
             color: [
-                this.brandColors.secondary,
-                this.brandColors.accent6,
-                this.brandColors.accent5,
-                this.brandColors.accent1,
+                this.brandColors.secondary, 
+                this.brandColors.accent6, 
+                this.brandColors.accent5, 
+                this.brandColors.accent1, 
                 this.brandColors.accent3,
-                this.brandColors.accent4,
-                this.brandColors.accent2
+                this.brandColors.accent4, 
+                this.brandColors.accent2, '#795548', '#607D8B', '#3F51B5'
             ],
             animationDuration: 1000,
             animationEasing: 'cubicInOut'
         };
-
-        console.log('Chart option:', option);
-
-        try {
-            this.charts['investmentByRegion']!.setOption(option);
-            console.log('Chart option set successfully');
-        } catch (error) {
-            console.error('Error setting chart option:', error);
-        }
-
-        this.charts['investmentByRegion']!.on('click', (params: any) => {
-            if (params.componentType === 'series' && params.name && params.seriesName) {
-                this.showRegionDetails(params.name, params.seriesName);
-            }
-        });
+    
+        this.charts['investmentByRegion']!.setOption(option);
     }
 
 // Make sure this method is also in your component
@@ -1142,142 +1167,36 @@ export class DataAnalysisComponent implements AfterViewInit {
         if (!chartDom) return;
         this.charts['projectsByClimateObjectives'] = echarts.init(chartDom);
 
-        const projectsByObjective = this.projects.reduce((acc, project) => {
-            acc[project.climateObjective] = (acc[project.climateObjective] || 0) + 1;
-            return acc;
-        }, {} as { [key: string]: number });
+        // Get unique climate objectives and years
+        const climateObjectives = Array.from(new Set(this.projects.map(p => p.climateObjective)));
+        const years = Array.from(new Set(this.projects.flatMap(p => Object.keys(p.yearlyInvestment)))).sort();
 
-        const data = Object.entries(projectsByObjective).map(([objective, count]) => ({
-            value: count,
-            name: objective
-        }));
+        // Prepare data for each climate objective
+        const series: BarSeriesOption[] = climateObjectives.map(objective => {
+            const data = years.map(year => {
+                const yearlyInvestment = this.projects
+                    .filter(p => p.climateObjective === objective)
+                    .reduce((sum, p) => sum + (p.yearlyInvestment[year] || 0), 0);
+                return yearlyInvestment / 1e6; // Convert to millions
+            });
 
-        const series: PieSeriesOption[] = [{
-            name: 'Projects',
-            type: 'pie',
-            radius: ['40%', '70%'],
-            avoidLabelOverlap: false,
-            itemStyle: {
-                borderRadius: 10,
-                borderColor: '#fff',
-                borderWidth: 2
-            },
-            label: {
-                show: false,
-                position: 'center'
-            },
-            emphasis: {
-                label: {
-                    show: true,
-                    fontSize: '18',
-                    fontWeight: 'bold',
-                    color: '#333333' // accent color for emphasized text
-                }
-            },
-            labelLine: {
-                show: false
-            },
-            data: data
-        }];
-
-        const option: EChartsOption = {
-            backgroundColor: '#F7F7F7', // primary color as background
-            title: {
-                text: 'Projects per Climate Objective',
-                left: 'center',
-                top: '5%',
-                textStyle: {
-                    color: '#333333', // accent color for title
-                    fontWeight: 'bold',
-                    fontSize: 18,
-                    fontFamily: 'Inter, sans-serif'
-                }
-            },
-            tooltip: {
-                trigger: 'item',
-                backgroundColor: 'rgba(247, 247, 247, 0.9)', // primary color with opacity
-                borderColor: '#d8d8cd', // accent2 color for border
-                borderWidth: 1,
-                textStyle: {
-                    color: '#333333', // accent color for tooltip text
-                    fontFamily: 'Inter, sans-serif'
-                },
-                formatter: '{b}: {c} projects ({d}%)'
-            },
-            legend: {
-                orient: 'vertical',
-                left: '5%',
-                top: 'center',
-                itemWidth: 25,
-                itemHeight: 14,
-                itemGap: 12,
-                textStyle: {
-                    color: '#333333', // accent color for legend text
-                    fontSize: 14,
-                    fontFamily: 'Inter, sans-serif'
-                }
-            },
-            series: series,
-            color: ['#D60000', '#2c4143', '#58707b'], // Using secondary, accent3, accent4 colors
-            animationDuration: 1000,
-            animationEasing: 'cubicInOut',
-            animationDelay: (idx: number) => idx * 150
-        };
-
-        this.charts['projectsByClimateObjectives']!.setOption(option);
-    }
-
-    private createInvestmentsByClimateObjectivesChart(): void {
-        const chartDom = document.getElementById('investmentsByClimateObjectivesChart');
-        if (!chartDom) return;
-        this.charts['investmentsByClimateObjectives'] = echarts.init(chartDom);
-
-        const investmentsByObjective = this.projects.reduce((acc, project) => {
-            acc[project.climateObjective] = (acc[project.climateObjective] || 0) + project.budget;
-            return acc;
-        }, {} as { [key: string]: number });
-
-        const data = Object.entries(investmentsByObjective).map(([objective, investment]) => ({
-            value: investment,
-            name: objective
-        }));
-
-        const series: PieSeriesOption[] = [
-            {
-                name: 'Investments',
-                type: 'pie',
-                radius: ['40%', '70%'],
-                avoidLabelOverlap: false,
-                itemStyle: {
-                    borderRadius: 10,
-                    borderColor: this.brandColors.primary,
-                    borderWidth: 2
-                },
-                label: {
-                    show: false,
-                    position: 'center'
-                },
+            return {
+                name: objective,
+                type: 'bar',
+                stack: 'total',
                 emphasis: {
-                    label: {
-                        show: true,
-                        fontSize: '18',
-                        fontWeight: 'bold',
-                        color: this.brandColors.accent
-                    }
+                    focus: 'series'
                 },
-                labelLine: {
-                    show: false
-                },
-                data: data.map(item => ({ value: item.value, name: item.name }))
-            }
-        ];
+                data: data
+            };
+        });
 
         const option: EChartsOption = {
             backgroundColor: this.brandColors.primary,
             title: {
-                text: 'Investments per Climate Objective',
+                text: 'Investment by Climate Objective Over Time',
                 left: 'center',
-                top: '5%',
+                top: '20px',
                 textStyle: {
                     color: this.brandColors.accent,
                     fontWeight: 'bold',
@@ -1286,7 +1205,10 @@ export class DataAnalysisComponent implements AfterViewInit {
                 }
             },
             tooltip: {
-                trigger: 'item',
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                },
                 backgroundColor: `rgba(247, 247, 247, 0.9)`,
                 borderColor: this.brandColors.accent2,
                 borderWidth: 1,
@@ -1295,31 +1217,227 @@ export class DataAnalysisComponent implements AfterViewInit {
                     fontFamily: 'Inter, sans-serif'
                 },
                 formatter: (params: any) => {
-                    const value = params.value.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 });
-                    return `${params.name}: ${value} million (${params.percent}%)`;
+                    let tooltip = `${params[0].axisValue}<br/>`;
+                    let total = 0;
+                    params.forEach((item: any) => {
+                        const value = item.value.toLocaleString('en-US', {
+                            style: 'currency',
+                            currency: 'ZAR',
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 2
+                        });
+                        tooltip += `${item.marker} ${item.seriesName}: ${value} million<br/>`;
+                        total += item.value;
+                    });
+                    tooltip += `<strong>Total: ${total.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'ZAR',
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 2
+                    })} million</strong>`;
+                    return tooltip;
                 }
             },
             legend: {
-                orient: 'vertical',
-                left: '5%',
-                top: 'center',
-                itemWidth: 25,
-                itemHeight: 14,
-                itemGap: 12,
+                data: climateObjectives,
+                bottom: '5%',
                 textStyle: {
                     color: this.brandColors.accent,
-                    fontSize: 14,
                     fontFamily: 'Inter, sans-serif'
                 }
             },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '15%',
+                top: '15%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                data: years,
+                axisLabel: {
+                    color: this.brandColors.accent,
+                    fontFamily: 'Inter, sans-serif'
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: this.brandColors.accent2
+                    }
+                }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Investment (Million ZAR)',
+                nameTextStyle: {
+                    color: this.brandColors.accent,
+                    fontFamily: 'Inter, sans-serif'
+                },
+                axisLabel: {
+                    color: this.brandColors.accent,
+                    fontFamily: 'Inter, sans-serif'
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: this.brandColors.accent2
+                    }
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: this.brandColors.accent2
+                    }
+                }
+            },
             series: series,
-            color: [this.brandColors.secondary, this.brandColors.accent3, this.brandColors.accent4],
+            color: [
+                this.brandColors.secondary,
+                this.brandColors.accent3,
+                this.brandColors.accent4,
+                this.brandColors.accent5,
+                this.brandColors.accent6
+            ],
             animationDuration: 1000,
-            animationEasing: 'cubicInOut',
-            animationDelay: (idx: number) => idx * 150
+            animationEasing: 'cubicInOut'
         };
 
-        this.charts['investmentsByClimateObjectives']!.setOption(this.updateChartStyles(option));
+        this.charts['projectsByClimateObjectives']!.setOption(this.updateChartStyles(option));
+    }
+
+    private createInvestmentsByClimateObjectivesChart(): void {
+        const chartDom = document.getElementById('investmentsByClimateObjectivesChart');
+        if (!chartDom) return;
+        this.charts['investmentsByClimateObjectives'] = echarts.init(chartDom);
+    
+        const climateObjectives = ['Mitigation', 'Cross-cutting', 'Adaptation'];
+        
+        // Extract years from the projects
+        const years = Array.from(new Set(
+            this.projects.flatMap(p => Object.keys(p.yearlyInvestment))
+        )).sort();
+    
+        // Prepare data for each climate objective
+        const series: BarSeriesOption[] = climateObjectives.map(objective => {
+            const data = years.map(year => {
+                const yearlyInvestment = this.projects
+                    .filter(p => p.climateObjective === objective)
+                    .reduce((sum, p) => sum + (p.yearlyInvestment[year] || 0), 0);
+                return yearlyInvestment / 1e9; // Convert to billions
+            });
+    
+            return {
+                name: objective,
+                type: 'bar',
+                stack: 'total',
+                emphasis: {
+                    focus: 'series'
+                },
+                data: data
+            };
+        });
+    
+        const option: EChartsOption = {
+            backgroundColor: '#f7f7f7', // Light gray background
+            title: {
+                text: 'Investment by Climate Objective',
+                left: 'center',
+                top: '20px',
+                textStyle: {
+                    color: '#333333',
+                    fontWeight: 'bold',
+                    fontSize: 18,
+                    fontFamily: 'Inter, sans-serif'
+                }
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                },
+                formatter: (params: any) => {
+                    let tooltip = `${params[0].axisValue}<br/>`;
+                    let total = 0;
+                    params.forEach((item: any) => {
+                        const value = item.value.toLocaleString('en-US', {
+                            style: 'currency',
+                            currency: 'ZAR',
+                            minimumFractionDigits: 1,
+                            maximumFractionDigits: 1
+                        });
+                        tooltip += `${item.marker} ${item.seriesName}: ${value}B<br/>`;
+                        total += item.value;
+                    });
+                    tooltip += `<strong>Total: ${total.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'ZAR',
+                        minimumFractionDigits: 1,
+                        maximumFractionDigits: 1
+                    })}B</strong>`;
+                    return tooltip;
+                }
+            },
+            legend: {
+                data: climateObjectives,
+                top: '50px',
+                textStyle: {
+                    color: '#333333',
+                    fontFamily: 'Inter, sans-serif'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '10%',
+                top: '15%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                data: years,
+                axisLabel: {
+                    color: '#333333',
+                    fontFamily: 'Inter, sans-serif'
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#d8d8cd'
+                    }
+                }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Investment (Billion ZAR)',
+                nameTextStyle: {
+                    color: '#333333',
+                    fontFamily: 'Inter, sans-serif'
+                },
+                axisLabel: {
+                    color: '#333333',
+                    fontFamily: 'Inter, sans-serif',
+                    formatter: (value: number) => `${value}`
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#d8d8cd'
+                    }
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: '#d8d8cd',
+                        type: 'dashed'
+                    }
+                }
+            },
+            series: series,
+            color: [
+                '#2c4143',  // Mitigation (blue)
+                '#61a8bd',  // Cross-cutting (cyan)
+                '#d60000'   // Adaptation (pink)
+            ],
+            animationDuration: 1000,
+            animationEasing: 'cubicInOut'
+        };
+    
+        this.charts['investmentsByClimateObjectives']!.setOption(option);
     }
 
     @HostListener('window:resize')
@@ -1332,10 +1450,6 @@ export class DataAnalysisComponent implements AfterViewInit {
         // Calculate Climate and Disaster Risk Assessment percentage
         const assessmentCount = this.projects.filter(p => p.climateAndDisasterRiskAssessmentPublished).length;
         this.climateRiskAssessmentPercentage = (assessmentCount / this.projects.length) * 100;
-
-        // Calculate average Asset Lifetime
-        const totalLifetime = this.projects.reduce((sum, p) => sum + p.assetLifetime, 0);
-        this.averageAssetLifetime = totalLifetime / this.projects.length;
 
         // Calculate Sustainable Subsector breakdown
         this.sustainableSubsectorBreakdown = this.projects.reduce((acc, p) => {
