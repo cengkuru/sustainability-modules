@@ -73,15 +73,15 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   private viewInitialized: boolean = false;
 
   mainSection = {
-    title: "Explore GCF Projects: Advancing Climate Finance in South Africa",
-    description: "This prototype, developed by <a href='https://infrastructuretransparency.org/' target='_blank'>CoST – the Infrastructure Transparency Initiative</a>, showcases how the <a href='https://standard.open-contracting.org/infrastructure/latest/en/reference/schema/' target='_blank'>Open Contracting for Infrastructure Data Standard (OC4IDS)</a> can be applied to climate finance and sustainability efforts. By focusing on these modules, it illustrates their potential to improve transparency and deliver significant benefits in infrastructure projects. The data presented is based on <a href='https://www.greenclimate.fund/' target='_blank'>Green Climate Fund (GCF)</a> projects in the Republic of South Africa, with values provided for illustrative purposes only.",
+    title: "Advancing transparency and accountability in climate finance projects",
+    description: "This prototype, developed by <a href='https://infrastructuretransparency.org/' target='_blank'>CoST – the Infrastructure Transparency Initiative</a>, showcases how the <a href='https://standard.open-contracting.org/infrastructure/latest/en/reference/schema/' target='_blank'>Open Contracting for Infrastructure Data Standard (OC4IDS)</a> can be applied to climate finance and sustainability efforts. It illustrates the potential to improve transparency and accountability in infrastructure projects aiming at adaptation and mitigation to climate change. The data presented is partially based on approved projects by the <a href='https://www.greenclimate.fund/' target='_blank'>Green Climate Fund (GCF)</a> for the Republic of South Africa, with values provided for illustrative purposes only.",
     buttonText: "Explore Projects "
   };
   
 
   featuredProjectsSection = {
-    title: "Explore Featured Infrastructure Projects",
-    description: "Discover innovative infrastructure projects that are setting new benchmarks in transparency, sustainability, and excellence. From sustainable energy initiatives to modern transportation systems and advanced water management, these projects exemplify best practices in development.",
+    title: "Featured infrastructure projects",
+    description: "Discover a range of infrastructure projects that are setting new benchmarks in sustainability, from sustainable energy initiatives to modern transportation systems and advanced water management, these projects exemplify best practices in development.",
     buttonText: "View Featured Projects →",
     buttonLink: "/projects/featured"
   };
