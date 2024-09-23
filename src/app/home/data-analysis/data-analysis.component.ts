@@ -636,17 +636,7 @@ export class DataAnalysisComponent implements AfterViewInit {
             const totalInvestment = data.reduce((sum, item) => sum + item.value, 0);
 
             const option: EChartsOption = {
-                title: {
-                    text: title,
-                    left: 'center',
-                    top: 20,
-                    textStyle: {
-                        fontSize: 18,
-                        fontWeight: 'bold',
-                        fontFamily: 'Inter, sans-serif',
-                        color: this.brandColors.accent
-                    }
-                },
+
                 tooltip: {
                     formatter: (info: any) => {
                         const value = info.value.toLocaleString('en-US', {
@@ -742,7 +732,7 @@ export class DataAnalysisComponent implements AfterViewInit {
                     }
                 ],
                 grid: {
-                    left: '5%',
+                    left: '15%',
                     right: '5%',
                     bottom: '10%',
                     top: '10%',
@@ -849,17 +839,7 @@ export class DataAnalysisComponent implements AfterViewInit {
 
         const option: EChartsOption = {
             backgroundColor: '#F7F7F7', // primary color as background
-            title: {
-                text: 'Project Types Distribution',
-                left: 'center',
-                top: '5%',
-                textStyle: {
-                    color: '#333333', // accent color for title
-                    fontSize: 18,
-                    fontWeight: 'bold',
-                    fontFamily: 'Inter, sans-serif' // Using Inter font as specified in Tailwind config
-                }
-            },
+
             tooltip: {
                 trigger: 'item',
                 formatter: '{b}: {c} projects ({d}%)',
@@ -927,17 +907,7 @@ export class DataAnalysisComponent implements AfterViewInit {
     
         const option: EChartsOption = {
             backgroundColor: '#f7f7f7', // Light gray background
-            title: {
-                text: 'Investment by Region',
-                left: 'center',
-                top: '20px',
-                textStyle: {
-                    color: '#333333',
-                    fontWeight: 'bold',
-                    fontSize: 18,
-                    fontFamily: 'Inter, sans-serif'
-                }
-            },
+
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
@@ -976,7 +946,7 @@ export class DataAnalysisComponent implements AfterViewInit {
                 pageButtonPosition: 'end'
             },
             grid: {
-                left: '3%',
+                left: '13%',
                 right: '4%',
                 bottom: '10%',
                 top: '15%',
@@ -1090,17 +1060,7 @@ export class DataAnalysisComponent implements AfterViewInit {
 
         const option: EChartsOption = {
             backgroundColor: '#F7F7F7', // primary color as background
-            title: {
-                text: 'Projects per Region',
-                left: 'center',
-                top: '20px',
-                textStyle: {
-                    color: '#333333', // accent color for title
-                    fontWeight: 'bold',
-                    fontSize: 18,
-                    fontFamily: 'Inter, sans-serif'
-                }
-            },
+
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
@@ -1109,7 +1069,7 @@ export class DataAnalysisComponent implements AfterViewInit {
                 formatter: '{b}: {c} projects'
             },
             grid: {
-                left: '5%',
+                left: '15%',
                 right: '5%',
                 bottom: '15%',
                 top: '15%',
@@ -1193,17 +1153,7 @@ export class DataAnalysisComponent implements AfterViewInit {
 
         const option: EChartsOption = {
             backgroundColor: this.brandColors.primary,
-            title: {
-                text: 'Investment by Climate Objective Over Time',
-                left: 'center',
-                top: '20px',
-                textStyle: {
-                    color: this.brandColors.accent,
-                    fontWeight: 'bold',
-                    fontSize: 18,
-                    fontFamily: 'Inter, sans-serif'
-                }
-            },
+
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
@@ -1247,7 +1197,7 @@ export class DataAnalysisComponent implements AfterViewInit {
                 }
             },
             grid: {
-                left: '3%',
+                left: '13%',
                 right: '4%',
                 bottom: '15%',
                 top: '15%',
@@ -1337,17 +1287,7 @@ export class DataAnalysisComponent implements AfterViewInit {
     
         const option: EChartsOption = {
             backgroundColor: '#f7f7f7', // Light gray background
-            title: {
-                text: 'Investment by Climate Objective',
-                left: 'center',
-                top: '20px',
-                textStyle: {
-                    color: '#333333',
-                    fontWeight: 'bold',
-                    fontSize: 18,
-                    fontFamily: 'Inter, sans-serif'
-                }
-            },
+
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
@@ -1384,7 +1324,7 @@ export class DataAnalysisComponent implements AfterViewInit {
                 }
             },
             grid: {
-                left: '3%',
+                left: '13%',
                 right: '4%',
                 bottom: '10%',
                 top: '15%',
