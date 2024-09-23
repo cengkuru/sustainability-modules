@@ -35,24 +35,44 @@ interface ViewProjectDetailsEvent extends CustomEvent {
     NgIconComponent,
   ],
   animations: [
+    // Existing slideInAnimation
     trigger('slideInAnimation', [
       transition(':enter', [
         style({ transform: 'translateY(20px)', opacity: 0 }),
         animate('1000ms ease-out', style({ transform: 'translateY(0)', opacity: 1 }))
       ])
     ]),
+    // Existing fadeInAnimation
     trigger('fadeInAnimation', [
       transition(':enter', [
         style({ opacity: 0 }),
         animate('500ms', style({ opacity: 1 }))
       ])
     ]),
+    // New fadeInUp animation definition
+    trigger('fadeInUp', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(50px)' }),
+        animate('500ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
+    ]),
+    // Staggered list animation
     trigger('listAnimation', [
       transition('* <=> *', [
-        query(':enter',
-            [style({ opacity: 0, transform: 'translateY(50px)' }), stagger('50ms', animate('500ms ease-out', style({ opacity: 1, transform: 'translateY(0px)' })))],
-            { optional: true }
-        )
+        query(':enter', [
+          style({ opacity: 0, transform: 'translateY(50px)' }),
+          stagger('50ms', animate('500ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })))
+        ], { optional: true })
+      ])
+    ]),
+
+    // New staggered list animation
+    trigger('staggeredList', [
+      transition('* <=> *', [
+        query(':enter', [
+          style({ opacity: 0, transform: 'translateY(50px)' }),
+          stagger('50ms', animate('500ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })))
+        ], { optional: true })
       ])
     ])
   ]
@@ -77,7 +97,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     description: "This prototype, developed by <a href='https://infrastructuretransparency.org/' target='_blank'>CoST – the Infrastructure Transparency Initiative</a>, showcases how the <a href='https://standard.open-contracting.org/infrastructure/latest/en/reference/schema/' target='_blank'>Open Contracting for Infrastructure Data Standard (OC4IDS)</a> can be applied to climate finance and sustainability efforts. It illustrates the potential to improve transparency and accountability in infrastructure projects aiming at adaptation and mitigation to climate change. The data presented is partially based on approved projects by the <a href='https://www.greenclimate.fund/' target='_blank'>Green Climate Fund (GCF)</a> for the Republic of South Africa, with values provided for illustrative purposes only.",
     buttonText: "Explore Projects "
   };
-  
+
 
   featuredProjectsSection = {
     title: "Featured infrastructure projects",
@@ -85,7 +105,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     buttonText: "View Featured Projects →",
     buttonLink: "/projects/featured"
   };
-  
+
 
   sponsorsSection = {
     title: "Supported by",
@@ -105,7 +125,6 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    console.log('ngOnInit called');
     try {
       await this.loadLeafletScripts();
       this.loadProjects();
@@ -116,7 +135,6 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    console.log('ngAfterViewInit called');
     this.viewInitialized = true;
     this.ngZone.runOutsideAngular(() => {
       setTimeout(() => {
@@ -126,7 +144,6 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy(): void {
-    console.log('ngOnDestroy called');
     window.removeEventListener('viewProjectDetails', this.handleViewProjectDetails as EventListener);
     if (this.map) {
       this.map.remove();
@@ -134,7 +151,6 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private async loadLeafletScripts(): Promise<void> {
-    console.log('loadLeafletScripts called');
     const scripts = [
       'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js'
     ];
@@ -145,7 +161,6 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     try {
       await this.scriptLoader.loadScripts(scripts);
       await this.scriptLoader.loadStyles(styles);
-      console.log('Leaflet scripts and styles loaded successfully');
     } catch (error) {
       console.error('Error loading Leaflet scripts or styles:', error);
       throw error;
@@ -153,20 +168,15 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   handleViewProjectDetails = (event: ViewProjectDetailsEvent) => {
-    console.log('handleViewProjectDetails called', event.detail);
+
     this.viewProjectDetails(event.detail);
   };
 
   checkAndInitializeMap(): void {
-    console.log('checkAndInitializeMap called');
-    console.log('viewInitialized:', this.viewInitialized);
-    console.log('projectsLoaded:', this.projectsLoaded);
-    console.log('mapContainer:', this.mapContainer);
 
     if (this.viewInitialized && this.projectsLoaded && this.mapContainer && this.mapContainer.nativeElement) {
       this.initializeMap();
     } else {
-      console.log('Map initialization deferred');
       if (!this.mapContainer) {
         console.error('Map container is not available');
       }
@@ -175,21 +185,15 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   initializeMap(): void {
-    console.log('initializeMap called');
     if (this.mapInitialized) {
-      console.log('Map already initialized');
       return;
     }
-
-    console.log('Creating map instance');
     this.map = L.map(this.mapContainer.nativeElement).setView([-28.4793, 24.6727], 6);
 
-    console.log('Adding tile layer');
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
     }).addTo(this.map);
-
-    console.log('Adding markers', this.markers);
     this.markers.forEach(markerData => {
       const marker = L.marker([markerData.lat, markerData.lng], {
         icon: this.getPulsingIcon(markerData.status)
@@ -199,11 +203,9 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.fitMapBounds();
     this.mapInitialized = true;
-    console.log('Map initialized successfully');
   }
 
   fitMapBounds() {
-    console.log('fitMapBounds called', this.markers.length);
     if (this.markers.length > 0 && this.map) {
       const bounds = L.latLngBounds(this.markers.map(m => [m.lat, m.lng]));
       this.map.fitBounds(bounds);
@@ -211,7 +213,6 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   viewProjectDetails(projectId: string) {
-    console.log('viewProjectDetails called', projectId);
     this.router.navigate(['/public/projects', projectId]).then(
         r => console.log('Navigated to project details:', r ? 'success' : 'failed')
     );
@@ -231,8 +232,6 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
               totalValue += parseFloat(contractPrice.replace(/[^0-9.-]+/g, ""));
             }
           });
-
-          console.log('Projects loaded:', projects.length);
           this.recentProjects = projects.slice(0, 5);
           this.highValueProjects = projects.sort((a, b) => {
             const aPrice = parseFloat(a.stages?.tenderManagement?.basicData?.contractPrice?.replace(/[^0-9.-]+/g, "") || '0');
@@ -256,7 +255,6 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   generateMarkers() {
-    console.log('generateMarkers called');
     this.markers = this.recentProjects.map(project => {
       if (project.location && project.location.coordinates) {
         const popup = `
@@ -283,7 +281,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
       }
       return null;
     }).filter((marker): marker is { lat: number; lng: number; popup: string; status: string } => marker !== null);
-    console.log('Generated markers:', this.markers);
+
   }
 
   private getPulsingIcon(status: string): L.DivIcon {

@@ -69,6 +69,7 @@ export class ProjectListComponent implements OnInit {
     pageSize = 10;
     totalPages = 1;
 
+
     constructor(
         private firestore: AngularFirestore,
         private emailService: EmailService,
@@ -102,10 +103,16 @@ export class ProjectListComponent implements OnInit {
                         (!status || project.status === status)
                     )),
                     map(projects => {
+                        // Parse project budget to ensure it's a number
+                        projects.forEach(project => {
+                            const budget = project.stages.preparation.basicData.projectBudget;
+                            project.parsedBudget = this.parseProjectBudget(budget);
+                        });
+
                         // Sort projects
                         projects.sort((a, b) => {
                             if (sortBy === 'name') return a.name.localeCompare(b.name);
-                            if (sortBy === 'budget') return a.stages.preparation.basicData.projectBudget - b.stages.preparation.basicData.projectBudget;
+                            if (sortBy === 'budget') return a.parsedBudget - b.parsedBudget;
                             if (sortBy === 'date') return new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
                             return 0;
                         });
@@ -119,8 +126,24 @@ export class ProjectListComponent implements OnInit {
             })
         );
 
+
         this.totalProjects$ = this.projects$.pipe(
             map(projects => projects.length)
+        );
+
+        this.totalValueOfProjects$ = this.projects$.pipe(
+            map(projects => projects.reduce((total, project) => total + project.parsedBudget, 0))
+        );
+
+        this.averageProjectValue$ = combineLatest([
+            this.totalValueOfProjects$,
+            this.totalProjects$
+        ]).pipe(
+            map(([totalValue, totalProjects]) => totalProjects > 0 ? totalValue / totalProjects : 0)
+        );
+
+        this.featuredProjectsCount$ = this.projects$.pipe(
+            map(projects => projects.filter(project => project.featured).length)
         );
 
         this.totalValueOfProjects$ = this.projects$.pipe(
@@ -128,7 +151,8 @@ export class ProjectListComponent implements OnInit {
                 return projects.reduce((total, project) => {
                     const contractPrice = project.stages?.tenderManagement?.basicData?.contractPrice;
                     if (contractPrice) {
-                        return total + parseFloat(contractPrice.replace(/[^0-9.-]+/g, ""));
+                        const numericValue = this.parseProjectBudget(contractPrice);
+                        return total + numericValue;
                     }
                     return total;
                 }, 0);
@@ -202,12 +226,10 @@ export class ProjectListComponent implements OnInit {
     }
 
     onProjectClick(project: any): void {
-        console.log('Project clicked:', project);
         // Implement any additional logic you want to execute when a project card is clicked
     }
 
     onBulkDownload(): void {
-        console.log('Bulk download initiated');
         // Implement the logic for bulk download
         // You might want to call a service method here to handle the actual download
     }
@@ -219,5 +241,19 @@ export class ProjectListComponent implements OnInit {
         this.selectedStatus.next('');
         this.sortOption.next('name');
         this.applyFilters();
+    }
+
+    parseProjectBudget(budget: string | number): number {
+        if (typeof budget === 'number') return budget;
+        if (typeof budget === 'string') {
+            const numericString = budget.replace(/[^0-9.-]+/g, '');
+            return parseFloat(numericString) || 0;
+        }
+        return 0;
+    }
+
+    formatCurrency(value: number | null): string {
+        if (value === null) return 'N/A';
+        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
     }
 }

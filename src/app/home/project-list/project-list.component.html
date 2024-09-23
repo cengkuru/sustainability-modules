@@ -10,7 +10,7 @@
     <div class="container mx-auto py-8 bg-gray-100">
         <div class="mt-16 mb-8 animate-apple-fade-in">
             <h2 class="text-2xl font-bold text-accent mb-6 text-center">Project Overview</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Total Projects Card -->
                 <div class="bg-primary rounded-apple-md shadow-apple-lg p-6 transition-transform duration-400 hover:shadow-apple-xl hover:translate-y-[-5px]">
                     <div class="flex items-center justify-between mb-4">
@@ -30,21 +30,9 @@
                         <i class="bi bi-cash-stack text-2xl text-accent6"></i>
                     </div>
                     <p class="text-3xl font-bold text-accent6">
-                        {{ totalValueOfProjects$ | async | currency:'USD':'symbol':'1.0-2'  }}
+                        {{ formatCurrency(totalValueOfProjects$ | async) }}
                     </p>
                     <p class="text-sm text-accent4 mt-2">Cumulative project investments</p>
-                </div>
-
-                <!-- Average Project Value Card -->
-                <div class="bg-primary rounded-apple-md shadow-apple-lg p-6 transition-transform duration-400 hover:shadow-apple-xl hover:translate-y-[-5px]">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-accent">Avg. Project Value</h3>
-                        <i class="bi bi-graph-up-arrow text-2xl text-accent6"></i>
-                    </div>
-                    <p class="text-3xl font-bold text-accent6">
-                        {{ averageProjectValue$ | async | currency:'USD':'symbol':'1.0-2' }}
-                    </p>
-                    <p class="text-sm text-accent4 mt-2">Mean investment per project</p>
                 </div>
 
                 <!-- Featured Projects Card -->
@@ -154,7 +142,7 @@
                                 <p class="text-accent text-opacity-80 line-clamp-2 mb-4">{{ project.stages.identification.basicData.projectDescription }}</p>
                                 <div class="flex flex-wrap justify-between items-center text-sm">
                                     <span class="bg-accent2 text-accent px-3 py-1 rounded-full mb-2 mr-2">{{ project.stages.identification.basicData.sectorSubsector }}</span>
-                                    <span class="font-semibold text-accent6 mb-2">{{ project.stages.preparation.basicData.projectBudget | currency }}</span>
+                                    <span class="font-semibold text-accent6 mb-2">{{ formatCurrency(project.parsedBudget) }}</span>
                                     <span class="bg-accent5 text-accent px-3 py-1 rounded-full mb-2 w-full sm:w-auto text-center">{{ project.status }}</span>
                                 </div>
                             </a>
