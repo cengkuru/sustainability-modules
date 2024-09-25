@@ -7,115 +7,106 @@
         </div>
     </div>
 
-    <div class="container mx-auto py-8 bg-gray-100">
-        <div class="mt-16 mb-8 animate-apple-fade-in">
+    <div class="container mx-auto py-8">
+        <!-- Project Overview Cards -->
+        <div class="mb-8 animate-apple-fade-in">
             <h2 class="text-2xl font-bold text-accent mb-6 text-center">Project Overview</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Total Projects Card -->
-                <div class="bg-primary rounded-apple-md shadow-apple-lg p-6 transition-transform duration-400 hover:shadow-apple-xl hover:translate-y-[-5px]">
-                    <div class="flex items-center justify-between mb-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="bg-primary rounded-apple-md shadow-apple-lg p-4 transition-transform duration-400 hover:shadow-apple-xl hover:translate-y-[-5px]">
+                    <div class="flex items-center justify-between mb-2">
                         <h3 class="text-lg font-semibold text-accent">Total Projects</h3>
-                        <i class="bi bi-folder2-open text-2xl text-accent6"></i>
+                        <i class="bi bi-folder2-open text-xl text-accent6"></i>
                     </div>
-                    <p class="text-3xl font-bold text-accent6">
-                        {{ totalProjects$ | async }}
-                    </p>
-                    <p class="text-sm text-accent4 mt-2">Active infrastructure initiatives</p>
+                    <p class="text-2xl font-bold text-accent6">{{ totalProjects$ | async }}</p>
                 </div>
-
-                <!-- Total Value Card -->
-                <div class="bg-primary rounded-apple-md shadow-apple-lg p-6 transition-transform duration-400 hover:shadow-apple-xl hover:translate-y-[-5px]">
-                    <div class="flex items-center justify-between mb-4">
+                <div class="bg-primary rounded-apple-md shadow-apple-lg p-4 transition-transform duration-400 hover:shadow-apple-xl hover:translate-y-[-5px]">
+                    <div class="flex items-center justify-between mb-2">
                         <h3 class="text-lg font-semibold text-accent">Total Value</h3>
-                        <i class="bi bi-cash-stack text-2xl text-accent6"></i>
+                        <i class="bi bi-cash-stack text-xl text-accent6"></i>
                     </div>
-                    <p class="text-3xl font-bold text-accent6">
-                        {{ formatCurrency(totalValueOfProjects$ | async) }}
-                    </p>
-                    <p class="text-sm text-accent4 mt-2">Cumulative project investments</p>
+                    <p class="text-2xl font-bold text-accent6">{{ formatCurrency(totalValueOfProjects$ | async) }}</p>
                 </div>
-
-                <!-- Featured Projects Card -->
-                <div class="bg-primary rounded-apple-md shadow-apple-lg p-6 transition-transform duration-400 hover:shadow-apple-xl hover:translate-y-[-5px]">
-                    <div class="flex items-center justify-between mb-4">
+                <div class="bg-primary rounded-apple-md shadow-apple-lg p-4 transition-transform duration-400 hover:shadow-apple-xl hover:translate-y-[-5px]">
+                    <div class="flex items-center justify-between mb-2">
                         <h3 class="text-lg font-semibold text-accent">Featured Projects</h3>
-                        <i class="bi bi-star-fill text-2xl text-accent6"></i>
+                        <i class="bi bi-star-fill text-xl text-accent6"></i>
                     </div>
-                    <p class="text-3xl font-bold text-accent6">
-                        {{ featuredProjectsCount$ | async }}
-                    </p>
-                    <p class="text-sm text-accent4 mt-2">Highlighted infrastructure initiatives</p>
+                    <p class="text-2xl font-bold text-accent6">{{ featuredProjectsCount$ | async }}</p>
                 </div>
             </div>
         </div>
 
-
-
-
-        <div class="flex flex-col lg:flex-row gap-8">
-            <!-- Filters Aside -->
+        <!-- Main Content Area -->
+        <div class="lg:flex lg:gap-8">
+            <!-- Filters (Collapsible on mobile) -->
             <aside class="lg:w-1/4 mb-6 lg:mb-0">
-                <div class="bg-primary rounded-apple-lg shadow-apple-md p-6 sticky top-4 transition-all duration-300 hover:shadow-apple-lg">
-                    <h2 class="text-2xl font-semibold mb-6 text-accent">Filters</h2>
-
-                    <div class="mb-6">
-                        <label for="search" class="block text-sm font-medium text-accent mb-2">Search Projects</label>
-                        <div class="relative">
+                <div class="bg-primary rounded-apple-lg shadow-apple-md p-4 lg:sticky lg:top-4 transition-all duration-300 hover:shadow-apple-lg">
+                    <button class="lg:hidden w-full text-left flex justify-between items-center text-accent font-semibold mb-4" (click)="toggleFilters()">
+                        Filters
+                        <i class="bi" [ngClass]="{'bi-chevron-down': !showFilters, 'bi-chevron-up': showFilters}"></i>
+                    </button>
+                    <div [ngClass]="{'hidden': !showFilters}" class="lg:block">
+                        <!-- Search Input -->
+                        <div class="mb-4">
                             <input
                                     id="search"
                                     type="text"
-                                    class="w-full pl-10 pr-3 py-3 rounded-apple-md bg-primary shadow-apple-inner border-none focus:outline-none focus:ring-2 focus:ring-accent6 transition-all duration-250 ease-apple text-accent placeholder-accent4"
-                                    placeholder="Search by name, keyword, or code..."
+                                    class="w-full px-3 py-2 rounded-apple-md bg-primary shadow-apple-inner border-none focus:outline-none focus:ring-2 focus:ring-accent6 transition-all duration-250 ease-apple text-accent placeholder-accent4"
+                                    placeholder="Search projects..."
                                     (input)="onSearchChange($event)"
                             />
-                            <i class="bi bi-search absolute left-3 top-1/2 transform -translate-y-1/2 text-accent4"></i>
                         </div>
-                    </div>
 
-                    <div class="mb-6">
-                        <label class="flex items-center cursor-pointer group">
-                            <input
-                                    type="checkbox"
-                                    class="form-checkbox w-5 h-5 text-accent6 rounded transition-all duration-250 ease-apple focus:ring-accent6 focus:ring-offset-2"
-                                    [checked]="showFeatured | async"
-                                    (change)="toggleFeatured()"
-                            />
-                            <span class="ml-3 text-accent group-hover:text-accent6 transition-colors duration-250">Featured Projects Only</span>
-                        </label>
-                    </div>
-
-                    <div class="mb-6">
-                        <h3 class="text-lg font-semibold mb-3 text-accent">Sectors</h3>
-                        <div class="space-y-2">
-                            <label *ngFor="let sector of sectors" class="flex items-center cursor-pointer group">
+                        <!-- Featured Projects Toggle -->
+                        <div class="mb-4">
+                            <label class="flex items-center cursor-pointer group">
                                 <input
                                         type="checkbox"
                                         class="form-checkbox w-5 h-5 text-accent6 rounded transition-all duration-250 ease-apple focus:ring-accent6 focus:ring-offset-2"
-                                        [checked]="isSectorSelected(sector)"
-                                        (change)="toggleSector(sector)"
+                                        [checked]="showFeatured | async"
+                                        (change)="toggleFeatured()"
                                 />
-                                <span class="ml-3 text-accent group-hover:text-accent6 transition-colors duration-250">{{ sector }}</span>
+                                <span class="ml-2 text-accent group-hover:text-accent6 transition-colors duration-250">Featured Only</span>
                             </label>
                         </div>
+
+                        <!-- Sectors -->
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold mb-2 text-accent">Sectors</h3>
+                            <div class="space-y-2">
+                                <label *ngFor="let sector of sectors" class="flex items-center cursor-pointer group">
+                                    <input
+                                            type="checkbox"
+                                            class="form-checkbox w-5 h-5 text-accent6 rounded transition-all duration-250 ease-apple focus:ring-accent6 focus:ring-offset-2"
+                                            [checked]="isSectorSelected(sector)"
+                                            (change)="toggleSector(sector)"
+                                    />
+                                    <span class="ml-2 text-accent group-hover:text-accent6 transition-colors duration-250">{{ sector }}</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Apply Filters Button -->
+                        <button
+                                class="w-full px-4 py-2 bg-accent6 text-primary rounded-apple-full font-medium transition-all duration-250 ease-apple hover:bg-accent5 focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2 active:scale-95"
+                                (click)="applyFilters()"
+                        >
+                            Apply Filters
+                        </button>
                     </div>
-                    <button
-                            class="w-full px-6 py-3 bg-accent6 text-primary rounded-apple-full font-medium transition-all duration-250 ease-apple hover:bg-accent5 focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2 active:scale-95"
-                            (click)="applyFilters()"
-                    >
-                        Apply Filters
-                    </button>
                 </div>
             </aside>
 
-            <!-- Main Content -->
+            <!-- Project List -->
             <main class="lg:w-3/4">
-                <div class="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
-                    <p class="text-accent text-lg">Showing <span class="font-semibold">{{ (projects$ | async)?.length || 0 }}</span> of <span class="font-semibold">{{ totalProjects$ | async }}</span> projects</p>
+                <!-- Sort and Results Info -->
+                <div class="mb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
+                    <p class="text-accent text-sm">Showing <span class="font-semibold">{{ (projects$ | async)?.length || 0 }}</span> of <span class="font-semibold">{{ totalProjects$ | async }}</span> projects</p>
                     <div class="flex items-center">
-                        <label for="sort" class="mr-3 text-accent">Sort:</label>
+                        <label for="sort" class="mr-2 text-accent text-sm">Sort:</label>
                         <select
                                 id="sort"
-                                class="px-4 py-2 rounded-apple-md bg-primary shadow-apple-inner border-none focus:outline-none focus:ring-2 focus:ring-accent6 transition-all duration-250 ease-apple text-accent"
+                                class="px-2 py-1 text-sm rounded-apple-md bg-primary shadow-apple-inner border-none focus:outline-none focus:ring-2 focus:ring-accent6 transition-all duration-250 ease-apple text-accent"
                                 (change)="onSortChange($event)"
                         >
                             <option value="name">Name</option>
@@ -125,39 +116,40 @@
                     </div>
                 </div>
 
-                <div class="space-y-6" @listAnimation>
+                <!-- Project Cards -->
+                <div class="space-y-4" @listAnimation>
                     <div *ngFor="let project of projects$ | async; let i = index"
                          class="relative overflow-hidden rounded-apple-lg bg-primary shadow-apple-md transition-all duration-300 ease-apple hover:shadow-apple-xl group apple-hover-lift"
                          [style.animation-delay]="i * 50 + 'ms'">
-                        <div class="p-6">
+                        <div class="p-4">
                             <a [routerLink]="['/public/projects', project.id]" class="block focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-inset rounded-apple-md">
-                                <div class="flex justify-between items-center mb-3">
-                                    <h3 class="text-2xl font-semibold text-accent group-hover:text-accent6 transition-colors duration-250 ease-apple">{{ project.name }}</h3>
-                                    <i class="bi bi-arrow-right text-xl text-accent4 group-hover:text-accent6 transition-all duration-250 ease-apple transform group-hover:translate-x-1"></i>
+                                <div class="flex justify-between items-center mb-2">
+                                    <h3 class="text-xl font-semibold text-accent group-hover:text-accent6 transition-colors duration-250 ease-apple">{{ project.name }}</h3>
+                                    <i class="bi bi-arrow-right text-lg text-accent4 group-hover:text-accent6 transition-all duration-250 ease-apple transform group-hover:translate-x-1"></i>
                                 </div>
-                                <p class="text-base mb-3 text-accent4 flex items-center">
-                                    <i class="bi bi-geo-alt mr-2 text-accent6"></i>
+                                <p class="text-sm mb-2 text-accent4 flex items-center">
+                                    <i class="bi bi-geo-alt mr-1 text-accent6"></i>
                                     {{ project.location.name }}
                                 </p>
-                                <p class="text-accent text-opacity-80 line-clamp-2 mb-4">{{ project.stages.identification.basicData.projectDescription }}</p>
-                                <div class="flex flex-wrap justify-between items-center text-sm">
-                                    <span class="bg-accent2 text-accent px-3 py-1 rounded-full mb-2 mr-2">{{ project.stages.identification.basicData.sectorSubsector }}</span>
-                                    <span class="font-semibold text-accent6 mb-2">{{ formatCurrency(project.parsedBudget) }}</span>
-                                    <span class="bg-accent5 text-accent px-3 py-1 rounded-full mb-2 w-full sm:w-auto text-center">{{ project.status }}</span>
+                                <p class="text-accent text-opacity-80 text-sm line-clamp-2 mb-3">{{ project.stages.identification.basicData.projectDescription }}</p>
+                                <div class="flex flex-wrap justify-between items-center text-xs">
+                                    <span class="bg-accent2 text-accent px-2 py-1 rounded-full mb-1 mr-1">{{ project.stages.identification.basicData.sectorSubsector }}</span>
+                                    <span class="font-semibold text-accent6 mb-1">{{ formatCurrency(project.parsedBudget) }}</span>
+                                    <span class="bg-accent5 text-accent px-2 py-1 rounded-full mb-1 w-full sm:w-auto text-center">{{ project.status }}</span>
                                 </div>
                             </a>
-                            <div *ngIf="project.featured" class="absolute top-4 right-4 animate-apple-pulse">
-                        <span class="bg-accent1 text-accent text-xs font-semibold px-4 py-2 rounded-apple-full shadow-apple-sm">
-                            Featured
-                        </span>
+                            <div *ngIf="project.featured" class="absolute top-2 right-2 animate-apple-pulse">
+                                <span class="bg-accent1 text-accent text-xs font-semibold px-2 py-1 rounded-apple-full shadow-apple-sm">
+                                    Featured
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Pagination -->
-                <nav class="mt-10" aria-label="Pagination">
-                    <ul class="flex justify-center items-center space-x-2">
+                <nav class="mt-8" aria-label="Pagination">
+                    <ul class="flex justify-center items-center space-x-1">
                         <li *ngFor="let page of [].constructor(totalPages); let i = index">
                             <button
                                     (click)="changePage(i + 1)"
@@ -166,7 +158,7 @@
                                     [class.bg-primary]="currentPage !== i + 1"
                                     [class.text-accent]="currentPage !== i + 1"
                                     [attr.aria-current]="currentPage === i + 1 ? 'page' : null"
-                                    class="w-10 h-10 rounded-full transition-colors duration-250 focus:outline-none focus:ring-2 focus:ring-accent6 hover:bg-accent5 hover:text-primary"
+                                    class="w-8 h-8 rounded-full transition-colors duration-250 focus:outline-none focus:ring-2 focus:ring-accent6 hover:bg-accent5 hover:text-primary text-sm"
                             >
                                 {{ i + 1 }}
                             </button>
@@ -175,9 +167,5 @@
                 </nav>
             </main>
         </div>
-
-
-
-
     </div>
 </div>

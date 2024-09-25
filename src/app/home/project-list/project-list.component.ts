@@ -63,6 +63,8 @@ export class ProjectListComponent implements OnInit {
 
     isLoading: boolean = true;
     showModal: boolean = false;
+    showFilters: boolean = false;  // New property for mobile filter toggle
+
 
     // Pagination
     currentPage = 1;
@@ -181,6 +183,11 @@ export class ProjectListComponent implements OnInit {
     toggleFeatured(): void {
         this.showFeatured.next(!this.showFeatured.value);
     }
+
+    toggleFilters(): void {
+        this.showFilters = !this.showFilters;
+    }
+
 
     toggleSector(sector: string): void {
         const currentSectors = this.selectedSectors.value;
