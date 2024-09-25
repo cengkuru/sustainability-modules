@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    await this.initializePolicyDataIfNeeded();
+    // await this.initializePolicyDataIfNeeded();
     // await this.initializeProjectsData();
 
     /*this.migrationService.migrateProjects().subscribe(

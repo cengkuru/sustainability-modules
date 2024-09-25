@@ -86,40 +86,63 @@
     <!-- Enhanced Footer -->
     <footer class="bg-accent text-primary">
         <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col items-center justify-between sm:flex-row">
-                <div class="mb-6 sm:mb-0">
-                    <img src="../../../assets/logo-white.png" alt="Logo" class="h-10 w-auto mb-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Logo and Copyright -->
+                <div class="text-center md:text-left">
+                    <img src="../../../assets/logo-white.png" alt="Logo" class="h-10 w-auto mx-auto md:mx-0 mb-4">
                     <p class="text-sm opacity-80">&copy; {{currentYear}} {{owner}}. All rights reserved.</p>
                 </div>
-                <div class="flex flex-wrap justify-center sm:justify-end gap-6">
-                    <div class="space-y-2">
-                        <h3 class="font-semibold mb-2">Navigation</h3>
-                        <a *ngFor="let link of navLinks" [routerLink]="link.path" class="block text-sm hover:text-accent1 transition-all duration-300 ease-apple hover:translate-x-1">
-                            {{link.label}}
-                        </a>
-                    </div>
-                    <div class="space-y-2">
-                        <h3 class="font-semibold mb-2">Legal</h3>
-                        <a *ngFor="let link of footerLinks" [routerLink]="link.path" class="block text-sm hover:text-accent1 transition-all duration-300 ease-apple hover:translate-x-1">
-                            {{link.label}}
-                        </a>
-                        <a [href]="creativeCommonsLicense.link" target="_blank" rel="license noopener noreferrer" class="flex items-center text-sm hover:text-accent1 transition-all duration-300 ease-apple hover:translate-x-1">
-                            <img src="../../../assets/ccheart_red.svg" alt="Creative Commons License" class="h-4 w-auto mr-2">
-                            {{creativeCommonsLicense.name}}
-                        </a>
-                    </div>
-                    <div class="space-y-2">
-                        <h3 class="font-semibold mb-2">Connect</h3>
-                        <a target="_blank" href="https://x.com/CoSTransparency" class="block text-sm hover:text-accent1 transition-all duration-300 ease-apple hover:translate-x-1">
-                            <i class="bi bi-x mr-2"></i>X (formerly: Twitter)
-                        </a>
-                        <a target="_blank" href="https://www.linkedin.com/company/costransparency/" class="block text-sm hover:text-accent1 transition-all duration-300 ease-apple hover:translate-x-1">
-                            <i class="bi bi-linkedin mr-2"></i>LinkedIn
-                        </a>
-                        <a target="_blank" href="https://www.facebook.com/CoSTransparency" class="block text-sm hover:text-accent1 transition-all duration-300 ease-apple hover:translate-x-1">
-                            <i class="bi bi-facebook mr-2"></i>Facebook
-                        </a>
-                    </div>
+
+                <!-- Navigation -->
+                <div>
+                    <h3 class="font-semibold mb-4 text-lg">Navigation</h3>
+                    <ul class="space-y-2">
+                        <li *ngFor="let link of navLinks">
+                            <a [routerLink]="link.path" class="text-sm hover:text-accent1 transition-all duration-300 ease-apple hover:translate-x-1 block">
+                                {{link.label}}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div>
+                    <h3 class="font-semibold mb-4 text-lg">Legal</h3>
+                    <ul class="space-y-2">
+                        <li *ngFor="let link of footerLinks">
+                            <a [routerLink]="link.path" class="text-sm hover:text-accent1 transition-all duration-300 ease-apple hover:translate-x-1 block">
+                                {{link.label}}
+                            </a>
+                        </li>
+                        <li>
+                            <a [href]="creativeCommonsLicense.link" target="_blank" rel="license noopener noreferrer" class="flex items-center text-sm hover:text-accent1 transition-all duration-300 ease-apple hover:translate-x-1">
+                                <img src="../../../assets/ccheart_red.svg" alt="Creative Commons License" class="h-4 w-auto mr-2">
+                                {{creativeCommonsLicense.name}}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Connect -->
+                <div>
+                    <h3 class="font-semibold mb-4 text-lg">Connect</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <a target="_blank" href="https://x.com/CoSTransparency" class="text-sm hover:text-accent1 transition-all duration-300 ease-apple hover:translate-x-1 flex items-center">
+                                <i class="bi bi-x mr-2"></i>X (formerly: Twitter)
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://www.linkedin.com/company/costransparency/" class="text-sm hover:text-accent1 transition-all duration-300 ease-apple hover:translate-x-1 flex items-center">
+                                <i class="bi bi-linkedin mr-2"></i>LinkedIn
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://www.facebook.com/CoSTransparency" class="text-sm hover:text-accent1 transition-all duration-300 ease-apple hover:translate-x-1 flex items-center">
+                                <i class="bi bi-facebook mr-2"></i>Facebook
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

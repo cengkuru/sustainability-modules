@@ -82,6 +82,8 @@ export class IndexComponent implements OnInit {
     });
   }
 
+
+
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
     const currentScrollPosition = window.pageYOffset;

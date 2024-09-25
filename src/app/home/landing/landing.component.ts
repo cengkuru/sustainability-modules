@@ -244,6 +244,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
 
           this.numberOfProjects = projects.length;
           this.totalValueOfProjects = totalValue;
+          this.generateMarkers(); // Call generateMarkers after loading projects
           this.projectsLoaded = true;
           this.isLoading = false;
           this.checkAndInitializeMap();
