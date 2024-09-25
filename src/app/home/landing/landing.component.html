@@ -10,20 +10,20 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="relative overflow-hidden bg-gradient-to-br from-primary via-primary-50 to-primary-100  flex items-center">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-15 lg:py-25">
-            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                <div class="space-y-8 text-center lg:text-left" @fadeInAnimation>
-                    <h1 class="text-2xl sm:text-5xl lg:text-4xl font-bold leading-tight tracking-tight text-accent">
+    <section class="relative overflow-hidden bg-gradient-to-br from-primary via-primary-50 to-primary-100 flex items-center py-12 md:py-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="md:flex md:items-center md:space-x-8 lg:space-x-16">
+                <div class="md:w-1/2 text-center md:text-left mb-8 md:mb-0" @fadeInAnimation>
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-accent mb-4">
                         {{ mainSection.title }}
                     </h1>
-                    <p class="text-accent-800 max-w-2xl mx-auto lg:mx-0" [innerHTML]="mainSection.description"></p>
-                    <button (click)="navigateToProjects()" class="group inline-flex items-center px-8 py-4 bg-accent6 text-primary text-lg font-semibold rounded-apple shadow-apple-lg hover:bg-accent hover:text-primary-100 transition-all duration-300 ease-apple focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2 focus:ring-offset-primary-100 transform hover:scale-105 active:scale-95">
+                    <p class="text-accent-800 mb-6 max-w-xl mx-auto md:mx-0" [innerHTML]="mainSection.description"></p>
+                    <button (click)="navigateToProjects()" class="w-full md:w-auto group inline-flex items-center justify-center px-8 py-4 bg-accent6 text-primary text-lg font-semibold rounded-apple shadow-apple-lg hover:bg-accent hover:text-primary-100 transition-all duration-300 ease-apple focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2 focus:ring-offset-primary-100 transform hover:scale-105 active:scale-95">
                         <span>{{ mainSection.buttonText }}</span>
                         <i class="bi bi-arrow-right ml-3 transition-transform duration-300 ease-apple transform group-hover:translate-x-2"></i>
                     </button>
                 </div>
-                <div class="relative z-0" @slideInAnimation>
+                <div class="md:w-1/2 relative z-0 hidden md:block" @slideInAnimation>
                     <div class="w-full aspect-square max-w-xl mx-auto overflow-hidden rounded-apple-xl shadow-apple-2xl">
                         <div #mapContainer class="w-full h-full" style="height: 400px;">
                             <div id="map" class="w-full h-full"></div>
@@ -58,15 +58,49 @@
             </div>
         </div>
     </section>
-
     <!-- Projects Showcase -->
     <section class="py-16 sm:py-24 bg-gradient-to-b from-primary to-accent2 dark:from-accent3 dark:to-accent4">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-4xl sm:text-5xl font-bold text-accent dark:text-primary text-center mb-12 tracking-tight">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-accent dark:text-primary text-center mb-12 tracking-tight">
                 Project Highlights
             </h2>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            <!-- Mobile: Tabbed interface -->
+            <div class="md:hidden mb-8">
+                <div class="flex border-b border-accent3">
+                    <button class="flex-1 py-2 px-4 text-accent font-medium" [class.border-b-2]="activeTab === 'recent'" (click)="setActiveTab('recent')">Recent</button>
+                    <button class="flex-1 py-2 px-4 text-accent font-medium" [class.border-b-2]="activeTab === 'highValue'" (click)="setActiveTab('highValue')">High Value</button>
+                </div>
+                <div *ngIf="activeTab === 'recent'" class="mt-4">
+                    <ul class="space-y-4">
+                        <li *ngFor="let project of recentProjects.slice(0, 5)" class="bg-white dark:bg-accent4 rounded-apple-lg p-4 shadow-apple-md">
+                            <h4 class="text-lg font-semibold text-accent dark:text-primary mb-2">{{ project.name }}</h4>
+                            <p class="text-accent4 dark:text-accent2 mb-3 text-sm">{{ project.description }}</p>
+                            <div class="flex justify-between items-center text-sm">
+                                <span class="text-accent3 dark:text-accent5">{{ project.startDate | date:'mediumDate' }}</span>
+                                <button class="text-accent6 dark:text-accent5 font-medium">View Details</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div *ngIf="activeTab === 'highValue'" class="mt-4">
+                    <ul class="space-y-4">
+                        <li *ngFor="let project of highValueProjects.slice(0, 5)" class="bg-white dark:bg-accent4 rounded-apple-lg p-4 shadow-apple-md">
+                            <h4 class="text-lg font-semibold text-accent dark:text-primary mb-2">{{ project.name }}</h4>
+                            <p class="text-accent4 dark:text-accent2 mb-3 text-sm">{{ project.description }}</p>
+                            <div class="flex justify-between items-center text-sm">
+                <span class="font-bold text-accent5 dark:text-accent6">
+                  {{ getFormattedPrice(project.stages?.preparation?.basicData?.projectBudget) }}
+                </span>
+                                <button class="text-accent6 dark:text-accent5 font-medium">View Details</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Desktop: Two-column layout -->
+            <div class="hidden md:grid md:grid-cols-2 gap-8 lg:gap-12">
                 <!-- Recent Projects Section -->
                 <div @fadeInUp class="bg-white dark:bg-accent3 rounded-apple-xl p-6 shadow-apple-lg transition-all duration-300 hover:shadow-apple-xl">
                     <h3 class="text-2xl font-semibold mb-6 text-accent dark:text-primary flex items-center">
@@ -83,9 +117,9 @@
                                 <div class="flex justify-between items-center text-sm">
                                     <span class="text-accent3 dark:text-accent5">{{ project.startDate | date:'mediumDate' }}</span>
                                     <span class="font-medium text-accent6 dark:text-accent5 flex items-center group-hover:text-accent5 dark:group-hover:text-accent6">
-                  View Details
-                  <i class="bi bi-arrow-right ml-2 transition-transform duration-300 ease-apple transform group-hover:translate-x-1"></i>
-                </span>
+                    View Details
+                    <i class="bi bi-arrow-right ml-2 transition-transform duration-300 ease-apple transform group-hover:translate-x-1"></i>
+                  </span>
                                 </div>
                             </a>
                         </li>
@@ -106,13 +140,13 @@
                                 <h4 class="text-lg font-semibold text-accent dark:text-primary mb-2 line-clamp-1 group-hover:text-accent6 dark:group-hover:text-accent5">{{ project.name }}</h4>
                                 <p class="text-accent4 dark:text-accent2 mb-3 text-sm line-clamp-2 group-hover:text-accent dark:group-hover:text-primary">{{ project.description }}</p>
                                 <div class="flex justify-between items-center text-sm">
-        <span class="font-bold text-accent5 dark:text-accent6 group-hover:text-accent6 dark:group-hover:text-accent5">
-          {{ getFormattedPrice(project.stages?.preparation?.basicData?.projectBudget) }}
-        </span>
+                  <span class="font-bold text-accent5 dark:text-accent6 group-hover:text-accent6 dark:group-hover:text-accent5">
+                    {{ getFormattedPrice(project.stages?.preparation?.basicData?.projectBudget) }}
+                  </span>
                                     <span class="font-medium text-accent6 dark:text-accent5 flex items-center group-hover:text-accent5 dark:group-hover:text-accent6">
-          View Details
-          <i class="bi bi-arrow-right ml-2 transition-transform duration-300 ease-apple transform group-hover:translate-x-1"></i>
-        </span>
+                    View Details
+                    <i class="bi bi-arrow-right ml-2 transition-transform duration-300 ease-apple transform group-hover:translate-x-1"></i>
+                  </span>
                                 </div>
                             </a>
                         </li>
@@ -123,23 +157,35 @@
             <!-- Summary Section -->
             <div class="mt-12 bg-white dark:bg-accent3 rounded-apple-xl p-6 shadow-apple-lg">
                 <div class="flex flex-wrap justify-around items-center">
-                    <div class="text-center p-4">
+                    <div class="text-center p-4 w-1/2 md:w-auto">
                         <p class="text-accent4 dark:text-accent2 text-sm mb-1">Total Projects</p>
-                        <p class="text-3xl font-bold text-accent dark:text-primary">{{ formatLargeNumber(numberOfProjects) }}</p>
+                        <p class="text-2xl md:text-3xl font-bold text-accent dark:text-primary">{{ formatLargeNumber(numberOfProjects) }}</p>
                     </div>
-                    <div class="text-center p-4">
+                    <div class="text-center p-4 w-1/2 md:w-auto">
                         <p class="text-accent4 dark:text-accent2 text-sm mb-1">Total Value</p>
-                        <p class="text-3xl font-bold text-accent dark:text-primary">{{ formatCurrency(totalValueOfProjects) }}</p>
+                        <p class="text-2xl md:text-3xl font-bold text-accent dark:text-primary">{{ formatCurrency(totalValueOfProjects) }}</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
     <!-- Sponsors Section -->
-    <section class="bg-gradient-to-b from-primary-100 to-primary-200 py-20 sm:py-32">
+    <section class="bg-gradient-to-b from-primary-100 to-primary-200 py-16 sm:py-24">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl sm:text-4xl font-semibold text-center text-accent mb-16">{{ sponsorsSection.title }}</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-12">
+            <h2 class="text-2xl md:text-3xl lg:text-4xl font-semibold text-center text-accent mb-12">{{ sponsorsSection.title }}</h2>
+
+            <!-- Mobile: Horizontal scrolling -->
+            <div class="md:hidden overflow-x-auto whitespace-nowrap pb-4">
+                <div *ngFor="let sponsor of sponsorsSection.sponsors" class="inline-block mr-8 last:mr-0">
+                    <a [href]="sponsor.link" target="_blank" rel="noopener noreferrer" class="block">
+                        <img [src]="sponsor.image" [alt]="sponsor.name" class="h-16 w-auto object-contain">
+                    </a>
+                </div>
+            </div>
+
+            <!-- Desktop: Grid layout -->
+            <div class="hidden md:grid md:grid-cols-2 gap-12">
                 <div *ngFor="let sponsor of sponsorsSection.sponsors" class="flex justify-center" @fadeInAnimation>
                     <a [href]="sponsor.link" target="_blank" rel="noopener noreferrer" class="group relative flex items-center justify-center w-full h-48 bg-white rounded-apple-xl shadow-apple-lg hover:shadow-apple-xl transition-all duration-300 ease-apple transform hover:-translate-y-2 focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-4 focus:ring-offset-primary-100">
                         <img [src]="sponsor.image" [alt]="sponsor.name" class="max-h-28 w-auto object-contain transition-all duration-300 ease-apple group-hover:scale-110">
@@ -150,15 +196,28 @@
             </div>
         </div>
     </section>
+
+    <!-- Floating Action Button (Mobile only) -->
+    <button class="md:hidden fixed bottom-4 right-4 bg-accent6 text-primary rounded-full p-4 shadow-lg z-50" (click)="openQuickMenu()">
+        <i class="bi bi-plus text-2xl"></i>
+    </button>
+
+    <!-- Quick Menu Modal (Mobile only) -->
+    <div *ngIf="showQuickMenu" class="fixed inset-0 bg-primary bg-opacity-75 flex items-end justify-center pb-20 px-4 z-50">
+        <div class="bg-white rounded-t-2xl w-full max-w-sm p-6 space-y-4">
+            <h3 class="text-xl font-semibold text-accent mb-4">Quick Actions</h3>
+            <button class="w-full text-left py-3 px-4 rounded-lg bg-primary-100 text-accent hover:bg-primary-200 transition-colors" (click)="navigateToProjects()">
+                Explore Projects
+            </button>
+            <button class="w-full text-left py-3 px-4 rounded-lg bg-primary-100 text-accent hover:bg-primary-200 transition-colors" (click)="navigateToFeaturedProjects()">
+                Featured Projects
+            </button>
+            <button class="w-full text-left py-3 px-4 rounded-lg bg-primary-100 text-accent hover:bg-primary-200 transition-colors" (click)="openContactForm()">
+                Contact Us
+            </button>
+            <button class="w-full text-center py-2 text-accent6" (click)="closeQuickMenu()">
+                Close
+            </button>
+        </div>
+    </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-

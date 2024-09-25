@@ -86,11 +86,16 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   markers: { lat: number; lng: number; popup: string; status: string; }[] = [];
   numberOfProjects: number = 0;
   totalValueOfProjects: number = 0;
+  featuredProjects: any[] = [];
 
   isLoading: boolean = true;
   mapInitialized: boolean = false;
   projectsLoaded: boolean = false;
   private viewInitialized: boolean = false;
+
+
+  activeTab: 'recent' | 'highValue' = 'recent';
+  showQuickMenu: boolean = false;
 
   mainSection = {
     title: "Advancing transparency and accountability in climate finance projects",
@@ -172,6 +177,11 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     this.viewProjectDetails(event.detail);
   };
 
+  openContactForm(): void {
+    // Implement contact form opening logic
+    console.log('Opening contact form');
+  }
+
   checkAndInitializeMap(): void {
 
     if (this.viewInitialized && this.projectsLoaded && this.mapContainer && this.mapContainer.nativeElement) {
@@ -218,6 +228,14 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     );
   }
 
+  navigateToProjects(): void {
+    this.router.navigate(['/public/projects']);
+  }
+
+  navigateToFeaturedProjects(): void {
+    this.router.navigate(['/public/projects'], { queryParams: { featured: 'true' } });
+  }
+
   loadProjects() {
     this.isLoading = true;
     this.firestore.collection('projects').get().subscribe(
@@ -226,7 +244,10 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
           let totalValue = 0;
           querySnapshot.forEach((doc) => {
             const project = doc.data() as any;
+            project.id = doc.id; // Ensure each project has an id
             projects.push(project);
+
+            // Calculate total value
             const projectBudget = project.stages?.preparation?.basicData?.projectBudget;
             if (projectBudget) {
               const numericValue = parseFloat(projectBudget.replace(/[^0-9.-]+/g, ""));
@@ -235,24 +256,48 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
               }
             }
           });
-          this.recentProjects = projects.slice(0, 5);
+
+          // Sort projects by start date (assuming there's a startDate field)
+          const sortedProjects = projects.sort((a, b) => {
+            return new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
+          });
+
+          // Populate recentProjects
+          this.recentProjects = sortedProjects.slice(0, 5);
+
+          // Sort and populate highValueProjects
           this.highValueProjects = projects.sort((a, b) => {
             const aPrice = parseFloat(a.stages?.preparation?.basicData?.projectBudget?.replace(/[^0-9.-]+/g, "") || '0');
             const bPrice = parseFloat(b.stages?.preparation?.basicData?.projectBudget?.replace(/[^0-9.-]+/g, "") || '0');
             return bPrice - aPrice;
           }).slice(0, 5);
 
+          // Populate featuredProjects (assuming there's a 'featured' boolean field)
+          this.featuredProjects = projects.filter(project => project.featured).slice(0, 3);
+
+          // If there aren't enough featured projects, add high-value projects to make up the difference
+          if (this.featuredProjects.length < 3) {
+            const additionalFeatured = this.highValueProjects
+                .filter(project => !this.featuredProjects.some(fp => fp.id === project.id))
+                .slice(0, 3 - this.featuredProjects.length);
+            this.featuredProjects = [...this.featuredProjects, ...additionalFeatured];
+          }
+
           this.numberOfProjects = projects.length;
           this.totalValueOfProjects = totalValue;
-          this.generateMarkers(); // Call generateMarkers after loading projects
+
+          this.generateMarkers();
           this.projectsLoaded = true;
           this.isLoading = false;
           this.checkAndInitializeMap();
+
+          // Trigger change detection
           this.cdr.detectChanges();
         },
         (error) => {
           this.isLoading = false;
           console.error('Error loading projects:', error);
+          // Optionally, implement error handling UI feedback here
         }
     );
   }
@@ -327,9 +372,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     return statusColors[status] || statusColors['Other'];
   }
 
-  navigateToProjects() {
-    this.router.navigate(['/public/projects']);
-  }
+
 
   addProjectsToFirebase(): void {
     const projects = (projectsData as any).projects;
@@ -345,9 +388,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     return prefix + suffix;
   }
 
-  navigateToFeaturedProjects(): void {
-    this.router.navigate(['/public/projects'], { queryParams: { featured: 'true' } });
-  }
+
 
   formatLargeNumber(num: number): string {
     if (num >= 1000000) {
@@ -386,5 +427,24 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
       }
       return total;
     }, 0);
+  }
+
+  toggleMobileMenu(): void {
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenu) {
+      mobileMenu.classList.toggle('hidden');
+    }
+  }
+
+  setActiveTab(tab: 'recent' | 'highValue'): void {
+    this.activeTab = tab;
+  }
+
+  openQuickMenu(): void {
+    this.showQuickMenu = true;
+  }
+
+  closeQuickMenu(): void {
+    this.showQuickMenu = false;
   }
 }
