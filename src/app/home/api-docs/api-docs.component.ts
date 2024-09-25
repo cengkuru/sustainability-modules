@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
-import { ApiEndpoint } from "../../models/api-endpoint.model";
+import {ApiEndpoint, HttpMethod} from "../../models/api-endpoint.model";
 import { ApiService } from "../../services/api.service";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
@@ -37,11 +37,11 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
 })
 export class ApiDocsComponent implements OnInit {
     apiEndpoints: ApiEndpoint[] = [];
-    activeEndpoint: string = '';
+    activeEndpoint: string | null = null;
     searchTerm: string = '';
-    isSidebarOpen: boolean = false;
     isDarkMode: boolean = false;
     showApiInfoModal: boolean = false;
+    showSearch: boolean = false;
 
     showToast: boolean = false;
     toastMessage: string = '';
@@ -72,14 +72,12 @@ export class ApiDocsComponent implements OnInit {
 
     setActiveEndpoint(title: string): void {
         this.activeEndpoint = title;
-        if (window.innerWidth < 768) {
-            this.toggleSidebar();
-        }
     }
 
-    toggleSidebar(): void {
-        this.isSidebarOpen = !this.isSidebarOpen;
+    clearActiveEndpoint(): void {
+        this.activeEndpoint = null;
     }
+
 
     toggleDarkMode(): void {
         this.isDarkMode = !this.isDarkMode;
@@ -122,8 +120,30 @@ export class ApiDocsComponent implements OnInit {
         return text || 'N/A';
     }
 
+    getActiveEndpointData(): ApiEndpoint {
+        return this.apiEndpoints.find(endpoint => endpoint.title === this.activeEndpoint) || {
+            title: 'No endpoint selected',
+            method: HttpMethod.GET,
+            path: '',
+            description: 'Please select an endpoint to view details.'
+        };
+    }
+
+
+    toggleSearch(): void {
+        this.showSearch = !this.showSearch;
+    }
+
     toggleApiInfoModal(): void {
         this.showApiInfoModal = !this.showApiInfoModal;
+    }
+
+    showToastMessage(message: string): void {
+        this.toastMessage = message;
+        this.showToast = true;
+        setTimeout(() => {
+            this.showToast = false;
+        }, 3000);
     }
 
     copyToClipboard(text: string | undefined): void {
@@ -140,13 +160,7 @@ export class ApiDocsComponent implements OnInit {
         }
     }
 
-    showToastMessage(message: string): void {
-        this.toastMessage = message;
-        this.showToast = true;
-        setTimeout(() => {
-            this.showToast = false;
-        }, 3000);
-    }
+
 
     scrollToTop(): void {
         this.mainContent.nativeElement.scrollTo({ top: 0, behavior: 'smooth' });

@@ -1,59 +1,64 @@
 <div class="min-h-screen font-inter transition-colors duration-300" [ngClass]="{'bg-primary text-accent': !isDarkMode, 'bg-accent text-primary': isDarkMode}">
-    <!-- Mobile Sidebar Toggle -->
-    <button (click)="toggleSidebar()" class="md:hidden fixed top-4 left-4 z-50 p-2 rounded-full shadow-apple-md transition duration-250 ease-apple active:scale-95" [ngClass]="{'bg-accent6 text-primary hover:bg-accent6/90': !isDarkMode, 'bg-accent5 text-accent hover:bg-accent5/90': isDarkMode}">
-        <i class="bi" [ngClass]="{'bi-list': !isSidebarOpen, 'bi-x': isSidebarOpen}"></i>
-    </button>
+    <!-- Mobile Header (visible on small screens) -->
+    <header class="md:hidden fixed top-0 left-0 right-0 z-50 px-4 py-3 shadow-apple-md flex justify-between items-center" [ngClass]="{'bg-primary': !isDarkMode, 'bg-accent3': isDarkMode}">
+        <h1 class="text-xl font-bold">API Docs</h1>
+        <div class="flex items-center space-x-2">
+            <button (click)="toggleSearch()" class="p-2 rounded-full" [ngClass]="{'text-accent6': !isDarkMode, 'text-accent5': isDarkMode}">
+                <i class="bi bi-search"></i>
+            </button>
+            <button (click)="toggleDarkMode()" class="p-2 rounded-full" [ngClass]="{'text-accent6': !isDarkMode, 'text-accent5': isDarkMode}">
+                <i class="bi" [ngClass]="{'bi-moon': !isDarkMode, 'bi-sun': isDarkMode}"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Search (hidden by default, visible on small screens) -->
+    <div *ngIf="showSearch" class="md:hidden fixed top-14 left-0 right-0 z-40 px-4 py-2 shadow-apple-md" [ngClass]="{'bg-primary-200': !isDarkMode, 'bg-accent4': isDarkMode}">
+        <input
+                type="text"
+                [(ngModel)]="searchTerm"
+                placeholder="Search API endpoints..."
+                class="w-full p-2 rounded-apple-md border focus:outline-none focus:ring-2 transition duration-300"
+                [ngClass]="{'border-accent2 focus:ring-accent6 bg-primary-200 text-accent placeholder-accent4': !isDarkMode, 'border-accent4 focus:ring-accent5 bg-accent4 text-primary placeholder-accent2': isDarkMode}"
+        >
+    </div>
 
     <div class="flex flex-col md:flex-row">
-        <!-- Sidebar -->
-        <aside [ngClass]="{'translate-x-0': isSidebarOpen, '-translate-x-full': !isSidebarOpen}"
-               class="w-full md:w-64 lg:w-80 fixed md:sticky top-0 h-screen overflow-y-auto transition-transform duration-300 ease-apple z-40 md:translate-x-0 shadow-apple-lg md:shadow-none"
-               [ngClass]="{'bg-primary-200': !isDarkMode, 'bg-accent4': isDarkMode}">
+        <!-- Sidebar (visible on medium screens and above) -->
+        <aside class="md:w-64 lg:w-80 md:flex-shrink-0 md:border-r border-accent2 md:h-screen md:overflow-y-auto hidden md:block" [ngClass]="{'bg-primary-200': !isDarkMode, 'bg-accent4': isDarkMode}">
             <div class="p-6">
-                <!-- Logo and Title -->
-                <div class="flex items-center mb-8">
-                    <h1 class="text-2xl font-bold">API Docs</h1>
-                </div>
-
-                <!-- Search Bar -->
-                <div class="mb-6 relative">
-                    <i class="bi bi-search absolute left-3 top-1/2 transform -translate-y-1/2" [ngClass]="{'text-accent4': !isDarkMode, 'text-accent2': isDarkMode}"></i>
+                <h1 class="text-2xl font-bold mb-6">API Docs</h1>
+                <div class="mb-6">
                     <input
                             type="text"
                             [(ngModel)]="searchTerm"
                             placeholder="Search API endpoints..."
-                            class="w-full p-3 pl-10 rounded-apple-md border focus:outline-none focus:ring-2 transition duration-300"
+                            class="w-full p-3 rounded-apple-md border focus:outline-none focus:ring-2 transition duration-300"
                             [ngClass]="{'border-accent2 focus:ring-accent6 bg-primary-200 text-accent placeholder-accent4': !isDarkMode, 'border-accent4 focus:ring-accent5 bg-accent4 text-primary placeholder-accent2': isDarkMode}"
                     >
                 </div>
-
-                <!-- Navigation -->
-                <nav class="w-full" [ngClass]="{'bg-primary': !isDarkMode, 'bg-accent3': isDarkMode}">
-                    <ul [@listAnimation]="filteredEndpoints.length" class="space-y-2">
+                <nav>
+                    <ul class="space-y-2">
                         <li *ngFor="let endpoint of filteredEndpoints"
                             (click)="setActiveEndpoint(endpoint.title)"
-                            class="cursor-pointer rounded-apple-md transition-all duration-250 ease-apple"
+                            class="cursor-pointer p-3 rounded-apple-md transition-all duration-250 ease-apple"
                             [ngClass]="{
-                'hover:bg-accent-100 hover:text-accent ': !isDarkMode,
-                'hover:bg-accent4  hover:text-primary': isDarkMode,
-                'bg-accent6 text-primary shadow-apple-md': activeEndpoint === endpoint.title && !isDarkMode,
-                'bg-accent5 text-accent3 shadow-apple-md': activeEndpoint === endpoint.title && isDarkMode,
-                'text-accent': !isDarkMode,
-                'text-accent2': isDarkMode
-            }">
-                            <a class="block px-4 py-3 text-black ">
-                                <span class="font-semibold inline-block w-16  ">{{ endpoint.method }} </span>
-                                <span class="truncate ">{{ endpoint.title }}</span>
-                            </a>
+                                'hover:bg-accent-100 hover:text-accent': !isDarkMode,
+                                'hover:bg-accent4 hover:text-primary': isDarkMode,
+                                'bg-accent6 text-primary shadow-apple-md': activeEndpoint === endpoint.title && !isDarkMode,
+                                'bg-accent5 text-accent3 shadow-apple-md': activeEndpoint === endpoint.title && isDarkMode
+                            }">
+                            <span class="font-semibold inline-block w-16">{{ endpoint.method }}</span>
+                            <span class="truncate">{{ endpoint.title }}</span>
                         </li>
                     </ul>
                 </nav>
             </div>
         </aside>
-
         <!-- Main Content -->
-        <main class="flex-1 p-6 md:p-8 mt-16 md:mt-0 max-w-4xl mx-auto">
-            <div class="flex justify-between mb-8">
+        <main class="flex-1 md:p-8 pt-16 pb-20 md:pt-8 md:pb-8">
+            <!-- Desktop Header (visible on medium screens and above) -->
+            <header class="hidden md:flex justify-between items-center mb-8">
                 <button (click)="toggleApiInfoModal()" class="inline-flex items-center px-4 py-2 rounded-full transition duration-300 ease-in-out shadow-apple-md hover:scale-105" [ngClass]="{'bg-accent6 text-primary hover:bg-accent6/90': !isDarkMode, 'bg-accent5 text-accent hover:bg-accent5/90': isDarkMode}">
                     <i class="bi bi-info-circle mr-2"></i>
                     What's an API?
@@ -61,137 +66,127 @@
                 <button (click)="toggleDarkMode()" class="p-2 rounded-full shadow-apple-md transition duration-250 ease-apple active:scale-95 hover:scale-105" [ngClass]="{'bg-accent6 text-primary hover:bg-accent6/90': !isDarkMode, 'bg-accent5 text-accent hover:bg-accent5/90': isDarkMode}">
                     <i class="bi" [ngClass]="{'bi-moon': !isDarkMode, 'bi-sun': isDarkMode}"></i>
                 </button>
+            </header>
+
+            <!-- Endpoint List View (visible on small screens when no endpoint is selected) -->
+            <section *ngIf="!activeEndpoint" class="md:hidden px-4">
+                <ul class="space-y-4">
+                    <li *ngFor="let endpoint of filteredEndpoints"
+                        (click)="setActiveEndpoint(endpoint.title)"
+                        class="p-4 rounded-apple-lg shadow-apple-md cursor-pointer transition-all duration-250 ease-apple"
+                        [ngClass]="{'bg-primary-100 hover:bg-primary-200': !isDarkMode, 'bg-accent4 hover:bg-accent3': isDarkMode}">
+                        <h2 class="text-lg font-semibold mb-1">{{ endpoint.title }}</h2>
+                        <div class="flex items-center text-sm">
+                            <span class="font-medium mr-2" [ngClass]="{'text-accent6': !isDarkMode, 'text-accent5': isDarkMode}">{{ endpoint.method }}</span>
+                            <span class="truncate">{{ endpoint.path }}</span>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Endpoint Detail View -->
+            <section *ngIf="activeEndpoint" class="px-4 md:px-0">
+                <button (click)="clearActiveEndpoint()" class="md:hidden mb-4 text-sm font-medium" [ngClass]="{'text-accent6': !isDarkMode, 'text-accent5': isDarkMode}">
+                    <i class="bi bi-arrow-left mr-1"></i> Back to List
+                </button>
+                <h1 class="text-2xl md:text-4xl font-bold mb-2">{{ getActiveEndpointData().title }}</h1>
+                <div class="inline-flex items-center px-3 py-1 rounded-apple-full text-sm font-medium mb-4" [ngClass]="{'bg-accent text-primary': !isDarkMode, 'bg-accent5 text-accent': isDarkMode}">
+                    <span class="mr-2 font-semibold">{{ getActiveEndpointData().method }}</span>
+                    <span class="truncate">{{ getActiveEndpointData().path }}</span>
+                </div>
+                <p class="text-base md:text-lg mb-6" [ngClass]="{'text-accent4': !isDarkMode, 'text-accent2': isDarkMode}">
+                    {{ getActiveEndpointData().description }}
+                </p>
+
+                <!-- Parameters (if available) -->
+                <div *ngIf="getActiveEndpointData().parameters?.length" class="mb-6">
+                    <h2 class="text-xl font-semibold mb-3">Parameters</h2>
+                    <ul class="space-y-2">
+                        <li *ngFor="let param of getActiveEndpointData().parameters" class="p-2 rounded-md" [ngClass]="{'bg-primary-100': !isDarkMode, 'bg-accent4': isDarkMode}">
+                            <strong>{{ param.name }}</strong> ({{ param.in }}, {{ param.required ? 'required' : 'optional' }})
+                            <p class="text-sm mt-1">{{ param.description }}</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Responses (if available) -->
+                <div *ngIf="getActiveEndpointData().responses?.length" class="mb-6">
+                    <h2 class="text-xl font-semibold mb-3">Responses</h2>
+                    <ul class="space-y-2">
+                        <li *ngFor="let response of getActiveEndpointData().responses" class="p-2 rounded-md" [ngClass]="{'bg-primary-100': !isDarkMode, 'bg-accent4': isDarkMode}">
+                            <strong>Status {{ response.status }}</strong>
+                            <p class="text-sm mt-1">{{ response.description }}</p>
+                            <pre *ngIf="response.example" class="mt-2 p-2 rounded-md text-xs overflow-x-auto" [ngClass]="{'bg-primary-200': !isDarkMode, 'bg-accent3': isDarkMode}">{{ response.example }}</pre>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Example URL (if available) -->
+                <div *ngIf="getActiveEndpointData().exampleUrl" class="mb-6">
+                    <h2 class="text-xl font-semibold mb-3">Example URL</h2>
+                    <pre class="p-2 rounded-md text-sm overflow-x-auto" [ngClass]="{'bg-primary-100': !isDarkMode, 'bg-accent4': isDarkMode}">{{ getActiveEndpointData().exampleUrl }}</pre>
+                </div>
+
+                <!-- Request Body Example (if available) -->
+                <div *ngIf="getActiveEndpointData().requestBodyExample" class="mb-6">
+                    <h2 class="text-xl font-semibold mb-3">Request Body Example</h2>
+                    <pre class="p-2 rounded-md text-sm overflow-x-auto" [ngClass]="{'bg-primary-100': !isDarkMode, 'bg-accent4': isDarkMode}">{{ getActiveEndpointData().requestBodyExample }}</pre>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Mobile Bottom Navigation (visible on small screens) -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 px-4 py-3 shadow-apple-md flex justify-around items-center" [ngClass]="{'bg-primary': !isDarkMode, 'bg-accent3': isDarkMode}">
+        <button (click)="clearActiveEndpoint()" [ngClass]="{'text-accent6': !isDarkMode, 'text-accent5': isDarkMode}">
+            <i class="bi bi-list"></i>
+            <span class="text-xs block mt-1">Endpoints</span>
+        </button>
+        <button (click)="toggleApiInfoModal()" [ngClass]="{'text-accent6': !isDarkMode, 'text-accent5': isDarkMode}">
+            <i class="bi bi-info-circle"></i>
+            <span class="text-xs block mt-1">About API</span>
+        </button>
+    </nav>
+
+    <!-- API Info Modal -->
+    <div *ngIf="showApiInfoModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
+        <div class="bg-primary dark:bg-accent3 p-6 md:p-8 rounded-apple-lg shadow-apple-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-start mb-6">
+                <h2 class="text-2xl md:text-3xl font-bold flex items-center text-accent dark:text-primary">
+                    <i class="bi bi-globe mr-3 text-accent6 dark:text-accent5"></i>
+                    Understanding APIs in OC4IDS
+                </h2>
+                <button (click)="toggleApiInfoModal()" class="text-accent6 dark:text-accent5 hover:text-accent6/80 dark:hover:text-accent5/80 transition duration-300 ease-in-out">
+                    <i class="bi bi-x-lg text-2xl"></i>
+                </button>
             </div>
 
-            <ng-container *ngFor="let endpoint of filteredEndpoints">
-                <section *ngIf="activeEndpoint === endpoint.title" [@fadeInOut] class="space-y-8">
-                    <header class="mb-8">
-                        <h1 class="text-4xl font-bold mb-4">{{ endpoint.title }}</h1>
-                        <div class="inline-flex items-center px-4 py-2 rounded-apple-full text-sm font-medium shadow-apple-sm" [ngClass]="{'bg-accent text-primary': !isDarkMode, 'bg-accent5 text-accent': isDarkMode}">
-                            <span class="mr-2 font-semibold">{{ endpoint.method }}</span>
-                            <span>{{ endpoint.path }}</span>
-                        </div>
-                    </header>
-
-                    <p class="text-xl leading-relaxed" [ngClass]="{'text-accent4': !isDarkMode, 'text-accent2': isDarkMode}">{{ endpoint.description }}</p>
-
-                    <!-- Example URL -->
-                    <div class="rounded-apple-lg p-6 shadow-apple-md" [ngClass]="{'bg-primary-200': !isDarkMode, 'bg-accent4': isDarkMode}">
-                        <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-2xl font-semibold">Example URL</h2>
-                            <button (click)="copyToClipboard(getCopyableText(endpoint.exampleUrl))" class="transition-colors duration-200 hover:scale-105" [ngClass]="{'text-accent6 hover:text-accent6/80': !isDarkMode, 'text-accent5 hover:text-accent5/80': isDarkMode}">
-                                <i class="bi bi-clipboard mr-2"></i> Copy
-                            </button>
-                        </div>
-                        <code class="block p-4 rounded-apple-md text-lg" [ngClass]="{'text-accent3 bg-primary-300': !isDarkMode, 'text-accent2 bg-accent3': isDarkMode}">{{ endpoint.exampleUrl }}</code>
-                    </div>
-
-                    <!-- Parameters -->
-                    <div>
-                        <h2 class="text-3xl font-semibold mb-6">Parameters</h2>
-                        <div class="space-y-6">
-                            <div *ngFor="let param of endpoint.parameters" class="p-6 rounded-apple-lg shadow-apple-md" [ngClass]="{'bg-primary-100': !isDarkMode, 'bg-accent4': isDarkMode}">
-                                <h3 class="text-2xl font-semibold mb-3">{{ param.name }}</h3>
-                                <p class="mb-4 text-lg" [ngClass]="{'text-accent4': !isDarkMode, 'text-accent2': isDarkMode}">{{ param.description }}</p>
-                                <div class="flex flex-wrap gap-4 text-sm">
-                                    <span class="px-3 py-1 rounded-full" [ngClass]="{'bg-accent2 text-accent': !isDarkMode, 'bg-accent5 text-accent': isDarkMode}"><strong>In:</strong> {{ param.in }}</span>
-                                    <span class="px-3 py-1 rounded-full" [ngClass]="{'bg-accent2 text-accent': !isDarkMode, 'bg-accent5 text-accent': isDarkMode}"><strong>Type:</strong> {{ param.type }}</span>
-                                    <span class="px-3 py-1 rounded-full" [ngClass]="{'bg-accent2 text-accent': !isDarkMode, 'bg-accent5 text-accent': isDarkMode}"><strong>Required:</strong> {{ param.required ? 'Yes' : 'No' }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Request Body Example -->
-                    <div *ngIf="endpoint.requestBodyExample">
-                        <h2 class="text-3xl font-semibold mb-6">Request Body Example</h2>
-                        <div class="relative rounded-apple-lg shadow-apple-md overflow-hidden">
-                            <button (click)="copyToClipboard(getCopyableText(endpoint.requestBodyExample))" class="absolute top-4 right-4 transition-colors duration-200 hover:scale-105 z-10" [ngClass]="{'text-accent6 hover:text-accent6/80': !isDarkMode, 'text-accent5 hover:text-accent5/80': isDarkMode}">
-                                <i class="bi bi-clipboard mr-2"></i> Copy
-                            </button>
-                            <pre class="p-6 overflow-x-auto text-lg" [ngClass]="{'bg-primary-200': !isDarkMode, 'bg-accent4': isDarkMode}"><code [ngClass]="{'text-accent3': !isDarkMode, 'text-accent2': isDarkMode}">{{ endpoint.requestBodyExample }}</code></pre>
-                        </div>
-                    </div>
-
-                    <!-- Responses -->
-                    <div>
-                        <h2 class="text-3xl font-semibold mb-6">Responses</h2>
-                        <div class="space-y-6">
-                            <div *ngFor="let response of endpoint.responses" class="p-6 rounded-apple-lg shadow-apple-md" [ngClass]="{'bg-primary-100': !isDarkMode, 'bg-accent4': isDarkMode}">
-                                <h3 class="text-2xl font-semibold mb-3">Status: {{ response.status }}</h3>
-                                <p class="mb-6 text-lg" [ngClass]="{'text-accent4': !isDarkMode, 'text-accent2': isDarkMode}">{{ response.description }}</p>
-                                <div *ngIf="response.example">
-                                    <h4 class="font-semibold mb-4 text-xl">Example Response:</h4>
-                                    <div class="relative rounded-apple-md overflow-hidden">
-                                        <button (click)="copyToClipboard(getCopyableText(response.example))" class="absolute top-4 right-4 transition-colors duration-200 hover:scale-105 z-10" [ngClass]="{'text-accent6 hover:text-accent6/80': !isDarkMode, 'text-accent5 hover:text-accent5/80': isDarkMode}">
-                                            <i class="bi bi-clipboard mr-2"></i> Copy
-                                        </button>
-                                        <pre class="p-6 overflow-x-auto text-lg" [ngClass]="{'bg-primary-200': !isDarkMode, 'bg-accent3': isDarkMode}"><code [ngClass]="{'text-accent3': !isDarkMode, 'text-accent2': isDarkMode}">{{ response.example }}</code></pre>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </ng-container>
-
-        </main>
-
-        <!-- API Info Modal -->
-        <div *ngIf="showApiInfoModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
-            <div class="bg-primary p-8 rounded-apple-lg shadow-apple-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto text-accent">
-                <div class="flex justify-between items-start mb-6">
-                    <h2 class="text-3xl font-bold flex items-center text-accent">
-                        <i class="bi bi-globe mr-3 text-accent6"></i>
-                        Understanding APIs in OC4IDS
-                    </h2>
-                    <button (click)="toggleApiInfoModal()" class="text-accent6 hover:text-accent6/80 transition duration-300 ease-in-out">
-                        <i class="bi bi-x-lg text-2xl"></i>
-                    </button>
-                </div>
-
-                <div class="space-y-6">
-                    <section>
-                        <h3 class="text-2xl font-semibold mb-4 text-accent6">What is an API?</h3>
-                        <p class="mb-4 text-lg leading-relaxed">
-                            An API, or Application Programming Interface, is a tool to:
-                        </p>
-                        <ul class="list-disc pl-6 space-y-3 text-lg">
-                            <li>Provide a list of services or data you can request.</li>
-                            <li>Receive request of specific data or information</li>
-                            <li>Processes your request and sends back the information or performs the action you asked for.</li>
-                        </ul>
-                    </section>
-
-                    <section>
-                        <h3 class="text-2xl font-semibold mb-4 text-accent6">API in the Context of OC4IDS</h3>
-                        <p class="mb-4 text-lg leading-relaxed">OC4IDS (Open Contracting for Infrastructure Data Standard) uses APIs to make information about infrastructure projects transparent and accessible. Here's how:</p>
-                        <ul class="space-y-4 text-lg">
-                            <li><i class="bi bi-eye-fill text-accent6 mr-2"></i> <strong>Transparency and Accountability:</strong> Acts as a window into project information.</li>
-                            <li><i class="bi bi-diagram-3 text-accent6 mr-2"></i> <strong>Data Integration:</strong> Allows automatic updates of project data in various applications.</li>
-                            <li><i class="bi bi-translate text-accent6 mr-2"></i> <strong>Interoperability:</strong> Ensures data is universally understood across different systems.</li>
-                            <li><i class="bi bi-robot text-accent6 mr-2"></i> <strong>Automation:</strong> Enables automatic notifications and updates of project information.</li>
-                            <li><i class="bi bi-sliders text-accent6 mr-2"></i> <strong>Customization:</strong> Allows users to request specific types of project data.</li>
-                            <li><i class="bi bi-clock-history text-accent6 mr-2"></i> <strong>Real-Time Data:</strong> Provides immediate access to project updates and changes.</li>
-                            <li><i class="bi bi-shield-lock text-accent6 mr-2"></i> <strong>Security and Control:</strong> Balances data accessibility with necessary restrictions.</li>
-                        </ul>
-                    </section>
-
-                    <p class="text-xl font-medium mt-6 leading-relaxed">
-                        In essence, APIs in OC4IDS serve as a bridge between vast amounts of infrastructure project data and interested parties, fostering transparency, innovation, and accountability.
+            <div class="space-y-6 text-accent dark:text-primary">
+                <section>
+                    <h3 class="text-xl md:text-2xl font-semibold mb-4 text-accent6 dark:text-accent5">What is an API?</h3>
+                    <p class="mb-4 text-base md:text-lg leading-relaxed">
+                        An API, or Application Programming Interface, is a set of protocols and tools for building software applications. It specifies how software components should interact, enabling different applications to communicate with each other.
                     </p>
-                </div>
+                </section>
+
+                <section>
+                    <h3 class="text-xl md:text-2xl font-semibold mb-4 text-accent6 dark:text-accent5">API in the Context of OC4IDS</h3>
+                    <p class="mb-4 text-base md:text-lg leading-relaxed">
+                        In the context of OC4IDS (Open Contracting for Infrastructure Data Standard), APIs play a crucial role in making infrastructure project data accessible and interoperable. They allow different systems to request and share standardized information about infrastructure projects, promoting transparency and enabling data-driven decision making.
+                    </p>
+                    <ul class="list-disc pl-5 space-y-2 text-base md:text-lg">
+                        <li><strong>Data Access:</strong> APIs provide a standardized way to access project data.</li>
+                        <li><strong>Interoperability:</strong> They ensure different systems can communicate and share data effectively.</li>
+                        <li><strong>Real-time Updates:</strong> APIs enable systems to receive up-to-date information as it becomes available.</li>
+                        <li><strong>Integration:</strong> They allow for seamless integration of OC4IDS data into various applications and platforms.</li>
+                    </ul>
+                </section>
             </div>
         </div>
     </div>
 
-    <!-- Floating Action Button for Mobile -->
-    <button (click)="scrollToTop()" class="fixed bottom-6 right-6 p-3 rounded-full shadow-apple-lg transition duration-300 ease-in-out md:hidden" [ngClass]="{'bg-accent6 text-primary hover:bg-accent6/90': !isDarkMode, 'bg-accent5 text-accent hover:bg-accent5/90': isDarkMode}">
-        <i class="bi bi-arrow-up-short text-2xl"></i>
-    </button>
-
     <!-- Toast Notification -->
-    <div *ngIf="showToast" [@fadeInOut] class="fixed bottom-6 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-full shadow-apple-lg text-white text-sm" [ngClass]="{'bg-accent6': !isDarkMode, 'bg-accent5': isDarkMode}">
+    <div *ngIf="showToast" class="fixed bottom-20 md:bottom-6 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-full shadow-apple-lg text-white text-sm z-50 transition-opacity duration-300" [ngClass]="{'bg-accent6': !isDarkMode, 'bg-accent5': isDarkMode}">
         {{ toastMessage }}
     </div>
 </div>
