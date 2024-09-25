@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import projectsData from '../../../assets/data/projects.json';
 import { IntersectionObserverDirective } from "../../directives/intersection-observer.directive";
@@ -227,21 +227,23 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
           querySnapshot.forEach((doc) => {
             const project = doc.data() as any;
             projects.push(project);
-            const contractPrice = project.stages?.tenderManagement?.basicData?.contractPrice;
-            if (contractPrice) {
-              totalValue += parseFloat(contractPrice.replace(/[^0-9.-]+/g, ""));
+            const projectBudget = project.stages?.preparation?.basicData?.projectBudget;
+            if (projectBudget) {
+              const numericValue = parseFloat(projectBudget.replace(/[^0-9.-]+/g, ""));
+              if (!isNaN(numericValue)) {
+                totalValue += numericValue;
+              }
             }
           });
           this.recentProjects = projects.slice(0, 5);
           this.highValueProjects = projects.sort((a, b) => {
-            const aPrice = parseFloat(a.stages?.tenderManagement?.basicData?.contractPrice?.replace(/[^0-9.-]+/g, "") || '0');
-            const bPrice = parseFloat(b.stages?.tenderManagement?.basicData?.contractPrice?.replace(/[^0-9.-]+/g, "") || '0');
+            const aPrice = parseFloat(a.stages?.preparation?.basicData?.projectBudget?.replace(/[^0-9.-]+/g, "") || '0');
+            const bPrice = parseFloat(b.stages?.preparation?.basicData?.projectBudget?.replace(/[^0-9.-]+/g, "") || '0');
             return bPrice - aPrice;
           }).slice(0, 5);
 
           this.numberOfProjects = projects.length;
           this.totalValueOfProjects = totalValue;
-          this.generateMarkers();
           this.projectsLoaded = true;
           this.isLoading = false;
           this.checkAndInitializeMap();
@@ -252,6 +254,20 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
           console.error('Error loading projects:', error);
         }
     );
+  }
+
+  formatCurrency(value: number): string {
+    if (isNaN(value) || value === 0) {
+      return 'N/A';
+    }
+    if (value >= 1000000000) {
+      return 'ZAR ' + (value / 1000000000).toFixed(1) + 'B';
+    } else if (value >= 1000000) {
+      return 'ZAR ' + (value / 1000000).toFixed(1) + 'M';
+    } else if (value >= 1000) {
+      return 'ZAR ' + (value / 1000).toFixed(1) + 'K';
+    }
+    return 'ZAR ' + value.toFixed(0);
   }
 
   generateMarkers() {
@@ -341,14 +357,33 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     return num.toString();
   }
 
-  formatCurrency(value: number): string {
-    if (value >= 1000000000) {
-      return '$' + (value / 1000000000).toFixed(1) + 'B';
-    } else if (value >= 1000000) {
-      return '$' + (value / 1000000).toFixed(1) + 'M';
-    } else if (value >= 1000) {
-      return '$' + (value / 1000).toFixed(1) + 'K';
+
+  getFormattedPrice(price: string): string {
+    if (!price) return 'N/A';
+
+    const numericValue = parseFloat(price.replace(/[^0-9.-]+/g, ""));
+    if (isNaN(numericValue)) {
+      return 'N/A';
+    } else {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'ZAR',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      }).format(numericValue);
     }
-    return '$' + value.toFixed(0);
+  }
+
+  calculateTotalBudget(): number {
+    return this.highValueProjects.reduce((total, project) => {
+      const budget = project.stages?.preparation?.basicData?.projectBudget;
+      if (budget) {
+        const numericValue = parseFloat(budget.replace(/[^0-9.-]+/g, ""));
+        if (!isNaN(numericValue)) {
+          return total + numericValue;
+        }
+      }
+      return total;
+    }, 0);
   }
 }
