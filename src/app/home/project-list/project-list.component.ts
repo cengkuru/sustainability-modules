@@ -94,36 +94,40 @@ export class ProjectListComponent implements OnInit {
         ]).pipe(
             switchMap(([term, showFeatured, sectors, status, sortBy]) => {
                 return this.firestore.collection('projects').snapshotChanges().pipe(
-                    map(actions => actions.map(a => {
-                        const data = a.payload.doc.data() as any;
-                        const id = a.payload.doc.id;
-                        return { id, ...data };
-                    }).filter(project =>
-                        (!term || project.name.toLowerCase().includes(term.toLowerCase())) &&
-                        (!showFeatured || project.featured) &&
-                        (sectors.length === 0 || sectors.includes(project.stages.identification.basicData.sectorSubsector)) &&
-                        (!status || project.status === status)
-                    )),
-                    map(projects => {
-                        // Parse project budget to ensure it's a number
-                        projects.forEach(project => {
-                            const budget = project.stages.preparation.basicData.projectBudget;
-                            project.parsedBudget = this.parseProjectBudget(budget);
-                        });
+                    // In your switchMap function, modify the line where you access project.stages.preparation
 
-                        // Sort projects
-                        projects.sort((a, b) => {
-                            if (sortBy === 'name') return a.name.localeCompare(b.name);
-                            if (sortBy === 'budget') return a.parsedBudget - b.parsedBudget;
-                            if (sortBy === 'date') return new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
-                            return 0;
-                        });
+map(actions => actions.map(a => {
+    const data = a.payload.doc.data() as any;
+    const id = a.payload.doc.id;
+    return { id, ...data };
+}).filter(project =>
+    (!term || project.name.toLowerCase().includes(term.toLowerCase())) &&
+    (!showFeatured || project.featured) &&
+    (sectors.length === 0 || sectors.includes(project.stages.identification.basicData.sectorSubsector)) &&
+    (!status || project.status === status)
+)),
+map(projects => {
+    console.log(projects);
+    // Parse project budget to ensure it's a number
+    projects.forEach(project => {
+        const budget = project.stages?.preparation?.basicData?.projectBudget; // Safe navigation operator to check if preparation exists
+        project.parsedBudget = budget ? this.parseProjectBudget(budget) : 0; // Default to 0 if budget is undefined
+    });
 
-                        this.isLoading = false;
-                        this.totalPages = Math.ceil(projects.length / this.pageSize);
-                        const startIndex = (this.currentPage - 1) * this.pageSize;
-                        return projects.slice(startIndex, startIndex + this.pageSize);
-                    })
+    // Sort projects
+    projects.sort((a, b) => {
+        if (sortBy === 'name') return a.name.localeCompare(b.name);
+        if (sortBy === 'budget') return a.parsedBudget - b.parsedBudget;
+        if (sortBy === 'date') return new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
+        return 0;
+    });
+
+    this.isLoading = false;
+    this.totalPages = Math.ceil(projects.length / this.pageSize);
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    return projects.slice(startIndex, startIndex + this.pageSize);
+})
+
                 );
             })
         );

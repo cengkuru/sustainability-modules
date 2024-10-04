@@ -1,829 +1,382 @@
 {
-  "projects": [
+  "projects":
+  [
+    {
+      "projects": [
+        {
+          "id": "oc4ids-bu3kcz-1",
+          "name": "Water treatment plant for Direct Potable Reuse",
+          "location": {
+            "coordinates": {
+              "lng": 25.6,
+              "lat": -33.95,
+              "popup": "Nelson Mandela Bay, South Africa"
+            },
+            "name": "Nelson Mandela Bay, South Africa"
+          },
+          "featured": true,
+          "stages": {
+            "identification": {
+              "basicData": {
+                "projectName": "Water treatment plant for Direct Potable Reuse",
+                "projectReferenceNumber": "oc4ids-bu3kcz-1",
+                "projectDescription": "Through this project an advance treatment plan (ATP) will be built to treat final wastewater effluent and transfer of the product water to the inlet of a bulk water treatment plant or directly into the water distribution network",
+                "projectLocation": "Nelson Mandela Bay, South Africa",
+                "projectOwner": "Nelson Mandela Metropolitan Municipality",
+                "sectorSubsector": "Water and Waste",
+                "purpose": "Directly reduce the climate vulnerability of communities through the scaling-up of water reuse projects",
+                "projectBriefOrFeasibilityStudy": "The feasibility study indicates that there is, on average, at least 82 Ml/d available for tertiary advanced treated at a proposed regional site. The transaction advisor engaged with potential used for the product water and identified a total of five potential end users who could potentially purchase up to 71.7 Ml/d on average of the product water.",
+                "projectOfficialsAndRoles": [
+                  {
+                    "name": "Ethan Abara",
+                    "role": "Public Authority"
+                  }
+                ]
+              },
+              "climateFinanceData": {
+                "climateObjective": "Adaptation",
+                "parisAgreement": "The NCCAS was developed in 2019 and is aligned with the Paris Agreement’s Article 7 and the associated aspects of the Paris Rulebook.",
+                "nationallyDeterminedContributions": "South Africa’s NDC reinforces this commitment further through its Goal 3: implementation of the NCCAS interventions for the period 2021-2030, including in the priority sector of water. The water re-use is amongst South Africa highest climate change adaptation priorities by showcasing the National Water Conservation and Water Demand Management Flagship Programme (within which the water re-use programme is situated) in South Africa’s most recent Biennial Update Report (BUR).",
+                "climateTransformation": "If technical and financial support is provided to municipalities in the identification, preparation and implementation of water reuse projects for climate adaptation at scale through a pipeline of projects, Then the local socio-economic resilience of communities to climate change will be strengthened through improved water security, Because transformational change in public and private sector funding of water reuse infrastructure will enable the establishment of a new asset class that will underpin the upscaling of water reuse nationally. ",
+                "climateFinanceDecisionMaking": "National Department of Forestry, Fisheries and Environment",
+                "financialInstrument": "Concessional Loan"
+              },
+              "institutionalSustainabilityData": {
+                "policyCoherenceDocumentation": "To prepare for a hotter and drier future with dwindling freshwater resources and growing water demand, South Africa developed its National Water and Sanitation Master Plan in 2018. The Master Plan identifies water re-use as one of the central strategies in its overall approach to ensuring water security and climate resilience. Also, implementing water re-use nationwide does support the major tenets of the National Climate Change Adaptation Strategy (NCCAS)   which urges water management institutions to adopt more adaptive responses (action 1.1.28) and underscores the need for more water-wise water management practices in urban areas – including water re-use (action 1.1.32).",
+                "numberOfFreedomOfInformationRequests": 0,
+                "numberOfFreedomOfInformationAnswers": 0,
+                "numberOfLobbyingActivities": 0
+              }
+            }
+          },
+          "metadata": {
+            "version": "1.0",
+            "dateCreated": "2024-08-28T16:45:00Z",
+            "datePublished": "2024-08-28T16:45:00Z",
+            "dateUpdated": "2024-08-28T16:45:00Z"
+          }
+        }
+      ]
+    },
 
     {
-      "id": "project-9012",
-      "name": "Olifants River Basin Wastewater Treatment and Reuse",
+      "id": "oc4ids-bu3kcz-2",
+      "name": "Water treatment plant for Indirect Potable Reuse",
       "location": {
         "coordinates": {
-          "lng": 29.0719,
-          "lat": -23.9619,
-          "popup": "Lephalale, Limpopo, South Africa"
+          "lng": 26.216667,
+          "lat": -29.1,
+          "popup": "Mangaung, South Africa"
         },
-        "name": "Lephalale, Limpopo, South Africa"
+        "name": "Mangaung, South Africa"
       },
       "featured": true,
       "stages": {
         "identification": {
           "basicData": {
-            "projectName": "Olifants River Basin Wastewater Treatment and Reuse",
-            "projectReferenceNumber": "WS-SA-2024-004",
-            "projectDescription": "This project focuses on improving wastewater treatment capacity and promoting water reuse in the Olifants River Basin, addressing water scarcity and pollution challenges.",
-            "projectLocation": "Lephalale, Limpopo, South Africa (with interventions throughout the basin)",
-            "projectOwner": "Department of Water and Sanitation, South Africa",
-            "sectorSubsector": "Water, Wastewater Treatment and Reuse",
-            "purpose": "Improve water quality, reduce pollution, and enhance water security in the Olifants River Basin.",
-            "projectBriefOrFeasibilityStudy": "Studies conducted in 2022 highlighted significant water quality issues and the potential for wastewater reuse in the basin.",
+            "projectName": "Water treatment plant for Indirect Potable Reuse",
+            "projectReferenceNumber": "oc4ids-bu3kcz-2",
+            "projectDescription": "Through this project an advance treatment plan (ATP) will be built to treat final wastewater effluent and the transfer of the product water to an environmental buffer (such as an aquifer or surface water reservoir) where it will blend with raw water before treatment in a bulk water treatment plant.",
+            "projectLocation": "Mangaung, South Africa",
+            "projectOwner": "Mangaung Metropolitan Municipality",
+            "sectorSubsector": "Water and Waste",
+            "purpose": "Directly reduce the climate vulnerability of communities through the scaling-up of water reuse projects",
+            "projectBriefOrFeasibilityStudy": "The feasibility study indicates that there is, on average, at least 81 Ml/d available for tertiary advanced treated at a proposed regional site. The transaction advisor engaged with potential used for the product water and identified a total of five potential end users who could potentially purchase up to 71.7 Ml/d on average of the product water.",
             "projectOfficialsAndRoles": [
               {
-                "name": "Stanley Mathabatha",
-                "role": "Project Steering Committee Chair"
-              },
-              {
-                "name": "Lerato Motaung",
-                "role": "Project Coordinator"
-              }
-            ],
-            "attachments": [
-              {
-                "title": "Initial Assessment Report",
-                "description": "Report summarizing the water quality and wastewater treatment challenges in the basin.",
-                "documentType": "Assessment Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": 120,
-                "datePublished": "2022-10-15T00:00:00Z",
-                "dateModified": "2022-11-01T00:00:00Z",
-                "url": "http://example.com/olifants-assessment-report.pdf"
-              }
-            ]
-          },
-          "institutionalSustainabilityData": {
-            "policyCoherenceDocumentation": "Project aligns with the National Water Act, the National Water Resource Strategy, and the Limpopo Provincial Growth and Development Plan.",
-            "freedomOfInformationRequestsAndAnswers": "A dedicated portal for FOI requests and responses related to the project will be established.",
-            "numberOfFreedomOfInformationRequests": "To be tracked upon project commencement.",
-            "numberOfFreedomOfInformationAnswers": "To be tracked upon project commencement.",
-            "numberOfLobbyingActivities": "To be tracked and reported annually.",
-            "lobbyingMeetingsMinutes": "Minutes from stakeholder consultations will be publicly available.",
-            "attachments": [
-              {
-                "title": "Policy Alignment Framework",
-                "description": "Framework outlining the project's alignment with relevant policies and regulations.",
-                "documentType": "Policy Framework",
-                "format": "PDF",
-                "language": "en",
-                "pages": 50,
-                "datePublished": "2023-01-20T00:00:00Z",
-                "dateModified": "2023-02-05T00:00:00Z",
-                "url": "http://example.com/olifants-policy-framework.pdf"
+                "name": "David Masondo",
+                "role": "Public Authority"
               }
             ]
           },
           "climateFinanceData": {
-            "climateObjective": "Enhance the Olifants River Basin's resilience to climate change impacts, such as droughts and floods, and contribute to sustainable water management.",
-            "parisAgreement": "Project supports South Africa's NDC targets related to water security and climate adaptation.",
-            "nationallyDeterminedContributions": "Contributes to South Africa's commitments on water resource management under the UNFCCC.",
-            "climateTransformation": "Promotes climate-resilient wastewater treatment and water reuse practices.",
-            "climateFinanceDecisionMaking": "Funding decisions will align with national climate change priorities and consider the vulnerability of the basin.",
-            "financialInstrument": "Blended finance (grants and concessional loans)",
-            "amountOfInvestment": "30,000,000 USD",
-            "fundingSource": "Green Climate Fund, Development Bank of Southern Africa, Private sector investors",
-            "attachments": [
-              {
-                "title": "Climate Finance Strategy",
-                "description": "Strategy outlining the mobilization of climate finance for the project.",
-                "documentType": "Strategy Document",
-                "format": "PDF",
-                "language": "en",
-                "pages": 60,
-                "datePublished": "2023-03-10T00:00:00Z",
-                "dateModified": "2023-03-25T00:00:00Z",
-                "url": "http://example.com/olifants-climate-finance-strategy.pdf"
-              }
-            ]
-          }
-        },
-        "preparation": {
-          "basicData": {
-            "projectScope": "Upgrading existing wastewater treatment plants, constructing new facilities, implementing water reuse schemes, and promoting water-efficient technologies.",
-            "fundingSources": "National Treasury, Green Climate Fund, Development Bank of Southern Africa, and private sector partners.",
-            "projectBudget": "150,000,000 USD",
-            "projectBudgetApprovalDate": "2024-09-15T00:00:00Z",
-            "contactDetails": "Project Coordinator: Lerato Motaung, Email: lerato.motaung@example.com, Phone: +27 15 781 2000",
-            "attachments": [
-              {
-                "title": "Strategic Environmental and Social Assessment (SESA)",
-                "description": "Comprehensive assessment of the project's potential environmental and social impacts at a strategic level.",
-                "documentType": "Strategic Assessment",
-                "format": "PDF",
-                "language": "en",
-                "pages": 250,
-                "datePublished": "2024-06-20T00:00:00Z",
-                "dateModified": "2024-07-05T00:00:00Z",
-                "url": "http://example.com/olifants-sesa.pdf"
-              },
-              {
-                "title": "Environmental and Social Management Framework (ESMF)",
-                "description": "Framework outlining the principles and procedures for managing environmental and social risks during project implementation.",
-                "documentType": "Management Framework",
-                "format": "PDF",
-                "language": "en",
-                "pages": 100,
-                "datePublished": "2024-07-10T00:00:00Z",
-                "dateModified": "2024-07-25T00:00:00Z",
-                "url": "http://example.com/olifants-esmf.pdf"
-              },
-              {
-                "title": "Stakeholder Engagement Plan (SEP)",
-                "description": "Plan outlining stakeholder identification, consultation, and information dissemination mechanisms.",
-                "documentType": "Engagement Plan",
-                "format": "PDF",
-                "language": "en",
-                "pages": 60,
-                "datePublished": "2024-08-01T00:00:00Z",
-                "dateModified": "2024-08-15T00:00:00Z",
-                "url": "http://example.com/olifants-sep.pdf"
-              },
-              {
-                "title": "Gender Action Plan (GAP)",
-                "description": "Plan outlining strategies to promote gender equality and women's empowerment in project activities.",
-                "documentType": "Action Plan",
-                "format": "PDF",
-                "language": "en",
-                "pages": 40,
-                "datePublished": "2024-08-20T00:00:00Z",
-                "dateModified": "2024-09-05T00:00:00Z",
-                "url": "http://example.com/olifants-gap.pdf"
-              },
-              {
-                "title": "Financial Management Plan",
-                "description": "Plan outlining procedures for managing project funds and ensuring financial accountability.",
-                "documentType": "Management Plan",
-                "format": "PDF",
-                "language": "en",
-                "pages": 70,
-                "datePublished": "2024-09-10T00:00:00Z",
-                "dateModified": "2024-09-25T00:00:00Z",
-                "url": "http://example.com/olifants-financial-plan.pdf"
-              }
-            ]
-          },
-          "environmentalAndClimateSustainabilityData": {
-            "environmentalImpactCategory": "High",
-            "environmentalMeasures": "Implementation of best available technologies for wastewater treatment, minimizing environmental footprint of new infrastructure, and promoting ecosystem restoration.",
-            "climateMeasures": "Integration of climate change projections in design, water demand management, and promotion of drought-resistant technologies.",
-            "conservationMeasures": "Water conservation awareness programs, promoting efficient irrigation practices, and protecting critical water sources.",
-            "protectedArea": "Project activities will avoid sensitive ecological areas and minimize impact on biodiversity.",
-            "environmentalLicensesAndExemptions": "All necessary environmental authorizations will be obtained before construction.",
-            "climateAndDisasterRiskAssessment": "A comprehensive risk assessment will be conducted to inform project design and implementation.",
-            "forecastOfGreenhouseGasEmissions": "Greenhouse gas emissions from project activities will be quantified and mitigation measures implemented.",
-            "attachments": [
-              {
-                "title": "Environmental and Social Impact Assessments (ESIAs)",
-                "description": "Site-specific ESIAs will be conducted for each major project component.",
-                "documentType": "Impact Assessment",
-                "format": "PDF",
-                "language": "en",
-                "pages": "Variable",
-                "datePublished": "To be determined",
-                "dateModified": "To be determined",
-                "url": "http://example.com/olifants-esias.pdf"
-              }
-            ]
-          },
-          "socialSustainabilityData": {
-            "beneficiaries": "Communities, industries, and agricultural users in the Olifants River Basin will benefit from improved water quality and increased water availability.",
-            "numberOfBeneficiaries": "Estimated 2 million people will benefit directly and indirectly.",
-            "publicConsultationMeetings": "Regular stakeholder consultations will be held throughout the project lifecycle.",
-            "indigenousLand": "Project will engage with traditional authorities and communities to ensure that cultural and heritage sites are protected.",
-            "landCompensationBudget": "A budget will be allocated for fair compensation for any land acquisition.",
-            "laborObligations": "Project will adhere to all labor laws and promote fair working conditions.",
-            "inclusiveDesign": "Project design will consider the needs of all users, including women, youth, and people with disabilities.",
-            "attachments": [
-              {
-                "title": "Stakeholder Engagement Reports",
-                "description": "Reports documenting stakeholder consultations and feedback.",
-                "documentType": "Engagement Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": "Variable",
-                "datePublished": "To be determined",
-                "dateModified": "To be determined",
-                "url": "http://example.com/olifants-engagement-reports.pdf"
-              },
-              {
-                "title": "Resettlement Action Plans (RAPs)",
-                "description": "RAPs will be developed and implemented if resettlement is required for any project component.",
-                "documentType": "Action Plan",
-                "format": "PDF",
-                "language": "en",
-                "pages": "Variable",
-                "datePublished": "To be determined",
-                "dateModified": "To be determined",
-                "url": "http://example.com/olifants-raps.pdf"
-              }
-            ]
+            "climateObjective": "Adaptation",
+            "parisAgreement": "The NCCAS was developed in 2019 and is aligned with the Paris Agreement’s Article 7 and the associated aspects of the Paris Rulebook.",
+            "nationallyDeterminedContributions": "South Africa’s NDC reinforces this commitment further through its Goal 3: implementation of the NCCAS interventions for the period 2021-2030, including in the priority sector of water. The water re-use is amongst South Africa highest climate change adaptation priorities by showcasing the National Water Conservation and Water Demand Management Flagship Programme (within which the water re-use programme is situated) in South Africa’s most recent Biennial Update Report (BUR).",
+            "climateTransformation": "If technical and financial support is provided to municipalities in the identification, preparation and implementation of water reuse projects for climate adaptation at scale through a pipeline of projects, Then the local socio-economic resilience of communities to climate change will be strengthened through improved water security, Because transformational change in public and private sector funding of water reuse infrastructure will enable the establishment of a new asset class that will underpin the upscaling of water reuse nationally. ",
+            "climateFinanceDecisionMaking": "National Department of Forestry, Fisheries and Environment",
+            "financialInstrument": "Concessional Loan"
           },
           "institutionalSustainabilityData": {
-            "policyCoherenceDocumentation": "Project implementation will be coordinated with relevant government agencies and municipalities to ensure alignment with existing policies and regulations.",
-            "freedomOfInformationRequestsAndAnswers": "The FOI portal will be actively managed to ensure timely responses to requests.",
-            "numberOfFreedomOfInformationRequests": "To be tracked and reported annually.",
-            "numberOfFreedomOfInformationAnswers": "To be tracked and reported annually.",
-            "riskManagementPlans": "A comprehensive risk management plan will be developed and updated regularly.",
-            "attachments": [
-              {
-                "title": "Inter-Agency Collaboration Framework",
-                "description": "Framework outlining roles and responsibilities of different government entities involved in the project.",
-                "documentType": "Collaboration Framework",
-                "format": "PDF",
-                "language": "en",
-                "pages": 40,
-                "datePublished": "2024-10-01T00:00:00Z",
-                "dateModified": "2024-10-15T00:00:00Z",
-                "url": "http://example.com/olifants-collaboration-framework.pdf"
-              },
-              {
-                "title": "Project Risk Register",
-                "description": "Dynamic document identifying and assessing project risks and mitigation measures.",
-                "documentType": "Risk Register",
-                "format": "XLSX",
-                "language": "en",
-                "datePublished": "2024-10-20T00:00:00Z",
-                "dateModified": "To be updated regularly",
-                "url": "http://example.com/olifants-risk-register.xlsx"
-              }
-            ]
-          },
-          "economicAndFinancialSustainabilityData": {
-            "costBenefitAnalysis": "Cost-benefit analysis demonstrates the long-term economic and social benefits of improved water management in the basin.",
-            "lifeCycleCost": "Estimated lifecycle cost of the project, including capital costs, operating expenses, and decommissioning costs.",
-            "lifeCycleCostCalculationMethodology": "Standard discounted cash flow methodology used for lifecycle cost analysis.",
-            "assetLifetime": "Expected operational lifespan of wastewater treatment plants and other infrastructure will be assessed during design.",
-            "valueForMoney": "Project will strive for cost-effectiveness and maximize the value of investments.",
-            "budgetForPreparation": "Detailed budget allocation for feasibility studies, environmental assessments, and project design.",
-            "budgetProjections": "Projected budget requirements for different project phases.",
-            "fundingSourceForPreparation": "Government of South Africa, Green Climate Fund, Development Bank of Southern Africa",
-            "procurementStrategy": "Transparent and competitive procurement procedures will be followed, adhering to national guidelines.",
-            "maintenancePlan": "A comprehensive maintenance plan will be developed for all project infrastructure to ensure long-term functionality.",
-            "attachments": [
-              {
-                "title": "Cost-Benefit Analysis Report",
-                "description": "Detailed analysis of the project's economic and social costs and benefits.",
-                "documentType": "Economic Analysis",
-                "format": "PDF",
-                "language": "en",
-                "pages": 80,
-                "datePublished": "2024-11-01T00:00:00Z",
-                "dateModified": "2024-11-15T00:00:00Z",
-                "url": "http://example.com/olifants-cost-benefit-analysis.pdf"
-              },
-              {
-                "title": "Financial Sustainability Plan",
-                "description": "Plan outlining strategies for long-term financial viability, including tariff structures and cost recovery mechanisms.",
-                "documentType": "Financial Plan",
-                "format": "PDF",
-                "language": "en",
-                "pages": 50,
-                "datePublished": "2024-11-20T00:00:00Z",
-                "dateModified": "2024-12-05T00:00:00Z",
-                "url": "http://example.com/olifants-financial-sustainability-plan.pdf"
-              }
-            ]
-          },
-          "climateFinanceData": {
-            "projectPreparationPeriod": "2023-04-01 to 2024-12-31",
-            "projectPreparationCosts": "10,000,000 USD",
-            "projectApprovalPeriod": "2025-01-01 to 2025-06-30",
-            "fundingSource": "Green Climate Fund, Development Bank of Southern Africa",
-            "accreditedEntityType": "National Implementing Entity (NIE)",
-            "greenClimateFundAccreditedEntity": "Development Bank of Southern Africa",
-            "ratioOfCoFinance": "70:30 (Government:GCF)",
-            "termsOfClimateFinance": "Concessional loans and grants with conditions for climate resilience and environmental sustainability.",
-            "carbonEfficiency": "Project will promote water and energy efficiency in wastewater treatment processes.",
-            "nonClimateCoBenefits": "Improved public health, job creation, and enhanced biodiversity in the river basin.",
-            "attachments": [
-              {
-                "title": "Climate Finance Proposal (GCF)",
-                "description": "Detailed proposal submitted to the Green Climate Fund.",
-                "documentType": "Funding Proposal",
-                "format": "PDF",
-                "language": "en",
-                "pages": 150,
-                "datePublished": "2024-04-15T00:00:00Z",
-                "dateModified": "2024-05-01T00:00:00Z",
-                "url": "http://example.com/olifants-gcf-proposal.pdf"
-              }
-            ]
-          }
-        },
-        "tenderManagement": {
-          "basicData": {
-            "procuringEntity": "Department of Water and Sanitation, Lephalale Water Services Authority",
-            "procuringEntityContactDetails": "Contact: [Contact Person], Email: [Email Address], Phone: [Phone Number]",
-            "procurementMethod": "Open tender",
-            "procurementProcess": "Multi-stage bidding process with pre-qualification.",
-            "contractTitle": "Olifants River Basin Wastewater Treatment and Reuse - Construction Contracts",
-            "contractType": "Engineering, Procurement, and Construction (EPC)",
-            "contractScopeOfWork": "Multiple contracts will be awarded for different project components, including wastewater treatment plant upgrades, pipeline construction, and water reuse systems.",
-            "numberOfFirmsTendering": "Variable depending on the specific contract.",
-            "contractFirm": "Winning bidders will be announced for each contract.",
-            "contractPrice": "Variable depending on the specific contract.",
-            "costEstimate": "Cost estimates will be developed during the tender process.",
-            "contractStartDate": "Variable depending on the specific contract.",
-            "contractDuration": "Variable depending on the specific contract.",
-            "contractStatus": "Contracts will be awarded upon completion of the tender process.",
-            "contractAdministrationEntity": "Department of Water and Sanitation, Lephalale Water Services Authority",
-            "contractOfficialsAndRoles": "Contract administrators and project managers will be assigned for each contract.",
-            "attachments": [
-              {
-                "title": "Tender Documents",
-                "description": "Tender documents will be published on the designated government procurement portal.",
-                "documentType": "Tender Document",
-                "format": "PDF",
-                "language": "en",
-                "pages": "Variable",
-                "datePublished": "To be determined",
-                "dateModified": "To be determined",
-                "url": "Link to procurement portal"
-              }
-            ]
-          },
-          "environmentalAndClimateSustainabilityData": {
-            "environmentalCertifications": "Contractors will be required to comply with relevant environmental standards and obtain necessary certifications (e.g., ISO 14001).",
-            "numberOfEnvironmentalCertifications": "To be determined based on contract requirements.",
-            "attachments": [
-              {
-                "title": "Environmental Requirements for Contractors",
-                "description": "Document outlining environmental obligations for contractors.",
-                "documentType": "Contractual Requirement",
-                "format": "PDF",
-                "language": "en",
-                "pages": "Variable",
-                "datePublished": "To be determined",
-                "dateModified": "To be determined",
-                "url": "To be provided with tender documents."
-              }
-            ]
-          },
-          "socialSustainabilityData": {
-            "healthAndSafetyCertifications": "Contractors will be required to comply with occupational health and safety standards (e.g., OHSAS 18001).",
-            "laborBudget": "Labor budgets will be determined during the tender process and incorporated into contract costs.",
-            "attachments": [
-              {
-                "title": "Health and Safety Requirements for Contractors",
-                "description": "Document outlining health and safety obligations for contractors.",
-                "documentType": "Contractual Requirement",
-                "format": "PDF",
-                "language": "en",
-                "pages": "Variable",
-                "datePublished": "To be determined",
-                "dateModified": "To be determined",
-                "url": "To be provided with tender documents."
-              }
-            ]
-          },
-          "institutionalSustainabilityData": {
-            "sustainabilityCriteria": "Sustainable procurement practices, including consideration of environmental and social criteria, will be integrated into the tender evaluation process.",
-            "freedomOfInformationRequestsAndAnswers": "The FOI portal will be used to manage requests related to tendering and contract awards.",
-            "numberOfFreedomOfInformationRequests": "To be tracked and reported annually.",
-            "numberOfFreedomOfInformationAnswers": "To be tracked and reported annually.",
-            "beneficialOwnership": "Bidders will be required to disclose beneficial ownership information in line with anti-corruption measures.",
-            "antiCorruptionCertifications": "Contracts will include anti-corruption clauses, and bidders may be required to provide relevant certifications.",
-            "attachments": [
-              {
-                "title": "Sustainable Procurement Guidelines",
-                "description": "Guidelines for integrating sustainability considerations in procurement.",
-                "documentType": "Procurement Guideline",
-                "format": "PDF",
-                "language": "en",
-                "pages": 30,
-                "datePublished": "2024-01-15T00:00:00Z",
-                "dateModified": "2024-02-01T00:00:00Z",
-                "url": "http://example.com/olifants-sustainable-procurement-guidelines.pdf"
-              }
-            ]
-          }
-        },
-        "implementation": {
-          "basicData": {
-            "variationToContractScope": "Contract variations will be managed according to established procedures, with proper documentation and approvals.",
-            "reasonsForScope": "Potential reasons for scope variations include unforeseen site conditions, changes in technology, or adjustments based on stakeholder feedback.",
-            "variationToContractPrice": "Contract price variations will be evaluated and approved based on justified reasons and supporting documentation.",
-            "reasonsForPriceChanges": "Potential reasons for price changes include fluctuations in material costs, labor costs, or changes in exchange rates.",
-            "variationToContractDuration": "Contract duration variations will be assessed based on the impact on project objectives and overall timeline.",
-            "reasonsForDurationChanges": "Potential reasons for duration changes include weather-related delays, unforeseen technical challenges, or delays in obtaining permits.",
-            "escalationOfContractPrice": "Contract provisions for price escalation will be included to address inflation and currency fluctuations.",
-            "attachments": [
-              {
-                "title": "Implementation Progress Reports",
-                "description": "Regular progress reports will be prepared for each contract and for the overall project.",
-                "documentType": "Progress Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": "Variable",
-                "datePublished": "To be determined",
-                "dateModified": "To be updated regularly",
-                "url": "http://example.com/olifants-progress-reports.pdf"
-              },
-              {
-                "title": "Contract Management Procedures",
-                "description": "Document outlining procedures for managing contract variations, claims, and dispute resolution.",
-                "documentType": "Management Procedure",
-                "format": "PDF",
-                "language": "en",
-                "pages": 40,
-                "datePublished": "2025-07-01T00:00:00Z",
-                "dateModified": "2025-07-15T00:00:00Z",
-                "url": "http://example.com/olifants-contract-management.pdf"
-              }
-            ]
-          },
-          "environmentalAndClimateSustainabilityData": {
-            "environmentalMeasures": "Implementation of environmental monitoring plans to track key indicators, mitigate impacts, and ensure compliance with permits.",
-            "climateMeasures": "Monitoring of water availability and climate data to inform adaptive management strategies.",
-            "conservationMeasures": "Implementation of water conservation measures at project sites and promotion of water-wise practices among stakeholders.",
-            "attachments": [
-              {
-                "title": "Environmental Monitoring Reports",
-                "description": "Regular reports on environmental monitoring results and corrective actions taken.",
-                "documentType": "Monitoring Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": "Variable",
-                "datePublished": "To be determined",
-                "dateModified": "To be updated regularly",
-                "url": "http://example.com/olifants-environmental-monitoring-reports.pdf"
-              }
-            ]
-          },
-          "socialSustainabilityData": {
-            "jobsGenerated": "The number of jobs created during construction and operation will be tracked and reported.",
-            "inclusiveImplementation": "Efforts will be made to promote local employment and skills development opportunities, with a focus on inclusion of women and youth.",
-            "workersAccidents": "Occupational health and safety will be prioritized, and all accidents will be reported and investigated.",
-            "attachments": [
-              {
-                "title": "Job Creation and Skills Development Report",
-                "description": "Report documenting employment opportunities generated by the project and skills development initiatives.",
-                "documentType": "Social Impact Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": "Variable",
-                "datePublished": "To be determined",
-                "dateModified": "To be updated annually",
-                "url": "http://example.com/olifants-jobs-skills-report.pdf"
-              },
-              {
-                "title": "Health and Safety Performance Report",
-                "description": "Report on occupational health and safety performance, including accident statistics and safety measures implemented.",
-                "documentType": "Safety Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": "Variable",
-                "datePublished": "To be determined",
-                "dateModified": "To be updated annually",
-                "url": "http://example.com/olifants-safety-performance-report.pdf"
-              }
-            ]
-          },
-          "institutionalSustainabilityData": {
-            "freedomOfInformationRequestsAndAnswers": "The FOI portal will be used to manage requests related to project implementation.",
-            "numberOfFreedomOfInformationRequests": "To be tracked and reported annually.",
-            "numberOfFreedomOfInformationAnswers": "To be tracked and reported annually.",
-            "attachments": [
-              {
-                "title": "Project Governance Framework",
-                "description": "Document outlining roles, responsibilities, and decision-making processes for project implementation.",
-                "documentType": "Governance Framework",
-                "format": "PDF",
-                "language": "en",
-                "pages": 35,
-                "datePublished": "2025-08-01T00:00:00Z",
-                "dateModified": "2025-08-15T00:00:00Z",
-                "url": "http://example.com/olifants-governance-framework.pdf"
-              }
-            ]
-          },
-          "economicAndFinancialSustainabilityData": {
-            "budgetForImplementation": "120,000,000 USD",
-            "fundingSourceForImplementation": "National Treasury, Green Climate Fund, Development Bank of Southern Africa, Private sector partners",
-            "budgetShortfall": "To be monitored and addressed through contingency planning and fundraising efforts.",
-            "attachments": [
-              {
-                "title": "Financial Monitoring Reports",
-                "description": "Regular reports on project expenditures, budget variances, and financial performance.",
-                "documentType": "Financial Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": "Variable",
-                "datePublished": "To be determined",
-                "dateModified": "To be updated quarterly",
-                "url": "http://example.com/olifants-financial-monitoring-reports.pdf"
-              }
-            ]
-          },
-          "climateFinanceData": {
-            "disbursementRecords": "Records of climate finance disbursements will be maintained and reported to funding agencies.",
-            "performanceMonitoring": "Project performance will be monitored against climate resilience indicators and reported to the Green Climate Fund.",
-            "independentMonitoring": "Periodic independent monitoring and evaluation will be conducted to assess the effectiveness of climate change adaptation measures.",
-            "typeOfMonitoring": "A combination of financial, technical, environmental, and social monitoring will be implemented.",
-            "reportingPeriod": "Reporting to funding agencies will occur annually, with more frequent updates provided as required.",
-            "attachments": [
-              {
-                "title": "Climate Finance Disbursement Reports",
-                "description": "Reports documenting the use of climate funds and project progress.",
-                "documentType": "Financial Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": "Variable",
-                "datePublished": "To be determined",
-                "dateModified": "To be updated annually",
-                "url": "To be provided to funding agencies."
-              }
-            ]
-          }
-        },
-        "completion": {
-          "basicData": {
-            "projectStatus": "Implementation Ongoing",
-            "completionDate": "Estimated completion date: 2028-12-31",
-            "completionCost": "To be determined upon project completion.",
-            "scopeAtCompletion": "To be finalized based on the progress of implementation and any necessary adjustments.",
-            "reasonsForProjectChanges": "Any changes to the project scope, timeline, or budget will be documented and justified.",
-            "attachments": [
-              {
-                "title": "Project Completion Report",
-                "description": "A comprehensive report will be prepared upon project completion, summarizing achievements, lessons learned, and recommendations.",
-                "documentType": "Completion Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": "To be determined",
-                "datePublished": "Upon project completion",
-                "dateModified": "Upon project completion",
-                "url": "http://example.com/olifants-completion-report.pdf"
-              }
-            ]
-          },
-          "institutionalSustainabilityData": {
-            "numberOfFreedomOfInformationRequests": "To be tracked and reported.",
-            "numberOfFreedomOfInformationAnswers": "To be tracked and reported.",
-            "attachments": [
-              {
-                "title": "FOI Log (Completion Phase)",
-                "description": "Log of FOI requests and responses during the completion phase.",
-                "documentType": "FOI Log",
-                "format": "XLSX",
-                "language": "en",
-                "datePublished": "Upon project completion",
-                "dateModified": "Upon project completion",
-                "url": "http://example.com/olifants-foi-log-completion.xlsx"
-              }
-            ]
-          }
-        },
-        "operationsAndMaintenance": {
-          "basicData": {
-            "assetName": "Wastewater Treatment Plants and Water Reuse Systems in the Olifants River Basin",
-            "assetLocation": "Various locations throughout the Olifants River Basin",
-            "maintenanceScope": "Routine maintenance, repairs, and upgrades of wastewater treatment plants, pipelines, pumping stations, and water reuse infrastructure.",
-            "typeOfMaintenanceWorks": "Preventive maintenance, corrective maintenance, and major rehabilitation works.",
-            "worksDescription": "Specific maintenance activities will be detailed in operational and maintenance manuals for each asset.",
-            "projectOfficialsAndRoles": "Roles and responsibilities for operation and maintenance will be defined for relevant stakeholders, including municipalities, water boards, and private operators.",
-            "attachments": [
-              {
-                "title": "Operations and Maintenance Manuals",
-                "description": "Individual manuals will be developed for each wastewater treatment plant and water reuse system.",
-                "documentType": "Operational Manual",
-                "format": "PDF",
-                "language": "en",
-                "pages": "Variable",
-                "datePublished": "Upon completion of each asset",
-                "dateModified": "To be updated as needed",
-                "url": "http://example.com/olifants-o&m-manuals.pdf"
-              }
-            ]
-          },
-          "environmentalAndClimateSustainabilityData": {
-            "environmentalMeasures": "Continued monitoring of effluent quality, water quality in the river basin, and potential environmental impacts of operations.",
-            "climateMeasures": "Adaptive management of water reuse schemes based on climate data and water availability projections.",
-            "conservationMeasures": "Water conservation measures will be implemented at treatment plants and promoted among water users.",
-            "attachments": [
-              {
-                "title": "Environmental Monitoring Reports (Operation Phase)",
-                "description": "Regular reports on environmental monitoring results and compliance with discharge permits.",
-                "documentType": "Monitoring Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": "Variable",
-                "datePublished": "To be determined",
-                "dateModified": "To be updated regularly",
-                "url": "http://example.com/olifants-environmental-monitoring-operations.pdf"
-              }
-            ]
-          },
-          "socialSustainabilityData": {
-            "jobsGenerated": "Permanent jobs will be created for the operation and maintenance of wastewater treatment plants and water reuse systems.",
-            "inclusiveImplementation": "Local employment opportunities will be prioritized, and training programs will be provided to enhance skills.",
-            "workersAccidents": "Health and safety procedures will be strictly enforced, and accident reporting and investigation mechanisms will be in place.",
-            "attachments": [
-              {
-                "title": "Employment and Skills Development Report (Operation Phase)",
-                "description": "Report documenting employment generated by operations and maintenance activities and skills development initiatives.",
-                "documentType": "Social Impact Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": "Variable",
-                "datePublished": "To be determined",
-                "dateModified": "To be updated annually",
-                "url": "http://example.com/olifants-employment-operations.pdf"
-              }
-            ]
-          },
-          "institutionalSustainabilityData": {
-            "numberOfFreedomOfInformationRequests": "To be tracked ",
-            "numberOfFreedomOfInformationAnswers": "To be tracked and reported.",
-            "attachments": [
-              {
-                "title": "FOI Log (Operation Phase)",
-                "description": "Log of FOI requests and responses during the operation phase.",
-                "documentType": "FOI Log",
-                "format": "XLSX",
-                "language": "en",
-                "datePublished": "To be determined",
-                "dateModified": "To be updated regularly",
-                "url": "http://example.com/olifants-foi-log-operation.xlsx"
-              }
-            ]
-          },
-          "economicAndFinancialSustainabilityData": {
-            "budgetForMaintenance": "Annual maintenance budgets will be developed for each asset, considering lifecycle costs and operational requirements.",
-            "fundingSourceForMaintenance": "Funding sources will include municipal budgets, water tariffs, and potential support from national government programs.",
-            "attachments": [
-              {
-                "title": "Operations and Maintenance Cost Reports",
-                "description": "Annual reports on operating and maintenance costs for each asset.",
-                "documentType": "Financial Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": "Variable",
-                "datePublished": "To be determined",
-                "dateModified": "To be updated annually",
-                "url": "http://example.com/olifants-o&m-cost-reports.pdf"
-              }
-            ]
-          },
-          "climateFinanceData": {
-            "impactMeasurement": "Monitoring of water quality improvements, water reuse volumes, and the project's contribution to climate resilience.",
-            "carbonFootprint": "Assessment and reporting of the carbon footprint of wastewater treatment and water reuse operations.",
-            "attachments": [
-              {
-                "title": "Impact Assessment Report (Operation Phase)",
-                "description": "Periodic assessments of the project's impact on water quality, water security, and climate resilience.",
-                "documentType": "Impact Assessment",
-                "format": "PDF",
-                "language": "en",
-                "pages": "Variable",
-                "datePublished": "To be determined",
-                "dateModified": "To be updated periodically",
-                "url": "http://example.com/olifants-impact-assessment-operation.pdf"
-              }
-            ]
-          }
-        },
-        "decommissioning": {
-          "basicData": {
-            "assetName": "Wastewater Treatment Plants and Water Reuse Systems in the Olifants River Basin",
-            "assetLocation": "Various locations throughout the Olifants River Basin",
-            "maintenanceScope": "Decommissioning of wastewater treatment plants and water reuse infrastructure at the end of their operational lifespan.",
-            "typeOfMaintenanceWorks": "Dismantling of equipment, demolition of structures, site remediation, and environmental restoration.",
-            "worksDescription": "Specific decommissioning activities will be detailed in decommissioning plans for each asset.",
-            "projectOfficialsAndRoles": "Roles and responsibilities for decommissioning will be defined, involving relevant government agencies, municipalities, and environmental experts.",
-            "attachments": [
-              {
-                "title": "Decommissioning Plans",
-                "description": "Individual plans will be developed for the decommissioning of each asset.",
-                "documentType": "Decommissioning Plan",
-                "format": "PDF",
-                "language": "en",
-                "pages": "Variable",
-                "datePublished": "To be determined",
-                "dateModified": "To be determined",
-                "url": "http://example.com/olifants-decommissioning-plans.pdf"
-              }
-            ]
-          },
-          "environmentalAndClimateSustainabilityData": {
-            "decommissionMitigationPlan": "Plans will outline measures to minimize environmental impacts during decommissioning, including waste management, soil remediation, and ecological restoration.",
-            "attachments": [
-              {
-                "title": "Environmental Impact Assessment (Decommissioning)",
-                "description": "Assessments will be conducted to evaluate the potential environmental impacts of decommissioning activities.",
-                "documentType": "Impact Assessment",
-                "format": "PDF",
-                "language": "en",
-                "pages": "Variable",
-                "datePublished": "To be determined",
-                "dateModified": "To be determined",
-                "url": "http://example.com/olifants-decommissioning-eia.pdf"
-              }
-            ]
-          },
-          "socialSustainabilityData": {
-            "jobsGenerated": "Potential job creation during decommissioning activities will be assessed and local employment will be promoted.",
-            "workersAccidents": "Health and safety protocols will be strictly enforced during decommissioning, and accident reporting procedures will be in place.",
-            "attachments": [
-              {
-                "title": "Decommissioning Social Impact Report",
-                "description": "Report documenting the social impacts of decommissioning, including employment and community engagement.",
-                "documentType": "Social Impact Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": "Variable",
-                "datePublished": "To be determined",
-                "dateModified": "To be determined",
-                "url": "http://example.com/olifants-decommissioning-social-impact.pdf"
-              }
-            ]
-          },
-          "institutionalSustainabilityData": {
-            "numberOfFreedomOfInformationRequests": "To be tracked and reported.",
-            "numberOfFreedomOfInformationAnswers": "To be tracked and reported.",
-            "attachments": [
-              {
-                "title": "FOI Log (Decommissioning Phase)",
-                "description": "Log of FOI requests and responses during the decommissioning phase.",
-                "documentType": "FOI Log",
-                "format": "XLSX",
-                "language": "en",
-                "datePublished": "To be determined",
-                "dateModified": "To be determined",
-                "url": "http://example.com/olifants-foi-log-decommissioning.xlsx"
-              }
-            ]
-          },
-          "economicAndFinancialSustainabilityData": {
-            "decommissionCostForecast": "Decommissioning cost estimates will be developed for each asset based on industry standards and best practices.",
-            "attachments": [
-              {
-                "title": "Decommissioning Cost Estimates",
-                "description": "Detailed cost estimates for decommissioning activities.",
-                "documentType": "Cost Estimate",
-                "format": "PDF",
-                "language": "en",
-                "pages": "Variable",
-                "datePublished": "To be determined",
-                "dateModified": "To be determined",
-                "url": "http://example.com/olifants-decommissioning-cost-estimates.pdf"
-              }
-            ]
-          },
-          "climateFinanceData": {
-            "decommissionCosts": "Actual decommissioning costs will be tracked and reported.",
-            "carbonDecommissionSavings": "Potential carbon emission reductions achieved through decommissioning will be estimated.",
-            "decommissionPeriod": "The decommissioning timeline will be determined based on asset conditions and regulatory requirements.",
-            "attachments": [
-              {
-                "title": "Decommissioning Environmental Report",
-                "description": "Report documenting the environmental performance of decommissioning activities.",
-                "documentType": "Environmental Report",
-                "format": "PDF",
-                "language": "en",
-                "pages": "Variable",
-                "datePublished": "To be determined",
-                "dateModified": "To be determined",
-                "url": "http://example.com/olifants-decommissioning-environmental-report.pdf"
-              }
-            ]
+            "policyCoherenceDocumentation": "To prepare for a hotter and drier future with dwindling freshwater resources and growing water demand, South Africa developed its National Water and Sanitation Master Plan in 2018. The Master Plan identifies water re-use as one of the central strategies in its overall approach to ensuring water security and climate resilience. Also, implementing water re-use nationwide does support the major tenets of the National Climate Change Adaptation Strategy (NCCAS) which urges water management institutions to adopt more adaptive responses (action 1.1.28) and underscores the need for more water-wise water management practices in urban areas – including water re-use (action 1.1.32).",
+            "numberOfFreedomOfInformationRequests": 0,
+            "numberOfFreedomOfInformationAnswers": 0,
+            "numberOfLobbyingActivities": 0
           }
         }
-
       },
       "metadata": {
         "version": "1.0",
         "dateCreated": "2024-08-28T16:45:00Z",
         "datePublished": "2024-08-28T16:45:00Z",
-        "dateUpdated": "2024-08-28T16:45:00Z",
-        "language": "en",
-        "lastModifiedBy": "admin",
-        "changeLog": [
-          {
-            "date": "2024-08-28T16:45:00Z",
-            "changedBy": "admin",
-            "change": "Initial creation"
+        "dateUpdated": "2024-08-28T16:45:00Z"
+      }
+    },
+    {
+      "id": "oc4ids-bu3kcz-3",
+      "name": "Water treatment plant for Direct Potable Reuse",
+      "location": {
+        "coordinates": {
+          "lng": 28.333333333333,
+          "lat": -26.166666666667,
+          "popup": "Ekurhuleni, South Africa"
+        },
+        "name": "Ekurhuleni, South Africa"
+      },
+      "featured": true,
+      "stages": {
+        "identification": {
+          "basicData": {
+            "projectName": "Water treatment plant for Direct Potable Reuse",
+            "projectReferenceNumber": "oc4ids-bu3kcz-3",
+            "projectDescription": "Through this project an advance treatment plan (ATP) will be built to treat final wastewater effluent and transfer of the product water to the inlet of a bulk water treatment plant or directly\ninto the water distribution network",
+            "projectLocation": "Ekurhuleni, South Africa",
+            "projectOwner": "City of Ekurhuleni",
+            "sectorSubsector": "Water and Waste",
+            "purpose": "Directly reduce the climate vulnerability of communities through the scaling-up of water reuse projects",
+            "projectBriefOrFeasibilityStudy": "The feasibility study indicates that there is, on average, at least 80 Ml/d available for tertiary advanced treated at a proposed regional site. The transaction advisor engaged with potential used for the product water and identified a total of five potential end users who could potentially purchase up to 71.7 Ml/d on average of the product water.",
+            "projectOfficialsAndRoles": [
+              {
+                "name": "Olivia Okeke",
+                "role": "Public Authority"
+              }
+            ]
+          },
+          "climateFinanceData": {
+            "climateObjective": "Adaptation",
+            "parisAgreement": "The NCCAS was developed in 2019 and is aligned with the Paris Agreement’s Article 7 and the associated aspects of the Paris Rulebook.",
+            "nationallyDeterminedContributions": "South Africa’s NDC reinforces this commitment further through its Goal 3: implementation of the NCCAS interventions for the period 2021-2030, including in the priority sector of water. The water re-use is amongst South Africa highest climate change adaptation priorities by showcasing the National Water Conservation and Water Demand Management Flagship Programme (within which the water re-use programme is situated) in South Africa’s most recent Biennial Update Report (BUR).",
+            "climateTransformation": "If technical and financial support is provided to municipalities in the identification, preparation and implementation of water reuse projects for climate adaptation at scale through a pipeline of projects, Then the local socio-economic resilience of communities to climate change will be strengthened through improved water security, Because transformational change in public and private sector funding of water reuse infrastructure will enable the establishment of a new asset class that will underpin the upscaling of water reuse nationally. ",
+            "climateFinanceDecisionMaking": "National Department of Forestry,\nFisheries and Environment",
+            "financialInstrument": "Concessional Loan"
+          },
+          "institutionalSustainabilityData": {
+            "policyCoherenceDocumentation": "To prepare for a hotter and drier future with dwindling freshwater resources and growing water demand, South Africa developed its National Water and Sanitation Master Plan in 2018. The Master Plan identifies water re-use as one of the central strategies in its overall approach to ensuring water security and climate resilience. Also, implementing water re-use nationwide does support the major tenets of the National Climate Change Adaptation Strategy (NCCAS) which urges water management institutions to adopt more adaptive responses (action 1.1.28) and underscores the need for more water-wise water management practices in urban areas – including water re-use (action 1.1.32).",
+            "numberOfFreedomOfInformationRequests": 0,
+            "numberOfFreedomOfInformationAnswers": 0,
+            "numberOfLobbyingActivities": 0
           }
-        ]
+        }
+      },
+      "metadata": {
+        "version": "1.0",
+        "dateCreated": "2024-08-28T16:45:00Z",
+        "datePublished": "2024-08-28T16:45:00Z",
+        "dateUpdated": "2024-08-28T16:45:00Z"
+      }
+    },
+    {
+      "id": "oc4ids-bu3kcz-4",
+      "name": "Water treatment plant for Industrial Reuse",
+      "location": {
+        "coordinates": {
+          "lng": 27.963611111111,
+          "lat": -26.176666666667,
+          "popup": "Johannesburg, South Africa"
+        },
+        "name": "Johannesburg, South Africa"
+      },
+      "featured": true,
+      "stages": {
+        "identification": {
+          "basicData": {
+            "projectName": "Water treatment plant for Industrial Reuse",
+            "projectReferenceNumber": "oc4ids-bu3kcz-4",
+            "projectDescription": "Through this project  an advanced treatment plant will be built to treat final wastewater effluent in to a quality suitable for industrial purposes and the transfer of the product water to a specific industry or generally to an industrial area.",
+            "projectLocation": "Johannesburg, South Africa",
+            "projectOwner": "City of Johannesburg Metropolitan Municipality",
+            "sectorSubsector": "Water and Waste",
+            "purpose": "Directly reduce the climate vulnerability of communities through the scaling-up of water reuse projects",
+            "projectBriefOrFeasibilityStudy": "The feasibility study indicates that there is, on average, at least 79 Ml/d available for tertiary advanced treated at a proposed regional site. The transaction advisor engaged with potential used for the product water and identified a total of five potential end users who could potentially purchase up to 71.7 Ml/d on average of the product water.",
+            "projectOfficialsAndRoles": [
+              {
+                "name": "Megan Jacobs",
+                "role": "Public Authority"
+              }
+            ]
+          },
+          "climateFinanceData": {
+            "climateObjective": "Adaptation",
+            "parisAgreement": "The NCCAS was developed in 2019 and is aligned with the Paris Agreement’s Article 7 and the associated aspects of the Paris Rulebook.",
+            "nationallyDeterminedContributions": "South Africa’s NDC reinforces this commitment further through its Goal 3: implementation of the NCCAS interventions for the period 2021-2030, including in the priority sector of water. The water re-use is amongst South Africa highest climate change adaptation priorities by showcasing the National Water Conservation and Water Demand Management Flagship Programme (within which the water re-use programme is situated) in South Africa’s most recent Biennial Update Report (BUR).",
+            "climateTransformation": "If technical and financial support is provided to municipalities in the identification, preparation and implementation of water reuse projects for climate adaptation at scale through a pipeline of projects, Then the local socio-economic resilience of communities to climate change will be strengthened through improved water security, Because transformational change in public and private sector funding of water reuse infrastructure will enable the establishment of a new asset class that will underpin the upscaling of water reuse nationally. ",
+            "climateFinanceDecisionMaking": "National Water Partnerships Programme",
+            "financialInstrument": "Concessional Loan"
+          },
+          "institutionalSustainabilityData": {
+            "policyCoherenceDocumentation": "To prepare for a hotter and drier future with dwindling freshwater resources and growing water demand, South Africa developed its National Water and Sanitation Master Plan in 2018. The Master Plan identifies water re-use as one of the central strategies in its overall approach to ensuring water security and climate resilience. Also, implementing water re-use nationwide does support the major tenets of the National Climate Change Adaptation Strategy (NCCAS)  which urges water management institutions to adopt more adaptive responses (action 1.1.28) and underscores the need for more water-wise water management practices in urban areas – including water re-use (action 1.1.32).",
+            "numberOfFreedomOfInformationRequests": 0,
+            "numberOfFreedomOfInformationAnswers": 0,
+            "numberOfLobbyingActivities": 0
+          }
+        }
+      },
+      "metadata": {
+        "version": "1.0",
+        "dateCreated": "2024-08-28T16:45:00Z",
+        "datePublished": "2024-08-28T16:45:00Z",
+        "dateUpdated": "2024-08-28T16:45:00Z"
+      }
+    },
+    {
+      "id": "oc4ids-bu3kcz-5",
+      "name": "Water treatment plant for Indirect Potable Reuse",
+      "location": {
+        "coordinates": {
+          "lng": 28.333333333333,
+          "lat": -25.666666666667,
+          "popup": "Tshwane, South Africa"
+        },
+        "name": "Tshwane, South Africa"
+      },
+      "featured": true,
+      "stages": {
+        "identification": {
+          "basicData": {
+            "projectName": "Water treatment plant for Indirect Potable Reuse",
+            "projectReferenceNumber": "oc4ids-bu3kcz-5",
+            "projectDescription": "Through this project an advance treatment plan (ATP) will be built to treat final wastewater effluent and the transfer of the product water to an environmental buffer (such as an aquifer or surface\nwater reservoir) where it will blend with raw water before treatment in a bulk water treatment plant.",
+            "projectLocation": "Tshwane, South Africa",
+            "projectOwner": "City of Tshwane Metropolitan Municipality",
+            "sectorSubsector": "Water and Waste",
+            "purpose": "Directly reduce the climate vulnerability of communities through the scaling-up of water reuse projects",
+            "projectBriefOrFeasibilityStudy": "The feasibility study indicates that there is, on average, at least 83 Ml/d available for tertiary advanced treated at a proposed regional site. The transaction advisor engaged with potential used for the product water and identified a total of five potential end users who could potentially purchase up to 71.7 Ml/d on average of the product water.",
+            "projectOfficialsAndRoles": [
+              {
+                "name": "Zoe Botha",
+                "role": "Public Authority"
+              }
+            ]
+          },
+          "climateFinanceData": {
+            "climateObjective": "Adaptation",
+            "parisAgreement": "The NCCAS was developed in 2019 and is aligned with the Paris Agreement’s Article 7 and the associated aspects of the Paris Rulebook.",
+            "nationallyDeterminedContributions": "South Africa’s NDC reinforces this commitment further through its Goal 3: implementation of the NCCAS interventions for the period 2021-2030, including in the priority sector of water. The water re-use is amongst South Africa highest climate change adaptation priorities by showcasing the National Water Conservation and Water Demand Management Flagship Programme (within which the water re-use programme is situated) in South Africa’s most recent Biennial Update Report (BUR).",
+            "climateTransformation": "If technical and financial support is provided to municipalities in the identification, preparation and implementation of water reuse projects for climate adaptation at scale through a pipeline of projects, Then the local socio-economic resilience of communities to climate change will be strengthened through improved water security, Because transformational change in public and private sector funding of water reuse infrastructure will enable the establishment of a new asset class that will underpin the upscaling of water reuse nationally. ",
+            "climateFinanceDecisionMaking": "National Water Partnerships Programme",
+            "financialInstrument": "Concessional Loan"
+          },
+          "institutionalSustainabilityData": {
+            "policyCoherenceDocumentation": "To prepare for a hotter and drier future with dwindling freshwater resources and growing water demand, South Africa developed its National Water and Sanitation Master Plan in 2018. The Master Plan identifies water re-use as one of the central strategies in its overall approach to ensuring water security and climate resilience. Also, implementing water re-use nationwide does support the major tenets of the National Climate Change Adaptation Strategy (NCCAS) which urges water management institutions to adopt more adaptive responses (action 1.1.28) and underscores the need for more water-wise water management practices in urban areas – including water re-use (action 1.1.32).",
+            "numberOfFreedomOfInformationRequests": 0,
+            "numberOfFreedomOfInformationAnswers": 0,
+            "numberOfLobbyingActivities": 0
+          }
+        }
+      },
+      "metadata": {
+        "version": "1.0",
+        "dateCreated": "2024-08-28T16:45:00Z",
+        "datePublished": "2024-08-28T16:45:00Z",
+        "dateUpdated": "2024-08-28T16:45:00Z"
+      }
+    },
+    {
+      "id": "oc4ids-bu3kcz-6",
+      "name": "Water treatment plant for Direct Potable Reuse",
+      "location": {
+        "coordinates": {
+          "lng": 18.5,
+          "lat": -34,
+          "popup": "Cape Town, South Africa"
+        },
+        "name": "Cape Town, South Africa"
+      },
+      "featured": true,
+      "stages": {
+        "identification": {
+          "basicData": {
+            "projectName": "Water treatment plant for Direct Potable Reuse",
+            "projectReferenceNumber": "oc4ids-bu3kcz-6",
+            "projectDescription": "Through this project an advance treatment plan (ATP) will be built to treat final wastewater effluent and transfer of the product water to the inlet of a bulk water treatment plant or directly into the water distribution network",
+            "projectLocation": "Cape Town, South Africa",
+            "projectOwner": "City of Cape Town Metropolitan Municipality",
+            "sectorSubsector": "Water and Waste",
+            "purpose": "Directly reduce the climate vulnerability of communities through the scaling-up of water reuse projects",
+            "projectBriefOrFeasibilityStudy": "The feasibility study indicates that there is, on average, at least 84 Ml/d available for tertiary advanced treated at a proposed regional site. The transaction advisor engaged with potential used for the product water and identified a total of five potential end users who could potentially purchase up to 71.7 Ml/d on average of the product water.",
+            "projectOfficialsAndRoles": [
+              {
+                "name": "William Smit",
+                "role": "Public Authority"
+              }
+            ]
+          },
+          "climateFinanceData": {
+            "climateObjective": "Adaptation",
+            "parisAgreement": "The NCCAS was developed in 2019 and is aligned with the Paris Agreement’s Article 7 and the associated aspects of the Paris Rulebook.",
+            "nationallyDeterminedContributions": "South Africa’s NDC reinforces this commitment further through its Goal 3: implementation of the NCCAS interventions for the period 2021-2030, including in the priority sector of water. The water re-use is amongst South Africa highest climate change adaptation priorities by showcasing the National Water Conservation and Water Demand Management Flagship Programme (within which the water re-use programme is situated) in South Africa’s most recent Biennial Update Report (BUR).",
+            "climateTransformation": "If technical and financial support is provided to municipalities in the identification, preparation and implementation of water reuse projects for climate adaptation at scale through a pipeline of projects, Then the local socio-economic resilience of communities to climate change will be strengthened through improved water security, Because transformational change in public and private sector funding of water reuse infrastructure will enable the establishment of a new asset class that will underpin the upscaling of water reuse nationally. ",
+            "climateFinanceDecisionMaking": "National Water Partnerships Programme",
+            "financialInstrument": "Concessional Loan"
+          },
+          "institutionalSustainabilityData": {
+            "policyCoherenceDocumentation": "To prepare for a hotter and drier future with dwindling freshwater resources and growing water demand, South Africa developed its National Water and Sanitation Master Plan in 2018. The Master Plan identifies water re-use as one of the central strategies in its overall approach to ensuring water security and climate resilience. Also, implementing water re-use nationwide does support the major tenets of the National Climate Change Adaptation Strategy (NCCAS)   which urges water management institutions to adopt more adaptive responses (action 1.1.28) and underscores the need for more water-wise water management practices in urban areas – including water re-use (action 1.1.32).",
+            "numberOfFreedomOfInformationRequests": 0,
+            "numberOfFreedomOfInformationAnswers": 0,
+            "numberOfLobbyingActivities": 0
+          }
+        }
+      },
+      "metadata": {
+        "version": "1.0",
+        "dateCreated": "2024-08-28T16:45:00Z",
+        "datePublished": "2024-08-28T16:45:00Z",
+        "dateUpdated": "2024-08-28T16:45:00Z"
+      }
+    },
+    {
+      "id": "oc4ids-bu3kcz-7",
+      "name": "Water treatment plant for Indirect Potable Reuse",
+      "location": {
+        "coordinates": {
+          "lng": 19.666666666667,
+          "lat": -33.333333333333,
+          "popup": "Cape Winelands, South Africa"
+        },
+        "name": "Cape Winelands, South Africa"
+      },
+      "featured": true,
+      "stages": {
+        "identification": {
+          "basicData": {
+            "projectName": "Water treatment plant for Indirect Potable Reuse",
+            "projectReferenceNumber": "oc4ids-bu3kcz-7",
+            "projectDescription": "Through this project an advance treatment plan (ATP) will be built to treat final wastewater effluent and the transfer of the product water to an environmental buffer (such as an aquifer or surface water reservoir) where it will blend with raw water before treatment in a bulk water treatment plant.",
+            "projectLocation": "Cape Winelands, South Africa",
+            "projectOwner": "Drakenstein Local Municipality",
+            "sectorSubsector": "Water and Waste",
+            "purpose": "Directly reduce the climate vulnerability of communities through the scaling-up of water reuse projects",
+            "projectBriefOrFeasibilityStudy": "The feasibility study indicates that there is, on average, at least 85 Ml/d available for tertiary advanced treated at a proposed regional site. The transaction advisor engaged with potential used for the product water and identified a total of five potential end users who could potentially purchase up to 71.7 Ml/d on average of the product water.",
+            "projectOfficialsAndRoles": [
+              {
+                "name": "Shane Gumede",
+                "role": "Public Authority"
+              }
+            ]
+          },
+          "climateFinanceData": {
+            "climateObjective": "Adaptation",
+            "parisAgreement": "The NCCAS was developed in 2019 and is aligned with the Paris Agreement’s Article 7 and the associated aspects of the Paris Rulebook.",
+            "nationallyDeterminedContributions": "South Africa’s NDC reinforces this commitment further through its Goal 3: implementation of the NCCAS interventions for the period 2021-2030, including in the priority sector of water. The water re-use is amongst South Africa highest climate change adaptation priorities by showcasing the National Water Conservation and Water Demand Management Flagship Programme (within which the water re-use programme is situated) in South Africa’s most recent Biennial Update Report (BUR).",
+            "climateTransformation": "If technical and financial support is provided to municipalities in the identification, preparation and implementation of water reuse projects for climate adaptation at scale through a pipeline of projects, Then the local socio-economic resilience of communities to climate change will be strengthened through improved water security, Because transformational change in public and private sector funding of water reuse infrastructure will enable the establishment of a new asset class that will underpin the upscaling of water reuse nationally. ",
+            "climateFinanceDecisionMaking": "South African national Department of Water and Sanitation",
+            "financialInstrument": "Concessional Loan"
+          },
+          "institutionalSustainabilityData": {
+            "policyCoherenceDocumentation": "To prepare for a hotter and drier future with dwindling freshwater resources and growing water demand, South Africa developed its National Water and Sanitation Master Plan in 2018. The Master Plan identifies water re-use as one of the central strategies in its overall approach to ensuring water security and climate resilience. Also, implementing water re-use nationwide does support the major tenets of the National Climate Change Adaptation Strategy (NCCAS) which urges water management institutions to adopt more adaptive responses (action 1.1.28) and underscores the need for more water-wise water management practices in urban areas – including water re-use (action 1.1.32).",
+            "numberOfFreedomOfInformationRequests": 0,
+            "numberOfFreedomOfInformationAnswers": 0,
+            "numberOfLobbyingActivities": 0
+          }
+        }
+      },
+      "metadata": {
+        "version": "1.0",
+        "dateCreated": "2024-08-28T16:45:00Z",
+        "datePublished": "2024-08-28T16:45:00Z",
+        "dateUpdated": "2024-08-28T16:45:00Z"
       }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   ]
+
 }

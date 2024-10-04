@@ -124,24 +124,30 @@
                         <div class="p-4">
                             <a [routerLink]="['/public/projects', project.id]" class="block focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-inset rounded-apple-md">
                                 <div class="flex justify-between items-center mb-2">
-                                    <h3 class="text-xl font-semibold text-accent group-hover:text-accent6 transition-colors duration-250 ease-apple">{{ project.name }}</h3>
+                                    <h3 class="text-xl font-semibold text-accent group-hover:text-accent6 transition-colors duration-250 ease-apple">{{ project.name || 'Unnamed Project' }}</h3>
                                     <i class="bi bi-arrow-right text-lg text-accent4 group-hover:text-accent6 transition-all duration-250 ease-apple transform group-hover:translate-x-1"></i>
                                 </div>
                                 <p class="text-sm mb-2 text-accent4 flex items-center">
                                     <i class="bi bi-geo-alt mr-1 text-accent6"></i>
-                                    {{ project.location.name }}
+                                    {{ project.location?.name || 'Location not specified' }}
                                 </p>
-                                <p class="text-accent text-opacity-80 text-sm line-clamp-2 mb-3">{{ project.stages.identification.basicData.projectDescription }}</p>
+                                <p class="text-accent text-opacity-80 text-sm line-clamp-2 mb-3">
+                                    {{ project.stages?.identification?.basicData?.projectDescription || 'No description available' }}
+                                </p>
                                 <div class="flex flex-wrap justify-between items-center text-xs">
-                                    <span class="bg-accent2 text-accent px-2 py-1 rounded-full mb-1 mr-1">{{ project.stages.identification.basicData.sectorSubsector }}</span>
+                <span class="bg-accent2 text-accent px-2 py-1 rounded-full mb-1 mr-1">
+                    {{ project.stages?.identification?.basicData?.sectorSubsector || 'Sector not specified' }}
+                </span>
                                     <span class="font-semibold text-accent6 mb-1">{{ formatCurrency(project.parsedBudget) }}</span>
-                                    <span class="bg-accent5 text-accent px-2 py-1 rounded-full mb-1 w-full sm:w-auto text-center">{{ project.status }}</span>
+                                    <span class="bg-accent5 text-accent px-2 py-1 rounded-full mb-1 w-full sm:w-auto text-center">
+                    {{ project.status || 'Status not available' }}
+                </span>
                                 </div>
                             </a>
                             <div *ngIf="project.featured" class="absolute top-2 right-2 animate-apple-pulse">
-                                <span class="bg-accent1 text-accent text-xs font-semibold px-2 py-1 rounded-apple-full shadow-apple-sm">
-                                    Featured
-                                </span>
+            <span class="bg-accent1 text-accent text-xs font-semibold px-2 py-1 rounded-apple-full shadow-apple-sm">
+                Featured
+            </span>
                             </div>
                         </div>
                     </div>
