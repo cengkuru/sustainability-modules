@@ -103,32 +103,43 @@
 
         <section class="bg-white rounded-apple-md shadow-apple-md p-6 mb-12">
             <div class="flex items-center justify-between mb-6">
-                <div class="flex items-center">
-                    <i class="bi bi-diagram-3 text-secondary text-2xl mr-3" aria-hidden="true"></i>
-                    <h3 class="text-2xl font-bold text-accent">Sustainable Subsector Breakdown</h3>
-                </div>
-                <p class="text-accent4 font-medium">
-                    Total Projects: <span class="text-accent font-semibold">{{totalProjects}}</span>
-                </p>
+              <div class="flex items-center">
+                <i class="bi bi-diagram-3 text-secondary text-2xl mr-3" aria-hidden="true"></i>
+                <h3 class="text-2xl font-bold text-accent">Sustainable Subsector Breakdown</h3>
+              </div>
+              <p class="text-accent4 font-medium">
+                Total Projects: <span class="text-accent font-semibold">{{totalProjects}}</span>
+              </p>
             </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div *ngFor="let item of sortedSubsectorBreakdown"
+      
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <!-- Bar Chart -->
+              <div class="lg:col-span-2">
+                <div id="subsectorBarChart" class="w-full h-96"></div>
+              </div>
+      
+              <!-- Stat Cards -->
+              <div class="lg:col-span-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+                <div *ngFor="let item of sortedSubsectorBreakdown.slice(0, 5)"
                      class="bg-accent2 bg-opacity-10 rounded-apple-lg p-5 transition-all duration-300 ease-apple-ease-out hover:bg-opacity-30 hover:shadow-apple-md transform hover:translate-y-[-2px]">
-                    <div class="flex items-center mb-3">
-                        <i [class]="getSubsectorIcon(item.key) + ' text-secondary text-xl mr-3'" [attr.aria-label]="item.key + ' icon'"></i>
-                        <p class="text-lg font-semibold text-accent truncate">{{item.key}}</p>
+                  <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center">
+                      <i [class]="getSubsectorIcon(item.key) + ' text-secondary text-xl mr-3'" [attr.aria-label]="item.key + ' icon'"></i>
+                      <p class="text-lg font-semibold text-accent truncate">{{item.key}}</p>
                     </div>
-                    <div class="flex justify-between items-baseline mb-2">
-                        <p class="text-2xl font-bold text-secondary">{{item.value}}</p>
-                        <p class="text-sm text-accent4">{{item.percentage.toFixed(1)}}% of total</p>
-                    </div>
-                    <div class="w-full bg-accent2 bg-opacity-20 rounded-full h-2 mt-2">
-                        <div class="bg-secondary h-2 rounded-full" [style.width]="item.percentage + '%'"></div>
-                    </div>
+                    <p class="text-sm text-accent4">{{item.percentage.toFixed(1)}}%</p>
+                  </div>
+                  <div class="flex justify-between items-baseline mb-2">
+                    <p class="text-2xl font-bold text-secondary">{{item.value}}</p>
+                    <p class="text-sm text-accent4">projects</p>
+                  </div>
+                  <div class="w-full bg-accent2 bg-opacity-20 rounded-full h-2 mt-2">
+                    <div class="bg-secondary h-2 rounded-full" [style.width]="item.percentage + '%'"></div>
+                  </div>
                 </div>
+              </div>
             </div>
-        </section>
+          </section>
 
 
         <!-- Charts -->

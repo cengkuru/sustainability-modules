@@ -150,6 +150,8 @@ export class DataAnalysisComponent implements AfterViewInit {
     },
   ];
 
+  
+
   constructor(
     private http: HttpClient,
     private ngZone: NgZone,
@@ -164,6 +166,8 @@ export class DataAnalysisComponent implements AfterViewInit {
       await this.loadProjects();
       this.updateKeyMetrics();
       this.initializeCharts();
+      this.updateSustainableSubsectorBreakdown();
+    this.createSubsectorBarChart();
       this.cdr.detectChanges();
     } catch (error) {
       console.error("Error during component initialization:", error);
@@ -513,22 +517,110 @@ export class DataAnalysisComponent implements AfterViewInit {
     this.endYear = this.maxYear = Math.max(...years);
   }
 
-  getSubsectorIcon(subsector: string): string {
-    const iconMap: { [key: string]: string } = {
-      Biomass: "bi bi-tree",
-      "Flood protection": "bi bi-water",
-      Geothermal: "bi bi-thermometer-half",
-      Hydropower: "bi bi-droplet",
-      "Low carbon transport": "bi bi-bicycle",
-      "Natural resource management": "bi bi-flower1",
-      "Renewable energy": "bi bi-sun",
-      Solar: "bi bi-brightness-high",
-      Transport: "bi bi-truck",
-      "Water and wastewater management": "bi bi-moisture",
-      Wind: "bi bi-wind",
+  private updateSustainableSubsectorBreakdown() {
+    this.sustainableSubsectorBreakdown = this.filteredProjects.reduce(
+      (acc, p) => {
+        if (p.sustainableSubsector) {
+          acc[p.sustainableSubsector] = (acc[p.sustainableSubsector] || 0) + 1;
+        }
+        return acc;
+      },
+      {} as { [key: string]: number }
+    );
+
+    this.totalProjects = this.filteredProjects.length;
+
+    this.sortedSubsectorBreakdown = Object.entries(
+      this.sustainableSubsectorBreakdown
+    )
+      .map(([key, value]) => ({
+        key,
+        value,
+        percentage: (value / this.totalProjects) * 100,
+      }))
+      .sort((a, b) => b.value - a.value);
+  }
+
+  createSubsectorBarChart() {
+    const chartDom = document.getElementById('subsectorBarChart');
+    if (!chartDom) return;
+
+    const myChart = echarts.init(chartDom);
+
+    const option: EChartsOption = {
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        },
+        formatter: (params: any) => {
+          const dataIndex = params[0].dataIndex;
+          const item = this.sortedSubsectorBreakdown[dataIndex];
+          return `${item.key}<br/>Projects: ${item.value}<br/>Percentage: ${item.percentage.toFixed(1)}%`;
+        }
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'value',
+        boundaryGap: [0, 0.01],
+        axisLabel: {
+          color: this.brandColors.accent
+        }
+      },
+      yAxis: {
+        type: 'category',
+        data: this.sortedSubsectorBreakdown.map(item => item.key),
+        axisLabel: {
+          color: this.brandColors.accent,
+          fontFamily: 'Inter, sans-serif',
+          fontSize: 12
+        }
+      },
+      series: [
+        {
+          name: 'Projects',
+          type: 'bar',
+          data: this.sortedSubsectorBreakdown.map(item => item.value),
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+              { offset: 0, color: this.brandColors.secondary },
+              { offset: 1, color: this.brandColors.accent6 }
+            ])
+          },
+          label: {
+            show: true,
+            position: 'right',
+            formatter: '{c}',
+            color: this.brandColors.accent
+          }
+        }
+      ]
     };
 
-    return iconMap[subsector] || "bi bi-question-circle";
+    myChart.setOption(option);
+  }
+
+  getSubsectorIcon(subsector: string): string {
+    const iconMap: { [key: string]: string } = {
+      'Biomass': 'bi bi-tree',
+      'Flood protection': 'bi bi-water',
+      'Geothermal': 'bi bi-thermometer-half',
+      'Hydropower': 'bi bi-droplet',
+      'Low carbon transport': 'bi bi-bicycle',
+      'Natural resource management': 'bi bi-flower1',
+      'Renewable energy': 'bi bi-sun',
+      'Solar': 'bi bi-brightness-high',
+      'Transport': 'bi bi-truck',
+      'Water and wastewater management': 'bi bi-moisture',
+      'Wind': 'bi bi-wind'
+    };
+
+    return iconMap[subsector] || 'bi bi-question-circle';
   }
 
   applyFilters() {
@@ -574,29 +666,7 @@ export class DataAnalysisComponent implements AfterViewInit {
     }
   }
 
-  private updateSustainableSubsectorBreakdown() {
-    this.sustainableSubsectorBreakdown = this.filteredProjects.reduce(
-      (acc, p) => {
-        if (p.sustainableSubsector) {
-          acc[p.sustainableSubsector] = (acc[p.sustainableSubsector] || 0) + 1;
-        }
-        return acc;
-      },
-      {} as { [key: string]: number }
-    );
-
-    this.totalProjects = this.filteredProjects.length;
-
-    this.sortedSubsectorBreakdown = Object.entries(
-      this.sustainableSubsectorBreakdown
-    )
-      .map(([key, value]) => ({
-        key,
-        value,
-        percentage: (value / this.totalProjects) * 100,
-      }))
-      .sort((a, b) => b.value - a.value);
-  }
+  
 
   updateKeyMetrics() {
     this.totalProjects = this.filteredProjects.length;
