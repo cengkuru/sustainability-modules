@@ -70,10 +70,10 @@ export class ProjectDetailsComponent implements OnInit {
     stages = [
         { id: 'Identification', icon: 'bi-info-circle', label: 'Identification' },
         { id: 'Preparation', icon: 'bi-tools', label: 'Preparation' },
-        { id: 'TenderManagement', icon: 'bi-file-earmark', label: 'Tender Management' },
+        { id: 'TenderManagement', icon: 'bi-file-earmark', label: 'Tendering' },
         { id: 'Implementation', icon: 'bi-play-circle', label: 'Implementation' },
         { id: 'Completion', icon: 'bi-check-circle', label: 'Completion' },
-        { id: 'OperationAndMaintenance', icon: 'bi-gear', label: 'Operation and Maintenance' },
+        { id: 'OperationAndMaintenance', icon: 'bi-gear', label: 'Maintenance' },
         { id: 'Decommissioning', icon: 'bi-x-circle', label: 'Decommissioning' }
     ];
     hoveredStage: string | null = null;
@@ -294,7 +294,7 @@ export class ProjectDetailsComponent implements OnInit {
         ["budgetShortfall", "If the project is running out of money, this shows how much more is needed."],
 
         // Institutional Sustainability Data
-        ["numberOfFreedomOfInformationRequests", "How many times the public has asked for information about the project, indicating public interest and transparency."],
+        ["numberOfFreedomOfInformationRequests", "How many times the public has asked for information about the project, indicating public interest."],
         ["numberOfFreedomOfInformationAnswers", "How many of those requests were answered, showing how open the project management is."],
 
         // Climate Finance Data (Moved here for logical grouping)
@@ -938,7 +938,9 @@ export class ProjectDetailsComponent implements OnInit {
             'Non-Climate Co-Benefits': climateFinanceData.nonClimateCoBenefits,
             'Terms of Climate Finance': climateFinanceData.termsOfClimateFinance,
             'Project Preparation Costs': climateFinanceData.projectPreparationCosts,
-            'Funding Source': climateFinanceData.fundingSource
+            'Funding Source': climateFinanceData.fundingSource,
+            'Total Amount of Investments': climateFinanceData.totalAmountOfInvestments,
+            'Amount of Investment': climateFinanceData.amountOfInvestment
         };
     }
 

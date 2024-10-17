@@ -329,9 +329,9 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
             <p class="mb-4 text-accent-100">
               <span class="font-medium">Location:</span> ${project.location.name}
             </p>
-            <button class="apple-button w-full text-center" data-project-id="${project.id}">
+            <a href="/public/projects/${project.id}" class="apple-button w-full text-center block">
               View Details
-            </button>
+            </a>
           </div>
         `;
         return {
