@@ -969,141 +969,165 @@ export class DataAnalysisComponent implements AfterViewInit {
   }
 
   private createInvestmentByRegionChart(): void {
-    const chartDom = document.getElementById("investmentByRegionChart");
+    const chartDom = document.getElementById('investmentByRegionChart');
     if (!chartDom) return;
-    this.charts["investmentByRegion"] = echarts.init(chartDom);
+    this.charts['investmentByRegion'] = echarts.init(chartDom);
 
     // Extract unique regions and years from the projects
-    const regions = Array.from(
-      new Set(this.projects.map((p) => p.region.name))
-    ).sort();
-    const years = Array.from(
-      new Set(this.projects.flatMap((p) => Object.keys(p.yearlyInvestment)))
-    ).sort();
+    const regions = Array.from(new Set(this.projects.map(p => p.region.name))).sort();
+    const years = Array.from(new Set(
+        this.projects.flatMap(p => Object.keys(p.yearlyInvestment))
+    )).sort();
 
     // Prepare data for each region
-    const series: BarSeriesOption[] = regions.map((region) => {
-      const data = years.map((year) => {
-        const yearlyInvestment = this.projects
-          .filter((p) => p.region.name === region)
-          .reduce((sum, p) => sum + (p.yearlyInvestment[year] || 0), 0);
-        return yearlyInvestment / 1e9; // Convert to billions
-      });
+    const series: BarSeriesOption[] = regions.map(region => {
+        const data = years.map(year => {
+            const yearlyInvestment = this.projects
+                .filter(p => p.region.name === region)
+                .reduce((sum, p) => sum + (p.yearlyInvestment[year] || 0), 0);
+            return yearlyInvestment / 1e9; // Convert to billions
+        });
 
-      return {
-        name: region,
-        type: "bar",
-        stack: "total",
-        emphasis: {
-          focus: "series",
-        },
-        data: data,
-      };
+        return {
+            name: region,
+            type: 'bar',
+            stack: 'total',
+            emphasis: {
+                focus: 'series'
+            },
+            data: data
+        };
     });
 
     const option: EChartsOption = {
-      backgroundColor: "#f7f7f7", // Light gray background
-
-      tooltip: {
-        trigger: "axis",
-        axisPointer: {
-          type: "shadow",
+        backgroundColor: this.brandColors.primary,
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            },
+            formatter: (params: any) => {
+                let tooltip = `${params[0].axisValue}<br/>`;
+                let total = 0;
+                params.forEach((item: any) => {
+                    const value = item.value.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'ZAR',
+                        minimumFractionDigits: 1,
+                        maximumFractionDigits: 1
+                    });
+                    tooltip += `${item.marker} ${item.seriesName}: ${value}B<br/>`;
+                    total += item.value;
+                });
+                tooltip += `<strong>Total: ${total.toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'ZAR',
+                    minimumFractionDigits: 1,
+                    maximumFractionDigits: 1
+                })}B</strong>`;
+                return tooltip;
+            },
+            backgroundColor: `rgba(255, 255, 255, 0.9)`,
+            borderColor: this.brandColors.accent2,
+            textStyle: {
+                color: this.brandColors.accent,
+                fontFamily: 'Inter, sans-serif'
+            }
         },
-        formatter: (params: any) => {
-          let tooltip = `${params[0].axisValue}<br/>`;
-          let total = 0;
-          params.forEach((item: any) => {
-            const value = item.value.toLocaleString("en-US", {
-              style: "currency",
-              currency: "ZAR",
-              minimumFractionDigits: 1,
-              maximumFractionDigits: 1,
-            });
-            tooltip += `${item.marker} ${item.seriesName}: ${value}B<br/>`;
-            total += item.value;
-          });
-          tooltip += `<strong>Total: ${total.toLocaleString("en-US", {
-            style: "currency",
-            currency: "ZAR",
-            minimumFractionDigits: 1,
-            maximumFractionDigits: 1,
-          })}B</strong>`;
-          return tooltip;
+        legend: {
+            type: 'scroll',
+            orient: 'vertical',
+            right: 10,
+            top: 20,
+            bottom: 20,
+            textStyle: {
+                color: this.brandColors.accent,
+                fontFamily: 'Inter, sans-serif',
+                fontSize: 8
+            },
+            itemWidth: 15,
+            itemHeight: 10,
+            itemGap: 10,
+            backgroundColor: `rgba(255, 255, 255, 0.1)`,
+            borderRadius: 5,
+            padding: 15,
+            formatter: (name: string) => {
+                const seriesItem = series.find(s => s.name === name);
+                if (seriesItem && Array.isArray(seriesItem.data)) {
+                    const value = seriesItem.data.reduce((a, b) => (typeof a === 'number' && typeof b === 'number') ? a + b : 0, 0);
+                    return `${name}: ${typeof value === 'number' ? value.toFixed(1) : '0.0'}B`;
+                }
+                return name;
+            },
+            pageButtonItemGap: 5,
+            pageButtonPosition: 'end',
+            pageTextStyle: {
+                color: this.brandColors.accent
+            }
         },
-      },
-      legend: {
-        data: regions,
-        top: "50px",
-        textStyle: {
-          color: "#333333",
-          fontFamily: "Inter, sans-serif",
+        grid: {
+            left: '3%',
+            right: '20%',
+            bottom: '8%',
+            top: '3%',
+            containLabel: true
         },
-        type: "scroll",
-        pageButtonPosition: "end",
-      },
-      grid: {
-        left: "13%",
-        right: "4%",
-        bottom: "10%",
-        top: "15%",
-        containLabel: true,
-      },
-      xAxis: {
-        type: "category",
-        data: years,
-        axisLabel: {
-          color: "#333333",
-          fontFamily: "Inter, sans-serif",
+        xAxis: {
+            type: 'category',
+            data: years,
+            axisLabel: {
+                color: this.brandColors.accent,
+                fontFamily: 'Inter, sans-serif'
+            },
+            axisLine: {
+                lineStyle: {
+                    color: this.brandColors.accent2
+                }
+            }
         },
-        axisLine: {
-          lineStyle: {
-            color: "#d8d8cd",
-          },
+        yAxis: {
+            type: 'value',
+            name: 'Investment (Billion ZAR)',
+            nameTextStyle: {
+                color: this.brandColors.accent,
+                fontFamily: 'Inter, sans-serif',
+                fontSize: 12,
+                padding: [0, 0, 10, 0]
+            },
+            axisLabel: {
+                color: this.brandColors.accent,
+                fontFamily: 'Inter, sans-serif',
+                formatter: (value: number) => `${value}`
+            },
+            axisLine: {
+                lineStyle: {
+                    color: this.brandColors.accent2
+                }
+            },
+            splitLine: {
+                lineStyle: {
+                    color: this.brandColors.accent2,
+                    opacity: 0.3
+                }
+            }
         },
-      },
-      yAxis: {
-        type: "value",
-        name: "Investment (Billion ZAR)",
-        nameTextStyle: {
-          color: "#333333",
-          fontFamily: "Inter, sans-serif",
-        },
-        axisLabel: {
-          color: "#333333",
-          fontFamily: "Inter, sans-serif",
-          formatter: (value: number) => `${value}`,
-        },
-        axisLine: {
-          lineStyle: {
-            color: "#d8d8cd",
-          },
-        },
-        splitLine: {
-          lineStyle: {
-            color: "#d8d8cd",
-            type: "dashed",
-          },
-        },
-      },
-      series: series,
-      color: [
-        this.brandColors.secondary,
-        this.brandColors.accent6,
-        this.brandColors.accent5,
-        this.brandColors.accent1,
-        this.brandColors.accent3,
-        this.brandColors.accent4,
-        this.brandColors.accent2,
-        "#795548",
-        "#607D8B",
-        "#3F51B5",
-      ],
-      animationDuration: 1000,
-      animationEasing: "cubicInOut",
+        series: series,
+        color: [
+            this.brandColors.secondary, 
+            this.brandColors.accent6, 
+            this.brandColors.accent5, 
+            this.brandColors.accent1, 
+            this.brandColors.accent3,
+            this.brandColors.accent4, 
+            this.brandColors.accent2, 
+            '#795548', '#607D8B', '#3F51B5'
+        ],
+        animationDuration: 1000,
+        animationEasing: 'cubicInOut'
     };
 
-    this.charts["investmentByRegion"]!.setOption(option);
-  }
+    this.charts['investmentByRegion']!.setOption(option);
+}
 
   // Make sure this method is also in your component
   private showRegionDetails(region: string, year: string): void {
