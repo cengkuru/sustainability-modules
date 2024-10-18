@@ -271,7 +271,7 @@
                                       <div>
                                           <p class="text-sm font-medium text-accent4 dark:text-accent6">Project Description</p>
                                           <p class="text-base text-accent dark:text-primary-100">
-                                              {{ getBasicDataItems(project.stages?.identification?.basicData)["Project Description"] || ' ' }}
+                                              {{ getBasicDataItems(project.stages?.identification?.basicData)["Project Description"] || 'No description available' }}
                                           </p>
                                       </div>
                                   </div>
@@ -292,13 +292,23 @@
                                       <i class="bi bi-file-earmark-text text-2xl text-secondary flex-shrink-0 mt-1"></i>
                                       <div>
                                           <p class="text-sm font-medium text-accent4 dark:text-accent6">Project Brief or Feasibility Study</p>
-                                          <a 
-                                              href="assets/FeasibilityStudy.pdf" 
-                                              target="_blank" 
-                                              class="inline-block bg-accent6 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-accent7 focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2 transition duration-300"
-                                          >
-                                              Read Study Findings
-                                          </a>
+                                          <div class="mt-2 p-4 bg-white rounded-lg shadow-md">
+                                              <p class="text-lg font-semibold text-accent6 mb-2">Feasibility Study Findings</p>
+                                              <p class="text-base text-accent4 mb-4">A detailed report on the feasibility and viability of the project, including technical, financial, and environmental aspects.</p>
+                                              <div class="flex items-center justify-between">
+                                                  <div>
+                                                      <p class="text-sm font-medium text-accent4">Format: PDF</p>
+                                                      <p class="text-sm font-medium text-accent4">Language: English</p>
+                                                  </div>
+                                                  <a 
+                                                      href="assets/FeasibilityStudy.pdf" 
+                                                      target="_blank" 
+                                                      class="inline-block bg-accent6 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-accent7 focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2 transition duration-300"
+                                                  >
+                                                      Read Study
+                                                  </a>
+                                              </div>
+                                          </div>
                                       </div>
                                   </div>
                               </div>
@@ -348,15 +358,22 @@
                                   <div class="flex items-start space-x-4">
                                       <i class="bi bi-cash-stack text-2xl text-accent6 flex-shrink-0 mt-1"></i>
                                       <div>
-                                        <p class="text-sm font-medium text-accent4 dark:text-accent6">Financial Instrument</p>
-                                        <a 
-                                            href="assets/FinancialInstrument.pdf" 
-                                            target="_blank" 
-                                            class="inline-block bg-accent6 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-accent7 focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2 transition duration-300"
-                                        >
-                                            {{ getClimateFinanceDataItems(project.stages?.identification?.climateFinanceData)["Financial Instrument"] || 'Not specified' }}
-                                        </a>
-                                    </div>
+                                          <p class="text-sm font-medium text-accent4 dark:text-accent6">Financial Instrument</p>
+                                          <div class="mt-2">
+                                              <div class="flex items-center space-x-2">
+                                                  <i class="bi bi-wallet2 text-xl text-accent6"></i>
+                                                  <p class="text-base font-semibold text-accent dark:text-primary-100">
+                                                      Type: Loan
+                                                  </p>
+                                              </div>
+                                              <div class="flex items-center space-x-2 mt-2">
+                                                  <i class="bi bi-check-circle-fill text-xl text-green-500"></i>
+                                                  <p class="text-base font-semibold text-accent dark:text-primary-100">
+                                                      Concessional: True
+                                                  </p>
+                                              </div>
+                                          </div>
+                                      </div>
                                   </div>
                               </div>
 
@@ -423,7 +440,7 @@
                                           <a 
                                               href="assets/PolicyCoherenceDocumentation.pdf" 
                                               target="_blank" 
-                                              class="inline-block bg-accent6 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-accent7 focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2 transition duration-300"
+                                              class="text-base text-accent dark:text-primary-100 hover:text-accent6 dark:hover:text-accent4 transition-colors duration-300"
                                           >
                                               View Document
                                           </a>
@@ -473,7 +490,7 @@
                                       <div>
                                           <p class="text-sm font-medium text-accent4 dark:text-accent6">Freedom of Information Requests and Answers</p>
                                           <p class="text-base text-accent dark:text-primary-100">
-                                              {{ getInstitutionalSustainabilityDataItems(project.stages?.identification?.institutionalSustainabilityData)["Freedom of Information Requests and Answers"] || ' ' }}
+                                              {{ getInstitutionalSustainabilityDataItems(project.stages?.identification?.institutionalSustainabilityData)["Freedom of Information Requests and Answers"] || 'No information available' }}
                                           </p>
                                       </div>
                                   </div>
@@ -2323,3 +2340,4 @@
     </div>
   </div>
 </div>
+
