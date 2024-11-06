@@ -570,7 +570,7 @@
                         >
                           <ng-container [ngSwitch]="item.key">
                             <ng-container *ngSwitchCase="'Project Budget'">
-                              {{ item.value | currency:'USD':'symbol':'1.0-0' }}
+                              {{ item.value }}
                             </ng-container>
                             <ng-container *ngSwitchCase="'Project Budget Approval Date'">
                               {{ item.value | date:'mediumDate' }}
@@ -647,20 +647,20 @@
     </p>
   </div>
   <p
-    class="text-base text-accent ml-6 transition-all duration-250"
+    class="text-base text-accent-300 ml-6 transition-all duration-250"
   >
     <ng-container [ngSwitch]="item.key">
-      <ng-container *ngSwitchCase="'Project Preparation Costs'">
-        {{ item.value | currency:'USD':'symbol':'1.0-0' }}
-      </ng-container>
-      <ng-container *ngSwitchCase="'Project Approval Period'">
-        {{ formatDateRange(item.value) }}
-      </ng-container>
-      <ng-container *ngSwitchCase="'Project Preparation Period'">
-        {{ formatDateRange(item.value) }}
-      </ng-container>
       <ng-container *ngSwitchCase="'Amount of Investment'">
-        {{ item.value | currency:'USD':'symbol':'1.0-0' }}
+        {{ parseFloat(item.value) | currency:'USD':'symbol':'1.0-0' }}
+      </ng-container>
+      <ng-container *ngSwitchCase="'Cost Estimate'">
+        {{ parseFloat(item.value) | currency:'USD':'symbol':'1.0-0' }}
+      </ng-container>
+      <ng-container *ngSwitchCase="'Contract Price'">
+        {{ parseFloat(item.value) | currency:'USD':'symbol':'1.0-0' }}
+      </ng-container>
+      <ng-container *ngSwitchCase="'Contract Start Date'">
+        {{ item.value | date:'mediumDate' }}
       </ng-container>
       <ng-container *ngSwitchDefault>
         {{ item.value }}
@@ -855,7 +855,17 @@
                           <p
                             class="text-base text-accent ml-6 transition-all duration-250"
                           >
-                            {{ item.value  }}
+                            <ng-container [ngSwitch]="item.key">
+                              <ng-container *ngSwitchCase="'Project Budget'">
+                                {{ item.value }}
+                              </ng-container>
+                              <ng-container *ngSwitchCase="'Project Budget Approval Date'">
+                                {{ item.value | date:'mediumDate' }}
+                              </ng-container>
+                              <ng-container *ngSwitchDefault>
+                                {{ item.value }}
+                              </ng-container>
+                            </ng-container>
                           </p>
                         </div>
                       </div>
@@ -915,7 +925,17 @@
                           <p
                             class="text-base text-accent ml-6 transition-all duration-250"
                           >
-                            {{ item.value }}
+                            <ng-container [ngSwitch]="item.key">
+                              <ng-container *ngSwitchCase="'Project Budget'">
+                                {{ item.value }}
+                              </ng-container>
+                              <ng-container *ngSwitchCase="'Project Budget Approval Date'">
+                                {{ item.value | date:'mediumDate' }}
+                              </ng-container>
+                              <ng-container *ngSwitchDefault>
+                                {{ item.value }}
+                              </ng-container>
+                            </ng-container>
                           </p>
                         </div>
                       </div>
@@ -1633,7 +1653,12 @@
   >
     <ng-container [ngSwitch]="item.key">
       <ng-container *ngSwitchCase="'Completion Cost'">
-        {{ item.value | currency:'USD':'symbol':'1.0-0' }}
+        <ng-container *ngIf="parseCurrencyValue(item.value) as currency">
+          {{ currency.amount | currency:currency.currency:'symbol':'1.0-0' }}
+        </ng-container>
+        <ng-container *ngIf="!parseCurrencyValue(item.value)">
+          {{ item.value }}
+        </ng-container>
       </ng-container>
       <ng-container *ngSwitchCase="'Completion Date'">
         {{ item.value | date:'mediumDate' }}
@@ -1982,7 +2007,17 @@
                           <p
                             class="text-base text-accent-300 ml-6 transition-all duration-250"
                           >
-                            {{ item.value | currency:'USD':'symbol':'1.0-0' }}
+                            <ng-container [ngSwitch]="item.key">
+                              <ng-container *ngSwitchCase="'Project Budget'">
+                                {{ item.value }}
+                              </ng-container>
+                              <ng-container *ngSwitchCase="'Project Budget Approval Date'">
+                                {{ item.value | date:'mediumDate' }}
+                              </ng-container>
+                              <ng-container *ngSwitchDefault>
+                                {{ item.value }}
+                              </ng-container>
+                            </ng-container>
                           </p>
                         </div>
                       </div>
@@ -2039,7 +2074,17 @@
                           <p
                             class="text-base text-accent-300 ml-6 transition-all duration-250"
                           >
-                            {{ item.value }}
+                            <ng-container [ngSwitch]="item.key">
+                              <ng-container *ngSwitchCase="'Project Budget'">
+                                {{ item.value }}
+                              </ng-container>
+                              <ng-container *ngSwitchCase="'Project Budget Approval Date'">
+                                {{ item.value | date:'mediumDate' }}
+                              </ng-container>
+                              <ng-container *ngSwitchDefault>
+                                {{ item.value }}
+                              </ng-container>
+                            </ng-container>
                           </p>
                         </div>
                       </div>
@@ -2266,7 +2311,17 @@
                           <p
                             class="text-base text-accent-300 ml-6 transition-all duration-250"
                           >
-                            {{ item.value | currency:'USD':'symbol':'1.0-0' }}
+                            <ng-container [ngSwitch]="item.key">
+                              <ng-container *ngSwitchCase="'Project Budget'">
+                                {{ item.value }}
+                              </ng-container>
+                              <ng-container *ngSwitchCase="'Project Budget Approval Date'">
+                                {{ item.value | date:'mediumDate' }}
+                              </ng-container>
+                              <ng-container *ngSwitchDefault>
+                                {{ item.value }}
+                              </ng-container>
+                            </ng-container>
                           </p>
                         </div>
                       </div>

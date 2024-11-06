@@ -918,11 +918,11 @@ export class ProjectDetailsComponent implements OnInit {
     getBasicDataItemsPreparation(basicData: any) {
         if (!basicData) return {};
         return {
-            'Project Scope': basicData.projectScope,
-            'Contact Details': basicData.contactDetails,
-            'Funding Sources': basicData.fundingSources,
-            'Project Budget': basicData.projectBudget,
-            'Project Budget Approval Date': this.formatHumanFriendlyDate(basicData.projectBudgetApprovalDate)
+            'Project Scope': basicData.projectScope || '',
+            'Contact Details': basicData.contactDetails || '',
+            'Funding Sources': basicData.fundingSources || '',
+            'Project Budget': basicData.projectBudget || '',
+            'Project Budget Approval Date': basicData.projectBudgetApprovalDate || ''
         };
     }
 
@@ -1323,5 +1323,38 @@ export class ProjectDetailsComponent implements OnInit {
         }
     }
 
+    // Add this helper method to clean currency values
+    private cleanCurrencyValue(value: string | number): number {
+        if (typeof value === 'number') return value;
+        if (!value) return 0;
+        // Remove any currency symbols, spaces, and get just the number
+        return parseFloat(value.toString().replace(/[^0-9.-]+/g, ''));
+    }
+
+    parseFloat(value: any): number {
+        if (!value) return 0;
+        if (typeof value === 'number') return value;
+        // Remove any non-numeric characters except decimal point
+        const numStr = value.toString().replace(/[^0-9.]/g, '');
+        return parseFloat(numStr) || 0;
+    }
+
+    parseCurrencyValue(value: string | number): { amount: number; currency: string } | null {
+        if (!value) return null;
+        
+        // If it's already a number, return it with default currency
+        if (typeof value === 'number') {
+            return { amount: value, currency: 'USD' };
+        }
+        
+        // Convert string value to clean number
+        const amount = this.cleanCurrencyValue(value);
+        
+        // Extract currency code if present (assuming it's a 3-letter code)
+        const currencyMatch = value.toString().match(/[A-Z]{3}/);
+        const currency = currencyMatch ? currencyMatch[0] : 'USD';
+        
+        return { amount, currency };
+    }
 
 }
