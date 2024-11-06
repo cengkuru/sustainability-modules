@@ -60,313 +60,136 @@
     },
 
     {
-      "id": "oc4ids-bu3kcz-2",
-      "name": "Water treatment plant for Indirect Potable Reuse",
-      "location": {
-        "coordinates": {
-          "lng": 26.216667,
-          "lat": -29.1,
-          "popup": "Mangaung, South Africa"
-        },
-        "name": "Mangaung, South Africa"
-      },
-      "featured": true,
-      "stages": {
-        "identification": {
-          "basicData": {
-            "projectName": "Water treatment plant for Indirect Potable Reuse",
-            "projectReferenceNumber": "oc4ids-bu3kcz-2",
-            "projectDescription": "Through this project an advance treatment plan (ATP) will be built to treat final wastewater effluent and the transfer of the product water to an environmental buffer (such as an aquifer or surface water reservoir) where it will blend with raw water before treatment in a bulk water treatment plant.",
-            "projectLocation": "Mangaung, South Africa",
-            "projectOwner": "Mangaung Metropolitan Municipality",
-            "sectorSubsector": "Water and Waste",
-            "purpose": "Directly reduce the climate vulnerability of communities through the scaling-up of water reuse projects",
-            "projectBriefOrFeasibilityStudy": "The feasibility study indicates that there is, on average, at least 81 Ml/d available for tertiary advanced treated at a proposed regional site. The transaction advisor engaged with potential used for the product water and identified a total of five potential end users who could potentially purchase up to 71.7 Ml/d on average of the product water.",
-            "projectOfficialsAndRoles": [
-              {
-                "name": "David Masondo",
-                "role": "Public Authority"
-              }
-            ]
-          },
-          "climateFinanceData": {
-            "climateObjective": "Adaptation",
-            "parisAgreement": "The NCCAS was developed in 2019 and is aligned with the Paris Agreement’s Article 7 and the associated aspects of the Paris Rulebook.",
-            "nationallyDeterminedContributions": "South Africa’s NDC reinforces this commitment further through its Goal 3: implementation of the NCCAS interventions for the period 2021-2030, including in the priority sector of water. The water re-use is amongst South Africa highest climate change adaptation priorities by showcasing the National Water Conservation and Water Demand Management Flagship Programme (within which the water re-use programme is situated) in South Africa’s most recent Biennial Update Report (BUR).",
-            "climateTransformation": "If technical and financial support is provided to municipalities in the identification, preparation and implementation of water reuse projects for climate adaptation at scale through a pipeline of projects, Then the local socio-economic resilience of communities to climate change will be strengthened through improved water security, Because transformational change in public and private sector funding of water reuse infrastructure will enable the establishment of a new asset class that will underpin the upscaling of water reuse nationally. ",
-            "climateFinanceDecisionMaking": "National Department of Forestry, Fisheries and Environment",
-            "financialInstrument": "Concessional Loan"
-          },
-          "institutionalSustainabilityData": {
-            "policyCoherenceDocumentation": "To prepare for a hotter and drier future with dwindling freshwater resources and growing water demand, South Africa developed its National Water and Sanitation Master Plan in 2018. The Master Plan identifies water re-use as one of the central strategies in its overall approach to ensuring water security and climate resilience. Also, implementing water re-use nationwide does support the major tenets of the National Climate Change Adaptation Strategy (NCCAS) which urges water management institutions to adopt more adaptive responses (action 1.1.28) and underscores the need for more water-wise water management practices in urban areas – including water re-use (action 1.1.32).",
-            "numberOfFreedomOfInformationRequests": 0,
-            "numberOfFreedomOfInformationAnswers": 0,
-            "numberOfLobbyingActivities": 0
-          }
-        }
-      },
-      "metadata": {
-        "version": "1.0",
-        "dateCreated": "2024-08-28T16:45:00Z",
-        "datePublished": "2024-08-28T16:45:00Z",
-        "dateUpdated": "2024-08-28T16:45:00Z"
-      }
-    },
-    {
-      "id": "oc4ids-bu3kcz-3",
+      "id": "oc4ids-bu3kcz-1",
       "name": "Water treatment plant for Direct Potable Reuse",
       "location": {
         "coordinates": {
-          "lng": 28.333333333333,
-          "lat": -26.166666666667,
-          "popup": "Ekurhuleni, South Africa"
+          "lng": 25.6,
+          "lat": -33.95,
+          "popup": "Nelson Mandela Bay, South Africa"
         },
-        "name": "Ekurhuleni, South Africa"
+        "name": "Nelson Mandela Bay, South Africa"
       },
       "featured": true,
       "stages": {
         "identification": {
           "basicData": {
+            "projectReferenceNumber": "oc4ids-bu3kcz-1",
+            "projectOwner": "Nelson Mandela Metropolitan Municipality",
+            "sectorSubsector": "Water and Waste",
             "projectName": "Water treatment plant for Direct Potable Reuse",
-            "projectReferenceNumber": "oc4ids-bu3kcz-3",
-            "projectDescription": "Through this project an advance treatment plan (ATP) will be built to treat final wastewater effluent and transfer of the product water to the inlet of a bulk water treatment plant or directly\ninto the water distribution network",
-            "projectLocation": "Ekurhuleni, South Africa",
-            "projectOwner": "City of Ekurhuleni",
-            "sectorSubsector": "Water and Waste",
+            "projectLocation": "Nelson Mandela Bay, South Africa",
             "purpose": "Directly reduce the climate vulnerability of communities through the scaling-up of water reuse projects",
-            "projectBriefOrFeasibilityStudy": "The feasibility study indicates that there is, on average, at least 80 Ml/d available for tertiary advanced treated at a proposed regional site. The transaction advisor engaged with potential used for the product water and identified a total of five potential end users who could potentially purchase up to 71.7 Ml/d on average of the product water.",
-            "projectOfficialsAndRoles": [
-              {
-                "name": "Olivia Okeke",
-                "role": "Public Authority"
-              }
-            ]
-          },
-          "climateFinanceData": {
-            "climateObjective": "Adaptation",
-            "parisAgreement": "The NCCAS was developed in 2019 and is aligned with the Paris Agreement’s Article 7 and the associated aspects of the Paris Rulebook.",
-            "nationallyDeterminedContributions": "South Africa’s NDC reinforces this commitment further through its Goal 3: implementation of the NCCAS interventions for the period 2021-2030, including in the priority sector of water. The water re-use is amongst South Africa highest climate change adaptation priorities by showcasing the National Water Conservation and Water Demand Management Flagship Programme (within which the water re-use programme is situated) in South Africa’s most recent Biennial Update Report (BUR).",
-            "climateTransformation": "If technical and financial support is provided to municipalities in the identification, preparation and implementation of water reuse projects for climate adaptation at scale through a pipeline of projects, Then the local socio-economic resilience of communities to climate change will be strengthened through improved water security, Because transformational change in public and private sector funding of water reuse infrastructure will enable the establishment of a new asset class that will underpin the upscaling of water reuse nationally. ",
-            "climateFinanceDecisionMaking": "National Department of Forestry,\nFisheries and Environment",
-            "financialInstrument": "Concessional Loan"
-          },
-          "institutionalSustainabilityData": {
-            "policyCoherenceDocumentation": "To prepare for a hotter and drier future with dwindling freshwater resources and growing water demand, South Africa developed its National Water and Sanitation Master Plan in 2018. The Master Plan identifies water re-use as one of the central strategies in its overall approach to ensuring water security and climate resilience. Also, implementing water re-use nationwide does support the major tenets of the National Climate Change Adaptation Strategy (NCCAS) which urges water management institutions to adopt more adaptive responses (action 1.1.28) and underscores the need for more water-wise water management practices in urban areas – including water re-use (action 1.1.32).",
-            "numberOfFreedomOfInformationRequests": 0,
-            "numberOfFreedomOfInformationAnswers": 0,
-            "numberOfLobbyingActivities": 0
-          }
-        }
-      },
-      "metadata": {
-        "version": "1.0",
-        "dateCreated": "2024-08-28T16:45:00Z",
-        "datePublished": "2024-08-28T16:45:00Z",
-        "dateUpdated": "2024-08-28T16:45:00Z"
-      }
-    },
-    {
-      "id": "oc4ids-bu3kcz-4",
-      "name": "Water treatment plant for Industrial Reuse",
-      "location": {
-        "coordinates": {
-          "lng": 27.963611111111,
-          "lat": -26.176666666667,
-          "popup": "Johannesburg, South Africa"
-        },
-        "name": "Johannesburg, South Africa"
-      },
-      "featured": true,
-      "stages": {
-        "identification": {
-          "basicData": {
-            "projectName": "Water treatment plant for Industrial Reuse",
-            "projectReferenceNumber": "oc4ids-bu3kcz-4",
-            "projectDescription": "Through this project  an advanced treatment plant will be built to treat final wastewater effluent in to a quality suitable for industrial purposes and the transfer of the product water to a specific industry or generally to an industrial area.",
-            "projectLocation": "Johannesburg, South Africa",
-            "projectOwner": "City of Johannesburg Metropolitan Municipality",
-            "sectorSubsector": "Water and Waste",
-            "purpose": "Directly reduce the climate vulnerability of communities through the scaling-up of water reuse projects",
-            "projectBriefOrFeasibilityStudy": "The feasibility study indicates that there is, on average, at least 79 Ml/d available for tertiary advanced treated at a proposed regional site. The transaction advisor engaged with potential used for the product water and identified a total of five potential end users who could potentially purchase up to 71.7 Ml/d on average of the product water.",
-            "projectOfficialsAndRoles": [
-              {
-                "name": "Megan Jacobs",
-                "role": "Public Authority"
-              }
-            ]
-          },
-          "climateFinanceData": {
-            "climateObjective": "Adaptation",
-            "parisAgreement": "The NCCAS was developed in 2019 and is aligned with the Paris Agreement’s Article 7 and the associated aspects of the Paris Rulebook.",
-            "nationallyDeterminedContributions": "South Africa’s NDC reinforces this commitment further through its Goal 3: implementation of the NCCAS interventions for the period 2021-2030, including in the priority sector of water. The water re-use is amongst South Africa highest climate change adaptation priorities by showcasing the National Water Conservation and Water Demand Management Flagship Programme (within which the water re-use programme is situated) in South Africa’s most recent Biennial Update Report (BUR).",
-            "climateTransformation": "If technical and financial support is provided to municipalities in the identification, preparation and implementation of water reuse projects for climate adaptation at scale through a pipeline of projects, Then the local socio-economic resilience of communities to climate change will be strengthened through improved water security, Because transformational change in public and private sector funding of water reuse infrastructure will enable the establishment of a new asset class that will underpin the upscaling of water reuse nationally. ",
-            "climateFinanceDecisionMaking": "National Water Partnerships Programme",
-            "financialInstrument": "Concessional Loan"
-          },
-          "institutionalSustainabilityData": {
-            "policyCoherenceDocumentation": "To prepare for a hotter and drier future with dwindling freshwater resources and growing water demand, South Africa developed its National Water and Sanitation Master Plan in 2018. The Master Plan identifies water re-use as one of the central strategies in its overall approach to ensuring water security and climate resilience. Also, implementing water re-use nationwide does support the major tenets of the National Climate Change Adaptation Strategy (NCCAS)  which urges water management institutions to adopt more adaptive responses (action 1.1.28) and underscores the need for more water-wise water management practices in urban areas – including water re-use (action 1.1.32).",
-            "numberOfFreedomOfInformationRequests": 0,
-            "numberOfFreedomOfInformationAnswers": 0,
-            "numberOfLobbyingActivities": 0
-          }
-        }
-      },
-      "metadata": {
-        "version": "1.0",
-        "dateCreated": "2024-08-28T16:45:00Z",
-        "datePublished": "2024-08-28T16:45:00Z",
-        "dateUpdated": "2024-08-28T16:45:00Z"
-      }
-    },
-    {
-      "id": "oc4ids-bu3kcz-5",
-      "name": "Water treatment plant for Indirect Potable Reuse",
-      "location": {
-        "coordinates": {
-          "lng": 28.333333333333,
-          "lat": -25.666666666667,
-          "popup": "Tshwane, South Africa"
-        },
-        "name": "Tshwane, South Africa"
-      },
-      "featured": true,
-      "stages": {
-        "identification": {
-          "basicData": {
-            "projectName": "Water treatment plant for Indirect Potable Reuse",
-            "projectReferenceNumber": "oc4ids-bu3kcz-5",
-            "projectDescription": "Through this project an advance treatment plan (ATP) will be built to treat final wastewater effluent and the transfer of the product water to an environmental buffer (such as an aquifer or surface\nwater reservoir) where it will blend with raw water before treatment in a bulk water treatment plant.",
-            "projectLocation": "Tshwane, South Africa",
-            "projectOwner": "City of Tshwane Metropolitan Municipality",
-            "sectorSubsector": "Water and Waste",
-            "purpose": "Directly reduce the climate vulnerability of communities through the scaling-up of water reuse projects",
-            "projectBriefOrFeasibilityStudy": "The feasibility study indicates that there is, on average, at least 83 Ml/d available for tertiary advanced treated at a proposed regional site. The transaction advisor engaged with potential used for the product water and identified a total of five potential end users who could potentially purchase up to 71.7 Ml/d on average of the product water.",
-            "projectOfficialsAndRoles": [
-              {
-                "name": "Zoe Botha",
-                "role": "Public Authority"
-              }
-            ]
-          },
-          "climateFinanceData": {
-            "climateObjective": "Adaptation",
-            "parisAgreement": "The NCCAS was developed in 2019 and is aligned with the Paris Agreement’s Article 7 and the associated aspects of the Paris Rulebook.",
-            "nationallyDeterminedContributions": "South Africa’s NDC reinforces this commitment further through its Goal 3: implementation of the NCCAS interventions for the period 2021-2030, including in the priority sector of water. The water re-use is amongst South Africa highest climate change adaptation priorities by showcasing the National Water Conservation and Water Demand Management Flagship Programme (within which the water re-use programme is situated) in South Africa’s most recent Biennial Update Report (BUR).",
-            "climateTransformation": "If technical and financial support is provided to municipalities in the identification, preparation and implementation of water reuse projects for climate adaptation at scale through a pipeline of projects, Then the local socio-economic resilience of communities to climate change will be strengthened through improved water security, Because transformational change in public and private sector funding of water reuse infrastructure will enable the establishment of a new asset class that will underpin the upscaling of water reuse nationally. ",
-            "climateFinanceDecisionMaking": "National Water Partnerships Programme",
-            "financialInstrument": "Concessional Loan"
-          },
-          "institutionalSustainabilityData": {
-            "policyCoherenceDocumentation": "To prepare for a hotter and drier future with dwindling freshwater resources and growing water demand, South Africa developed its National Water and Sanitation Master Plan in 2018. The Master Plan identifies water re-use as one of the central strategies in its overall approach to ensuring water security and climate resilience. Also, implementing water re-use nationwide does support the major tenets of the National Climate Change Adaptation Strategy (NCCAS) which urges water management institutions to adopt more adaptive responses (action 1.1.28) and underscores the need for more water-wise water management practices in urban areas – including water re-use (action 1.1.32).",
-            "numberOfFreedomOfInformationRequests": 0,
-            "numberOfFreedomOfInformationAnswers": 0,
-            "numberOfLobbyingActivities": 0
-          }
-        }
-      },
-      "metadata": {
-        "version": "1.0",
-        "dateCreated": "2024-08-28T16:45:00Z",
-        "datePublished": "2024-08-28T16:45:00Z",
-        "dateUpdated": "2024-08-28T16:45:00Z"
-      }
-    },
-    {
-      "id": "oc4ids-bu3kcz-6",
-      "name": "Water treatment plant for Direct Potable Reuse",
-      "location": {
-        "coordinates": {
-          "lng": 18.5,
-          "lat": -34,
-          "popup": "Cape Town, South Africa"
-        },
-        "name": "Cape Town, South Africa"
-      },
-      "featured": true,
-      "stages": {
-        "identification": {
-          "basicData": {
-            "projectName": "Water treatment plant for Direct Potable Reuse",
-            "projectReferenceNumber": "oc4ids-bu3kcz-6",
             "projectDescription": "Through this project an advance treatment plan (ATP) will be built to treat final wastewater effluent and transfer of the product water to the inlet of a bulk water treatment plant or directly into the water distribution network",
-            "projectLocation": "Cape Town, South Africa",
-            "projectOwner": "City of Cape Town Metropolitan Municipality",
-            "sectorSubsector": "Water and Waste",
-            "purpose": "Directly reduce the climate vulnerability of communities through the scaling-up of water reuse projects",
-            "projectBriefOrFeasibilityStudy": "The feasibility study indicates that there is, on average, at least 84 Ml/d available for tertiary advanced treated at a proposed regional site. The transaction advisor engaged with potential used for the product water and identified a total of five potential end users who could potentially purchase up to 71.7 Ml/d on average of the product water.",
             "projectOfficialsAndRoles": [
               {
-                "name": "William Smit",
+                "name": "Ethan Abara",
                 "role": "Public Authority"
               }
-            ]
+            ],
+            "projectBriefOrFeasibilityStudy": "The feasibility study indicates that there is, on average, at least 82 Ml/d available for tertiary advanced treated at a proposed regional site. The transaction advisor engaged with potential used for the product water and identified a total of five potential end users who could potentially purchase up to 71.7 Ml/d on average of the product water."
           },
           "climateFinanceData": {
             "climateObjective": "Adaptation",
-            "parisAgreement": "The NCCAS was developed in 2019 and is aligned with the Paris Agreement’s Article 7 and the associated aspects of the Paris Rulebook.",
-            "nationallyDeterminedContributions": "South Africa’s NDC reinforces this commitment further through its Goal 3: implementation of the NCCAS interventions for the period 2021-2030, including in the priority sector of water. The water re-use is amongst South Africa highest climate change adaptation priorities by showcasing the National Water Conservation and Water Demand Management Flagship Programme (within which the water re-use programme is situated) in South Africa’s most recent Biennial Update Report (BUR).",
-            "climateTransformation": "If technical and financial support is provided to municipalities in the identification, preparation and implementation of water reuse projects for climate adaptation at scale through a pipeline of projects, Then the local socio-economic resilience of communities to climate change will be strengthened through improved water security, Because transformational change in public and private sector funding of water reuse infrastructure will enable the establishment of a new asset class that will underpin the upscaling of water reuse nationally. ",
-            "climateFinanceDecisionMaking": "National Water Partnerships Programme",
-            "financialInstrument": "Concessional Loan"
+            "financialInstrument": "Concessional Loan",
+            "climateTransformation": "If technical and financial support is provided to municipalities in the identification, preparation and implementation of water reuse projects for climate adaptation at scale through a pipeline of projects, Then the local socio-economic resilience of communities to climate change will be strengthened through improved water security, Because transformational change in public and private sector funding of water reuse infrastructure will enable the establishment of a new asset class that will underpin the upscaling of water reuse nationally.",
+            "climateFinanceDecisionMaking": "National Department of Forestry, Fisheries and Environment",
+            "parisAgreement": "The NCCAS was developed in 2019 and is aligned with the Paris Agreement's Article 7 and the associated aspects of the Paris Rulebook.",
+            "nationallyDeterminedContributions": "South Africa's NDC reinforces this commitment further through its Goal 3: implementation of the NCCAS interventions for the period 2021-2030, including in the priority sector of water. The water re-use is amongst South Africa highest climate change adaptation priorities by showcasing the National Water Conservation and Water Demand Management Flagship Programme (within which the water re-use programme is situated) in South Africa's most recent Biennial Update Report (BUR)."
           },
           "institutionalSustainabilityData": {
-            "policyCoherenceDocumentation": "To prepare for a hotter and drier future with dwindling freshwater resources and growing water demand, South Africa developed its National Water and Sanitation Master Plan in 2018. The Master Plan identifies water re-use as one of the central strategies in its overall approach to ensuring water security and climate resilience. Also, implementing water re-use nationwide does support the major tenets of the National Climate Change Adaptation Strategy (NCCAS)   which urges water management institutions to adopt more adaptive responses (action 1.1.28) and underscores the need for more water-wise water management practices in urban areas – including water re-use (action 1.1.32).",
+            "numberOfLobbyingActivities": 0,
             "numberOfFreedomOfInformationRequests": 0,
             "numberOfFreedomOfInformationAnswers": 0,
-            "numberOfLobbyingActivities": 0
+            "policyCoherenceDocumentation": "To prepare for a hotter and drier future with dwindling freshwater resources and growing water demand, South Africa developed its National Water and Sanitation Master Plan in 2018. The Master Plan identifies water re-use as one of the central strategies in its overall approach to ensuring water security and climate resilience. Also, implementing water re-use nationwide does support the major tenets of the National Climate Change Adaptation Strategy (NCCAS) which urges water management institutions to adopt more adaptive responses (action 1.1.28) and underscores the need for more water-wise water management practices in urban areas – including water re-use (action 1.1.32)."
           }
-        }
-      },
-      "metadata": {
-        "version": "1.0",
-        "dateCreated": "2024-08-28T16:45:00Z",
-        "datePublished": "2024-08-28T16:45:00Z",
-        "dateUpdated": "2024-08-28T16:45:00Z"
-      }
-    },
-    {
-      "id": "oc4ids-bu3kcz-7",
-      "name": "Water treatment plant for Indirect Potable Reuse",
-      "location": {
-        "coordinates": {
-          "lng": 19.666666666667,
-          "lat": -33.333333333333,
-          "popup": "Cape Winelands, South Africa"
         },
-        "name": "Cape Winelands, South Africa"
-      },
-      "featured": true,
-      "stages": {
-        "identification": {
+        "preparation": {
           "basicData": {
-            "projectName": "Water treatment plant for Indirect Potable Reuse",
-            "projectReferenceNumber": "oc4ids-bu3kcz-7",
-            "projectDescription": "Through this project an advance treatment plan (ATP) will be built to treat final wastewater effluent and the transfer of the product water to an environmental buffer (such as an aquifer or surface water reservoir) where it will blend with raw water before treatment in a bulk water treatment plant.",
-            "projectLocation": "Cape Winelands, South Africa",
-            "projectOwner": "Drakenstein Local Municipality",
-            "sectorSubsector": "Water and Waste",
-            "purpose": "Directly reduce the climate vulnerability of communities through the scaling-up of water reuse projects",
-            "projectBriefOrFeasibilityStudy": "The feasibility study indicates that there is, on average, at least 85 Ml/d available for tertiary advanced treated at a proposed regional site. The transaction advisor engaged with potential used for the product water and identified a total of five potential end users who could potentially purchase up to 71.7 Ml/d on average of the product water.",
-            "projectOfficialsAndRoles": [
+            "projectScope": "A water treatment plant for direct potable reuse",
+            "contactDetails": "E.Abara@nelsonmandela.gov.za",
+            "fundingSources": "Development Bank of Southern Africa",
+            "projectBudget": "550000000 ZAR",
+            "projectBudgetApprovalDate": "2024-10-16",
+            "attachments": [
               {
-                "name": "Shane Gumede",
-                "role": "Public Authority"
+                "title": "Environmental and social impact assessment",
+                "description": "The project will have an overall positive impact on the environment in terms of more sustainable water resource management, climate adaption and provide municipalities with a more resilient water and climate future. It will also provide indirect positive social impacts including job creation. The negative impacts can be addressed and mitigated by implementation and compliance with the requirements of the ESMF and ESMP.",
+                "documentType": "Environmental Assessment"
+              },
+              {
+                "title": "Resettlement and compensation plan",
+                "description": "At this juncture it is not likely that land acquisition would be required as all projects are expected to take place on municipally owned land. Should land acquisition be required then a land acquisition plan will be addressed as part of the Resettlement Action plan (aligned to the safeguards guidance provided by DBSA).",
+                "documentType": "Resettlement Plan"
+              },
+              {
+                "title": "Financial agreement",
+                "description": "The water reuse project is financed in SA Rand (ZAR), which is overseen by the DBSA.",
+                "documentType": "Financial Agreement"
+              },
+              {
+                "title": "Multiyear programme and budget",
+                "description": "Concessional Loans of approx. USD 200 mil from the GCF to target the gap financing requirements and ensure the financial viability of individual sub-projects across the programme.",
+                "documentType": "Budget Document"
+              },
+              {
+                "title": "Procurement plan",
+                "description": "The procurement plan identifies and schedule all activities including all the necessary Council and National Treasury approvals. This plan resides with the DBSA's Supply Chain Management Unit who oversees and monitors compliance",
+                "documentType": "Procurement Plan"
+              },
+              {
+                "title": "Project approval decision",
+                "description": "The Accredited Entity's Investment Committee issued the final decision on the approval of this Project",
+                "documentType": "Approval Document"
               }
             ]
           },
           "climateFinanceData": {
-            "climateObjective": "Adaptation",
-            "parisAgreement": "The NCCAS was developed in 2019 and is aligned with the Paris Agreement’s Article 7 and the associated aspects of the Paris Rulebook.",
-            "nationallyDeterminedContributions": "South Africa’s NDC reinforces this commitment further through its Goal 3: implementation of the NCCAS interventions for the period 2021-2030, including in the priority sector of water. The water re-use is amongst South Africa highest climate change adaptation priorities by showcasing the National Water Conservation and Water Demand Management Flagship Programme (within which the water re-use programme is situated) in South Africa’s most recent Biennial Update Report (BUR).",
-            "climateTransformation": "If technical and financial support is provided to municipalities in the identification, preparation and implementation of water reuse projects for climate adaptation at scale through a pipeline of projects, Then the local socio-economic resilience of communities to climate change will be strengthened through improved water security, Because transformational change in public and private sector funding of water reuse infrastructure will enable the establishment of a new asset class that will underpin the upscaling of water reuse nationally. ",
-            "climateFinanceDecisionMaking": "South African national Department of Water and Sanitation",
-            "financialInstrument": "Concessional Loan"
+            "fundingSource": "Green Climate Fund",
+            "amountOfInvestment": "519916500 ZAR",
+            "greenClimateFundAccreditedEntity": "Development Bank of Southern Africa",
+            "accreditedEntityType": "Regional",
+            "projectPreparationCosts": "5500000 ZAR",
+            "projectPreparationPeriod": "29/10/2019-13/07/2023",
+            "projectApprovalPeriod": "13/7/2023-15/07/2024",
+            "ratioOfCoFinance": {
+              "domesticMobilisations": "10.00%",
+              "privateFinance": "6.00%"
+            },
+            "termsOfClimateFinance": {
+              "maturity": "20 years",
+              "gracePeriod": "1 year",
+              "annualPrincipalRepayment": "2%",
+              "interest": "1%",
+              "serviceFee": "0.15%",
+              "commitmentFee": "0.25%"
+            },
+            "nonClimateCoBenefits": {
+              "environmental": "Co-benefit 1: Environmental. There will be improvement in the quality of rivers and groundwater with there being a reduction in the discharge from wastewater treatment works, with these waters being redirected to water reuse plants. Also, with the reduced demand upon local catchments the water requirements of ecosystems may be met.",
+              "economic": "Co-benefit 2: Economic. Improvements in water security would enable further expansion of economic activities including local agriculture and industry, as well as other businesses",
+              "gender": "Co-benefit 3: Gender. In many communities women and girl children are often responsible for the collection of water. Improvements in water security can have profound impacts on the availability of supply and the improvement of water service standards."
+            }
+          },
+          "socialSustainabilityData": {
+            "beneficiaries": {
+              "description": "The project expects to directly increase the resilience to climate change of 459,770 people and an additional 3,877 indirect beneficiaries.",
+              "totalDirectBeneficiaries": 459770,
+              "male": 222069,
+              "female": 237701
+            },
+            "publicConsultationMeetings": "A range of stakeholder engagement processes were held with key stakeholders with the purpose to gather inputs into the design of the project, as well as ensuring alignment with key strategies and plans."
           },
           "institutionalSustainabilityData": {
-            "policyCoherenceDocumentation": "To prepare for a hotter and drier future with dwindling freshwater resources and growing water demand, South Africa developed its National Water and Sanitation Master Plan in 2018. The Master Plan identifies water re-use as one of the central strategies in its overall approach to ensuring water security and climate resilience. Also, implementing water re-use nationwide does support the major tenets of the National Climate Change Adaptation Strategy (NCCAS) which urges water management institutions to adopt more adaptive responses (action 1.1.28) and underscores the need for more water-wise water management practices in urban areas – including water re-use (action 1.1.32).",
             "numberOfFreedomOfInformationRequests": 0,
-            "numberOfFreedomOfInformationAnswers": 0,
-            "numberOfLobbyingActivities": 0
+            "numberOfFreedomOfInformationAnswers": 0
+          },
+          "economicAndFinancialSustainabilityData": {
+            "procurementStrategy": {
+              "description": "The approach depends on the recommended way forward in the Feasibility Study undertaken during the project preparation phase. The Municipality will be provided with a detailed procurement implementation plan, and the Project Preparation service provider will be drafting of all required documentation and reports, supporting regulatory processes and decision-making process."
+            }
+          },
+          "environmentalAndClimateSustainabilityData": {
+            "environmentalImpactCategory": "2"
           }
         }
       },
@@ -375,7 +198,8 @@
         "dateCreated": "2024-08-28T16:45:00Z",
         "datePublished": "2024-08-28T16:45:00Z",
         "dateUpdated": "2024-08-28T16:45:00Z"
-      }
+      },
+      "parsedBudget": 0
     }
   ]
 

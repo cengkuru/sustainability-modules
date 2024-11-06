@@ -9,6 +9,38 @@ import { ActivatedRoute, RouterLink } from "@angular/router";
 import { EmailService } from "../services/email.service";
 import { IntersectionObserverDirective } from "../../directives/intersection-observer.directive";
 
+// First, let's define an interface for the Project type
+interface Project {
+  id: string;
+  name: string;
+  parsedBudget: number;
+  startDate?: string;
+  status?: string;
+  featured?: boolean;
+  location?: {
+    name?: string;
+  };
+  stages?: {
+    preparation?: {
+      basicData?: {
+        projectBudget?: string | number;
+      };
+    };
+    identification?: {
+      basicData?: {
+        projectDescription?: string;
+        sectorSubsector?: string;
+      };
+    };
+    tenderManagement?: {
+      basicData?: {
+        contractPrice?: string | number;
+      };
+    };
+  };
+  // Add other properties as needed
+}
+
 @Component({
     selector: 'app-project-list',
     standalone: true,
@@ -48,7 +80,7 @@ import { IntersectionObserverDirective } from "../../directives/intersection-obs
     ],
 })
 export class ProjectListComponent implements OnInit {
-    projects$!: Observable<any[]>;
+    projects$!: Observable<Project[]>;
     totalProjects$!: Observable<number>;
     totalValueOfProjects$!: Observable<number>;
     averageProjectValue$!: Observable<number>;
@@ -110,15 +142,25 @@ map(projects => {
     console.log(projects);
     // Parse project budget to ensure it's a number
     projects.forEach(project => {
-        const budget = project.stages?.preparation?.basicData?.projectBudget; // Safe navigation operator to check if preparation exists
-        project.parsedBudget = budget ? this.parseProjectBudget(budget) : 0; // Default to 0 if budget is undefined
+        const budget = project.stages?.preparation?.basicData?.projectBudget;
+        project.parsedBudget = budget ? this.parseProjectBudget(budget) : 0;
     });
 
-    // Sort projects
-    projects.sort((a, b) => {
-        if (sortBy === 'name') return a.name.localeCompare(b.name);
-        if (sortBy === 'budget') return a.parsedBudget - b.parsedBudget;
-        if (sortBy === 'date') return new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
+    // Sort projects with null checks
+    projects.sort((a: Project, b: Project) => {
+        if (sortBy === 'name') {
+            const nameA = a?.name || '';
+            const nameB = b?.name || '';
+            return nameA.localeCompare(nameB);
+        }
+        if (sortBy === 'budget') {
+            return (a?.parsedBudget || 0) - (b?.parsedBudget || 0);
+        }
+        if (sortBy === 'date') {
+            const dateA = a?.startDate ? new Date(a.startDate).getTime() : 0;
+            const dateB = b?.startDate ? new Date(b.startDate).getTime() : 0;
+            return dateA - dateB;
+        }
         return 0;
     });
 

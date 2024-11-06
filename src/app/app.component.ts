@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     // await this.initializePolicyDataIfNeeded();
-    // await this.initializeProjectsData();
+    await this.initializeProjectsData();
 
     /*this.migrationService.migrateProjects().subscribe(
         count => console.log(`Migration completed. ${count} projects migrated.`),
@@ -69,8 +69,20 @@ export class AppComponent implements OnInit {
 
       if (projectsData.projects && Array.isArray(projectsData.projects)) {
         for (const project of projectsData.projects) {
-          await this.firestore.collection(this.projectsCollectionName).doc(project.id).set(project);
-          console.log(`Project with ID ${project.id} successfully added to Firestore`);
+          // Check if project exists
+          const projectDoc = await firstValueFrom(
+            this.firestore.collection(this.projectsCollectionName).doc(project.id).get()
+          );
+
+          if (projectDoc.exists) {
+            // Update existing project
+            await this.firestore.collection(this.projectsCollectionName).doc(project.id).update(project);
+            console.log(`Project with ID ${project.id} successfully updated in Firestore`);
+          } else {
+            // Insert new project
+            await this.firestore.collection(this.projectsCollectionName).doc(project.id).set(project);
+            console.log(`Project with ID ${project.id} successfully added to Firestore`);
+          }
         }
       } else {
         console.error('Invalid projects data format');

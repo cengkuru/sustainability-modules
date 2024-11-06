@@ -1,147 +1,90 @@
 {
   "preparation": {
-    "climateFinanceData": {
-      "projectPreparationCosts": "$50,000",
-      "attachments": [
-        {
-          "description": "Climate Finance Proposal",
-          "title": "Proposal for Green Funding",
-          "language": "English",
-          "url": "https://example.com/climate_finance_proposal.pdf",
-          "pages": 10,
-          "format": "PDF",
-          "documentType": "Proposal",
-          "datePublished": "2024-01-15",
-          "dateModified": "2024-01-15"
-        }
-      ],
-      "carbonEfficiency": "10% reduction per $1000 spent",
-      "accreditedEntityType": "National Environmental Agency",
-      "termsOfClimateFinance": "Grant with 5-year performance review",
-      "fundingSource": "Green Climate Fund",
-      "ratioOfCoFinance": "1:3",
-      "nonClimateCoBenefits": "Improved local water quality",
-      "greenClimateFundAccreditedEntity": "Yes",
-      "projectPreparationPeriod": "6 months",
-      "projectApprovalPeriod": "3 months"
-    },
-    "environmentalAndClimateSustainabilityData": {
-      "environmentalLicensesAndExemptions": "Permit #ENV-2024-001",
-      "conservationMeasures": "Replanting with native species",
-      "environmentalImpactCategory": "Biodiversity",
-      "climateMeasures": "Carbon capture technology",
-      "environmentalMeasures": "Waste recycling program",
-      "protectedArea": "No",
-      "attachments": [
-        {
-          "format": "PDF",
-          "documentType": "Environmental Impact Assessment",
-          "language": "English",
-          "url": "https://example.com/eia_report.pdf",
-          "pages": 20,
-          "dateModified": "2024-02-01",
-          "datePublished": "2024-02-01",
-          "description": "EIA for Project X",
-          "title": "Environmental Impact Report"
-        }
-      ],
-      "forecastOfGreenhouseGasEmissions": {
-        "measure": "1000",
-        "unit": {
-          "name": "Tonne (metric ton)",
-          "scheme": "UNCEFACT",
-          "id": "TNE"
-        },
-        "period": "2024-2029"
-      },
-      "climateAndDisasterRiskAssessment": "Flood risk mitigation plan"
-    },
     "basicData": {
-      "projectBudget": "$1,000,000",
-      "fundingSources": "Government, Private Investors",
-      "projectScope": "Infrastructure for renewable energy",
-      "contactDetails": "email@example.com",
+      "projectScope": "A water treatment plant for direct potable reuse",
+      "contactDetails": "E.Abara@nelsonmandela.gov.za",
+      "fundingSources": "Development Bank of Southern Africa",
+      "projectBudget": "550000000 ZAR",
+      "projectBudgetApprovalDate": "2024-10-16",
       "attachments": [
         {
-          "url": "https://example.com/project_budget.pdf",
-          "pages": 15,
-          "language": "English",
-          "title": "Project Budget",
-          "documentType": "Budget Document",
-          "description": "Detailed budget breakdown",
-          "dateModified": "2024-01-01",
-          "datePublished": "2024-01-01",
-          "format": "PDF"
+          "title": "Environmental and social impact assessment",
+          "description": "The project will have an overall positive impact on the environment in terms of more sustainable water resource management, climate adaption and provide municipalities with a more resilient water and climate future. It will also provide indirect positive social impacts including job creation. The negative impacts can be addressed and mitigated by implementation and compliance with the requirements of the ESMF and ESMP.",
+          "documentType": "Environmental Assessment"
+        },
+        {
+          "title": "Resettlement and compensation plan",
+          "description": "At this juncture it is not likely that land acquisition would be required as all projects are expected to take place on municipally owned land. Should land acquisition be required then a land acquisition plan will be addressed as part of the Resettlement Action plan (aligned to the safeguards guidance provided by DBSA).",
+          "documentType": "Resettlement Plan"
+        },
+        {
+          "title": "Financial agreement",
+          "description": "The water reuse project is financed in SA Rand (ZAR), which is overseen by the DBSA.",
+          "documentType": "Financial Agreement"
+        },
+        {
+          "title": "Multiyear programme and budget",
+          "description": "Concessional Loans of approx. USD 200 mil from the GCF to target the gap financing requirements and ensure the financial viability of individual sub-projects across the programme.",
+          "documentType": "Budget Document"
+        },
+        {
+          "title": "Procurement plan",
+          "description": "The procurement plan identifies and schedule all activities including all the necessary Council and National Treasury approvals. This plan resides with the DBSA's Supply Chain Management Unit who oversees and monitors compliance",
+          "documentType": "Procurement Plan"
+        },
+        {
+          "title": "Project approval decision",
+          "description": "The Accredited Entity's Investment Committee issued the final decision on the approval of this Project",
+          "documentType": "Approval Document"
         }
-      ],
-      "projectBudgetApprovalDate": "2024-03-01"
+      ]
     },
-    "economicAndFinancialSustainabilityData": {
-      "budgetProjections": "Annual increase by 5%",
-      "attachments": [
-        {
-          "language": "English",
-          "documentType": "Financial Analysis",
-          "url": "https://example.com/financial_analysis.pdf",
-          "pages": 30,
-          "dateModified": "2024-01-15",
-          "format": "PDF",
-          "datePublished": "2024-01-15",
-          "description": "Financial sustainability analysis",
-          "title": "Financial Projections"
-        }
-      ],
-      "costBenefitAnalysis": "Net Present Value: $500,000",
-      "procurementStrategy": "Local sourcing for 70% of materials",
-      "assetLifetime": "30 years",
-      "lifeCycleCostCalculationMethodology": "ISO 15686-5",
-      "lifeCycleCost": "$2,000,000",
-      "fundingSourceForPreparation": "National Development Bank",
-      "budgetForPreparation": "$100,000",
-      "valueForMoney": "High, due to long-term savings",
-      "maintenancePlan": "Annual inspections with 5-year major overhaul"
-    },
-    "institutionalSustainabilityData": {
-      "policyCoherenceDocumentation": "National Energy Policy 2023",
-      "freedomOfInformationRequestsAndAnswers": "Available on project website",
-      "riskManagementPlans": "Comprehensive risk assessment",
-      "numberOfFreedomOfInformationAnswers": 10,
-      "attachments": [
-        {
-          "description": "Risk Management Strategy",
-          "language": "English",
-          "title": "Risk Management",
-          "pages": 5,
-          "dateModified": "2024-01-30",
-          "documentType": "Strategy Document",
-          "format": "PDF",
-          "datePublished": "2024-01-30",
-          "url": "https://example.com/risk_management.pdf"
-        }
-      ],
-      "numberOfFreedomOfInformationRequests": 15
+    "climateFinanceData": {
+      "fundingSource": "Green Climate Fund",
+      "amountOfInvestment": "519916500 ZAR",
+      "greenClimateFundAccreditedEntity": "Development Bank of Southern Africa",
+      "accreditedEntityType": "Regional",
+      "projectPreparationCosts": "5500000 ZAR",
+      "projectPreparationPeriod": "29/10/2019-13/07/2023",
+      "projectApprovalPeriod": "13/7/2023-15/07/2024",
+      "ratioOfCoFinance": {
+        "domesticMobilisations": "10.00%",
+        "privateFinance": "6.00%"
+      },
+      "termsOfClimateFinance": {
+        "maturity": "20 years",
+        "gracePeriod": "1 year",
+        "annualPrincipalRepayment": "2%",
+        "interest": "1%",
+        "serviceFee": "0.15%",
+        "commitmentFee": "0.25%"
+      },
+      "nonClimateCoBenefits": {
+        "environmental": "Co-benefit 1: Environmental. There will be improvement in the quality of rivers and groundwater with there being a reduction in the discharge from wastewater treatment works, with these waters being redirected to water reuse plants. Also, with the reduced demand upon local catchments the water requirements of ecosystems may be met.",
+        "economic": "Co-benefit 2: Economic. Improvements in water security would enable further expansion of economic activities including local agriculture and industry, as well as other businesses",
+        "gender": "Co-benefit 3: Gender. In many communities women and girl children are often responsible for the collection of water. Improvements in water security can have profound impacts on the availability of supply and the improvement of water service standards."
+      }
     },
     "socialSustainabilityData": {
-      "landCompensationBudget": "$20,000",
-      "publicConsultationMeetings": "4 meetings held",
-      "inclusiveDesign": "Accessible infrastructure",
-      "beneficiaries": "Local community and businesses",
-      "attachments": [
-        {
-          "format": "PDF",
-          "pages": 12,
-          "title": "Public Consultation Summary",
-          "documentType": "Report",
-          "datePublished": "2024-02-20",
-          "language": "English",
-          "dateModified": "2024-02-20",
-          "url": "https://example.com/public_consultation.pdf",
-          "description": "Summary of public consultations"
-        }
-      ],
-      "numberOfBeneficiaries": 1000,
-      "laborObligations": "Fair wage practices",
-      "indigenousLand": "Consultation with local tribes"
+      "beneficiaries": {
+        "description": "The project expects to directly increase the resilience to climate change of 459,770 people and an additional 3,877 indirect beneficiaries.",
+        "totalDirectBeneficiaries": 459770,
+        "male": 222069,
+        "female": 237701
+      },
+      "publicConsultationMeetings": "A range of stakeholder engagement processes were held with key stakeholders with the purpose to gather inputs into the design of the project, as well as ensuring alignment with key strategies and plans."
+    },
+    "institutionalSustainabilityData": {
+      "numberOfFreedomOfInformationRequests": 0,
+      "numberOfFreedomOfInformationAnswers": 0
+    },
+    "economicAndFinancialSustainabilityData": {
+      "procurementStrategy": {
+        "description": "The approach depends on the recommended way forward in the Feasibility Study undertaken during the project preparation phase. The Municipality will be provided with a detailed procurement implementation plan, and the Project Preparation service provider will be drafting of all required documentation and reports, supporting regulatory processes and decision-making process."
+      }
+    },
+    "environmentalAndClimateSustainabilityData": {
+      "environmentalImpactCategory": "2"
     }
   }
 }
