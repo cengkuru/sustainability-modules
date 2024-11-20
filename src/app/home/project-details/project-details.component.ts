@@ -11,6 +11,25 @@ import {FormatSectionTitlePipe} from "../../pipes/format-section-title.pipe";
 import {JsonViewerComponent} from "../../shared/components/json-viewer/json-viewer.component";
 import {DataItemComponent} from "../../shared/components/data-item/data-item.component";
 
+interface SustainabilityModules {
+    economic: boolean;
+    environmental: boolean;
+    social: boolean;
+    institutional: boolean;
+    climate: boolean;
+    completion: number;  // Changed to number since it represents completion percentage
+}
+  
+type ModuleType = keyof Omit<SustainabilityModules, 'completion'>;
+
+interface Stage {
+    id: string;
+    icon: string;
+    label: string;
+    sustainabilityModules: SustainabilityModules;
+}
+  
+
 @Component({
     selector: 'app-project-details',
     standalone: true,
@@ -67,14 +86,98 @@ import {DataItemComponent} from "../../shared/components/data-item/data-item.com
 })
 export class ProjectDetailsComponent implements OnInit {
 
-    stages = [
-        { id: 'Identification', icon: 'bi-info-circle', label: 'Identification' },
-        { id: 'Preparation', icon: 'bi-tools', label: 'Preparation' },
-        { id: 'TenderManagement', icon: 'bi-file-earmark', label: 'Tendering' },
-        { id: 'Implementation', icon: 'bi-play-circle', label: 'Implementation' },
-        { id: 'Completion', icon: 'bi-check-circle', label: 'Completion' },
-        { id: 'OperationAndMaintenance', icon: 'bi-gear', label: 'Maintenance' },
-        { id: 'Decommissioning', icon: 'bi-x-circle', label: 'Decommissioning' }
+    stages: Stage[] = [
+        {
+            id: 'Identification',
+            icon: 'bi-info-circle',
+            label: 'Identification',
+            sustainabilityModules: {
+                economic: true,
+                environmental: true,
+                social: true,
+                institutional: true,
+                climate: true,
+                completion: 100 // Changed from true to percentage
+            }
+        },
+        {
+            id: 'Preparation',
+            icon: 'bi-tools',
+            label: 'Preparation',
+            sustainabilityModules: {
+                economic: true,
+                environmental: true,
+                social: true,
+                institutional: true,
+                climate: true,
+                completion: 100
+            }
+        },
+        {
+            id: 'TenderManagement',
+            icon: 'bi-file-earmark',
+            label: 'Tendering',
+            sustainabilityModules: {
+                economic: true,
+                environmental: true,
+                social: false,
+                institutional: true,
+                climate: true,
+                completion: 100
+            }
+        },
+        {
+            id: 'Implementation',
+            icon: 'bi-play-circle',
+            label: 'Implementation',
+            sustainabilityModules: {
+                economic: true,
+                environmental: true,
+                social: true,
+                institutional: true,
+                climate: true,
+                completion: 100
+            }
+        },
+        {
+            id: 'Completion',
+            icon: 'bi-check-circle',
+            label: 'Completion',
+            sustainabilityModules: {
+                economic: true,
+                environmental: true,
+                social: true,
+                institutional: true,
+                climate: false,
+                completion: 100
+            }
+        },
+        {
+            id: 'OperationAndMaintenance',
+            icon: 'bi-gear',
+            label: 'Maintenance',
+            sustainabilityModules: {
+                economic: true,
+                environmental: true,
+                social: true,
+                institutional: true,
+                climate: true,
+                completion: 100
+            }
+        },
+        {
+            id: 'Decommissioning',
+            icon: 'bi-x-circle',
+            label: 'Decommissioning',
+            sustainabilityModules: {
+                economic: true,
+                environmental: true,
+                social: true,
+                institutional: false,
+                climate: true,
+                completion: 100
+            }
+        }
     ];
     hoveredStage: string | null = null;
 
@@ -740,7 +843,39 @@ export class ProjectDetailsComponent implements OnInit {
         };
     }
 
-    // Helper method to get sections
+     // Add this helper method to safely check module status
+     isModuleEnabled(stage: Stage, moduleName: ModuleType): boolean {
+        return stage.sustainabilityModules[moduleName];
+    }
+
+  // Add this helper method to get module color
+  getModuleColor(moduleName: ModuleType): string {
+    const colors: Record<ModuleType, string> = {
+        economic: 'emerald-500',
+        environmental: 'green-500',
+        social: 'blue-500',
+        institutional: 'purple-500',
+        climate: 'cyan-500'
+    };
+    return colors[moduleName] || 'gray-500';
+}
+
+ // Helper method to check if a string is a valid module type
+ isValidModuleType(module: string): module is ModuleType {
+    return ['economic', 'environmental', 'social', 'institutional', 'climate'].includes(module);
+}
+
+
+
+    
+    getStageCompletion(stageId: string): number {
+        const stage = this.stages.find(s => s.id === stageId);
+        // Ensure completion is treated as a number
+        const completion = stage?.sustainabilityModules?.completion;
+        return typeof completion === 'number' ? completion : 0;
+    }
+
+    // Helper method to get sections 
     getSections(): string[] {
         return this.orderedSectionsIdentification;
     }

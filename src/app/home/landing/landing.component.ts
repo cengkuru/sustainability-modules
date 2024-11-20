@@ -14,7 +14,7 @@ import {CommonModule} from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import projectsData from '../../../assets/data/projects.json';
 import { IntersectionObserverDirective } from "../../directives/intersection-observer.directive";
-import { animate, style, transition, trigger, query, stagger } from "@angular/animations";
+import { animate, style, transition, trigger, query, stagger, state } from "@angular/animations";
 import * as L from 'leaflet';
 import { ScriptLoaderService } from "../../services/scriptLoader.service";
 import { NgIconComponent } from "@ng-icons/core";
@@ -64,6 +64,18 @@ interface ViewProjectDetailsEvent extends CustomEvent {
           stagger('50ms', animate('500ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })))
         ], { optional: true })
       ])
+    ]),
+
+    trigger('cardHover', [
+      state('initial', style({
+        transform: 'translateY(0)',
+        boxShadow: 'var(--shadow-sm)'
+      })),
+      state('hovered', style({
+        transform: 'translateY(-4px)',
+        boxShadow: 'var(--shadow-lg)'
+      })),
+      transition('initial <=> hovered', animate('200ms ease-out'))
     ]),
 
     // New staggered list animation
