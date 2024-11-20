@@ -273,3 +273,43 @@ input, textarea, select {
 
 
 
+:host {
+  display: block;
+  height: 100%;
+}
+
+.content-wrapper {
+  height: calc(100vh - 64px); // Adjust based on your header height
+  overflow-y: auto;
+  
+  // Custom scrollbar
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+    
+    &:hover {
+      background: #94a3b8;
+    }
+  }
+}
+
+// Smooth fade for loading overlay
+.loading-overlay {
+  transition: opacity 0.2s ease-in-out;
+}
+
+// Improve animation performance
+.animate-fade-slide {
+  will-change: transform, opacity;
+}
+
+
+

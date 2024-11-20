@@ -1567,9 +1567,14 @@ export class ProjectDetailsComponent implements OnInit {
         return 'Invalid amount';
       }
 
-      calculateResponseRate(answers: number = 0, requests: number = 0): number {
-        if (requests === 0) return 0;
-        return Math.round((answers / requests) * 100);
+      
+
+      calculateResponseRate(answers: string | number = 0, requests: string | number = 0): number {
+        const numAnswers = typeof answers === 'string' ? parseInt(answers, 10) : answers;
+        const numRequests = typeof requests === 'string' ? parseInt(requests, 10) : requests;
+        
+        if (numRequests === 0) return 0;
+        return Math.round((numAnswers / numRequests) * 100);
       }
 
 }
