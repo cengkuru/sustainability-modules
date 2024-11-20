@@ -22,6 +22,14 @@ interface SustainabilityModules {
   
 type ModuleType = keyof Omit<SustainabilityModules, 'completion'>;
 
+interface ProcurementStrategy {
+    description?: string;
+    type?: string;
+    method?: string;
+    [key: string]: any; // for any additional properties
+  }
+  
+
 interface Stage {
     id: string;
     icon: string;
@@ -925,8 +933,40 @@ export class ProjectDetailsComponent implements OnInit {
         return this.projectIds.length;
     }
 
+    isProcurementStrategyObject(strategy: any): strategy is ProcurementStrategy {
+        return strategy && typeof strategy === 'object' && 'description' in strategy;
+      }
+      
+      // Improved method to safely get procurement strategy text
+      getProcurementStrategyText(strategy: any): string {
+        if (!strategy) return 'No procurement strategy specified';
+        
+        if (typeof strategy === 'string') return strategy;
+        
+        if (this.isProcurementStrategyObject(strategy)) {
+          return strategy.description || 'No procurement strategy description available';
+        }
+        
+        // If it's an object but doesn't match our expected format
+        return JSON.stringify(strategy);
+      }
 
 
+
+
+
+      hasEnvironmentalLicenses(project: any): boolean {
+        return !!project?.stages?.preparation?.environmentalAndClimateSustainabilityData?.environmentalLicensesAndExemptions;
+      }
+      
+      // If you want to format any specific environmental data
+      formatEnvironmentalData(data: any): string {
+        if (!data) return 'Not specified';
+        if (typeof data === 'object') {
+          return data.description || JSON.stringify(data);
+        }
+        return data.toString();
+      }
 
     onTabChange(event: Event): void {
         const target = event.target as HTMLSelectElement;
@@ -1491,5 +1531,45 @@ export class ProjectDetailsComponent implements OnInit {
         
         return { amount, currency };
     }
+
+
+    formatCurrencyValue(value: string | number | undefined): string {
+        if (!value) return 'Not specified';
+        
+        // Handle string values that might contain currency code
+        if (typeof value === 'string') {
+          const parts = value.split(' ');
+          if (parts.length === 2) {
+            const amount = parseFloat(parts[0]);
+            const currency = parts[1];
+            if (!isNaN(amount)) {
+              return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: currency,
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+              }).format(amount);
+            }
+          }
+        }
+        
+        // Handle numeric values
+        const amount = typeof value === 'string' ? parseFloat(value) : value;
+        if (!isNaN(amount)) {
+          return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+          }).format(amount);
+        }
+        
+        return 'Invalid amount';
+      }
+
+      calculateResponseRate(answers: number = 0, requests: number = 0): number {
+        if (requests === 0) return 0;
+        return Math.round((answers / requests) * 100);
+      }
 
 }

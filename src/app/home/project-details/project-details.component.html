@@ -199,7 +199,6 @@
               </div>
             </div>
 
-            
             <!-- Updated sidebar HTML -->
             <!-- Updated sidebar HTML -->
             <div class="relative p-6">
@@ -215,7 +214,7 @@
                   >
                     <div class="flex items-center">
                       <!-- Stage Number Circle -->
-                      <div 
+                      <div
                         class="w-8 h-8 rounded-full flex items-center justify-center mr-3"
                         [ngClass]="{
                           'bg-accent6 text-white': selectedTab === stage.id,
@@ -224,10 +223,10 @@
                       >
                         {{ i + 1 }}
                       </div>
-            
+
                       <!-- Stage Name -->
                       <div class="flex-1">
-                        <span 
+                        <span
                           class="text-base font-medium"
                           [ngClass]="{
                             'text-accent6': selectedTab === stage.id,
@@ -237,9 +236,9 @@
                           {{ stage.label }}
                         </span>
                       </div>
-            
+
                       <!-- Simple Arrow -->
-                      <i 
+                      <i
                         class="bi bi-chevron-right ml-2"
                         [ngClass]="{
                           'text-accent6': selectedTab === stage.id,
@@ -248,16 +247,15 @@
                       ></i>
                     </div>
                   </button>
-            
+
                   <!-- Simple Connector Line -->
-                  <div 
-                    *ngIf="i < stages.length - 1" 
+                  <div
+                    *ngIf="i < stages.length - 1"
                     class="h-4 w-0.5 mx-auto bg-gray-200"
                   ></div>
                 </ng-container>
               </div>
             </div>
-            
           </div>
         </div>
         <!-- Tab Content -->
@@ -928,451 +926,1079 @@
                 </div>
 
                 <div *ngIf="project$ | async as project" class="space-y-8">
+                 
+                 
+                 
                   <!-- Basic Data Section -->
                   <section
-                    class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg"
+                    class="bg-white p-6 rounded-xl shadow-lg border border-gray-100"
+                    *ngIf="project$ | async as project"
                   >
-                    <div class="p-6 sm:p-8">
-                      <h3
-                        class="text-2xl font-semibold text-accent mb-6 flex items-center"
-                      >
-                        <i
-                          class="bi bi-info-circle-fill mr-3 text-secondary-300"
-                        ></i>
-                        Basic Data
-                      </h3>
-                      <div class="grid grid-cols-1 gap-8">
-                        <div
-                          class="space-y-4 hover:apple-hover-lift transition-all duration-300"
-                          *ngFor="
-                            let item of getBasicDataItemsPreparation(
-                              project.stages.preparation.basicData
-                            ) | keyvalue
-                          "
+                    <!-- Header with Context -->
+                    <div class="flex items-center justify-between mb-6">
+                      <div class="flex items-center gap-3">
+                        <i class="bi bi-info-circle text-2xl text-blue-600"></i>
+                        <h3 class="text-xl font-semibold text-gray-900">
+                          Basic Data
+                        </h3>
+                      </div>
+                      <div class="flex items-center gap-2">
+                        <span
+                          class="px-3 py-1 text-sm bg-blue-50 text-blue-700 rounded-full"
                         >
-                          <div class="flex items-center mb-2">
-                            <i
-                              class="bi mr-2 text-lg"
-                              [ngClass]="{
-                                'bi-bullseye text-accent6':
-                                  item.key === 'Project Scope',
-                                'bi-person-lines-fill text-accent4':
-                                  item.key === 'Contact Details',
-                                'bi-cash-coin text-accent5':
-                                  item.key === 'Funding Sources',
-                                'bi-wallet2 text-secondary-200':
-                                  item.key === 'Project Budget',
-                                'bi-calendar-check text-accent3':
-                                  item.key === 'Project Budget Approval Date'
-                              }"
-                            ></i>
-                            <p class="text-sm font-medium text-accent4">
-                              {{ item.key }}
+                          <i class="bi bi-tools mr-2"></i>
+                          Preparation Stage
+                        </span>
+                      </div>
+                    </div>
+
+                    <!-- Content Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <!-- Project Scope -->
+                      <div
+                        class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200"
+                      >
+                        <div class="flex items-start gap-3">
+                          <i class="bi bi-bullseye text-blue-600 mt-1"></i>
+                          <div>
+                            <p class="text-sm font-medium text-gray-600">
+                              Project Scope
+                            </p>
+                            <p class="text-base text-gray-900 mt-1">
+                              {{
+                                project.stages?.preparation?.basicData
+                                  ?.projectScope || "Not specified"
+                              }}
+                            </p>
+                            <p
+                              *ngIf="getExplanationPreparation('projectScope')"
+                              class="text-xs text-gray-500 mt-2"
+                            >
+                              {{ getExplanationPreparation("projectScope") }}
                             </p>
                           </div>
-                          <p
-                            class="text-base text-accent ml-6 transition-all duration-250"
-                          >
-                            <ng-container [ngSwitch]="item.key">
-                              <ng-container *ngSwitchCase="'Project Budget'">
-                                {{ item.value }}
-                              </ng-container>
-                              <ng-container
-                                *ngSwitchCase="'Project Budget Approval Date'"
-                              >
-                                {{ item.value | date : "mediumDate" }}
-                              </ng-container>
-                              <ng-container *ngSwitchDefault>
-                                {{ item.value }}
-                              </ng-container>
-                            </ng-container>
-                          </p>
-                          <p
-                            class="text-base text-accent ml-6 transition-all duration-250"
-                          >
-                            {{ item.value }}
-                          </p>
                         </div>
                       </div>
-                      <app-attachment-list
-                        [attachments]="
-                          project.stages.preparation.basicData.attachments
-                        "
-                        class="mt-8"
-                      ></app-attachment-list>
+
+                      <!-- Contact Details -->
+                      <div
+                        class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200"
+                      >
+                        <div class="flex items-start gap-3">
+                          <i
+                            class="bi bi-person-lines-fill text-green-600 mt-1"
+                          ></i>
+                          <div>
+                            <p class="text-sm font-medium text-gray-600">
+                              Contact Details
+                            </p>
+                            <p class="text-base text-gray-900 mt-1">
+                              {{
+                                project.stages?.preparation?.basicData
+                                  ?.contactDetails || "Not specified"
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Project Budget -->
+                      <div
+                        class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200"
+                      >
+                        <div class="flex items-start gap-3">
+                          <i class="bi bi-cash-stack text-purple-600 mt-1"></i>
+                          <div>
+                            <p class="text-sm font-medium text-gray-600">
+                              Project Budget
+                            </p>
+                            <p class="text-base text-gray-900 mt-1">
+                              {{
+                                parseCurrencyValue(
+                                  project.stages?.preparation?.basicData
+                                    ?.projectBudget
+                                )?.amount
+                                  | currency
+                                    : parseCurrencyValue(
+                                        project.stages?.preparation?.basicData
+                                          ?.projectBudget
+                                      )?.currency
+                                    : "symbol"
+                                    : "1.0-0" || "Not specified"
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Budget Approval Date -->
+                      <div
+                        class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200"
+                      >
+                        <div class="flex items-start gap-3">
+                          <i
+                            class="bi bi-calendar-check text-indigo-600 mt-1"
+                          ></i>
+                          <div>
+                            <p class="text-sm font-medium text-gray-600">
+                              Budget Approval Date
+                            </p>
+                            <p class="text-base text-gray-900 mt-1">
+                              {{
+                                project.stages?.preparation?.basicData
+                                  ?.projectBudgetApprovalDate
+                                  | date : "mediumDate" || "Not specified"
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Funding Sources -->
+                      <div
+                        class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200 md:col-span-2"
+                      >
+                        <div class="flex items-start gap-3">
+                          <i class="bi bi-bank text-orange-600 mt-1"></i>
+                          <div>
+                            <p class="text-sm font-medium text-gray-600">
+                              Funding Sources
+                            </p>
+                            <p class="text-base text-gray-900 mt-1">
+                              {{
+                                project.stages?.preparation?.basicData
+                                  ?.fundingSources || "Not specified"
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Attachments Section if any -->
+                    <div
+                      *ngIf="
+                        project.stages?.preparation?.basicData?.attachments
+                          ?.length
+                      "
+                      class="mt-8 pt-6 border-t border-gray-200"
+                    >
+                      <h4
+                        class="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2"
+                      >
+                        <i class="bi bi-paperclip"></i>
+                        Related Documents
+                      </h4>
+
+                      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div
+                          *ngFor="
+                            let attachment of project.stages?.preparation
+                              ?.basicData?.attachments
+                          "
+                          class="flex items-start gap-3 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200"
+                        >
+                          <i
+                            class="bi bi-file-earmark-text text-gray-500 text-xl"
+                          ></i>
+                          <div>
+                            <h5 class="text-sm font-medium text-gray-900">
+                              {{ attachment.title }}
+                            </h5>
+                            <p class="text-xs text-gray-500">
+                              {{ attachment.documentType }}
+                            </p>
+                            <p
+                              *ngIf="attachment.description"
+                              class="text-xs text-gray-600 mt-1"
+                            >
+                              {{ attachment.description }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </section>
+
+
+
+
                   <!-- Climate Finance Data Section -->
-                  <section
-                    class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg"
-                  >
-                    <div class="p-6 sm:p-8">
-                      <h3
-                        class="text-2xl font-semibold text-accent mb-6 flex items-center"
-                      >
-                        <i class="bi bi-cloud-fill mr-3 text-accent6"></i>
-                        Climate Finance Data
-                      </h3>
-                      <div class="grid grid-cols-1 gap-8">
-                        <div
-                          class="hover:apple-hover-lift transition-all duration-300"
-                          *ngFor="
-                            let item of getClimateFinanceDataItemsPreparation(
-                              project.stages.preparation.climateFinanceData
-                            ) | keyvalue
-                          "
-                        >
-                          <div class="flex items-center mb-2">
-                            <i
-                              class="bi mr-2 text-lg"
-                              [ngClass]="{
-                                'bi-bank text-accent6':
-                                  item.key ===
-                                  'Green Climate Fund Accredited Entity',
-                                'bi-building text-accent4':
-                                  item.key === 'Accredited Entity Type',
-                                'bi-pie-chart-fill text-accent5':
-                                  item.key === 'Ratio of Co-Finance',
-                                'bi-calendar-range text-secondary-200':
-                                  item.key === 'Project Approval Period',
-                                'bi-lightning-charge-fill text-accent5':
-                                  item.key === 'Carbon Efficiency',
-                                'bi-hourglass-split text-accent3':
-                                  item.key === 'Project Preparation Period',
-                                'bi-graph-up-arrow text-accent6':
-                                  item.key === 'Non-Climate Co-Benefits',
-                                'bi-cash-stack text-secondary-200':
-                                  item.key === 'Amount of Investment',
-                                'bi-receipt text-accent4':
-                                  item.key === 'Project Preparation Costs',
-                                'bi-piggy-bank-fill text-accent5':
-                                  item.key === 'Funding Source'
-                              }"
-                            ></i>
-                            <p class="text-sm font-medium text-accent4">
-                              {{ item.key }}
-                            </p>
-                          </div>
-                          <p
-                            class="text-base text-accent-300 ml-6 transition-all duration-250"
-                          >
-                            <ng-container [ngSwitch]="item.key">
-                              <ng-container
-                                *ngSwitchCase="'Amount of Investment'"
-                              >
-                                {{
-                                  parseFloat(item.value)
-                                    | currency : "USD" : "symbol" : "1.0-0"
-                                }}
-                              </ng-container>
-                              <ng-container *ngSwitchCase="'Cost Estimate'">
-                                {{
-                                  parseFloat(item.value)
-                                    | currency : "USD" : "symbol" : "1.0-0"
-                                }}
-                              </ng-container>
-                              <ng-container *ngSwitchCase="'Contract Price'">
-                                {{
-                                  parseFloat(item.value)
-                                    | currency : "USD" : "symbol" : "1.0-0"
-                                }}
-                              </ng-container>
-                              <ng-container
-                                *ngSwitchCase="'Contract Start Date'"
-                              >
-                                {{ item.value | date : "mediumDate" }}
-                              </ng-container>
-                              <ng-container *ngSwitchDefault>
-                                {{ item.value }}
-                              </ng-container>
-                            </ng-container>
-                          </p>
-                        </div>
-                      </div>
-                      <app-attachment-list
-                        [attachments]="
-                          project.stages.preparation.climateFinanceData
-                            .attachments
-                        "
-                        class="mt-8"
-                      ></app-attachment-list>
-                    </div>
-                  </section>
-                  <!-- Social Sustainability Data Section -->
-                  <section
-                    class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8"
-                  >
-                    <div class="p-6 sm:p-8">
-                      <h3
-                        class="text-2xl font-semibold text-accent mb-6 flex items-center"
-                      >
-                        <i class="bi bi-people-fill mr-3 text-accent3"></i>
-                        Social Sustainability Data
-                      </h3>
-                      <div class="grid grid-cols-1 gap-8">
-                        <div
-                          class="apple-card hover:apple-hover-lift transition-all duration-300"
-                          *ngFor="
-                            let item of getSocialSustainabilityDataItemsPreparation(
-                              project.stages.preparation
-                                .socialSustainabilityData
-                            ) | keyvalue
-                          "
-                        >
-                          <div class="flex items-center mb-2">
-                            <i
-                              class="bi mr-2 text-lg"
-                              [ngClass]="{
-                                'bi-calendar-event text-accent6':
-                                  item.key === 'Public Consultation Meetings',
-                                'bi-universal-access text-accent4':
-                                  item.key === 'Inclusive Design',
-                                'bi-briefcase-fill text-accent5':
-                                  item.key === 'Labor Obligations',
-                                'bi-cash-coin text-secondary-200':
-                                  item.key === 'Land Compensation Budget',
-                                'bi-geo-alt-fill text-accent3':
-                                  item.key === 'Indigenous Land',
-                                'bi-person-check-fill text-accent6':
-                                  item.key === 'Beneficiaries',
-                                'bi-people-fill text-accent4':
-                                  item.key === 'Number of Beneficiaries'
-                              }"
-                            ></i>
-                            <p class="text-sm font-medium text-accent4">
-                              {{ item.key }}
-                            </p>
-                          </div>
-                          <p
-                            class="text-base text-accent ml-6 transition-all duration-250"
-                          >
-                            {{ item.value }}
-                          </p>
-                        </div>
-                      </div>
-                      <app-attachment-list
-                        [attachments]="
-                          project.stages.preparation.socialSustainabilityData
-                            .attachments
-                        "
-                        class="mt-8"
-                      ></app-attachment-list>
-                    </div>
-                  </section>
+                  <!-- Climate Finance Data Section -->
+<section class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 mt-8" *ngIf="project$ | async as project">
+  <!-- Header with Context -->
+  <div class="flex items-center justify-between mb-6">
+    <div class="flex items-center gap-3">
+      <i class="bi bi-cloud-fill text-2xl text-teal-600"></i>
+      <h3 class="text-xl font-semibold text-gray-900">Climate Finance Data</h3>
+    </div>
+    <span class="px-3 py-1 text-sm bg-teal-50 text-teal-700 rounded-full">
+      <i class="bi bi-leaf-fill mr-2"></i>
+      Sustainability Focus
+    </span>
+  </div>
 
-                  <!-- Institutional Sustainability Data Section -->
-                  <section
-                    class="bg-white mt rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg"
-                  >
-                    <div class="p-6 sm:p-8">
-                      <h3
-                        class="text-2xl font-semibold text-accent mb-6 flex items-center"
-                      >
-                        <i class="bi bi-building-fill mr-3 text-secondary"></i>
-                        Institutional Sustainability Data
-                      </h3>
-                      <div class="grid grid-cols-1 gap-8">
-                        <div
-                          class="apple-card hover:apple-hover-lift transition-all duration-300"
-                          *ngFor="
-                            let item of getInstitutionalSustainabilityDataItemsPreparation(
-                              project.stages.preparation
-                                .institutionalSustainabilityData
-                            ) | keyvalue
-                          "
-                        >
-                          <div class="flex items-center mb-2">
-                            <i
-                              class="bi mr-2 text-lg"
-                              [ngClass]="{
-                                'bi-file-earmark-text text-accent6':
-                                  item.key ===
-                                  'Number of Freedom of Information Requests',
-                                'bi-clipboard-check text-accent4':
-                                  item.key === 'Policy Coherence Documentation',
-                                'bi-envelope-open text-accent5':
-                                  item.key ===
-                                  'Number of Freedom of Information Answers',
-                                'bi-chat-square-text text-secondary-200':
-                                  item.key ===
-                                  'Freedom of Information Requests and Answers',
-                                'bi-shield-check text-accent3':
-                                  item.key === 'Risk Management Plans'
-                              }"
-                            ></i>
-                            <p class="text-sm font-medium text-accent4">
-                              {{ item.key }}
-                            </p>
-                          </div>
-                          <p
-                            class="text-base text-accent ml-6 transition-all duration-250"
-                          >
-                            {{ item.value }}
-                          </p>
-                        </div>
-                      </div>
-                      <app-attachment-list
-                        [attachments]="
-                          project.stages.preparation
-                            .institutionalSustainabilityData.attachments
-                        "
-                        class="mt-8"
-                      ></app-attachment-list>
-                    </div>
-                  </section>
+  <!-- Content Grid -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Green Climate Fund Entity -->
+    <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200">
+      <div class="flex items-start gap-3">
+        <i class="bi bi-bank text-teal-600 mt-1"></i>
+        <div>
+          <p class="text-sm font-medium text-gray-600">Green Climate Fund Accredited Entity</p>
+          <p class="text-base text-gray-900 mt-1">
+            {{ project.stages?.preparation?.climateFinanceData?.greenClimateFundAccreditedEntity || 'Not specified' }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accredited Entity Type -->
+    <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200">
+      <div class="flex items-start gap-3">
+        <i class="bi bi-building text-blue-600 mt-1"></i>
+        <div>
+          <p class="text-sm font-medium text-gray-600">Accredited Entity Type</p>
+          <p class="text-base text-gray-900 mt-1">
+            {{ project.stages?.preparation?.climateFinanceData?.accreditedEntityType || 'Not specified' }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Co-Finance Details -->
+    <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200">
+      <div class="flex items-start gap-3">
+        <i class="bi bi-pie-chart-fill text-purple-600 mt-1"></i>
+        <div>
+          <p class="text-sm font-medium text-gray-600">Ratio of Co-Finance</p>
+          <div class="space-y-2 mt-1">
+            <div *ngIf="project.stages?.preparation?.climateFinanceData?.ratioOfCoFinance?.privateFinance" 
+                 class="text-sm">
+              <span class="font-medium">Private Finance:</span> 
+              {{ project.stages?.preparation?.climateFinanceData?.ratioOfCoFinance?.privateFinance }}
+            </div>
+            <div *ngIf="project.stages?.preparation?.climateFinanceData?.ratioOfCoFinance?.domesticMobilisations" 
+                 class="text-sm">
+              <span class="font-medium">Domestic Mobilisations:</span> 
+              {{ project.stages?.preparation?.climateFinanceData?.ratioOfCoFinance?.domesticMobilisations }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project Timeline -->
+    <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200">
+      <div class="flex items-start gap-3">
+        <i class="bi bi-calendar-range text-indigo-600 mt-1"></i>
+        <div>
+          <p class="text-sm font-medium text-gray-600">Project Timing</p>
+          <div class="space-y-2 mt-1">
+            <div class="text-sm">
+              <span class="font-medium">Approval Period:</span>
+              {{ formatDateRange(project.stages?.preparation?.climateFinanceData?.projectApprovalPeriod) || 'Not specified' }}
+            </div>
+            <div class="text-sm">
+              <span class="font-medium">Preparation Period:</span>
+              {{ formatDateRange(project.stages?.preparation?.climateFinanceData?.projectPreparationPeriod) || 'Not specified' }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Financial Details -->
+    <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200 lg:col-span-2">
+      <div class="flex items-start gap-3">
+        <i class="bi bi-cash-stack text-green-600 mt-1"></i>
+        <div class="w-full">
+          <p class="text-sm font-medium text-gray-600">Financial Information</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+            <div class="text-sm">
+              <span class="font-medium">Amount of Investment:</span>
+              <p class="mt-1">
+                {{ formatCurrencyValue(project.stages?.preparation?.climateFinanceData?.amountOfInvestment) }}
+              </p>
+            </div>
+            <div class="text-sm">
+              <span class="font-medium">Preparation Costs:</span>
+              <p class="mt-1">
+                {{ formatCurrencyValue(project.stages?.preparation?.climateFinanceData?.projectPreparationCosts) }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Non-Climate Co-Benefits -->
+    <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200 lg:col-span-2">
+      <div class="flex items-start gap-3">
+        <i class="bi bi-graph-up-arrow text-blue-600 mt-1"></i>
+        <div>
+          <p class="text-sm font-medium text-gray-600">Non-Climate Co-Benefits</p>
+          <div class="space-y-3 mt-3">
+            <div *ngIf="project.stages?.preparation?.climateFinanceData?.nonClimateCoBenefits?.environmental" 
+                 class="rounded-lg bg-white p-3 shadow-sm">
+              <p class="text-sm font-medium text-green-700">Environmental</p>
+              <p class="text-sm text-gray-600 mt-1">
+                {{ project.stages?.preparation?.climateFinanceData?.nonClimateCoBenefits?.environmental }}
+              </p>
+            </div>
+            <div *ngIf="project.stages?.preparation?.climateFinanceData?.nonClimateCoBenefits?.economic" 
+                 class="rounded-lg bg-white p-3 shadow-sm">
+              <p class="text-sm font-medium text-blue-700">Economic</p>
+              <p class="text-sm text-gray-600 mt-1">
+                {{ project.stages?.preparation?.climateFinanceData?.nonClimateCoBenefits?.economic }}
+              </p>
+            </div>
+            <div *ngIf="project.stages?.preparation?.climateFinanceData?.nonClimateCoBenefits?.gender" 
+                 class="rounded-lg bg-white p-3 shadow-sm">
+              <p class="text-sm font-medium text-purple-700">Gender</p>
+              <p class="text-sm text-gray-600 mt-1">
+                {{ project.stages?.preparation?.climateFinanceData?.nonClimateCoBenefits?.gender }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Terms of Climate Finance -->
+  <div class="mt-6">
+    <div class="bg-gray-50 p-4 rounded-lg">
+      <div class="flex items-start gap-3">
+        <i class="bi bi-file-text text-gray-600 mt-1"></i>
+        <div>
+          <p class="text-sm font-medium text-gray-600">Terms of Climate Finance</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3">
+            <div *ngIf="project.stages?.preparation?.climateFinanceData?.termsOfClimateFinance?.maturity" 
+                 class="text-sm">
+              <span class="font-medium">Maturity:</span>
+              <p class="text-gray-600 mt-1">
+                {{ project.stages?.preparation?.climateFinanceData?.termsOfClimateFinance?.maturity }}
+              </p>
+            </div>
+            <div *ngIf="project.stages?.preparation?.climateFinanceData?.termsOfClimateFinance?.gracePeriod" 
+                 class="text-sm">
+              <span class="font-medium">Grace Period:</span>
+              <p class="text-gray-600 mt-1">
+                {{ project.stages?.preparation?.climateFinanceData?.termsOfClimateFinance?.gracePeriod }}
+              </p>
+            </div>
+            <div *ngIf="project.stages?.preparation?.climateFinanceData?.termsOfClimateFinance?.interest" 
+                 class="text-sm">
+              <span class="font-medium">Interest Rate:</span>
+              <p class="text-gray-600 mt-1">
+                {{ project.stages?.preparation?.climateFinanceData?.termsOfClimateFinance?.interest }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Attachments Section -->
+  <div *ngIf="project.stages?.preparation?.climateFinanceData?.attachments?.length" 
+       class="mt-8 pt-6 border-t border-gray-200">
+    <h4 class="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
+      <i class="bi bi-paperclip"></i>
+      Related Documents
+    </h4>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <ng-container *ngFor="let attachment of project.stages?.preparation?.climateFinanceData?.attachments">
+        <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200">
+          <i class="bi bi-file-earmark-text text-gray-500 text-xl"></i>
+          <div>
+            <h5 class="text-sm font-medium text-gray-900">{{ attachment.title }}</h5>
+            <p class="text-xs text-gray-500">{{ attachment.documentType }}</p>
+            <p *ngIf="attachment.description" class="text-xs text-gray-600 mt-1">
+              {{ attachment.description }}
+            </p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</section>
+                  
+                  
+                 <!-- Social Sustainability Data Section -->
+<section class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 mt-8" *ngIf="project$ | async as project">
+  <!-- Header with Context -->
+  <div class="flex items-center justify-between mb-6">
+    <div class="flex items-center gap-3">
+      <i class="bi bi-people-fill text-2xl text-indigo-600"></i>
+      <h3 class="text-xl font-semibold text-gray-900">Social Sustainability Data</h3>
+    </div>
+    <span class="px-3 py-1 text-sm bg-indigo-50 text-indigo-700 rounded-full">
+      <i class="bi bi-heart-fill mr-2"></i>
+      Community Impact
+    </span>
+  </div>
+
+  <!-- Content Grid -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Public Consultation Meetings -->
+    <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200 lg:col-span-2">
+      <div class="flex items-start gap-3">
+        <i class="bi bi-calendar-event text-indigo-600 mt-1"></i>
+        <div>
+          <p class="text-sm font-medium text-gray-600">Public Consultation Meetings</p>
+          <p class="text-base text-gray-900 mt-2 whitespace-pre-line">
+            {{ project.stages?.preparation?.socialSustainabilityData?.publicConsultationMeetings || 'No consultation meetings recorded' }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Beneficiaries Information -->
+    <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200 lg:col-span-2">
+      <div class="flex items-start gap-3">
+        <i class="bi bi-person-check-fill text-green-600 mt-1"></i>
+        <div class="w-full">
+          <p class="text-sm font-medium text-gray-600">Beneficiaries</p>
+          <div class="mt-3 space-y-4">
+            <div *ngIf="project.stages?.preparation?.socialSustainabilityData?.beneficiaries"
+                 class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="bg-white p-3 rounded-lg shadow-sm">
+                <p class="text-sm text-gray-600">Total Direct Beneficiaries</p>
+                <p class="text-lg font-semibold text-indigo-700 mt-1">
+                  {{ project.stages?.preparation?.socialSustainabilityData?.beneficiaries?.totalDirectBeneficiaries | number }}
+                </p>
+              </div>
+              <div class="bg-white p-3 rounded-lg shadow-sm">
+                <p class="text-sm text-gray-600">Male</p>
+                <p class="text-lg font-semibold text-blue-700 mt-1">
+                  {{ project.stages?.preparation?.socialSustainabilityData?.beneficiaries?.male | number }}
+                </p>
+              </div>
+              <div class="bg-white p-3 rounded-lg shadow-sm">
+                <p class="text-sm text-gray-600">Female</p>
+                <p class="text-lg font-semibold text-pink-700 mt-1">
+                  {{ project.stages?.preparation?.socialSustainabilityData?.beneficiaries?.female | number }}
+                </p>
+              </div>
+            </div>
+            <p class="text-sm text-gray-600">
+              {{ project.stages?.preparation?.socialSustainabilityData?.beneficiaries?.description }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inclusive Design -->
+    <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200">
+      <div class="flex items-start gap-3">
+        <i class="bi bi-universal-access text-purple-600 mt-1"></i>
+        <div>
+          <p class="text-sm font-medium text-gray-600">Inclusive Design</p>
+          <p class="text-base text-gray-900 mt-2 whitespace-pre-line">
+            {{ project.stages?.preparation?.socialSustainabilityData?.inclusiveDesign || 'No inclusive design details specified' }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Labor Obligations -->
+    <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200">
+      <div class="flex items-start gap-3">
+        <i class="bi bi-briefcase-fill text-blue-600 mt-1"></i>
+        <div>
+          <p class="text-sm font-medium text-gray-600">Labor Obligations</p>
+          <p class="text-base text-gray-900 mt-2">
+            {{ project.stages?.preparation?.socialSustainabilityData?.laborObligations || 'No labor obligations specified' }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Land Compensation Budget -->
+    <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200">
+      <div class="flex items-start gap-3">
+        <i class="bi bi-cash-coin text-green-600 mt-1"></i>
+        <div>
+          <p class="text-sm font-medium text-gray-600">Land Compensation Budget</p>
+          <p class="text-base text-gray-900 mt-2">
+            {{ formatCurrencyValue(project.stages?.preparation?.socialSustainabilityData?.landCompensationBudget) }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Indigenous Land -->
+    <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200">
+      <div class="flex items-start gap-3">
+        <i class="bi bi-geo-alt-fill text-red-600 mt-1"></i>
+        <div>
+          <p class="text-sm font-medium text-gray-600">Indigenous Land Impact</p>
+          <p class="text-base text-gray-900 mt-2">
+            {{ project.stages?.preparation?.socialSustainabilityData?.indigenousLand || 'No indigenous land impact specified' }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Attachments Section -->
+  <div *ngIf="project.stages?.preparation?.socialSustainabilityData?.attachments?.length" 
+       class="mt-8 pt-6 border-t border-gray-200">
+    <h4 class="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
+      <i class="bi bi-paperclip"></i>
+      Related Social Impact Documents
+    </h4>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <ng-container *ngFor="let attachment of project.stages?.preparation?.socialSustainabilityData?.attachments">
+        <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200">
+          <i class="bi bi-file-earmark-text text-gray-500 text-xl"></i>
+          <div>
+            <h5 class="text-sm font-medium text-gray-900">{{ attachment.title }}</h5>
+            <p class="text-xs text-gray-500">{{ attachment.documentType }}</p>
+            <p *ngIf="attachment.description" class="text-xs text-gray-600 mt-1">
+              {{ attachment.description }}
+            </p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</section>
+
+                 <!-- Institutional Sustainability Data Section -->
+<section class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 mt-8" *ngIf="project$ | async as project">
+  <!-- Header with Context -->
+  <div class="flex items-center justify-between mb-6">
+    <div class="flex items-center gap-3">
+      <i class="bi bi-building-fill text-2xl text-purple-600"></i>
+      <h3 class="text-xl font-semibold text-gray-900">Institutional Sustainability Data</h3>
+    </div>
+    <span class="px-3 py-1 text-sm bg-purple-50 text-purple-700 rounded-full">
+      <i class="bi bi-shield-check mr-2"></i>
+      Governance & Compliance
+    </span>
+  </div>
+
+  <!-- Main Content -->
+  <div class="space-y-6">
+    <!-- Freedom of Information Metrics -->
+    <div class="bg-gray-50 p-4 rounded-lg">
+      <h4 class="text-base font-medium text-gray-700 mb-4">Information Transparency</h4>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Requests -->
+        <div class="bg-white p-4 rounded-lg shadow-sm">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <i class="bi bi-file-earmark-text text-purple-600"></i>
+              <span class="text-sm font-medium text-gray-600">Information Requests</span>
+            </div>
+            <span class="text-lg font-semibold text-purple-700">
+              {{ project.stages?.preparation?.institutionalSustainabilityData?.numberOfFreedomOfInformationRequests || '0' }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Answers -->
+        <div class="bg-white p-4 rounded-lg shadow-sm">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <i class="bi bi-envelope-open text-green-600"></i>
+              <span class="text-sm font-medium text-gray-600">Information Responses</span>
+            </div>
+            <span class="text-lg font-semibold text-green-700">
+              {{ project.stages?.preparation?.institutionalSustainabilityData?.numberOfFreedomOfInformationAnswers || '0' }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Policy Coherence Documentation -->
+    <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200">
+      <div class="flex items-start gap-3">
+        <i class="bi bi-clipboard-check text-blue-600 mt-1"></i>
+        <div>
+          <p class="text-sm font-medium text-gray-600">Policy Coherence Documentation</p>
+          <div class="mt-2 space-y-2">
+            <p class="text-base text-gray-900 whitespace-pre-line">
+              {{ project.stages?.preparation?.institutionalSustainabilityData?.policyCoherenceDocumentation || 'No policy coherence documentation specified' }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Freedom of Information Details -->
+    <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200">
+      <div class="flex items-start gap-3">
+        <i class="bi bi-chat-square-text text-indigo-600 mt-1"></i>
+        <div>
+          <p class="text-sm font-medium text-gray-600">Information Request Details</p>
+          <div class="mt-2 space-y-2">
+            <p class="text-base text-gray-900">
+              {{ project.stages?.preparation?.institutionalSustainabilityData?.freedomOfInformationRequestsAndAnswers || 'No detailed information available' }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Risk Management Plans -->
+    <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200">
+      <div class="flex items-start gap-3">
+        <i class="bi bi-shield-check text-red-600 mt-1"></i>
+        <div>
+          <p class="text-sm font-medium text-gray-600">Risk Management Plans</p>
+          <div class="mt-2">
+            <p class="text-base text-gray-900 whitespace-pre-line">
+              {{ project.stages?.preparation?.institutionalSustainabilityData?.riskManagementPlans || 'No risk management plans specified' }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Performance Metrics -->
+  <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+    <h4 class="text-base font-medium text-gray-700 mb-4">Response Rate Metrics</h4>
+    <div class="relative h-2 bg-gray-200 rounded-full overflow-hidden">
+      <div class="absolute top-0 left-0 h-full bg-purple-600 rounded-full"
+           [style.width.%]="calculateResponseRate(
+             project.stages?.preparation?.institutionalSustainabilityData?.numberOfFreedomOfInformationAnswers,
+             project.stages?.preparation?.institutionalSustainabilityData?.numberOfFreedomOfInformationRequests
+           )">
+      </div>
+    </div>
+    <div class="mt-2 flex justify-between text-sm text-gray-600">
+      <span>Response Rate</span>
+      <span class="font-medium">
+        {{ calculateResponseRate(
+          project.stages?.preparation?.institutionalSustainabilityData?.numberOfFreedomOfInformationAnswers,
+          project.stages?.preparation?.institutionalSustainabilityData?.numberOfFreedomOfInformationRequests
+        ) }}%
+      </span>
+    </div>
+  </div>
+
+  <!-- Attachments Section -->
+  <div *ngIf="project.stages?.preparation?.institutionalSustainabilityData?.attachments?.length" 
+       class="mt-8 pt-6 border-t border-gray-200">
+    <h4 class="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
+      <i class="bi bi-paperclip"></i>
+      Institutional Documentation
+    </h4>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <ng-container *ngFor="let attachment of project.stages?.preparation?.institutionalSustainabilityData?.attachments">
+        <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200">
+          <i class="bi bi-file-earmark-text text-gray-500 text-xl"></i>
+          <div>
+            <h5 class="text-sm font-medium text-gray-900">{{ attachment.title }}</h5>
+            <p class="text-xs text-gray-500">{{ attachment.documentType }}</p>
+            <p *ngIf="attachment.description" class="text-xs text-gray-600 mt-1">
+              {{ attachment.description }}
+            </p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</section>
                   <!-- Economic and Financial Sustainability Data Section -->
-                  <section
-                    class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg mb-8"
-                  >
-                    <div class="p-6 sm:p-8">
-                      <h3
-                        class="text-2xl font-semibold text-accent mb-6 flex items-center"
-                      >
-                        <i class="bi bi-cash-coin mr-3 text-accent6"></i>
-                        Economic and Financial Sustainability Data
-                      </h3>
-                      <div class="grid grid-cols-1 gap-8">
-                        <div
-                          class="apple-card hover:apple-hover-lift transition-all duration-300"
-                          *ngFor="
-                            let item of getEconomicFinancialSustainabilityDataItemsPreparation(
-                              project.stages.preparation
-                                .economicAndFinancialSustainabilityData
-                            ) | keyvalue
-                          "
-                        >
-                          <div class="flex items-center mb-2">
-                            <i
-                              class="bi mr-2 text-lg"
-                              [ngClass]="{
-                                'bi-trophy-fill text-accent5':
-                                  item.key === 'Value for Money',
-                                'bi-wallet-fill text-accent4':
-                                  item.key === 'Budget for Preparation',
-                                'bi-tools text-accent3':
-                                  item.key === 'Maintenance Plan',
-                                'bi-hourglass-split text-secondary-200':
-                                  item.key === 'Asset Lifetime',
-                                'bi-graph-up text-accent6':
-                                  item.key === 'Cost Benefit Analysis',
-                                'bi-piggy-bank-fill text-accent4':
-                                  item.key === 'Funding Source for Preparation',
-                                'bi-bar-chart-fill text-accent5':
-                                  item.key === 'Budget Projections',
-                                'bi-cart-fill text-accent3':
-                                  item.key === 'Procurement Strategy',
-                                'bi-calculator-fill text-secondary-200':
-                                  item.key ===
-                                  'Life Cycle Cost Calculation Methodology',
-                                'bi-currency-dollar text-accent6':
-                                  item.key === 'Life Cycle Cost'
-                              }"
-                            ></i>
-                            <p class="text-sm font-medium text-accent4">
-                              {{ item.key }}
-                            </p>
-                          </div>
-                          <p
-                            class="text-base text-accent ml-6 transition-all duration-250"
-                          >
-                            <ng-container [ngSwitch]="item.key">
-                              <ng-container *ngSwitchCase="'Project Budget'">
-                                {{ item.value }}
-                              </ng-container>
-                              <ng-container
-                                *ngSwitchCase="'Project Budget Approval Date'"
-                              >
-                                {{ item.value | date : "mediumDate" }}
-                              </ng-container>
-                              <ng-container *ngSwitchDefault>
-                                {{ item.value }}
-                              </ng-container>
-                            </ng-container>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </section>
+<section class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 mt-8" *ngIf="project$ | async as project">
+  <!-- Header with Context -->
+  <div class="flex items-center justify-between mb-6">
+    <div class="flex items-center gap-3">
+      <i class="bi bi-cash-coin text-2xl text-emerald-600"></i>
+      <h3 class="text-xl font-semibold text-gray-900">Economic and Financial Sustainability Data</h3>
+    </div>
+    <span class="px-3 py-1 text-sm bg-emerald-50 text-emerald-700 rounded-full">
+      <i class="bi bi-graph-up-arrow mr-2"></i>
+      Financial Metrics
+    </span>
+  </div>
 
-                  <!-- Environmental and Climate Sustainability Data Section -->
-                  <section
-                    class="bg-white mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg"
-                  >
-                    <div class="p-6 sm:p-8">
-                      <h3
-                        class="text-2xl font-semibold text-accent mb-6 flex items-center"
-                      >
-                        <i class="bi bi-tree-fill mr-3 text-accent3"></i>
-                        Environmental and Climate Sustainability Data
-                      </h3>
-                      <div class="grid grid-cols-1 gap-8">
-                        <div
-                          class="apple-card hover:apple-hover-lift transition-all duration-300"
-                          *ngFor="
-                            let item of getEnvironmentalClimateSustainabilityDataItemsPreparation(
-                              project.stages.preparation
-                                .environmentalAndClimateSustainabilityData
-                            ) | keyvalue
-                          "
-                        >
-                          <div class="flex items-center mb-2">
-                            <i
-                              class="bi mr-2 text-lg"
-                              [ngClass]="{
-                                'bi-file-earmark-check-fill text-accent6':
-                                  item.key ===
-                                  'Environmental Licenses and Exemptions',
-                                'bi-cloud-fill text-accent4':
-                                  item.key ===
-                                  'Forecast of Greenhouse Gas Emissions',
-                                'bi-shield-fill-check text-accent5':
-                                  item.key === 'Protected Area',
-                                'bi-thermometer-half text-secondary-200':
-                                  item.key === 'Climate Measures',
-                                'bi-flower1 text-accent3':
-                                  item.key === 'Environmental Measures',
-                                'bi-list-ol text-accent6':
-                                  item.key === 'Environmental Impact Category',
-                                'bi-exclamation-triangle-fill text-accent4':
-                                  item.key ===
-                                  'Climate and Disaster Risk Assessment',
-                                'bi-tree text-accent5':
-                                  item.key === 'Conservation Measures'
-                              }"
-                            ></i>
-                            <p class="text-sm font-medium text-accent4">
-                              {{ item.key }}
-                            </p>
-                          </div>
-                          <p
-                            class="text-base text-accent ml-6 transition-all duration-250"
-                          >
-                            <ng-container [ngSwitch]="item.key">
-                              <ng-container *ngSwitchCase="'Project Budget'">
-                                {{ item.value }}
-                              </ng-container>
-                              <ng-container
-                                *ngSwitchCase="'Project Budget Approval Date'"
-                              >
-                                {{ item.value | date : "mediumDate" }}
-                              </ng-container>
-                              <ng-container *ngSwitchDefault>
-                                {{ item.value }}
-                              </ng-container>
-                            </ng-container>
-                          </p>
-                        </div>
-                      </div>
-                      <app-attachment-list
-                        [attachments]="
-                          project.stages.preparation
-                            .environmentalAndClimateSustainabilityData
-                            .attachments
-                        "
-                        class="mt-8"
-                      ></app-attachment-list>
-                    </div>
-                  </section>
+  <!-- Main Content Grid -->
+  <div class="space-y-6">
+    <!-- Value Assessment Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Value for Money -->
+      <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200">
+        <div class="flex items-start gap-3">
+          <div class="flex-shrink-0">
+            <i class="bi bi-trophy-fill text-2xl text-yellow-600"></i>
+          </div>
+          <div>
+            <h4 class="text-sm font-medium text-gray-700">Value for Money</h4>
+            <p class="mt-2 text-gray-900">
+              {{ project.stages?.preparation?.economicAndFinancialSustainabilityData?.valueForMoney || 'Not specified' }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cost Benefit Analysis -->
+      <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200">
+        <div class="flex items-start gap-3">
+          <div class="flex-shrink-0">
+            <i class="bi bi-graph-up text-2xl text-blue-600"></i>
+          </div>
+          <div>
+            <h4 class="text-sm font-medium text-gray-700">Cost Benefit Analysis</h4>
+            <p class="mt-2 text-gray-900">
+              {{ project.stages?.preparation?.economicAndFinancialSustainabilityData?.costBenefitAnalysis || 'Not specified' }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Budget and Costs Section -->
+    <div class="bg-white rounded-lg border border-gray-200">
+      <div class="p-4 border-b border-gray-200">
+        <h4 class="text-base font-medium text-gray-900">Financial Overview</h4>
+      </div>
+      
+      <div class="p-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Preparation Budget -->
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-gray-600">Preparation Budget</span>
+            <i class="bi bi-wallet-fill text-emerald-600"></i>
+          </div>
+          <p class="mt-2 text-lg font-semibold text-gray-900">
+            {{ formatCurrencyValue(project.stages?.preparation?.economicAndFinancialSustainabilityData?.budgetForPreparation) }}
+          </p>
+        </div>
+
+        <!-- Life Cycle Cost -->
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-gray-600">Life Cycle Cost</span>
+            <i class="bi bi-currency-dollar text-emerald-600"></i>
+          </div>
+          <p class="mt-2 text-lg font-semibold text-gray-900">
+            {{ formatCurrencyValue(project.stages?.preparation?.economicAndFinancialSustainabilityData?.lifeCycleCost) }}
+          </p>
+        </div>
+
+        <!-- Asset Lifetime -->
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-gray-600">Asset Lifetime</span>
+            <i class="bi bi-hourglass-split text-emerald-600"></i>
+          </div>
+          <p class="mt-2 text-lg font-semibold text-gray-900">
+            {{ project.stages?.preparation?.economicAndFinancialSustainabilityData?.assetLifetime || 'Not specified' }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Planning and Strategy Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Maintenance Plan -->
+      <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200">
+        <div class="flex items-start gap-3">
+          <i class="bi bi-tools text-indigo-600 mt-1"></i>
+          <div>
+            <h4 class="text-sm font-medium text-gray-700">Maintenance Plan</h4>
+            <p class="mt-2 text-gray-900 whitespace-pre-line">
+              {{ project.stages?.preparation?.economicAndFinancialSustainabilityData?.maintenancePlan || 'No maintenance plan specified' }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Procurement Strategy -->
+      <!-- Procurement Strategy -->
+<div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200">
+  <div class="flex items-start gap-3">
+    <i class="bi bi-cart-fill text-purple-600 mt-1"></i>
+    <div>
+      <h4 class="text-sm font-medium text-gray-700">Procurement Strategy</h4>
+      <div class="mt-2 space-y-2">
+        <!-- Handle object with description property -->
+        <p class="text-gray-900 whitespace-pre-line" *ngIf="isProcurementStrategyObject(project.stages?.preparation?.economicAndFinancialSustainabilityData?.procurementStrategy)">
+          {{ project.stages?.preparation?.economicAndFinancialSustainabilityData?.procurementStrategy?.description }}
+        </p>
+        <!-- Handle string value -->
+        <p class="text-gray-900 whitespace-pre-line" *ngIf="!isProcurementStrategyObject(project.stages?.preparation?.economicAndFinancialSustainabilityData?.procurementStrategy)">
+          {{ project.stages?.preparation?.economicAndFinancialSustainabilityData?.procurementStrategy || 'No procurement strategy specified' }}
+        </p>
+        
+        <!-- Additional procurement details if they exist -->
+        <div *ngIf="isProcurementStrategyObject(project.stages?.preparation?.economicAndFinancialSustainabilityData?.procurementStrategy)" 
+             class="mt-4 space-y-3">
+          <!-- Add any additional procurement strategy fields here -->
+          <div *ngIf="project.stages?.preparation?.economicAndFinancialSustainabilityData?.procurementStrategy?.type" 
+               class="flex items-center gap-2 text-sm">
+            <span class="font-medium text-gray-600">Type:</span>
+            <span class="text-gray-900">
+              {{ project.stages?.preparation?.economicAndFinancialSustainabilityData?.procurementStrategy?.type }}
+            </span>
+          </div>
+          <div *ngIf="project.stages?.preparation?.economicAndFinancialSustainabilityData?.procurementStrategy?.method" 
+               class="flex items-center gap-2 text-sm">
+            <span class="font-medium text-gray-600">Method:</span>
+            <span class="text-gray-900">
+              {{ project.stages?.preparation?.economicAndFinancialSustainabilityData?.procurementStrategy?.method }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+
+    <!-- Budget Projections -->
+    <div class="bg-gray-50 p-4 rounded-lg">
+      <div class="flex items-start gap-3">
+        <i class="bi bi-bar-chart-fill text-blue-600 mt-1"></i>
+        <div class="w-full">
+          <h4 class="text-sm font-medium text-gray-700">Budget Projections</h4>
+          <div class="mt-4 space-y-2">
+            <div *ngIf="project.stages?.preparation?.economicAndFinancialSustainabilityData?.budgetProjections"
+                 class="relative overflow-x-auto">
+              <table class="w-full text-sm text-left text-gray-700">
+                <thead class="text-xs text-gray-600 bg-gray-100">
+                  <tr>
+                    <th class="px-4 py-2">Year</th>
+                    <th class="px-4 py-2">Projected Amount</th>
+                    <th class="px-4 py-2">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Add your budget projection rows here -->
+                </tbody>
+              </table>
+            </div>
+            <p *ngIf="!project.stages?.preparation?.economicAndFinancialSustainabilityData?.budgetProjections"
+               class="text-gray-600">
+              No budget projections available
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Methodology Section -->
+  <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+    <div class="flex items-start gap-3">
+      <i class="bi bi-calculator-fill text-gray-600 mt-1"></i>
+      <div>
+        <h4 class="text-sm font-medium text-gray-700">Life Cycle Cost Calculation Methodology</h4>
+        <p class="mt-2 text-gray-900 whitespace-pre-line">
+          {{ project.stages?.preparation?.economicAndFinancialSustainabilityData?.lifeCycleCostCalculationMethodology || 'No methodology specified' }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Attachments Section -->
+  <div *ngIf="project.stages?.preparation?.economicAndFinancialSustainabilityData?.attachments?.length" 
+       class="mt-8 pt-6 border-t border-gray-200">
+    <h4 class="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
+      <i class="bi bi-paperclip"></i>
+      Financial Documentation
+    </h4>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div *ngFor="let attachment of project.stages?.preparation?.economicAndFinancialSustainabilityData?.attachments"
+           class="flex items-start gap-3 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200">
+        <i class="bi bi-file-earmark-text text-gray-500 text-xl"></i>
+        <div>
+          <h5 class="text-sm font-medium text-gray-900">{{ attachment.title }}</h5>
+          <p class="text-xs text-gray-500">{{ attachment.documentType }}</p>
+          <p *ngIf="attachment.description" class="text-xs text-gray-600 mt-1">
+            {{ attachment.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+                 <!-- Environmental and Climate Sustainability Data Section -->
+<section class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 mt-8" *ngIf="project$ | async as project">
+  <!-- Header with Context -->
+  <div class="flex items-center justify-between mb-6">
+    <div class="flex items-center gap-3">
+      <i class="bi bi-tree-fill text-2xl text-green-600"></i>
+      <h3 class="text-xl font-semibold text-gray-900">Environmental and Climate Sustainability Data</h3>
+    </div>
+    <span class="px-3 py-1 text-sm bg-green-50 text-green-700 rounded-full">
+      <i class="bi bi-leaf-fill mr-2"></i>
+      Environmental Impact
+    </span>
+  </div>
+
+  <!-- Main Content -->
+  <div class="space-y-8">
+    <!-- Environmental Impact Assessment -->
+    <div class="bg-gray-50 p-4 rounded-lg">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Impact Category -->
+        <div class="bg-white p-4 rounded-lg shadow-sm">
+          <div class="flex items-start gap-3">
+            <i class="bi bi-list-ol text-green-600 text-xl"></i>
+            <div>
+              <h4 class="text-sm font-medium text-gray-700">Environmental Impact Category</h4>
+              <p class="mt-2 text-base text-gray-900">
+                {{ project.stages?.preparation?.environmentalAndClimateSustainabilityData?.environmentalImpactCategory || 'Not specified' }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Protected Area Status -->
+        <div class="bg-white p-4 rounded-lg shadow-sm">
+          <div class="flex items-start gap-3">
+            <i class="bi bi-shield-fill-check text-blue-600 text-xl"></i>
+            <div>
+              <h4 class="text-sm font-medium text-gray-700">Protected Area Status</h4>
+              <p class="mt-2 text-base text-gray-900">
+                {{ project.stages?.preparation?.environmentalAndClimateSustainabilityData?.protectedArea || 'Not in protected area' }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Climate Risk and Emissions -->
+    <div class="bg-gray-50 p-4 rounded-lg">
+      <h4 class="text-base font-medium text-gray-900 mb-4">Climate Impact Assessment</h4>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- GHG Emissions Forecast -->
+        <div class="bg-white p-4 rounded-lg shadow-sm">
+          <div class="flex items-start gap-3">
+            <i class="bi bi-cloud-fill text-purple-600 text-xl"></i>
+            <div>
+              <h4 class="text-sm font-medium text-gray-700">Greenhouse Gas Emissions Forecast</h4>
+              <p class="mt-2 text-base text-gray-900">
+                {{ project.stages?.preparation?.environmentalAndClimateSustainabilityData?.forecastOfGreenhouseGasEmissions || 'No forecast available' }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Climate and Disaster Risk -->
+        <div class="bg-white p-4 rounded-lg shadow-sm">
+          <div class="flex items-start gap-3">
+            <i class="bi bi-exclamation-triangle-fill text-red-600 text-xl"></i>
+            <div>
+              <h4 class="text-sm font-medium text-gray-700">Climate and Disaster Risk Assessment</h4>
+              <p class="mt-2 text-base text-gray-900">
+                {{ project.stages?.preparation?.environmentalAndClimateSustainabilityData?.climateAndDisasterRiskAssessment || 'No risk assessment available' }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Environmental Measures and Conservation -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Environmental Measures -->
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <div class="flex items-start gap-3">
+          <i class="bi bi-flower1 text-green-600 text-xl"></i>
+          <div>
+            <h4 class="text-sm font-medium text-gray-700">Environmental Measures</h4>
+            <div class="mt-3 space-y-2">
+              <p class="text-base text-gray-900 whitespace-pre-line">
+                {{ project.stages?.preparation?.environmentalAndClimateSustainabilityData?.environmentalMeasures || 'No environmental measures specified' }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conservation Measures -->
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <div class="flex items-start gap-3">
+          <i class="bi bi-tree text-emerald-600 text-xl"></i>
+          <div>
+            <h4 class="text-sm font-medium text-gray-700">Conservation Measures</h4>
+            <div class="mt-3 space-y-2">
+              <p class="text-base text-gray-900 whitespace-pre-line">
+                {{ project.stages?.preparation?.environmentalAndClimateSustainabilityData?.conservationMeasures || 'No conservation measures specified' }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Climate Measures -->
+    <div class="bg-gray-50 p-4 rounded-lg">
+      <div class="flex items-start gap-3">
+        <i class="bi bi-thermometer-half text-orange-600 text-xl"></i>
+        <div>
+          <h4 class="text-sm font-medium text-gray-700">Climate Measures</h4>
+          <div class="mt-3 space-y-2">
+            <p class="text-base text-gray-900 whitespace-pre-line">
+              {{ project.stages?.preparation?.environmentalAndClimateSustainabilityData?.climateMeasures || 'No climate measures specified' }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Licenses and Exemptions -->
+    <div class="bg-gray-50 p-4 rounded-lg">
+      <div class="flex items-start gap-3">
+        <i class="bi bi-file-earmark-check-fill text-blue-600 text-xl"></i>
+        <div class="w-full">
+          <h4 class="text-sm font-medium text-gray-700">Environmental Licenses and Exemptions</h4>
+          <div class="mt-3">
+            <div class="bg-white rounded-lg shadow-sm divide-y divide-gray-200">
+              <div *ngIf="hasEnvironmentalLicenses(project); else noLicenses" 
+                   class="space-y-4">
+                <!-- Add specific license details here if available -->
+                <div class="p-3">
+                  {{ project.stages?.preparation?.environmentalAndClimateSustainabilityData?.environmentalLicensesAndExemptions }}
+                </div>
+              </div>
+              <ng-template #noLicenses>
+                <div class="p-3 text-gray-600">
+                  No licenses or exemptions recorded
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Attachments Section -->
+  <div *ngIf="project.stages?.preparation?.environmentalAndClimateSustainabilityData?.attachments?.length" 
+       class="mt-8 pt-6 border-t border-gray-200">
+    <h4 class="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
+      <i class="bi bi-paperclip"></i>
+      Environmental Documentation
+    </h4>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div *ngFor="let attachment of project.stages?.preparation?.environmentalAndClimateSustainabilityData?.attachments"
+           class="flex items-start gap-3 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200">
+        <i class="bi bi-file-earmark-text text-gray-500 text-xl"></i>
+        <div>
+          <h5 class="text-sm font-medium text-gray-900">{{ attachment.title }}</h5>
+          <p class="text-xs text-gray-500">{{ attachment.documentType }}</p>
+          <p *ngIf="attachment.description" class="text-xs text-gray-600 mt-1">
+            {{ attachment.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
                 </div>
               </section>
             </ng-container>
