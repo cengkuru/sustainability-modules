@@ -774,191 +774,139 @@
 
                 <div *ngIf="project$ | async as project" class="space-y-8">
                   <!-- Basic Data Section -->
-                  <section
-                    class="bg-white p-6 rounded-xl shadow-lg border border-gray-100"
-                    *ngIf="project$ | async as project"
-                  >
-                    <!-- Header with Context -->
+                  <section class="bg-white p-6 rounded-xl shadow-lg" *ngIf="project$ | async as project">
+                    <!-- Section Header -->
                     <div class="flex items-center justify-between mb-6">
                       <div class="flex items-center gap-3">
-                        <i class="bi bi-info-circle text-2xl text-blue-600"></i>
-                        <h3 class="text-xl font-semibold text-gray-900">
-                          Basic Data
-                        </h3>
+                        <i class="bi bi-info-circle-fill text-2xl text-blue-600"></i>
+                        <h2 class="text-xl font-semibold text-gray-900">Basic Information</h2>
                       </div>
-                      <div class="flex items-center gap-2">
-                        <span
-                          class="px-3 py-1 text-sm bg-blue-50 text-blue-700 rounded-full"
-                        >
-                          <i class="bi bi-tools mr-2"></i>
-                          Preparation Stage
-                        </span>
-                      </div>
+                      <span class="px-3 py-1 text-sm bg-blue-50 text-blue-700 rounded-full" *ngIf="project.stages?.preparation?.basicData?.projectBudgetApprovalDate">
+                        <i class="bi bi-clock-history mr-2"></i>
+                        Last Updated: {{ project.stages?.preparation?.basicData?.projectBudgetApprovalDate | date:'mediumDate':'UTC' }}
+                      </span>
                     </div>
-
-                    <!-- Content Grid -->
+                  
+                    <!-- Main Content Grid -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <!-- Project Scope -->
-                      <div
-                        class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200"
-                      >
+                      <div class="group relative bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200">
                         <div class="flex items-start gap-3">
                           <i class="bi bi-bullseye text-blue-600 mt-1"></i>
-                          <div>
-                            <p class="text-sm font-medium text-gray-600">
-                              Project Scope
-                            </p>
-                            <p class="text-base text-gray-900 mt-1">
-                              {{
-                                project.stages?.preparation?.basicData
-                                  ?.projectScope || "Not specified"
-                              }}
-                            </p>
-                            <p
-                              *ngIf="getExplanationPreparation('projectScope')"
-                              class="text-xs text-gray-500 mt-2"
-                            >
-                              {{ getExplanationPreparation("projectScope") }}
-                            </p>
+                          <div class="flex-1">
+                            <div class="flex items-center">
+                              <h3 class="text-sm font-medium text-gray-600">Project Scope</h3>
+                              <div class="tooltip ml-2">
+                                <i class="bi bi-question-circle text-gray-400 hover:text-gray-600"></i>
+                                <span class="tooltip-text">
+                                  This outlines what the project aims to achieve and its limits, helping everyone know what's in and out of the project's focus.
+                                </span>
+                              </div>
+                            </div>
+                            <p class="mt-1 text-base text-gray-900">{{ project.stages?.preparation?.basicData?.projectScope || 'Not specified' }}</p>
                           </div>
                         </div>
                       </div>
-
+                  
                       <!-- Contact Details -->
-                      <div
-                        class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200"
-                      >
+                      <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200">
                         <div class="flex items-start gap-3">
-                          <i
-                            class="bi bi-person-lines-fill text-green-600 mt-1"
-                          ></i>
-                          <div>
-                            <p class="text-sm font-medium text-gray-600">
-                              Contact Details
-                            </p>
-                            <p class="text-base text-gray-900 mt-1">
-                              {{
-                                project.stages?.preparation?.basicData
-                                  ?.contactDetails || "Not specified"
-                              }}
-                            </p>
+                          <i class="bi bi-envelope text-green-600 mt-1"></i>
+                          <div class="flex-1">
+                            <h3 class="text-sm font-medium text-gray-600">Contact Details</h3>
+                            <a [href]="'mailto:' + project.stages?.preparation?.basicData?.contactDetails" 
+                               class="mt-1 text-base text-blue-600 hover:text-blue-800 hover:underline">
+                              {{ project.stages?.preparation?.basicData?.contactDetails || 'Not available' }}
+                            </a>
                           </div>
                         </div>
                       </div>
-
-                      <!-- Project Budget -->
-                      <div
-                        class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200"
-                      >
+                  
+                      <!-- Budget Information -->
+                      <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200">
                         <div class="flex items-start gap-3">
                           <i class="bi bi-cash-stack text-purple-600 mt-1"></i>
-                          <div>
-                            <p class="text-sm font-medium text-gray-600">
-                              Project Budget
+                          <div class="flex-1">
+                            <h3 class="text-sm font-medium text-gray-600">Project Budget</h3>
+                            <p class="mt-1 text-lg font-semibold text-gray-900">
+                              {{ project.stages?.preparation?.basicData?.projectBudget || 'Not specified' }}
                             </p>
-                            <p class="text-base text-gray-900 mt-1">
-                              {{
-                                parseCurrencyValue(
-                                  project.stages?.preparation?.basicData
-                                    ?.projectBudget
-                                )?.amount
-                                  | currency
-                                    : parseCurrencyValue(
-                                        project.stages?.preparation?.basicData
-                                          ?.projectBudget
-                                      )?.currency
-                                    : "symbol"
-                                    : "1.0-0" || "Not specified"
-                              }}
+                            <p class="text-xs text-gray-500 mt-1" *ngIf="project.stages?.preparation?.basicData?.projectBudgetApprovalDate">
+                              Approved on {{ project.stages?.preparation?.basicData?.projectBudgetApprovalDate | date:'longDate':'UTC' }}
                             </p>
                           </div>
                         </div>
                       </div>
-
-                      <!-- Budget Approval Date -->
-                      <div
-                        class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200"
-                      >
-                        <div class="flex items-start gap-3">
-                          <i
-                            class="bi bi-calendar-check text-indigo-600 mt-1"
-                          ></i>
-                          <div>
-                            <p class="text-sm font-medium text-gray-600">
-                              Budget Approval Date
-                            </p>
-                            <p class="text-base text-gray-900 mt-1">
-                              {{
-                                project.stages?.preparation?.basicData
-                                  ?.projectBudgetApprovalDate
-                                  | date : "mediumDate" || "Not specified"
-                              }}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
+                  
                       <!-- Funding Sources -->
-                      <div
-                        class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200 md:col-span-2"
-                      >
+                      <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200">
                         <div class="flex items-start gap-3">
                           <i class="bi bi-bank text-orange-600 mt-1"></i>
-                          <div>
-                            <p class="text-sm font-medium text-gray-600">
-                              Funding Sources
-                            </p>
-                            <p class="text-base text-gray-900 mt-1">
-                              {{
-                                project.stages?.preparation?.basicData
-                                  ?.fundingSources || "Not specified"
-                              }}
+                          <div class="flex-1">
+                            <h3 class="text-sm font-medium text-gray-600">Funding Sources</h3>
+                            <p class="mt-1 text-base text-gray-900">
+                              {{ project.stages?.preparation?.basicData?.fundingSources || 'Not specified' }}
                             </p>
                           </div>
                         </div>
                       </div>
                     </div>
-
-                    <!-- Attachments Section if any -->
-                    <div
-                      *ngIf="
-                        project.stages?.preparation?.basicData?.attachments
-                          ?.length
-                      "
-                      class="mt-8 pt-6 border-t border-gray-200"
-                    >
-                      <h4
-                        class="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2"
-                      >
-                        <i class="bi bi-paperclip"></i>
-                        Related Documents
-                      </h4>
-
-                      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div
-                          *ngFor="
-                            let attachment of project.stages?.preparation
-                              ?.basicData?.attachments
-                          "
-                          class="flex items-start gap-3 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200"
-                        >
-                          <i
-                            class="bi bi-file-earmark-text text-gray-500 text-xl"
-                          ></i>
-                          <div>
-                            <h5 class="text-sm font-medium text-gray-900">
-                              {{ attachment.title }}
-                            </h5>
-                            <p class="text-xs text-gray-500">
-                              {{ attachment.documentType }}
-                            </p>
-                            <p
-                              *ngIf="attachment.description"
-                              class="text-xs text-gray-600 mt-1"
-                            >
-                              {{ attachment.description }}
-                            </p>
+                  
+                    <!-- Attachments Section -->
+                    <!-- Attachments Section -->
+                    <div class="mt-8 pt-6 border-t border-gray-200" *ngIf="preparationAttachments?.length">
+                      <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                          <i class="bi bi-folder2-open text-blue-600"></i>
+                          Project Documents
+                        </h3>
+                        <span class="text-sm text-gray-500">{{ preparationAttachments.length }} documents</span>
+                      </div>
+                      
+                      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div *ngFor="let doc of preparationAttachments" 
+                             class="group relative bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300">
+                          <!-- Document Header -->
+                          <div class="p-4 border-b border-gray-100">
+                            <div class="flex items-start justify-between">
+                              <div class="flex items-center gap-3">
+                                <div class="p-2 bg-blue-50 rounded-lg">
+                                  <i class="bi bi-file-pdf text-xl text-blue-600"></i>
+                                </div>
+                                <h4 class="text-base font-medium text-gray-900 truncate max-w-[200px]">
+                                  {{ doc.title }}
+                                </h4>
+                              </div>
+                            </div>
                           </div>
+                    
+                          <!-- Document Content -->
+                          <div class="p-4">
+                            <p *ngIf="doc.description" 
+                               class="text-sm text-gray-600 mb-4 line-clamp-2">
+                              {{ doc.description }}
+                            </p>
+                    
+                            <!-- Action Button -->
+                            <div class="flex justify-end">
+                              <a *ngIf="doc.url" 
+                                 [href]="doc.url" 
+                                 target="_blank" 
+                                 rel="noopener noreferrer"
+                                 class="inline-flex items-center px-4 py-2 rounded-lg bg-gray-50 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-200">
+                                <i class="bi bi-download mr-2"></i>
+                                Download
+                              </a>
+                              <span *ngIf="!doc.url" 
+                                    class="inline-flex items-center px-4 py-2 rounded-lg bg-gray-50 text-gray-400">
+                                <i class="bi bi-lock mr-2"></i>
+                                Not available
+                              </span>
+                            </div>
+                          </div>
+                    
+                          <!-- Hover Overlay -->
+                          <div class="absolute inset-0 border-2 border-transparent rounded-xl group-hover:border-blue-200 pointer-events-none transition-all duration-300"></div>
                         </div>
                       </div>
                     </div>

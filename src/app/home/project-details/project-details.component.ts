@@ -11,6 +11,30 @@ import {FormatSectionTitlePipe} from "../../pipes/format-section-title.pipe";
 import {JsonViewerComponent} from "../../shared/components/json-viewer/json-viewer.component";
 import {DataItemComponent} from "../../shared/components/data-item/data-item.component";
 
+interface Attachment {
+    title: string;
+    description: string;
+    documentType: string;
+    url: string;
+    type: string ;
+
+  }
+
+  // In your component class
+interface PreparationBasicData {
+    projectScope: string;
+    contactDetails: string;
+    fundingSources: string;
+    projectBudget: string;
+    projectBudgetApprovalDate: string;
+    attachments: {
+      title: string;
+      description: string;
+      documentType: string;
+    }[];
+  }
+  
+
 interface SustainabilityModules {
     economic: boolean;
     environmental: boolean;
@@ -315,6 +339,51 @@ export class ProjectDetailsComponent implements OnInit {
         ["beneficiaries", "Who will gain from the project."],
         ["numberOfBeneficiaries", "How many people will benefit."]
     ]);
+
+    preparationAttachments: Attachment[] = [
+        {
+          title: "Environmental and social impact assessment",
+          documentType: "Environmental Assessment",
+          description: "The project will have an overall positive impact on the environment in terms of more sustainable water resource management, climate adaption and provide municipalities with a more resilient water and climate future. It will also provide indirect positive social impacts including job creation. The negative impacts can be addressed and mitigated by implementation and compliance with the requirements of the ESMF and ESMP.",
+          url: "https://drive.google.com/file/d/1om7wR11ceA2WQJQ1uFNtH6df094Q-9Ed/view?usp=sharing",
+          type: 'PDF'
+        },
+        {
+          title: "Resettlement and compensation plan",
+          documentType: "Resettlement Plan",
+          description: "At this juncture it is not likely that land acquisition would be required as all projects are expected to take place on municipally owned land. Should land acquisition be required then a land acquisition plan will be addressed as part of the Resettlement Action plan (aligned to the safeguards guidance provided by DBSA).",
+          url: "https://drive.google.com/file/d/1PmAFE8IcC1YVBZahhiTrWOj8egmC4PjX/view?usp=sharing",
+          type: 'PDF'
+        },
+        {
+          title: "Financial agreement",
+          documentType: "Financial Agreement",
+          description: "The water reuse project is financed in SA Rand (ZAR), which is overseen by the DBSA.",
+          url: "https://drive.google.com/file/d/174vJGHUpa21JvL64eTXQHOqJzCk8iRpL/view?usp=sharing",
+          type: 'PDF'
+        },
+        {
+          title: "Multiyear programme and budget",
+          documentType: "Budget Document",
+          description: "Concessional Loans of approx. USD 200 mil from the GCF to target the gap financing requirements and ensure the financial viability of individual sub-projects across the programme.",
+          url: "https://drive.google.com/file/d/1D0NmzppQNo6twAKpIfYyXQ7t6g9cdw-g/view?usp=drive_link",
+          type: 'PDF'
+        },
+        {
+          title: "Procurement plan",
+          documentType: "Procurement Plan",
+          description: "The procurement plan identifies and schedule all activities including all the necessary Council and National Treasury approvals. This plan resides with the DBSA's Supply Chain Management Unit who oversees and monitors compliance",
+          url: "https://drive.google.com/file/d/1TPJSOOoXAvq5X7c0-dQaqQZU4f9SL5-X/view?usp=sharing",
+          type: 'PDF'
+        },
+        {
+          title: "Project approval decision",
+          documentType: "Approval Document",
+          description: "The Accredited Entity's Investment Committee issued the final decision on the approval of this Project",
+          url: "https://drive.google.com/file/d/1yCUzJxr8BoOO7wg4vqu812tOoXn_XwIX/view?usp=drive_link",
+          type: 'PDF'
+        }
+      ];
     orderedSectionsPreparation: string[] = [
         'basicData',
         'climateFinanceData',
@@ -1497,6 +1566,27 @@ export class ProjectDetailsComponent implements OnInit {
                 return 'bi-info-circle-fill text-accent4';
         }
     }
+
+    getDocumentTypeClass(documentType: string): string {
+        const baseClasses = 'inline-flex items-center';
+        
+        switch (documentType) {
+          case 'Environmental Assessment':
+            return `${baseClasses} bg-green-100 text-green-800`;
+          case 'Resettlement Plan':
+            return `${baseClasses} bg-orange-100 text-orange-800`;
+          case 'Financial Agreement':
+            return `${baseClasses} bg-blue-100 text-blue-800`;
+          case 'Budget Document':
+            return `${baseClasses} bg-purple-100 text-purple-800`;
+          case 'Procurement Plan':
+            return `${baseClasses} bg-indigo-100 text-indigo-800`;
+          case 'Approval Document':
+            return `${baseClasses} bg-red-100 text-red-800`;
+          default:
+            return `${baseClasses} bg-gray-100 text-gray-800`;
+        }
+      }
 
     // Add this helper method to clean currency values
     private cleanCurrencyValue(value: string | number): number {
