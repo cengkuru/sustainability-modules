@@ -3,11 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap, map } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, switchMap, map, catchError } from 'rxjs/operators';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { EmailService } from "../services/email.service";
 import { IntersectionObserverDirective } from "../../directives/intersection-observer.directive";
+import { of } from 'rxjs';
 
 // First, let's define an interface for the Project type
 interface Project {
@@ -103,6 +104,8 @@ export class ProjectListComponent implements OnInit {
     pageSize = 10;
     totalPages = 1;
 
+    numberOfProjects: number = 0;
+    totalValueOfProjects: number = 0;
 
     constructor(
         private firestore: AngularFirestore,
@@ -110,116 +113,97 @@ export class ProjectListComponent implements OnInit {
         private route: ActivatedRoute
     ) {}
 
+    // In the component class
     ngOnInit(): void {
         this.isLoading = true;
-        this.route.queryParams.subscribe(params => {
-            const featured = params['featured'] === 'true';
-            this.showFeatured.next(featured);
-        });
-
+        
         this.projects$ = combineLatest([
-            this.searchTerm.pipe(debounceTime(300), distinctUntilChanged()),
-            this.showFeatured,
-            this.selectedSectors,
-            this.selectedStatus,
-            this.sortOption
+          this.searchTerm.pipe(debounceTime(300), distinctUntilChanged()),
+          this.showFeatured,
+          this.selectedSectors,
+          this.selectedStatus,
+          this.sortOption
         ]).pipe(
-            switchMap(([term, showFeatured, sectors, status, sortBy]) => {
-                return this.firestore.collection('projects').snapshotChanges().pipe(
-                    // In your switchMap function, modify the line where you access project.stages.preparation
-
-map(actions => actions.map(a => {
-    const data = a.payload.doc.data() as any;
-    const id = a.payload.doc.id;
-    return { id, ...data };
-}).filter(project =>
-    (!term || project.name.toLowerCase().includes(term.toLowerCase())) &&
-    (!showFeatured || project.featured) &&
-    (sectors.length === 0 || sectors.includes(project.stages.identification.basicData.sectorSubsector)) &&
-    (!status || project.status === status)
-)),
-map(projects => {
-    console.log(projects);
-    // Parse project budget to ensure it's a number
-    projects.forEach(project => {
-        const budget = project.stages?.preparation?.basicData?.projectBudget;
-        project.parsedBudget = budget ? this.parseProjectBudget(budget) : 0;
-    });
-
-    // Sort projects with null checks
-    projects.sort((a: Project, b: Project) => {
-        if (sortBy === 'name') {
-            const nameA = a?.name || '';
-            const nameB = b?.name || '';
-            return nameA.localeCompare(nameB);
-        }
-        if (sortBy === 'budget') {
-            return (a?.parsedBudget || 0) - (b?.parsedBudget || 0);
-        }
-        if (sortBy === 'date') {
-            const dateA = a?.startDate ? new Date(a.startDate).getTime() : 0;
-            const dateB = b?.startDate ? new Date(b.startDate).getTime() : 0;
-            return dateA - dateB;
-        }
-        return 0;
-    });
-
-    this.isLoading = false;
-    this.totalPages = Math.ceil(projects.length / this.pageSize);
-    const startIndex = (this.currentPage - 1) * this.pageSize;
-    return projects.slice(startIndex, startIndex + this.pageSize);
-})
-
+          switchMap(([term, showFeatured, sectors, status, sortBy]) => {
+            return this.firestore.collection('projects').snapshotChanges().pipe(
+              map(actions => {
+                const projects = actions.map(a => {
+                  const data = a.payload.doc.data() as any;
+                  const id = a.payload.doc.id;
+                  return { id, ...data };
+                });
+      
+                // Filter projects
+                const filteredProjects = projects.filter(project => 
+                  (!term || project.name.toLowerCase().includes(term.toLowerCase())) &&
+                  (!showFeatured || project.featured) &&
+                  (sectors.length === 0 || sectors.includes(project.stages?.identification?.basicData?.sectorSubsector)) &&
+                  (!status || project.status === status)
                 );
-            })
+      
+                // Parse budgets and sort
+                filteredProjects.forEach(project => {
+                  const budget = project.stages?.preparation?.basicData?.projectBudget;
+                  project.parsedBudget = budget ? this.parseProjectBudget(budget) : 0;
+                });
+      
+                // Sort projects
+                filteredProjects.sort((a: Project, b: Project) => {
+                  if (sortBy === 'name') {
+                    return (a?.name || '').localeCompare(b?.name || '');
+                  }
+                  if (sortBy === 'budget') {
+                    return (b?.parsedBudget || 0) - (a?.parsedBudget || 0);
+                  }
+                  if (sortBy === 'date') {
+                    const dateA = a?.startDate ? new Date(a.startDate).getTime() : 0;
+                    const dateB = b?.startDate ? new Date(b.startDate).getTime() : 0;
+                    return dateB - dateA;
+                  }
+                  return 0;
+                });
+      
+                this.isLoading = false;
+                return filteredProjects;
+              }),
+              catchError(error => {
+                console.error('Error loading projects:', error);
+                this.isLoading = false;
+                return of([]);
+              })
+            );
+          })
         );
-
-
+      
+        // Initialize derived observables
         this.totalProjects$ = this.projects$.pipe(
-            map(projects => projects.length)
+          map(projects => projects.length)
         );
-
+      
         this.totalValueOfProjects$ = this.projects$.pipe(
-            map(projects => projects.reduce((total, project) => total + project.parsedBudget, 0))
+          map(projects => projects.reduce((total, project) => {
+            const budget = project.stages?.preparation?.basicData?.projectBudget;
+            if (budget) {
+              const numericValue = this.parseProjectBudget(budget);
+              return total + numericValue;
+            }
+            return total;
+          }, 0))
         );
-
+      
         this.averageProjectValue$ = combineLatest([
-            this.totalValueOfProjects$,
-            this.totalProjects$
+          this.totalValueOfProjects$,
+          this.totalProjects$
         ]).pipe(
-            map(([totalValue, totalProjects]) => totalProjects > 0 ? totalValue / totalProjects : 0)
+          map(([totalValue, totalProjects]) => 
+            totalProjects > 0 ? totalValue / totalProjects : 0
+          )
         );
-
+      
         this.featuredProjectsCount$ = this.projects$.pipe(
-            map(projects => projects.filter(project => project.featured).length)
+          map(projects => projects.filter(project => project.featured).length)
         );
-
-        this.totalValueOfProjects$ = this.projects$.pipe(
-            map((projects: any[]) => {
-                return projects.reduce((total, project) => {
-                    const contractPrice = project.stages?.tenderManagement?.basicData?.contractPrice;
-                    if (contractPrice) {
-                        const numericValue = this.parseProjectBudget(contractPrice);
-                        return total + numericValue;
-                    }
-                    return total;
-                }, 0);
-            })
-        );
-
-        this.averageProjectValue$ = combineLatest([
-            this.totalValueOfProjects$,
-            this.totalProjects$
-        ]).pipe(
-            map(([totalValue, totalProjects]) => {
-                return totalProjects > 0 ? totalValue / totalProjects : 0;
-            })
-        );
-
-        this.featuredProjectsCount$ = this.projects$.pipe(
-            map(projects => projects.filter(project => project.featured).length)
-        );
-    }
+      }
 
     onSearchChange(event: Event): void {
         const target = event.target as HTMLInputElement;
@@ -306,7 +290,119 @@ map(projects => {
     }
 
     formatCurrency(value: number | null): string {
-        if (value === null) return 'N/A';
+        if (value === null) return '';
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
     }
+
+
+    loadProjects() {
+        this.isLoading = true;
+        this.firestore.collection('projects').get().subscribe(
+          (querySnapshot) => {
+            const projects: any[] = [];
+            let totalBudget = 0;
+            
+            querySnapshot.forEach((doc) => {
+              const project = doc.data() as Project;
+              project.id = doc.id;
+              projects.push(project);
+    
+              // Calculate project budget
+              const projectBudget = project.stages?.preparation?.basicData?.projectBudget;
+              if (projectBudget) {
+                let numericValue: number;
+                if (typeof projectBudget === 'string') {
+                  numericValue = parseFloat(projectBudget.replace(/[^0-9.-]+/g, ""));
+                } else {
+                  numericValue = projectBudget;
+                }
+                if (!isNaN(numericValue)) {
+                  totalBudget += numericValue;
+                  project.parsedBudget = numericValue;
+                }
+              }
+            });
+    
+            // Update projects count
+            this.numberOfProjects = projects.length;
+            this.totalValueOfProjects = totalBudget;
+    
+            // Apply filters and sorting
+            this.projects$ = combineLatest([
+              this.searchTerm.pipe(debounceTime(300), distinctUntilChanged()),
+              this.showFeatured,
+              this.selectedSectors,
+              this.selectedStatus,
+              this.sortOption
+            ]).pipe(
+              map(([term, showFeatured, sectors, status, sortBy]) => {
+                return projects.filter(project => 
+                  (!term || project.name.toLowerCase().includes(term.toLowerCase())) &&
+                  (!showFeatured || project.featured) &&
+                  (sectors.length === 0 || sectors.includes(project.stages?.identification?.basicData?.sectorSubsector)) &&
+                  (!status || project.status === status)
+                ).sort((a: Project, b: Project) => {
+                  if (sortBy === 'name') {
+                    return (a?.name || '').localeCompare(b?.name || '');
+                  }
+                  if (sortBy === 'budget') {
+                    return (b?.parsedBudget || 0) - (a?.parsedBudget || 0);
+                  }
+                  if (sortBy === 'date') {
+                    const dateA = a?.startDate ? new Date(a.startDate).getTime() : 0;
+                    const dateB = b?.startDate ? new Date(b.startDate).getTime() : 0;
+                    return dateB - dateA;
+                  }
+                  return 0;
+                });
+              })
+            );
+    
+            this.isLoading = false;
+          },
+          (error) => {
+            console.error('Error loading projects:', error);
+            this.isLoading = false;
+          }
+        );
+      }
+    
+      getFormattedPrice(price: any): string {
+        if (!price) {
+          return '';
+        }
+    
+        try {
+          if (typeof price === 'string') {
+            const cleanedPrice = price.replace(/,/g, '').replace('ZAR', '').trim();
+            const numericValue = parseFloat(cleanedPrice);
+            
+            if (isNaN(numericValue)) {
+              return '';
+            }
+    
+            return new Intl.NumberFormat('en-ZA', {
+              style: 'currency',
+              currency: 'ZAR',
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0
+            }).format(numericValue);
+          }
+    
+          if (typeof price === 'number') {
+            return new Intl.NumberFormat('en-ZA', {
+              style: 'currency',
+              currency: 'ZAR',
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0
+            }).format(price);
+          }
+    
+          return '';
+        } catch (error) {
+          console.error('Error formatting price:', error);
+          return '';
+        }
+      }
+    
 }
