@@ -104,6 +104,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   mapInitialized: boolean = false;
   projectsLoaded: boolean = false;
   private viewInitialized: boolean = false;
+  totalRecentProjectsValue: number = 0;
 
 
   activeTab: 'recent' | 'highValue' = 'recent';
@@ -127,10 +128,20 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   sponsorsSection = {
     title: "Supported by",
     sponsors: [
-      { name: "GIZ", link: "https://www.giz.de/en/html/index.html", image: "../../../assets/giz.png" },
-      { name: "FCDO", link: "https://www.gov.uk/government/organisations/foreign-commonwealth-development-office", image: "../../../assets/uk.png" },
+        {
+            name: "Deutsche Gesellschaft für Internationale Zusammenarbeit (GIZ)",
+            link: "https://www.giz.de/en/html/index.html",
+            image: "../../../assets/giz.png"
+        },
+        {
+            name: "Foreign, Commonwealth & Development Office (FCDO)",
+            link: "https://www.gov.uk/government/organisations/foreign-commonwealth-development-office",
+            image: "../../../assets/uk.png"
+        }
     ]
-  };
+};
+
+  totalHighValueProjectsValue: number = 0;
 
   constructor(
       private http: HttpClient,
@@ -251,72 +262,81 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   loadProjects() {
     this.isLoading = true;
     this.firestore.collection('projects').get().subscribe(
-        (querySnapshot) => {
-          const projects: any[] = [];
-          let totalValue = 0;
-          querySnapshot.forEach((doc) => {
-            const project = doc.data() as any;
-            project.id = doc.id; // Ensure each project has an id
-            projects.push(project);
-
-            // Calculate total value
-            const projectBudget = project.stages?.preparation?.basicData?.projectBudget;
-            if (projectBudget) {
-              const numericValue = parseFloat(projectBudget.replace(/[^0-9.-]+/g, ""));
-              if (!isNaN(numericValue)) {
-                totalValue += numericValue;
-              }
+      (querySnapshot) => {
+        const projects: any[] = [];
+        let totalBudget = 0;
+        
+        querySnapshot.forEach((doc) => {
+          const project = doc.data() as any;
+          project.id = doc.id;
+          projects.push(project);
+  
+          const projectBudget = project.stages?.preparation?.basicData?.projectBudget;
+          if (projectBudget) {
+            const numericValue = parseFloat(projectBudget.replace(/[^0-9.-]+/g, ""));
+            if (!isNaN(numericValue)) {
+              totalBudget += numericValue;
             }
-          });
-
-          // Sort projects by start date (assuming there's a startDate field)
-          const sortedProjects = projects.sort((a, b) => {
-            return new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
-          });
-
-          // Populate recentProjects
-          this.recentProjects = sortedProjects.slice(0, 5);
-
-          // Sort and populate highValueProjects
-          this.highValueProjects = projects.sort((a, b) => {
-            const aPrice = parseFloat(a.stages?.preparation?.basicData?.projectBudget?.replace(/[^0-9.-]+/g, "") || '0');
-            const bPrice = parseFloat(b.stages?.preparation?.basicData?.projectBudget?.replace(/[^0-9.-]+/g, "") || '0');
-            return bPrice - aPrice;
-          }).slice(0, 5);
-
-          // Populate featuredProjects (assuming there's a 'featured' boolean field)
-          this.featuredProjects = projects.filter(project => project.featured).slice(0, 3);
-
-          // If there aren't enough featured projects, add high-value projects to make up the difference
-          if (this.featuredProjects.length < 3) {
-            const additionalFeatured = this.highValueProjects
-                .filter(project => !this.featuredProjects.some(fp => fp.id === project.id))
-                .slice(0, 3 - this.featuredProjects.length);
-            this.featuredProjects = [...this.featuredProjects, ...additionalFeatured];
           }
-
-          this.numberOfProjects = projects.length;
-          this.totalValueOfProjects = totalValue;
-
-          this.generateMarkers();
-          this.projectsLoaded = true;
-          this.isLoading = false;
-          this.checkAndInitializeMap();
-
-          // Trigger change detection
-          this.cdr.detectChanges();
-        },
-        (error) => {
-          this.isLoading = false;
-          console.error('Error loading projects:', error);
-          // Optionally, implement error handling UI feedback here
+        });
+  
+        // Sort by start date
+        const sortedProjects = projects.sort((a, b) => {
+          return new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
+        });
+  
+        // Get recent projects
+        this.recentProjects = sortedProjects.slice(0, 5);
+        this.calculateTotalRecentProjectsValue();
+  
+        // Sort and get high value projects
+        this.highValueProjects = projects.sort((a, b) => {
+          const aPrice = parseFloat(a.stages?.preparation?.basicData?.projectBudget?.replace(/[^0-9.-]+/g, "") || '0');
+          const bPrice = parseFloat(b.stages?.preparation?.basicData?.projectBudget?.replace(/[^0-9.-]+/g, "") || '0');
+          return bPrice - aPrice;
+        }).slice(0, 5);
+  
+        // Calculate total high value projects
+        this.totalHighValueProjectsValue = this.highValueProjects.reduce((total, project) => {
+          const budget = project.stages?.preparation?.basicData?.projectBudget;
+          if (budget) {
+            const numericValue = parseFloat(budget.replace(/[^0-9.-]+/g, ""));
+            return !isNaN(numericValue) ? total + numericValue : total;
+          }
+          return total;
+        }, 0);
+  
+        // Get featured projects
+        this.featuredProjects = projects.filter(project => project.featured).slice(0, 3);
+  
+        // Add high value projects if not enough featured
+        if (this.featuredProjects.length < 3) {
+          const additionalFeatured = this.highValueProjects
+            .filter(project => !this.featuredProjects.some(fp => fp.id === project.id))
+            .slice(0, 3 - this.featuredProjects.length);
+          this.featuredProjects = [...this.featuredProjects, ...additionalFeatured];
         }
+  
+        this.numberOfProjects = projects.length;
+        this.totalValueOfProjects = totalBudget;
+  
+        this.generateMarkers();
+        this.projectsLoaded = true;
+        this.isLoading = false;
+        this.checkAndInitializeMap();
+  
+        this.cdr.detectChanges();
+      },
+      (error) => {
+        this.isLoading = false;
+        console.error('Error loading projects:', error);
+      }
     );
   }
 
   formatCurrency(value: number): string {
     if (isNaN(value) || value === 0) {
-      return 'N/A';
+      return '';
     }
     if (value >= 1000000000) {
       return 'ZAR ' + (value / 1000000000).toFixed(1) + 'B';
@@ -336,7 +356,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
             <h3 class="text-lg font-semibold mb-2 text-accent-300">${project.name}</h3>
             <p class="mb-2 text-accent-100">
               <span class="font-medium">Cost Estimate:</span> 
-              ${project.stages?.tenderManagement?.basicData?.contractPrice || 'N/A'}
+              ${project.stages?.tenderManagement?.basicData?.contractPrice || ''}
             </p>
             <p class="mb-4 text-accent-100">
               <span class="font-medium">Location:</span> ${project.location.name}
@@ -412,20 +432,57 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
 
-  getFormattedPrice(price: string): string {
-    if (!price) return 'N/A';
-
-    const numericValue = parseFloat(price.replace(/[^0-9.-]+/g, ""));
-    if (isNaN(numericValue)) {
-      return 'N/A';
-    } else {
-      return new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'ZAR',
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0
-      }).format(numericValue);
+  // In landing.component.ts
+  getFormattedPrice(price: any): string {
+    if (!price) {
+      return '';
     }
+    
+    try {
+      // If price is a string, clean and extract numeric value
+      if (typeof price === 'string') {
+        const cleanedPrice = price.replace(/,/g, '').replace('ZAR', '').trim();
+        const numericValue = parseFloat(cleanedPrice);
+        
+        if (isNaN(numericValue)) {
+          return '';
+        }
+  
+        return new Intl.NumberFormat('en-ZA', {
+          style: 'currency',
+          currency: 'ZAR',
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0
+        }).format(numericValue);
+      }
+  
+      // If price is already a number
+      if (typeof price === 'number') {
+        return new Intl.NumberFormat('en-ZA', {
+          style: 'currency',
+          currency: 'ZAR',
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0
+        }).format(price);
+      }
+  
+      return '';
+    } catch (error) {
+      console.error('Error formatting price:', error);
+      return '';
+    }
+  }
+
+  calculateTotalHighValueProjectsValue(): void {
+    this.totalHighValueProjectsValue = this.highValueProjects.reduce((total, project) => {
+      const budget = project.stages?.preparation?.basicData?.projectBudget;
+      if (budget) {
+        // Handle string values like "100000000 ZAR"
+        const numericValue = parseFloat(budget.replace(/[^0-9.-]+/g, ""));
+        return !isNaN(numericValue) ? total + numericValue : total;
+      }
+      return total;
+    }, 0);
   }
 
   calculateTotalBudget(): number {
@@ -459,4 +516,17 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   closeQuickMenu(): void {
     this.showQuickMenu = false;
   }
+
+  calculateTotalRecentProjectsValue() {
+    this.totalRecentProjectsValue = this.recentProjects.reduce((total, project) => {
+      const budget = project.stages?.preparation?.basicData?.projectBudget;
+      if (budget) {
+        const numericValue = parseFloat(budget.replace(/[^0-9.-]+/g, ""));
+        return !isNaN(numericValue) ? total + numericValue : total;
+      }
+      return total;
+    }, 0);
+  }
+
+  
 }
