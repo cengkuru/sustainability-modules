@@ -20,77 +20,7 @@
           </h1>
         </div>
 
-        <!-- Navigation Controls -->
-        <div
-          class="mt-8 sm:mt-10 flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0"
-        >
-          <!-- Project Status -->
-          <div class="flex items-center space-x-3 text-sm text-accent4">
-            <span
-              class="inline-flex items-center px-3 py-1 rounded-full bg-accent6/10 text-accent6"
-            >
-              {{ project.status || "Status not available" }}
-            </span>
-            <span class="inline-flex items-center">
-              <i class="bi bi-calendar-event mr-2"></i>
-              {{ project.startDate | date : "mediumDate" }}
-            </span>
-          </div>
-
-          <!-- Navigation Buttons -->
-          <nav
-            class="flex items-center space-x-3 animate-apple-fade-in-delay-2"
-            aria-label="Project navigation"
-          >
-            <button
-              *ngIf="previousProject$ | async as previousProject"
-              (click)="navigateToProject(previousProject)"
-              class="group inline-flex items-center px-4 py-2 bg-primary rounded-apple-lg text-accent3 text-sm font-medium transition-all duration-300 hover:bg-accent2/10 focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
-              [attr.aria-label]="
-                'Navigate to previous project: ' + previousProject.name
-              "
-            >
-              <svg
-                class="w-4 h-4 mr-2 transition-transform duration-300 group-hover:-translate-x-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 19l-7-7 7-7"
-                ></path>
-              </svg>
-              Previous
-            </button>
-
-            <button
-              *ngIf="nextProject$ | async as nextProject"
-              (click)="navigateToProject(nextProject)"
-              class="group inline-flex items-center px-4 py-2 bg-primary rounded-apple-lg text-accent3 text-sm font-medium transition-all duration-300 hover:bg-accent6/10 focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
-              [attr.aria-label]="
-                'Navigate to next project: ' + nextProject.name
-              "
-            >
-              Next
-              <svg
-                class="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5l7 7-7 7"
-                ></path>
-              </svg>
-            </button>
-          </nav>
-        </div>
+        
 
         <!-- Decorative Elements -->
         <div
@@ -191,15 +121,10 @@
             <div class="p-6 border-b border-accent2/10">
               <div class="flex items-center justify-between">
                 <h2 class="text-2xl font-bold text-accent3">Project Stages</h2>
-                <div
-                  class="text-sm text-accent4 px-3 py-1 bg-accent6/10 rounded-full"
-                >
-                  {{ getCurrentStageName() }}
-                </div>
+                
               </div>
             </div>
 
-            <!-- Updated sidebar HTML -->
             <!-- Updated sidebar HTML -->
             <div class="relative p-6">
               <div class="space-y-3">
@@ -264,16 +189,9 @@
             <!-- Identification Tab -->
             <ng-container *ngSwitchCase="'Identification'">
               <section
-                class="p-6 sm:p-8 bg-primary mt-10 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg"
+                class="p-2 sm:p-4 bg-primary mt-6 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg"
               >
-                <div class="flex items-center justify-between mb-6">
-                  <h3
-                    class="text-2xl font-semibold text-accent flex items-center"
-                  >
-                    <i class="bi bi-clipboard-data mr-3 text-secondary"></i>
-                    Identification Data
-                  </h3>
-                </div>
+                
 
                 <!-- Basic Data Section -->
                 <section class="bg-white p-6 rounded-xl shadow-lg" *ngIf="project$ | async as project">
@@ -281,12 +199,8 @@
                   <div class="flex items-center justify-between mb-8">
                     <div class="flex items-center gap-3">
                       <i class="bi bi-info-circle-fill text-2xl text-blue-600"></i>
-                      <h3 class="text-xl font-semibold text-gray-900">Basic Project Information</h3>
+                      <h3 class="text-xl font-semibold text-gray-900">Basic Data</h3>
                     </div>
-                    <span class="px-3 py-1 text-sm bg-blue-50 text-blue-700 rounded-full">
-                      <i class="bi bi-flag-fill mr-2"></i>
-                      Identification Phase
-                    </span>
                   </div>
 
                   <!-- Main Content -->
@@ -302,7 +216,7 @@
                               <div>
                                 <p class="text-sm font-medium text-gray-500">Project Name</p>
                                 <h4 class="mt-1 text-lg font-semibold text-gray-900">
-                                  {{ getBasicDataItems(project.stages?.identification?.basicData)["Project Name"] || "N/A" }}
+                                  {{ getBasicDataItems(project.stages?.identification?.basicData)["Project Name"] || "" }}
                                 </h4>
                               </div>
                             </div>
@@ -315,7 +229,7 @@
                               <div>
                                 <p class="text-sm font-medium text-gray-500">Reference Number</p>
                                 <p class="mt-1 text-base text-gray-900 font-mono">
-                                  {{ getBasicDataItems(project.stages?.identification?.basicData)["Project Reference Number"] || "N/A" }}
+                                  {{ getBasicDataItems(project.stages?.identification?.basicData)["Project Reference Number"] || "" }}
                                 </p>
                               </div>
                             </div>
@@ -330,7 +244,7 @@
                               <div>
                                 <p class="text-sm font-medium text-gray-500">Project Owner</p>
                                 <p class="mt-1 text-base text-gray-900">
-                                  {{ getBasicDataItems(project.stages?.identification?.basicData)["Project Owner"] || "N/A" }}
+                                  {{ getBasicDataItems(project.stages?.identification?.basicData)["Project Owner"] || "" }}
                                 </p>
                               </div>
                             </div>
@@ -343,7 +257,7 @@
                               <div>
                                 <p class="text-sm font-medium text-gray-500">Location</p>
                                 <p class="mt-1 text-base text-gray-900">
-                                  {{ getBasicDataItems(project.stages?.identification?.basicData)["Project Location"] || "N/A" }}
+                                  {{ getBasicDataItems(project.stages?.identification?.basicData)["Project Location"] || "" }}
                                 </p>
                               </div>
                             </div>
@@ -360,10 +274,10 @@
                       </h4>
                       <div class="flex flex-wrap gap-2">
                         <span class="inline-flex items-center px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-sm font-medium">
-                          {{ getBasicDataItems(project.stages?.identification?.basicData)["Sector, Subsector"]?.split(", ")[0] || "N/A" }}
+                          {{ getBasicDataItems(project.stages?.identification?.basicData)["Sector, Subsector"]?.split(", ")[0] || "" }}
                         </span>
                         <span class="inline-flex items-center px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-sm font-medium">
-                          {{ getBasicDataItems(project.stages?.identification?.basicData)["Sector, Subsector"]?.split(", ")[1] || "N/A" }}
+                          {{ getBasicDataItems(project.stages?.identification?.basicData)["Sector, Subsector"]?.split(", ")[1] || "" }}
                         </span>
                       </div>
                     </div>
@@ -379,7 +293,7 @@
                           <div>
                             <p class="text-sm font-medium text-gray-500">Purpose</p>
                             <p class="mt-2 text-base text-gray-900 whitespace-pre-line">
-                              {{ getBasicDataItems(project.stages?.identification?.basicData)["Purpose"] || "N/A" }}
+                              {{ getBasicDataItems(project.stages?.identification?.basicData)["Purpose"] || "" }}
                             </p>
                           </div>
                         </div>
@@ -569,35 +483,7 @@
                       </div>
                     </div>
 
-                    <!-- Climate Finance Progress -->
-                    <div class="bg-gray-50 p-4 rounded-lg">
-                      <div class="flex items-center justify-between mb-4">
-                        <h4 class="text-sm font-medium text-gray-700">Implementation Progress</h4>
-                        <span class="px-2.5 py-1 text-xs font-medium text-green-700 bg-green-100 rounded-full">
-                          On Track
-                        </span>
-                      </div>
-                      
-                      <!-- Progress Bar -->
-                      <div class="relative h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <div class="absolute top-0 left-0 h-full bg-green-600 rounded-full" style="width: 75%"></div>
-                      </div>
-                      
-                      <div class="mt-4 grid grid-cols-3 gap-4 text-center text-sm">
-                        <div>
-                          <p class="text-gray-500">Planned</p>
-                          <p class="font-medium text-gray-900">Q1 2024</p>
-                        </div>
-                        <div>
-                          <p class="text-gray-500">Current</p>
-                          <p class="font-medium text-gray-900">Q3 2024</p>
-                        </div>
-                        <div>
-                          <p class="text-gray-500">Target</p>
-                          <p class="font-medium text-gray-900">Q4 2024</p>
-                        </div>
-                      </div>
-                    </div>
+                    
                   </div>
 
                   <!-- Attachments -->
@@ -761,16 +647,9 @@
             <!-- Preparation Tab -->
             <ng-container *ngSwitchCase="'Preparation'">
               <section
-                class="p-6 sm:p-8 bg-primary rounded-apple-lg shadow-apple-md overflow-hidden"
+                class="p-2 sm:p-4 bg-primary mt-6 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg"
               >
-                <div class="flex items-center justify-between mb-6">
-                  <h3
-                    class="text-2xl font-semibold text-accent flex items-center"
-                  >
-                    <i class="bi bi-clipboard-check mr-3 text-secondary"></i>
-                    Preparation Data
-                  </h3>
-                </div>
+               
 
                 <div *ngIf="project$ | async as project" class="space-y-8">
                   <!-- Basic Data Section -->
@@ -779,12 +658,8 @@
                     <div class="flex items-center justify-between mb-6">
                       <div class="flex items-center gap-3">
                         <i class="bi bi-info-circle-fill text-2xl text-blue-600"></i>
-                        <h2 class="text-xl font-semibold text-gray-900">Basic Information</h2>
+                        <h2 class="text-xl font-semibold text-gray-900">Basic Data</h2>
                       </div>
-                      <span class="px-3 py-1 text-sm bg-blue-50 text-blue-700 rounded-full" *ngIf="project.stages?.preparation?.basicData?.projectBudgetApprovalDate">
-                        <i class="bi bi-clock-history mr-2"></i>
-                        Last Updated: {{ project.stages?.preparation?.basicData?.projectBudgetApprovalDate | date:'mediumDate':'UTC' }}
-                      </span>
                     </div>
                   
                     <!-- Main Content Grid -->
@@ -855,61 +730,95 @@
                     <!-- Attachments Section -->
                     <!-- Attachments Section -->
                     <div class="mt-8 pt-6 border-t border-gray-200" *ngIf="preparationAttachments?.length">
-                      <div class="flex items-center justify-between mb-6">
-                        <h3 class="text-lg font-semibold text-gray-800 flex items-center gap-2">
-                          <i class="bi bi-folder2-open text-blue-600"></i>
-                          Project Documents
-                        </h3>
-                        <span class="text-sm text-gray-500">{{ preparationAttachments.length }} documents</span>
-                      </div>
-                      
-                      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div *ngFor="let doc of preparationAttachments" 
-                             class="group relative bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300">
-                          <!-- Document Header -->
-                          <div class="p-4 border-b border-gray-100">
-                            <div class="flex items-start justify-between">
-                              <div class="flex items-center gap-3">
-                                <div class="p-2 bg-blue-50 rounded-lg">
-                                  <i class="bi bi-file-pdf text-xl text-blue-600"></i>
-                                </div>
-                                <h4 class="text-base font-medium text-gray-900 truncate max-w-[200px]">
-                                  {{ doc.title }}
-                                </h4>
-                              </div>
-                            </div>
+                      <!-- Header with Interactive Counter -->
+                      <div class="flex items-center justify-between mb-8">
+                        <div class="flex items-center gap-3">
+                          <div class="p-2 bg-blue-50 rounded-lg">
+                            <i class="bi bi-folder2-open text-xl text-blue-600"></i>
                           </div>
-                    
-                          <!-- Document Content -->
-                          <div class="p-4">
-                            <p *ngIf="doc.description" 
-                               class="text-sm text-gray-600 mb-4 line-clamp-2">
-                              {{ doc.description }}
-                            </p>
-                    
-                            <!-- Action Button -->
-                            <div class="flex justify-end">
-                              <a *ngIf="doc.url" 
-                                 [href]="doc.url" 
-                                 target="_blank" 
-                                 rel="noopener noreferrer"
-                                 class="inline-flex items-center px-4 py-2 rounded-lg bg-gray-50 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-200">
-                                <i class="bi bi-download mr-2"></i>
-                                Download
-                              </a>
-                              <span *ngIf="!doc.url" 
-                                    class="inline-flex items-center px-4 py-2 rounded-lg bg-gray-50 text-gray-400">
-                                <i class="bi bi-lock mr-2"></i>
-                                Not available
-                              </span>
-                            </div>
+                          <div>
+                            <h3 class="text-lg font-semibold text-gray-900">Project Documents</h3>
+                            <p class="text-sm text-gray-500 mt-1">{{ preparationAttachments.length }} documents available</p>
                           </div>
-                    
-                          <!-- Hover Overlay -->
-                          <div class="absolute inset-0 border-2 border-transparent rounded-xl group-hover:border-blue-200 pointer-events-none transition-all duration-300"></div>
+                        </div>
+                        
+                        <!-- Quick Filter -->
+                        <div class="flex items-center gap-2">
+                          <select class="text-sm rounded-lg border-gray-200 focus:ring-blue-500">
+                            <option>All Types</option>
+                            <option>PDF Documents</option>
+                            <option>Images</option>
+                            <option>Others</option>
+                          </select>
                         </div>
                       </div>
-                    </div>
+                    
+                      <!-- Documents List -->
+                      <div class="space-y-4">
+                        <div *ngFor="let doc of preparationAttachments" 
+                             class="group bg-white rounded-xl border border-gray-200 hover:shadow-lg transition-all duration-300">
+                          <div class="p-6">
+                            <div class="flex items-start gap-6">
+                              <!-- Left: Icon -->
+                              <div class="p-3 bg-gray-50 rounded-xl group-hover:bg-blue-50 transition-colors">
+                                <i class="bi bi-file-pdf text-xl text-blue-600"></i>
+                              </div>
+                    
+                              <!-- Middle: Content -->
+                              <!-- Middle: Content -->
+<div class="flex-1 min-w-0 space-y-3">
+  <!-- Title Row -->
+  <div class="flex items-center justify-between">
+    <h4 class="font-medium text-gray-900 truncate max-w-md">{{ doc.title }}</h4>
+  
+  </div>
+
+  <!-- Description Row -->
+  <p *ngIf="doc.description" 
+     class="text-sm text-gray-600 line-clamp-2">
+    {{ doc.description }}
+  </p>
+
+  <!-- Metadata Row -->
+  <div class="flex items-center gap-4 text-sm text-gray-500">
+    <span class="flex items-center gap-1">
+      <i class="bi bi-file-text"></i>
+      500KB
+    </span>
+    <span class="flex items-center gap-1">
+      <i class="bi bi-translate"></i>
+      English
+    </span>
+  </div>
+
+  <!-- Actions Row -->
+  <div class="flex items-center gap-3 pt-2">
+    
+    
+    <a *ngIf="doc.url" 
+    [href]="doc.url" 
+    target="_blank" 
+    rel="noopener noreferrer"
+            class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 
+                                          transition-colors duration-200 text-sm font-medium">
+      <i class="bi bi-download mr-2"></i>
+      Download
+    </a>
+    <span *ngIf="!doc.url" 
+          class="ray-50 text-gray-400">
+      <i class="bi bi-lock mr-2"></i>
+      Not available
+    </span>
+  </div>
+</div>
+                    
+                             
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>inline-flex items-center px-4 py-2 rounded-lg bg-g
                   </section>
 
                   <!-- Climate Finance Data Section -->
@@ -3975,6 +3884,66 @@
 
 
       </div>
+      <!-- Navigation Controls -->
+      <div
+      class="mt-8 sm:mt-10 flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0"
+    >
+     
+
+      <!-- Navigation Buttons -->
+      <nav
+        class="flex items-center space-x-3 animate-apple-fade-in-delay-2"
+        aria-label="Project navigation"
+      >
+        <button
+          *ngIf="previousProject$ | async as previousProject"
+          (click)="navigateToProject(previousProject)"
+          class="group inline-flex items-center px-4 py-2 bg-primary rounded-apple-lg text-accent3 text-sm font-medium transition-all duration-300 hover:bg-accent2/10 focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
+          [attr.aria-label]="
+            'Navigate to previous project: ' + previousProject.name
+          "
+        >
+          <svg
+            class="w-4 h-4 mr-2 transition-transform duration-300 group-hover:-translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"
+            ></path>
+          </svg>
+          Previous
+        </button>
+
+        <button
+          *ngIf="nextProject$ | async as nextProject"
+          (click)="navigateToProject(nextProject)"
+          class="group inline-flex items-center px-4 py-2 bg-primary rounded-apple-lg text-accent3 text-sm font-medium transition-all duration-300 hover:bg-accent6/10 focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
+          [attr.aria-label]="
+            'Navigate to next project: ' + nextProject.name
+          "
+        >
+          Next
+          <svg
+            class="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5l7 7-7 7"
+            ></path>
+          </svg>
+        </button>
+      </nav>
+    </div>
     </div>
   </div>
 </div>
