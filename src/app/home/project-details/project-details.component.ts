@@ -556,6 +556,34 @@ export class ProjectDetailsComponent implements OnInit {
     ["numberOfBeneficiaries", "How many people will benefit."],
   ]);
 
+  identificationAttachments: Attachment[] = [
+    {
+        title: "Feasibility Study",
+        documentType: "Feasibility Study",
+        description: "This document provides a detailed analysis of the project's feasibility, including technical, economic, and environmental considerations.",
+        url: "https://drive.google.com/file/d/1y_BegfpRGMZYmiWXcXJUJOT7RsRWJuK5/view?usp=sharing",
+        type: "PDF",
+    },
+    {
+        title: "Financial Instrument",
+        documentType: "Financial Instrument",
+        description: "This document outlines the financial instruments and mechanisms that will be used to finance the project.",
+        url: "https://drive.google.com/file/d/1TewofMKkqAN5qYzB_2ViGJvS8S8rA5f0/view?usp=sharing",
+        type: "PDF",
+    }
+
+  ];
+
+  identificationAttachmentsInstitutionalSustainability: Attachment[] = [
+    {
+        title: "Policy Coherence Documentation",
+        documentType: "Policy Coherence Documentation",
+        description: "This document shows how the project aligns with national and international sustainability policies.",
+        url: "https://drive.google.com/file/d/1gQas4TGmgJR95Sj51k2RaZ-CFBTjAF5r/view?usp=sharing",
+        type: "PDF",
+    }
+  ];
+
   preparationAttachments: Attachment[] = [
     {
       title: "Environmental and social impact assessment",
@@ -606,6 +634,7 @@ export class ProjectDetailsComponent implements OnInit {
       type: "PDF",
     },
   ];
+
 
   preparationSustainabilityAttachments: Attachment[] = [
     {
