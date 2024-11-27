@@ -20,8 +20,6 @@
           </h1>
         </div>
 
-        
-
         <!-- Decorative Elements -->
         <div
           class="absolute -top-4 -right-4 w-24 h-24 bg-accent6/5 rounded-full blur-xl"
@@ -121,7 +119,6 @@
             <div class="p-6 border-b border-accent2/10">
               <div class="flex items-center justify-between">
                 <h2 class="text-2xl font-bold text-accent3">Project Stages</h2>
-                
               </div>
             </div>
 
@@ -191,15 +188,20 @@
               <section
                 class="p-2 sm:p-4 bg-primary mt-6 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg"
               >
-                
-
                 <!-- Basic Data Section -->
-                <section class="bg-white p-6 rounded-xl shadow-lg" *ngIf="project$ | async as project">
+                <section
+                  class="bg-white p-6 rounded-xl shadow-lg"
+                  *ngIf="project$ | async as project"
+                >
                   <!-- Header -->
                   <div class="flex items-center justify-between mb-8">
                     <div class="flex items-center gap-3">
-                      <i class="bi bi-info-circle-fill text-2xl text-blue-600"></i>
-                      <h3 class="text-xl font-semibold text-gray-900">Basic Data</h3>
+                      <i
+                        class="bi bi-info-circle-fill text-2xl text-blue-600"
+                      ></i>
+                      <h3 class="text-xl font-semibold text-gray-900">
+                        Basic Data
+                      </h3>
                     </div>
                   </div>
 
@@ -212,11 +214,21 @@
                           <!-- Project Name -->
                           <div class="bg-white p-4 rounded-lg shadow-sm">
                             <div class="flex items-start gap-3">
-                              <i class="bi bi-briefcase text-blue-600 text-xl"></i>
+                              <i
+                                class="bi bi-briefcase text-blue-600 text-xl"
+                              ></i>
                               <div>
-                                <p class="text-sm font-medium text-gray-500">Project Name</p>
-                                <h4 class="mt-1 text-lg font-semibold text-gray-900">
-                                  {{ getBasicDataItems(project.stages?.identification?.basicData)["Project Name"] || "" }}
+                                <p class="text-sm font-medium text-gray-500">
+                                  Project Name
+                                </p>
+                                <h4
+                                  class="mt-1 text-lg font-semibold text-gray-900"
+                                >
+                                  {{
+                                    getBasicDataItems(
+                                      project.stages?.identification?.basicData
+                                    )["Project Name"] || ""
+                                  }}
                                 </h4>
                               </div>
                             </div>
@@ -227,9 +239,17 @@
                             <div class="flex items-start gap-3">
                               <i class="bi bi-hash text-indigo-600 text-xl"></i>
                               <div>
-                                <p class="text-sm font-medium text-gray-500">Reference Number</p>
-                                <p class="mt-1 text-base text-gray-900 font-mono">
-                                  {{ getBasicDataItems(project.stages?.identification?.basicData)["Project Reference Number"] || "" }}
+                                <p class="text-sm font-medium text-gray-500">
+                                  Reference Number
+                                </p>
+                                <p
+                                  class="mt-1 text-base text-gray-900 font-mono"
+                                >
+                                  {{
+                                    getBasicDataItems(
+                                      project.stages?.identification?.basicData
+                                    )["Project Reference Number"] || ""
+                                  }}
                                 </p>
                               </div>
                             </div>
@@ -240,11 +260,19 @@
                           <!-- Project Owner -->
                           <div class="bg-white p-4 rounded-lg shadow-sm">
                             <div class="flex items-start gap-3">
-                              <i class="bi bi-person text-green-600 text-xl"></i>
+                              <i
+                                class="bi bi-person text-green-600 text-xl"
+                              ></i>
                               <div>
-                                <p class="text-sm font-medium text-gray-500">Project Owner</p>
+                                <p class="text-sm font-medium text-gray-500">
+                                  Project Owner
+                                </p>
                                 <p class="mt-1 text-base text-gray-900">
-                                  {{ getBasicDataItems(project.stages?.identification?.basicData)["Project Owner"] || "" }}
+                                  {{
+                                    getBasicDataItems(
+                                      project.stages?.identification?.basicData
+                                    )["Project Owner"] || ""
+                                  }}
                                 </p>
                               </div>
                             </div>
@@ -255,9 +283,15 @@
                             <div class="flex items-start gap-3">
                               <i class="bi bi-geo-alt text-red-600 text-xl"></i>
                               <div>
-                                <p class="text-sm font-medium text-gray-500">Location</p>
+                                <p class="text-sm font-medium text-gray-500">
+                                  Location
+                                </p>
                                 <p class="mt-1 text-base text-gray-900">
-                                  {{ getBasicDataItems(project.stages?.identification?.basicData)["Project Location"] || "" }}
+                                  {{
+                                    getBasicDataItems(
+                                      project.stages?.identification?.basicData
+                                    )["Project Location"] || ""
+                                  }}
                                 </p>
                               </div>
                             </div>
@@ -268,32 +302,56 @@
 
                     <!-- Sector Information -->
                     <div class="bg-gray-50 p-4 rounded-lg">
-                      <h4 class="text-sm font-medium text-gray-700 mb-3 flex items-center gap-2">
+                      <h4
+                        class="text-sm font-medium text-gray-700 mb-3 flex items-center gap-2"
+                      >
                         <i class="bi bi-diagram-3 text-purple-600"></i>
                         Sector Classification
                       </h4>
                       <div class="flex flex-wrap gap-2">
-                        <span class="inline-flex items-center px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-sm font-medium">
-                          {{ getBasicDataItems(project.stages?.identification?.basicData)["Sector, Subsector"]?.split(", ")[0] || "" }}
+                        <span
+                          class="inline-flex items-center px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-sm font-medium"
+                        >
+                          {{
+                            getBasicDataItems(
+                              project.stages?.identification?.basicData
+                            )["Sector, Subsector"]?.split(", ")[0] || ""
+                          }}
                         </span>
-                        <span class="inline-flex items-center px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-sm font-medium">
-                          {{ getBasicDataItems(project.stages?.identification?.basicData)["Sector, Subsector"]?.split(", ")[1] || "" }}
+                        <span
+                          class="inline-flex items-center px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-sm font-medium"
+                        >
+                          {{
+                            getBasicDataItems(
+                              project.stages?.identification?.basicData
+                            )["Sector, Subsector"]?.split(", ")[1] || ""
+                          }}
                         </span>
                       </div>
                     </div>
 
                     <!-- Project Details -->
                     <div class="bg-gray-50 p-4 rounded-lg">
-                      <h4 class="text-sm font-medium text-gray-700 mb-4">Project Details</h4>
-                      
+                      <h4 class="text-sm font-medium text-gray-700 mb-4">
+                        Project Details
+                      </h4>
+
                       <!-- Purpose -->
                       <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
                         <div class="flex items-start gap-3">
                           <i class="bi bi-bullseye text-orange-600 text-xl"></i>
                           <div>
-                            <p class="text-sm font-medium text-gray-500">Purpose</p>
-                            <p class="mt-2 text-base text-gray-900 whitespace-pre-line">
-                              {{ getBasicDataItems(project.stages?.identification?.basicData)["Purpose"] || "" }}
+                            <p class="text-sm font-medium text-gray-500">
+                              Purpose
+                            </p>
+                            <p
+                              class="mt-2 text-base text-gray-900 whitespace-pre-line"
+                            >
+                              {{
+                                getBasicDataItems(
+                                  project.stages?.identification?.basicData
+                                )["Purpose"] || ""
+                              }}
                             </p>
                           </div>
                         </div>
@@ -304,9 +362,18 @@
                         <div class="flex items-start gap-3">
                           <i class="bi bi-card-text text-teal-600 text-xl"></i>
                           <div>
-                            <p class="text-sm font-medium text-gray-500">Description</p>
-                            <p class="mt-2 text-base text-gray-900 whitespace-pre-line">
-                              {{ getBasicDataItems(project.stages?.identification?.basicData)["Project Description"] || "No description available" }}
+                            <p class="text-sm font-medium text-gray-500">
+                              Description
+                            </p>
+                            <p
+                              class="mt-2 text-base text-gray-900 whitespace-pre-line"
+                            >
+                              {{
+                                getBasicDataItems(
+                                  project.stages?.identification?.basicData
+                                )["Project Description"] ||
+                                  "No description available"
+                              }}
                             </p>
                           </div>
                         </div>
@@ -316,14 +383,25 @@
                     <!-- Feasibility Study -->
                     <div class="bg-gray-50 p-4 rounded-lg">
                       <div class="flex items-start gap-3">
-                        <i class="bi bi-file-earmark-text text-blue-600 text-xl"></i>
+                        <i
+                          class="bi bi-file-earmark-text text-blue-600 text-xl"
+                        ></i>
                         <div class="w-full">
-                          <h4 class="text-sm font-medium text-gray-700">Feasibility Study</h4>
+                          <h4 class="text-sm font-medium text-gray-700">
+                            Feasibility Study
+                          </h4>
                           <div class="mt-3 bg-white p-4 rounded-lg shadow-sm">
                             <p class="text-base text-gray-900 mb-4">
-                              {{ getBasicDataItems(project.stages?.identification?.basicData)["Project Brief or Feasibility Study"] || "No study available" }}
+                              {{
+                                getBasicDataItems(
+                                  project.stages?.identification?.basicData
+                                )["Project Brief or Feasibility Study"] ||
+                                  "No study available"
+                              }}
                             </p>
-                            <div class="flex items-center justify-between pt-4 border-t">
+                            <div
+                              class="flex items-center justify-between pt-4 border-t"
+                            >
                               <div class="text-sm text-gray-500">
                                 <p class="flex items-center gap-2">
                                   <i class="bi bi-file-pdf"></i>
@@ -334,8 +412,9 @@
                                   Language: English
                                 </p>
                               </div>
-                              <button class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 
-                                          transition-colors duration-200 text-sm font-medium">
+                              <button
+                                class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 text-sm font-medium"
+                              >
                                 <i class="bi bi-download mr-2"></i>
                                 Download Study
                               </button>
@@ -347,26 +426,44 @@
                   </div>
 
                   <!-- Attachments Section -->
-                  <div *ngIf="project.stages?.identification?.basicData?.attachments?.length" 
-                      class="mt-8 pt-6 border-t border-gray-200">
-                    <h4 class="text-sm font-medium text-gray-700 mb-4 flex items-center gap-2">
+                  <div
+                    *ngIf="
+                      project.stages?.identification?.basicData?.attachments
+                        ?.length
+                    "
+                    class="mt-8 pt-6 border-t border-gray-200"
+                  >
+                    <h4
+                      class="text-sm font-medium text-gray-700 mb-4 flex items-center gap-2"
+                    >
                       <i class="bi bi-paperclip"></i>
                       Supporting Documents
                     </h4>
-                    <app-attachment-list [attachments]="project.stages.identification.basicData.attachments">
+                    <app-attachment-list
+                      [attachments]="
+                        project.stages.identification.basicData.attachments
+                      "
+                    >
                     </app-attachment-list>
                   </div>
                 </section>
 
                 <!-- Climate Finance Data Section -->
-                <section class="bg-white p-6 rounded-xl shadow-lg" *ngIf="project$ | async as project">
+                <section
+                  class="bg-white p-6 rounded-xl shadow-lg"
+                  *ngIf="project$ | async as project"
+                >
                   <!-- Header -->
                   <div class="flex items-center justify-between mb-8">
                     <div class="flex items-center gap-3">
                       <i class="bi bi-globe text-2xl text-green-600"></i>
-                      <h3 class="text-xl font-semibold text-gray-900">Climate Finance Data</h3>
+                      <h3 class="text-xl font-semibold text-gray-900">
+                        Climate Finance Data
+                      </h3>
                     </div>
-                    <span class="px-3 py-1 text-sm bg-green-50 text-green-700 rounded-full">
+                    <span
+                      class="px-3 py-1 text-sm bg-green-50 text-green-700 rounded-full"
+                    >
                       <i class="bi bi-leaf-fill mr-2"></i>
                       Climate Impact
                     </span>
@@ -380,13 +477,24 @@
                         <!-- Climate Objective -->
                         <div class="bg-white p-4 rounded-lg shadow-sm">
                           <div class="flex items-start gap-3">
-                            <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-green-100 rounded-lg">
-                              <i class="bi bi-bullseye text-xl text-green-600"></i>
+                            <div
+                              class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-green-100 rounded-lg"
+                            >
+                              <i
+                                class="bi bi-bullseye text-xl text-green-600"
+                              ></i>
                             </div>
                             <div>
-                              <h4 class="text-sm font-medium text-gray-500">Climate Objective</h4>
+                              <h4 class="text-sm font-medium text-gray-500">
+                                Climate Objective
+                              </h4>
                               <p class="mt-2 text-base text-gray-900">
-                                {{ getClimateFinanceDataItems(project.stages?.identification?.climateFinanceData)["Climate Objective"] || "Not specified" }}
+                                {{
+                                  getClimateFinanceDataItems(
+                                    project.stages?.identification
+                                      ?.climateFinanceData
+                                  )["Climate Objective"] || "Not specified"
+                                }}
                               </p>
                             </div>
                           </div>
@@ -395,19 +503,29 @@
                         <!-- Financial Instrument -->
                         <div class="bg-white p-4 rounded-lg shadow-sm">
                           <div class="flex items-start gap-3">
-                            <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-blue-100 rounded-lg">
-                              <i class="bi bi-cash-stack text-xl text-blue-600"></i>
+                            <div
+                              class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-blue-100 rounded-lg"
+                            >
+                              <i
+                                class="bi bi-cash-stack text-xl text-blue-600"
+                              ></i>
                             </div>
                             <div>
-                              <h4 class="text-sm font-medium text-gray-500">Financial Instrument</h4>
+                              <h4 class="text-sm font-medium text-gray-500">
+                                Financial Instrument
+                              </h4>
                               <div class="mt-2 space-y-2">
                                 <div class="flex items-center gap-2">
                                   <i class="bi bi-wallet2 text-blue-600"></i>
                                   <span class="text-gray-900">Loan</span>
                                 </div>
                                 <div class="flex items-center gap-2">
-                                  <i class="bi bi-check-circle-fill text-emerald-500"></i>
-                                  <span class="text-gray-900">Concessional</span>
+                                  <i
+                                    class="bi bi-check-circle-fill text-emerald-500"
+                                  ></i>
+                                  <span class="text-gray-900"
+                                    >Concessional</span
+                                  >
                                 </div>
                               </div>
                             </div>
@@ -418,16 +536,29 @@
 
                     <!-- Transformation and Decision Making -->
                     <div class="bg-gray-50 p-4 rounded-lg">
-                      <h4 class="text-sm font-medium text-gray-700 mb-4">Implementation Strategy</h4>
-                      
+                      <h4 class="text-sm font-medium text-gray-700 mb-4">
+                        Implementation Strategy
+                      </h4>
+
                       <!-- Climate Transformation -->
                       <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
                         <div class="flex items-start gap-3">
-                          <i class="bi bi-arrow-repeat text-purple-600 text-xl"></i>
+                          <i
+                            class="bi bi-arrow-repeat text-purple-600 text-xl"
+                          ></i>
                           <div>
-                            <p class="text-sm font-medium text-gray-500">Climate Transformation</p>
-                            <p class="mt-2 text-base text-gray-900 whitespace-pre-line">
-                              {{ getClimateFinanceDataItems(project.stages?.identification?.climateFinanceData)["Climate Transformation"] || "Not specified" }}
+                            <p class="text-sm font-medium text-gray-500">
+                              Climate Transformation
+                            </p>
+                            <p
+                              class="mt-2 text-base text-gray-900 whitespace-pre-line"
+                            >
+                              {{
+                                getClimateFinanceDataItems(
+                                  project.stages?.identification
+                                    ?.climateFinanceData
+                                )["Climate Transformation"] || "Not specified"
+                              }}
                             </p>
                           </div>
                         </div>
@@ -436,11 +567,21 @@
                       <!-- Decision Making -->
                       <div class="bg-white p-4 rounded-lg shadow-sm">
                         <div class="flex items-start gap-3">
-                          <i class="bi bi-clipboard-data text-indigo-600 text-xl"></i>
+                          <i
+                            class="bi bi-clipboard-data text-indigo-600 text-xl"
+                          ></i>
                           <div>
-                            <p class="text-sm font-medium text-gray-500">Decision Making Process</p>
+                            <p class="text-sm font-medium text-gray-500">
+                              Decision Making Process
+                            </p>
                             <p class="mt-2 text-base text-gray-900">
-                              {{ getClimateFinanceDataItems(project.stages?.identification?.climateFinanceData)["Climate Finance Decision-Making"] || "Not specified" }}
+                              {{
+                                getClimateFinanceDataItems(
+                                  project.stages?.identification
+                                    ?.climateFinanceData
+                                )["Climate Finance Decision-Making"] ||
+                                  "Not specified"
+                              }}
                             </p>
                           </div>
                         </div>
@@ -449,7 +590,9 @@
 
                     <!-- International Agreements -->
                     <div class="bg-gray-50 p-4 rounded-lg">
-                      <h4 class="text-sm font-medium text-gray-700 mb-4 flex items-center gap-2">
+                      <h4
+                        class="text-sm font-medium text-gray-700 mb-4 flex items-center gap-2"
+                      >
                         <i class="bi bi-globe-americas text-blue-600"></i>
                         International Climate Commitments
                       </h4>
@@ -460,9 +603,19 @@
                           <div class="flex items-start gap-3">
                             <i class="bi bi-flag text-orange-600 text-xl"></i>
                             <div>
-                              <p class="text-sm font-medium text-gray-500">Nationally Determined Contributions</p>
-                              <p class="mt-2 text-base text-gray-900 whitespace-pre-line">
-                                {{ getClimateFinanceDataItems(project.stages?.identification?.climateFinanceData)["Nationally Determined Contributions"] || "Not specified" }}
+                              <p class="text-sm font-medium text-gray-500">
+                                Nationally Determined Contributions
+                              </p>
+                              <p
+                                class="mt-2 text-base text-gray-900 whitespace-pre-line"
+                              >
+                                {{
+                                  getClimateFinanceDataItems(
+                                    project.stages?.identification
+                                      ?.climateFinanceData
+                                  )["Nationally Determined Contributions"] ||
+                                    "Not specified"
+                                }}
                               </p>
                             </div>
                           </div>
@@ -473,174 +626,290 @@
                           <div class="flex items-start gap-3">
                             <i class="bi bi-globe text-green-600 text-xl"></i>
                             <div>
-                              <p class="text-sm font-medium text-gray-500">Paris Agreement Alignment</p>
-                              <p class="mt-2 text-base text-gray-900 whitespace-pre-line">
-                                {{ getClimateFinanceDataItems(project.stages?.identification?.climateFinanceData)["Paris Agreement"] || "Not specified" }}
+                              <p class="text-sm font-medium text-gray-500">
+                                Paris Agreement Alignment
+                              </p>
+                              <p
+                                class="mt-2 text-base text-gray-900 whitespace-pre-line"
+                              >
+                                {{
+                                  getClimateFinanceDataItems(
+                                    project.stages?.identification
+                                      ?.climateFinanceData
+                                  )["Paris Agreement"] || "Not specified"
+                                }}
                               </p>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-
-                    
                   </div>
 
                   <!-- Attachments -->
-                  <div *ngIf="project.stages?.identification?.climateFinanceData?.attachments?.length" 
-                      class="mt-8 pt-6 border-t border-gray-200">
-                    <h4 class="text-sm font-medium text-gray-700 mb-4 flex items-center gap-2">
+                  <div
+                    *ngIf="
+                      project.stages?.identification?.climateFinanceData
+                        ?.attachments?.length
+                    "
+                    class="mt-8 pt-6 border-t border-gray-200"
+                  >
+                    <h4
+                      class="text-sm font-medium text-gray-700 mb-4 flex items-center gap-2"
+                    >
                       <i class="bi bi-paperclip"></i>
                       Climate Finance Documentation
                     </h4>
-                    <app-attachment-list [attachments]="project.stages.identification.climateFinanceData.attachments">
+                    <app-attachment-list
+                      [attachments]="
+                        project.stages.identification.climateFinanceData
+                          .attachments
+                      "
+                    >
                     </app-attachment-list>
                   </div>
                 </section>
 
                 <!-- Institutional Sustainability Data Section -->
-              <section class="bg-white p-6 pt-20 rounded-xl shadow-lg" *ngIf="project$ | async as project">
-                <!-- Header -->
-                <div class="flex items-center justify-between mb-8">
-                  <div class="flex items-center gap-3">
-                    <i class="bi bi-building text-2xl text-purple-600"></i>
-                    <h3 class="text-xl font-semibold text-gray-900">Institutional Sustainability Data</h3>
+                <section
+                  class="bg-white p-6 pt-20 rounded-xl shadow-lg"
+                  *ngIf="project$ | async as project"
+                >
+                  <!-- Header -->
+                  <div class="flex items-center justify-between mb-8">
+                    <div class="flex items-center gap-3">
+                      <i class="bi bi-building text-2xl text-purple-600"></i>
+                      <h3 class="text-xl font-semibold text-gray-900">
+                        Institutional Sustainability Data
+                      </h3>
+                    </div>
+                    <span
+                      class="px-3 py-1 text-sm bg-purple-50 text-purple-700 rounded-full"
+                    >
+                      <i class="bi bi-shield-check mr-2"></i>
+                      Governance & Transparency
+                    </span>
                   </div>
-                  <span class="px-3 py-1 text-sm bg-purple-50 text-purple-700 rounded-full">
-                    <i class="bi bi-shield-check mr-2"></i>
-                    Governance & Transparency
-                  </span>
-                </div>
 
-                <!-- Main Content -->
-                <div class="space-y-8">
-                  <!-- Information Request Metrics -->
-                  <div class="bg-gray-50 p-4 rounded-lg">
-                    <h4 class="text-base font-medium text-gray-700 mb-4">Information Request Statistics</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <!-- Total Requests -->
-                      <div class="bg-white p-4 rounded-lg shadow-sm">
-                        <div class="flex items-center justify-between">
-                          <div>
-                            <p class="text-sm text-gray-500">Total Requests</p>
-                            <p class="mt-1 text-2xl font-bold text-purple-600">
-                              {{ getInstitutionalSustainabilityDataItems(project.stages?.identification?.institutionalSustainabilityData)["Number of Freedom of Information Requests"] || "0" }}
-                            </p>
-                          </div>
-                          <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                            <i class="bi bi-file-text text-xl text-purple-600"></i>
+                  <!-- Main Content -->
+                  <div class="space-y-8">
+                    <!-- Information Request Metrics -->
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                      <h4 class="text-base font-medium text-gray-700 mb-4">
+                        Information Request Statistics
+                      </h4>
+                      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- Total Requests -->
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                          <div class="flex items-center justify-between">
+                            <div>
+                              <p class="text-sm text-gray-500">
+                                Total Requests
+                              </p>
+                              <p
+                                class="mt-1 text-2xl font-bold text-purple-600"
+                              >
+                                {{
+                                  getInstitutionalSustainabilityDataItems(
+                                    project.stages?.identification
+                                      ?.institutionalSustainabilityData
+                                  )[
+                                    "Number of Freedom of Information Requests"
+                                  ] || "0"
+                                }}
+                              </p>
+                            </div>
+                            <div
+                              class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center"
+                            >
+                              <i
+                                class="bi bi-file-text text-xl text-purple-600"
+                              ></i>
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      <!-- Answered Requests -->
-                      <div class="bg-white p-4 rounded-lg shadow-sm">
-                        <div class="flex items-center justify-between">
-                          <div>
-                            <p class="text-sm text-gray-500">Answered Requests</p>
-                            <p class="mt-1 text-2xl font-bold text-green-600">
-                              {{ getInstitutionalSustainabilityDataItems(project.stages?.identification?.institutionalSustainabilityData)["Number of Freedom of Information Answers"] || "0" }}
-                            </p>
-                          </div>
-                          <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                            <i class="bi bi-check-circle text-xl text-green-600"></i>
+                        <!-- Answered Requests -->
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                          <div class="flex items-center justify-between">
+                            <div>
+                              <p class="text-sm text-gray-500">
+                                Answered Requests
+                              </p>
+                              <p class="mt-1 text-2xl font-bold text-green-600">
+                                {{
+                                  getInstitutionalSustainabilityDataItems(
+                                    project.stages?.identification
+                                      ?.institutionalSustainabilityData
+                                  )[
+                                    "Number of Freedom of Information Answers"
+                                  ] || "0"
+                                }}
+                              </p>
+                            </div>
+                            <div
+                              class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center"
+                            >
+                              <i
+                                class="bi bi-check-circle text-xl text-green-600"
+                              ></i>
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      <!-- Response Rate -->
-                      <div class="bg-white p-4 rounded-lg shadow-sm">
-                        <div class="flex items-center justify-between">
-                          <div>
-                            <p class="text-sm text-gray-500">Response Rate</p>
-                            <p class="mt-1 text-2xl font-bold text-blue-600">
-                              {{ calculateResponseRate(
-                                  getInstitutionalSustainabilityDataItems(project.stages?.identification?.institutionalSustainabilityData)["Number of Freedom of Information Answers"],
-                                  getInstitutionalSustainabilityDataItems(project.stages?.identification?.institutionalSustainabilityData)["Number of Freedom of Information Requests"]
-                                ) }}%
-                            </p>
-                          </div>
-                          <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                            <i class="bi bi-graph-up text-xl text-blue-600"></i>
+                        <!-- Response Rate -->
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                          <div class="flex items-center justify-between">
+                            <div>
+                              <p class="text-sm text-gray-500">Response Rate</p>
+                              <p class="mt-1 text-2xl font-bold text-blue-600">
+                                {{
+                                  calculateResponseRate(
+                                    getInstitutionalSustainabilityDataItems(
+                                      project.stages?.identification
+                                        ?.institutionalSustainabilityData
+                                    )[
+                                      "Number of Freedom of Information Answers"
+                                    ],
+                                    getInstitutionalSustainabilityDataItems(
+                                      project.stages?.identification
+                                        ?.institutionalSustainabilityData
+                                    )[
+                                      "Number of Freedom of Information Requests"
+                                    ]
+                                  )
+                                }}%
+                              </p>
+                            </div>
+                            <div
+                              class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center"
+                            >
+                              <i
+                                class="bi bi-graph-up text-xl text-blue-600"
+                              ></i>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  <!-- Policy Coherence Section -->
-                  <div class="bg-gray-50 p-4 rounded-lg">
-                    <h4 class="text-base font-medium text-gray-700 mb-4">Policy Documentation</h4>
-                    <div class="bg-white p-4 rounded-lg shadow-sm">
-                      <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0 w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
-                          <i class="bi bi-files text-xl text-indigo-600"></i>
+                    <!-- Policy Coherence Section -->
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                      <h4 class="text-base font-medium text-gray-700 mb-4">
+                        Policy Documentation
+                      </h4>
+                      <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <div class="flex items-start gap-4">
+                          <div
+                            class="flex-shrink-0 w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center"
+                          >
+                            <i class="bi bi-files text-xl text-indigo-600"></i>
+                          </div>
+                          <div class="flex-grow">
+                            <h5 class="text-sm font-medium text-gray-700">
+                              Policy Coherence Documentation
+                            </h5>
+                            <p class="mt-2 text-sm text-gray-600 mb-4">
+                              Official documentation detailing policy alignment
+                              and coherence strategies
+                            </p>
+                            <button
+                              class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-200 text-sm font-medium"
+                            >
+                              <i class="bi bi-download mr-2"></i>
+                              Download Documentation
+                            </button>
+                          </div>
                         </div>
-                        <div class="flex-grow">
-                          <h5 class="text-sm font-medium text-gray-700">Policy Coherence Documentation</h5>
-                          <p class="mt-2 text-sm text-gray-600 mb-4">
-                            Official documentation detailing policy alignment and coherence strategies
-                          </p>
-                          <button class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 
-                                      transition-colors duration-200 text-sm font-medium">
-                            <i class="bi bi-download mr-2"></i>
-                            Download Documentation
+                      </div>
+                    </div>
+
+                    <!-- Lobbying Activities -->
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                      <h4 class="text-base font-medium text-gray-700 mb-4">
+                        Lobbying Activities
+                      </h4>
+                      <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <div class="flex items-center justify-between mb-4">
+                          <div class="flex items-center gap-3">
+                            <div
+                              class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center"
+                            >
+                              <i
+                                class="bi bi-people text-xl text-orange-600"
+                              ></i>
+                            </div>
+                            <div>
+                              <p class="text-sm text-gray-500">
+                                Total Activities
+                              </p>
+                              <p class="text-xl font-bold text-gray-900">
+                                {{
+                                  getInstitutionalSustainabilityDataItems(
+                                    project.stages?.identification
+                                      ?.institutionalSustainabilityData
+                                  )["Number of Lobbying Activities"] || "0"
+                                }}
+                              </p>
+                            </div>
+                          </div>
+                          <button
+                            class="text-sm text-blue-600 hover:text-blue-800 font-medium"
+                          >
+                            View Details
                           </button>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  <!-- Lobbying Activities -->
-                  <div class="bg-gray-50 p-4 rounded-lg">
-                    <h4 class="text-base font-medium text-gray-700 mb-4">Lobbying Activities</h4>
-                    <div class="bg-white p-4 rounded-lg shadow-sm">
-                      <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center gap-3">
-                          <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
-                            <i class="bi bi-people text-xl text-orange-600"></i>
-                          </div>
-                          <div>
-                            <p class="text-sm text-gray-500">Total Activities</p>
-                            <p class="text-xl font-bold text-gray-900">
-                              {{ getInstitutionalSustainabilityDataItems(project.stages?.identification?.institutionalSustainabilityData)["Number of Lobbying Activities"] || "0" }}
-                            </p>
-                          </div>
+                    <!-- Detailed Information -->
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                      <h4
+                        class="text-base font-medium text-gray-700 mb-4 flex items-center gap-2"
+                      >
+                        <i class="bi bi-info-circle text-blue-600"></i>
+                        Detailed Information Requests
+                      </h4>
+                      <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                          <p class="text-gray-900 whitespace-pre-line">
+                            {{
+                              getInstitutionalSustainabilityDataItems(
+                                project.stages?.identification
+                                  ?.institutionalSustainabilityData
+                              )[
+                                "Freedom of Information Requests and Answers"
+                              ] || "No detailed information available"
+                            }}
+                          </p>
                         </div>
-                        <button class="text-sm text-blue-600 hover:text-blue-800 font-medium">
-                          View Details
-                        </button>
                       </div>
                     </div>
                   </div>
 
-                  <!-- Detailed Information -->
-                  <div class="bg-gray-50 p-4 rounded-lg">
-                    <h4 class="text-base font-medium text-gray-700 mb-4 flex items-center gap-2">
-                      <i class="bi bi-info-circle text-blue-600"></i>
-                      Detailed Information Requests
+                  <!-- Attachments -->
+                  <div
+                    *ngIf="
+                      project.stages?.identification
+                        ?.institutionalSustainabilityData?.attachments?.length
+                    "
+                    class="mt-8 pt-6 border-t border-gray-200"
+                  >
+                    <h4
+                      class="text-sm font-medium text-gray-700 mb-4 flex items-center gap-2"
+                    >
+                      <i class="bi bi-paperclip"></i>
+                      Supporting Documentation
                     </h4>
-                    <div class="space-y-4">
-                      <div class="bg-white p-4 rounded-lg shadow-sm">
-                        <p class="text-gray-900 whitespace-pre-line">
-                          {{ getInstitutionalSustainabilityDataItems(project.stages?.identification?.institutionalSustainabilityData)["Freedom of Information Requests and Answers"] || "No detailed information available" }}
-                        </p>
-                      </div>
-                    </div>
+                    <app-attachment-list
+                      [attachments]="
+                        project.stages.identification
+                          .institutionalSustainabilityData.attachments
+                      "
+                    >
+                    </app-attachment-list>
                   </div>
-                </div>
-
-                <!-- Attachments -->
-                <div *ngIf="project.stages?.identification?.institutionalSustainabilityData?.attachments?.length" 
-                    class="mt-8 pt-6 border-t border-gray-200">
-                  <h4 class="text-sm font-medium text-gray-700 mb-4 flex items-center gap-2">
-                    <i class="bi bi-paperclip"></i>
-                    Supporting Documentation
-                  </h4>
-                  <app-attachment-list [attachments]="project.stages.identification.institutionalSustainabilityData.attachments">
-                  </app-attachment-list>
-                </div>
-              </section>
+                </section>
               </section>
             </ng-container>
 
@@ -649,179 +918,245 @@
               <section
                 class="p-2 sm:p-4 bg-primary mt-6 rounded-apple-lg shadow-apple-md overflow-hidden transition-all duration-300 hover:shadow-apple-lg"
               >
-               
-
                 <div *ngIf="project$ | async as project" class="space-y-8">
                   <!-- Basic Data Section -->
-                  <section class="bg-white p-6 rounded-xl shadow-lg" *ngIf="project$ | async as project">
+                  <section
+                    class="bg-white p-6 rounded-xl shadow-lg"
+                    *ngIf="project$ | async as project"
+                  >
                     <!-- Section Header -->
                     <div class="flex items-center justify-between mb-6">
                       <div class="flex items-center gap-3">
-                        <i class="bi bi-info-circle-fill text-2xl text-blue-600"></i>
-                        <h2 class="text-xl font-semibold text-gray-900">Basic Data</h2>
+                        <i
+                          class="bi bi-info-circle-fill text-2xl text-blue-600"
+                        ></i>
+                        <h2 class="text-xl font-semibold text-gray-900">
+                          Basic Data
+                        </h2>
                       </div>
                     </div>
-                  
+
                     <!-- Main Content Grid -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <!-- Project Scope -->
-                      <div class="group relative bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200">
+                      <div
+                        class="group relative bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200"
+                      >
                         <div class="flex items-start gap-3">
                           <i class="bi bi-bullseye text-blue-600 mt-1"></i>
                           <div class="flex-1">
                             <div class="flex items-center">
-                              <h3 class="text-sm font-medium text-gray-600">Project Scope</h3>
+                              <h3 class="text-sm font-medium text-gray-600">
+                                Project Scope
+                              </h3>
                               <div class="tooltip ml-2">
-                                <i class="bi bi-question-circle text-gray-400 hover:text-gray-600"></i>
+                                <i
+                                  class="bi bi-question-circle text-gray-400 hover:text-gray-600"
+                                ></i>
                                 <span class="tooltip-text">
-                                  This outlines what the project aims to achieve and its limits, helping everyone know what's in and out of the project's focus.
+                                  This outlines what the project aims to achieve
+                                  and its limits, helping everyone know what's
+                                  in and out of the project's focus.
                                 </span>
                               </div>
                             </div>
-                            <p class="mt-1 text-base text-gray-900">{{ project.stages?.preparation?.basicData?.projectScope || 'Not specified' }}</p>
+                            <p class="mt-1 text-base text-gray-900">
+                              {{
+                                project.stages?.preparation?.basicData
+                                  ?.projectScope || "Not specified"
+                              }}
+                            </p>
                           </div>
                         </div>
                       </div>
-                  
+
                       <!-- Contact Details -->
-                      <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200">
+                      <div
+                        class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200"
+                      >
                         <div class="flex items-start gap-3">
                           <i class="bi bi-envelope text-green-600 mt-1"></i>
                           <div class="flex-1">
-                            <h3 class="text-sm font-medium text-gray-600">Contact Details</h3>
-                            <a [href]="'mailto:' + project.stages?.preparation?.basicData?.contactDetails" 
-                               class="mt-1 text-base text-blue-600 hover:text-blue-800 hover:underline">
-                              {{ project.stages?.preparation?.basicData?.contactDetails || 'Not available' }}
+                            <h3 class="text-sm font-medium text-gray-600">
+                              Contact Details
+                            </h3>
+                            <a
+                              [href]="
+                                'mailto:' +
+                                project.stages?.preparation?.basicData
+                                  ?.contactDetails
+                              "
+                              class="mt-1 text-base text-blue-600 hover:text-blue-800 hover:underline"
+                            >
+                              {{
+                                project.stages?.preparation?.basicData
+                                  ?.contactDetails || "Not available"
+                              }}
                             </a>
                           </div>
                         </div>
                       </div>
-                  
+
                       <!-- Budget Information -->
-                      <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200">
+                      <div
+                        class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200"
+                      >
                         <div class="flex items-start gap-3">
                           <i class="bi bi-cash-stack text-purple-600 mt-1"></i>
                           <div class="flex-1">
-                            <h3 class="text-sm font-medium text-gray-600">Project Budget</h3>
+                            <h3 class="text-sm font-medium text-gray-600">
+                              Project Budget
+                            </h3>
                             <p class="mt-1 text-lg font-semibold text-gray-900">
-                              {{ project.stages?.preparation?.basicData?.projectBudget || 'Not specified' }}
+                              {{
+                                project.stages?.preparation?.basicData
+                                  ?.projectBudget || "Not specified"
+                              }}
                             </p>
-                            <p class="text-xs text-gray-500 mt-1" *ngIf="project.stages?.preparation?.basicData?.projectBudgetApprovalDate">
-                              Approved on {{ project.stages?.preparation?.basicData?.projectBudgetApprovalDate | date:'longDate':'UTC' }}
+                            <p
+                              class="text-xs text-gray-500 mt-1"
+                              *ngIf="
+                                project.stages?.preparation?.basicData
+                                  ?.projectBudgetApprovalDate
+                              "
+                            >
+                              Approved on
+                              {{
+                                project.stages?.preparation?.basicData
+                                  ?.projectBudgetApprovalDate
+                                  | date : "longDate" : "UTC"
+                              }}
                             </p>
                           </div>
                         </div>
                       </div>
-                  
+
                       <!-- Funding Sources -->
-                      <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200">
+                      <div
+                        class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200"
+                      >
                         <div class="flex items-start gap-3">
                           <i class="bi bi-bank text-orange-600 mt-1"></i>
                           <div class="flex-1">
-                            <h3 class="text-sm font-medium text-gray-600">Funding Sources</h3>
+                            <h3 class="text-sm font-medium text-gray-600">
+                              Funding Sources
+                            </h3>
                             <p class="mt-1 text-base text-gray-900">
-                              {{ project.stages?.preparation?.basicData?.fundingSources || 'Not specified' }}
+                              {{
+                                project.stages?.preparation?.basicData
+                                  ?.fundingSources || "Not specified"
+                              }}
                             </p>
                           </div>
                         </div>
                       </div>
                     </div>
-                  
+
                     <!-- Attachments Section -->
-                    <!-- Attachments Section -->
-                    <div class="mt-8 pt-6 border-t border-gray-200" *ngIf="preparationAttachments?.length">
+                    <div
+                      class="mt-8 pt-6 border-t border-gray-200"
+                      *ngIf="preparationAttachments?.length"
+                    >
                       <!-- Header with Interactive Counter -->
                       <div class="flex items-center justify-between mb-8">
                         <div class="flex items-center gap-3">
                           <div class="p-2 bg-blue-50 rounded-lg">
-                            <i class="bi bi-folder2-open text-xl text-blue-600"></i>
+                            <i
+                              class="bi bi-folder2-open text-xl text-blue-600"
+                            ></i>
                           </div>
                           <div>
-                            <h3 class="text-lg font-semibold text-gray-900">Project Documents</h3>
-                            <p class="text-sm text-gray-500 mt-1">{{ preparationAttachments.length }} documents available</p>
+                            <h3 class="text-lg font-semibold text-gray-900">
+                              Project Documents
+                            </h3>
+                            <p class="text-sm text-gray-500 mt-1">
+                              {{ preparationAttachments.length }} documents
+                              available
+                            </p>
                           </div>
                         </div>
+
                         
-                        <!-- Quick Filter -->
-                        <div class="flex items-center gap-2">
-                          <select class="text-sm rounded-lg border-gray-200 focus:ring-blue-500">
-                            <option>All Types</option>
-                            <option>PDF Documents</option>
-                            <option>Images</option>
-                            <option>Others</option>
-                          </select>
-                        </div>
                       </div>
-                    
+
                       <!-- Documents List -->
                       <div class="space-y-4">
-                        <div *ngFor="let doc of preparationAttachments" 
-                             class="group bg-white rounded-xl border border-gray-200 hover:shadow-lg transition-all duration-300">
+                        <div
+                          *ngFor="let doc of preparationAttachments"
+                          class="group bg-white rounded-xl border border-gray-200 hover:shadow-lg transition-all duration-300"
+                        >
                           <div class="p-6">
                             <div class="flex items-start gap-6">
                               <!-- Left: Icon -->
-                              <div class="p-3 bg-gray-50 rounded-xl group-hover:bg-blue-50 transition-colors">
-                                <i class="bi bi-file-pdf text-xl text-blue-600"></i>
+                              <div
+                                class="p-3 bg-gray-50 rounded-xl group-hover:bg-blue-50 transition-colors"
+                              >
+                                <i
+                                  class="bi bi-file-pdf text-xl text-blue-600"
+                                ></i>
                               </div>
-                    
+
                               <!-- Middle: Content -->
-                              <!-- Middle: Content -->
-<div class="flex-1 min-w-0 space-y-3">
-  <!-- Title Row -->
-  <div class="flex items-center justify-between">
-    <h4 class="font-medium text-gray-900 truncate max-w-md">{{ doc.title }}</h4>
-  
-  </div>
+                              <div class="flex-1 min-w-0 space-y-3">
+                                <!-- Title Row -->
+                                <div class="flex items-center justify-between">
+                                  <h4
+                                    class="font-medium text-gray-900 truncate max-w-md"
+                                  >
+                                    {{ doc.title }}
+                                  </h4>
+                                </div>
 
-  <!-- Description Row -->
-  <p *ngIf="doc.description" 
-     class="text-sm text-gray-600 line-clamp-2">
-    {{ doc.description }}
-  </p>
+                                <!-- Description Row -->
+                                <p
+                                  *ngIf="doc.description"
+                                  class="text-sm text-gray-600 line-clamp-2"
+                                >
+                                  {{ doc.description }}
+                                </p>
 
-  <!-- Metadata Row -->
-  <div class="flex items-center gap-4 text-sm text-gray-500">
-    <span class="flex items-center gap-1">
-      <i class="bi bi-file-text"></i>
-      500KB
-    </span>
-    <span class="flex items-center gap-1">
-      <i class="bi bi-translate"></i>
-      English
-    </span>
-  </div>
+                                <!-- Metadata Row -->
+                                <div
+                                  class="flex items-center gap-4 text-sm text-gray-500"
+                                >
+                                  <span class="flex items-center gap-1">
+                                    <i class="bi bi-file-pdf"></i>
+                                    Format: PDF
+                                  </span>
+                                  <span class="flex items-center gap-1">
+                                    <i class="bi bi-translate"></i>
+                                    English
+                                  </span>
+                                </div>
 
-  <!-- Actions Row -->
-  <div class="flex items-center gap-3 pt-2">
-    
-    
-    <a *ngIf="doc.url" 
-    [href]="doc.url" 
-    target="_blank" 
-    rel="noopener noreferrer"
-            class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 
-                                          transition-colors duration-200 text-sm font-medium">
-      <i class="bi bi-download mr-2"></i>
-      Download
-    </a>
-    <span *ngIf="!doc.url" 
-          class="ray-50 text-gray-400">
-      <i class="bi bi-lock mr-2"></i>
-      Not available
-    </span>
-  </div>
-</div>
-                    
-                             
-                              
+                                <!-- Actions Row -->
+                                <div class="flex items-center gap-3 pt-2">
+                                  <a
+                                    *ngIf="doc.url"
+                                    [href]="doc.url"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 text-sm font-medium"
+                                  >
+                                    <i class="bi bi-download mr-2"></i>
+                                    Download
+                                  </a>
+                                  <span
+                                    *ngIf="!doc.url"
+                                    class="ray-50 text-gray-400"
+                                  >
+                                    <i class="bi bi-lock mr-2"></i>
+                                    Not available
+                                  </span>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>inline-flex items-center px-4 py-2 rounded-lg bg-g
+                    </div>
                   </section>
 
-                  <!-- Climate Finance Data Section -->
                   <!-- Climate Finance Data Section -->
                   <section
                     class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 mt-8"
@@ -1242,31 +1577,7 @@
 
                     <!-- Content Grid -->
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                      <!-- Public Consultation Meetings -->
-                      <div
-                        class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200 lg:col-span-2"
-                      >
-                        <div class="flex items-start gap-3">
-                          <i
-                            class="bi bi-calendar-event text-indigo-600 mt-1"
-                          ></i>
-                          <div>
-                            <p class="text-sm font-medium text-gray-600">
-                              Public Consultation Meetings
-                            </p>
-                            <p
-                              class="text-base text-gray-900 mt-2 whitespace-pre-line"
-                            >
-                              {{
-                                project.stages?.preparation
-                                  ?.socialSustainabilityData
-                                  ?.publicConsultationMeetings ||
-                                  "No consultation meetings recorded"
-                              }}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
+                      
 
                       <!-- Beneficiaries Information -->
                       <div
@@ -1340,143 +1651,83 @@
                         </div>
                       </div>
 
-                      <!-- Inclusive Design -->
-                      <div
-                        class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200"
-                      >
-                        <div class="flex items-start gap-3">
-                          <i
-                            class="bi bi-universal-access text-purple-600 mt-1"
-                          ></i>
-                          <div>
-                            <p class="text-sm font-medium text-gray-600">
-                              Inclusive Design
-                            </p>
-                            <p
-                              class="text-base text-gray-900 mt-2 whitespace-pre-line"
-                            >
-                              {{
-                                project.stages?.preparation
-                                  ?.socialSustainabilityData?.inclusiveDesign ||
-                                  "No inclusive design details specified"
-                              }}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
+                    
 
-                      <!-- Labor Obligations -->
-                      <div
-                        class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200"
-                      >
-                        <div class="flex items-start gap-3">
-                          <i
-                            class="bi bi-briefcase-fill text-blue-600 mt-1"
-                          ></i>
-                          <div>
-                            <p class="text-sm font-medium text-gray-600">
-                              Labor Obligations
-                            </p>
-                            <p class="text-base text-gray-900 mt-2">
-                              {{
-                                project.stages?.preparation
-                                  ?.socialSustainabilityData
-                                  ?.laborObligations ||
-                                  "No labor obligations specified"
-                              }}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- Land Compensation Budget -->
-                      <div
-                        class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200"
-                      >
-                        <div class="flex items-start gap-3">
-                          <i class="bi bi-cash-coin text-green-600 mt-1"></i>
-                          <div>
-                            <p class="text-sm font-medium text-gray-600">
-                              Land Compensation Budget
-                            </p>
-                            <p class="text-base text-gray-900 mt-2">
-                              {{
-                                formatCurrencyValue(
-                                  project.stages?.preparation
-                                    ?.socialSustainabilityData
-                                    ?.landCompensationBudget
-                                )
-                              }}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- Indigenous Land -->
-                      <div
-                        class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200"
-                      >
-                        <div class="flex items-start gap-3">
-                          <i class="bi bi-geo-alt-fill text-red-600 mt-1"></i>
-                          <div>
-                            <p class="text-sm font-medium text-gray-600">
-                              Indigenous Land Impact
-                            </p>
-                            <p class="text-base text-gray-900 mt-2">
-                              {{
-                                project.stages?.preparation
-                                  ?.socialSustainabilityData?.indigenousLand ||
-                                  "No indigenous land impact specified"
-                              }}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
                     </div>
 
-                    <!-- Attachments Section -->
-                    <div
-                      *ngIf="
-                        project.stages?.preparation?.socialSustainabilityData
-                          ?.attachments?.length
-                      "
-                      class="mt-8 pt-6 border-t border-gray-200"
-                    >
-                      <h4
-                        class="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2"
+                    <!-- Documents List -->
+                    <div class="space-y-4 my-10">
+                      <div
+                        *ngFor="let doc of preparationSustainabilityAttachments"
+                        class="group bg-white rounded-xl border border-gray-200 hover:shadow-lg transition-all duration-300"
                       >
-                        <i class="bi bi-paperclip"></i>
-                        Related Social Impact Documents
-                      </h4>
-                      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <ng-container
-                          *ngFor="
-                            let attachment of project.stages?.preparation
-                              ?.socialSustainabilityData?.attachments
-                          "
-                        >
-                          <div
-                            class="flex items-start gap-3 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200"
-                          >
-                            <i
-                              class="bi bi-file-earmark-text text-gray-500 text-xl"
-                            ></i>
-                            <div>
-                              <h5 class="text-sm font-medium text-gray-900">
-                                {{ attachment.title }}
-                              </h5>
-                              <p class="text-xs text-gray-500">
-                                {{ attachment.documentType }}
-                              </p>
+                        <div class="p-6">
+                          <div class="flex items-start gap-6">
+                            <!-- Left: Icon -->
+                            <div
+                              class="p-3 bg-gray-50 rounded-xl group-hover:bg-blue-50 transition-colors"
+                            >
+                              <i
+                                class="bi bi-file-pdf text-xl text-blue-600"
+                              ></i>
+                            </div>
+
+                            <!-- Middle: Content -->
+                            <div class="flex-1 min-w-0 space-y-3">
+                              <!-- Title Row -->
+                              <div class="flex items-center justify-between">
+                                <h4
+                                  class="font-medium text-gray-900 truncate max-w-md"
+                                >
+                                  {{ doc.title }}
+                                </h4>
+                              </div>
+
+                              <!-- Description Row -->
                               <p
-                                *ngIf="attachment.description"
-                                class="text-xs text-gray-600 mt-1"
+                                *ngIf="doc.description"
+                                class="text-sm text-gray-600 line-clamp-2"
                               >
-                                {{ attachment.description }}
+                                {{ doc.description }}
                               </p>
+
+                              <!-- Metadata Row -->
+                              <div
+                                class="flex items-center gap-4 text-sm text-gray-500"
+                              >
+                                <span class="flex items-center gap-1">
+                                  <i class="bi bi-file-pdf"></i>
+                                  Format: PDF
+                                </span>
+                                <span class="flex items-center gap-1">
+                                  <i class="bi bi-translate"></i>
+                                  English
+                                </span>
+                              </div>
+
+                              <!-- Actions Row -->
+                              <div class="flex items-center gap-3 pt-2">
+                                <a
+                                  *ngIf="doc.url"
+                                  [href]="doc.url"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 text-sm font-medium"
+                                >
+                                  <i class="bi bi-download mr-2"></i>
+                                  Download
+                                </a>
+                                <span
+                                  *ngIf="!doc.url"
+                                  class="ray-50 text-gray-400"
+                                >
+                                  <i class="bi bi-lock mr-2"></i>
+                                  Not available
+                                </span>
+                              </div>
                             </div>
                           </div>
-                        </ng-container>
+                        </div>
                       </div>
                     </div>
                   </section>
@@ -1561,173 +1812,87 @@
                         </div>
                       </div>
 
-                      <!-- Policy Coherence Documentation -->
-                      <div
-                        class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200"
-                      >
-                        <div class="flex items-start gap-3">
-                          <i
-                            class="bi bi-clipboard-check text-blue-600 mt-1"
-                          ></i>
-                          <div>
-                            <p class="text-sm font-medium text-gray-600">
-                              Policy Coherence Documentation
-                            </p>
-                            <div class="mt-2 space-y-2">
-                              <p
-                                class="text-base text-gray-900 whitespace-pre-line"
-                              >
-                                {{
-                                  project.stages?.preparation
-                                    ?.institutionalSustainabilityData
-                                    ?.policyCoherenceDocumentation ||
-                                    "No policy coherence documentation specified"
-                                }}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                    </div>
 
-                      <!-- Freedom of Information Details -->
-                      <div
-                        class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200"
-                      >
-                        <div class="flex items-start gap-3">
-                          <i
-                            class="bi bi-chat-square-text text-indigo-600 mt-1"
-                          ></i>
-                          <div>
-                            <p class="text-sm font-medium text-gray-600">
-                              Information Request Details
-                            </p>
-                            <div class="mt-2 space-y-2">
-                              <p class="text-base text-gray-900">
-                                {{
-                                  project.stages?.preparation
-                                    ?.institutionalSustainabilityData
-                                    ?.freedomOfInformationRequestsAndAnswers ||
-                                    "No detailed information available"
-                                }}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                    
 
-                      <!-- Risk Management Plans -->
+                    <!-- Documents List -->
+                    <div class="space-y-4 my-10">
                       <div
-                        class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-all duration-200"
+                        *ngFor="let doc of preparationInstitutionalSustainabilityAttachments"
+                        class="group bg-white rounded-xl border border-gray-200 hover:shadow-lg transition-all duration-300"
                       >
-                        <div class="flex items-start gap-3">
-                          <i class="bi bi-shield-check text-red-600 mt-1"></i>
-                          <div>
-                            <p class="text-sm font-medium text-gray-600">
-                              Risk Management Plans
-                            </p>
-                            <div class="mt-2">
+                        <div class="p-6">
+                          <div class="flex items-start gap-6">
+                            <!-- Left: Icon -->
+                            <div
+                              class="p-3 bg-gray-50 rounded-xl group-hover:bg-blue-50 transition-colors"
+                            >
+                              <i
+                                class="bi bi-file-pdf text-xl text-blue-600"
+                              ></i>
+                            </div>
+
+                            <!-- Middle: Content -->
+                            <div class="flex-1 min-w-0 space-y-3">
+                              <!-- Title Row -->
+                              <div class="flex items-center justify-between">
+                                <h4
+                                  class="font-medium text-gray-900 truncate max-w-md"
+                                >
+                                  {{ doc.title }}
+                                </h4>
+                              </div>
+
+                              <!-- Description Row -->
                               <p
-                                class="text-base text-gray-900 whitespace-pre-line"
+                                *ngIf="doc.description"
+                                class="text-sm text-gray-600 line-clamp-2"
                               >
-                                {{
-                                  project.stages?.preparation
-                                    ?.institutionalSustainabilityData
-                                    ?.riskManagementPlans ||
-                                    "No risk management plans specified"
-                                }}
+                                {{ doc.description }}
                               </p>
+
+                              <!-- Metadata Row -->
+                              <div
+                                class="flex items-center gap-4 text-sm text-gray-500"
+                              >
+                                <span class="flex items-center gap-1">
+                                  <i class="bi bi-file-pdf"></i>
+                                  Format: PDF
+                                </span>
+                                <span class="flex items-center gap-1">
+                                  <i class="bi bi-translate"></i>
+                                  English
+                                </span>
+                              </div>
+
+                              <!-- Actions Row -->
+                              <div class="flex items-center gap-3 pt-2">
+                                <a
+                                  *ngIf="doc.url"
+                                  [href]="doc.url"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 text-sm font-medium"
+                                >
+                                  <i class="bi bi-download mr-2"></i>
+                                  Download
+                                </a>
+                                <span
+                                  *ngIf="!doc.url"
+                                  class="ray-50 text-gray-400"
+                                >
+                                  <i class="bi bi-lock mr-2"></i>
+                                  Not available
+                                </span>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
 
-                    <!-- Performance Metrics -->
-                    <div class="mt-6 p-4 bg-gray-50 rounded-lg">
-                      <h4 class="text-base font-medium text-gray-700 mb-4">
-                        Response Rate Metrics
-                      </h4>
-                      <div
-                        class="relative h-2 bg-gray-200 rounded-full overflow-hidden"
-                      >
-                        <div
-                          class="absolute top-0 left-0 h-full bg-purple-600 rounded-full"
-                          [style.width.%]="
-                            calculateResponseRate(
-                              project.stages?.preparation
-                                ?.institutionalSustainabilityData
-                                ?.numberOfFreedomOfInformationAnswers,
-                              project.stages?.preparation
-                                ?.institutionalSustainabilityData
-                                ?.numberOfFreedomOfInformationRequests
-                            )
-                          "
-                        ></div>
-                      </div>
-                      <div
-                        class="mt-2 flex justify-between text-sm text-gray-600"
-                      >
-                        <span>Response Rate</span>
-                        <span class="font-medium">
-                          {{
-                            calculateResponseRate(
-                              project.stages?.preparation
-                                ?.institutionalSustainabilityData
-                                ?.numberOfFreedomOfInformationAnswers,
-                              project.stages?.preparation
-                                ?.institutionalSustainabilityData
-                                ?.numberOfFreedomOfInformationRequests
-                            )
-                          }}%
-                        </span>
-                      </div>
-                    </div>
-
-                    <!-- Attachments Section -->
-                    <div
-                      *ngIf="
-                        project.stages?.preparation
-                          ?.institutionalSustainabilityData?.attachments?.length
-                      "
-                      class="mt-8 pt-6 border-t border-gray-200"
-                    >
-                      <h4
-                        class="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2"
-                      >
-                        <i class="bi bi-paperclip"></i>
-                        Institutional Documentation
-                      </h4>
-                      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <ng-container
-                          *ngFor="
-                            let attachment of project.stages?.preparation
-                              ?.institutionalSustainabilityData?.attachments
-                          "
-                        >
-                          <div
-                            class="flex items-start gap-3 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200"
-                          >
-                            <i
-                              class="bi bi-file-earmark-text text-gray-500 text-xl"
-                            ></i>
-                            <div>
-                              <h5 class="text-sm font-medium text-gray-900">
-                                {{ attachment.title }}
-                              </h5>
-                              <p class="text-xs text-gray-500">
-                                {{ attachment.documentType }}
-                              </p>
-                              <p
-                                *ngIf="attachment.description"
-                                class="text-xs text-gray-600 mt-1"
-                              >
-                                {{ attachment.description }}
-                              </p>
-                            </div>
-                          </div>
-                        </ng-container>
-                      </div>
-                    </div>
+                   
                   </section>
                   <!-- Economic and Financial Sustainability Data Section -->
                   <section
@@ -3881,69 +4046,63 @@
             </ng-container>
           </ng-container>
         </div>
-
-
       </div>
       <!-- Navigation Controls -->
       <div
-      class="mt-8 sm:mt-10 flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0"
-    >
-     
-
-      <!-- Navigation Buttons -->
-      <nav
-        class="flex items-center space-x-3 animate-apple-fade-in-delay-2"
-        aria-label="Project navigation"
+        class="mt-8 sm:mt-10 flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0"
       >
-        <button
-          *ngIf="previousProject$ | async as previousProject"
-          (click)="navigateToProject(previousProject)"
-          class="group inline-flex items-center px-4 py-2 bg-primary rounded-apple-lg text-accent3 text-sm font-medium transition-all duration-300 hover:bg-accent2/10 focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
-          [attr.aria-label]="
-            'Navigate to previous project: ' + previousProject.name
-          "
+        <!-- Navigation Buttons -->
+        <nav
+          class="flex items-center space-x-3 animate-apple-fade-in-delay-2"
+          aria-label="Project navigation"
         >
-          <svg
-            class="w-4 h-4 mr-2 transition-transform duration-300 group-hover:-translate-x-1"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+          <button
+            *ngIf="previousProject$ | async as previousProject"
+            (click)="navigateToProject(previousProject)"
+            class="group inline-flex items-center px-4 py-2 bg-primary rounded-apple-lg text-accent3 text-sm font-medium transition-all duration-300 hover:bg-accent2/10 focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
+            [attr.aria-label]="
+              'Navigate to previous project: ' + previousProject.name
+            "
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M15 19l-7-7 7-7"
-            ></path>
-          </svg>
-          Previous
-        </button>
+            <svg
+              class="w-4 h-4 mr-2 transition-transform duration-300 group-hover:-translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"
+              ></path>
+            </svg>
+            Previous
+          </button>
 
-        <button
-          *ngIf="nextProject$ | async as nextProject"
-          (click)="navigateToProject(nextProject)"
-          class="group inline-flex items-center px-4 py-2 bg-primary rounded-apple-lg text-accent3 text-sm font-medium transition-all duration-300 hover:bg-accent6/10 focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
-          [attr.aria-label]="
-            'Navigate to next project: ' + nextProject.name
-          "
-        >
-          Next
-          <svg
-            class="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+          <button
+            *ngIf="nextProject$ | async as nextProject"
+            (click)="navigateToProject(nextProject)"
+            class="group inline-flex items-center px-4 py-2 bg-primary rounded-apple-lg text-accent3 text-sm font-medium transition-all duration-300 hover:bg-accent6/10 focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
+            [attr.aria-label]="'Navigate to next project: ' + nextProject.name"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 5l7 7-7 7"
-            ></path>
-          </svg>
-        </button>
-      </nav>
-    </div>
+            Next
+            <svg
+              class="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              ></path>
+            </svg>
+          </button>
+        </nav>
+      </div>
     </div>
   </div>
 </div>
