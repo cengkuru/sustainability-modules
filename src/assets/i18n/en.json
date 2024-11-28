@@ -1,0 +1,82 @@
+{
+    "HEADER": {
+      "LOGIN": "Login",
+      "PROFILE": "Your Profile",
+      "SIGN_OUT": "Sign out",
+      "OPEN_MENU": "Open user menu",
+      "TOGGLE_MENU": "Toggle menu"
+    },
+    "NAV": {
+      "HOME": "Home",
+      "PROJECTS": "Projects",
+      "ANALYTICS": "Analytics",
+      "DOWNLOADS": "Downloads",
+      "FEEDBACK": "Feedback",
+      "API_DOCUMENTATION": "API",
+      "ABOUT": "About"
+    },
+    "FOOTER": {
+      "NAVIGATION": "Navigation",
+      "LEGAL": "Legal",
+      "CONNECT": "Connect",
+      "RIGHTS_RESERVED": "All rights reserved",
+      "SOCIAL": {
+        "TWITTER": "X (formerly: Twitter)",
+        "LINKEDIN": "LinkedIn",
+        "FACEBOOK": "Facebook"
+      },
+      "LOGO_ALT": "Company Logo",
+      "CC_LICENSE_ALT": "Creative Commons License",
+      "CC_LICENSE": "Creative Commons Attribution 4.0 International License",
+      "PUBLICATION_POLICY": "Publication Policy",
+      "LANGUAGE": "Language"
+    },
+    "LANG": {
+      "EN": "English",
+      "ES": "Spanish"
+    },
+    "LANDING": {
+      "LOADING": "Loading...",
+      "MAIN_SECTION": {
+        "TITLE": "Advancing transparency and accountability in climate finance projects",
+        "DESCRIPTION": "This prototype, developed by <a href='https://infrastructuretransparency.org/' target='_blank'>CoST – the Infrastructure Transparency Initiative</a>, showcases how the <a href='https://standard.open-contracting.org/infrastructure/latest/en/reference/schema/' target='_blank'>Open Contracting for Infrastructure Data Standard (OC4IDS)</a> can be applied to climate finance and sustainability efforts. It illustrates the potential to improve transparency and accountability in infrastructure projects aiming at adaptation and mitigation to climate change. The data presented is partially based on approved projects by the <a href='https://www.greenclimate.fund/' target='_blank'>Green Climate Fund (GCF)</a> for the Republic of South Africa, with values provided for illustrative purposes only.",
+        "BUTTON_TEXT": "Explore Projects"
+      },
+      
+      "FEATURED_PROJECTS_SECTION": {
+        "TITLE": "Featured infrastructure projects",
+        "DESCRIPTION": "Discover a range of infrastructure projects that are setting new benchmarks in sustainability, from sustainable energy initiatives to modern transportation systems and advanced water management, these projects exemplify best practices in development.",
+        "BUTTON_TEXT": "View Featured Projects →"
+      },
+      "PROJECT_HIGHLIGHTS": {
+      "TITLE": "Project Highlights",
+      "RECENT_PROJECTS": "Recent Projects",
+      "HIGH_VALUE_PROJECTS": "High-Value Projects",
+      "TOTAL_VALUE": "Total Value",
+      "VIEW_DETAILS": "View Details",
+      "TOTAL_PROJECTS": "Total Projects",
+      "UNTITLED": "Untitled Project",
+      "NO_DESCRIPTION": "No description available"
+    },
+    "SPONSORS": {
+      "TITLE": "Supported by",
+      "VISIT_WEBSITE": "Visit Website",
+      "GIZ_NAME": "Deutsche Gesellschaft für Internationale Zusammenarbeit (GIZ)",
+      "FCDO_NAME": "Foreign, Commonwealth & Development Office (FCDO)"
+    },
+      "QUICK_MENU": {
+        "TITLE": "Quick Actions",
+        "EXPLORE_PROJECTS": "Explore Projects",
+        "FEATURED_PROJECTS": "Featured Projects",
+        "CONTACT_US": "Contact Us",
+        "CLOSE": "Close"
+      }
+    },
+    "SPONSORS": {
+  "TITLE": "Supported by",
+  "VISIT_WEBSITE": "Visit Website",
+  "GIZ_NAME": "Deutsche Gesellschaft für Internationale Zusammenarbeit (GIZ)",
+  "FCDO_NAME": "Foreign, Commonwealth & Development Office (FCDO)"
+}
+  }
+  

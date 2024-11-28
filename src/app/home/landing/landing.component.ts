@@ -18,6 +18,7 @@ import { animate, style, transition, trigger, query, stagger, state } from "@ang
 import * as L from 'leaflet';
 import { ScriptLoaderService } from "../../services/scriptLoader.service";
 import { NgIconComponent } from "@ng-icons/core";
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 interface ViewProjectDetailsEvent extends CustomEvent {
   detail: string;
@@ -31,6 +32,7 @@ interface ViewProjectDetailsEvent extends CustomEvent {
   imports: [
     CommonModule,
     RouterLink,
+    TranslateModule,
     IntersectionObserverDirective,
     NgIconComponent,
   ],
@@ -92,6 +94,8 @@ interface ViewProjectDetailsEvent extends CustomEvent {
 export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('mapContainer') mapContainer!: ElementRef;
 
+  currentLang: string;
+
   private map!: L.Map;
   recentProjects: any[] = [];
   highValueProjects: any[] = [];
@@ -149,14 +153,23 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
       private router: Router,
       private scriptLoader: ScriptLoaderService,
       private cdr: ChangeDetectorRef,
-      private ngZone: NgZone
-  ) {}
+      private ngZone: NgZone,
+      private translateService: TranslateService // Inject TranslateService
+    ) {
+      this.currentLang = this.translateService.currentLang;
+    }
 
   async ngOnInit(): Promise<void> {
     try {
       await this.loadLeafletScripts();
       this.loadProjects();
       window.addEventListener('viewProjectDetails', this.handleViewProjectDetails as EventListener);
+
+       // Subscribe to language changes
+        this.translateService.onLangChange.subscribe(event => {
+          this.currentLang = event.lang;
+        });
+
     } catch (error) {
       console.error('Error during component initialization:', error);
     }

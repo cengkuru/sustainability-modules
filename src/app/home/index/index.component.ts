@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { Router, RouterLink, RouterLinkActive, RouterOutlet, NavigationEnd } from "@angular/router";
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 import { filter } from 'rxjs/operators';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-index',
@@ -12,6 +13,7 @@ import { filter } from 'rxjs/operators';
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
+    TranslateModule // Add TranslateModule to imports
   ],
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
@@ -36,6 +38,8 @@ import { filter } from 'rxjs/operators';
   ],
 })
 export class IndexComponent implements OnInit {
+  currentLang: string;
+  isLanguageDropdownOpen = false;
   pageTitle = 'The National Infrastructure Disclosure Platform';
   isProfileDropdownOpen = false;
   isMobileMenuOpen = false;
@@ -43,31 +47,51 @@ export class IndexComponent implements OnInit {
   isFooterExpanded = false;
   isHeaderVisible = true;
   lastScrollPosition = 0;
+  // Update language options with icons
+  languageOptions = [
+    { code: 'en', label: 'English', icon: 'bi bi-globe2' },
+    { code: 'es', label: 'Español', icon: 'bi bi-globe' }
+  ];
+
+  
+
+  // Close dropdown when clicking outside
+  @HostListener('document:click')
+  onDocumentClick() {
+    if (this.isLanguageDropdownOpen) {
+      this.isLanguageDropdownOpen = false;
+    }
+  }
 
   currentYear = new Date().getFullYear();
   owner = 'CoST Infrastructure Transparency Initiative';
   appName = 'CoST Data Portal: Prototype';
 
   navLinks = [
-    { path: 'home', label: 'Home', icon: 'bi bi-house' },
-    { path: 'projects', label: 'Projects', icon: 'bi bi-file-text' },
-    { path: 'data-analytics', label: 'Analysis', icon: 'bi bi-bar-chart' },
-    { path: 'downloads', label: 'Downloads', icon: 'bi bi-download' },
-    { path: 'feedback', label: 'Feedback', icon: 'bi bi-star' },
-    { path: 'api-documentation', label: 'API Documentation', icon: 'bi bi-code-square' }
+    { path: 'home', label: 'NAV.HOME', icon: 'bi bi-house' }, // Update labels to use translation keys
+    { path: 'projects', label: 'NAV.PROJECTS', icon: 'bi bi-file-text' },
+    { path: 'data-analytics', label: 'NAV.ANALYTICS', icon: 'bi bi-bar-chart' },
+    { path: 'downloads', label: 'NAV.DOWNLOADS', icon: 'bi bi-download' },
+    { path: 'feedback', label: 'NAV.FEEDBACK', icon: 'bi bi-star' },
+    { path: 'api-documentation', label: 'NAV.API_DOCUMENTATION', icon: 'bi bi-code-square' }
   ];
 
   footerLinks = [
-    { path: 'publication-policy', label: 'Publication Policy', icon: 'bi bi-file-text' }
+    { path: 'publication-policy', label: 'FOOTER.PUBLICATION_POLICY', icon: 'bi bi-file-text' }
   ];
 
   creativeCommonsLicense = {
-    name: 'Creative Commons Attribution 4.0 International License',
+    name: 'FOOTER.CC_LICENSE',
     icon: 'bi bi-file-text',
     link: 'https://creativecommons.org/licenses/by/4.0/'
   };
 
-  constructor(public router: Router) {}
+  constructor(
+    public router: Router,
+    private translateService: TranslateService // Inject TranslateService
+  ) {
+    this.currentLang = this.translateService.currentLang;
+  }
 
   ngOnInit() {
     if (this.router.url === '/public' || this.router.url === '/public/') {
@@ -75,14 +99,33 @@ export class IndexComponent implements OnInit {
     }
 
     this.router.events.pipe(
-        filter(event => event instanceof NavigationEnd)
+      filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
       window.scrollTo(0, 0);
       this.closeMobileMenu();
     });
+
+    // Subscribe to language changes
+    this.translateService.onLangChange.subscribe(event => {
+      this.currentLang = event.lang;
+    });
   }
 
+  // Improved toggle with stopPropagation
+  toggleLanguageDropdown(event: Event) {
+    event.stopPropagation();
+    this.isLanguageDropdownOpen = !this.isLanguageDropdownOpen;
+  }
 
+  // Updated change language method
+  changeLanguage(lang: string, event?: Event) {
+    if (event) {
+      event.stopPropagation();
+    }
+    this.translateService.use(lang);
+    this.currentLang = lang;
+    this.isLanguageDropdownOpen = false;
+  }
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
@@ -113,5 +156,10 @@ export class IndexComponent implements OnInit {
 
   expandFooter() {
     this.isFooterExpanded = !this.isFooterExpanded;
+  }
+
+  // Add trackBy function
+  trackByLangCode(index: number, lang: { code: string }): string {
+    return lang.code;
   }
 }

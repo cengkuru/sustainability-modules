@@ -19,3 +19,27 @@
     @apply flex flex-col items-center;
   }
 }
+
+.language-selector {
+  button {
+    &:focus {
+      outline: none;
+      @apply ring-2 ring-accent6;
+    }
+  }
+
+  .dropdown-menu {
+    min-width: 160px;
+    transform-origin: top right;
+    
+    button {
+      &:hover {
+        background-color: rgba(var(--accent-rgb), 0.05);
+      }
+      
+      &.active {
+        background-color: rgba(var(--accent-rgb), 0.1);
+      }
+    }
+  }
+}

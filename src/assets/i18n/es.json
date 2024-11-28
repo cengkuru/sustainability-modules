@@ -1,0 +1,74 @@
+{
+    "HEADER": {
+      "LOGIN": "Iniciar sesión",
+      "PROFILE": "Tu Perfil",
+      "SIGN_OUT": "Cerrar sesión",
+      "OPEN_MENU": "Abrir menú de usuario",
+      "TOGGLE_MENU": "Alternar menú"
+    },
+    "NAV": {
+      "HOME": "Inicio",
+      "PROJECTS": "Proyectos",
+      "ANALYTICS": "Análisis",
+      "DOWNLOADS": "Descargas",
+      "FEEDBACK": "Comentarios",
+      "API_DOCUMENTATION": "API",
+      "ABOUT": "Acerca de"
+    },
+    "FOOTER": {
+      "NAVIGATION": "Navegación",
+      "LEGAL": "Legal",
+      "CONNECT": "Conectar",
+      "RIGHTS_RESERVED": "Todos los derechos reservados",
+      "SOCIAL": {
+        "TWITTER": "X (antes Twitter)",
+        "LINKEDIN": "LinkedIn",
+        "FACEBOOK": "Facebook"
+      },
+      "LOGO_ALT": "Logo de la Empresa",
+      "CC_LICENSE_ALT": "Licencia Creative Commons",
+      "CC_LICENSE": "Licencia Internacional Creative Commons Attribution 4.0",
+      "PUBLICATION_POLICY": "Política de Publicación",
+      "LANGUAGE": "Idioma"
+    },
+    "LANG": {
+      "EN": "Inglés",
+      "ES": "Español"
+    },
+    "LANDING": {
+      "LOADING": "Cargando...",
+      "MAIN_SECTION": {
+        "TITLE": "Promoviendo la transparencia y la rendición de cuentas en proyectos de financiamiento climático",
+        "DESCRIPTION": "Este prototipo, desarrollado por <a href='https://infrastructuretransparency.org/' target='_blank'>CoST – la Iniciativa de Transparencia en Infraestructura</a>, demuestra cómo el <a href='https://standard.open-contracting.org/infrastructure/latest/en/reference/schema/' target='_blank'>Estándar de Datos de Contratación Abierta para Infraestructura (OC4IDS)</a> puede aplicarse a los esfuerzos de financiamiento climático y sostenibilidad. Ilustra el potencial para mejorar la transparencia y la rendición de cuentas en proyectos de infraestructura orientados a la adaptación y mitigación del cambio climático. Los datos presentados se basan parcialmente en proyectos aprobados por el <a href='https://www.greenclimate.fund/' target='_blank'>Fondo Verde para el Clima (GCF)</a> para la República de Sudáfrica, con valores proporcionados solo con fines ilustrativos.",
+        "BUTTON_TEXT": "Explorar Proyectos"
+      },
+      "FEATURED_PROJECTS_SECTION": {
+        "TITLE": "Proyectos de infraestructura destacados",
+        "DESCRIPTION": "Descubra una variedad de proyectos de infraestructura que establecen nuevos estándares en sostenibilidad, desde iniciativas de energía sostenible hasta sistemas de transporte modernos y gestión avanzada del agua, estos proyectos ejemplifican las mejores prácticas en desarrollo.",
+        "BUTTON_TEXT": "Ver Proyectos Destacados →"
+      },
+      "PROJECT_HIGHLIGHTS": {
+        "TITLE": "Aspectos Destacados del Proyecto",
+        "RECENT_PROJECTS": "Proyectos Recientes",
+        "HIGH_VALUE_PROJECTS": "Proyectos de Alto Valor",
+        "TOTAL_VALUE": "Valor Total",
+        "VIEW_DETAILS": "Ver Detalles",
+        "TOTAL_PROJECTS": "Total de Proyectos",
+        "UNTITLED": "Proyecto Sin Título",
+        "NO_DESCRIPTION": "No hay descripción disponible"
+      },
+      "SPONSORS": {
+        "TITLE": "Respaldado por",
+        "VISIT_WEBSITE": "Visitar Sitio Web",
+        "GIZ_NAME": "Deutsche Gesellschaft für Internationale Zusammenarbeit (GIZ)",
+        "FCDO_NAME": "Foreign, Commonwealth & Development Office (FCDO)"
+      },
+      "QUICK_MENU": {
+        "TITLE": "Acciones Rápidas",
+        "EXPLORE_PROJECTS": "Explorar Proyectos",
+        "FEATURED_PROJECTS": "Proyectos Destacados",
+        "CONTACT_US": "Contáctenos",
+        "CLOSE": "Cerrar"
+      }
+    }
+}

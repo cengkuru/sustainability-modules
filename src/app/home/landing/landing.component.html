@@ -1,359 +1,393 @@
 <div class="font-inter bg-primary text-accent antialiased">
-    <!-- Loading State -->
-    <div *ngIf="isLoading" class="fixed inset-0 flex items-center justify-center bg-primary bg-opacity-75 backdrop-filter backdrop-blur-sm z-50" @fadeInAnimation>
-        <div class="w-24 h-24 relative">
-            <div class="absolute inset-0 border-4 border-accent2 border-t-accent6 rounded-full animate-spin"></div>
-            <div class="absolute inset-0 flex items-center justify-center">
-                <span class="text-accent6 font-semibold">Loading...</span>
-            </div>
-        </div>
+  <!-- Loading State -->
+  <div
+    *ngIf="isLoading"
+    class="fixed inset-0 flex items-center justify-center bg-primary bg-opacity-75 backdrop-filter backdrop-blur-sm z-50"
+    @fadeInAnimation
+  >
+    <div class="w-24 h-24 relative">
+      <div
+        class="absolute inset-0 border-4 border-accent2 border-t-accent6 rounded-full animate-spin"
+      ></div>
+      <div class="absolute inset-0 flex items-center justify-center">
+        <span class="text-accent6 font-semibold">{{
+          "LANDING.LOADING" | translate
+        }}</span>
+      </div>
     </div>
+  </div>
 
-    <!-- Hero Section -->
-<section class="relative overflow-hidden bg-gradient-to-br from-primary via-primary-50 to-primary-100">
-    <!-- Background Pattern (subtle) -->
-    <div class="absolute inset-0 opacity-5">
-        <div class="absolute inset-0 bg-grid-accent6/10"></div>
-    </div>
-
-    <!-- Main Content -->
+  <!-- Hero Section -->
+  <section
+    class="relative overflow-hidden bg-gradient-to-br from-primary via-primary-50 to-primary-100"
+  >
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-20">
-        <div class="md:flex md:items-center md:gap-x-12 lg:gap-x-20">
-            <!-- Text Content -->
-            <div class="md:w-1/2 text-center md:text-left space-y-6" @fadeInAnimation>
-                <h1 class="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold leading-tight tracking-tight text-accent">
-                    {{ mainSection.title }}
-                </h1>
-                
-                <p class="text-lg text-accent4/90 max-w-xl mx-auto md:mx-0 leading-relaxed" 
-                   [innerHTML]="mainSection.description">
-                </p>
+      <div class="md:flex md:items-center md:gap-x-12 lg:gap-x-20">
+        <!-- Text Content -->
+        <div
+          class="md:w-1/2 text-center md:text-left space-y-6"
+          @fadeInAnimation
+        >
+          <h1
+            class="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold leading-tight tracking-tight text-accent"
+          >
+            {{ "LANDING.MAIN_SECTION.TITLE" | translate }}
+          </h1>
+          <p
+            class="text-lg text-accent4/90 max-w-xl mx-auto md:mx-0 leading-relaxed"
+            [innerHTML]="'LANDING.MAIN_SECTION.DESCRIPTION' | translate"
+          ></p>
 
-                <!-- CTA Button -->
-                <div class="pt-4">
-                    <button (click)="navigateToProjects()" 
-                            class="group inline-flex items-center justify-center px-8 py-4 
-                                   bg-accent6 text-primary text-lg font-medium
-                                   rounded-apple-lg shadow-apple-lg 
-                                   hover:bg-accent5 hover:shadow-apple-xl
-                                   focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2
-                                   transition-all duration-300 ease-apple transform
-                                   hover:-translate-y-0.5 active:translate-y-0.5
-                                   w-full md:w-auto">
-                        <span>{{ mainSection.buttonText }}</span>
-                        <svg class="ml-3 w-5 h-5 transition-transform duration-300 ease-apple transform group-hover:translate-x-1"
-                             xmlns="http://www.w3.org/2000/svg" 
-                             viewBox="0 0 20 20" 
-                             fill="currentColor">
-                            <path fill-rule="evenodd" 
-                                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" 
-                                  clip-rule="evenodd" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Map Container -->
-            <div class="md:w-1/2 relative z-0 hidden md:block mt-8 md:mt-0" @slideInAnimation>
-                <div class="relative w-full aspect-square max-w-xl mx-auto">
-                    <!-- Glass Effect Background -->
-                    <div class="absolute inset-0 bg-white/30 backdrop-blur-sm rounded-apple-xl"></div>
-                    
-                    <!-- Map -->
-                    <div class="relative w-full h-[500px] rounded-apple-xl shadow-apple-xl overflow-hidden">
-                        <div #mapContainer class="w-full h-full">
-                            <div id="map" class="w-full h-full"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          <!-- CTA Button -->
+          <div class="pt-4">
+            <button
+              (click)="navigateToProjects()"
+              class="group inline-flex items-center justify-center px-8 py-4 bg-accent6 text-primary text-lg font-medium rounded-apple-lg shadow-apple-lg hover:bg-accent5 hover:shadow-apple-xl focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2 transition-all duration-300 ease-apple transform hover:-translate-y-0.5 active:translate-y-0.5 w-full md:w-auto"
+            >
+              <span>{{ "LANDING.MAIN_SECTION.BUTTON_TEXT" | translate }}</span>
+            </button>
+          </div>
         </div>
-    </div>
-</section>
 
-    <!-- Featured Projects Section -->
-<section class="relative overflow-hidden bg-gradient-to-br from-primary-100 to-primary-200 py-12 sm:py-24">
-    <!-- Background Pattern Overlay -->
-    <div class="absolute inset-0 opacity-10">
-        <div class="absolute inset-0 bg-grid-accent6/5"></div>
+        <!-- Map Container -->
+        <div
+          class="md:w-1/2 relative z-0 hidden md:block mt-8 md:mt-0"
+          @slideInAnimation
+        >
+          <div class="relative w-full aspect-square max-w-xl mx-auto">
+            <div
+              class="absolute inset-0 bg-white/30 backdrop-blur-sm rounded-apple-xl"
+            ></div>
+            <div
+              class="relative w-full h-[500px] rounded-apple-xl shadow-apple-xl overflow-hidden"
+            >
+              <div #mapContainer class="w-full h-full"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 
+  <!-- Featured Projects Section -->
+  <section
+    class="relative overflow-hidden bg-gradient-to-br from-primary-100 to-primary-200 py-12 sm:py-24"
+  >
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="lg:flex lg:items-center lg:gap-x-20">
-            <!-- Content Column -->
-            <div class="lg:w-1/2 text-center lg:text-left space-y-8" @fadeInAnimation>
-                <div class="space-y-4">
-                    <h2 class="text-3xl sm:text-4xl font-bold text-accent leading-tight tracking-tight">
-                        {{ featuredProjectsSection.title }}
-                    </h2>
-                    <p class="text-lg md:text-xl text-accent4/90 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                        {{ featuredProjectsSection.description }}
-                    </p>
-                </div>
-
-                <!-- CTA Button -->
-                <button (click)="navigateToFeaturedProjects()" 
-                        class="group relative inline-flex items-center justify-center px-8 py-4 
-                               bg-accent6 text-primary text-lg font-medium
-                               rounded-apple-lg shadow-apple-lg
-                               transition-all duration-300 ease-apple
-                               hover:bg-accent5 hover:shadow-apple-xl
-                               focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2
-                               transform hover:-translate-y-0.5 active:translate-y-0.5">
-                    <span class="relative z-10">{{ featuredProjectsSection.buttonText }}</span>
-                    <svg class="w-5 h-5 ml-2 transition-transform duration-300 ease-apple transform group-hover:translate-x-1"
-                         xmlns="http://www.w3.org/2000/svg" 
-                         viewBox="0 0 20 20" 
-                         fill="currentColor">
-                        <path fill-rule="evenodd" 
-                              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" 
-                              clip-rule="evenodd" />
-                    </svg>
-                    
-                    <!-- Button Hover Effect -->
-                    <div class="absolute inset-0 rounded-apple-lg transition-opacity duration-300 opacity-0 group-hover:opacity-10 bg-white"></div>
-                </button>
-            </div>
-
-            <!-- Image Column -->
-            <div class="lg:w-1/2 relative mt-12 lg:mt-0" @slideInAnimation>
-                <div class="relative rounded-apple-xl overflow-hidden shadow-apple-xl">
-                    <!-- Image Container -->
-                    <div class="aspect-w-16 aspect-h-9 group">
-                        <img src="../../../assets/iStock-1322482774.jpeg" 
-                             alt="Featured Project" 
-                             class="w-full h-full object-cover transition-all duration-700 ease-apple transform group-hover:scale-105">
-                        
-                        <!-- Image Overlay -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-accent3/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-
-                    <!-- Decorative Elements -->
-                    <div class="absolute -bottom-2 -right-2 w-24 h-24 bg-accent6/10 rounded-full blur-xl"></div>
-                    <div class="absolute -top-2 -left-2 w-20 h-20 bg-accent5/10 rounded-full blur-lg"></div>
-                </div>
-            </div>
+      <div class="lg:flex lg:items-center lg:gap-x-20">
+        <div
+          class="lg:w-1/2 text-center lg:text-left space-y-8"
+          @fadeInAnimation
+        >
+          <h2
+            class="text-3xl sm:text-4xl font-bold text-accent leading-tight tracking-tight"
+          >
+            {{ "LANDING.FEATURED_PROJECTS_SECTION.TITLE" | translate }}
+          </h2>
+          <p
+            class="text-lg md:text-xl text-accent4/90 leading-relaxed max-w-2xl mx-auto lg:mx-0"
+          >
+            {{ "LANDING.FEATURED_PROJECTS_SECTION.DESCRIPTION" | translate }}
+          </p>
+          <button
+            (click)="navigateToFeaturedProjects()"
+            class="group relative inline-flex items-center justify-center px-8 py-4 bg-accent6 text-primary text-lg font-medium rounded-apple-lg shadow-apple-lg transition-all duration-300 ease-apple hover:bg-accent5 hover:shadow-apple-xl focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-2 transform hover:-translate-y-0.5 active:translate-y-0.5"
+          >
+            {{ "LANDING.FEATURED_PROJECTS_SECTION.BUTTON_TEXT" | translate }}
+          </button>
         </div>
+      </div>
     </div>
-</section>
- 
-<!-- Project Highlights Section -->
-<section class="py-12 sm:py-16 bg-gradient-to-b from-primary to-accent2">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Section Header -->
-        <div class="text-center mb-12">
-            <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-accent tracking-tight">
-                Project Highlights
-            </h2>
-        </div>
+  </section>
 
-        <!-- Project Cards Grid -->
+  <!-- Project Highlights Section -->
+  <section class="py-12 sm:py-16 bg-gradient-to-b from-primary to-accent2">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+<div class="text-center mb-12">
+    <h2 
+      class="text-2xl md:text-3xl lg:text-4xl font-bold text-accent tracking-tight"
+    >
+      {{ 'LANDING.PROJECT_HIGHLIGHTS.TITLE' | translate }}
+    </h2>
+  </div>
+
+      <!-- Project Cards Grid -->
 <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
     <!-- Recent Projects Card -->
     <div class="bg-white rounded-apple-xl p-6 shadow-apple-lg transition-all duration-300 hover:shadow-apple-xl">
-        <div class="flex items-center mb-6">
-            <i class="bi bi-clock-history text-accent5 text-2xl mr-3"></i>
-            <h3 class="text-2xl font-semibold text-accent">Recent Projects</h3>
-        </div>
-
-         <!-- Total Value -->
-    <div class="bg-accent6 text-primary rounded-apple-lg p-4 mb-6">
-        <p class="text-lg font-semibold">Total Value</p>
-        <p class="text-3xl font-bold">{{ getFormattedPrice(totalRecentProjectsValue || 0) }}</p>
+      <div class="flex items-center mb-6">
+        <i class="bi bi-clock-history text-accent5 text-2xl mr-3"></i>
+        <h3 class="text-2xl font-semibold text-accent">
+          {{ 'LANDING.PROJECT_HIGHLIGHTS.RECENT_PROJECTS' | translate }}
+        </h3>
+      </div>
+  
+      <!-- Total Value -->
+      <div class="bg-accent6 text-primary rounded-apple-lg p-4 mb-6">
+        <p class="text-lg font-semibold">{{ 'LANDING.PROJECT_HIGHLIGHTS.TOTAL_VALUE' | translate }}</p>
+        <p class="text-3xl font-bold">
+          {{ getFormattedPrice(totalRecentProjectsValue || 0) }}
+        </p>
+      </div>
+  
+      <ul class="space-y-4">
+        <li 
+          *ngFor="let project of recentProjects"
+          class="group bg-primary rounded-apple-lg p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-apple-md">
+          <a [routerLink]="['/public/projects', project.id]" class="block">
+            <h4 class="text-lg font-semibold text-accent mb-2 group-hover:text-accent5 line-clamp-1">
+              {{ project.name || ('LANDING.PROJECT_HIGHLIGHTS.UNTITLED' | translate) }}
+            </h4>
+            <p class="text-accent4 text-sm mb-3 line-clamp-2">
+              {{ project.description || ('LANDING.PROJECT_HIGHLIGHTS.NO_DESCRIPTION' | translate) }}
+            </p>
+            <div class="flex justify-between items-center text-sm">
+              <span class="font-bold text-accent5 group-hover:text-accent6">
+                {{ getFormattedPrice(project?.stages?.preparation?.basicData?.projectBudget || 0) }}
+              </span>
+              <span class="flex items-center text-accent6 font-medium group-hover:text-accent5">
+                {{ 'LANDING.PROJECT_HIGHLIGHTS.VIEW_DETAILS' | translate }}
+                <svg class="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  viewBox="0 0 20 20" 
+                  fill="currentColor">
+                  <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"/>
+                </svg>
+              </span>
+            </div>
+          </a>
+        </li>
+      </ul>
     </div>
-        
-        <ul class="space-y-4">
-            <li *ngFor="let project of recentProjects" 
-                class="group bg-primary rounded-apple-lg p-4 transition-all duration-300 
-                       hover:-translate-y-1 hover:shadow-apple-md">
-                <a [routerLink]="['/public/projects', project.id]" class="block">
-                    <h4 class="text-lg font-semibold text-accent mb-2 group-hover:text-accent5 
-                           line-clamp-1">{{ project.name || 'Untitled Project' }}</h4>
-                    <p class="text-accent4 text-sm mb-3 line-clamp-2">{{ project.description || 'No description available' }}</p>
-                    <div class="flex justify-between items-center text-sm">
-                        <span class="font-bold text-accent5 group-hover:text-accent6">
-                            {{ getFormattedPrice(project?.stages?.preparation?.basicData?.projectBudget || 0) }}
-                        </span>
-                        <span class="flex items-center text-accent6 font-medium group-hover:text-accent5">
-                            View Details
-                            <svg class="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1"
-                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"/>
-                            </svg>
-                        </span>
-                    </div>
-                </a>
-            </li>
-        </ul>
-    </div>
-
+  
     <!-- High-Value Projects Card -->
     <div class="bg-white rounded-apple-xl p-6 shadow-apple-lg transition-all duration-300 hover:shadow-apple-xl">
-        <div class="flex items-center mb-6">
-            <i class="bi bi-bar-chart-fill text-accent6 text-2xl mr-3"></i>
-            <h3 class="text-2xl font-semibold text-accent">High-Value Projects</h3>
-        </div>
-
-        <!-- Total Value -->
-        <div class="bg-accent6 text-primary rounded-apple-lg p-4 mb-6">
-            <p class="text-lg font-semibold">Total Value</p>
-            <p class="text-3xl font-bold">{{ getFormattedPrice(totalHighValueProjectsValue || 0) }}</p>
-        </div>
-
-        <ul class="space-y-4">
-            <li *ngFor="let project of highValueProjects" 
-                class="group bg-primary rounded-apple-lg p-4 transition-all duration-300 
-                       hover:-translate-y-1 hover:shadow-apple-md">
-                <a [routerLink]="['/public/projects', project.id]" class="block">
-                    <h4 class="text-lg font-semibold text-accent mb-2 group-hover:text-accent6 
-                           line-clamp-1">{{ project.name || 'Untitled Project' }}</h4>
-                    <p class="text-accent4 text-sm mb-3 line-clamp-2">{{ project.description || 'No description available' }}</p>
-                    <div class="flex justify-between items-center text-sm">
-                        <span class="font-bold text-accent5 group-hover:text-accent6">
-                          {{ getFormattedPrice(project?.stages?.preparation?.basicData?.projectBudget || 0) }}
-                        </span>
-                        <span class="flex items-center text-accent6 font-medium group-hover:text-accent5">
-                            View Details
-                            <svg class="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1"
-                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"/>
-                            </svg>
-                        </span>
-                    </div>
-                </a>
-            </li>
-        </ul>
-    </div>
-</div>
-
-        <!-- Summary Stats -->
-        <div class="mt-12 bg-white rounded-apple-xl p-8 shadow-apple-lg">
-            <div class="grid grid-cols-2 gap-8 text-center">
-                <div>
-                    <p class="text-accent4 text-sm mb-2">Total Projects</p>
-                    <p class="text-3xl font-bold text-accent">{{ formatLargeNumber(numberOfProjects) }}</p>
-                </div>
-                <div>
-                    <p class="text-accent4 text-sm mb-2">Total Value</p>
-                    <p class="text-3xl font-bold text-accent">{{ getFormattedPrice(totalValueOfProjects || 0) }}</p>
-                </div>
+      <div class="flex items-center mb-6">
+        <i class="bi bi-bar-chart-fill text-accent6 text-2xl mr-3"></i>
+        <h3 class="text-2xl font-semibold text-accent">
+          {{ 'LANDING.PROJECT_HIGHLIGHTS.HIGH_VALUE_PROJECTS' | translate }}
+        </h3>
+      </div>
+  
+      <!-- Total Value -->
+      <div class="bg-accent6 text-primary rounded-apple-lg p-4 mb-6">
+        <p class="text-lg font-semibold">{{ 'LANDING.PROJECT_HIGHLIGHTS.TOTAL_VALUE' | translate }}</p>
+        <p class="text-3xl font-bold">
+          {{ getFormattedPrice(totalHighValueProjectsValue || 0) }}
+        </p>
+      </div>
+  
+      <ul class="space-y-4">
+        <li 
+          *ngFor="let project of highValueProjects"
+          class="group bg-primary rounded-apple-lg p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-apple-md">
+          <a [routerLink]="['/public/projects', project.id]" class="block">
+            <h4 class="text-lg font-semibold text-accent mb-2 group-hover:text-accent6 line-clamp-1">
+              {{ project.name || ('LANDING.PROJECT_HIGHLIGHTS.UNTITLED' | translate) }}
+            </h4>
+            <p class="text-accent4 text-sm mb-3 line-clamp-2">
+              {{ project.description || ('LANDING.PROJECT_HIGHLIGHTS.NO_DESCRIPTION' | translate) }}
+            </p>
+            <div class="flex justify-between items-center text-sm">
+              <span class="font-bold text-accent5 group-hover:text-accent6">
+                {{ getFormattedPrice(project?.stages?.preparation?.basicData?.projectBudget || 0) }}
+              </span>
+              <span class="flex items-center text-accent6 font-medium group-hover:text-accent5">
+                {{ 'LANDING.PROJECT_HIGHLIGHTS.VIEW_DETAILS' | translate }}
+                <svg class="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  viewBox="0 0 20 20" 
+                  fill="currentColor">
+                  <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"/>
+                </svg>
+              </span>
             </div>
-        </div>
+          </a>
+        </li>
+      </ul>
     </div>
-</section>
+  </div>
 
-    <!-- Sponsors Section -->
-<section class="relative overflow-hidden bg-gradient-to-b from-primary-100 to-primary-200 py-16 sm:py-20">
+      <!-- Summary Stats -->
+<div class="mt-12 bg-white rounded-apple-xl p-8 shadow-apple-lg">
+    <div class="grid grid-cols-2 gap-8 text-center">
+      <div>
+        <p class="text-accent4 text-sm mb-2">
+          {{ 'LANDING.PROJECT_HIGHLIGHTS.TOTAL_PROJECTS' | translate }}
+        </p>
+        <p class="text-3xl font-bold text-accent">
+          {{ formatLargeNumber(numberOfProjects) }}
+        </p>
+      </div>
+      <div>
+        <p class="text-accent4 text-sm mb-2">
+          {{ 'LANDING.PROJECT_HIGHLIGHTS.TOTAL_VALUE' | translate }}
+        </p>
+        <p class="text-3xl font-bold text-accent">
+          {{ getFormattedPrice(totalValueOfProjects || 0) }}
+        </p>
+      </div>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Sponsors Section -->
+  <section
+    class="relative overflow-hidden bg-gradient-to-b from-primary-100 to-primary-200 py-16 sm:py-20"
+  >
     <!-- Background Pattern -->
     <div class="absolute inset-0 opacity-5">
-        <div class="absolute inset-0" 
-             style="background-image: radial-gradient(circle at 2px 2px, rgba(0,0,0,0.1) 1px, transparent 0);
-                    background-size: 24px 24px;">
-        </div>
+      <div
+        class="absolute inset-0"
+        style="
+          background-image: radial-gradient(
+            circle at 2px 2px,
+            rgba(0, 0, 0, 0.1) 1px,
+            transparent 0
+          );
+          background-size: 24px 24px;
+        "
+      ></div>
     </div>
 
     <div class="container relative mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Section Header -->
-        <div class="text-center mb-16">
-            <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-accent tracking-tight">
-                {{ sponsorsSection.title }}
-            </h2>
-            <div class="mt-4 h-1 w-20 bg-accent6 mx-auto rounded-full"></div>
-        </div>
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <h2
+          class="text-2xl md:text-3xl lg:text-4xl font-bold text-accent tracking-tight"
+        >
+          {{ sponsorsSection.title }}
+        </h2>
+        <div class="mt-4 h-1 w-20 bg-accent6 mx-auto rounded-full"></div>
+      </div>
 
-        <!-- Mobile: Card Slider -->
-        <div class="md:hidden">
-            <div class="overflow-x-auto scrollbar-hide -mx-4 px-4">
-                <div class="inline-flex space-x-6 pb-4">
-                    <div *ngFor="let sponsor of sponsorsSection.sponsors" 
-                         class="first:pl-4 last:pr-4">
-                        <a [href]="sponsor.link" 
-                           target="_blank" 
-                           rel="noopener noreferrer" 
-                           class="block bg-white rounded-apple-lg p-6 shadow-apple-md hover:shadow-apple-lg transition-all duration-300">
-                            <div class="w-48 h-24 flex items-center justify-center">
-                                <img [src]="sponsor.image" 
-                                     [alt]="sponsor.name" 
-                                     class="max-h-16 w-auto object-contain transition-transform duration-300 hover:scale-105">
-                            </div>
-                            <p class="mt-4 text-center text-sm font-medium text-accent4">
-                                {{ sponsor.name }}
-                            </p>
-                        </a>
-                    </div>
+      <!-- Mobile: Card Slider -->
+      <div class="md:hidden">
+        <div class="overflow-x-auto scrollbar-hide -mx-4 px-4">
+          <div class="inline-flex space-x-6 pb-4">
+            <div
+              *ngFor="let sponsor of sponsorsSection.sponsors"
+              class="first:pl-4 last:pr-4"
+            >
+              <a
+                [href]="sponsor.link"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="block bg-white rounded-apple-lg p-6 shadow-apple-md hover:shadow-apple-lg transition-all duration-300"
+              >
+                <div class="w-48 h-24 flex items-center justify-center">
+                  <img
+                    [src]="sponsor.image"
+                    [alt]="sponsor.name"
+                    class="max-h-16 w-auto object-contain transition-transform duration-300 hover:scale-105"
+                  />
                 </div>
+                <p class="mt-4 text-center text-sm font-medium text-accent4">
+                  {{ sponsor.name }}
+                </p>
+              </a>
             </div>
+          </div>
         </div>
+      </div>
 
-        <!-- Desktop: Grid Layout -->
-<div class="hidden md:grid md:grid-cols-2 gap-8 lg:gap-12 max-w-4xl mx-auto">
-    <div *ngFor="let sponsor of sponsorsSection.sponsors" 
-         class="flex justify-center" 
-         @fadeInAnimation>
-        <a [href]="sponsor.link" 
-           target="_blank" 
-           rel="noopener noreferrer" 
-           class="group relative w-full bg-white rounded-apple-xl p-8 shadow-apple-lg
-                  transition-all duration-300 ease-apple transform
-                  hover:-translate-y-1 hover:shadow-apple-xl
-                  focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-4">
+      <!-- Desktop: Grid Layout -->
+      <div
+        class="hidden md:grid md:grid-cols-2 gap-8 lg:gap-12 max-w-4xl mx-auto"
+      >
+        <div
+          *ngFor="let sponsor of sponsorsSection.sponsors"
+          class="flex justify-center"
+          @fadeInAnimation
+        >
+          <a
+            [href]="sponsor.link"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group relative w-full bg-white rounded-apple-xl p-8 shadow-apple-lg transition-all duration-300 ease-apple transform hover:-translate-y-1 hover:shadow-apple-xl focus:outline-none focus:ring-2 focus:ring-accent6 focus:ring-offset-4"
+          >
             <!-- Logo Container -->
             <div class="relative h-32 flex items-center justify-center">
-                <img [src]="sponsor.image" 
-                     [alt]="sponsor.name" 
-                     class="max-h-24 w-auto object-contain transition-all duration-300 
-                            ease-apple group-hover:scale-110">
-                
-                <!-- Hover Overlay -->
-                <div class="absolute inset-0 bg-gradient-to-t from-accent6/5 to-transparent 
-                          opacity-0 group-hover:opacity-100 transition-opacity duration-300 
-                          rounded-apple-lg"></div>
+              <img
+                [src]="sponsor.image"
+                [alt]="sponsor.name"
+                class="max-h-24 w-auto object-contain transition-all duration-300 ease-apple group-hover:scale-110"
+              />
+
+              <!-- Hover Overlay -->
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-accent6/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-apple-lg"
+              ></div>
             </div>
 
             <!-- Sponsor Name -->
             <div class="mt-6 text-center">
-                <p class="text-accent font-medium">{{ sponsor.name }}</p>
-                <span class="mt-2 inline-flex items-center text-sm text-accent6 opacity-0 
-                           group-hover:opacity-100 transition-all duration-300">
-                    Visit Website
-                    <svg class="w-4 h-4 ml-1 transform transition-transform duration-300 
-                            group-hover:translate-x-1" 
-                         xmlns="http://www.w3.org/2000/svg" 
-                         viewBox="0 0 20 20" 
-                         fill="currentColor">
-                        <path fill-rule="evenodd" 
-                              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" 
-                              clip-rule="evenodd" />
-                    </svg>
-                </span>
+              <p class="text-accent font-medium">{{ sponsor.name }}</p>
+              <span
+                class="mt-2 inline-flex items-center text-sm text-accent6 opacity-0 group-hover:opacity-100 transition-all duration-300"
+              >
+                Visit Website
+                <svg
+                  class="w-4 h-4 ml-1 transform transition-transform duration-300 group-hover:translate-x-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </span>
             </div>
-        </a>
-    </div>
-</div>
-    </div>
-</section>
-
-    <!-- Floating Action Button (Mobile only) -->
-    <button class="md:hidden fixed bottom-4 right-4 bg-accent6 text-primary rounded-full p-4 shadow-lg z-50" (click)="openQuickMenu()">
-        <i class="bi bi-plus text-2xl"></i>
-    </button>
-
-    <!-- Quick Menu Modal (Mobile only) -->
-    <div *ngIf="showQuickMenu" class="fixed inset-0 bg-primary bg-opacity-75 flex items-end justify-center pb-10 px-4 z-50">
-        <div class="bg-white rounded-t-2xl w-full max-w-sm p-6 space-y-4">
-            <h3 class="text-xl font-semibold text-accent mb-4">Quick Actions</h3>
-            <button class="w-full text-left py-3 px-4 rounded-lg bg-primary-100 text-accent hover:bg-primary-200 transition-colors" (click)="navigateToProjects()">
-                Explore Projects
-            </button>
-            <button class="w-full text-left py-3 px-4 rounded-lg bg-primary-100 text-accent hover:bg-primary-200 transition-colors" (click)="navigateToFeaturedProjects()">
-                Featured Projects
-            </button>
-            <button class="w-full text-left py-3 px-4 rounded-lg bg-primary-100 text-accent hover:bg-primary-200 transition-colors" (click)="openContactForm()">
-                Contact Us
-            </button>
-            <button class="w-full text-center py-2 text-accent6" (click)="closeQuickMenu()">
-                Close
-            </button>
+          </a>
         </div>
+      </div>
     </div>
+  </section>
+
+  <!-- Floating Action Button (Mobile only) -->
+  <button
+    class="md:hidden fixed bottom-4 right-4 bg-accent6 text-primary rounded-full p-4 shadow-lg z-50"
+    (click)="openQuickMenu()"
+  >
+    <i class="bi bi-plus text-2xl"></i>
+  </button>
+
+  <!-- Quick Menu Modal (Mobile only) -->
+  <div
+    *ngIf="showQuickMenu"
+    class="fixed inset-0 bg-primary bg-opacity-75 flex items-end justify-center pb-10 px-4 z-50"
+  >
+    <div class="bg-white rounded-t-2xl w-full max-w-sm p-6 space-y-4">
+      <h3 class="text-xl font-semibold text-accent mb-4">Quick Actions</h3>
+      <button
+        class="w-full text-left py-3 px-4 rounded-lg bg-primary-100 text-accent hover:bg-primary-200 transition-colors"
+        (click)="navigateToProjects()"
+      >
+        Explore Projects
+      </button>
+      <button
+        class="w-full text-left py-3 px-4 rounded-lg bg-primary-100 text-accent hover:bg-primary-200 transition-colors"
+        (click)="navigateToFeaturedProjects()"
+      >
+        Featured Projects
+      </button>
+      <button
+        class="w-full text-left py-3 px-4 rounded-lg bg-primary-100 text-accent hover:bg-primary-200 transition-colors"
+        (click)="openContactForm()"
+      >
+        Contact Us
+      </button>
+      <button
+        class="w-full text-center py-2 text-accent6"
+        (click)="closeQuickMenu()"
+      >
+        Close
+      </button>
+    </div>
+  </div>
 </div>
