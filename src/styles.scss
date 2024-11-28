@@ -338,5 +338,18 @@ input, textarea, select {
   opacity: 1;
 }
 
+.floating-menu {
+  max-width: 200px;
+  transition: all 0.3s ease-in-out;
+  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+@media (max-width: 1024px) {
+  .floating-menu {
+    display: none;
+  }
+}
+
 
 

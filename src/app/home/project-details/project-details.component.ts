@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, HostListener, OnInit } from "@angular/core";
 import { CommonModule, DatePipe, KeyValue, NgForOf } from "@angular/common";
 import { Observable, of } from "rxjs";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -136,6 +136,20 @@ interface Stage {
   providers: [ProjectService, DatePipe],
 })
 export class ProjectDetailsComponent implements OnInit {
+    isOriginalMenuVisible = true;
+    private readonly SCROLL_THRESHOLD = 300;
+    
+    @HostListener('window:scroll', ['$event'])
+    onWindowScroll() {
+      // Get the original menu element
+      const menu = document.querySelector('.hidden.lg\\:block.max-w-md');
+      if (!menu) return;
+    
+      const rect = menu.getBoundingClientRect();
+      // Show floating menu when original menu goes above viewport
+      this.isOriginalMenuVisible = rect.top > -this.SCROLL_THRESHOLD;
+    }
+
   stages: Stage[] = [
     {
       id: "Identification",
