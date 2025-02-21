@@ -66,15 +66,15 @@ export class DataAnalysisComponent implements AfterViewInit {
 
   // Brand Colors
   private readonly brandColors = {
-    primary: "#f7f7f7",
-    secondary: "#d60000",
-    accent: "#333333",
-    accent1: "#ffce32",
-    accent2: "#d8d8cd",
-    accent3: "#2c4143",
-    accent4: "#58707b",
-    accent5: "#9bcbd9",
-    accent6: "#61a8bd",
+    primary: '#FAFAFA',
+    secondary: '#0066CC',
+    accent: '#1D1D1F',
+    accent1: '#86868B',
+    accent2: '#E5E5E7',
+    accent3: '#F5F5F7',
+    accent4: '#004499',
+    accent5: '#F0F0F2',
+    accent6: '#FFFFFF',
   };
 
   dropdownOpen: Record<ChartName, boolean> = {
@@ -193,27 +193,32 @@ export class DataAnalysisComponent implements AfterViewInit {
     const appleStyling: Partial<EChartsOption> = {
       backgroundColor: this.brandColors.primary,
       textStyle: {
-        fontFamily: "Inter, sans-serif",
+        fontFamily: "'SF Pro Display', 'Inter', system-ui",
         color: this.brandColors.accent,
       },
       title: {
         textStyle: {
           color: this.brandColors.accent,
-          fontWeight: "bold",
+          fontWeight: 500,
           fontSize: 18,
+          fontFamily: "'SF Pro Display', 'Inter', system-ui",
         },
       },
       tooltip: {
-        backgroundColor: `rgba(247, 247, 247, 0.9)`,
+        backgroundColor: `rgba(255, 255, 255, 0.95)`,
         borderColor: this.brandColors.accent2,
         borderWidth: 1,
         textStyle: {
           color: this.brandColors.accent,
+          fontFamily: "'SF Pro Display', 'Inter', system-ui",
         },
+        padding: [8, 12],
+        borderRadius: 8,
       },
       legend: {
         textStyle: {
-          color: this.brandColors.accent,
+          color: this.brandColors.accent1,
+          fontFamily: "'SF Pro Display', 'Inter', system-ui",
         },
       },
       xAxis: {
@@ -223,7 +228,11 @@ export class DataAnalysisComponent implements AfterViewInit {
           },
         },
         axisLabel: {
-          color: this.brandColors.accent,
+          color: this.brandColors.accent1,
+          fontFamily: "'SF Pro Display', 'Inter', system-ui",
+        },
+        splitLine: {
+          show: false,
         },
       },
       yAxis: {
@@ -233,11 +242,14 @@ export class DataAnalysisComponent implements AfterViewInit {
           },
         },
         axisLabel: {
-          color: this.brandColors.accent,
+          color: this.brandColors.accent1,
+          fontFamily: "'SF Pro Display', 'Inter', system-ui",
         },
         splitLine: {
           lineStyle: {
             color: this.brandColors.accent2,
+            opacity: 0.3,
+            type: 'dashed',
           },
         },
       },
@@ -283,32 +295,58 @@ export class DataAnalysisComponent implements AfterViewInit {
   // Update the chart creation methods to use Apple-inspired styles
 
   private applyLeafletCustomStyles(): void {
-    const style = document.createElement("style");
+    const style = document.createElement('style');
     style.textContent = `
-        .leaflet-container {
-            background-color: ${this.brandColors.primary};
+      .leaflet-container {
+        background-color: ${this.brandColors.primary};
+        font-family: 'SF Pro Display', 'Inter', system-ui;
+      }
+      .leaflet-popup-content-wrapper {
+        background-color: ${this.brandColors.accent6};
+        color: ${this.brandColors.accent};
+        border-radius: 12px;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        border: 1px solid ${this.brandColors.accent2};
+        backdrop-filter: blur(8px);
+      }
+      .leaflet-popup-tip {
+        background-color: ${this.brandColors.accent6};
+        border: 1px solid ${this.brandColors.accent2};
+      }
+      .leaflet-control-zoom a {
+        background-color: ${this.brandColors.accent6} !important;
+        color: ${this.brandColors.accent} !important;
+        border-color: ${this.brandColors.accent2} !important;
+        border-radius: 8px !important;
+        margin-bottom: 8px !important;
+      }
+      .leaflet-control-zoom a:hover {
+        background-color: ${this.brandColors.accent3} !important;
+        color: ${this.brandColors.accent} !important;
+      }
+      .leaflet-control-attribution {
+        background-color: rgba(255, 255, 255, 0.8) !important;
+        color: ${this.brandColors.accent1} !important;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+      .pulsing-icon .pulse-ring {
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          opacity: 1;
         }
-        .leaflet-popup-content-wrapper {
-            background-color: ${this.brandColors.primary};
-            color: ${this.brandColors.accent};
-            border-radius: 10px;
+        50% {
+          transform: scale(1.5);
+          opacity: 0;
         }
-        .leaflet-popup-tip {
-            background-color: ${this.brandColors.primary};
+        100% {
+          transform: scale(1);
+          opacity: 1;
         }
-        .leaflet-control-zoom a {
-            background-color: ${this.brandColors.primary};
-            color: ${this.brandColors.accent};
-            border-color: ${this.brandColors.accent2};
-        }
-        .leaflet-control-zoom a:hover {
-            background-color: ${this.brandColors.secondary};
-            color: ${this.brandColors.primary};
-        }
-        .leaflet-control-attribution {
-            background-color: rgba(247, 247, 247, 0.7) !important;
-            color: ${this.brandColors.accent} !important;
-        }
+      }
     `;
     document.head.appendChild(style);
   }
@@ -332,15 +370,15 @@ export class DataAnalysisComponent implements AfterViewInit {
   }
 
   private getPulsingIcon(status: string): L.DivIcon {
-    const color = "#D60000";
+    const color = this.brandColors.secondary;
     return L.divIcon({
-      className: "pulsing-icon",
+      className: 'pulsing-icon',
       html: `
-            <div class="relative w-6 h-6">
-                <div class="absolute inset-0 pulse-ring rounded-full border-2" style="border-color: ${color};"></div>
-                <div class="absolute inset-0 rounded-full" style="background-color: ${color};"></div>
-            </div>
-        `,
+        <div class="relative w-6 h-6">
+          <div class="absolute inset-0 pulse-ring rounded-full border-2" style="border-color: ${color};"></div>
+          <div class="absolute inset-0 rounded-full bg-white/80 backdrop-blur-sm" style="background-color: ${color};"></div>
+        </div>
+      `,
       iconSize: [24, 24],
       iconAnchor: [12, 12],
     });
@@ -541,7 +579,7 @@ export class DataAnalysisComponent implements AfterViewInit {
       .sort((a, b) => b.value - a.value);
   }
 
-  createSubsectorBarChart() {
+  private createSubsectorBarChart() {
     const chartDom = document.getElementById('subsectorBarChart');
     if (!chartDom) return;
 
@@ -556,28 +594,38 @@ export class DataAnalysisComponent implements AfterViewInit {
         formatter: (params: any) => {
           const dataIndex = params[0].dataIndex;
           const item = this.sortedSubsectorBreakdown[dataIndex];
-          return `${item.key}<br/>Projects: ${item.value}<br/>Percentage: ${item.percentage.toFixed(1)}%`;
+          return `
+            <div class="font-['SF Pro Display', 'Inter', system-ui]">
+              <div class="font-medium mb-1">${item.key}</div>
+              <div class="text-[#86868B]">
+                Projects: <span class="text-[#1D1D1F]">${item.value}</span><br/>
+                Percentage: <span class="text-[#1D1D1F]">${item.percentage.toFixed(1)}%</span>
+              </div>
+            </div>
+          `;
         }
       },
       grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
+        left: '5%',
+        right: '5%',
+        bottom: '5%',
+        top: '5%',
         containLabel: true
       },
       xAxis: {
         type: 'value',
         boundaryGap: [0, 0.01],
         axisLabel: {
-          color: this.brandColors.accent
+          color: this.brandColors.accent1,
+          fontFamily: "'SF Pro Display', 'Inter', system-ui",
         }
       },
       yAxis: {
         type: 'category',
         data: this.sortedSubsectorBreakdown.map(item => item.key),
         axisLabel: {
-          color: this.brandColors.accent,
-          fontFamily: 'Inter, sans-serif',
+          color: this.brandColors.accent1,
+          fontFamily: "'SF Pro Display', 'Inter', system-ui",
           fontSize: 12
         }
       },
@@ -589,20 +637,22 @@ export class DataAnalysisComponent implements AfterViewInit {
           itemStyle: {
             color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
               { offset: 0, color: this.brandColors.secondary },
-              { offset: 1, color: this.brandColors.accent6 }
-            ])
+              { offset: 1, color: this.brandColors.accent4 }
+            ]),
+            borderRadius: [0, 4, 4, 0]
           },
           label: {
             show: true,
             position: 'right',
             formatter: '{c}',
-            color: this.brandColors.accent
+            color: this.brandColors.accent1,
+            fontFamily: "'SF Pro Display', 'Inter', system-ui",
           }
         }
       ]
     };
 
-    myChart.setOption(option);
+    myChart.setOption(this.updateChartStyles(option));
   }
 
   getSubsectorIcon(subsector: string): string {

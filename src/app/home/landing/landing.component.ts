@@ -24,6 +24,11 @@ interface ViewProjectDetailsEvent extends CustomEvent {
   detail: string;
 }
 
+interface ProjectStat {
+  value: string | number;
+  label: string;
+}
+
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
@@ -88,6 +93,15 @@ interface ViewProjectDetailsEvent extends CustomEvent {
           stagger('50ms', animate('500ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })))
         ], { optional: true })
       ])
+    ]),
+
+    // Typography system
+    trigger('subtleFloat', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate('1200ms cubic-bezier(0.19, 1, 0.22, 1)', 
+          style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
     ])
   ]
 })
@@ -146,6 +160,20 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
 };
 
   totalHighValueProjectsValue: number = 0;
+
+  // Typography system
+  fontStyles = {
+    display: 'font-light tracking-tight',
+    body: 'font-light leading-relaxed',
+    caption: 'font-light text-[rgb(var(--color-text-secondary))]'
+  };
+
+  projectStats: ProjectStat[] = [
+    { value: '150+', label: 'Active Projects' },
+    { value: '$2.5B', label: 'Total Value' },
+    { value: '45', label: 'Partners' },
+    { value: '12', label: 'Countries' }
+  ];
 
   constructor(
       private http: HttpClient,

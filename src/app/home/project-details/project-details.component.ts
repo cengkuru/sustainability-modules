@@ -10,6 +10,7 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { FormatSectionTitlePipe } from "../../pipes/format-section-title.pipe";
 import { JsonViewerComponent } from "../../shared/components/json-viewer/json-viewer.component";
 import { DataItemComponent } from "../../shared/components/data-item/data-item.component";
+import { RouterLink } from "@angular/router";
 
 interface Attachment {
   title: string;
@@ -70,6 +71,7 @@ interface Stage {
     FormatSectionTitlePipe,
     JsonViewerComponent,
     DataItemComponent,
+    RouterLink,
   ],
   templateUrl: "./project-details.component.html",
   styleUrls: ["./project-details.component.scss"],
@@ -1709,7 +1711,7 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
   getStageCompletion(stageId: string): number {
-    const stage = this.stages.find((s) => s.id === stageId);
+    const stage = this.stages.find(s => s.id === stageId);
     // Ensure completion is treated as a number
     const completion = stage?.sustainabilityModules?.completion;
     return typeof completion === "number" ? completion : 0;
@@ -2140,13 +2142,11 @@ export class ProjectDetailsComponent implements OnInit {
   getBasicDataItemsImplementation(basicData: any) {
     if (!basicData) return {};
     return {
-      "Variation to Contract Price": basicData.variationToContractPrice,
-      "Escalation of Contract Price": basicData.escalationOfContractPrice,
-      "Variation to Contract Duration": basicData.variationToContractDuration,
-      "Variation to Contract Scope": basicData.variationToContractScope,
-      "Reasons for Price Changes": basicData.reasonsForPriceChanges,
-      "Reasons for Scope": basicData.reasonsForScope,
-      "Reasons for Duration Changes": basicData.reasonsForDurationChanges,
+      "Implementation Status": basicData?.implementationStatus || 'Not specified',
+      "Progress Report": basicData?.progressReport || 'Not specified',
+      "Completion Percentage": basicData?.completionPercentage || '0%',
+      "Current Phase": basicData?.currentPhase || 'Not specified',
+      "Expected Completion": basicData?.expectedCompletion || 'Not specified'
     };
   }
 
@@ -2259,15 +2259,11 @@ export class ProjectDetailsComponent implements OnInit {
   getBasicDataItemsOandM(basicData: any) {
     if (!basicData) return {};
     return {
-      "Asset Name": basicData.assetName,
-      "Asset Location": basicData.assetLocation,
-      "Type of Maintenance Works": basicData.typeOfMaintenanceWorks,
-      "Works Description": basicData.worksDescription,
-      "Project Officials and Roles": basicData.projectOfficialsAndRoles
-        ?.map((official: any) => `${official.name} - ${official.role}`)
-        .join(", "),
-      "Maintenance Scope": basicData.maintenanceScope,
-      "Maintenance Plan": basicData.maintenancePlan,
+      "Maintenance Schedule": basicData.maintenanceSchedule || '',
+      "Maintenance Cost": basicData.maintenanceCost || '',
+      "Operating Cost": basicData.operatingCost || '',
+      "Asset Performance": basicData.assetPerformance || '',
+      "Maintenance Responsibility": basicData.maintenanceResponsibility || ''
     };
   }
 
@@ -2330,14 +2326,16 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
   getAllAttachmentsOandM(stage: any) {
-    if (!stage) return [];
+    if (!stage?.operationsAndMaintenance) return [];
+    const oAndM = stage.operationsAndMaintenance;
+    
     return [
-      ...(stage.basicData?.attachments || []),
-      ...(stage.climateFinanceData?.attachments || []),
-      ...(stage.socialSustainabilityData?.attachments || []),
-      ...(stage.institutionalSustainabilityData?.attachments || []),
-      ...(stage.economicAndFinancialSustainabilityData?.attachments || []),
-      ...(stage.environmentalAndClimateSustainabilityData?.attachments || []),
+      ...(oAndM.basicData?.attachments || []),
+      ...(oAndM.climateFinanceData?.attachments || []),
+      ...(oAndM.socialSustainabilityData?.attachments || []),
+      ...(oAndM.institutionalSustainabilityData?.attachments || []),
+      ...(oAndM.economicAndFinancialSustainabilityData?.attachments || []),
+      ...(oAndM.environmentalAndClimateSustainabilityData?.attachments || [])
     ];
   }
 
@@ -2545,4 +2543,40 @@ export class ProjectDetailsComponent implements OnInit {
     if (numRequests === 0) return 0;
     return Math.round((numAnswers / numRequests) * 100);
   }
+
+  getCurrentStageIcon(): string {
+    const currentStage = this.stages.find(stage => stage.id === this.selectedTab);
+    return currentStage?.icon || 'bi-question-circle';
+  }
+
+  getCurrentStageIndex(): number {
+    return this.stages.findIndex(stage => stage.id === this.selectedTab);
+  }
+
+  getLastUpdateDate(): Date {
+    return new Date(); // Replace with actual last update date logic
+  }
+
+  hasPreviousStage(): boolean {
+    return this.getCurrentStageIndex() > 0;
+  }
+
+  hasNextStage(): boolean {
+    return this.getCurrentStageIndex() < this.stages.length - 1;
+  }
+
+  navigateToPreviousStage(): void {
+    const prevIndex = this.getCurrentStageIndex() - 1;
+    if (prevIndex >= 0) {
+      this.selectTab(this.stages[prevIndex].id);
+    }
+  }
+
+  navigateToNextStage(): void {
+    const nextIndex = this.getCurrentStageIndex() + 1;
+    if (nextIndex < this.stages.length) {
+      this.selectTab(this.stages[nextIndex].id);
+    }
+  }
 }
+

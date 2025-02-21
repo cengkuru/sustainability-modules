@@ -9,6 +9,16 @@ import { saveAs } from 'file-saver';
 
 type DownloadFormat = 'json' | 'csv' | 'xlsx';
 
+interface DataFile {
+  id: string;
+  name: string;
+  description: string;
+  size?: string;
+  lastModified?: Date;
+  format: string;
+  icon: string;
+}
+
 @Component({
   selector: 'app-open-data',
   templateUrl: './open-data.component.html',
@@ -21,15 +31,24 @@ export class OpenDataComponent implements OnInit {
   downloading = false;
   error: string | null = null;
   lastUpdated: Date = new Date();
+  downloadProgress: number = 0;
 
-  dataFiles = [
-    { id: 'project-overview', name: 'Project Overview' },
+  dataFiles: DataFile[] = [
+    {
+      id: 'project-overview',
+      name: 'Project Overview Dataset',
+      description: 'Comprehensive dataset containing detailed project information, including locations, investments, and climate objectives.',
+      size: '2.4 MB',
+      lastModified: new Date(),
+      format: 'Multiple formats available',
+      icon: 'bi-file-earmark-text'
+    }
   ];
 
-  downloadFormats: { type: DownloadFormat; label: string }[] = [
-    { type: 'json', label: 'JSON' },
-    { type: 'csv', label: 'CSV' },
-    { type: 'xlsx', label: 'Excel' },
+  downloadFormats: { type: DownloadFormat; label: string; icon: string }[] = [
+    { type: 'json', label: 'JSON', icon: 'bi-filetype-json' },
+    { type: 'csv', label: 'CSV', icon: 'bi-filetype-csv' },
+    { type: 'xlsx', label: 'Excel', icon: 'bi-file-earmark-spreadsheet' }
   ];
 
   constructor(
@@ -41,20 +60,32 @@ export class OpenDataComponent implements OnInit {
     this.flattenedProjects$ = this.firestore.collection('projects').valueChanges().pipe(
       map(projects => projects.map(project => this.projectService.flattenProject(project)))
     );
+
+    // Simulate periodic updates
+    this.lastUpdated = new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000);
   }
 
   async downloadFile(fileId: string, format: DownloadFormat) {
     this.downloading = true;
     this.error = null;
+    this.downloadProgress = 0;
+
     try {
       const projects = await firstValueFrom(this.flattenedProjects$);
       
+      // Simulate progress
+      const progressInterval = setInterval(() => {
+        if (this.downloadProgress < 90) {
+          this.downloadProgress += Math.random() * 30;
+        }
+      }, 500);
+
       switch (format) {
         case 'json':
-          this.downloadData(JSON.stringify(projects, null, 2), `${fileId}.json`);
+          this.downloadData(JSON.stringify(projects, null, 2), `${fileId}.json`, 'application/json');
           break;
         case 'csv':
-          this.downloadData(this.convertToCSV(projects), `${fileId}.csv`);
+          this.downloadData(this.convertToCSV(projects), `${fileId}.csv`, 'text/csv');
           break;
         case 'xlsx':
           this.downloadExcel(projects, `${fileId}.xlsx`);
@@ -62,11 +93,22 @@ export class OpenDataComponent implements OnInit {
         default:
           throw new Error('Unsupported format');
       }
+
+      // Complete progress
+      setTimeout(() => {
+        clearInterval(progressInterval);
+        this.downloadProgress = 100;
+        setTimeout(() => {
+          this.downloading = false;
+          this.downloadProgress = 0;
+        }, 500);
+      }, 500);
+
     } catch (err) {
       console.error('Download error:', err);
       this.error = 'An error occurred during download. Please try again.';
-    } finally {
       this.downloading = false;
+      this.downloadProgress = 0;
     }
   }
 
@@ -87,8 +129,8 @@ export class OpenDataComponent implements OnInit {
     return csvRows.join('\n');
   }
 
-  private downloadData(data: string | Blob, fileName: string): void {
-    const blob = data instanceof Blob ? data : new Blob([data], { type: 'text/plain' });
+  private downloadData(data: string | Blob, fileName: string, mimeType: string): void {
+    const blob = data instanceof Blob ? data : new Blob([data], { type: mimeType });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;

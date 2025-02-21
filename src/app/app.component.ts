@@ -28,10 +28,10 @@ export class AppComponent implements OnInit {
     // await this.initializePolicyDataIfNeeded();
     // await this.initializeProjectsData();
 
-    /*this.migrationService.migrateProjects().subscribe(
+    /* this.migrationService.migrateProjects().subscribe(
         count => console.log(`Migration completed. ${count} projects migrated.`),
         error => console.error('Error during migration:', error)
-    );*/
+    ); */
 
     // await this.updateProjects();
   }

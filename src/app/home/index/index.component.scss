@@ -43,3 +43,26 @@
     }
   }
 }
+
+:root {
+  --surface-primary: 255, 255, 255;  // Pure white
+  --text-primary: 17, 24, 39;       // Near black
+  --accent-subtle: 243, 244, 246;   // Light gray
+  --blur-background: rgba(255, 255, 255, 0.8);
+}
+
+.frosted-glass {
+  @apply backdrop-blur-xl bg-white/80;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+// Custom transitions
+.ease-apple {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Refined shadows
+.shadow-apple {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1),
+              0 1px 2px -1px rgba(0, 0, 0, 0.1);
+}

@@ -1,5 +1,41 @@
 // landing.component.scss
 
+// Core design system
+:root {
+  // Colors - extremely minimal palette
+  --color-pure-white: 255, 255, 255;
+  --color-off-white: 250, 250, 253;
+  --color-subtle-gray: 245, 245, 247;
+  --color-text: 29, 29, 31;
+  --color-text-secondary: 110, 110, 115;
+  
+  // Shadows - extremely subtle
+  --shadow-subtle: 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-elevated: 0 4px 12px rgba(0,0,0,0.08);
+  
+  // Transitions
+  --transition-subtle: 700ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+// Refined animations
+@keyframes subtle-float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+
+.frosted-glass {
+  backdrop-filter: blur(20px) saturate(180%);
+  background-color: rgba(var(--color-pure-white), 0.7);
+}
+
+.card-hover {
+  transition: var(--transition-subtle);
+  &:hover {
+    transform: scale(1.01);
+  }
+}
+
 :host {
     display: block;
     --shadow-sm: #{theme('boxShadow.apple-sm')};
