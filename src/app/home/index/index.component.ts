@@ -13,7 +13,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
-    TranslateModule // Add TranslateModule to imports
+    TranslateModule
   ],
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
@@ -21,17 +21,17 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     trigger('fadeInOut', [
       transition(':enter', [
         style({ opacity: 0 }),
-        animate('300ms ease-out', style({ opacity: 1 })),
+        animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1 })),
       ]),
       transition(':leave', [
-        animate('300ms ease-in', style({ opacity: 0 })),
+        animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 0 })),
       ]),
     ]),
     trigger('staggerList', [
       transition('* <=> *', [
         query(':enter', [
           style({ opacity: 0, transform: 'translateY(10px)' }),
-          stagger('60ms', animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })))
+          stagger('50ms', animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1, transform: 'translateY(0)' })))
         ], { optional: true }),
       ])
     ]),
@@ -47,13 +47,31 @@ export class IndexComponent implements OnInit {
   isFooterExpanded = false;
   isHeaderVisible = true;
   lastScrollPosition = 0;
+
+  // Design system values from style guide
+  colors = {
+    background: 'var(--neutral-50)',
+    text: {
+      primary: 'var(--neutral-700)',
+      secondary: 'var(--neutral-500)'
+    },
+    border: 'var(--neutral-200)',
+    accent: 'var(--accent-color-base)'
+  };
+
+  // Typography tokens based on style guide
+  typography = {
+    heading: 'text-2xl font-light text-neutral-700 tracking-tight',
+    subheading: 'text-lg font-light text-neutral-700',
+    body: 'text-base font-light text-neutral-700',
+    caption: 'text-sm font-light text-neutral-500'
+  };
+
   // Update language options with icons
   languageOptions = [
     { code: 'en', label: 'English', icon: 'bi bi-globe2' },
     { code: 'es', label: 'Español', icon: 'bi bi-globe' }
   ];
-
-  
 
   // Close dropdown when clicking outside
   @HostListener('document:click')
@@ -68,7 +86,7 @@ export class IndexComponent implements OnInit {
   appName = 'CoST Data Portal: Prototype';
 
   navLinks = [
-    { path: 'home', label: 'NAV.HOME', icon: 'bi bi-house' }, // Update labels to use translation keys
+    { path: 'home', label: 'NAV.HOME', icon: 'bi bi-house' },
     { path: 'projects', label: 'NAV.PROJECTS', icon: 'bi bi-file-text' },
     { path: 'data-analytics', label: 'NAV.ANALYTICS', icon: 'bi bi-bar-chart' },
     { path: 'downloads', label: 'NAV.DOWNLOADS', icon: 'bi bi-download' },
@@ -88,7 +106,7 @@ export class IndexComponent implements OnInit {
 
   constructor(
     public router: Router,
-    private translateService: TranslateService // Inject TranslateService
+    private translateService: TranslateService
   ) {
     this.currentLang = this.translateService.currentLang;
   }

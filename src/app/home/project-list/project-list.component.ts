@@ -49,25 +49,26 @@ interface Project {
         CommonModule,
         RouterLink,
         IntersectionObserverDirective,
-        SharedModule // Add the pipe to the imports array
+        SharedModule
     ],
     templateUrl: './project-list.component.html',
     styleUrls: ['./project-list.component.scss'],
     animations: [
+        // Updated animations to match style guide with appropriate cubic-bezier timing
         trigger('fadeInOut', [
             transition(':enter', [
                 style({ opacity: 0 }),
-                animate('300ms', style({ opacity: 1 })),
+                animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1 })),
             ]),
             transition(':leave', [
-                animate('300ms', style({ opacity: 0 })),
+                animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 0 })),
             ]),
         ]),
         trigger('listAnimation', [
             transition('* <=> *', [
                 query(':enter',
-                    [style({ opacity: 0, transform: 'translateY(50px)' }),
-                        stagger('50ms', animate('500ms ease', style({ opacity: 1, transform: 'translateY(0)' })))],
+                    [style({ opacity: 0, transform: 'translateY(20px)' }),
+                        stagger('50ms', animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1, transform: 'translateY(0)' })))],
                     { optional: true }
                 ),
             ]),
@@ -75,7 +76,7 @@ interface Project {
         trigger('fadeInAnimation', [
             transition(':enter', [
                 style({ opacity: 0 }),
-                animate('300ms', style({ opacity: 1 })),
+                animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1 })),
             ]),
         ]),
     ],
@@ -96,8 +97,32 @@ export class ProjectListComponent implements OnInit {
 
     isLoading: boolean = true;
     showModal: boolean = false;
-    showFilters: boolean = false;  // New property for mobile filter toggle
+    showFilters: boolean = false;
 
+    // Style guide values
+    colors = {
+        background: 'var(--neutral-50)',
+        card: 'var(--white)',
+        text: {
+            primary: 'var(--neutral-700)',
+            secondary: 'var(--neutral-500)'
+        },
+        border: 'var(--neutral-300)',
+        statusColors: {
+            active: 'var(--status-active)',
+            completed: 'var(--status-completed)',
+            inProgress: 'var(--status-in-progress)',
+            planned: 'var(--status-planned)'
+        }
+    };
+
+    // Typography tokens based on style guide
+    typography = {
+        heading: 'text-2xl font-light text-neutral-700 tracking-tight',
+        subheading: 'text-xl font-light text-neutral-700',
+        body: 'text-base font-light text-neutral-700',
+        caption: 'text-sm font-light text-neutral-500'
+    };
 
     // Pagination
     currentPage = 1;
@@ -113,9 +138,15 @@ export class ProjectListComponent implements OnInit {
         private route: ActivatedRoute
     ) {}
 
-    // In the component class
     ngOnInit(): void {
         this.isLoading = true;
+        
+        // Check for featured query param
+        this.route.queryParams.subscribe(params => {
+            if (params['featured'] === 'true') {
+                this.showFeatured.next(true);
+            }
+        });
         
         this.projects$ = combineLatest([
           this.searchTerm.pipe(debounceTime(300), distinctUntilChanged()),
@@ -218,7 +249,6 @@ export class ProjectListComponent implements OnInit {
         this.showFilters = !this.showFilters;
     }
 
-
     toggleSector(sector: string): void {
         const currentSectors = this.selectedSectors.value;
         const updatedSectors = currentSectors.includes(sector)
@@ -268,7 +298,6 @@ export class ProjectListComponent implements OnInit {
 
     onBulkDownload(): void {
         // Implement the logic for bulk download
-        // You might want to call a service method here to handle the actual download
     }
 
     resetFilters(): void {
@@ -293,7 +322,6 @@ export class ProjectListComponent implements OnInit {
         if (value === null) return '';
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
     }
-
 
     loadProjects() {
         this.isLoading = true;
@@ -404,5 +432,4 @@ export class ProjectListComponent implements OnInit {
           return '';
         }
       }
-    
 }

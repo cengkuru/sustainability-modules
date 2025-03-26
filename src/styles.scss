@@ -5,6 +5,31 @@
 
 // Custom variables
 :root {
+  // Core colors from style guide
+  --white: #FFFFFF;
+  --neutral-50: #F9FAFB;
+  --neutral-100: #F3F4F6;
+  --neutral-200: #E5E7EB;
+  --neutral-300: #D1D5DB;
+  --neutral-500: #4B5563;
+  --neutral-700: #111827;
+  --neutral-800: #1F2937;
+  --black: #000000;
+  --accent-base: #61a8bd;
+
+  // Status colors
+  --status-active: #61a8bd;
+  --status-completed: #4CAF50;
+  --status-in-progress: #ffc107;
+  --status-planned: #2196f3;
+  --status-other: #D60000;
+
+  // Functional colors
+  --alert: var(--status-other);
+  --success: var(--status-completed);
+  --info: var(--status-planned);
+
+  // Legacy colors (maintained for backward compatibility)
   --primary: #f7f7f7;
   --secondary: #d60000;
   --accent: #333333;
@@ -18,62 +43,192 @@
 
 // Base styles
 body {
-  font-family: 'Inter', system-ui, sans-serif;
-  background-color: var(--primary);
-  color: var(--accent);
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--white);
+  color: var(--neutral-700);
   line-height: 1.5;
 }
 
 // Typography
 h1, h2, h3, h4, h5, h6 {
   font-family: 'SF Pro Display', 'Inter', system-ui, sans-serif;
-  font-weight: 600;
+  color: var(--neutral-700);
   letter-spacing: -0.025em;
 }
 
-h1 { @apply text-4xl md:text-5xl mb-6; }
-h2 { @apply text-3xl md:text-4xl mb-5; }
-h3 { @apply text-2xl md:text-3xl mb-4; }
-h4 { @apply text-xl md:text-2xl mb-3; }
-h5 { @apply text-lg md:text-xl mb-2; }
-h6 { @apply text-base md:text-lg mb-2; }
+h1 { 
+  @apply text-2xl font-normal tracking-tight mb-4; // 24px - Page titles
+  @apply md:text-3xl;
+}
 
-p { @apply mb-4; }
+h2 { 
+  @apply text-base font-medium mb-3; // Section titles
+  @apply md:text-lg;
+}
+
+h3 { 
+  @apply text-sm font-medium mb-2; // Subsection titles
+  @apply md:text-base;
+}
+
+h4 { 
+  @apply text-sm font-medium mb-2;
+  @apply md:text-base;
+}
+
+h5, h6 { 
+  @apply text-sm mb-2;
+}
+
+p { 
+  @apply text-base text-neutral-700 mb-4;
+}
+
+.body-text {
+  @apply text-base text-neutral-700;
+}
+
+.caption-text {
+  @apply text-sm text-neutral-500;
+}
+
+.label-text {
+  @apply text-sm text-neutral-700;
+}
 
 a {
-  color: var(--accent6);
+  color: var(--accent-base);
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color 0.2s ease;
 
   &:hover {
-    color: var(--accent5);
+    color: var(--status-planned);
   }
 }
 
 // Buttons
 .btn {
-  @apply px-4 py-2 rounded-apple-md transition duration-300 ease-apple-ease;
+  @apply px-4 py-2 text-sm transition-colors;
+  border-radius: 4px;
 
   &-primary {
-    @apply bg-accent6 text-primary hover:bg-accent5;
+    @apply bg-black text-white border border-black;
+    &:hover {
+      @apply bg-neutral-800 border-neutral-800;
+    }
+    &:disabled {
+      @apply opacity-50 cursor-not-allowed;
+    }
   }
 
   &-secondary {
-    @apply bg-accent text-primary hover:bg-accent4;
+    @apply bg-white text-neutral-700 border border-neutral-700;
+    &:hover {
+      @apply bg-neutral-100;
+    }
+  }
+
+  &-tertiary {
+    @apply bg-white text-neutral-500 border border-neutral-300;
+    &:hover {
+      @apply bg-neutral-100;
+    }
+  }
+
+  &-action {
+    @apply px-3 py-1 text-xs bg-white text-neutral-500 border border-neutral-300;
+    &:hover {
+      @apply bg-neutral-100;
+    }
   }
 }
 
 // Forms
 input, textarea, select {
-  @apply border border-accent2 rounded-apple-sm px-3 py-2 w-full;
-  @apply focus:outline-none focus:ring-2 focus:ring-accent6 focus:border-transparent;
+  @apply w-full px-3 py-2 text-sm text-neutral-700 bg-white border border-neutral-300;
+  border-radius: 4px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  
+  &:focus {
+    @apply border-accent-base outline-none;
+    box-shadow: 0 0 0 2px rgba(97, 168, 189, 0.3); // Subtle teal glow
+  }
+  
+  &:disabled {
+    @apply bg-neutral-100 opacity-70;
+  }
 }
 
-// Cards
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23111827' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-position: right 0.75rem center;
+  background-repeat: no-repeat;
+  background-size: 1em;
+  padding-right: 2.5rem;
+}
+
+.checkbox, 
+.radio {
+  @apply appearance-none w-4 h-4 border border-neutral-300 bg-white mr-2 align-middle;
+  transition: border-color 0.2s, background-color 0.2s;
+  
+  &:checked {
+    @apply border-accent-base bg-accent-base;
+    background-size: 65%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  &:focus {
+    @apply outline-none;
+    box-shadow: 0 0 0 2px rgba(97, 168, 189, 0.3); // Subtle teal glow
+  }
+}
+
+.checkbox {
+  border-radius: 2px;
+  
+  &:checked {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23FFFFFF'%3E%3Cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clip-rule='evenodd'/%3E%3C/svg%3E");
+  }
+}
+
+.radio {
+  border-radius: 50%;
+  
+  &:checked {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFFFFF'%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3C/svg%3E");
+  }
+}
+
+.label {
+  @apply block text-sm text-neutral-700 mb-2;
+}
+
+// Cards & Containers
 .card {
-  @apply bg-white rounded-apple-lg shadow-apple-md p-6;
-  @apply transition duration-300 ease-apple-ease;
-  @apply hover:shadow-apple-lg;
+  @apply bg-white border border-neutral-300 p-8;
+  
+  // Optional: Frosted glass effect
+  // @apply bg-white/90 backdrop-filter backdrop-blur-lg;
+  
+  .card-header {
+    @apply mb-6;
+  }
+  
+  .card-title {
+    @apply text-base font-medium text-neutral-700;
+  }
+}
+
+// Section dividers
+.divider {
+  @apply h-px w-full bg-neutral-200 my-6;
+}
+
+.divider-small {
+  @apply h-px w-16 bg-neutral-700 my-2;
 }
 
 // Utility classes
@@ -82,11 +237,11 @@ input, textarea, select {
 }
 
 .apple-glass {
-  @apply bg-white bg-opacity-70 backdrop-filter backdrop-blur-lg;
+  @apply bg-white/90 backdrop-filter backdrop-blur-lg;
 }
 
 .apple-gradient-text {
-  @apply bg-gradient-to-r from-accent5 to-accent6 text-transparent bg-clip-text;
+  @apply bg-gradient-to-r from-accent-base to-status-planned text-transparent bg-clip-text;
 }
 
 // Animations
@@ -111,15 +266,70 @@ input, textarea, select {
 // Dark mode
 @media (prefers-color-scheme: dark) {
   body {
-    @apply bg-accent3 text-primary;
+    @apply bg-neutral-800 text-white;
   }
 
   .card {
-    @apply bg-accent4;
+    @apply bg-neutral-700 border-neutral-700;
   }
 
   .apple-glass {
-    @apply bg-accent3 bg-opacity-70;
+    @apply bg-black/70 backdrop-filter backdrop-blur-lg;
+  }
+  
+  a {
+    color: var(--status-planned);
+    
+    &:hover {
+      color: var(--accent-base);
+    }
+  }
+  
+  .btn {
+    &-primary {
+      @apply bg-white text-neutral-800 border-white;
+      &:hover {
+        @apply bg-neutral-100 border-neutral-100;
+      }
+    }
+    
+    &-secondary {
+      @apply bg-transparent text-white border-white;
+      &:hover {
+        @apply bg-white/10;
+      }
+    }
+    
+    &-tertiary, &-action {
+      @apply bg-transparent text-neutral-300 border-neutral-600;
+      &:hover {
+        @apply bg-white/10;
+      }
+    }
+  }
+  
+  input, textarea, select {
+    @apply bg-neutral-700 border-neutral-600 text-white;
+    
+    &:focus {
+      @apply border-accent-base;
+    }
+    
+    &:disabled {
+      @apply bg-neutral-800;
+    }
+  }
+  
+  select {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  }
+  
+  .divider {
+    @apply bg-neutral-600;
+  }
+  
+  .divider-small {
+    @apply bg-neutral-300;
   }
 }
 
@@ -134,21 +344,15 @@ input, textarea, select {
 
 // Accessibility
 .sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+  @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
 }
 
 // Print styles
 @media print {
   body {
     font-size: 12pt;
+    background-color: white;
+    color: black;
   }
 
   a {
@@ -348,6 +552,100 @@ input, textarea, select {
 @media (max-width: 1024px) {
   .floating-menu {
     display: none;
+  }
+}
+
+// Interactive states
+.tab {
+  @apply px-6 py-2 text-sm font-normal border border-neutral-300 cursor-pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  
+  &.active {
+    @apply bg-accent-base border-accent-base text-white;
+  }
+  
+  &:not(.active) {
+    @apply bg-white text-neutral-500;
+    
+    &:hover {
+      @apply bg-neutral-100;
+    }
+  }
+}
+
+// Focus states
+:focus-visible {
+  outline: none;
+  border-color: var(--accent-base);
+  box-shadow: 0 0 0 2px rgba(97, 168, 189, 0.3); // Subtle teal glow
+}
+
+// Animations & Transitions
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+.transition-colors {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+// Fade animations
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 200ms ease-out;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.fade-out {
+  animation: fadeOut 200ms ease-in;
+}
+
+// Container classes
+.container {
+  @apply max-w-6xl mx-auto px-4;
+}
+
+.container-sm {
+  @apply max-w-3xl mx-auto px-4;
+}
+
+// Hover effects
+.hover-lift {
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: translateY(-3px);
+  }
+}
+
+// Custom scrollbar
+.custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: var(--neutral-100);
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: var(--neutral-300);
+    border-radius: 4px;
+    
+    &:hover {
+      background: var(--neutral-500);
+    }
   }
 }
 

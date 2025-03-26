@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+import { CommonModule, CurrencyPipe } from "@angular/common";
 import {
   Component,
   AfterViewInit,
@@ -7,18 +7,21 @@ import {
   NgZone,
   HostListener,
   ChangeDetectorRef,
+  OnDestroy,
+  OnInit,
 } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
 import * as echarts from "echarts";
-import { EChartsOption, BarSeriesOption, PieSeriesOption } from "echarts";
+import { EChartsOption, BarSeriesOption, PieSeriesOption, TreemapSeriesOption } from "echarts";
 import * as L from "leaflet";
+import 'leaflet.markercluster';
 import { ScriptLoaderService } from "../../services/scriptLoader.service";
-import { Project } from "../../models/vizprojects.model";
+import { Project, ProjectUtils, CHART_COLORS, Region } from "../../models/vizprojects.model";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
 import firebase from "firebase/compat";
 import DocumentData = firebase.firestore.DocumentData;
-import { CallbackDataParams } from "echarts/types/dist/shared";
+import { CallbackDataParams, TooltipFormatterCallback, TopLevelFormatterParams } from "echarts/types/dist/shared";
 
 type ChartName =
   | "investmentByRegion"
@@ -46,10 +49,11 @@ interface ChartClickEventParams {
   selector: "app-data-analysis",
   standalone: true,
   imports: [CommonModule, FormsModule],
+  providers: [CurrencyPipe],
   templateUrl: "./data-analysis.component.html",
   styleUrls: ["./data-analysis.component.scss"],
 })
-export class DataAnalysisComponent implements AfterViewInit {
+export class DataAnalysisComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild("mapContainer") mapContainer!: ElementRef;
 
   charts: { [key in ChartName]?: echarts.ECharts } = {};
@@ -59,22 +63,31 @@ export class DataAnalysisComponent implements AfterViewInit {
   projectsLoaded: boolean = false;
   private viewInitialized: boolean = false;
 
-  private map!: L.Map;
+  private map?: L.Map;
   projects: Project[] = [];
   filteredProjects: Project[] = [];
-  markers: { lat: number; lng: number; popup: string; status: string }[] = [];
+  public markers: L.Marker[] = [];
+  private markerClusterGroup?: L.MarkerClusterGroup;
 
   // Brand Colors
   private readonly brandColors = {
-    primary: '#FAFAFA',
-    secondary: '#0066CC',
-    accent: '#1D1D1F',
-    accent1: '#86868B',
-    accent2: '#E5E5E7',
-    accent3: '#F5F5F7',
-    accent4: '#004499',
-    accent5: '#F0F0F2',
-    accent6: '#FFFFFF',
+    primary: '#FFFFFF',
+    secondary: '#007AFF',  // iOS blue
+    accent: '#1D1D1F',    // Almost black
+    accent1: '#86868B',   // Neutral gray
+    accent2: '#E5E5E7',   // Light border
+    accent3: '#F5F5F7',   // Background gray
+    accent4: '#0055B3',   // Darker blue
+    accent5: '#F0F0F2',   // Subtle hover
+    accent6: '#FFFFFF',   // Pure white
+    success: '#34C759',   // iOS green
+    warning: '#FF9500',   // iOS orange
+    error: '#FF3B30',     // iOS red
+    chart1: '#007AFF',    // Primary chart color
+    chart2: '#5856D6',    // Secondary chart color
+    chart3: '#34C759',    // Tertiary chart color
+    chart4: '#FF9500',    // Quaternary chart color
+    chart5: '#FF2D55'     // Quinary chart color
   };
 
   dropdownOpen: Record<ChartName, boolean> = {
@@ -83,14 +96,14 @@ export class DataAnalysisComponent implements AfterViewInit {
     projectsByClimateObjectives: true,
     investmentsByClimateObjectives: true,
     projectTypes: true,
-    infrastructureInvestment: true,
+    infrastructureInvestment: true
   };
 
   chartNames: ChartName[] = [
     "infrastructureInvestment",
     "projectsByRegion",
     "investmentsByClimateObjectives",
-    "investmentByRegion", // Add this line
+    "investmentByRegion"
   ];
 
   // Filters
@@ -150,24 +163,29 @@ export class DataAnalysisComponent implements AfterViewInit {
     },
   ];
 
-  
+  // Add after other properties
+  public selectedSubsector: string | null = null;
+  public chartView: 'donut' | 'bar' = 'donut';
 
   constructor(
     private http: HttpClient,
     private ngZone: NgZone,
     private scriptLoader: ScriptLoaderService,
     private cdr: ChangeDetectorRef,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private currencyPipe: CurrencyPipe
   ) {}
 
   async ngOnInit(): Promise<void> {
     try {
       await this.loadLeafletScripts();
       await this.loadProjects();
+      if (this.viewInitialized && !this.mapInitialized) {
+        this.initializeMap();
+      }
       this.updateKeyMetrics();
       this.initializeCharts();
       this.updateSustainableSubsectorBreakdown();
-    this.createSubsectorBarChart();
       this.cdr.detectChanges();
     } catch (error) {
       console.error("Error during component initialization:", error);
@@ -176,16 +194,18 @@ export class DataAnalysisComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.viewInitialized = true;
-    this.ngZone.runOutsideAngular(() => {
-      setTimeout(() => {
-        this.checkAndInitializeMap();
-      }, 0);
+    if (this.projectsLoaded && !this.mapInitialized) {
+      this.initializeMap();
+    }
+    setTimeout(() => {
+      this.initializeCharts();
     });
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     if (this.map) {
       this.map.remove();
+      this.map = undefined;
     }
   }
 
@@ -193,82 +213,119 @@ export class DataAnalysisComponent implements AfterViewInit {
     const appleStyling: Partial<EChartsOption> = {
       backgroundColor: this.brandColors.primary,
       textStyle: {
-        fontFamily: "'SF Pro Display', 'Inter', system-ui",
+        fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, system-ui",
         color: this.brandColors.accent,
+        fontWeight: 400
       },
       title: {
         textStyle: {
           color: this.brandColors.accent,
           fontWeight: 500,
-          fontSize: 18,
-          fontFamily: "'SF Pro Display', 'Inter', system-ui",
+          fontSize: 20,
+          fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, system-ui"
         },
+        subtextStyle: {
+          color: this.brandColors.accent1,
+          fontSize: 14,
+          fontWeight: 400
+        }
       },
       tooltip: {
-        backgroundColor: `rgba(255, 255, 255, 0.95)`,
+        backgroundColor: `rgba(255, 255, 255, 0.98)`,
         borderColor: this.brandColors.accent2,
         borderWidth: 1,
         textStyle: {
           color: this.brandColors.accent,
-          fontFamily: "'SF Pro Display', 'Inter', system-ui",
+          fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, system-ui",
+          fontSize: 13
         },
         padding: [8, 12],
-        borderRadius: 8,
+        borderRadius: 10,
+        shadowColor: 'rgba(0, 0, 0, 0.1)',
+        shadowBlur: 10,
+        shadowOffsetX: 0,
+        shadowOffsetY: 4,
+        extraCssText: 'backdrop-filter: blur(10px)'
       },
       legend: {
         textStyle: {
           color: this.brandColors.accent1,
-          fontFamily: "'SF Pro Display', 'Inter', system-ui",
+          fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, system-ui",
+          fontSize: 13
         },
+        itemWidth: 10,
+        itemHeight: 10,
+        itemGap: 15,
+        icon: 'circle',
+        pageIconColor: this.brandColors.accent1,
+        pageIconInactiveColor: this.brandColors.accent2,
+        pageTextStyle: {
+          color: this.brandColors.accent1
+        }
       },
       xAxis: {
         axisLine: {
           lineStyle: {
             color: this.brandColors.accent2,
-          },
+            width: 1
+          }
         },
         axisLabel: {
           color: this.brandColors.accent1,
-          fontFamily: "'SF Pro Display', 'Inter', system-ui",
+          fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, system-ui",
+          fontSize: 12
         },
         splitLine: {
-          show: false,
+          show: false
         },
+        axisTick: {
+          alignWithLabel: true,
+          length: 4,
+          lineStyle: {
+            color: this.brandColors.accent2
+          }
+        }
       },
       yAxis: {
         axisLine: {
           lineStyle: {
             color: this.brandColors.accent2,
-          },
+            width: 1
+          }
         },
         axisLabel: {
           color: this.brandColors.accent1,
-          fontFamily: "'SF Pro Display', 'Inter', system-ui",
+          fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, system-ui",
+          fontSize: 12
         },
         splitLine: {
           lineStyle: {
             color: this.brandColors.accent2,
             opacity: 0.3,
             type: 'dashed',
-          },
-        },
+            width: 1
+          }
+        }
       },
+      grid: {
+        left: '5%',
+        right: '5%',
+        bottom: '10%',
+        top: '15%',
+        containLabel: true
+      }
     };
 
     return { ...option, ...appleStyling };
   }
 
   private async loadLeafletScripts(): Promise<void> {
-    const scripts = ["https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"];
-    const styles = ["https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"];
-
     try {
-      await this.scriptLoader.loadScripts(scripts);
-      await this.scriptLoader.loadStyles(styles);
-      // After loading Leaflet, apply custom styles to align with Tailwind config
+      // We don't need to load external scripts or styles anymore
+      // since we're using npm packages and Angular's built-in style loading
       this.applyLeafletCustomStyles();
     } catch (error) {
-      console.error("Error loading Leaflet scripts or styles:", error);
+      console.error("Error applying Leaflet custom styles:", error);
       throw error;
     }
   }
@@ -278,9 +335,9 @@ export class DataAnalysisComponent implements AfterViewInit {
       infrastructureInvestment: "Investment by Sector",
       projectsByRegion: "Projects by Region",
       investmentsByClimateObjectives: "Investment by Climate Objective",
-      investmentByRegion: "Investment by Region",
+      investmentByRegion: "Beneficiary Impact",
       projectsByClimateObjectives: "Projects by Climate Objectives",
-      projectTypes: "Project Types",
+      projectTypes: "Project Types"
     };
     return titles[chartName] || "Chart";
   }
@@ -362,110 +419,149 @@ export class DataAnalysisComponent implements AfterViewInit {
         this.initializeMap();
       }, 100); // 100ms delay
     } else {
-      if (!this.mapContainer) {
-        console.error("Map container is not available");
-      }
+      
       setTimeout(() => this.checkAndInitializeMap(), 100);
     }
   }
 
   private getPulsingIcon(status: string): L.DivIcon {
-    const color = this.brandColors.secondary;
+    const color = this.getColorForStatus(status);
     return L.divIcon({
-      className: 'pulsing-icon',
-      html: `
-        <div class="relative w-6 h-6">
-          <div class="absolute inset-0 pulse-ring rounded-full border-2" style="border-color: ${color};"></div>
-          <div class="absolute inset-0 rounded-full bg-white/80 backdrop-blur-sm" style="background-color: ${color};"></div>
-        </div>
-      `,
-      iconSize: [24, 24],
-      iconAnchor: [12, 12],
+        className: 'custom-div-icon',
+        html: `
+            <div class="relative flex">
+                <div class="w-4 h-4 rounded-full ${color} animate-ping absolute opacity-75"></div>
+                <div class="w-4 h-4 rounded-full ${color} relative"></div>
+            </div>
+        `,
+        iconSize: [16, 16],
+        iconAnchor: [8, 8]
     });
   }
+
   private getColorForStatus(status: string): string {
-    const statusColors: { [key: string]: string } = {
-      Completed: "#4caf50",
-      "In Progress": "#ffc107",
-      Planned: "#2196f3",
-      Other: "#d60000",
+    const statusColors = {
+        'Completed': 'bg-[#0066CC]',
+        'In Progress': 'bg-amber-500',
+        'Planned': 'bg-[#004499]',
+        'Other': 'bg-[#86868B]'
     };
-    return statusColors[status] || statusColors["Other"];
-  }
-  generateMarkers() {
-    console.log("generateMarkers called");
-    this.markers = this.filteredProjects
-      .filter(
-        (project) =>
-          project.location &&
-          project.location.lat !== 0 &&
-          project.location.lng !== 0
-      )
-      .map((project) => {
-        const popup = `
-                <div class="p-6 max-w-sm bg-primary-100 rounded-apple ">
-                    <h3 class="text-lg font-semibold mb-2 text-accent-300">${
-                      project.name
-                    }</h3>
-                    <p class="mb-2 text-accent-100">
-                        <span class="font-medium">Budget:</span> 
-                        ${project.budget.toLocaleString("en-US", {
-                          style: "currency",
-                          currency: "USD",
-                        })}
-                    </p>
-                    <p class="mb-4 text-accent-100">
-                        <span class="font-medium">Region:</span> ${
-                          project.region.name
-                        }
-                    </p>
-                </div>
-            `;
-        return {
-          lat: project.location.lat,
-          lng: project.location.lng,
-          popup: popup,
-          status: this.getProjectStatus(project),
-        };
-      });
-    console.log("Generated markers:", this.markers);
+    return statusColors[status as keyof typeof statusColors] || statusColors['Other'];
   }
 
-  initializeMap(): void {
-    console.log("initializeMap called");
-    if (this.mapInitialized) {
-      console.log("Map already initialized");
+  private initializeMap(): void {
+    if (!this.mapContainer || this.mapInitialized) {
       return;
     }
 
-    console.log("Creating map instance");
-    this.map = L.map(this.mapContainer.nativeElement).setView(
-      [-28.4793, 24.6727],
-      6
-    );
+    this.ngZone.runOutsideAngular(() => {
+      if (this.map) {
+        this.map.remove();
+      }
+      this.map = L.map(this.mapContainer.nativeElement, {
+        minZoom: 2,
+        maxZoom: 18,
+        zoomControl: true,
+        scrollWheelZoom: true
+      });
 
-    console.log("Adding tile layer");
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "© OpenStreetMap contributors",
-    }).addTo(this.map);
-
-    console.log("Adding markers", this.markers);
-    this.markers.forEach((markerData) => {
-      const marker = L.marker([markerData.lat, markerData.lng], {
-        icon: this.getPulsingIcon(markerData.status),
+      // Add tile layer
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
       }).addTo(this.map);
-      marker.bindPopup(markerData.popup);
-    });
 
-    this.fitMapBounds();
-    this.mapInitialized = true;
-    console.log("Map initialized successfully");
+      // Initialize marker cluster group
+      this.markerClusterGroup = new L.MarkerClusterGroup({
+        chunkedLoading: true,
+        spiderfyOnMaxZoom: true,
+        showCoverageOnHover: false,
+        zoomToBoundsOnClick: true,
+        maxClusterRadius: 50,
+        iconCreateFunction: (cluster) => {
+          const count = cluster.getChildCount();
+          return L.divIcon({
+            html: `
+                <div class="relative flex items-center justify-center">
+                    <div class="w-8 h-8 rounded-full bg-[#0066CC]/40 animate-ping absolute"></div>
+                    <div class="w-8 h-8 rounded-full bg-[#0066CC] relative flex items-center justify-center border-2 border-white">
+                        <span class="text-white text-sm font-semibold">${count}</span>
+                    </div>
+                </div>
+            `,
+            className: 'custom-cluster-icon',
+            iconSize: L.point(32, 32),
+            iconAnchor: L.point(16, 16)
+          });
+        }
+      });
+
+      this.mapInitialized = true;
+      this.updateMapMarkers();
+    });
   }
 
-  fitMapBounds() {
-    if (this.markers.length > 0 && this.map) {
-      const bounds = L.latLngBounds(this.markers.map((m) => [m.lat, m.lng]));
-      this.map.fitBounds(bounds);
+  private updateMapMarkers(): void {
+    
+    if (!this.map || !this.markerClusterGroup) {
+      return;
+    }
+
+    const clusterGroup = this.markerClusterGroup;
+    // Clear existing markers
+    clusterGroup.clearLayers();
+    this.markers = [];
+
+    // Add new markers
+    this.filteredProjects.forEach(project => {
+      if (project.location && project.location.latitude && project.location.longitude) {
+        
+        const status = this.getProjectStatus(project);
+        const marker = L.marker(
+          [project.location.latitude, project.location.longitude],
+          { icon: this.getPulsingIcon(status) }
+        );
+
+        const popupContent = `
+          <div class="p-4 max-w-sm bg-white rounded-lg shadow-sm">
+            <h3 class="text-lg font-semibold mb-2">${project.name || 'Project'}</h3>
+            <div class="space-y-2 text-sm">
+              <p><span class="font-medium">Budget:</span> ${project.budget.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'ZAR',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+              })}</p>
+              <p><span class="font-medium">Region:</span> ${this.getRegionName(project.region)}</p>
+              <p><span class="font-medium">Sector:</span> ${project.sector}</p>
+              <p><span class="font-medium">Status:</span> ${status}</p>
+            </div>
+          </div>
+        `;
+
+        marker.bindPopup(popupContent);
+        this.markers.push(marker);
+        clusterGroup.addLayer(marker);
+      }
+    });
+
+    
+
+    // Add marker cluster group to map if not already added
+    if (!this.map.hasLayer(clusterGroup)) {
+      this.map.addLayer(clusterGroup);
+    }
+
+    // Fit bounds if there are markers
+    if (this.markers.length > 0) {
+      const group = L.featureGroup(this.markers);
+      const bounds = group.getBounds();
+      this.map.fitBounds(bounds, { 
+        padding: [50, 50],
+        maxZoom: 12
+      });
+    } else {
+      // Default view for South Africa if no markers
+      this.map.setView([-28.4793, 24.6727], 6);
     }
   }
 
@@ -473,20 +569,66 @@ export class DataAnalysisComponent implements AfterViewInit {
     const currentYear = new Date().getFullYear();
     const investmentYears = Object.keys(project.yearlyInvestment).map(Number);
 
-    if (investmentYears.length === 0) {
-      return "Planned";
-    }
+    if (investmentYears.length === 0) return "Planned";
 
     const latestInvestmentYear = Math.max(...investmentYears);
     const earliestInvestmentYear = Math.min(...investmentYears);
 
-    if (latestInvestmentYear < currentYear) {
-      return "Completed";
-    } else if (earliestInvestmentYear > currentYear) {
-      return "Planned";
-    } else {
-      return "In Progress";
-    }
+    if (latestInvestmentYear < currentYear) return "Completed";
+    if (earliestInvestmentYear > currentYear) return "Planned";
+    return "In Progress";
+  }
+
+  private convertToProject(id: string, data: DocumentData): Project {
+    // Convert location format
+    const location = data["location"] ? {
+      latitude: data["location"].latitude || 0,
+      longitude: data["location"].longitude || 0
+    } : { latitude: 0, longitude: 0 };
+
+    // Convert region from string to Region object if needed
+    const region = typeof data["region"] === 'string' ? {
+      name: data["region"],
+      code: "",
+      population: 0
+    } : data["region"] || { name: "", code: "", population: 0 };
+
+    // Determine funding source based on project data
+    const fundingSource = data["funding_source"] || "Public"; // Default to Public if not specified
+
+    const project = {
+      id,
+      name: data["name"] || "",
+      budget: data["budget"] || 0,
+      region: region,
+      location: location,
+      climateObjective: data["objective"] || "",
+      sector: data["sector"] || "",
+      subsector: data["subsector"] || "",
+      projectType: data["projectType"] || "",
+      date: data["date"] || "",
+      yearlyInvestment: data["yearlyInvestment"] || {},
+      climateAndDisasterRiskAssessmentPublished: data["climateAndDisasterRiskAssessmentPublished"] || false,
+      sustainableSubsector: data["sustainableSubsector"] || "",
+    };
+
+    return {
+      ...project,
+      subsector_total: `$${(project.budget / 1e9).toFixed(1)}bn`,
+      subsector_label: `${project.subsector}: $${(project.budget / 1e9).toFixed(1)}bn`,
+      oc4ids: {
+        climate_finance_decision_making: data["oc4ids"]?.climate_finance_decision_making || "Pending approval",
+        nationally_determined_contributions: data["oc4ids"]?.nationally_determined_contributions || "Aligned with NDC",
+        paris_agreement: data["oc4ids"]?.paris_agreement ?? true,
+        beneficiaries: data["oc4ids"]?.beneficiaries || 0,
+        amount_of_investment: data["oc4ids"]?.amount_of_investment || project.budget,
+        funding_source: data["oc4ids"]?.funding_source || fundingSource,
+        ratio_of_co_finance: data["oc4ids"]?.ratio_of_co_finance || "0:0",
+        public_consultation_meetings: data["oc4ids"]?.public_consultation_meetings || 0,
+        abatement_cost: data["oc4ids"]?.abatement_cost || 0,
+        in_protected_area: data["oc4ids"]?.in_protected_area ?? false
+      }
+    };
   }
 
   async loadProjects() {
@@ -497,17 +639,34 @@ export class DataAnalysisComponent implements AfterViewInit {
         .get()
         .toPromise();
       if (snapshot) {
+        console.log("Raw Firestore data:", snapshot.docs.map(doc => ({ _id: doc.id, ...doc.data() })));
         this.projects = snapshot.docs.map((doc) =>
           this.convertToProject(doc.id, doc.data())
         );
+        
+        // Log projects with valid coordinates
+        const projectsWithCoords = this.projects.filter(p => 
+          p.location && 
+          typeof p.location.latitude === 'number' && 
+          typeof p.location.longitude === 'number' &&
+          p.location.latitude !== 0 &&
+          p.location.longitude !== 0
+        );
+        
+        
+
         this.filteredProjects = [...this.projects];
         this.projectsLoaded = true;
-        console.log(this.projects);
         this.initializeFilters();
         this.calculateNewMetrics();
         this.updateKeyMetrics();
-        this.generateMarkers(); // Add this line
-        this.checkAndInitializeMap();
+        
+        // Only update map markers if we have valid coordinates
+        if (projectsWithCoords.length > 0) {
+          this.updateMapMarkers();
+        } else {
+          console.warn("No projects with valid coordinates found");
+        }
       } else {
         console.error("No data received from Firestore");
         this.projects = [];
@@ -522,27 +681,15 @@ export class DataAnalysisComponent implements AfterViewInit {
     }
   }
 
-  private convertToProject(id: string, data: DocumentData): Project {
-    return {
-      id,
-      name: data["name"] || "",
-      budget: data["budget"] || 0,
-      region: data["region"] || { name: "", code: "", population: 0 },
-      location: data["location"] || { lat: 0, lng: 0 },
-      climateObjective: data["climateObjective"] || "",
-      sector: data["sector"] || "",
-      subsector: data["subsector"] || "",
-      projectType: data["projectType"] || "",
-      date: data["date"] || "",
-      yearlyInvestment: data["yearlyInvestment"] || {},
-      climateAndDisasterRiskAssessmentPublished:
-        data["climateAndDisasterRiskAssessmentPublished"] || false,
-      sustainableSubsector: data["sustainableSubsector"] || "",
-    };
+  private getRegionName(region: Region | string): string {
+    if (typeof region === 'string') {
+      return region;
+    }
+    return region.name || '';
   }
 
   initializeFilters() {
-    this.regions = ["All", ...new Set(this.projects.map((p) => p.region.name))];
+    this.regions = ["All", ...new Set(this.projects.map((p) => this.getRegionName(p.region)))];
     this.sectors = ["All", ...new Set(this.projects.map((p) => p.sector))];
     this.climateObjectives = [
       "All",
@@ -556,458 +703,535 @@ export class DataAnalysisComponent implements AfterViewInit {
   }
 
   private updateSustainableSubsectorBreakdown() {
+    // Create a default mapping of subsectors with type definition
+    const defaultSubsectors: { [key: string]: number } = {
+      'Solar': 0,
+      'Wind': 0,
+      'Hydropower': 0,
+      'Biomass': 0,
+      'Geothermal': 0,
+      'Transport': 0,
+      'Water and wastewater management': 0,
+      'Natural resource management': 0,
+      'Low carbon transport': 0,
+      'Flood protection': 0
+    };
+
+    // Count projects by subsector
     this.sustainableSubsectorBreakdown = this.filteredProjects.reduce(
       (acc, p) => {
-        if (p.sustainableSubsector) {
-          acc[p.sustainableSubsector] = (acc[p.sustainableSubsector] || 0) + 1;
-        }
+        const subsector = p.subsector || 'Other';
+        acc[subsector] = (acc[subsector] || 0) + 1;
         return acc;
       },
-      {} as { [key: string]: number }
+      { ...defaultSubsectors } as { [key: string]: number }
     );
 
     this.totalProjects = this.filteredProjects.length;
 
-    this.sortedSubsectorBreakdown = Object.entries(
-      this.sustainableSubsectorBreakdown
-    )
+    // Convert to sorted array with percentages
+    this.sortedSubsectorBreakdown = Object.entries(this.sustainableSubsectorBreakdown)
+      .filter(([key, value]) => value > 0) // Only include subsectors with projects
       .map(([key, value]) => ({
         key,
         value,
         percentage: (value / this.totalProjects) * 100,
       }))
       .sort((a, b) => b.value - a.value);
+
+    // Update the chart
+    this.createSubsectorBarChart();
   }
 
-  private createSubsectorBarChart() {
+  private createSubsectorBarChart(): void {
     const chartDom = document.getElementById('subsectorBarChart');
     if (!chartDom) return;
 
-    const myChart = echarts.init(chartDom);
+    const chart = echarts.init(chartDom);
+    
+    // Define the category structure with specific colors for each category
+    const categories = {
+      'Energy': {
+        subsectors: ['Solar', 'Wind', 'Hydropower', 'Biomass', 'Geothermal'],
+        color: this.brandColors.chart1,
+        gradient: [
+          { offset: 0, color: this.brandColors.chart1 },
+          { offset: 1, color: this.getLighterColor(this.brandColors.chart1, -0.2) }
+        ]
+      },
+      'Infrastructure': {
+        subsectors: ['Transport', 'Low carbon transport'],
+        color: this.brandColors.chart2,
+        gradient: [
+          { offset: 0, color: this.brandColors.chart2 },
+          { offset: 1, color: this.getLighterColor(this.brandColors.chart2, -0.2) }
+        ]
+      },
+      'Environment': {
+        subsectors: ['Water and wastewater management', 'Natural resource management', 'Flood protection'],
+        color: this.brandColors.chart3,
+        gradient: [
+          { offset: 0, color: this.brandColors.chart3 },
+          { offset: 1, color: this.getLighterColor(this.brandColors.chart3, -0.2) }
+        ]
+      }
+    };
 
-    const option: EChartsOption = {
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-          type: 'shadow'
-        },
-        formatter: (params: any) => {
-          const dataIndex = params[0].dataIndex;
-          const item = this.sortedSubsectorBreakdown[dataIndex];
-          return `
-            <div class="font-['SF Pro Display', 'Inter', system-ui]">
-              <div class="font-medium mb-1">${item.key}</div>
-              <div class="text-[#86868B]">
-                Projects: <span class="text-[#1D1D1F]">${item.value}</span><br/>
-                Percentage: <span class="text-[#1D1D1F]">${item.percentage.toFixed(1)}%</span>
-              </div>
-            </div>
-          `;
-        }
-      },
-      grid: {
-        left: '5%',
-        right: '5%',
-        bottom: '5%',
-        top: '5%',
-        containLabel: true
-      },
-      xAxis: {
-        type: 'value',
-        boundaryGap: [0, 0.01],
-        axisLabel: {
-          color: this.brandColors.accent1,
-          fontFamily: "'SF Pro Display', 'Inter', system-ui",
-        }
-      },
-      yAxis: {
-        type: 'category',
-        data: this.sortedSubsectorBreakdown.map(item => item.key),
-        axisLabel: {
-          color: this.brandColors.accent1,
-          fontFamily: "'SF Pro Display', 'Inter', system-ui",
-          fontSize: 12
-        }
-      },
-      series: [
-        {
-          name: 'Projects',
-          type: 'bar',
-          data: this.sortedSubsectorBreakdown.map(item => item.value),
-          itemStyle: {
-            color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-              { offset: 0, color: this.brandColors.secondary },
-              { offset: 1, color: this.brandColors.accent4 }
-            ]),
-            borderRadius: [0, 4, 4, 0]
-          },
-          label: {
-            show: true,
-            position: 'right',
-            formatter: '{c}',
-            color: this.brandColors.accent1,
-            fontFamily: "'SF Pro Display', 'Inter', system-ui",
+    // Process data into hierarchical structure
+    const processData = () => {
+      const root = {
+        name: 'All Sectors',
+        children: [] as any[]
+      };
+
+      // Calculate totals for each category and subsector
+      Object.entries(categories).forEach(([category, info]) => {
+        const categoryProjects = this.filteredProjects.filter(p => 
+          info.subsectors.includes(p.subsector)
+        );
+
+        if (categoryProjects.length > 0) {
+          const categoryNode = {
+            name: category,
+            value: categoryProjects.reduce((sum, p) => sum + p.budget, 0),
+            itemStyle: {
+              color: info.color,
+              borderColor: this.brandColors.primary,
+              borderWidth: 2
+            },
+            children: [] as any[]
+          };
+
+          // Group projects by subsector
+          const subsectorGroups = info.subsectors.reduce((acc, subsector) => {
+            const projects = categoryProjects.filter(p => p.subsector === subsector);
+            if (projects.length > 0) {
+              acc[subsector] = projects;
+            }
+            return acc;
+          }, {} as Record<string, Project[]>);
+
+          // Create subsector nodes
+          Object.entries(subsectorGroups).forEach(([subsector, projects], index) => {
+            const subsectorValue = projects.reduce((sum, p) => sum + p.budget, 0);
+            categoryNode.children.push({
+              name: subsector,
+              value: subsectorValue,
+              itemStyle: {
+                color: this.getLighterColor(info.color, 0.1 * (index + 1)),
+                borderColor: this.brandColors.primary,
+                borderWidth: 1
+              },
+              children: projects.map((project, projectIndex) => ({
+                name: project.name,
+                value: project.budget,
+                itemStyle: {
+                  color: this.getLighterColor(info.color, 0.2 * (projectIndex + 1)),
+                  borderColor: this.brandColors.primary,
+                  borderWidth: 1
+                },
+                project: project
+              }))
+            });
+          });
+
+          if (categoryNode.children.length > 0) {
+            root.children.push(categoryNode);
           }
         }
-      ]
+      });
+
+      return root;
     };
 
-    myChart.setOption(this.updateChartStyles(option));
-  }
+    const data = processData();
+    const totalInvestment = data.children.reduce((sum, category) => sum + category.value, 0);
 
-  getSubsectorIcon(subsector: string): string {
-    const iconMap: { [key: string]: string } = {
-      'Biomass': 'bi bi-tree',
-      'Flood protection': 'bi bi-water',
-      'Geothermal': 'bi bi-thermometer-half',
-      'Hydropower': 'bi bi-droplet',
-      'Low carbon transport': 'bi bi-bicycle',
-      'Natural resource management': 'bi bi-flower1',
-      'Renewable energy': 'bi bi-sun',
-      'Solar': 'bi bi-brightness-high',
-      'Transport': 'bi bi-truck',
-      'Water and wastewater management': 'bi bi-moisture',
-      'Wind': 'bi bi-wind'
-    };
+    const option: EChartsOption = {
+      title: {
+        text: 'Sustainable Subsector Analysis',
+        subtext: `Total Investment: ${totalInvestment.toLocaleString('en-US', {
+          style: 'currency',
+          currency: 'ZAR',
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0
+        })}`,
+        left: 'center',
+        top: 20
+      },
+      tooltip: {
+        formatter: (params: any) => {
+          const { name, value, data } = params;
+          const formattedValue = value.toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'ZAR',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+          });
 
-    return iconMap[subsector] || 'bi bi-question-circle';
-  }
+          if (data.project) {
+            // Project level tooltip
+            return `
+              <div class="font-['SF Pro Display']">
+                <div class="font-medium mb-2">${name}</div>
+                <div class="space-y-1 text-[#86868B]">
+                  <div>Investment: <span class="text-[#1D1D1F]">${formattedValue}</span></div>
+                  <div>Region: <span class="text-[#1D1D1F]">${this.getRegionName(data.project.region)}</span></div>
+                  <div>Climate Objective: <span class="text-[#1D1D1F]">${data.project.climateObjective}</span></div>
+                </div>
+              </div>
+            `;
+          } else {
+            // Category/Subsector level tooltip
+            const percentage = ((value / totalInvestment) * 100).toFixed(1);
+            const childCount = data.children ? data.children.length : 0;
+            const childLabel = data.children ? 
+              `${childCount} ${data.children[0].project ? 'Projects' : 'Subsectors'}` : 
+              'No children';
 
-  applyFilters() {
-    this.filteredProjects = this.projects.filter(
-      (p) =>
-        (this.selectedRegion === "All" ||
-          p.region.name === this.selectedRegion) &&
-        (this.selectedSector === "All" || p.sector === this.selectedSector) &&
-        (this.selectedClimateObjective === "All" ||
-          p.climateObjective === this.selectedClimateObjective) &&
-        Object.keys(p.yearlyInvestment).some((year) => {
-          const y = Number(year);
-          return y >= this.startYear && y <= this.endYear;
-        })
-    );
-    this.updateKeyMetrics();
-    this.updateSustainableSubsectorBreakdown();
-    this.generateMarkers();
-    this.updateAllCharts();
-    this.updateMapMarkers();
-    this.cdr.detectChanges();
-  }
-
-  // Add this new method to update the map markers
-  private updateMapMarkers() {
-    if (this.map) {
-      // Clear existing markers
-      this.map.eachLayer((layer) => {
-        if (layer instanceof L.Marker) {
-          this.map.removeLayer(layer);
+            return `
+              <div class="font-['SF Pro Display']">
+                <div class="font-medium mb-2">${name}</div>
+                <div class="space-y-1 text-[#86868B]">
+                  <div>Investment: <span class="text-[#1D1D1F]">${formattedValue}</span></div>
+                  <div>Share: <span class="text-[#1D1D1F]">${percentage}%</span></div>
+                  <div>Contains: <span class="text-[#1D1D1F]">${childLabel}</span></div>
+                </div>
+              </div>
+            `;
+          }
         }
-      });
+      },
+      series: [{
+        type: 'treemap',
+        data: data.children,
+        width: '95%',
+        height: '90%',
+        top: '10%',
+        roam: false,
+        nodeClick: 'zoomToNode',
+        breadcrumb: {
+          show: true,
+          height: 30,
+          top: 80,
+          itemStyle: {
+            color: this.brandColors.accent3,
+            borderColor: this.brandColors.accent2,
+            borderWidth: 1,
+            textStyle: {
+              color: this.brandColors.accent,
+              fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, system-ui"
+            }
+          }
+        },
+        levels: [
+          {
+            itemStyle: {
+              borderColor: this.brandColors.primary,
+              borderWidth: 3,
+              gapWidth: 3,
+              borderRadius: [4, 4, 0, 0]
+            },
+            upperLabel: {
+              show: true,
+              height: 30,
+              color: this.brandColors.primary,
+              fontSize: 14,
+              fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, system-ui",
+              backgroundColor: 'rgba(0,0,0,0.4)'
+            }
+          },
+          {
+            itemStyle: {
+              borderColor: this.brandColors.primary,
+              borderWidth: 2,
+              gapWidth: 2,
+              borderRadius: [2, 2, 0, 0]
+            },
+            emphasis: {
+              itemStyle: {
+                borderColor: this.brandColors.accent
+              }
+            }
+          },
+          {
+            itemStyle: {
+              borderColor: this.brandColors.primary,
+              borderWidth: 1,
+              gapWidth: 1,
+              borderRadius: [1, 1, 0, 0]
+            },
+            emphasis: {
+              itemStyle: {
+                borderColor: this.brandColors.accent
+              }
+            }
+          }
+        ],
+        label: {
+          show: true,
+          formatter: (params: any) => {
+            const value = params.value.toLocaleString('en-US', {
+              style: 'currency',
+              currency: 'ZAR',
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0
+            });
+            if (params.depth === 0) {
+              return `{name|${params.name}}\n{value|${value}}`;
+            } else if (params.depth === 1) {
+              return `{name|${params.name}}\n{value|${value}}`;
+            } else {
+              return `{name|${params.name}}\n{small|${value}}`;
+            }
+          },
+          rich: {
+            name: {
+              fontSize: 14,
+              fontWeight: 500,
+              color: '#FFFFFF',
+              padding: [5, 0, 0, 0]
+            },
+            value: {
+              fontSize: 12,
+              fontWeight: 400,
+              color: 'rgba(255, 255, 255, 0.8)',
+              padding: [0, 0, 5, 0]
+            },
+            small: {
+              fontSize: 10,
+              fontWeight: 400,
+              color: 'rgba(255, 255, 255, 0.7)',
+              padding: [0, 0, 5, 0]
+            }
+          }
+        },
+        upperLabel: {
+          show: true,
+          height: 30,
+          color: this.brandColors.primary,
+          fontSize: 12,
+          fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, system-ui"
+        }
+      } as TreemapSeriesOption]
+    };
 
-      // Add new markers
-      this.markers.forEach((markerData) => {
-        const marker = L.marker([markerData.lat, markerData.lng], {
-          icon: this.getPulsingIcon(markerData.status),
-        }).addTo(this.map);
-        marker.bindPopup(markerData.popup);
-      });
+    chart.setOption(this.updateChartStyles(option));
 
-      this.fitMapBounds();
+    // Handle subsector highlighting
+    if (this.selectedSubsector) {
+      chart.dispatchAction({
+        type: 'highlight',
+        seriesIndex: 0,
+        name: this.selectedSubsector
+      });
     }
   }
 
-  
-
-  updateKeyMetrics() {
-    this.totalProjects = this.filteredProjects.length;
-
-    // Update sustainableSubsectorBreakdown
-    this.updateSustainableSubsectorBreakdown();
-
-    // Assuming a project is completed if it has no investment in the last year
-    const completedProjects = this.filteredProjects.filter(
-      (p) => !p.yearlyInvestment[this.endYear.toString()]
-    ).length;
-    this.projectCompletionRate =
-      (completedProjects / this.totalProjects) * 100 || 0;
-    // Assuming each project creates a random number of jobs between 100 and 1000
-    this.jobsCreated = this.filteredProjects.reduce(
-      (sum, p) => sum + Math.floor(Math.random() * 900 + 100),
-      0
-    );
-
-    // Update the stats array
-    this.stats = [
-      {
-        title: "Total Projects",
-        value: this.totalProjects,
-        icon: "bi-folder2-open",
-        description: `from ${this.regions.length - 1} Regions`,
-        format: "1.0-0",
-      },
-      {
-        title: "Project Completion",
-        value: this.projectCompletionRate,
-        icon: "bi-graph-up",
-        description: "of projects completed",
-        format: "1.0-0",
-      },
-      {
-        title: "Jobs Created",
-        value: this.jobsCreated,
-        icon: "bi-people",
-        description: "estimated new jobs",
-        format: "1.0-0",
-      },
-      {
-        title: "Risk Assessment",
-        value: this.climateRiskAssessmentPercentage,
-        icon: "bi-clipboard-check",
-        description: "projects with published assessment",
-        format: "1.0-0",
-      },
-    ];
-
-    console.log("Updated metrics:", {
-      totalProjects: this.totalProjects,
-      projectCompletionRate: this.projectCompletionRate,
-      jobsCreated: this.jobsCreated,
-    });
-  }
-
-  private initializeCharts(): void {
-    this.chartNames.forEach((chartName) => {
-      const chartDom = document.getElementById(chartName + "Chart");
-      if (chartDom) {
-        this.charts[chartName] = echarts.init(chartDom);
-        this.updateChart(chartName);
-      }
-    });
-  }
-
-  private updateAllCharts(): void {
-    Object.keys(this.charts).forEach((chartName) => {
-      this.updateChart(chartName);
-    });
-  }
-
-  private updateChart(chartName: string): void {
-    switch (chartName) {
-      case "infrastructureInvestment":
-        this.createInfrastructureInvestmentChart();
-        break;
-      case "projectTypes":
-        this.createProjectTypesChart();
-        break;
-      case "investmentByRegion":
-        this.createInvestmentByRegionChart();
-        break;
-      case "projectsByRegion":
-        this.createProjectsByRegionChart();
-        break;
-      case "projectsByClimateObjectives":
-        this.createProjectsByClimateObjectivesChart();
-        break;
-      case "investmentsByClimateObjectives":
-        this.createInvestmentsByClimateObjectivesChart();
-        break;
-    }
+  private createSubsectorDonutChart(): void {
+    // Remove this function
   }
 
   private createInfrastructureInvestmentChart(): void {
     const chart = this.charts["infrastructureInvestment"];
     if (!chart) return;
 
-    const processData = (
-      projects: Project[],
-      groupBy: "sector" | "subsector"
-    ) => {
-      const investmentData = projects.reduce((acc, project) => {
-        const key = project[groupBy];
-        if (!acc[key]) {
-          acc[key] = { value: 0, projectCount: 0 };
+    // Process data to group by sectors and subsectors
+    const sectorData = this.filteredProjects.reduce((acc, project) => {
+        const sector = project.sector || 'Other';
+        const subsector = project.subsector || 'Other';
+        
+        if (!acc[sector]) {
+            acc[sector] = {
+                total: 0,
+                subsectors: {}
+            };
         }
-        acc[key].value += project.budget;
-        acc[key].projectCount++;
+        
+        if (!acc[sector].subsectors[subsector]) {
+            acc[sector].subsectors[subsector] = 0;
+        }
+        
+        acc[sector].total += project.budget;
+        acc[sector].subsectors[subsector] += project.budget;
+        
         return acc;
-      }, {} as { [key: string]: { value: number; projectCount: number } });
+    }, {} as { [key: string]: { total: number, subsectors: { [key: string]: number } } });
 
-      return Object.entries(investmentData).map(([name, data]) => ({
-        name,
-        value: data.value,
-        projectCount: data.projectCount,
-      }));
-    };
+    // Sort sectors by total investment and get top 10
+    const sortedSectors = Object.entries(sectorData)
+        .sort((a, b) => b[1].total - a[1].total);
+    
+    const topSectors = sortedSectors.slice(0, 10);
+    
+    // Combine remaining sectors into "Other"
+    const otherSectors = sortedSectors.slice(10);
+    if (otherSectors.length > 0) {
+        const otherData = {
+            total: otherSectors.reduce((sum, [_, data]) => sum + data.total, 0),
+            subsectors: otherSectors.reduce((acc, [_, data]) => {
+                Object.entries(data.subsectors).forEach(([subsector, value]) => {
+                    acc[subsector] = (acc[subsector] || 0) + value;
+                });
+                return acc;
+            }, {} as { [key: string]: number })
+        };
+        sectorData['Other'] = otherData;
+        topSectors.push(['Other', otherData]);
+    }
 
-    const renderChart = (data: any[], title: string) => {
-      const totalInvestment = data.reduce((sum, item) => sum + item.value, 0);
+    // Get final list of sectors for display
+    const sectors = topSectors.map(([sector]) => sector);
+    
+    // Collect all unique subsectors and their data
+    const allSubsectors = new Set<string>();
+    sectors.forEach(sector => {
+        Object.keys(sectorData[sector].subsectors).forEach(subsector => {
+            allSubsectors.add(subsector);
+        });
+    });
 
-      const option: EChartsOption = {
-        tooltip: {
-          formatter: (info: any) => {
-            const value = info.value.toLocaleString("en-US", {
-              style: "currency",
-              currency: "ZAR",
-              minimumFractionDigits: 0,
-              maximumFractionDigits: 0,
-            });
-            const percentage = ((info.value / totalInvestment) * 100).toFixed(
-              2
-            );
-            return (
-              `<strong>${info.name}</strong><br/>` +
-              `Investment: ${value}<br/>` +
-              `Percentage: ${percentage}%<br/>` +
-              `Projects: ${info.data.projectCount}`
-            );
-          },
-          backgroundColor: this.brandColors.primary,
-          borderColor: this.brandColors.accent2,
-          textStyle: {
-            color: this.brandColors.accent,
-          },
-        },
-        series: [
-          {
-            name: "Infrastructure Investment",
-            type: "treemap",
-            data: data,
-            label: {
-              show: true,
-              formatter: (params: any) => {
-                return `{name|${
-                  params.name
-                }}\n{value|${params.value.toLocaleString("en-US", {
-                  style: "currency",
-                  currency: "ZAR",
-                  minimumFractionDigits: 0,
-                  maximumFractionDigits: 0,
-                })}}`;
-              },
-              rich: {
-                name: {
-                  fontSize: 14,
-                  fontWeight: "bold",
-                  color: this.brandColors.primary,
-                  lineHeight: 20,
-                },
-                value: {
-                  fontSize: 12,
-                  color: this.brandColors.primary,
-                  lineHeight: 20,
-                },
-              },
-            },
+    // Create series for each subsector
+    const subsectorSeries: any[] = Array.from(allSubsectors).map((subsector, index) => {
+        const data = sectors.map(sector => ({
+            value: sectorData[sector].subsectors[subsector] || 0,
             itemStyle: {
-              borderColor: this.brandColors.primary,
-              borderWidth: 1,
-              gapWidth: 1,
+                color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
+                    offset: 0,
+                    color: this.getLighterColor(this.getChartColor(index), 0.3)
+                }, {
+                    offset: 1,
+                    color: this.getChartColor(index)
+                }])
+            }
+        }));
+
+        return {
+            name: subsector,
+            type: 'bar',
+            stack: 'total',
+            emphasis: {
+                focus: 'series',
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(0,0,0,0.2)'
+                }
             },
-            levels: [
-              {
-                itemStyle: {
-                  borderColor: this.brandColors.primary,
-                  borderWidth: 0,
-                  gapWidth: 1,
-                },
-              },
-              {
-                colorSaturation: [0.3, 0.6],
-                itemStyle: {
-                  borderColorSaturation: 0.7,
-                  gapWidth: 2,
-                  borderWidth: 2,
-                },
-              },
-            ],
-            breadcrumb: { show: false },
-          },
-        ],
-        color: [
-          this.brandColors.secondary,
-          this.brandColors.accent6,
-          this.brandColors.accent5,
-          this.brandColors.accent1,
-          this.brandColors.accent3,
-          this.brandColors.accent4,
-          this.brandColors.accent2,
-        ],
-        toolbox: {
-          show: false, // Disable the toolbox completely
+            data: data
+        };
+    });
+
+    const option: EChartsOption = {
+        title: {
+            text: 'Investment by Sector',
+            subtext: `Total Investment: ${this.currencyPipe.transform(
+                sectors.reduce((sum, sector) => sum + sectorData[sector].total, 0),
+                'ZAR',
+                'symbol',
+                '1.0-0'
+            )}`,
+            left: 'center',
+            top: 20
         },
-        dataZoom: [
-          {
-            type: "inside",
-            disabled: true, // Disable inside zoom
-          },
-          {
-            type: "slider",
-            show: false, // Hide zoom slider
-          },
-        ],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            },
+            formatter: (params: any) => {
+                const sectorName = params[0].axisValue;
+                const total = params.reduce((sum: number, item: any) => sum + (item.value || 0), 0);
+                
+                let tooltip = `<div class="font-['SF Pro Display']">
+                    <div class="font-medium mb-2">${sectorName}</div>
+                    <div class="text-[#86868B] mb-2">
+                        Total: <span class="text-[#1D1D1F]">${this.currencyPipe.transform(total, 'ZAR', 'symbol', '1.0-0')}</span>
+                    </div>
+                    <div class="space-y-1">`;
+                
+                // Sort subsectors by value for this sector
+                const sectorItems = params
+                    .filter((item: any) => item.value > 0)
+                    .sort((a: any, b: any) => b.value - a.value);
+
+                sectorItems.forEach((item: any) => {
+                    const percentage = ((item.value / total) * 100).toFixed(1);
+                    tooltip += `
+                        <div class="flex justify-between text-sm">
+                            <span class="text-[#86868B]">${item.seriesName}:</span>
+                            <span class="text-[#1D1D1F]">${this.currencyPipe.transform(item.value, 'ZAR', 'symbol', '1.0-0')} (${percentage}%)</span>
+                        </div>`;
+                });
+                
+                tooltip += '</div></div>';
+                return tooltip;
+            }
+        },
+        legend: {
+            type: 'scroll',
+            orient: 'horizontal',
+            bottom: 0,
+            data: Array.from(allSubsectors)
+        },
         grid: {
-          left: "15%",
-          right: "5%",
-          bottom: "10%",
-          top: "10%",
-          containLabel: true,
+            left: '5%',
+            right: '5%',
+            bottom: '15%',
+            top: '15%',
+            containLabel: true
         },
         xAxis: {
-          type: "category",
-          data: data.map((item) => item.name),
-          axisLabel: {
-            rotate: 45,
-            interval: 0,
-          },
-          axisTick: {
-            alignWithLabel: true,
-          },
+            type: 'category',
+            data: sectors,
+            axisLabel: {
+                interval: 0,
+                rotate: 45,
+                formatter: (value: string) => {
+                    return value.length > 15 ? value.substring(0, 12) + '...' : value;
+                }
+            }
         },
         yAxis: {
-          type: "value",
+            type: 'value',
+            name: 'Investment (ZAR)',
+            axisLabel: {
+                formatter: (value: number) => {
+                    return this.currencyPipe.transform(value, 'ZAR', 'symbol', '1.0-0') || '';
+                }
+            }
         },
-        animation: false, // Disable animations
-      };
-
-      chart.setOption(this.updateChartStyles(option));
-
-      // Disable chart dragging
-      chart.getZr().off("mousedown");
-      chart.getZr().off("mousemove");
-      chart.getZr().off("mouseup");
+        series: subsectorSeries,
+        animationDuration: 1000,
+        animationEasing: 'cubicInOut'
     };
 
-    let currentData = processData(this.filteredProjects, "sector");
-    let currentTitle = "Infrastructure Investment by Sector";
-    let drillStack: { data: any[]; title: string }[] = [];
-
-    renderChart(currentData, currentTitle);
-
-    chart.on("click", (params) => {
-      if (params.componentType === "series") {
-        if (drillStack.length === 0) {
-          // Drill down to subsector
-          const sector = params.name;
-          const subsectorData = processData(
-            this.filteredProjects.filter((p) => p.sector === sector),
-            "subsector"
-          );
-          drillStack.push({ data: currentData, title: currentTitle });
-          currentData = subsectorData;
-          currentTitle = `Infrastructure Investment in ${sector} by Subsector`;
-          renderChart(currentData, currentTitle);
-        } else {
-          // Go back to sector view
-          const previousLevel = drillStack.pop();
-          if (previousLevel) {
-            currentData = previousLevel.data;
-            currentTitle = previousLevel.title;
-            renderChart(currentData, currentTitle);
-          }
-        }
-      }
-    });
+    chart.setOption(this.updateChartStyles(option));
   }
+
+  private getLighterColor(color: string, factor: number): string {
+    const hex = color.replace('#', '');
+    const r = parseInt(hex.substr(0, 2), 16);
+    const g = parseInt(hex.substr(2, 2), 16);
+    const b = parseInt(hex.substr(4, 2), 16);
+    
+    const lighterR = Math.round(r + (255 - r) * factor);
+    const lighterG = Math.round(g + (255 - g) * factor);
+    const lighterB = Math.round(b + (255 - b) * factor);
+    
+    return `#${lighterR.toString(16).padStart(2, '0')}${lighterG.toString(16).padStart(2, '0')}${lighterB.toString(16).padStart(2, '0')}`;
+  }
+
+  private getChartColor(index: number): string {
+    const colors = [
+      this.brandColors.chart1,
+      this.brandColors.chart2,
+      this.brandColors.chart3,
+      this.brandColors.chart4,
+      this.brandColors.chart5
+    ];
+    return colors[index % colors.length];
+  }
+
   private createProjectTypesChart(): void {
     const chartDom = document.getElementById("projectTypesChart");
     if (!chartDom) return;
@@ -1091,168 +1315,160 @@ export class DataAnalysisComponent implements AfterViewInit {
   private createInvestmentByRegionChart(): void {
     const chartDom = document.getElementById('investmentByRegionChart');
     if (!chartDom) return;
-    this.charts['investmentByRegion'] = echarts.init(chartDom);
-
-    // Extract unique regions and years from the projects
-    const regions = Array.from(new Set(this.projects.map(p => p.region.name))).sort();
-    const years = Array.from(new Set(
-        this.projects.flatMap(p => Object.keys(p.yearlyInvestment))
-    )).sort();
-
-    // Prepare data for each region
-    const series: BarSeriesOption[] = regions.map(region => {
-        const data = years.map(year => {
-            const yearlyInvestment = this.projects
-                .filter(p => p.region.name === region)
-                .reduce((sum, p) => sum + (p.yearlyInvestment[year] || 0), 0);
-            return yearlyInvestment / 1e9; // Convert to billions
+    
+    // Calculate protected area statistics
+    const stats = this.filteredProjects.reduce((acc, project) => {
+        const status = project.oc4ids.in_protected_area;
+        const category = status ? 'Protected Area' : 'Non-Protected Area';
+        
+        if (!acc[category]) {
+            acc[category] = {
+                count: 0,
+                investment: 0,
+                projects: []
+            };
+        }
+        
+        acc[category].count += 1;
+        acc[category].investment += project.budget;
+        acc[category].projects.push({
+            name: project.name,
+            budget: project.budget,
+            region: this.getRegionName(project.region)
         });
+        
+        return acc;
+    }, {} as { [key: string]: { count: number; investment: number; projects: any[] } });
 
-        return {
-            name: region,
-            type: 'bar',
-            stack: 'total',
-            emphasis: {
-                focus: 'series'
-            },
-            data: data
-        };
-    });
+    const totalProjects = this.filteredProjects.length;
+    const totalInvestment = this.filteredProjects.reduce((sum, p) => sum + p.budget, 0);
 
+    const chart = echarts.init(chartDom);
+    
     const option: EChartsOption = {
-        backgroundColor: this.brandColors.primary,
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow'
-            },
-            formatter: (params: any) => {
-                let tooltip = `${params[0].axisValue}<br/>`;
-                let total = 0;
-                params.forEach((item: any) => {
-                    const value = item.value.toLocaleString('en-US', {
-                        style: 'currency',
-                        currency: 'ZAR',
-                        minimumFractionDigits: 1,
-                        maximumFractionDigits: 1
-                    });
-                    tooltip += `${item.marker} ${item.seriesName}: ${value}B<br/>`;
-                    total += item.value;
-                });
-                tooltip += `<strong>Total: ${total.toLocaleString('en-US', {
-                    style: 'currency',
-                    currency: 'ZAR',
-                    minimumFractionDigits: 1,
-                    maximumFractionDigits: 1
-                })}B</strong>`;
-                return tooltip;
-            },
-            backgroundColor: `rgba(255, 255, 255, 0.9)`,
-            borderColor: this.brandColors.accent2,
+        title: {
+            text: 'Protected Area Status',
+            subtext: `Total Projects: ${totalProjects}`,
+            left: 'center',
+            top: 20,
             textStyle: {
-                color: this.brandColors.accent,
-                fontFamily: 'Inter, sans-serif'
+                fontSize: 18,
+                fontWeight: 500,
+                color: this.brandColors.accent
+            },
+            subtextStyle: {
+                fontSize: 14,
+                color: this.brandColors.accent1
+            }
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: (params: any) => {
+                const data = stats[params.name];
+                const percentage = ((data.count / totalProjects) * 100).toFixed(1);
+                const investmentBillion = (data.investment / 1e9).toFixed(2);
+                
+                return `
+                    <div class="font-['SF Pro Display', 'Inter', system-ui] p-1">
+                        <div class="font-medium mb-2">${params.name}</div>
+                        <div class="space-y-1 text-[#86868B]">
+                            <div>Projects: <span class="text-[#1D1D1F]">${data.count} (${percentage}%)</span></div>
+                            <div>Total Investment: <span class="text-[#1D1D1F]">ZAR ${investmentBillion}B</span></div>
+                        </div>
+                    </div>
+                `;
             }
         },
         legend: {
-            type: 'scroll',
             orient: 'vertical',
-            right: 10,
-            top: 20,
-            bottom: 20,
-            textStyle: {
-                color: this.brandColors.accent,
-                fontFamily: 'Inter, sans-serif',
-                fontSize: 8
-            },
-            itemWidth: 15,
+            left: '15%',
+            top: 'middle',
+            itemWidth: 10,
             itemHeight: 10,
-            itemGap: 10,
-            backgroundColor: `rgba(255, 255, 255, 0.1)`,
-            borderRadius: 5,
-            padding: 15,
+            icon: 'circle',
             formatter: (name: string) => {
-                const seriesItem = series.find(s => s.name === name);
-                if (seriesItem && Array.isArray(seriesItem.data)) {
-                    const value = seriesItem.data.reduce((a, b) => (typeof a === 'number' && typeof b === 'number') ? a + b : 0, 0);
-                    return `${name}: ${typeof value === 'number' ? value.toFixed(1) : '0.0'}B`;
-                }
-                return name;
-            },
-            pageButtonItemGap: 5,
-            pageButtonPosition: 'end',
-            pageTextStyle: {
-                color: this.brandColors.accent
+                const data = stats[name];
+                const percentage = ((data.count / totalProjects) * 100).toFixed(1);
+                return `${name}: ${data.count} (${percentage}%)`;
             }
         },
-        grid: {
-            left: '3%',
-            right: '20%',
-            bottom: '8%',
-            top: '3%',
-            containLabel: true
-        },
-        xAxis: {
-            type: 'category',
-            data: years,
-            axisLabel: {
-                color: this.brandColors.accent,
-                fontFamily: 'Inter, sans-serif'
+        series: [
+            {
+                name: 'Protected Area Status',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                center: ['65%', '50%'],
+                avoidLabelOverlap: true,
+                itemStyle: {
+                    borderColor: this.brandColors.primary,
+                    borderWidth: 2,
+                    borderRadius: 4
+                },
+                label: {
+                    show: false
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        formatter: '{b}\n{c} projects',
+                        fontSize: 14,
+                        fontWeight: 500
+                    },
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.2)'
+                    }
+                },
+                data: [
+                    {
+                        name: 'Protected Area',
+                        value: stats['Protected Area']?.count || 0,
+                        itemStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                { offset: 0, color: '#34C759' },
+                                { offset: 1, color: '#248A3D' }
+                            ])
+                        }
+                    },
+                    {
+                        name: 'Non-Protected Area',
+                        value: stats['Non-Protected Area']?.count || 0,
+                        itemStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                { offset: 0, color: '#FF9500' },
+                                { offset: 1, color: '#C93400' }
+                            ])
+                        }
+                    }
+                ]
             },
-            axisLine: {
-                lineStyle: {
-                    color: this.brandColors.accent2
-                }
+            {
+                name: 'Investment Ring',
+                type: 'pie',
+                radius: ['75%', '78%'],
+                center: ['65%', '50%'],
+                silent: true,
+                label: {
+                    show: false
+                },
+                data: [{
+                    value: 1,
+                    itemStyle: {
+                        color: this.brandColors.accent2
+                    }
+                }]
             }
-        },
-        yAxis: {
-            type: 'value',
-            name: 'Investment (Billion ZAR)',
-            nameTextStyle: {
-                color: this.brandColors.accent,
-                fontFamily: 'Inter, sans-serif',
-                fontSize: 12,
-                padding: [0, 0, 10, 0]
-            },
-            axisLabel: {
-                color: this.brandColors.accent,
-                fontFamily: 'Inter, sans-serif',
-                formatter: (value: number) => `${value}`
-            },
-            axisLine: {
-                lineStyle: {
-                    color: this.brandColors.accent2
-                }
-            },
-            splitLine: {
-                lineStyle: {
-                    color: this.brandColors.accent2,
-                    opacity: 0.3
-                }
-            }
-        },
-        series: series,
-        color: [
-            this.brandColors.secondary, 
-            this.brandColors.accent6, 
-            this.brandColors.accent5, 
-            this.brandColors.accent1, 
-            this.brandColors.accent3,
-            this.brandColors.accent4, 
-            this.brandColors.accent2, 
-            '#795548', '#607D8B', '#3F51B5'
-        ],
-        animationDuration: 1000,
-        animationEasing: 'cubicInOut'
+        ]
     };
 
-    this.charts['investmentByRegion']!.setOption(option);
-}
+    chart.setOption(this.updateChartStyles(option));
+  }
 
   // Make sure this method is also in your component
   private showRegionDetails(region: string, year: string): void {
     const regionProjects = this.filteredProjects.filter(
-      (p) => p.region.name === region && p.yearlyInvestment[year]
+      (p) => this.getRegionName(p.region) === region && p.yearlyInvestment[year]
     );
 
     const details = regionProjects.map((p) => ({
@@ -1260,8 +1476,6 @@ export class DataAnalysisComponent implements AfterViewInit {
       investment: p.yearlyInvestment[year] / 1e6,
       sector: p.sector,
     }));
-
-    console.log(`Projects in ${region} for ${year}:`, details);
   }
   public filterChart(
     selectedRegions?: string[],
@@ -1271,9 +1485,9 @@ export class DataAnalysisComponent implements AfterViewInit {
     // This is just a basic example
     this.filteredProjects = this.projects.filter(
       (p) =>
-        (!selectedRegions || selectedRegions.includes(p.region.name)) &&
-        (!selectedYears ||
-          selectedYears.some((year) => p.yearlyInvestment[year] > 0))
+        (!selectedRegions || selectedRegions.includes(this.getRegionName(p.region))) &&
+          (!selectedYears ||
+            selectedYears.some((year) => p.yearlyInvestment[year] > 0))
     );
     this.createInvestmentByRegionChart(); // Recreate the chart with filtered data
   }
@@ -1284,7 +1498,8 @@ export class DataAnalysisComponent implements AfterViewInit {
     this.charts["projectsByRegion"] = echarts.init(chartDom);
 
     const projectsByRegion = this.projects.reduce((acc, project) => {
-      acc[project.region.name] = (acc[project.region.name] || 0) + 1;
+      const regionName = this.getRegionName(project.region);
+      acc[regionName] = (acc[regionName] || 0) + 1;
       return acc;
     }, {} as { [key: string]: number });
 
@@ -1512,132 +1727,132 @@ export class DataAnalysisComponent implements AfterViewInit {
   }
 
   private createInvestmentsByClimateObjectivesChart(): void {
-    const chartDom = document.getElementById(
-      "investmentsByClimateObjectivesChart"
-    );
-    if (!chartDom) return;
+    const chartDom = document.getElementById('investmentsByClimateObjectivesChart');
+    if (!chartDom) {
+      console.error('Chart DOM element not found');
+      return;
+    }
     this.charts["investmentsByClimateObjectives"] = echarts.init(chartDom);
 
-    const climateObjectives = ["Mitigation", "Cross-cutting", "Adaptation"];
+    // Calculate total investment by climate objective
+    const objectiveData = this.filteredProjects.reduce((acc, project) => {
+      const objective = project.climateObjective || 'Unspecified';
+      acc[objective] = (acc[objective] || 0) + project.budget;
+      return acc;
+    }, {} as { [key: string]: number });
 
-    // Extract years from the projects
-    const years = Array.from(
-      new Set(this.projects.flatMap((p) => Object.keys(p.yearlyInvestment)))
-    ).sort();
-
-    // Prepare data for each climate objective
-    const series: BarSeriesOption[] = climateObjectives.map((objective) => {
-      const data = years.map((year) => {
-        const yearlyInvestment = this.projects
-          .filter((p) => p.climateObjective === objective)
-          .reduce((sum, p) => sum + (p.yearlyInvestment[year] || 0), 0);
-        return yearlyInvestment / 1e9; // Convert to billions
-      });
-
-      return {
+    // Convert to array and sort by investment amount
+    const data = Object.entries(objectiveData)
+      .map(([objective, budget]) => ({
         name: objective,
-        type: "bar",
-        stack: "total",
-        emphasis: {
-          focus: "series",
-        },
-        data: data,
-      };
+        value: budget / 1e9, // Convert to billions
+        percentage: 0 // Will be calculated below
+      }))
+      .sort((a, b) => b.value - a.value);
+
+    // Calculate percentages
+    const totalBudget = data.reduce((sum, item) => sum + item.value, 0);
+    data.forEach(item => {
+      item.percentage = (item.value / totalBudget) * 100;
     });
 
     const option: EChartsOption = {
-      backgroundColor: "#f7f7f7", // Light gray background
-
+      title: {
+        text: 'Investment Distribution by Climate Objective',
+        subtext: 'Total Investment: ZAR ' + totalBudget.toFixed(1) + 'B',
+        left: 'center',
+        top: '20px',
+        textStyle: {
+          fontSize: 18,
+          fontWeight: 500,
+          color: this.brandColors.accent
+        },
+        subtextStyle: {
+          fontSize: 14,
+          color: this.brandColors.accent1
+        }
+      },
       tooltip: {
-        trigger: "axis",
-        axisPointer: {
-          type: "shadow",
-        },
+        trigger: 'item',
         formatter: (params: any) => {
-          let tooltip = `${params[0].axisValue}<br/>`;
-          let total = 0;
-          params.forEach((item: any) => {
-            const value = item.value.toLocaleString("en-US", {
-              style: "currency",
-              currency: "ZAR",
-              minimumFractionDigits: 1,
-              maximumFractionDigits: 1,
-            });
-            tooltip += `${item.marker} ${item.seriesName}: ${value}B<br/>`;
-            total += item.value;
-          });
-          tooltip += `<strong>Total: ${total.toLocaleString("en-US", {
-            style: "currency",
-            currency: "ZAR",
-            minimumFractionDigits: 1,
-            maximumFractionDigits: 1,
-          })}B</strong>`;
-          return tooltip;
+          return `
+            <div class="font-['SF Pro Display', 'Inter', system-ui]">
+              <div class="font-medium mb-1">${params.name}</div>
+              <div class="text-[#86868B]">
+                Investment: <span class="text-[#1D1D1F]">ZAR ${params.value.toFixed(1)}B</span><br/>
+                Share: <span class="text-[#1D1D1F]">${params.percent.toFixed(1)}%</span>
+              </div>
+            </div>
+          `;
         },
+        backgroundColor: `rgba(255, 255, 255, 0.95)`,
+        borderColor: this.brandColors.accent2,
+        textStyle: {
+          color: this.brandColors.accent,
+          fontFamily: "'SF Pro Display', 'Inter', system-ui"
+        },
+        padding: [8, 12],
+        borderRadius: 8
       },
       legend: {
-        data: climateObjectives,
-        top: "50px",
+        orient: 'vertical',
+        left: '15%',
+        top: 'middle',
+        itemWidth: 10,
+        itemHeight: 10,
+        icon: 'circle',
+        formatter: (name: string) => {
+          const item = data.find(d => d.name === name);
+          return `${name}: ZAR ${item?.value.toFixed(1)}B (${item?.percentage.toFixed(1)}%)`;
+        },
         textStyle: {
-          color: "#333333",
-          fontFamily: "Inter, sans-serif",
-        },
+          color: this.brandColors.accent1,
+          fontSize: 12,
+          fontFamily: "'SF Pro Display', 'Inter', system-ui"
+        }
       },
-      grid: {
-        left: "13%",
-        right: "4%",
-        bottom: "10%",
-        top: "15%",
-        containLabel: true,
-      },
-      xAxis: {
-        type: "category",
-        data: years,
-        axisLabel: {
-          color: "#333333",
-          fontFamily: "Inter, sans-serif",
+      series: [{
+        name: 'Investment',
+        type: 'pie',
+        radius: ['40%', '70%'],
+        center: ['65%', '50%'],
+        avoidLabelOverlap: true,
+        itemStyle: {
+          borderColor: this.brandColors.primary,
+          borderWidth: 2,
+          borderRadius: 4
         },
-        axisLine: {
-          lineStyle: {
-            color: "#d8d8cd",
+        label: {
+          show: false
+        },
+        emphasis: {
+          label: {
+            show: true,
+            formatter: '{b}\n{c}B ({d}%)',
+            fontSize: 12,
+            fontWeight: 500
           },
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.2)'
+          }
         },
-      },
-      yAxis: {
-        type: "value",
-        name: "Investment (Billion ZAR)",
-        nameTextStyle: {
-          color: "#333333",
-          fontFamily: "Inter, sans-serif",
+        labelLine: {
+          show: false
         },
-        axisLabel: {
-          color: "#333333",
-          fontFamily: "Inter, sans-serif",
-          formatter: (value: number) => `${value}`,
-        },
-        axisLine: {
-          lineStyle: {
-            color: "#d8d8cd",
-          },
-        },
-        splitLine: {
-          lineStyle: {
-            color: "#d8d8cd",
-            type: "dashed",
-          },
-        },
-      },
-      series: series,
-      color: [
-        "#2c4143", // Mitigation (blue)
-        "#61a8bd", // Cross-cutting (cyan)
-        "#d60000", // Adaptation (pink)
-      ],
-      animationDuration: 1000,
-      animationEasing: "cubicInOut",
+        data: data,
+        color: [
+          this.brandColors.secondary,
+          this.brandColors.accent4,
+          '#34C759',  // Success green
+          '#FF9500',  // Warning orange
+          '#FF3B30'   // Error red
+        ]
+      }]
     };
 
-    this.charts["investmentsByClimateObjectives"]!.setOption(option);
+    this.charts["investmentsByClimateObjectives"]?.setOption(this.updateChartStyles(option));
   }
 
   @HostListener("window:resize")
@@ -1660,6 +1875,33 @@ export class DataAnalysisComponent implements AfterViewInit {
     }, {} as { [key: string]: number });
   }
 
+  public getMaxStatValue(statTitle: string): number {
+    switch (statTitle) {
+      case 'Total Projects':
+        return Math.max(this.totalProjects, 100); // Set minimum scale to 100
+      case 'Project Completion':
+        return 100; // Percentage scale
+      case 'Jobs Created':
+        return Math.max(this.jobsCreated, 10000); // Set minimum scale to 10,000
+      case 'Risk Assessment':
+        return 100; // Percentage scale
+      default:
+        return 100;
+    }
+  }
+
+  public getChartIcon(chartName: ChartName): string {
+    const icons: Record<ChartName, string> = {
+      infrastructureInvestment: 'bi-building',
+      projectsByRegion: 'bi-geo-alt',
+      investmentsByClimateObjectives: 'bi-cloud-sun',
+      investmentByRegion: 'bi-graph-up',
+      projectsByClimateObjectives: 'bi-list-check',
+      projectTypes: 'bi-diagram-3'
+    };
+    return icons[chartName] || 'bi-graph-up';
+  }
+
   resetFilters() {
     this.selectedRegion = "All";
     this.selectedSector = "All";
@@ -1667,5 +1909,189 @@ export class DataAnalysisComponent implements AfterViewInit {
     this.startYear = this.minYear;
     this.endYear = this.maxYear;
     this.applyFilters();
+  }
+
+  // Add after other methods
+  public highlightSubsector(subsector: string): void {
+    this.selectedSubsector = subsector;
+  }
+
+  public clearSubsectorHighlight(): void {
+    this.selectedSubsector = null;
+  }
+
+  public setChartView(view: 'donut' | 'bar'): void {
+    this.chartView = view;
+  }
+
+  public getSubsectorBudget(subsector: string): number {
+    return this.filteredProjects
+      .filter(p => p.subsector === subsector)
+      .reduce((sum, p) => sum + p.budget, 0);
+  }
+
+  public getCategoryName(subsector: string): string {
+    const categories = {
+      'Energy': ['Solar', 'Wind', 'Hydropower', 'Biomass', 'Geothermal'],
+      'Infrastructure': ['Transport', 'Low carbon transport'],
+      'Environment': ['Water management', 'Natural resources', 'Flood protection']
+    };
+
+    for (const [category, subsectors] of Object.entries(categories)) {
+      if (subsectors.includes(subsector)) return category;
+    }
+    return 'Other';
+  }
+
+  public getCategoryColor(subsector: string): string {
+    const categoryColors = {
+      'Energy': 'bg-[#007AFF]',
+      'Infrastructure': 'bg-[#5856D6]',
+      'Environment': 'bg-[#34C759]',
+      'Other': 'bg-[#86868B]'
+    } as const;
+    
+    type CategoryKey = keyof typeof categoryColors;
+    return categoryColors[this.getCategoryName(subsector) as CategoryKey];
+  }
+
+  private initializeCharts(): void {
+    this.chartNames.forEach((chartName) => {
+      const chartDom = document.getElementById(chartName + "Chart");
+      if (chartDom) {
+        this.charts[chartName] = echarts.init(chartDom);
+        this.updateChart(chartName);
+      } else {
+        console.warn(`Chart container for ${chartName} not found`);
+      }
+    });
+  }
+
+  private updateAllCharts(): void {
+    Object.keys(this.charts).forEach((chartName) => {
+      this.updateChart(chartName as ChartName);
+    });
+  }
+
+  private updateChart(chartName: ChartName): void {
+    if (!this.charts[chartName]) {
+      console.warn(`Chart instance for ${chartName} not initialized`);
+      return;
+    }
+    
+    switch (chartName) {
+      case "infrastructureInvestment":
+        this.createInfrastructureInvestmentChart();
+        break;
+      case "projectTypes":
+        this.createProjectTypesChart();
+        break;
+      case "investmentByRegion":
+        this.createInvestmentByRegionChart();
+        break;
+      case "projectsByRegion":
+        this.createProjectsByRegionChart();
+        break;
+      case "projectsByClimateObjectives":
+        this.createProjectsByClimateObjectivesChart();
+        break;
+      case "investmentsByClimateObjectives":
+        this.createInvestmentsByClimateObjectivesChart();
+        break;
+    }
+  }
+
+  getSubsectorIcon(subsector: string): string {
+    const iconMap: { [key: string]: string } = {
+      'Biomass': 'bi bi-tree',
+      'Flood protection': 'bi bi-water',
+      'Geothermal': 'bi bi-thermometer-half',
+      'Hydropower': 'bi bi-droplet',
+      'Low carbon transport': 'bi bi-bicycle',
+      'Natural resource management': 'bi bi-flower1',
+      'Renewable energy': 'bi bi-sun',
+      'Solar': 'bi bi-brightness-high',
+      'Transport': 'bi bi-truck',
+      'Water and wastewater management': 'bi bi-moisture',
+      'Wind': 'bi bi-wind'
+    };
+
+    return iconMap[subsector] || 'bi bi-question-circle';
+  }
+
+  applyFilters() {
+    const filters = {
+      region: this.selectedRegion,
+      sector: this.selectedSector,
+      climateObjective: this.selectedClimateObjective,
+      startYear: this.startYear,
+      endYear: this.endYear
+    };
+
+    this.filteredProjects = this.projects.filter(project => {
+      const regionName = this.getRegionName(project.region);
+      return (
+        (this.selectedRegion === "All" || regionName === this.selectedRegion) &&
+        (this.selectedSector === "All" || project.sector === this.selectedSector) &&
+        (this.selectedClimateObjective === "All" || project.climateObjective === this.selectedClimateObjective)
+      );
+    });
+
+    this.updateKeyMetrics();
+    this.updateSustainableSubsectorBreakdown();
+    this.updateAllCharts();
+    this.updateMapMarkers();
+    this.cdr.detectChanges();
+  }
+
+  updateKeyMetrics() {
+    this.totalProjects = this.filteredProjects.length;
+
+    // Update sustainableSubsectorBreakdown
+    this.updateSustainableSubsectorBreakdown();
+
+    // Assuming a project is completed if it has no investment in the last year
+    const completedProjects = this.filteredProjects.filter(
+      (p) => !p.yearlyInvestment[this.endYear.toString()]
+    ).length;
+    this.projectCompletionRate =
+      (completedProjects / this.totalProjects) * 100 || 0;
+    // Assuming each project creates a random number of jobs between 100 and 1000
+    this.jobsCreated = this.filteredProjects.reduce(
+      (sum, p) => sum + Math.floor(Math.random() * 900 + 100),
+      0
+    );
+
+    // Update the stats array
+    this.stats = [
+      {
+        title: "Total Projects",
+        value: this.totalProjects,
+        icon: "bi-folder2-open",
+        description: `from ${this.regions.length - 1} Regions`,
+        format: "1.0-0",
+      },
+      {
+        title: "Project Completion",
+        value: this.projectCompletionRate,
+        icon: "bi-graph-up",
+        description: "of projects completed",
+        format: "1.0-0",
+      },
+      {
+        title: "Jobs Created",
+        value: this.jobsCreated,
+        icon: "bi-people",
+        description: "estimated new jobs",
+        format: "1.0-0",
+      },
+      {
+        title: "Risk Assessment",
+        value: this.climateRiskAssessmentPercentage,
+        icon: "bi-clipboard-check",
+        description: "projects with published assessment",
+        format: "1.0-0",
+      },
+    ];
   }
 }

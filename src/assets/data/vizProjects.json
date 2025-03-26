@@ -1,130 +1,2190 @@
 [
-    {
-      "name": "Eastern Cape Solar Power Plant",
-      "region": "Eastern Cape",
-      "beneficiaries": {
-        "total": 10000,
-        "female": 4500,
-        "male": 5500
-      },
-      "EIA": {
-        "status": "Approved",
-        "approvalDate": "2024-01-15"
-      },
-      "stages": {
-        "identification": {
-          "climateFinanceData": {
-            "financialInstrument": "Energy",
-            "amountOfInvestment": "$500,000"
-          }
-        },
-        "preparation": {
-          "basicData": {
-            "projectBudget": "$600,000"
-          }
-        },
-        "completion": {
-          "basicData": {
-            "estimatedCompletionCost": "$550,000",
-            "estimatedCompletionDate": "2023-12-31"
-          }
-        }
-      }
+  {
+    "budget": 684305501.00,
+    "region": "Eastern Cape",
+    "objective": "Mitigation",
+    "sector": "Natural resources",
+    "subsector": "Flood protection",
+    "subsector_total": "$6.8bn",
+    "subsector_label": "Flood protection: $6.8bn",
+    "iso_region": "ZA-EC",
+    "date": "2020-06-24",
+    "location": {
+      "latitude": -32.5,
+      "longitude": 26.5
     },
-    {
-      "name": "Western Cape Water Treatment Facility",
-      "region": "Western Cape",
-      "beneficiaries": {
-        "total": 12000,
-        "female": 6000,
-        "male": 6000
-      },
-      "EIA": {
-        "status": "Pending",
-        "approvalDate": null
-      },
-      "stages": {
-        "identification": {
-          "climateFinanceData": {
-            "financialInstrument": "Water",
-            "amountOfInvestment": "$200,000"
-          }
-        },
-        "preparation": {
-          "basicData": {
-            "projectBudget": "$250,000"
-          }
-        },
-        "completion": {
-          "basicData": {
-            "estimatedCompletionCost": "$230,000",
-            "estimatedCompletionDate": "2024-06-30"
-          }
-        }
-      }
-    },
-    {
-      "name": "Free State Transport Hub",
-      "region": "Free State",
-      "beneficiaries": {
-        "total": 8000,
-        "female": 3800,
-        "male": 4200
-      },
-      "EIA": {
-        "status": "Approved",
-        "approvalDate": "2024-02-10"
-      },
-      "stages": {
-        "identification": {
-          "climateFinanceData": {
-            "financialInstrument": "Transport",
-            "amountOfInvestment": "$150,000"
-          }
-        },
-        "preparation": {
-          "basicData": {
-            "projectBudget": "$180,000"
-          }
-        },
-        "completion": {
-          "basicData": {
-            "estimatedCompletionCost": "$160,000",
-            "estimatedCompletionDate": "2024-03-31"
-          }
-        }
-      }
-    },
-    {
-      "name": "Northern Cape Economic Zone",
-      "region": "Northern Cape",
-      "beneficiaries": {
-        "total": 15000,
-        "female": 7500,
-        "male": 7500
-      },
-      "EIA": {
-        "status": "Rejected",
-        "approvalDate": null
-      },
-      "stages": {
-        "identification": {
-          "climateFinanceData": {
-            "financialInstrument": "Economy",
-            "amountOfInvestment": "$150,000"
-          }
-        },
-        "preparation": {
-          "basicData": {
-            "projectBudget": "$170,000"
-          }
-        },
-        "completion": {
-          "basicData": {
-            "estimatedCompletionCost": "$165,000",
-            "estimatedCompletionDate": "2024-05-31"
-          }
-        }
-      }
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Eastern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 684305501.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 35.0,
+      "in_protected_area": true
     }
-  ]
+  },
+  {
+    "budget": 292534987.00,
+    "region": "Limpopo",
+    "objective": "Adaptation",
+    "sector": "Governance",
+    "subsector": "Governance",
+    "subsector_total": "$3.4bn",
+    "subsector_label": "Governance: $3.4bn",
+    "iso_region": "ZA-LP",
+    "date": "2021-12-07",
+    "location": {
+      "latitude": -23.9,
+      "longitude": 29.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Limpopo Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 292534987.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 40.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 39143109.00,
+    "region": "Northern Cape",
+    "objective": "Adaptation",
+    "sector": "Natural resources",
+    "subsector": "Flood protection",
+    "subsector_total": "$6.8bn",
+    "subsector_label": "Flood protection: $6.8bn",
+    "iso_region": "ZA-NC",
+    "date": "2022-05-03",
+    "location": {
+      "latitude": -29.0,
+      "longitude": 22.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Northern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 39143109.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 40.0,
+      "in_protected_area": true
+    }
+  },
+  {
+    "budget": 84909950.00,
+    "region": "Mpumalanga",
+    "objective": "Mitigation",
+    "sector": "Transport",
+    "subsector": "Water transport",
+    "subsector_total": "$84.9m",
+    "subsector_label": "Water transport: $84.9m",
+    "iso_region": "ZA-MP",
+    "date": "2020-12-27",
+    "location": {
+      "latitude": -25.5,
+      "longitude": 30.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Mpumalanga Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 84909950.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 444563523.00,
+    "region": "Mpumalanga",
+    "objective": "Cross-cutting",
+    "sector": "Governance",
+    "subsector": "Governance",
+    "subsector_total": "$3.4bn",
+    "subsector_label": "Governance: $3.4bn",
+    "iso_region": "ZA-MP",
+    "date": "2024-06-04",
+    "location": {
+      "latitude": -25.5,
+      "longitude": 30.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Mpumalanga Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 444563523.00,
+      "funding_source": "Bilateral Donor",
+      "ratio_of_co_finance": "50:50",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 30.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 485364225.00,
+    "region": "Gauteng",
+    "objective": "Mitigation",
+    "sector": "Energy",
+    "subsector": "Biomass energy",
+    "subsector_total": "$485.4m",
+    "subsector_label": "Biomass energy: $485.4m",
+    "iso_region": "ZA-GT",
+    "date": "2022-06-26",
+    "location": {
+      "latitude": -26.2,
+      "longitude": 28.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Gauteng Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 485364225.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 865750980.00,
+    "region": "North West",
+    "objective": "Cross-cutting",
+    "sector": "Energy",
+    "subsector": "Wind energy",
+    "subsector_total": "$1.4bn",
+    "subsector_label": "Wind energy: $1.4bn",
+    "iso_region": "ZA-NW",
+    "date": "2024-02-11",
+    "location": {
+      "latitude": -26.0,
+      "longitude": 26.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by North West Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 865750980.00,
+      "funding_source": "Bilateral Donor",
+      "ratio_of_co_finance": "50:50",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 30.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 870923953.00,
+    "region": "Eastern Cape",
+    "objective": "Mitigation",
+    "sector": "Natural resources",
+    "subsector": "Flood protection",
+    "subsector_total": "$6.8bn",
+    "subsector_label": "Flood protection: $6.8bn",
+    "iso_region": "ZA-EC",
+    "date": "2020-05-14",
+    "location": {
+      "latitude": -32.5,
+      "longitude": 26.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Eastern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 870923953.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 35.0,
+      "in_protected_area": true
+    }
+  },
+  {
+    "budget": 508938668.00,
+    "region": "Gauteng",
+    "objective": "Cross-cutting",
+    "sector": "Transport",
+    "subsector": "Other transport",
+    "subsector_total": "$508.9m",
+    "subsector_label": "Other transport: $508.9m",
+    "iso_region": "ZA-GT",
+    "date": "2023-06-27",
+    "location": {
+      "latitude": -26.2,
+      "longitude": 28.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Gauteng Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 508938668.00,
+      "funding_source": "Bilateral Donor",
+      "ratio_of_co_finance": "50:50",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 30.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 712874865.00,
+    "region": "North West",
+    "objective": "Adaptation",
+    "sector": "Natural resources",
+    "subsector": "Flood protection",
+    "subsector_total": "$6.8bn",
+    "subsector_label": "Flood protection: $6.8bn",
+    "iso_region": "ZA-NW",
+    "date": "2022-06-03",
+    "location": {
+      "latitude": -26.0,
+      "longitude": 26.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by North West Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 712874865.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 40.0,
+      "in_protected_area": true
+    }
+  },
+  {
+    "budget": 352560310.00,
+    "region": "Eastern Cape",
+    "objective": "Cross-cutting",
+    "sector": "Energy",
+    "subsector": "Other energy",
+    "subsector_total": "$1.6bn",
+    "subsector_label": "Other energy: $1.6bn",
+    "iso_region": "ZA-EC",
+    "date": "2021-10-14",
+    "location": {
+      "latitude": -32.5,
+      "longitude": 26.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Eastern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 352560310.00,
+      "funding_source": "Bilateral Donor",
+      "ratio_of_co_finance": "50:50",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 30.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 732171140.00,
+    "region": "Northern Cape",
+    "objective": "Adaptation",
+    "sector": "Education",
+    "subsector": "Education",
+    "subsector_total": "$4.8bn",
+    "subsector_label": "Education: $4.8bn",
+    "iso_region": "ZA-NC",
+    "date": "2020-11-01",
+    "location": {
+      "latitude": -29.0,
+      "longitude": 22.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Northern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 732171140.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 40.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 433824089.00,
+    "region": "North West",
+    "objective": "Mitigation",
+    "sector": "Governance",
+    "subsector": "Governance",
+    "subsector_total": "$3.4bn",
+    "subsector_label": "Governance: $3.4bn",
+    "iso_region": "ZA-NW",
+    "date": "2022-07-28",
+    "location": {
+      "latitude": -26.0,
+      "longitude": 26.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by North West Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 433824089.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 279462826.00,
+    "region": "Gauteng",
+    "objective": "Cross-cutting",
+    "sector": "Economy",
+    "subsector": "Economy",
+    "subsector_total": "$2.2bn",
+    "subsector_label": "Economy: $2.2bn",
+    "iso_region": "ZA-GT",
+    "date": "2022-08-06",
+    "location": {
+      "latitude": -26.2,
+      "longitude": 28.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Gauteng Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 279462826.00,
+      "funding_source": "Bilateral Donor",
+      "ratio_of_co_finance": "50:50",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 30.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 762713849.00,
+    "region": "Northern Cape",
+    "objective": "Mitigation",
+    "sector": "Communications",
+    "subsector": "Communications",
+    "subsector_total": "$2.7bn",
+    "subsector_label": "Communications: $2.7bn",
+    "iso_region": "ZA-NC",
+    "date": "2023-07-03",
+    "location": {
+      "latitude": -29.0,
+      "longitude": 22.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Northern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 762713849.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 323762464.00,
+    "region": "Northern Cape",
+    "objective": "Cross-cutting",
+    "sector": "Education",
+    "subsector": "Education",
+    "subsector_total": "$4.8bn",
+    "subsector_label": "Education: $4.8bn",
+    "iso_region": "ZA-NC",
+    "date": "2020-04-03",
+    "location": {
+      "latitude": -29.0,
+      "longitude": 22.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Northern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 323762464.00,
+      "funding_source": "Bilateral Donor",
+      "ratio_of_co_finance": "50:50",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 30.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 816199230.00,
+    "region": "KwaZulu-Natal",
+    "objective": "Adaptation",
+    "sector": "Natural resources",
+    "subsector": "Flood protection",
+    "subsector_total": "$6.8bn",
+    "subsector_label": "Flood protection: $6.8bn",
+    "iso_region": "ZA-NL",
+    "date": "2022-04-27",
+    "location": {
+      "latitude": -29.0,
+      "longitude": 31.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by KwaZulu-Natal Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 816199230.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 40.0,
+      "in_protected_area": true
+    }
+  },
+  {
+    "budget": 260267367.00,
+    "region": "KwaZulu-Natal",
+    "objective": "Mitigation",
+    "sector": "Education",
+    "subsector": "Education",
+    "subsector_total": "$4.8bn",
+    "subsector_label": "Education: $4.8bn",
+    "iso_region": "ZA-NL",
+    "date": "2023-04-23",
+    "location": {
+      "latitude": -29.0,
+      "longitude": 31.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by KwaZulu-Natal Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 260267367.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 686247858.00,
+    "region": "Limpopo",
+    "objective": "Cross-cutting",
+    "sector": "Governance",
+    "subsector": "Governance",
+    "subsector_total": "$3.4bn",
+    "subsector_label": "Governance: $3.4bn",
+    "iso_region": "ZA-LP",
+    "date": "2023-03-06",
+    "location": {
+      "latitude": -23.9,
+      "longitude": 29.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Limpopo Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 686247858.00,
+      "funding_source": "Bilateral Donor",
+      "ratio_of_co_finance": "50:50",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 30.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 350879546.00,
+    "region": "Mpumalanga",
+    "objective": "Mitigation",
+    "sector": "Energy",
+    "subsector": "Hydropower energy",
+    "subsector_total": "$1.3bn",
+    "subsector_label": "Hydropower energy: $1.3bn",
+    "iso_region": "ZA-MP",
+    "date": "2023-05-27",
+    "location": {
+      "latitude": -25.5,
+      "longitude": 30.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Mpumalanga Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 350879546.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 988156991.00,
+    "region": "Eastern Cape",
+    "objective": "Cross-cutting",
+    "sector": "Economy",
+    "subsector": "Economy",
+    "subsector_total": "$2.2bn",
+    "subsector_label": "Economy: $2.2bn",
+    "iso_region": "ZA-EC",
+    "date": "2020-05-26",
+    "location": {
+      "latitude": -32.5,
+      "longitude": 26.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Eastern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 988156991.00,
+      "funding_source": "Bilateral Donor",
+      "ratio_of_co_finance": "50:50",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 30.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 456119551.00,
+    "region": "Western Cape",
+    "objective": "Mitigation",
+    "sector": "Education",
+    "subsector": "Education",
+    "subsector_total": "$4.8bn",
+    "subsector_label": "Education: $4.8bn",
+    "iso_region": "ZA-WC",
+    "date": "2022-09-23",
+    "location": {
+      "latitude": -33.9,
+      "longitude": 18.4
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Western Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 456119551.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 536319271.00,
+    "region": "KwaZulu-Natal",
+    "objective": "Mitigation",
+    "sector": "Health",
+    "subsector": "Health",
+    "subsector_total": "$4.5bn",
+    "subsector_label": "Health: $4.5bn",
+    "iso_region": "ZA-NL",
+    "date": "2024-04-21",
+    "location": {
+      "latitude": -29.0,
+      "longitude": 31.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by KwaZulu-Natal Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 536319271.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 864874338.00,
+    "region": "Eastern Cape",
+    "objective": "Adaptation",
+    "sector": "Water and waste",
+    "subsector": "Water and waste",
+    "subsector_total": "$3.3bn",
+    "subsector_label": "Water and waste: $3.3bn",
+    "iso_region": "ZA-EC",
+    "date": "2023-09-04",
+    "location": {
+      "latitude": -32.5,
+      "longitude": 26.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Eastern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 864874338.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 40.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 930604586.00,
+    "region": "KwaZulu-Natal",
+    "objective": "Adaptation",
+    "sector": "Communications",
+    "subsector": "Communications",
+    "subsector_total": "$2.7bn",
+    "subsector_label": "Communications: $2.7bn",
+    "iso_region": "ZA-NL",
+    "date": "2022-10-21",
+    "location": {
+      "latitude": -29.0,
+      "longitude": 31.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by KwaZulu-Natal Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 930604586.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 40.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 697821299.00,
+    "region": "Free State",
+    "objective": "Cross-cutting",
+    "sector": "Social housing",
+    "subsector": "Social housing",
+    "subsector_total": "$3.2bn",
+    "subsector_label": "Social housing: $3.2bn",
+    "iso_region": "ZA-FS",
+    "date": "2021-11-20",
+    "location": {
+      "latitude": -29.1,
+      "longitude": 26.2
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Free State Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 697821299.00,
+      "funding_source": "Bilateral Donor",
+      "ratio_of_co_finance": "50:50",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 30.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 621857681.00,
+    "region": "KwaZulu-Natal",
+    "objective": "Cross-cutting",
+    "sector": "Natural resources",
+    "subsector": "Flood protection",
+    "subsector_total": "$6.8bn",
+    "subsector_label": "Flood protection: $6.8bn",
+    "iso_region": "ZA-NL",
+    "date": "2021-05-08",
+    "location": {
+      "latitude": -29.0,
+      "longitude": 31.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by KwaZulu-Natal Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 621857681.00,
+      "funding_source": "Bilateral Donor",
+      "ratio_of_co_finance": "50:50",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 30.0,
+      "in_protected_area": true
+    }
+  },
+  {
+    "budget": 926860939.00,
+    "region": "Western Cape",
+    "objective": "Cross-cutting",
+    "sector": "Energy",
+    "subsector": "Hydropower energy",
+    "subsector_total": "$1.3bn",
+    "subsector_label": "Hydropower energy: $1.3bn",
+    "iso_region": "ZA-WC",
+    "date": "2020-09-11",
+    "location": {
+      "latitude": -33.9,
+      "longitude": 18.4
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Western Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 926860939.00,
+      "funding_source": "Bilateral Donor",
+      "ratio_of_co_finance": "50:50",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 30.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 536092607.00,
+    "region": "Limpopo",
+    "objective": "Mitigation",
+    "sector": "Transport",
+    "subsector": "Rail transport",
+    "subsector_total": "$536.1m",
+    "subsector_label": "Rail transport: $536.1m",
+    "iso_region": "ZA-LP",
+    "date": "2022-07-08",
+    "location": {
+      "latitude": -23.9,
+      "longitude": 29.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Limpopo Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 536092607.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 507005166.00,
+    "region": "Northern Cape",
+    "objective": "Cross-cutting",
+    "sector": "Culture, sports and recreation",
+    "subsector": "Culture, sports and recreation",
+    "subsector_total": "$3.9bn",
+    "subsector_label": "Culture, sports and recreation: $3.9bn",
+    "iso_region": "ZA-NC",
+    "date": "2020-04-30",
+    "location": {
+      "latitude": -29.0,
+      "longitude": 22.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Northern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 507005166.00,
+      "funding_source": "Bilateral Donor",
+      "ratio_of_co_finance": "50:50",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 30.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 122810490.00,
+    "region": "Northern Cape",
+    "objective": "Adaptation",
+    "sector": "Education",
+    "subsector": "Education",
+    "subsector_total": "$4.8bn",
+    "subsector_label": "Education: $4.8bn",
+    "iso_region": "ZA-NC",
+    "date": "2020-08-03",
+    "location": {
+      "latitude": -29.0,
+      "longitude": 22.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Northern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 122810490.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 40.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 88306602.00,
+    "region": "Free State",
+    "objective": "Mitigation",
+    "sector": "Transport",
+    "subsector": "Low-carbon transport",
+    "subsector_total": "$109.0m",
+    "subsector_label": "Low-carbon transport: $109.0m",
+    "iso_region": "ZA-FS",
+    "date": "2022-01-20",
+    "location": {
+      "latitude": -29.1,
+      "longitude": 26.2
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Free State Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 88306602.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 20710165.00,
+    "region": "Western Cape",
+    "objective": "Adaptation",
+    "sector": "Transport",
+    "subsector": "Low-carbon transport",
+    "subsector_total": "$109.0m",
+    "subsector_label": "Low-carbon transport: $109.0m",
+    "iso_region": "ZA-WC",
+    "date": "2023-11-14",
+    "location": {
+      "latitude": -33.9,
+      "longitude": 18.4
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Western Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 20710165.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 40.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 81581823.00,
+    "region": "Eastern Cape",
+    "objective": "Mitigation",
+    "sector": "Natural resources",
+    "subsector": "Flood protection",
+    "subsector_total": "$6.8bn",
+    "subsector_label": "Flood protection: $6.8bn",
+    "iso_region": "ZA-EC",
+    "date": "2024-06-01",
+    "location": {
+      "latitude": -32.5,
+      "longitude": 26.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Eastern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 81581823.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 35.0,
+      "in_protected_area": true
+    }
+  },
+  {
+    "budget": 620117650.00,
+    "region": "Gauteng",
+    "objective": "Mitigation",
+    "sector": "Natural resources",
+    "subsector": "Flood protection",
+    "subsector_total": "$6.8bn",
+    "subsector_label": "Flood protection: $6.8bn",
+    "iso_region": "ZA-GT",
+    "date": "2020-04-05",
+    "location": {
+      "latitude": -26.2,
+      "longitude": 28.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Gauteng Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 620117650.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 35.0,
+      "in_protected_area": true
+    }
+  },
+  {
+    "budget": 376245514.00,
+    "region": "Free State",
+    "objective": "Adaptation",
+    "sector": "Education",
+    "subsector": "Education",
+    "subsector_total": "$4.8bn",
+    "subsector_label": "Education: $4.8bn",
+    "iso_region": "ZA-FS",
+    "date": "2023-03-28",
+    "location": {
+      "latitude": -29.1,
+      "longitude": 26.2
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Free State Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 376245514.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 40.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 501685436.00,
+    "region": "KwaZulu-Natal",
+    "objective": "Adaptation",
+    "sector": "Energy",
+    "subsector": "Geothermal energy",
+    "subsector_total": "$1.5bn",
+    "subsector_label": "Geothermal energy: $1.5bn",
+    "iso_region": "ZA-NL",
+    "date": "2021-04-29",
+    "location": {
+      "latitude": -29.0,
+      "longitude": 31.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by KwaZulu-Natal Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 501685436.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 40.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 330007132.00,
+    "region": "Free State",
+    "objective": "Mitigation",
+    "sector": "Education",
+    "subsector": "Education",
+    "subsector_total": "$4.8bn",
+    "subsector_label": "Education: $4.8bn",
+    "iso_region": "ZA-FS",
+    "date": "2023-05-02",
+    "location": {
+      "latitude": -29.1,
+      "longitude": 26.2
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Free State Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 330007132.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 202739220.00,
+    "region": "Western Cape",
+    "objective": "Adaptation",
+    "sector": "Natural resources",
+    "subsector": "Flood protection",
+    "subsector_total": "$6.8bn",
+    "subsector_label": "Flood protection: $6.8bn",
+    "iso_region": "ZA-WC",
+    "date": "2022-11-30",
+    "location": {
+      "latitude": -33.9,
+      "longitude": 18.4
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Western Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 202739220.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 40.0,
+      "in_protected_area": true
+    }
+  },
+  {
+    "budget": 993823901.00,
+    "region": "Eastern Cape",
+    "objective": "Adaptation",
+    "sector": "Social housing",
+    "subsector": "Social housing",
+    "subsector_total": "$3.2bn",
+    "subsector_label": "Social housing: $3.2bn",
+    "iso_region": "ZA-EC",
+    "date": "2020-01-20",
+    "location": {
+      "latitude": -32.5,
+      "longitude": 26.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Eastern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 993823901.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 40.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 503753006.00,
+    "region": "Limpopo",
+    "objective": "Cross-cutting",
+    "sector": "Health",
+    "subsector": "Health",
+    "subsector_total": "$4.5bn",
+    "subsector_label": "Health: $4.5bn",
+    "iso_region": "ZA-LP",
+    "date": "2021-03-22",
+    "location": {
+      "latitude": -23.9,
+      "longitude": 29.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Limpopo Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 503753006.00,
+      "funding_source": "Bilateral Donor",
+      "ratio_of_co_finance": "50:50",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 30.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 210296198.00,
+    "region": "Free State",
+    "objective": "Cross-cutting",
+    "sector": "Culture, sports and recreation",
+    "subsector": "Culture, sports and recreation",
+    "subsector_total": "$3.9bn",
+    "subsector_label": "Culture, sports and recreation: $3.9bn",
+    "iso_region": "ZA-FS",
+    "date": "2022-08-24",
+    "location": {
+      "latitude": -29.1,
+      "longitude": 26.2
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Free State Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 210296198.00,
+      "funding_source": "Bilateral Donor",
+      "ratio_of_co_finance": "50:50",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 30.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 521463662.00,
+    "region": "KwaZulu-Natal",
+    "objective": "Mitigation",
+    "sector": "Water and waste",
+    "subsector": "Water and waste",
+    "subsector_total": "$3.3bn",
+    "subsector_label": "Water and waste: $3.3bn",
+    "iso_region": "ZA-NL",
+    "date": "2022-06-10",
+    "location": {
+      "latitude": -29.0,
+      "longitude": 31.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by KwaZulu-Natal Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 521463662.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 721938448.00,
+    "region": "Free State",
+    "objective": "Adaptation",
+    "sector": "Natural resources",
+    "subsector": "Flood protection",
+    "subsector_total": "$6.8bn",
+    "subsector_label": "Flood protection: $6.8bn",
+    "iso_region": "ZA-FS",
+    "date": "2021-03-01",
+    "location": {
+      "latitude": -29.1,
+      "longitude": 26.2
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Free State Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 721938448.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 40.0,
+      "in_protected_area": true
+    }
+  },
+  {
+    "budget": 415488042.00,
+    "region": "Free State",
+    "objective": "Mitigation",
+    "sector": "Culture, sports and recreation",
+    "subsector": "Culture, sports and recreation",
+    "subsector_total": "$3.9bn",
+    "subsector_label": "Culture, sports and recreation: $3.9bn",
+    "iso_region": "ZA-FS",
+    "date": "2021-03-12",
+    "location": {
+      "latitude": -29.1,
+      "longitude": 26.2
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Free State Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 415488042.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 931873541.00,
+    "region": "Eastern Cape",
+    "objective": "Mitigation",
+    "sector": "Water and waste",
+    "subsector": "Water and waste",
+    "subsector_total": "$3.3bn",
+    "subsector_label": "Water and waste: $3.3bn",
+    "iso_region": "ZA-EC",
+    "date": "2021-07-05",
+    "location": {
+      "latitude": -32.5,
+      "longitude": 26.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Eastern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 931873541.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 622849470.00,
+    "region": "Gauteng",
+    "objective": "Adaptation",
+    "sector": "Energy",
+    "subsector": "Other energy",
+    "subsector_total": "$1.6bn",
+    "subsector_label": "Other energy: $1.6bn",
+    "iso_region": "ZA-GT",
+    "date": "2021-03-28",
+    "location": {
+      "latitude": -26.2,
+      "longitude": 28.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Gauteng Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 622849470.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 40.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 109752881.00,
+    "region": "Free State",
+    "objective": "Adaptation",
+    "sector": "Communications",
+    "subsector": "Communications",
+    "subsector_total": "$2.7bn",
+    "subsector_label": "Communications: $2.7bn",
+    "iso_region": "ZA-FS",
+    "date": "2023-08-11",
+    "location": {
+      "latitude": -29.1,
+      "longitude": 26.2
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Free State Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 109752881.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 40.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 748666138.00,
+    "region": "Western Cape",
+    "objective": "Mitigation",
+    "sector": "Natural resources",
+    "subsector": "Flood protection",
+    "subsector_total": "$6.8bn",
+    "subsector_label": "Flood protection: $6.8bn",
+    "iso_region": "ZA-WC",
+    "date": "2024-01-28",
+    "location": {
+      "latitude": -33.9,
+      "longitude": 18.4
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Western Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 748666138.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 35.0,
+      "in_protected_area": true
+    }
+  },
+  {
+    "budget": 698981675.00,
+    "region": "Limpopo",
+    "objective": "Adaptation",
+    "sector": "Social housing",
+    "subsector": "Social housing",
+    "subsector_total": "$3.2bn",
+    "subsector_label": "Social housing: $3.2bn",
+    "iso_region": "ZA-LP",
+    "date": "2024-04-07",
+    "location": {
+      "latitude": -23.9,
+      "longitude": 29.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Limpopo Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 698981675.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 40.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 793494846.00,
+    "region": "Eastern Cape",
+    "objective": "Mitigation",
+    "sector": "Education",
+    "subsector": "Education",
+    "subsector_total": "$4.8bn",
+    "subsector_label": "Education: $4.8bn",
+    "iso_region": "ZA-EC",
+    "date": "2020-10-05",
+    "location": {
+      "latitude": -32.5,
+      "longitude": 26.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Eastern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 793494846.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 896868267.00,
+    "region": "North West",
+    "objective": "Mitigation",
+    "sector": "Health",
+    "subsector": "Health",
+    "subsector_total": "$4.5bn",
+    "subsector_label": "Health: $4.5bn",
+    "iso_region": "ZA-NW",
+    "date": "2023-08-07",
+    "location": {
+      "latitude": -26.0,
+      "longitude": 26.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by North West Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 896868267.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 370284855.00,
+    "region": "Eastern Cape",
+    "objective": "Mitigation",
+    "sector": "Economy",
+    "subsector": "Economy",
+    "subsector_total": "$2.2bn",
+    "subsector_label": "Economy: $2.2bn",
+    "iso_region": "ZA-EC",
+    "date": "2021-01-22",
+    "location": {
+      "latitude": -32.5,
+      "longitude": 26.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Eastern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 370284855.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 513469713.00,
+    "region": "Northern Cape",
+    "objective": "Adaptation",
+    "sector": "Transport",
+    "subsector": "Urban transport",
+    "subsector_total": "$513.5m",
+    "subsector_label": "Urban transport: $513.5m",
+    "iso_region": "ZA-NC",
+    "date": "2021-02-17",
+    "location": {
+      "latitude": -29.0,
+      "longitude": 22.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Northern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 513469713.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 40.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 161892222.00,
+    "region": "Northern Cape",
+    "objective": "Cross-cutting",
+    "sector": "Economy",
+    "subsector": "Economy",
+    "subsector_total": "$2.2bn",
+    "subsector_label": "Economy: $2.2bn",
+    "iso_region": "ZA-NC",
+    "date": "2023-12-16",
+    "location": {
+      "latitude": -29.0,
+      "longitude": 22.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Northern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 161892222.00,
+      "funding_source": "Bilateral Donor",
+      "ratio_of_co_finance": "50:50",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 30.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 750883367.00,
+    "region": "Eastern Cape",
+    "objective": "Mitigation",
+    "sector": "Energy",
+    "subsector": "Geothermal energy",
+    "subsector_total": "$1.5bn",
+    "subsector_label": "Geothermal energy: $1.5bn",
+    "iso_region": "ZA-EC",
+    "date": "2020-02-10",
+    "location": {
+      "latitude": -32.5,
+      "longitude": 26.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Eastern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 750883367.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 745178915.00,
+    "region": "Mpumalanga",
+    "objective": "Cross-cutting",
+    "sector": "Health",
+    "subsector": "Health",
+    "subsector_total": "$4.5bn",
+    "subsector_label": "Health: $4.5bn",
+    "iso_region": "ZA-MP",
+    "date": "2023-04-04",
+    "location": {
+      "latitude": -25.5,
+      "longitude": 30.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Mpumalanga Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 745178915.00,
+      "funding_source": "Bilateral Donor",
+      "ratio_of_co_finance": "50:50",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 30.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 253354146.00,
+    "region": "Limpopo",
+    "objective": "Cross-cutting",
+    "sector": "Energy",
+    "subsector": "Geothermal energy",
+    "subsector_total": "$1.5bn",
+    "subsector_label": "Geothermal energy: $1.5bn",
+    "iso_region": "ZA-LP",
+    "date": "2021-04-07",
+    "location": {
+      "latitude": -23.9,
+      "longitude": 29.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Limpopo Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 253354146.00,
+      "funding_source": "Bilateral Donor",
+      "ratio_of_co_finance": "50:50",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 30.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 285404400.00,
+    "region": "Mpumalanga",
+    "objective": "Adaptation",
+    "sector": "Economy",
+    "subsector": "Economy",
+    "subsector_total": "$2.2bn",
+    "subsector_label": "Economy: $2.2bn",
+    "iso_region": "ZA-MP",
+    "date": "2021-03-13",
+    "location": {
+      "latitude": -25.5,
+      "longitude": 30.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Mpumalanga Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 285404400.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 40.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 308008894.00,
+    "region": "Free State",
+    "objective": "Mitigation",
+    "sector": "Social housing",
+    "subsector": "Social housing",
+    "subsector_total": "$3.2bn",
+    "subsector_label": "Social housing: $3.2bn",
+    "iso_region": "ZA-FS",
+    "date": "2022-04-10",
+    "location": {
+      "latitude": -29.1,
+      "longitude": 26.2
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Free State Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 308008894.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 648175247.00,
+    "region": "North West",
+    "objective": "Cross-cutting",
+    "sector": "Natural resources",
+    "subsector": "Flood protection",
+    "subsector_total": "$6.8bn",
+    "subsector_label": "Flood protection: $6.8bn",
+    "iso_region": "ZA-NW",
+    "date": "2020-06-24",
+    "location": {
+      "latitude": -26.0,
+      "longitude": 26.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by North West Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 648175247.00,
+      "funding_source": "Bilateral Donor",
+      "ratio_of_co_finance": "50:50",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 30.0,
+      "in_protected_area": true
+    }
+  },
+  {
+    "budget": 645581050.00,
+    "region": "Mpumalanga",
+    "objective": "Cross-cutting",
+    "sector": "Culture, sports and recreation",
+    "subsector": "Culture, sports and recreation",
+    "subsector_total": "$3.9bn",
+    "subsector_label": "Culture, sports and recreation: $3.9bn",
+    "iso_region": "ZA-MP",
+    "date": "2022-12-10",
+    "location": {
+      "latitude": -25.5,
+      "longitude": 30.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Mpumalanga Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 645581050.00,
+      "funding_source": "Bilateral Donor",
+      "ratio_of_co_finance": "50:50",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 30.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 516398014.00,
+    "region": "Free State",
+    "objective": "Mitigation",
+    "sector": "Water and waste",
+    "subsector": "Water and waste",
+    "subsector_total": "$3.3bn",
+    "subsector_label": "Water and waste: $3.3bn",
+    "iso_region": "ZA-FS",
+    "date": "2022-05-04",
+    "location": {
+      "latitude": -29.1,
+      "longitude": 26.2
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Free State Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 516398014.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 747298077.00,
+    "region": "Eastern Cape",
+    "objective": "Adaptation",
+    "sector": "Governance",
+    "subsector": "Governance",
+    "subsector_total": "$3.4bn",
+    "subsector_label": "Governance: $3.4bn",
+    "iso_region": "ZA-EC",
+    "date": "2022-04-14",
+    "location": {
+      "latitude": -32.5,
+      "longitude": 26.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Eastern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 747298077.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 40.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 700468157.00,
+    "region": "North West",
+    "objective": "Cross-cutting",
+    "sector": "Communications",
+    "subsector": "Communications",
+    "subsector_total": "$2.7bn",
+    "subsector_label": "Communications: $2.7bn",
+    "iso_region": "ZA-NW",
+    "date": "2021-05-08",
+    "location": {
+      "latitude": -26.0,
+      "longitude": 26.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by North West Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 700468157.00,
+      "funding_source": "Bilateral Donor",
+      "ratio_of_co_finance": "50:50",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 30.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 996926258.00,
+    "region": "Free State",
+    "objective": "Adaptation",
+    "sector": "Transport",
+    "subsector": "Air transport",
+    "subsector_total": "$996.9m",
+    "subsector_label": "Air transport: $996.9m",
+    "iso_region": "ZA-FS",
+    "date": "2024-04-26",
+    "location": {
+      "latitude": -29.1,
+      "longitude": 26.2
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Free State Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 996926258.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 40.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 483288247.00,
+    "region": "North West",
+    "objective": "Mitigation",
+    "sector": "Water and waste",
+    "subsector": "Water and waste",
+    "subsector_total": "$3.3bn",
+    "subsector_label": "Water and waste: $3.3bn",
+    "iso_region": "ZA-NW",
+    "date": "2022-11-30",
+    "location": {
+      "latitude": -26.0,
+      "longitude": 26.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by North West Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 483288247.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 583921846.00,
+    "region": "Western Cape",
+    "objective": "Mitigation",
+    "sector": "Culture, sports and recreation",
+    "subsector": "Culture, sports and recreation",
+    "subsector_total": "$3.9bn",
+    "subsector_label": "Culture, sports and recreation: $3.9bn",
+    "iso_region": "ZA-WC",
+    "date": "2023-08-09",
+    "location": {
+      "latitude": -33.9,
+      "longitude": 18.4
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Western Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 583921846.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 583346294.00,
+    "region": "Eastern Cape",
+    "objective": "Mitigation",
+    "sector": "Energy",
+    "subsector": "Wind energy",
+    "subsector_total": "$1.4bn",
+    "subsector_label": "Wind energy: $1.4bn",
+    "iso_region": "ZA-EC",
+    "date": "2020-09-25",
+    "location": {
+      "latitude": -32.5,
+      "longitude": 26.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Eastern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 583346294.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 529945932.00,
+    "region": "Mpumalanga",
+    "objective": "Cross-cutting",
+    "sector": "Social housing",
+    "subsector": "Social housing",
+    "subsector_total": "$3.2bn",
+    "subsector_label": "Social housing: $3.2bn",
+    "iso_region": "ZA-MP",
+    "date": "2022-08-19",
+    "location": {
+      "latitude": -25.5,
+      "longitude": 30.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Mpumalanga Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 529945932.00,
+      "funding_source": "Bilateral Donor",
+      "ratio_of_co_finance": "50:50",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 30.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 649184673.00,
+    "region": "Northern Cape",
+    "objective": "Adaptation",
+    "sector": "Health",
+    "subsector": "Health",
+    "subsector_total": "$4.5bn",
+    "subsector_label": "Health: $4.5bn",
+    "iso_region": "ZA-NC",
+    "date": "2023-04-07",
+    "location": {
+      "latitude": -29.0,
+      "longitude": 22.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Northern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 649184673.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 40.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 133751224.00,
+    "region": "Gauteng",
+    "objective": "Cross-cutting",
+    "sector": "Economy",
+    "subsector": "Economy",
+    "subsector_total": "$2.2bn",
+    "subsector_label": "Economy: $2.2bn",
+    "iso_region": "ZA-GT",
+    "date": "2023-07-03",
+    "location": {
+      "latitude": -26.2,
+      "longitude": 28.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Gauteng Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 133751224.00,
+      "funding_source": "Bilateral Donor",
+      "ratio_of_co_finance": "50:50",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 30.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 746574711.00,
+    "region": "Mpumalanga",
+    "objective": "Mitigation",
+    "sector": "Governance",
+    "subsector": "Governance",
+    "subsector_total": "$3.4bn",
+    "subsector_label": "Governance: $3.4bn",
+    "iso_region": "ZA-MP",
+    "date": "2020-06-19",
+    "location": {
+      "latitude": -25.5,
+      "longitude": 30.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Mpumalanga Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 746574711.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 963333363.00,
+    "region": "Eastern Cape",
+    "objective": "Cross-cutting",
+    "sector": "Health",
+    "subsector": "Health",
+    "subsector_total": "$4.5bn",
+    "subsector_label": "Health: $4.5bn",
+    "iso_region": "ZA-EC",
+    "date": "2022-06-21",
+    "location": {
+      "latitude": -32.5,
+      "longitude": 26.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Eastern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 963333363.00,
+      "funding_source": "Bilateral Donor",
+      "ratio_of_co_finance": "50:50",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 30.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 535983818.00,
+    "region": "KwaZulu-Natal",
+    "objective": "Adaptation",
+    "sector": "Culture, sports and recreation",
+    "subsector": "Culture, sports and recreation",
+    "subsector_total": "$3.9bn",
+    "subsector_label": "Culture, sports and recreation: $3.9bn",
+    "iso_region": "ZA-NL",
+    "date": "2022-08-20",
+    "location": {
+      "latitude": -29.0,
+      "longitude": 31.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by KwaZulu-Natal Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 535983818.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 40.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 171314471.00,
+    "region": "Limpopo",
+    "objective": "Adaptation",
+    "sector": "Communications",
+    "subsector": "Communications",
+    "subsector_total": "$2.7bn",
+    "subsector_label": "Communications: $2.7bn",
+    "iso_region": "ZA-LP",
+    "date": "2024-06-16",
+    "location": {
+      "latitude": -23.9,
+      "longitude": 29.5
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Limpopo Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 171314471.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 40.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 972624473.00,
+    "region": "Western Cape",
+    "objective": "Adaptation",
+    "sector": "Culture, sports and recreation",
+    "subsector": "Culture, sports and recreation",
+    "subsector_total": "$3.9bn",
+    "subsector_label": "Culture, sports and recreation: $3.9bn",
+    "iso_region": "ZA-WC",
+    "date": "2020-09-23",
+    "location": {
+      "latitude": -33.9,
+      "longitude": 18.4
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Western Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 972624473.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 40.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 546952063.00,
+    "region": "Western Cape",
+    "objective": "Adaptation",
+    "sector": "Education",
+    "subsector": "Education",
+    "subsector_total": "$4.8bn",
+    "subsector_label": "Education: $4.8bn",
+    "iso_region": "ZA-WC",
+    "date": "2024-03-17",
+    "location": {
+      "latitude": -33.9,
+      "longitude": 18.4
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Western Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 546952063.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 40.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 860127851.00,
+    "region": "Northern Cape",
+    "objective": "Mitigation",
+    "sector": "Education",
+    "subsector": "Education",
+    "subsector_total": "$4.8bn",
+    "subsector_label": "Education: $4.8bn",
+    "iso_region": "ZA-NC",
+    "date": "2024-03-28",
+    "location": {
+      "latitude": -29.0,
+      "longitude": 22.0
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Northern Cape Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 860127851.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 612967719.00,
+    "region": "Free State",
+    "objective": "Adaptation",
+    "sector": "Energy",
+    "subsector": "Other energy",
+    "subsector_total": "$1.6bn",
+    "subsector_label": "Other energy: $1.6bn",
+    "iso_region": "ZA-FS",
+    "date": "2023-11-22",
+    "location": {
+      "latitude": -29.1,
+      "longitude": 26.2
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Free State Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 10000,
+      "amount_of_investment": 612967719.00,
+      "funding_source": "Adaptation Fund",
+      "ratio_of_co_finance": "70:30",
+      "public_consultation_meetings": 3,
+      "abatement_cost": 40.0,
+      "in_protected_area": false
+    }
+  },
+  {
+    "budget": 201550565.00,
+    "region": "Free State",
+    "objective": "Mitigation",
+    "sector": "Health",
+    "subsector": "Health",
+    "subsector_total": "$4.5bn",
+    "subsector_label": "Health: $4.5bn",
+    "iso_region": "ZA-FS",
+    "date": "2021-12-20",
+    "location": {
+      "latitude": -29.1,
+      "longitude": 26.2
+    },
+    "oc4ids": {
+      "climate_finance_decision_making": "Approved by Free State Climate Finance Authority",
+      "nationally_determined_contributions": "Aligned with country's NDC targets",
+      "paris_agreement": true,
+      "beneficiaries": 5000,
+      "amount_of_investment": 201550565.00,
+      "funding_source": "Green Climate Fund",
+      "ratio_of_co_finance": "60:40",
+      "public_consultation_meetings": 1,
+      "abatement_cost": 35.0,
+      "in_protected_area": false
+    }
+  }
+]
+

@@ -1,17 +1,17 @@
-<div class="min-h-screen bg-[#FAFAFA] font-['SF Pro Display', 'Inter', system-ui] text-[#1D1D1F]">
+<div class="min-h-screen bg-gradient-to-b from-neutral-50 to-white font-light text-neutral-700">
     <main class="container mx-auto px-6 py-12">
         <!-- Header Section -->
         <header class="mb-16">
-            <h1 class="text-4xl font-medium tracking-tight mb-3">Data Analysis</h1>
-            <p class="text-[#86868B] text-lg font-light leading-relaxed">Comprehensive analysis of sustainable infrastructure projects across regions.</p>
+            <h1 class="text-4xl font-light tracking-tight mb-3">Data Analysis</h1>
+            <p class="text-neutral-500 text-lg font-light leading-relaxed">Comprehensive analysis of sustainable infrastructure projects across regions.</p>
         </header>
 
         <!-- Universal Filters -->
         <section class="mb-16 relative">
-            <div class="bg-white rounded-2xl shadow-sm backdrop-blur-lg bg-opacity-70 p-8 border border-[#E5E5E7]">
+            <div class="bg-white/40 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.03)] backdrop-blur-xl p-8 border border-neutral-200">
                 <div class="flex justify-between items-center mb-8">
-                    <h2 class="text-2xl font-medium">Universal Filters</h2>
-                    <button class="flex items-center text-[#86868B] hover:text-[#1D1D1F] transition-all duration-300" (click)="resetFilters()">
+                    <h2 class="text-2xl font-light">Universal Filters</h2>
+                    <button class="flex items-center text-neutral-500 hover:text-neutral-700 transition-all duration-200" (click)="resetFilters()">
                         <i class="bi bi-arrow-counterclockwise mr-2"></i>
                         <span class="text-sm">Reset Filters</span>
                     </button>
@@ -20,56 +20,56 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <!-- Region Filter -->
                     <div class="space-y-2">
-                        <label for="region" class="text-sm font-medium text-[#1D1D1F]">Region</label>
+                        <label for="region" class="text-sm font-light text-neutral-500">Region</label>
                         <div class="relative">
                             <select id="region" [(ngModel)]="selectedRegion" (change)="applyFilters()"
-                                    class="w-full bg-[#F5F5F7] rounded-xl border-none py-3 px-4 text-[#1D1D1F] appearance-none focus:outline-none focus:ring-2 focus:ring-[#0066CC] transition-all duration-300">
+                                    class="w-full bg-white/50 rounded-xl border border-neutral-300 py-3 px-4 text-neutral-700 appearance-none focus:outline-none focus:ring-1 focus:ring-accent-color-base focus:border-accent-color-base transition-all duration-200">
                                 <option *ngFor="let region of regions" [value]="region">{{region}}</option>
                             </select>
                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4">
-                                <i class="bi bi-chevron-down text-[#86868B]"></i>
+                                <i class="bi bi-chevron-down text-neutral-500"></i>
                             </div>
                         </div>
                     </div>
 
                     <!-- Sector Filter -->
                     <div class="space-y-2">
-                        <label for="sector" class="text-sm font-medium text-[#1D1D1F]">Sector</label>
+                        <label for="sector" class="text-sm font-light text-neutral-500">Sector</label>
                         <div class="relative">
                             <select id="sector" [(ngModel)]="selectedSector" (change)="applyFilters()"
-                                    class="w-full bg-[#F5F5F7] rounded-xl border-none py-3 px-4 text-[#1D1D1F] appearance-none focus:outline-none focus:ring-2 focus:ring-[#0066CC] transition-all duration-300">
+                                    class="w-full bg-white/50 rounded-xl border border-neutral-300 py-3 px-4 text-neutral-700 appearance-none focus:outline-none focus:ring-1 focus:ring-accent-color-base focus:border-accent-color-base transition-all duration-200">
                                 <option *ngFor="let sector of sectors" [value]="sector">{{sector}}</option>
                             </select>
                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4">
-                                <i class="bi bi-chevron-down text-[#86868B]"></i>
+                                <i class="bi bi-chevron-down text-neutral-500"></i>
                             </div>
                         </div>
                     </div>
 
                     <!-- Climate Objective Filter -->
                     <div class="space-y-2">
-                        <label for="climateObjective" class="text-sm font-medium text-[#1D1D1F]">Climate Objective</label>
+                        <label for="climateObjective" class="text-sm font-light text-neutral-500">Climate Objective</label>
                         <div class="relative">
                             <select id="climateObjective" [(ngModel)]="selectedClimateObjective" (change)="applyFilters()"
-                                    class="w-full bg-[#F5F5F7] rounded-xl border-none py-3 px-4 text-[#1D1D1F] appearance-none focus:outline-none focus:ring-2 focus:ring-[#0066CC] transition-all duration-300">
+                                    class="w-full bg-white/50 rounded-xl border border-neutral-300 py-3 px-4 text-neutral-700 appearance-none focus:outline-none focus:ring-1 focus:ring-accent-color-base focus:border-accent-color-base transition-all duration-200">
                                 <option *ngFor="let objective of climateObjectives" [value]="objective">{{objective}}</option>
                             </select>
                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4">
-                                <i class="bi bi-chevron-down text-[#86868B]"></i>
+                                <i class="bi bi-chevron-down text-neutral-500"></i>
                             </div>
                         </div>
                     </div>
 
                     <!-- Year Range Filter -->
                     <div class="space-y-2">
-                        <label class="text-sm font-medium text-[#1D1D1F]">Year Range</label>
+                        <label class="text-sm font-light text-neutral-500">Year Range</label>
                         <div class="flex items-center space-x-3">
                             <input type="number" [(ngModel)]="startYear" (change)="applyFilters()"
-                                   class="w-1/2 bg-[#F5F5F7] rounded-xl border-none py-3 px-4 text-[#1D1D1F] focus:outline-none focus:ring-2 focus:ring-[#0066CC] transition-all duration-300"
+                                   class="w-1/2 bg-white/50 rounded-xl border border-neutral-300 py-3 px-4 text-neutral-700 focus:outline-none focus:ring-1 focus:ring-accent-color-base focus:border-accent-color-base transition-all duration-200"
                                    [min]="minYear" [max]="maxYear" placeholder="Start">
-                            <span class="text-[#86868B]">—</span>
+                            <span class="text-neutral-500">—</span>
                             <input type="number" [(ngModel)]="endYear" (change)="applyFilters()"
-                                   class="w-1/2 bg-[#F5F5F7] rounded-xl border-none py-3 px-4 text-[#1D1D1F] focus:outline-none focus:ring-2 focus:ring-[#0066CC] transition-all duration-300"
+                                   class="w-1/2 bg-white/50 rounded-xl border border-neutral-300 py-3 px-4 text-neutral-700 focus:outline-none focus:ring-1 focus:ring-accent-color-base focus:border-accent-color-base transition-all duration-200"
                                    [min]="minYear" [max]="maxYear" placeholder="End">
                         </div>
                     </div>
@@ -79,61 +79,71 @@
 
         <!-- Key Metrics -->
         <section class="mb-16">
-            <h2 class="text-2xl font-medium mb-8">Key Metrics</h2>
+            <h2 class="text-2xl font-light tracking-tight mb-8">Key Performance Indicators</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div *ngFor="let stat of stats; let i = index"
-                     class="bg-white rounded-2xl shadow-sm backdrop-blur-lg bg-opacity-70 p-8 border border-[#E5E5E7] transition-all duration-500 hover:transform hover:-translate-y-1 hover:shadow-md"
+                     class="bg-white/40 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.03)] p-8 border border-neutral-200 transition-all duration-200 hover:transform hover:-translate-y-1 hover:shadow-[0_10px_25px_-5px_rgba(0,0,0,0.05),_0_8px_10px_-6px_rgba(0,0,0,0.01)] group"
                      [ngClass]="{'animate-fade-up': true}"
                      [style.animation-delay]="i * 100 + 'ms'">
                     <div class="flex items-center mb-6">
-                        <div class="bg-[#F5F5F7] rounded-xl p-3 mr-4">
-                            <i class="bi {{ stat.icon }} text-[#0066CC] text-xl"></i>
+                        <div class="bg-neutral-100 rounded-xl p-3 mr-4 group-hover:bg-accent-color-base/10 transition-all duration-200">
+                            <i class="bi {{ stat.icon }} text-accent-color-base text-xl"></i>
                         </div>
-                        <h3 class="text-[#86868B] font-medium">{{ stat.title }}</h3>
+                        <h3 class="text-neutral-500 font-light tracking-tight">{{ stat.title }}</h3>
                     </div>
-                    <p class="text-4xl font-light mb-2">{{ stat.value | number:stat.format }}</p>
-                    <p class="text-sm text-[#86868B]">{{ stat.description }}</p>
+                    <p class="text-4xl font-light mb-2 tracking-tight text-neutral-700">{{ stat.value | number:stat.format }}</p>
+                    <p class="text-sm text-neutral-500 tracking-tight">{{ stat.description }}</p>
+                    <div class="mt-4 h-1 bg-neutral-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-accent-color-base rounded-full transition-all duration-200 ease-out"
+                             [style.width]="(stat.value / getMaxStatValue(stat.title)) * 100 + '%'"></div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Sustainable Subsector Breakdown -->
         <section class="mb-16">
-            <div class="bg-white rounded-2xl shadow-sm backdrop-blur-lg bg-opacity-70 p-8 border border-[#E5E5E7]">
+            <div class="bg-white/40 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.03)] backdrop-blur-xl p-8 border border-neutral-200">
                 <div class="flex items-center justify-between mb-8">
                     <div class="flex items-center">
-                        <i class="bi bi-diagram-3 text-[#0066CC] text-2xl mr-3"></i>
-                        <h3 class="text-2xl font-medium">Sustainable Subsector Breakdown</h3>
+                        <i class="bi bi-diagram-3 text-accent-color-base text-2xl mr-3"></i>
+                        <h3 class="text-2xl font-light tracking-tight">Sustainable Subsector Analysis</h3>
                     </div>
-                    <p class="text-[#86868B]">
-                        Total Projects: <span class="text-[#1D1D1F] font-medium">{{totalProjects}}</span>
+                    <p class="text-neutral-500 tracking-tight">
+                        Total Projects: <span class="text-neutral-700 font-light">{{totalProjects}}</span>
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <!-- Bar Chart -->
-                    <div class="lg:col-span-2">
-                        <div id="subsectorBarChart" class="w-full h-[400px]"></div>
-                    </div>
-
-                    <!-- Stat Cards -->
-                    <div class="lg:col-span-1 grid grid-cols-1 gap-4">
-                        <div *ngFor="let item of sortedSubsectorBreakdown.slice(0, 5)"
-                             class="bg-[#F5F5F7] rounded-xl p-6 transition-all duration-300 hover:bg-[#F0F0F2]">
-                            <div class="flex items-center justify-between mb-4">
-                                <div class="flex items-center">
-                                    <i [class]="getSubsectorIcon(item.key) + ' text-[#0066CC] text-xl mr-3'"></i>
-                                    <p class="text-[#1D1D1F] font-medium">{{item.key}}</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div *ngFor="let item of sortedSubsectorBreakdown.slice(0, 6)" 
+                        class="bg-white/30 rounded-xl p-4 border border-neutral-200 transition-all 
+                                hover:border-accent-color-base group cursor-pointer"
+                        (mouseenter)="highlightSubsector(item.key)"
+                        (mouseleave)="clearSubsectorHighlight()">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center">
+                                <div [class]="'p-2 rounded-lg ' + getCategoryColor(item.key)">
+                                    <i [class]="getSubsectorIcon(item.key) + ' text-white text-lg'"></i>
                                 </div>
-                                <p class="text-sm text-[#86868B]">{{item.percentage.toFixed(1)}}%</p>
+                                <div class="ml-3">
+                                    <p class="text-sm font-light text-neutral-700">{{item.key}}</p>
+                                    <p class="text-xs text-neutral-500">{{getCategoryName(item.key)}}</p>
+                                </div>
                             </div>
-                            <div class="flex justify-between items-baseline mb-3">
-                                <p class="text-2xl font-light">{{item.value}}</p>
-                                <p class="text-sm text-[#86868B]">projects</p>
+                            <span class="text-sm font-light text-accent-color-base">
+                                {{item.percentage.toFixed(1)}}%
+                            </span>
+                        </div>
+                        <div class="relative pt-2">
+                            <div class="overflow-hidden h-2 mb-2 text-xs flex rounded-full bg-neutral-100">
+                                <div [style.width]="item.percentage + '%'" 
+                                    class="shadow-none flex flex-col text-center whitespace-nowrap 
+                                            text-white justify-center transition-all duration-200 
+                                            bg-accent-color-base rounded-full"></div>
                             </div>
-                            <div class="w-full bg-[#E5E5E7] rounded-full h-1">
-                                <div class="bg-[#0066CC] h-1 rounded-full transition-all duration-500" 
-                                     [style.width]="item.percentage + '%'"></div>
+                            <div class="flex justify-between text-xs text-neutral-500">
+                                <span>{{item.value}} projects</span>
+                                <span>{{getSubsectorBudget(item.key) | currency:'ZAR':'symbol':'1.0-0'}}</span>
                             </div>
                         </div>
                     </div>
@@ -142,29 +152,55 @@
         </section>
 
         <!-- Charts Grid -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-            <div *ngFor="let chartName of chartNames"
-                 class="bg-white rounded-2xl shadow-sm backdrop-blur-lg bg-opacity-70 border border-[#E5E5E7] transition-all duration-300 hover:shadow-md">
-                <div class="p-6 flex justify-between items-center border-b border-[#E5E5E7]">
-                    <h3 class="text-xl font-medium">{{getChartTitle(chartName)}}</h3>
-                    <button (click)="toggleDropdown(chartName)"
-                            class="text-[#0066CC] hover:text-[#004499] transition-colors duration-300">
-                        <i class="bi" [ngClass]="{'bi-chevron-down': !dropdownOpen[chartName], 'bi-chevron-up': dropdownOpen[chartName]}"></i>
-                    </button>
-                </div>
-                <div [ngClass]="{'h-0': !dropdownOpen[chartName], 'h-[400px]': dropdownOpen[chartName]}"
-                     class="transition-all duration-500 ease-in-out overflow-hidden">
-                    <div [id]="chartName + 'Chart'" class="w-full h-full p-6"></div>
+        <section class="space-y-8 mb-16">
+            <h2 class="text-2xl font-light tracking-tight">Investment Analysis</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div *ngFor="let chartName of chartNames; let i = index"
+                     class="bg-white/40 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.03)] backdrop-blur-xl border border-neutral-200 transition-all duration-200 hover:shadow-md group"
+                     [style.animation-delay]="i * 100 + 'ms'">
+                    <div class="p-6 flex justify-between items-center border-b border-neutral-200">
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-neutral-100 rounded-lg p-2 group-hover:bg-accent-color-base/10 transition-all duration-200">
+                                <i class="bi" [class]="getChartIcon(chartName) + ' text-accent-color-base'"></i>
+                            </div>
+                            <h3 class="text-xl font-light tracking-tight">{{getChartTitle(chartName)}}</h3>
+                        </div>
+                        <button (click)="toggleDropdown(chartName)"
+                                class="text-accent-color-base hover:text-black transition-colors duration-200 focus:outline-none">
+                            <i class="bi text-xl" [ngClass]="{'bi-chevron-down': !dropdownOpen[chartName], 'bi-chevron-up': dropdownOpen[chartName]}"></i>
+                        </button>
+                    </div>
+                    <div [ngClass]="{'h-0': !dropdownOpen[chartName], 'h-[400px]': dropdownOpen[chartName]}"
+                         class="transition-all duration-200 ease-in-out overflow-hidden">
+                        <div [id]="chartName + 'Chart'" class="w-full h-full p-6"></div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Map Section -->
-        <section class="bg-white rounded-2xl shadow-sm backdrop-blur-lg bg-opacity-70 border border-[#E5E5E7] overflow-hidden transition-all duration-300 hover:shadow-md">
-            <div class="p-6 border-b border-[#E5E5E7]">
-                <h3 class="text-xl font-medium">Project Locations</h3>
+        <section class="bg-white/40 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.03)] backdrop-blur-xl border border-neutral-200 overflow-hidden transition-all duration-200 hover:shadow-md">
+            <div class="p-6 border-b border-neutral-200 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-neutral-100 rounded-lg p-2 group-hover:bg-accent-color-base/10 transition-all duration-200">
+                        <i class="bi bi-geo-alt text-accent-color-base text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-light tracking-tight">Project Locations</h3>
+                </div>
+                <div class="text-sm text-neutral-500 tracking-tight">
+                    {{markers.length}} Projects Mapped
+                </div>
             </div>
-            <div #mapContainer class="h-[500px] p-6"></div>
+            <div #mapContainer class="w-full h-[600px] relative">
+                <!-- Loading State -->
+                <div *ngIf="isLoading" class="absolute inset-0 bg-white/90 backdrop-filter backdrop-blur-md flex items-center justify-center">
+                    <div class="text-center space-y-3">
+                        <div class="w-10 h-10 rounded-full border-2 border-neutral-300 border-t-accent-color-base animate-spin mx-auto"></div>
+                        <p class="text-neutral-500 tracking-tight">Loading Map...</p>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 </div>

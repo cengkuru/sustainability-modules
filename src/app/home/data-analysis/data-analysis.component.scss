@@ -1,23 +1,3 @@
-.pulsing-icon {
-  .pulse-ring {
-    animation: pulse 2s infinite;
-  }
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(0.5);
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1.5);
-    opacity: 0;
-  }
-}
-
 .leaflet-div-icon {
   background: transparent;
   border: none;
@@ -27,4 +7,36 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+// Cluster Styles
+.custom-cluster-icon {
+  background: transparent;
+  border: none;
+  
+  // Make cluster slightly larger and more prominent than individual markers
+  .relative {
+    transform: scale(1.2);
+  }
+}
+
+// Popup Styles
+.leaflet-popup-content-wrapper {
+  @apply rounded-lg shadow-md p-0;
+  
+  .leaflet-popup-content {
+    margin: 0;
+  }
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  @apply text-[#86868B] p-2 w-7 h-7 text-base;
+  
+  &:hover {
+    @apply text-[#1D1D1F] bg-black/5 rounded-full;
+  }
+}
+
+.leaflet-container {
+  font-family: 'SF Pro Display', 'Inter', system-ui;
 }

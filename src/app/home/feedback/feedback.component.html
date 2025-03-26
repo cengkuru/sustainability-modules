@@ -1,214 +1,167 @@
-<div class="min-h-screen bg-[#FAFAFA] font-['SF Pro Display', 'Inter', system-ui] text-[#1D1D1F]">
-    <main class="container mx-auto px-6 py-12 max-w-3xl">
+<!-- Main Container -->
+<div class="min-h-screen bg-gradient-to-b from-neutral-50 to-white font-['SF Pro Display', 'Inter', system-ui] text-neutral-700">
+    <main class="container mx-auto px-6 py-12 max-w-6xl">
         <!-- Header Section -->
         <header class="text-center mb-16">
-            <h1 class="text-4xl font-medium tracking-tight mb-3">Get in Touch</h1>
-            <p class="text-[#86868B] text-lg font-light leading-relaxed max-w-2xl mx-auto">
-                We value your feedback and are here to help. Share your thoughts, questions, or concerns with us.
+            <h1 class="text-4xl font-light tracking-tight mb-3">Contact Us</h1>
+            <p class="text-neutral-500 text-lg font-light leading-relaxed max-w-2xl mx-auto">
+                Have questions or feedback? We're here to help. Reach out to us through the form below or connect with us through our various channels.
             </p>
         </header>
 
-        <!-- Contact Form -->
-        <div class="bg-white rounded-2xl shadow-sm backdrop-blur-lg bg-opacity-70 p-8 border border-[#E5E5E7] mb-16">
-            <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" class="space-y-6">
-                <!-- Name Fields -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Contact Form Section -->
+            <section class="bg-white/90 backdrop-blur-xl rounded-2xl shadow-sm p-8 border border-neutral-200">
+                <h2 class="text-2xl font-light mb-6">Send us a Message</h2>
+                
+                <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" class="space-y-6">
+                    <!-- First Name -->
                     <div class="space-y-2">
-                        <label for="firstName" class="block text-sm font-medium text-[#1D1D1F]">First name</label>
-                        <div class="relative">
-                            <input type="text" 
-                                   id="firstName" 
-                                   formControlName="firstName"
-                                   [class]="'w-full bg-[#F5F5F7] rounded-xl border-none py-3 px-4 text-[#1D1D1F] placeholder-[#86868B] transition-all duration-300 ' + 
-                                           (isFieldInvalid('firstName') ? 'ring-2 ring-[#FF3B30]' : 'focus:ring-2 focus:ring-[#0066CC]')"
-                                   [attr.aria-invalid]="isFieldInvalid('firstName')"
-                                   placeholder="John">
-                            <div *ngIf="isFieldInvalid('firstName')" class="absolute -bottom-6 left-0 text-xs text-[#FF3B30]">
-                                {{ getFieldError('firstName') }}
-                            </div>
-                        </div>
+                        <label for="firstName" class="block text-sm font-light text-neutral-700">First Name</label>
+                        <input 
+                            type="text" 
+                            id="firstName"
+                            formControlName="firstName"
+                            class="w-full px-4 py-3 rounded-xl border border-neutral-200 bg-white text-neutral-700 text-sm font-light transition-all duration-300 focus:border-accent-color-base focus:ring-2 focus:ring-accent-color-base/20 outline-none"
+                            [class.border-status-other]="isFieldInvalid('firstName')"
+                        >
+                        <p *ngIf="isFieldInvalid('firstName')" class="text-sm text-status-other">
+                            {{ getFieldError('firstName') }}
+                        </p>
                     </div>
-                    <div class="space-y-2">
-                        <label for="lastName" class="block text-sm font-medium text-[#1D1D1F]">Last name</label>
-                        <div class="relative">
-                            <input type="text" 
-                                   id="lastName" 
-                                   formControlName="lastName"
-                                   [class]="'w-full bg-[#F5F5F7] rounded-xl border-none py-3 px-4 text-[#1D1D1F] placeholder-[#86868B] transition-all duration-300 ' + 
-                                           (isFieldInvalid('lastName') ? 'ring-2 ring-[#FF3B30]' : 'focus:ring-2 focus:ring-[#0066CC]')"
-                                   [attr.aria-invalid]="isFieldInvalid('lastName')"
-                                   placeholder="Doe">
-                            <div *ngIf="isFieldInvalid('lastName')" class="absolute -bottom-6 left-0 text-xs text-[#FF3B30]">
-                                {{ getFieldError('lastName') }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Email Field -->
-                <div class="space-y-2">
-                    <label for="email" class="block text-sm font-medium text-[#1D1D1F]">Email</label>
-                    <div class="relative">
-                        <input type="email" 
-                               id="email" 
-                               formControlName="email"
-                               [class]="'w-full bg-[#F5F5F7] rounded-xl border-none py-3 px-4 text-[#1D1D1F] placeholder-[#86868B] transition-all duration-300 ' + 
-                                       (isFieldInvalid('email') ? 'ring-2 ring-[#FF3B30]' : 'focus:ring-2 focus:ring-[#0066CC]')"
-                               [attr.aria-invalid]="isFieldInvalid('email')"
-                               placeholder="john.doe@example.com">
-                        <div *ngIf="isFieldInvalid('email')" class="absolute -bottom-6 left-0 text-xs text-[#FF3B30]">
+                    <!-- Last Name -->
+                    <div class="space-y-2">
+                        <label for="lastName" class="block text-sm font-light text-neutral-700">Last Name</label>
+                        <input 
+                            type="text" 
+                            id="lastName"
+                            formControlName="lastName"
+                            class="w-full px-4 py-3 rounded-xl border border-neutral-200 bg-white text-neutral-700 text-sm font-light transition-all duration-300 focus:border-accent-color-base focus:ring-2 focus:ring-accent-color-base/20 outline-none"
+                            [class.border-status-other]="isFieldInvalid('lastName')"
+                        >
+                        <p *ngIf="isFieldInvalid('lastName')" class="text-sm text-status-other">
+                            {{ getFieldError('lastName') }}
+                        </p>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="space-y-2">
+                        <label for="email" class="block text-sm font-light text-neutral-700">Email</label>
+                        <input 
+                            type="email" 
+                            id="email"
+                            formControlName="email"
+                            class="w-full px-4 py-3 rounded-xl border border-neutral-200 bg-white text-neutral-700 text-sm font-light transition-all duration-300 focus:border-accent-color-base focus:ring-2 focus:ring-accent-color-base/20 outline-none"
+                            [class.border-status-other]="isFieldInvalid('email')"
+                        >
+                        <p *ngIf="isFieldInvalid('email')" class="text-sm text-status-other">
                             {{ getFieldError('email') }}
-                        </div>
+                        </p>
                     </div>
-                </div>
 
-                <!-- Message Field -->
-                <div class="space-y-2">
-                    <label for="message" class="block text-sm font-medium text-[#1D1D1F]">Message</label>
-                    <div class="relative">
-                        <textarea id="message" 
-                                  formControlName="message"
-                                  rows="4"
-                                  [class]="'w-full bg-[#F5F5F7] rounded-xl border-none py-3 px-4 text-[#1D1D1F] placeholder-[#86868B] transition-all duration-300 resize-none ' + 
-                                          (isFieldInvalid('message') ? 'ring-2 ring-[#FF3B30]' : 'focus:ring-2 focus:ring-[#0066CC]')"
-                                  [attr.aria-invalid]="isFieldInvalid('message')"
-                                  placeholder="Your message here..."></textarea>
-                        <div *ngIf="isFieldInvalid('message')" class="absolute -bottom-6 left-0 text-xs text-[#FF3B30]">
+                    <!-- Message -->
+                    <div class="space-y-2">
+                        <label for="message" class="block text-sm font-light text-neutral-700">Message</label>
+                        <textarea 
+                            id="message"
+                            formControlName="message"
+                            rows="4"
+                            class="w-full px-4 py-3 rounded-xl border border-neutral-200 bg-white text-neutral-700 text-sm font-light transition-all duration-300 focus:border-accent-color-base focus:ring-2 focus:ring-accent-color-base/20 outline-none resize-none"
+                            [class.border-status-other]="isFieldInvalid('message')"
+                        ></textarea>
+                        <p *ngIf="isFieldInvalid('message')" class="text-sm text-status-other">
                             {{ getFieldError('message') }}
-                        </div>
+                        </p>
                     </div>
-                </div>
 
-                <!-- Submit Button -->
-                <div class="pt-4">
-                    <button type="submit" 
-                            [disabled]="isSubmitting"
-                            class="w-full bg-[#0066CC] text-white rounded-xl py-3 px-6 font-medium transition-all duration-300 flex items-center justify-center group disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#004499]">
-                        <span class="flex items-center">
-                            <span>{{ isSubmitting ? 'Sending...' : 'Send Message' }}</span>
-                            <svg *ngIf="!isSubmitting" 
-                                 class="ml-2 h-5 w-5 transform transition-transform duration-300 group-hover:translate-x-1" 
-                                 xmlns="http://www.w3.org/2000/svg" 
-                                 viewBox="0 0 20 20" 
-                                 fill="currentColor" 
-                                 aria-hidden="true">
-                                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                            </svg>
-                            <svg *ngIf="isSubmitting" 
-                                 class="animate-spin ml-2 h-5 w-5" 
-                                 xmlns="http://www.w3.org/2000/svg" 
-                                 fill="none" 
-                                 viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
+                    <!-- Submit Button -->
+                    <button 
+                        type="submit"
+                        [disabled]="isSubmitting || feedbackForm.invalid"
+                        class="w-full px-6 py-3 bg-black text-white text-sm font-light rounded-xl transition-all duration-300 hover:bg-neutral-800 disabled:bg-neutral-200 disabled:text-neutral-500 disabled:cursor-not-allowed"
+                    >
+                        <span *ngIf="!isSubmitting">Send Message</span>
+                        <span *ngIf="isSubmitting" class="flex items-center justify-center gap-2">
+                            <i class="bi bi-arrow-repeat animate-spin"></i>
+                            Sending...
                         </span>
                     </button>
-                </div>
+                </form>
 
                 <!-- Success Message -->
                 <div *ngIf="submitSuccess" 
-                     class="mt-4 bg-[#E5F5E9] rounded-xl p-4 flex items-center gap-3 animate-fade-in">
-                    <i class="bi bi-check-circle text-[#34C759]"></i>
-                    <p class="text-sm text-[#1D1D1F]">Message sent successfully! We'll get back to you soon.</p>
+                     class="mt-4 p-4 bg-status-completed/10 border border-status-completed rounded-xl animate-fade-in">
+                    <p class="text-sm text-status-completed flex items-center gap-2">
+                        <i class="bi bi-check-circle"></i>
+                        Message sent successfully!
+                    </p>
                 </div>
 
                 <!-- Error Message -->
                 <div *ngIf="submitError" 
-                     class="mt-4 bg-[#FEF2F2] rounded-xl p-4 flex items-center gap-3 animate-fade-in">
-                    <i class="bi bi-exclamation-circle text-[#FF3B30]"></i>
-                    <p class="text-sm text-[#FF3B30]">{{ submitError }}</p>
+                     class="mt-4 p-4 bg-status-other/10 border border-status-other rounded-xl animate-fade-in">
+                    <p class="text-sm text-status-other flex items-center gap-2">
+                        <i class="bi bi-exclamation-circle"></i>
+                        {{ submitError }}
+                    </p>
                 </div>
-            </form>
-        </div>
+            </section>
 
-        <!-- Contact Information -->
-        <section class="bg-[#F5F5F7] rounded-2xl p-8">
-            <h2 class="text-xl font-medium mb-8">Other Ways to Reach Us</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Direct Contact -->
-                <div class="space-y-6">
-                    <div class="flex items-start gap-4">
-                        <div class="bg-white rounded-xl p-3">
-                            <i class="bi bi-building text-[#0066CC] text-xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-base font-medium mb-1">{{ contacts[0].title }}</h3>
-                            <p class="text-sm text-[#86868B]">{{ contacts[0].address }}</p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start gap-4">
-                        <div class="bg-white rounded-xl p-3">
-                            <i class="bi bi-envelope text-[#0066CC] text-xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-base font-medium mb-1">Email</h3>
-                            <a href="mailto:{{ contacts[0].email }}" 
-                               class="text-sm text-[#0066CC] hover:text-[#004499] transition-colors duration-300">
-                                {{ contacts[0].email }}
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start gap-4">
-                        <div class="bg-white rounded-xl p-3">
-                            <i class="bi bi-telephone text-[#0066CC] text-xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-base font-medium mb-1">Phone</h3>
-                            <a href="tel:{{ contacts[0].phone }}" 
-                               class="text-sm text-[#0066CC] hover:text-[#004499] transition-colors duration-300">
-                                {{ contacts[0].phone }}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quick Links -->
-                <div class="space-y-6">
-                    <div class="flex items-start gap-4">
-                        <div class="bg-white rounded-xl p-3">
-                            <i class="bi bi-question-circle text-[#0066CC] text-xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-base font-medium mb-1">FAQs</h3>
-                            <p class="text-sm text-[#86868B]">Find quick answers to common questions about our services.</p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start gap-4">
-                        <div class="bg-white rounded-xl p-3">
-                            <i class="bi bi-chat-dots text-[#0066CC] text-xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-base font-medium mb-1">Live Chat</h3>
-                            <p class="text-sm text-[#86868B]">Available {{ supportHours.days }}, {{ supportHours.hours }}</p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start gap-4">
-                        <div class="bg-white rounded-xl p-3">
-                            <i class="bi bi-globe text-[#0066CC] text-xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-base font-medium mb-1">Social Media</h3>
-                            <div class="flex gap-4 mt-2">
-                                <a *ngFor="let link of socialLinks"
-                                   [href]="link.url"
-                                   class="text-[#0066CC] hover:text-[#004499] transition-colors duration-300"
-                                   target="_blank"
-                                   rel="noopener noreferrer">
-                                    <i [class]="'bi ' + link.icon + ' text-xl'"></i>
-                                    <span class="sr-only">{{ link.platform }}</span>
-                                </a>
+            <!-- Contact Information Section -->
+            <section class="space-y-8">
+                <!-- Organization Info -->
+                <div class="bg-white/90 backdrop-blur-xl rounded-2xl shadow-sm p-8 border border-neutral-200">
+                    <h2 class="text-2xl font-light mb-6">Contact Information</h2>
+                    <div class="space-y-6">
+                        <div *ngFor="let contact of contacts" class="space-y-4">
+                            <h3 class="text-lg font-light">{{ contact.title }}</h3>
+                            <div class="space-y-3">
+                                <p class="flex items-center gap-3 text-neutral-500">
+                                    <i class="bi bi-envelope text-accent-color-base"></i>
+                                    <a href="mailto:{{ contact.email }}" class="hover:text-accent-color-base transition-colors duration-300">
+                                        {{ contact.email }}
+                                    </a>
+                                </p>
+                                <p class="flex items-center gap-3 text-neutral-500">
+                                    <i class="bi bi-telephone text-accent-color-base"></i>
+                                    <a href="tel:{{ contact.phone }}" class="hover:text-accent-color-base transition-colors duration-300">
+                                        {{ contact.phone }}
+                                    </a>
+                                </p>
+                                <p class="flex items-center gap-3 text-neutral-500">
+                                    <i class="bi bi-geo-alt text-accent-color-base"></i>
+                                    {{ contact.address }}
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+
+                <!-- Support Hours -->
+                <div class="bg-white/90 backdrop-blur-xl rounded-2xl shadow-sm p-8 border border-neutral-200">
+                    <h2 class="text-2xl font-light mb-6">Support Hours</h2>
+                    <div class="space-y-2">
+                        <p class="text-neutral-700">{{ supportHours.days }}</p>
+                        <p class="text-neutral-500">{{ supportHours.hours }}</p>
+                    </div>
+                </div>
+
+                <!-- Social Links -->
+                <div class="bg-white/90 backdrop-blur-xl rounded-2xl shadow-sm p-8 border border-neutral-200">
+                    <h2 class="text-2xl font-light mb-6">Connect With Us</h2>
+                    <div class="flex gap-4">
+                        <a *ngFor="let social of socialLinks"
+                           [href]="social.url"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="group p-3 bg-neutral-100 rounded-xl transition-all duration-300 hover:bg-accent-color-base">
+                            <i class="bi {{ social.icon }} text-neutral-700 group-hover:text-white text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
 </div>
 
@@ -218,7 +171,7 @@
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 </style>

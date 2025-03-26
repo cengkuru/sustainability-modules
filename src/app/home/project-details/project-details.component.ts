@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { switchMap, tap } from "rxjs/operators";
 import { animate, style, transition, trigger } from "@angular/animations";
 import { ProjectService } from "../../services/project.service";
+import { DatabaseProviderService } from "../../services/mongodb/database-provider.service";
 import { AttachmentListComponent } from "./attachment-list/attachment-list.component";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { FormatSectionTitlePipe } from "../../pipes/format-section-title.pipe";
@@ -135,7 +136,7 @@ interface Stage {
     ]),
     // Add more triggers as needed based on your HTML structure
   ],
-  providers: [ProjectService, DatePipe],
+  providers: [ProjectService, DatePipe, DatabaseProviderService],
 })
 export class ProjectDetailsComponent implements OnInit {
     isOriginalMenuVisible = true;
@@ -1388,39 +1389,34 @@ export class ProjectDetailsComponent implements OnInit {
     private router: Router,
     private projectService: ProjectService,
     private datePipe: DatePipe,
-    private http: HttpClient
+    private http: HttpClient,
+    private dbProvider: DatabaseProviderService
   ) {}
 
   ngOnInit(): void {
-    this.isLoading = true;
     this.project$ = this.route.paramMap.pipe(
-      switchMap((params) => {
-        const projectId = params.get("id");
-        if (projectId) {
-          return this.projectService.getProjectById(projectId);
+      switchMap(params => {
+        const projectId = params.get('id');
+        if (!projectId) {
+          return of(null);
         }
-        return of(null);
-      }),
-      tap((project) => {
-        if (project) {
-          console.log("Project:", project);
-          this.nextProject$ = this.projectService.getNextProject(project.id);
-          this.previousProject$ = this.projectService.getPreviousProject(
-            project.id
-          );
-        }
-        this.isLoading = false;
+        this.isLoading = true;
+        // Use database provider instead of direct project service
+        return this.dbProvider.getProjectById(projectId).pipe(
+          tap(() => {
+            this.isLoading = false;
+          })
+        );
       })
     );
 
-    // Fetch all project IDs to calculate total projects
-    this.projectService.getAllProjectIds().subscribe((ids) => {
+    // Use database provider for all project service calls
+    this.dbProvider.getProjectIds().subscribe((ids: string[]) => {
       this.projectIds = ids;
     });
 
+    // Load all data structures
     this.loadIdentificationStructure();
-
-    // do for other stages
     this.loadPreparationStructure();
     this.loadTenderManagementStructure();
     this.loadImplementationStructure();
@@ -1753,9 +1749,7 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
   navigateToProject(project: any): void {
-    if (project) {
-      this.router.navigate(["/public/projects", project.id]);
-    }
+    this.router.navigate(['/project', project.id]);
   }
 
   getCurrentStageName(): string {

@@ -42,64 +42,56 @@ interface ProjectStat {
     NgIconComponent,
   ],
   animations: [
-    // Existing slideInAnimation
+    // Refined animations based on style guide's transition principles
     trigger('slideInAnimation', [
       transition(':enter', [
         style({ transform: 'translateY(20px)', opacity: 0 }),
-        animate('1000ms ease-out', style({ transform: 'translateY(0)', opacity: 1 }))
+        animate('500ms cubic-bezier(0.4, 0, 0.2, 1)', style({ transform: 'translateY(0)', opacity: 1 }))
       ])
     ]),
-    // Existing fadeInAnimation
     trigger('fadeInAnimation', [
       transition(':enter', [
         style({ opacity: 0 }),
-        animate('500ms', style({ opacity: 1 }))
+        animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1 }))
       ])
     ]),
-    // New fadeInUp animation definition
     trigger('fadeInUp', [
       transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(50px)' }),
-        animate('500ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1, transform: 'translateY(0)' }))
       ])
     ]),
-    // Staggered list animation
     trigger('listAnimation', [
       transition('* <=> *', [
         query(':enter', [
-          style({ opacity: 0, transform: 'translateY(50px)' }),
-          stagger('50ms', animate('500ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })))
+          style({ opacity: 0, transform: 'translateY(20px)' }),
+          stagger('50ms', animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1, transform: 'translateY(0)' })))
         ], { optional: true })
       ])
     ]),
-
     trigger('cardHover', [
       state('initial', style({
         transform: 'translateY(0)',
-        boxShadow: 'var(--shadow-sm)'
+        boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
       })),
       state('hovered', style({
         transform: 'translateY(-4px)',
-        boxShadow: 'var(--shadow-lg)'
+        boxShadow: '0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01)'
       })),
-      transition('initial <=> hovered', animate('200ms ease-out'))
+      transition('initial <=> hovered', animate('200ms cubic-bezier(0.4, 0, 0.2, 1)'))
     ]),
-
-    // New staggered list animation
     trigger('staggeredList', [
       transition('* <=> *', [
         query(':enter', [
-          style({ opacity: 0, transform: 'translateY(50px)' }),
-          stagger('50ms', animate('500ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })))
+          style({ opacity: 0, transform: 'translateY(20px)' }),
+          stagger('50ms', animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1, transform: 'translateY(0)' })))
         ], { optional: true })
       ])
     ]),
-
-    // Typography system
     trigger('subtleFloat', [
       transition(':enter', [
         style({ opacity: 0, transform: 'translateY(20px)' }),
-        animate('1200ms cubic-bezier(0.19, 1, 0.22, 1)', 
+        animate('400ms cubic-bezier(0.4, 0, 0.2, 1)', 
           style({ opacity: 1, transform: 'translateY(0)' }))
       ])
     ])
@@ -128,12 +120,43 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   activeTab: 'recent' | 'highValue' = 'recent';
   showQuickMenu: boolean = false;
 
+  // Updated color variables to match style guide
+  colors = {
+    primary: 'var(--white)',
+    accent: 'var(--accent-color-base)',
+    text: {
+      primary: 'var(--neutral-700)',
+      secondary: 'var(--neutral-500)'
+    },
+    status: {
+      active: 'var(--status-active)',
+      completed: 'var(--status-completed)',
+      inProgress: 'var(--status-in-progress)',
+      planned: 'var(--status-planned)',
+      other: 'var(--status-other)'
+    }
+  };
+
+  // Updated typography system to match style guide
+  typography = {
+    display: 'font-light tracking-tight',
+    heading: 'text-xl md:text-2xl font-light text-neutral-700',
+    body: 'font-light leading-relaxed text-neutral-700',
+    caption: 'font-light text-sm text-neutral-500'
+  };
+
+  // Design tokens
+  spacing = {
+    base: 'var(--space-4)',
+    section: 'var(--space-8)',
+    large: 'var(--space-12)'
+  };
+
   mainSection = {
     title: "Advancing transparency and accountability in climate finance projects",
     description: "This prototype, developed by <a href='https://infrastructuretransparency.org/' target='_blank'>CoST – the Infrastructure Transparency Initiative</a>, showcases how the <a href='https://standard.open-contracting.org/infrastructure/latest/en/reference/schema/' target='_blank'>Open Contracting for Infrastructure Data Standard (OC4IDS)</a> can be applied to climate finance and sustainability efforts. It illustrates the potential to improve transparency and accountability in infrastructure projects aiming at adaptation and mitigation to climate change. The data presented is partially based on approved projects by the <a href='https://www.greenclimate.fund/' target='_blank'>Green Climate Fund (GCF)</a> for the Republic of South Africa, with values provided for illustrative purposes only.",
     buttonText: "Explore Projects "
   };
-
 
   featuredProjectsSection = {
     title: "Featured infrastructure projects",
@@ -141,7 +164,6 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     buttonText: "View Featured Projects →",
     buttonLink: "/projects/featured"
   };
-
 
   sponsorsSection = {
     title: "Supported by",
@@ -157,16 +179,9 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
             image: "../../../assets/uk.png"
         }
     ]
-};
+  };
 
   totalHighValueProjectsValue: number = 0;
-
-  // Typography system
-  fontStyles = {
-    display: 'font-light tracking-tight',
-    body: 'font-light leading-relaxed',
-    caption: 'font-light text-[rgb(var(--color-text-secondary))]'
-  };
 
   projectStats: ProjectStat[] = [
     { value: '150+', label: 'Active Projects' },
@@ -182,7 +197,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
       private scriptLoader: ScriptLoaderService,
       private cdr: ChangeDetectorRef,
       private ngZone: NgZone,
-      private translateService: TranslateService // Inject TranslateService
+      private translateService: TranslateService
     ) {
       this.currentLang = this.translateService.currentLang;
     }
@@ -237,17 +252,14 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   handleViewProjectDetails = (event: ViewProjectDetailsEvent) => {
-
     this.viewProjectDetails(event.detail);
   };
 
   openContactForm(): void {
-    // Implement contact form opening logic
     console.log('Opening contact form');
   }
 
   checkAndInitializeMap(): void {
-
     if (this.viewInitialized && this.projectsLoaded && this.mapContainer && this.mapContainer.nativeElement) {
       this.initializeMap();
     } else {
@@ -263,7 +275,6 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
       return;
     }
     this.map = L.map(this.mapContainer.nativeElement).setView([-28.4793, 24.6727], 6);
-
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
@@ -392,17 +403,18 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   generateMarkers() {
     this.markers = this.recentProjects.map(project => {
       if (project.location && project.location.coordinates) {
+        // Updated popup HTML with style guide colors and typography
         const popup = `
-          <div class="p-6 max-w-sm bg-primary-100 rounded-apple ">
-            <h3 class="text-lg font-semibold mb-2 text-accent-300">${project.name}</h3>
-            <p class="mb-2 text-accent-100">
+          <div class="p-6 max-w-sm bg-white rounded-xl shadow-sm">
+            <h3 class="text-lg font-light mb-2 text-neutral-700">${project.name}</h3>
+            <p class="mb-2 text-neutral-700 text-sm">
               <span class="font-medium">Cost Estimate:</span> 
               ${project.stages?.tenderManagement?.basicData?.contractPrice || ''}
             </p>
-            <p class="mb-4 text-accent-100">
+            <p class="mb-4 text-neutral-700 text-sm">
               <span class="font-medium">Location:</span> ${project.location.name}
             </p>
-            <a href="/public/projects/${project.id}" class="apple-button w-full text-center block">
+            <a href="/public/projects/${project.id}" class="inline-flex px-4 py-2 bg-black text-white text-sm rounded-full transition-all duration-200 hover:bg-neutral-800">
               View Details
             </a>
           </div>
@@ -416,17 +428,17 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
       }
       return null;
     }).filter((marker): marker is { lat: number; lng: number; popup: string; status: string } => marker !== null);
-
   }
 
   private getPulsingIcon(status: string): L.DivIcon {
     const color = this.getColorForStatus(status);
+    // Updated icon design to match style guide
     return L.divIcon({
       className: 'pulsing-icon',
       html: `
         <div class="relative w-10 h-10">
           <div class="absolute inset-0 pulse-ring rounded-full border-2" style="border-color: ${color};"></div>
-          <div class="absolute inset-2 rounded-full bg-white shadow-md" style="background-color: ${color};"></div>
+          <div class="absolute inset-2 rounded-full bg-white shadow-sm" style="background-color: ${color};"></div>
         </div>
       `,
       iconSize: [40, 40],
@@ -435,17 +447,16 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private getColorForStatus(status: string): string {
+    // Updated to use style guide status colors
     const statusColors: { [key: string]: string } = {
-      'Active': '#61a8bd',
-      'Completed': '#4caf50',
-      'In Progress': '#ffc107',
-      'Planned': '#2196f3',
-      'Other': '#D60000'
+      'Active': this.colors.status.active,
+      'Completed': this.colors.status.completed,
+      'In Progress': this.colors.status.inProgress,
+      'Planned': this.colors.status.planned,
+      'Other': this.colors.status.other
     };
     return statusColors[status] || statusColors['Other'];
   }
-
-
 
   addProjectsToFirebase(): void {
     const projects = (projectsData as any).projects;
@@ -461,8 +472,6 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     return prefix + suffix;
   }
 
-
-
   formatLargeNumber(num: number): string {
     if (num >= 1000000) {
       return (num / 1000000).toFixed(1) + 'M';
@@ -472,8 +481,6 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     return num.toString();
   }
 
-
-  // In landing.component.ts
   getFormattedPrice(price: any): string {
     if (!price) {
       return '';
@@ -518,7 +525,6 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     this.totalHighValueProjectsValue = this.highValueProjects.reduce((total, project) => {
       const budget = project.stages?.preparation?.basicData?.projectBudget;
       if (budget) {
-        // Handle string values like "100000000 ZAR"
         const numericValue = parseFloat(budget.replace(/[^0-9.-]+/g, ""));
         return !isNaN(numericValue) ? total + numericValue : total;
       }
@@ -568,6 +574,4 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
       return total;
     }, 0);
   }
-
-  
 }

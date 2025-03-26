@@ -21,6 +21,16 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+// Import MongoDB services
+import { MongoProjectService } from './services/mongodb/mongo-project.service';
+import { MongoPolicyService } from './services/mongodb/mongo-policy.service';
+import { ProjectService } from './services/project.service';
+import { 
+  DatabaseProviderService, 
+  PROJECT_SERVICE_TOKEN, 
+  projectServiceFactory 
+} from './services/mongodb/database-provider.service';
+
 // Factory function for translate loader
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -61,7 +71,18 @@ export function HttpLoaderFactory(http: HttpClient) {
     AngularFireAuthModule,   // imports firebase/auth, only needed for auth features
 
   ],
-  providers: [],
+  providers: [
+    // Provider for MongoDB services
+    MongoProjectService,
+    MongoPolicyService,
+    // Factory provider to switch between Firebase and MongoDB
+    {
+      provide: PROJECT_SERVICE_TOKEN,
+      useFactory: projectServiceFactory,
+      deps: [ProjectService, MongoProjectService]
+    },
+    DatabaseProviderService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

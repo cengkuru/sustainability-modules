@@ -1,30 +1,30 @@
-<div class="min-h-screen bg-[#FAFAFA] font-['SF Pro Display', 'Inter', system-ui] text-[#1D1D1F]">
+<div class="min-h-screen bg-gradient-to-b from-neutral-50 to-white font-['SF Pro Display', 'Inter', system-ui] text-neutral-700">
     <main class="container mx-auto px-6 py-12 max-w-6xl">
         <!-- Header Section -->
         <header class="text-center mb-16">
-            <h1 class="text-4xl font-medium tracking-tight mb-3">Open Infrastructure Data</h1>
-            <p class="text-[#86868B] text-lg font-light leading-relaxed max-w-2xl mx-auto">
+            <h1 class="text-4xl font-light tracking-tight mb-3">Open Infrastructure Data</h1>
+            <p class="text-neutral-500 text-lg font-light leading-relaxed max-w-2xl mx-auto">
                 Access and download comprehensive infrastructure project data. Our commitment to transparency enables informed decision-making and collaborative innovation.
             </p>
         </header>
 
         <!-- License Banner -->
         <section class="mb-16">
-            <div class="bg-white rounded-2xl shadow-sm backdrop-blur-lg bg-opacity-70 p-8 border border-[#E5E5E7]">
+            <div class="bg-white/90 backdrop-blur-xl rounded-2xl shadow-sm p-8 border border-neutral-200">
                 <div class="flex flex-col md:flex-row items-center justify-between gap-6">
                     <div class="flex items-center gap-6">
-                        <div class="bg-[#F5F5F7] rounded-xl p-4">
+                        <div class="bg-neutral-100 rounded-xl p-4">
                             <img src="../../../assets/Cc.png" alt="Creative Commons License" class="h-8 w-auto">
                         </div>
                         <div>
-                            <h2 class="text-xl font-medium mb-2">Open License</h2>
-                            <p class="text-[#86868B] text-sm">This work is licensed under a Creative Commons Attribution 4.0 International License</p>
+                            <h2 class="text-xl font-light mb-2">Open License</h2>
+                            <p class="text-neutral-500 text-sm">This work is licensed under a Creative Commons Attribution 4.0 International License</p>
                         </div>
                     </div>
                     <a href="https://creativecommons.org/licenses/by/4.0/" 
                        target="_blank" 
                        rel="license noopener noreferrer" 
-                       class="text-[#0066CC] hover:text-[#004499] transition-all duration-300 flex items-center group">
+                       class="text-accent-color-base hover:text-neutral-800 transition-all duration-300 flex items-center group">
                         Learn more
                         <i class="bi bi-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform duration-300"></i>
                     </a>
@@ -34,8 +34,8 @@
 
         <!-- Last Updated -->
         <div class="flex items-center justify-between mb-8">
-            <h2 class="text-2xl font-medium">Available Datasets</h2>
-            <p class="text-[#86868B] text-sm">
+            <h2 class="text-2xl font-light">Available Datasets</h2>
+            <p class="text-neutral-500 text-sm">
                 Last updated: <time [attr.datetime]="lastUpdated | date:'yyyy-MM-dd'">{{lastUpdated | date:'mediumDate'}}</time>
             </p>
         </div>
@@ -43,29 +43,29 @@
         <!-- Dataset Cards -->
         <div class="grid grid-cols-1 gap-6">
             <div *ngFor="let file of dataFiles" 
-                 class="bg-white rounded-2xl shadow-sm backdrop-blur-lg bg-opacity-70 border border-[#E5E5E7] overflow-hidden transition-all duration-300 hover:shadow-md">
+                 class="bg-white/90 backdrop-blur-xl rounded-2xl shadow-sm border border-neutral-200 overflow-hidden transition-all duration-300 hover:shadow-md">
                 <div class="p-8">
                     <div class="flex items-start justify-between mb-6">
                         <div>
-                            <h3 class="text-xl font-medium mb-2">{{ file.name }}</h3>
-                            <p class="text-[#86868B] text-sm">Comprehensive dataset containing detailed project information, including locations, investments, and climate objectives.</p>
+                            <h3 class="text-xl font-light mb-2">{{ file.name }}</h3>
+                            <p class="text-neutral-500 text-sm">Comprehensive dataset containing detailed project information, including locations, investments, and climate objectives.</p>
                         </div>
-                        <div class="bg-[#F5F5F7] rounded-xl p-3">
-                            <i class="bi bi-file-earmark-text text-[#0066CC] text-xl"></i>
+                        <div class="bg-neutral-100 rounded-xl p-3">
+                            <i class="bi bi-file-earmark-text text-accent-color-base text-xl"></i>
                         </div>
                     </div>
 
                     <!-- Download Options -->
                     <div class="space-y-4">
-                        <p class="text-sm font-medium text-[#1D1D1F]">Download Format</p>
+                        <p class="text-sm font-light text-neutral-700">Download Format</p>
                         <div class="flex flex-wrap gap-3">
                             <button *ngFor="let format of downloadFormats"
                                     (click)="downloadFile(file.id, format.type)"
                                     [disabled]="downloading"
-                                    class="group relative flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-xl transition-all duration-300"
+                                    class="group relative flex items-center gap-2 px-6 py-3 text-sm font-light rounded-xl transition-all duration-300"
                                     [ngClass]="{
-                                        'bg-[#F5F5F7] text-[#1D1D1F] hover:bg-[#0066CC] hover:text-white': !downloading,
-                                        'bg-[#E5E5E7] text-[#86868B] cursor-not-allowed': downloading
+                                        'bg-neutral-100 text-neutral-700 hover:bg-accent-color-base hover:text-white': !downloading,
+                                        'bg-neutral-200 text-neutral-500 cursor-not-allowed': downloading
                                     }">
                                 <i class="bi" [ngClass]="{
                                     'bi-filetype-json': format.type === 'json',
@@ -73,7 +73,7 @@
                                     'bi-file-earmark-spreadsheet': format.type === 'xlsx'
                                 }"></i>
                                 {{ format.label }}
-                                <div class="absolute inset-0 rounded-xl border-2 border-transparent transition-all duration-300 group-hover:border-[#0066CC]"
+                                <div class="absolute inset-0 rounded-xl border-2 border-transparent transition-all duration-300 group-hover:border-accent-color-base"
                                      [ngClass]="{'group-hover:border-transparent': downloading}">
                                 </div>
                             </button>
@@ -83,55 +83,55 @@
 
                 <!-- Download Progress -->
                 <div *ngIf="downloading" 
-                     class="bg-[#F5F5F7] px-8 py-4 flex items-center justify-between animate-fade-in">
+                     class="bg-neutral-100 px-8 py-4 flex items-center justify-between animate-fade-in">
                     <div class="flex items-center gap-3">
-                        <i class="bi bi-arrow-repeat animate-spin text-[#0066CC]"></i>
-                        <span class="text-sm font-medium">Preparing your download...</span>
+                        <i class="bi bi-arrow-repeat animate-spin text-accent-color-base"></i>
+                        <span class="text-sm font-light">Preparing your download...</span>
                     </div>
-                    <div class="w-24 h-1 bg-[#E5E5E7] rounded-full overflow-hidden">
-                        <div class="h-full bg-[#0066CC] rounded-full animate-progress"></div>
+                    <div class="w-24 h-1 bg-neutral-200 rounded-full overflow-hidden">
+                        <div class="h-full bg-accent-color-base rounded-full animate-progress"></div>
                     </div>
                 </div>
 
                 <!-- Error Message -->
                 <div *ngIf="error" 
-                     class="bg-[#FEF2F2] border-t border-[#FCA5A5] px-8 py-4 flex items-center gap-3 animate-fade-in">
-                    <i class="bi bi-exclamation-circle text-[#DC2626]"></i>
-                    <p class="text-sm text-[#DC2626]">{{ error }}</p>
+                     class="bg-[#FEF2F2] border-t border-status-other px-8 py-4 flex items-center gap-3 animate-fade-in">
+                    <i class="bi bi-exclamation-circle text-status-other"></i>
+                    <p class="text-sm text-status-other">{{ error }}</p>
                 </div>
             </div>
         </div>
 
         <!-- Data Usage Guidelines -->
         <section class="mt-16">
-            <div class="bg-[#F5F5F7] rounded-2xl p-8">
-                <h2 class="text-xl font-medium mb-6">Data Usage Guidelines</h2>
+            <div class="bg-neutral-100 rounded-2xl p-8">
+                <h2 class="text-xl font-light mb-6">Data Usage Guidelines</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="flex items-start gap-4">
                         <div class="bg-white rounded-xl p-3">
-                            <i class="bi bi-citation text-[#0066CC] text-xl"></i>
+                            <i class="bi bi-citation text-accent-color-base text-xl"></i>
                         </div>
                         <div>
-                            <h3 class="text-base font-medium mb-2">Citation</h3>
-                            <p class="text-sm text-[#86868B]">Please cite the source when using this data in your research or applications.</p>
+                            <h3 class="text-base font-light mb-2">Citation</h3>
+                            <p class="text-sm text-neutral-500">Please cite the source when using this data in your research or applications.</p>
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
                         <div class="bg-white rounded-xl p-3">
-                            <i class="bi bi-shield-check text-[#0066CC] text-xl"></i>
+                            <i class="bi bi-shield-check text-accent-color-base text-xl"></i>
                         </div>
                         <div>
-                            <h3 class="text-base font-medium mb-2">Data Quality</h3>
-                            <p class="text-sm text-[#86868B]">All datasets undergo rigorous quality checks before publication.</p>
+                            <h3 class="text-base font-light mb-2">Data Quality</h3>
+                            <p class="text-sm text-neutral-500">All datasets undergo rigorous quality checks before publication.</p>
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
                         <div class="bg-white rounded-xl p-3">
-                            <i class="bi bi-clock-history text-[#0066CC] text-xl"></i>
+                            <i class="bi bi-clock-history text-accent-color-base text-xl"></i>
                         </div>
                         <div>
-                            <h3 class="text-base font-medium mb-2">Updates</h3>
-                            <p class="text-sm text-[#86868B]">Data is updated regularly to ensure accuracy and relevance.</p>
+                            <h3 class="text-base font-light mb-2">Updates</h3>
+                            <p class="text-sm text-neutral-500">Data is updated regularly to ensure accuracy and relevance.</p>
                         </div>
                     </div>
                 </div>

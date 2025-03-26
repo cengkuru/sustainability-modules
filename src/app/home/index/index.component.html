@@ -1,6 +1,6 @@
-<div class="min-h-full bg-white text-gray-900 font-sf-pro">
+<div class="min-h-full bg-gradient-to-b from-neutral-50 to-white text-neutral-700 font-light">
   <header
-    class="fixed w-full top-0 z-50 bg-white/80 backdrop-filter backdrop-blur-xl border-b border-gray-100/50 transition-all duration-500 ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
+    class="fixed w-full top-0 z-50 bg-white/80 backdrop-filter backdrop-blur-xl border-b border-neutral-200 transition-all duration-200 cubic-bezier(0.4, 0, 0.2, 1)"
     [class.translate-y-[-100%)]="!isHeaderVisible"
   >
     <div class="mx-auto max-w-7xl px-6">
@@ -9,7 +9,7 @@
         <div class="flex items-center">
           <a
             href="/"
-            class="flex-shrink-0 transition-transform duration-300 ease-[cubic-bezier(0.4, 0, 0.2, 1)] hover:opacity-75"
+            class="flex-shrink-0 transition-transform duration-200 hover:opacity-75"
           >
             <img
               class="w-auto h-8"
@@ -25,9 +25,9 @@
             <a
               *ngFor="let link of navLinks"
               [routerLink]="link.path"
-              routerLinkActive="bg-gray-100 text-gray-900"
+              routerLinkActive="bg-neutral-100 text-neutral-700"
               [routerLinkActiveOptions]="{ exact: true }"
-              class="px-4 py-2 rounded-full text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all duration-300 ease-[cubic-bezier(0.4, 0, 0.2, 1)] flex items-center"
+              class="px-4 py-2 rounded-full text-sm font-light text-neutral-500 hover:bg-neutral-100 transition-all duration-200 flex items-center"
             >
               <i [class]="link.icon + ' mr-2 text-base opacity-75'"></i>
               {{ link.label | translate }}
@@ -42,31 +42,31 @@
             <button
               type="button"
               (click)="toggleLanguageDropdown($event)"
-              class="flex items-center space-x-2 px-3 py-2 rounded-full text-gray-600 hover:bg-gray-50 transition-all duration-300"
-              [ngClass]="{'bg-gray-50': isLanguageDropdownOpen}"
+              class="flex items-center space-x-2 px-3 py-2 rounded-full text-neutral-500 hover:bg-neutral-100 transition-all duration-200"
+              [ngClass]="{'bg-neutral-100': isLanguageDropdownOpen}"
             >
               <i class="bi bi-translate text-base opacity-75"></i>
-              <span class="text-sm font-medium">{{ currentLang | uppercase }}</span>
+              <span class="text-sm font-light">{{ currentLang | uppercase }}</span>
             </button>
 
             <!-- Dropdown Menu -->
             <div 
               *ngIf="isLanguageDropdownOpen"
               @fadeInOut
-              class="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-lg shadow-gray-100/50 border border-gray-100 py-1"
+              class="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-sm border border-neutral-300 py-1"
             >
               <button 
                 *ngFor="let lang of languageOptions; trackBy: trackByLangCode"
                 (click)="changeLanguage(lang.code, $event)"
-                class="w-full px-4 py-2 text-left hover:bg-accent/5 focus:bg-accent/5 focus:outline-none transition-colors duration-200 flex items-center space-x-2"
-                [ngClass]="{'bg-accent/10': currentLang === lang.code}"
+                class="w-full px-4 py-2 text-left hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none transition-colors duration-200 flex items-center space-x-2"
+                [ngClass]="{'bg-neutral-100': currentLang === lang.code}"
                 type="button"
                 role="menuitem"
                 [attr.aria-checked]="currentLang === lang.code"
                 tabindex="0"
               >
                 <i [ngClass]="lang.icon" aria-hidden="true"></i>
-                <span>{{ lang.label }}</span>
+                <span class="font-light">{{ lang.label }}</span>
                 <i 
                   *ngIf="currentLang === lang.code" 
                   class="bi bi-check2 ml-auto" 
@@ -81,7 +81,7 @@
             <button
               type="button"
               (click)="toggleProfileDropdown()"
-              class="flex items-center rounded-full bg-accent1 text-accent p-2 hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-accent6 transition-all duration-300 ease-apple hover:scale-105"
+              class="flex items-center rounded-full bg-white text-neutral-700 p-2 hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-accent-color-base transition-all duration-200"
               aria-haspopup="true"
               [attr.aria-expanded]="isProfileDropdownOpen"
             >
@@ -93,17 +93,17 @@
             <div
               *ngIf="isProfileDropdownOpen"
               [@fadeInOut]
-              class="absolute right-0 mt-2 w-48 bg-primary rounded-apple-lg shadow-apple-xl ring-1 ring-black ring-opacity-5 focus:outline-none overflow-hidden"
+              class="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-sm border border-neutral-300 focus:outline-none overflow-hidden"
               role="menu"
             >
               <a
                 href="#"
-                class="block px-4 py-3 text-sm text-accent hover:bg-accent6 hover:text-primary transition-all duration-300 ease-apple"
+                class="block px-4 py-3 text-sm font-light text-neutral-700 hover:bg-neutral-100 transition-all duration-200"
                 role="menuitem"
               >{{ "HEADER.PROFILE" | translate }}</a>
               <a
                 href="#"
-                class="block px-4 py-3 text-sm text-accent hover:bg-accent6 hover:text-primary transition-all duration-300 ease-apple"
+                class="block px-4 py-3 text-sm font-light text-neutral-700 hover:bg-neutral-100 transition-all duration-200"
                 role="menuitem"
               >{{ "HEADER.SIGN_OUT" | translate }}</a>
             </div>
@@ -114,7 +114,7 @@
             <button
               type="button"
               (click)="login()"
-              class="hidden md:flex items-center text-primary bg-accent6 rounded-apple-lg px-4 py-2 text-sm font-medium hover:bg-opacity-90 transition-all duration-300 ease-apple hover:scale-105"
+              class="hidden md:flex items-center text-white bg-black rounded-full px-4 py-2 text-sm font-light hover:bg-neutral-800 transition-all duration-200"
             >
               <i class="bi bi-box-arrow-in-right mr-2 text-lg" aria-hidden="true"></i>
               <span>{{ "HEADER.LOGIN" | translate }}</span>
@@ -125,7 +125,7 @@
           <button
             type="button"
             (click)="toggleMobileMenu()"
-            class="md:hidden inline-flex items-center justify-center p-2 rounded-apple-lg text-accent hover:bg-accent hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-accent6 transition-all duration-300 ease-apple"
+            class="md:hidden inline-flex items-center justify-center p-2 rounded-full text-neutral-700 hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-accent-color-base transition-all duration-200"
             [attr.aria-expanded]="isMobileMenuOpen"
           >
             <span class="sr-only">{{ "HEADER.TOGGLE_MENU" | translate }}</span>
@@ -143,15 +143,15 @@
     <div class="md:hidden" *ngIf="isMobileMenuOpen" [@fadeInOut]>
       <!-- Language Selector for Mobile -->
       <div
-        class="px-2 pt-2 pb-2 flex justify-center space-x-2 border-b border-accent border-opacity-20"
+        class="px-2 pt-2 pb-2 flex justify-center space-x-2 border-b border-neutral-200"
       >
         <button
           *ngFor="let lang of ['en', 'es']"
           (click)="changeLanguage(lang)"
-          class="px-4 py-2 rounded-apple-lg text-sm font-medium transition-all duration-300"
+          class="px-4 py-2 rounded-full text-sm font-light transition-all duration-200"
           [ngClass]="{
-            'bg-accent6 text-primary': currentLang === lang,
-            'text-accent hover:bg-accent hover:bg-opacity-10':
+            'bg-black text-white': currentLang === lang,
+            'text-neutral-700 hover:bg-neutral-100':
               currentLang !== lang
           }"
         >
@@ -163,16 +163,16 @@
         <a
           *ngFor="let link of navLinks"
           [routerLink]="link.path"
-          routerLinkActive="bg-accent6 text-primary"
+          routerLinkActive="bg-black text-white"
           [routerLinkActiveOptions]="{ exact: true }"
-          class="flex items-center px-3 py-2 rounded-apple-lg text-base font-medium hover:bg-accent hover:bg-opacity-10 transition-all duration-300 ease-apple"
+          class="flex items-center px-3 py-2 rounded-full text-base font-light hover:bg-neutral-100 transition-all duration-200"
           (click)="closeMobileMenu()"
         >
           <i [class]="link.icon + ' mr-2 text-lg'"></i
           >{{ link.label | translate }}
         </a>
       </div>
-      <div class="pt-4 pb-3 border-t border-accent border-opacity-20">
+      <div class="pt-4 pb-3 border-t border-neutral-200">
         <div
           class="flex items-center px-5"
           *ngIf="isLoggedIn; else loginButtonMobile"
@@ -181,8 +181,8 @@
             <i class="bi bi-person-circle text-3xl"></i>
           </div>
           <div class="ml-3">
-            <div class="text-base font-medium text-accent">Tom Cook</div>
-            <div class="text-sm font-medium text-accent opacity-75">
+            <div class="text-base font-light text-neutral-700">Tom Cook</div>
+            <div class="text-sm font-light text-neutral-500">
               {{ "email@example.com" }}
             </div>
           </div>
@@ -190,12 +190,12 @@
         <div class="mt-3 px-2 space-y-1">
           <a
             href="#"
-            class="block px-3 py-2 rounded-apple-lg text-base font-medium text-accent hover:bg-accent hover:bg-opacity-10 transition-all duration-300 ease-apple"
+            class="block px-3 py-2 rounded-full text-base font-light text-neutral-700 hover:bg-neutral-100 transition-all duration-200"
             >{{ "HEADER.PROFILE" | translate }}</a
           >
           <a
             href="#"
-            class="block px-3 py-2 rounded-apple-lg text-base font-medium text-accent hover:bg-accent hover:bg-opacity-10 transition-all duration-300 ease-apple"
+            class="block px-3 py-2 rounded-full text-base font-light text-neutral-700 hover:bg-neutral-100 transition-all duration-200"
             >{{ "HEADER.SIGN_OUT" | translate }}</a
           >
         </div>
@@ -203,7 +203,7 @@
           <div class="mt-3 px-2">
             <button
               (click)="login()"
-              class="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-apple-lg shadow-sm text-sm font-medium text-primary bg-accent6 hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent6 transition-all duration-300 ease-apple"
+              class="w-full flex justify-center items-center py-2 px-4 rounded-full text-sm font-light text-white bg-black hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-color-base transition-all duration-200"
             >
               <i class="bi bi-box-arrow-in-right mr-2 text-lg"></i
               >{{ "HEADER.LOGIN" | translate }}
@@ -218,7 +218,7 @@
     <router-outlet></router-outlet>
   </main>
 
-  <footer class="bg-gray-50 border-t border-gray-100">
+  <footer class="bg-neutral-50 border-t border-neutral-200">
     <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <!-- Logo and Copyright -->
@@ -228,7 +228,7 @@
             [alt]="'FOOTER.LOGO_ALT' | translate"
             class="h-10 w-auto mx-auto md:mx-0 mb-4"
           />
-          <p class="text-sm opacity-80">
+          <p class="text-sm font-light text-neutral-500">
             &copy; {{ currentYear }} {{ owner }}.
             {{ "FOOTER.RIGHTS_RESERVED" | translate }}
           </p>
@@ -236,14 +236,14 @@
 
         <!-- Navigation -->
         <div>
-          <h3 class="font-semibold mb-4 text-lg">
+          <h3 class="font-medium mb-4 text-lg text-neutral-700">
             {{ "FOOTER.NAVIGATION" | translate }}
           </h3>
           <ul class="space-y-2">
             <li *ngFor="let link of navLinks">
               <a
                 [routerLink]="link.path"
-                class="text-sm hover:text-accent1 transition-all duration-300 ease-apple hover:translate-x-1 block"
+                class="text-sm font-light text-neutral-500 hover:text-neutral-700 transition-all duration-200 hover:translate-x-1 block"
               >
                 {{ link.label | translate }}
               </a>
@@ -253,14 +253,14 @@
 
         <!-- Legal -->
         <div>
-          <h3 class="font-semibold mb-4 text-lg">
+          <h3 class="font-medium mb-4 text-lg text-neutral-700">
             {{ "FOOTER.LEGAL" | translate }}
           </h3>
           <ul class="space-y-2">
             <li *ngFor="let link of footerLinks">
               <a
                 [routerLink]="link.path"
-                class="text-sm hover:text-accent1 transition-all duration-300 ease-apple hover:translate-x-1 block"
+                class="text-sm font-light text-neutral-500 hover:text-neutral-700 transition-all duration-200 hover:translate-x-1 block"
               >
                 {{ link.label | translate }}
               </a>
@@ -270,7 +270,7 @@
                 [href]="creativeCommonsLicense.link"
                 target="_blank"
                 rel="license noopener noreferrer"
-                class="flex items-center text-sm hover:text-accent1 transition-all duration-300 ease-apple hover:translate-x-1"
+                class="flex items-center text-sm font-light text-neutral-500 hover:text-neutral-700 transition-all duration-200 hover:translate-x-1"
               >
                 <img
                   src="../../../assets/Cc.png"
@@ -285,7 +285,7 @@
 
         <!-- Connect -->
         <div>
-          <h3 class="font-semibold mb-4 text-lg">
+          <h3 class="font-medium mb-4 text-lg text-neutral-700">
             {{ "FOOTER.CONNECT" | translate }}
           </h3>
           <ul class="space-y-2">
@@ -293,7 +293,7 @@
               <a
                 target="_blank"
                 href="https://x.com/CoSTransparency"
-                class="text-sm hover:text-accent1 transition-all duration-300 ease-apple hover:translate-x-1 flex items-center"
+                class="text-sm font-light text-neutral-500 hover:text-neutral-700 transition-all duration-200 hover:translate-x-1 flex items-center"
               >
                 <i class="bi bi-x mr-2"></i>
                 {{ "FOOTER.SOCIAL.TWITTER" | translate }}
@@ -303,7 +303,7 @@
               <a
                 target="_blank"
                 href="https://www.linkedin.com/company/costransparency/"
-                class="text-sm hover:text-accent1 transition-all duration-300 ease-apple hover:translate-x-1 flex items-center"
+                class="text-sm font-light text-neutral-500 hover:text-neutral-700 transition-all duration-200 hover:translate-x-1 flex items-center"
               >
                 <i class="bi bi-linkedin mr-2"></i>
                 {{ "FOOTER.SOCIAL.LINKEDIN" | translate }}
@@ -313,7 +313,7 @@
               <a
                 target="_blank"
                 href="https://www.facebook.com/CoSTransparency"
-                class="text-sm hover:text-accent1 transition-all duration-300 ease-apple hover:translate-x-1 flex items-center"
+                class="text-sm font-light text-neutral-500 hover:text-neutral-700 transition-all duration-200 hover:translate-x-1 flex items-center"
               >
                 <i class="bi bi-facebook mr-2"></i>
                 {{ "FOOTER.SOCIAL.FACEBOOK" | translate }}
@@ -325,19 +325,19 @@
 
       <!-- Language Selector in Footer -->
       <div
-        class="mt-8 pt-8 border-t border-primary border-opacity-20 flex justify-center md:justify-end"
+        class="mt-8 pt-8 border-t border-neutral-200 flex justify-center md:justify-end"
       >
         <div class="flex items-center space-x-2">
-          <span class="text-sm opacity-80"
+          <span class="text-sm font-light text-neutral-500"
             >{{ "FOOTER.LANGUAGE" | translate }}:</span
           >
           <button
             *ngFor="let lang of ['en', 'es']"
             (click)="changeLanguage(lang)"
-            class="px-3 py-1 rounded-apple-lg text-sm transition-all duration-300"
+            class="px-3 py-1 rounded-full text-sm font-light transition-all duration-200"
             [ngClass]="{
-              'bg-primary text-accent': currentLang === lang,
-              'hover:bg-primary/10': currentLang !== lang
+              'bg-black text-white': currentLang === lang,
+              'text-neutral-700 hover:bg-neutral-100': currentLang !== lang
             }"
           >
             {{ "LANG." + lang.toUpperCase() | translate }}

@@ -6,6 +6,22 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        white: '#FFFFFF',
+        black: '#000000',
+        'neutral-50': '#F9FAFB',
+        'neutral-100': '#F3F4F6',
+        'neutral-200': '#E5E7EB',
+        'neutral-300': '#D1D5DB',
+        'neutral-500': '#4B5563',
+        'neutral-700': '#111827',
+        'neutral-800': '#1F2937',
+        'accent-base': '#61a8bd',
+        'status-active': '#61a8bd',
+        'status-completed': '#4CAF50',
+        'status-in-progress': '#ffc107',
+        'status-planned': '#2196f3',
+        'status-other': '#D60000',
+        // Legacy colors maintained for compatibility
         primary: '#f7f7f7',
         secondary: '#d60000',
         accent: '#333333',
@@ -19,31 +35,32 @@ module.exports = {
       typography: {
         DEFAULT: {
           css: {
-            color: '#333333',
+            color: 'var(--neutral-700)',
             a: {
-              color: '#373738',
+              color: 'var(--accent-base)',
               '&:hover': {
-                color: '#373738',
+                color: 'var(--status-planned)',
               },
             },
             h1: {
-              color: '#333333',
-              fontSize: '2.5rem',
-              fontWeight: '700',
+              color: 'var(--neutral-700)',
+              fontSize: '1.5rem',
+              fontWeight: '500',
               letterSpacing: '-0.025em',
             },
             h2: {
-              color: '#333333',
-              fontSize: '2rem',
-              fontWeight: '600',
+              color: 'var(--neutral-700)',
+              fontSize: '1rem',
+              fontWeight: '500',
               letterSpacing: '-0.025em',
             },
             h3: {
-              color: '#333333',
-              fontSize: '1.5rem',
-              fontWeight: '600',
+              color: 'var(--neutral-700)',
+              fontSize: '0.875rem',
+              fontWeight: '500',
             },
             p: {
+              color: 'var(--neutral-700)',
               marginBottom: '1.5em',
               lineHeight: '1.6',
             },
@@ -51,33 +68,35 @@ module.exports = {
         },
         dark: {
           css: {
-            color: '#f7f7f7',
+            color: 'var(--white)',
             a: {
-              color: '#00A8E0',
+              color: 'var(--status-planned)',
               '&:hover': {
-                color: '#61a8bd',
+                color: 'var(--accent-base)',
               },
             },
             h1: {
-              color: '#f7f7f7',
+              color: 'var(--white)',
             },
             h2: {
-              color: '#f7f7f7',
+              color: 'var(--white)',
             },
             h3: {
-              color: '#f7f7f7',
+              color: 'var(--white)',
             },
+            p: {
+              color: 'var(--white)',
+            }
           },
         },
-
       },
       fontSize: {
         xs: ['0.75rem', { lineHeight: '1.5' }],
-        sm: ['0.875rem', { lineHeight: '1.5715' }],
-        base: ['1rem', { lineHeight: '1.5', letterSpacing: '-0.01em' }],
-        lg: ['1.125rem', { lineHeight: '1.5', letterSpacing: '-0.01em' }],
-        xl: ['1.25rem', { lineHeight: '1.5', letterSpacing: '-0.01em' }],
-        '2xl': ['1.5rem', { lineHeight: '1.33', letterSpacing: '-0.01em' }],
+        sm: ['0.875rem', { lineHeight: '1.5' }],
+        base: ['1rem', { lineHeight: '1.5' }],
+        lg: ['1.125rem', { lineHeight: '1.5' }],
+        xl: ['1.25rem', { lineHeight: '1.5' }],
+        '2xl': ['1.5rem', { lineHeight: '1.33' }],
         '3xl': ['1.88rem', { lineHeight: '1.33', letterSpacing: '-0.01em' }],
         '4xl': ['2.25rem', { lineHeight: '1.25', letterSpacing: '-0.02em' }],
         '5xl': ['3rem', { lineHeight: '1.25', letterSpacing: '-0.02em' }],
@@ -165,7 +184,9 @@ module.exports = {
     plugin(({ addUtilities, theme, variants }) => {
       const newUtilities = {
         '.apple-focus-ring': {
-          boxShadow: `0 0 0 4px ${theme('colors.accent6')}`,
+          outline: 'none',
+          borderColor: 'var(--accent-base)',
+          boxShadow: '0 0 0 2px rgba(97, 168, 189, 0.3)', // Subtle teal glow
         },
         '.apple-press-effect': {
           transform: 'scale(0.98)',
@@ -178,7 +199,7 @@ module.exports = {
           },
         },
         '.apple-glass': {
-          backgroundColor: 'rgba(255, 255, 255, 0.7)',
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
           backdropFilter: 'blur(10px)',
         },
         '.dark .apple-glass': {
@@ -188,9 +209,29 @@ module.exports = {
           textWrap: 'balance',
         },
         '.apple-gradient-text': {
-          background: `linear-gradient(to right, ${theme('colors.accent5')}, ${theme('colors.accent6')})`,
+          background: `linear-gradient(to right, ${theme('colors.accent-base')}, ${theme('colors.status-planned')})`,
           '-webkit-background-clip': 'text',
           '-webkit-text-fill-color': 'transparent',
+        },
+        '.hover-bg-subtle:hover': {
+          backgroundColor: 'var(--neutral-100)',
+        },
+        '.transition-colors': {
+          transitionProperty: 'background-color, border-color, color, fill, stroke',
+          transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+          transitionDuration: '200ms',
+        },
+        '.divider': {
+          height: '1px',
+          width: '100%',
+          backgroundColor: 'var(--neutral-200)',
+          margin: '1.5rem 0',
+        },
+        '.divider-small': {
+          height: '1px',
+          width: '4rem',
+          backgroundColor: 'var(--neutral-700)',
+          margin: '0.5rem 0',
         },
       };
 
@@ -200,6 +241,4 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('@tailwindcss/aspect-ratio'),
   ],
-
-
 }

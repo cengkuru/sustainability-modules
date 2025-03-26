@@ -1,57 +1,98 @@
+<!-- Main Container -->
+<div class="min-h-screen bg-gradient-to-b from-neutral-50 to-white font-['SF Pro Display', 'Inter', system-ui] text-neutral-700">
+    <main class="container mx-auto px-4 py-12 max-w-sm">
+        <!-- Header Section -->
+        <header class="text-center mb-8">
+            <h1 class="text-3xl font-light tracking-tight mb-2">Welcome Back</h1>
+            <p class="text-neutral-500 text-base font-light leading-relaxed">
+                Sign in to your account to continue
+            </p>
+        </header>
 
-<div class="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-    <div class="grid grid-cols-1 items-start gap-4 lg:grid-cols-1 lg:gap-8">
-        <!-- About Section -->
-        <div class="grid grid-cols-1 gap-4 lg:col-span-2">
-            <section aria-labelledby="section-1-title">
-                <div class="overflow-hidden rounded-lg">
-                    <div class="p-6">
-                        <div class="max-w-lg mx-auto bg-white px-10 py-8 rounded-lg">
-                            <h1 class="text-2xl font-semibold text-center mb-6">Procuring Entity Login</h1>
-                            <form [formGroup]="loginForm" (ngSubmit)="login()" class="space-y-6">
-                                <!-- Error Message Display -->
-                                <div *ngIf="errorMessage" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                                    <strong class="font-bold">Error!</strong>
-                                    <span class="block sm:inline">{{ errorMessage }}</span>
-                                </div>
+        <!-- Login Form Card -->
+        <div class="bg-white/90 backdrop-blur-xl rounded-2xl shadow-sm p-6 border border-neutral-200">
+            <form [formGroup]="loginForm" (ngSubmit)="login()" class="space-y-5">
+                <!-- Error Message -->
+                <div *ngIf="errorMessage" 
+                     class="p-3 bg-status-other/10 border border-status-other rounded-xl animate-fade-in">
+                    <p class="text-sm text-status-other flex items-center gap-2">
+                        <i class="bi bi-exclamation-circle"></i>
+                        {{ errorMessage }}
+                    </p>
+                </div>
 
-
-                                <div class="space-y-2">
-                                    <label for="email" class="text-gray-700 font-bold">Email</label>
-                                    <div class="flex items-center border border-gray-300 rounded px-3 py-2">
-                                        <i class="bi bi-envelope text-gray-400"></i>
-                                        <input type="email" id="email" formControlName="email" placeholder="Enter your email" class="flex-1 ml-2 bg-transparent text-gray-700 outline-none">
-                                    </div>
-
-
-                                </div>
-
-                                <div class="space-y-2">
-                                    <label for="password" class="text-gray-700 font-bold">Password</label>
-                                    <div class="flex items-center border border-gray-300 rounded px-3 py-2">
-                                        <i class="bi bi-lock-fill text-gray-400"></i>
-                                        <input type="password" id="password" formControlName="password" placeholder="Enter your password" class="flex-1 ml-2 bg-transparent text-gray-700 outline-none">
-                                    </div>
-
-                                </div>
-
-                                <div class="text-center">
-                                    <button type="submit"
-                                            class="bg-accent hover:bg-secondary text-white font-bold py-2 px-4 rounded w-full disabled:bg-gray-500"
-                                            [disabled]="!loginForm.valid || isLoading">
-                                        {{ isLoading ? 'Logging in...' : 'Login' }}
-                                    </button>
-                                </div>
-
-                            </form>
-                            <div class="mt-4 text-center">
-                                <a href="/" class="text-blue-500 hover:underline">Back to Home</a>
-                            </div>
+                <!-- Email Field -->
+                <div class="space-y-1.5">
+                    <label for="email" class="block text-sm font-light text-neutral-700">Email Address</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="bi bi-envelope text-neutral-400"></i>
                         </div>
+                        <input 
+                            type="email" 
+                            id="email"
+                            formControlName="email"
+                            class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-neutral-200 bg-white text-neutral-700 text-sm font-light transition-all duration-300 focus:border-accent-color-base focus:ring-2 focus:ring-accent-color-base/20 outline-none"
+                            placeholder="Enter your email"
+                        >
                     </div>
                 </div>
-            </section>
+
+                <!-- Password Field -->
+                <div class="space-y-1.5">
+                    <label for="password" class="block text-sm font-light text-neutral-700">Password</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="bi bi-lock text-neutral-400"></i>
+                        </div>
+                        <input 
+                            type="password" 
+                            id="password"
+                            formControlName="password"
+                            class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-neutral-200 bg-white text-neutral-700 text-sm font-light transition-all duration-300 focus:border-accent-color-base focus:ring-2 focus:ring-accent-color-base/20 outline-none"
+                            placeholder="Enter your password"
+                        >
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button 
+                    type="submit"
+                    [disabled]="!loginForm.valid || isLoading"
+                    class="w-full px-4 py-2.5 bg-black text-white text-sm font-light rounded-xl transition-all duration-300 hover:bg-neutral-800 disabled:bg-neutral-200 disabled:text-neutral-500 disabled:cursor-not-allowed"
+                >
+                    <span *ngIf="!isLoading" class="flex items-center justify-center gap-2">
+                        Sign In
+                    </span>
+                    <span *ngIf="isLoading" class="flex items-center justify-center gap-2">
+                        <i class="bi bi-arrow-repeat animate-spin"></i>
+                        Signing in...
+                    </span>
+                </button>
+            </form>
+
+            <!-- Back to Home Link -->
+            <div class="mt-5 text-center">
+                <a 
+                    href="/" 
+                    class="text-sm text-neutral-500 hover:text-accent-color-base transition-colors duration-300 flex items-center justify-center gap-2"
+                >
+                    <i class="bi bi-arrow-left"></i>
+                    Back to Home
+                </a>
+            </div>
         </div>
-    </div>
+    </main>
 </div>
+
+<style>
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+</style>
 

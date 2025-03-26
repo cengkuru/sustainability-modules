@@ -1,27 +1,89 @@
-# NewModulesApp
+# Climate Finance Project - MongoDB Migration
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.1.
+This project is migrating from Firebase/Firestore to MongoDB Atlas for better scalability and performance.
 
-## Development server
+## Project Structure
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- `src/` - Angular application code
+- `server/` - MongoDB backend API
+  - `models/` - MongoDB schema definitions
+  - `routes/` - API routes
+  - `migration/` - Data migration scripts
+  - `server.js` - Express server entry point
 
-## Code scaffolding
+## MongoDB Migration
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+This project is in the process of migrating the database from Firebase/Firestore to MongoDB Atlas. The MongoDB connection string is:
 
-## Build
+```
+mongodb+srv://michael:I8atyUtCA21b3Az2@prototype.ncqh9de.mongodb.net/?retryWrites=true&w=majority&appName=prototype
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Migration Features
 
-## Running unit tests
+1. **Dual-Database Support**: The app can switch between Firebase and MongoDB using a feature flag
+2. **Gradual Rollout**: MongoDB can be enabled per-environment or per-feature
+3. **API Compatibility**: MongoDB API matches the Firebase/Firestore API for seamless transition
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Getting Started
 
-## Running end-to-end tests
+1. Install dependencies:
+   ```bash
+   npm install --legacy-peer-deps
+   ```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+2. Set up MongoDB Atlas access:
+   - Log in to MongoDB Atlas
+   - Navigate to "Network Access"
+   - Add your IP address to the whitelist
 
-## Further help
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+4. Run database migration:
+   ```bash
+   npm run migrate
+   ```
+
+### Environment Configuration
+
+To switch between Firebase and MongoDB, modify the `environment.ts` file:
+
+```typescript
+export const environment = {
+  // ...other config
+  
+  // Toggle to true to use MongoDB instead of Firebase
+  useMongoDb: true
+};
+```
+
+## Development
+
+### Running the Application
+
+- Run Angular frontend only: `npm start`
+- Run Express backend only: `npm run server`
+- Run both concurrently: `npm run dev`
+
+### Testing MongoDB Connection
+
+```bash
+npm run test-mongo
+```
+
+## Note on Firebase Services
+
+While the database is being migrated to MongoDB, the following Firebase services are still being used:
+
+- Firebase Authentication
+- Firebase Hosting
+- Firebase Storage (for file uploads)
+
+These services will be evaluated for migration in a future phase.
+
+## License
+
+Copyright (c) 2024. All rights reserved.

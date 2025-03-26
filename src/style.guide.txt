@@ -1,0 +1,612 @@
+## Design Philosophy
+
+This styleguide embodies the principles of Dieter Rams' functionalist approach with Jony Ive's premium material sensibility:
+
+-   **Less, But Better** - Remove everything that isn't essential
+-   **Honest UI** - Elements clearly communicate their function
+-   **Unobtrusive** - Interface recedes to highlight content
+-   **Precise** - Meticulous attention to alignment, spacing, and proportion
+-   **Timeless** - Avoids trends in favor of lasting utility and clarity
+-   **Premium Material Feel** - Digital materials behave with integrity, incorporating subtle gradients and transparency.
+
+## Color System
+
+The color system uses a minimalist palette focused on light backgrounds, clear typography, and selective use of accents and transparency.
+
+### Primary Colors
+
+```css
+/* Core Base & Neutrals */
+--white: #FFFFFF;         /* Base white */
+--neutral-50: #F9FAFB;   /* Light gray (Tailwind gray-50) - Used in background gradients */
+--neutral-100: #F3F4F6;  /* Background medium/subtle hover */
+--neutral-200: #E5E7EB;  /* Dividers, disabled states */
+--neutral-300: #D1D5DB;  /* Borders */
+--neutral-500: #4B5563;  /* Secondary text (Tailwind gray-600) */
+--neutral-700: #111827;  /* Primary text, Headings (Tailwind gray-900) */
+--neutral-800: #1F2937;  /* Dark gray (Tailwind gray-800) - Hover states for black elements */
+--black: #000000;         /* Strong contrast, primary actions */
+
+/* Accent Color (Derived from Status Active) */
+--accent-color-base: #61a8bd; /* Teal Blue - Used for focus, active states, general accent */
+
+Functional Colors (Status Indicators)
+/* Status & Functional */
+--status-active: #61a8bd;    /* Teal Blue */
+--status-completed: #4CAF50; /* Green */
+--status-in-progress: #ffc107; /* Amber/Yellow */
+--status-planned: #2196f3;   /* Blue */
+--status-other: #D60000;    /* Red (Used for alerts/errors) */
+
+/* Legacy Functional Names (mapping to new status colors) */
+--alert: var(--status-other); /* Error states */
+--success: var(--status-completed); /* Success states */
+--info: var(--status-planned);    /* Information states */
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Css
+IGNORE_WHEN_COPYING_END
+Color Usage
+
+Backgrounds: Primarily use var(--white) or light gradients (e.g., linear-gradient(to bottom, var(--neutral-50), var(--white))). Consider subtle transparency effects (rgba(255, 255, 255, 0.9)) for "frosted glass" overlays where appropriate.
+
+Text: Use var(--neutral-700) for primary text/headings and var(--neutral-500) for secondary text. Ensure high contrast (at least 4.5:1).
+
+Primary Actions: Use var(--black) for primary button backgrounds with var(--white) text.
+
+Accent Usage: Use var(--accent-color-base) (Teal Blue) for focus indicators, active tabs/selections, and potentially accent text where needed.
+
+Status Indicators: Use the specific --status-* colors for their semantic meaning.
+
+Borders & Dividers: Use var(--neutral-300) and var(--neutral-200) respectively for subtle separation.
+
+Hover States: Use subtle shifts, like var(--neutral-100) for light backgrounds or var(--neutral-800) for black elements. Button hovers might use accent colors or gradients (see component definitions).
+
+Typography
+Font Family
+--font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Css
+IGNORE_WHEN_COPYING_END
+Font Weights
+--font-normal: 400;
+--font-medium: 500;
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Css
+IGNORE_WHEN_COPYING_END
+Font Sizes
+--text-xs: 0.75rem;     /* 12px - Secondary UI elements */
+--text-sm: 0.875rem;    /* 14px - Form labels, secondary text, captions */
+--text-base: 1rem;      /* 16px - Body text */
+--text-lg: 1.125rem;    /* 18px - Subtitles */
+--text-xl: 1.25rem;     /* 20px - Subtitles */
+--text-2xl: 1.5rem;     /* 24px - Main headings */
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Css
+IGNORE_WHEN_COPYING_END
+Text Styles
+Style       Use Case          Properties
+----------- ----------------- -----------------------------------------------
+Heading 1   Page titles       text-2xl font-normal text-neutral-700 tracking-tight
+Heading 2   Section titles    text-base font-medium text-neutral-700
+Heading 3   Subsection titles text-sm font-medium text-neutral-700
+Body        Regular text      text-base text-neutral-700
+Caption     Helper text       text-sm text-neutral-500
+Label       Form labels       text-sm text-neutral-700
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+IGNORE_WHEN_COPYING_END
+Spacing
+Scale
+--space-1: 0.25rem;   /* 4px */
+--space-2: 0.5rem;    /* 8px */
+--space-3: 0.75rem;   /* 12px */
+--space-4: 1rem;      /* 16px */
+--space-5: 1.25rem;   /* 20px */
+--space-6: 1.5rem;    /* 24px */
+--space-8: 2rem;      /* 32px */
+--space-10: 2.5rem;   /* 40px */
+--space-12: 3rem;     /* 48px */
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Css
+IGNORE_WHEN_COPYING_END
+Usage Guidelines
+
+Consistent spacing between related elements: space-6 (24px)
+
+Spacing between groups: space-8 (32px)
+
+Padding for containers: p-8 (32px)
+
+Form field spacing: space-6 (24px)
+
+Section dividing margins: mb-10 (40px)
+
+Layout
+Containers
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.container-sm {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Css
+IGNORE_WHEN_COPYING_END
+Grid System
+
+Use CSS Grid for layout with these common patterns:
+
+.grid-1-col { grid-template-columns: 1fr; }
+.grid-2-col { grid-template-columns: 1fr 1fr; }
+.grid-3-col { grid-template-columns: 1fr 1fr 1fr; }
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Css
+IGNORE_WHEN_COPYING_END
+
+Responsive breakpoints:
+
+Mobile: < 768px (default 1 column)
+
+Tablet: 768px-1024px (2 columns where appropriate)
+
+Desktop: > 1024px (full grid)
+
+UI Components
+Buttons
+
+(Note: Hover effects using gradients like from-accent6 to-accent5 require defining those specific accent shades or using utility classes if available. The examples below use a simpler solid color hover for demonstration unless specified.)
+
+Primary Button
+.btn-primary {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid var(--black);
+  font-size: var(--text-sm);
+  color: var(--white);
+  background-color: var(--black);
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn-primary:hover {
+  /* Option 1: Subtle darken */
+  background-color: var(--neutral-800);
+  border-color: var(--neutral-800);
+  /* Option 2: Accent Gradient (Conceptual - requires accent6/accent5 definition) */
+  /* background-image: linear-gradient(to right, var(--accent-6, #5090a0), var(--accent-5, #70c0d0)); */
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Css
+IGNORE_WHEN_COPYING_END
+Secondary Button
+.btn-secondary {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid var(--neutral-700); /* Dark gray border */
+  font-size: var(--text-sm);
+  color: var(--neutral-700);           /* Dark gray text */
+  background-color: var(--white);
+  transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: var(--neutral-100); /* Light gray background */
+}
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Css
+IGNORE_WHEN_COPYING_END
+Tertiary Button
+.btn-tertiary {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid var(--neutral-300); /* Light gray border */
+  font-size: var(--text-sm);
+  color: var(--neutral-500);           /* Medium gray text */
+  background-color: var(--white);
+  transition: background-color 0.2s;
+}
+
+.btn-tertiary:hover {
+  background-color: var(--neutral-100); /* Light gray background */
+}
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Css
+IGNORE_WHEN_COPYING_END
+Action Button (small)
+.btn-action {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--neutral-300); /* Light gray border */
+  font-size: var(--text-xs);
+  color: var(--neutral-500);           /* Medium gray text */
+  background-color: var(--white);
+  transition: background-color 0.2s;
+}
+
+.btn-action:hover {
+  background-color: var(--neutral-100); /* Light gray background */
+}
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Css
+IGNORE_WHEN_COPYING_END
+Form Elements
+Text Input
+.input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--neutral-300);
+  font-size: var(--text-sm);
+  color: var(--neutral-700);
+  background-color: var(--white);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input:focus {
+  border-color: var(--accent-color-base); /* Teal blue border */
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(97, 168, 189, 0.3); /* Subtle teal glow */
+}
+
+.input:disabled {
+  background-color: var(--neutral-100);
+  opacity: 0.7;
+}
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Css
+IGNORE_WHEN_COPYING_END
+Select
+.select {
+  width: 100%;
+  padding: 0.5rem 2.5rem 0.5rem 0.75rem; /* Adjust padding for arrow */
+  border: 1px solid var(--neutral-300);
+  font-size: var(--text-sm);
+  color: var(--neutral-700);
+  background-color: var(--white);
+  appearance: none;
+  /* Updated SVG arrow color to neutral-700 (#111827) */
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23111827' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-position: right 0.75rem center;
+  background-repeat: no-repeat;
+  background-size: 1em;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.select:focus {
+  border-color: var(--accent-color-base); /* Teal blue border */
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(97, 168, 189, 0.3); /* Subtle teal glow */
+}
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Css
+IGNORE_WHEN_COPYING_END
+Checkbox & Radio
+.checkbox, .radio {
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid var(--neutral-300);
+  background-color: var(--white);
+  margin-right: 0.5rem;
+  vertical-align: middle; /* Align with text */
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.checkbox {
+  border-radius: 2px;
+}
+
+.radio {
+  border-radius: 50%;
+}
+
+.checkbox:checked, .radio:checked {
+  border-color: var(--accent-color-base);    /* Teal blue border */
+  background-color: var(--accent-color-base); /* Teal blue background */
+  background-size: 65%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Checkbox tick - white */
+.checkbox:checked {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23FFFFFF'%3E%3Cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clip-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+/* Radio dot - white */
+.radio:checked {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFFFFF'%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3C/svg%3E");
+}
+
+/* Focus state for Checkbox/Radio */
+.checkbox:focus, .radio:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(97, 168, 189, 0.3); /* Subtle teal glow */
+}
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Css
+IGNORE_WHEN_COPYING_END
+Form Label
+.label {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--neutral-700);
+  margin-bottom: 0.5rem; /* space-2 */
+}
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Css
+IGNORE_WHEN_COPYING_END
+Cards & Containers
+Card
+.card {
+  /* Base style */
+  background-color: var(--white);
+  border: 1px solid var(--neutral-300);
+  padding: 2rem; /* space-8 */
+
+  /* Optional: Frosted glass effect example */
+  /* background-color: rgba(255, 255, 255, 0.9); */
+  /* backdrop-filter: blur(10px); */
+}
+
+.card-header {
+  margin-bottom: 1.5rem; /* space-6 */
+}
+
+.card-title {
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  color: var(--neutral-700); /* Updated to primary text color */
+}
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Css
+IGNORE_WHEN_COPYING_END
+Section Divider
+.divider {
+  height: 1px;
+  width: 100%;
+  background-color: var(--neutral-200); /* Lighter divider */
+  margin: 1.5rem 0; /* space-6 */
+}
+
+.divider-small {
+  height: 1px;
+  width: 4rem;
+  background-color: var(--neutral-700); /* Dark gray accent divider */
+  margin: 0.5rem 0; /* space-2 */
+}
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Css
+IGNORE_WHEN_COPYING_END
+Interactive States
+Tab/Toggle States
+.tab {
+  padding: 0.5rem 1.5rem; /* space-2 space-6 */
+  font-size: var(--text-sm);
+  font-weight: var(--font-normal);
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  border: 1px solid var(--neutral-300);
+  cursor: pointer;
+}
+
+.tab.active {
+  background-color: var(--accent-color-base); /* Teal blue background */
+  border-color: var(--accent-color-base);    /* Teal blue border */
+  color: var(--white);
+}
+
+.tab:not(.active) {
+  background-color: var(--white);
+  color: var(--neutral-500); /* Medium gray text */
+}
+
+.tab:not(.active):hover {
+    background-color: var(--neutral-100); /* Light hover */
+}
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Css
+IGNORE_WHEN_COPYING_END
+Focus States
+
+All interactive elements should have a clear focus state. The default uses the accent color:
+
+:focus-visible { /* Use focus-visible for better accessibility */
+  outline: none;
+  border-color: var(--accent-color-base); /* Teal blue border */
+  box-shadow: 0 0 0 2px rgba(97, 168, 189, 0.3); /* Subtle teal glow */
+}
+/* Apply specific focus styles within components (like inputs, buttons) */
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Css
+IGNORE_WHEN_COPYING_END
+Hover States
+
+General hover utility and principles:
+
+:hover {
+  transition-duration: 200ms; /* Apply transition duration broadly */
+}
+
+.hover-bg-subtle:hover {
+  background-color: var(--neutral-100); /* For light elements */
+}
+
+/* Specific hover states defined within components */
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Css
+IGNORE_WHEN_COPYING_END
+Animations & Transitions
+Transitions
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+.transition-colors {
+  transition-property: background-color, border-color, color, fill, stroke; /* Added fill/stroke */
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Css
+IGNORE_WHEN_COPYING_END
+Fade Animation
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 200ms ease-out;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.fade-out {
+  animation: fadeOut 200ms ease-in;
+}
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Css
+IGNORE_WHEN_COPYING_END
+Icons
+Icon Sizes
+
+Small: 16px
+
+Medium: 20px
+
+Large: 24px
+
+Icon Style
+
+Use clean, simple line icons with a 1px or 1.5px stroke width.
+
+Keep icons monochrome, typically inheriting currentColor to match text color (var(--neutral-700) or var(--neutral-500)).
+
+Use consistent rounding (e.g., 2px radius) if applicable to the icon set.
+
+Design Implementation Guidelines
+1. Component Hierarchy
+
+Maintain a logical hierarchy: Layout -> Sections -> Components -> Elements.
+
+2. Responsive Behavior
+
+Mobile-first approach.
+
+Use relative units (rem).
+
+Test at key breakpoints (320px, 768px, 1024px, 1440px).
+
+3. Accessibility Considerations
+
+Maintain minimum 4.5:1 contrast for normal text, 3:1 for large text. Check contrast especially for var(--neutral-500) on white/light gray.
+
+Ensure keyboard navigability and focus visibility (:focus-visible).
+
+Use semantic HTML.
+
+Provide text alternatives (alt text, aria-labels).
+
+4. Implementation Notes
+
+Consider using a utility-first CSS framework (like Tailwind CSS) and configuring its theme to match these variables.
+
+Implement the background gradient (from-gray-50 to-white) on the main body or layout containers.
+
+Use transparency utilities (e.g., bg-white/90, bg-white/40) for frosted glass effects where needed.
+
+Create reusable components.
+
+Document component usage.
+
+Adapting Colors (Notes on this Adaptation)
+
+This version of the style guide has been adapted based on the provided palette:
+
+Neutrals: Replaced with a white/light gray base and specific dark/medium gray text colors (#111827, #4B5563).
+
+Accents: Primary button actions now use black. The general UI accent (focus, active states) uses the specified 'Active' status color (#61a8bd).
+
+Functionals: Status colors (#61a8bd, #4CAF50, etc.) were added and mapped to functional roles like --alert, --success, --info.
+
+Transparency/Gradients: Incorporated the concepts of background gradients and transparent UI elements into the usage guidelines and component descriptions.
+
+Contrast: Color choices were made aiming for sufficient contrast, but always verify in implementation, especially var(--neutral-500) text.
+
