@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { MongoProjectsListService } from '../../../services/mongodb/mongo-projects-list.service';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-projects-list',
@@ -11,55 +12,72 @@ import { ToastrService } from 'ngx-toastr';
 export class ProjectsListComponent implements OnInit {
     pageTitle = 'Projects List';
     projects: any[] = [];  // Array to hold the projects
-    isLoading = false;  // Added to track loading state
+    isLoading = true;  // Added to track loading state
 
-    constructor(private db: AngularFireDatabase, private toastr: ToastrService) {}
+    constructor(
+      private mongoProjectsService: MongoProjectsListService,
+      private router: Router,
+      private toastr: ToastrService
+    ) {}
 
     ngOnInit(): void {
+        this.loadProjects();
+    }
+
+    loadProjects(): void {
         this.isLoading = true;  // Set loading to true when data fetch begins
-        this.db.list('/projects').snapshotChanges().pipe(
-            map(changes =>
-                changes.map(c => {
-                    const data = c.payload.val();
-                    return { key: c.payload.key, ...(data instanceof Object ? data : {}) };
-                })
-            )
-        ).subscribe(data => {
-            this.projects = data;
-            this.isLoading = false;  // Set loading to false when data fetch is complete
-        }, error => {
-            this.isLoading = false;  // Ensure loading is set to false on error
-            this.toastr.error('Failed to load projects: ' + error.message);
+        this.mongoProjectsService.getProjects().subscribe({
+            next: (projects) => {
+                this.projects = projects;
+                this.isLoading = false;  // Set loading to false when data fetch is complete
+            },
+            error: (error) => {
+                console.error('Error fetching projects', error);
+                this.toastr.error('Failed to load projects. Please try again later.');
+                this.isLoading = false;  // Ensure loading is set to false on error
+            }
         });
     }
 
     togglePublishStatus(project: any): void {
         this.isLoading = true;  // Set loading to true when updating status
-        const path = `/projects/${project.key}`;
-        const status = !project.publishStatus;
-        this.db.object(path).update({ publishStatus: status })
-            .then(() => {
-                this.toastr.success('Publish status updated!');
-                this.isLoading = false;  // Set loading to false when update is complete
-            })
-            .catch(err => {
-                this.toastr.error('Error updating status: ' + err.message);
-                this.isLoading = false;  // Ensure loading is set to false on error
+        this.mongoProjectsService.togglePublishStatus(project.key, project.publishStatus)
+            .subscribe({
+                next: (response) => {
+                    project.publishStatus = !project.publishStatus;
+                    this.toastr.success(`Project ${project.publishStatus ? 'published' : 'unpublished'} successfully`);
+                    this.isLoading = false;  // Set loading to false when update is complete
+                },
+                error: (error) => {
+                    console.error('Error toggling publish status', error);
+                    this.toastr.error('Failed to update publish status');
+                    this.isLoading = false;  // Ensure loading is set to false on error
+                }
             });
     }
 
-
-    deleteProject(projectKey: string) {
-        if (confirm('Are you sure you want to delete this project?')) {
-            this.db.object(`/projects/${projectKey}`).remove()
-                .then(() => {
-                    this.toastr.success('Project deleted successfully!');
-                })
-                .catch(error => {
-                    this.toastr.error('Error deleting project: ' + error.message);
+    deleteProject(project: any): void {
+        if (confirm(`Are you sure you want to delete "${project.title}"?`)) {
+            this.mongoProjectsService.deleteProject(project.key)
+                .subscribe({
+                    next: () => {
+                        // Remove the project from the local array
+                        this.projects = this.projects.filter(p => p.key !== project.key);
+                        this.toastr.success('Project deleted successfully');
+                    },
+                    error: (error) => {
+                        console.error('Error deleting project', error);
+                        this.toastr.error('Failed to delete project');
+                    }
                 });
         }
     }
 
+    navigateToProjectEdit(projectId: string): void {
+        this.router.navigate(['/dashboard/project/edit', projectId]);
+    }
 
+    navigateToProjectCreate(): void {
+        this.router.navigate(['/dashboard/project/create']);
+    }
 }

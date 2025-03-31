@@ -21,5 +21,5 @@ export const environment = {
   },
   
   // Feature flag for database selection
-  useMongoDb: false // Set to true to use MongoDB instead of Firebase
+  useMongoDb: true // Set to true to use MongoDB instead of Firebase
 };

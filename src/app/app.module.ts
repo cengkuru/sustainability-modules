@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { CoreModule } from './core/core.module';
@@ -12,14 +12,11 @@ import {NgxJsonViewerModule} from "ngx-json-viewer";
 import {FilterProjectsPipe} from "./pipes/filter-projects.pipe";
 import {FilterRolesPipe} from "./pipes/filter-roles.pipe";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {AngularFireModule} from "@angular/fire/compat";
-import {environment} from "../environments/environment";
-import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
-import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {ToastrModule} from "ngx-toastr";
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AuthInterceptor } from './core/auth.interceptor';
 
 // Import MongoDB services
 import { MongoProjectService } from './services/mongodb/mongo-project.service';
@@ -66,10 +63,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     ReactiveFormsModule,
     NgxJsonViewerModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,  // imports firebase/firestore, only needed for database features
-    AngularFireAuthModule,   // imports firebase/auth, only needed for auth features
-
   ],
   providers: [
     // Provider for MongoDB services
@@ -81,7 +74,13 @@ export function HttpLoaderFactory(http: HttpClient) {
       useFactory: projectServiceFactory,
       deps: [ProjectService, MongoProjectService]
     },
-    DatabaseProviderService
+    DatabaseProviderService,
+    // HTTP Interceptor for auth token
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

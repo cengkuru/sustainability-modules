@@ -5,6 +5,7 @@ import { AuthGuard } from "../core/guards/auth.guard";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashLandingComponent } from './dash-landing/dash-landing.component';
 import {SettingsComponent} from "./settings/settings.component";
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   {
@@ -14,8 +15,13 @@ const routes: Routes = [
     children: [
       { path: '', component: DashLandingComponent, pathMatch: 'full' },
       { path: 'settings', component: SettingsComponent },
+      { 
+        path: 'admin', 
+        component: AdminComponent, 
+        canActivate: [AuthGuard],
+        data: { requiresAdmin: true }
+      },
       { path: 'projects', loadChildren: () => import('./project/project.module').then(m => m.ProjectModule) }
-
     ]
   },
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },

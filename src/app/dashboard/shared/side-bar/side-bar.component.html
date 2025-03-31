@@ -1,34 +1,116 @@
-<div class="bg-white text-gray-900 w-64 space-y-6 py-7 px-2 pt-16 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out min-h-screen flex flex-col justify-between">
-    <div>
-        <a href="#" class="text-gray-900 flex items-center space-x-2 px-4">
-            <span class="text-2xl font-bold">Dashboard</span>
-        </a>
+<div class="bg-[#ffffff] w-64 py-7 px-4 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-out min-h-screen flex flex-col justify-between border-r border-[#D9D9D9]">
+    <div class="space-y-8">
+        <!-- Logo/Brand and User Role -->
+        <div class="px-2 space-y-1">
+            <span class="text-xl font-light text-[#0B0B0B]">Infrastructure</span>
+            <div *ngIf="isAdmin$ | async" class="flex items-center mt-1">
+                <span class="text-xs px-2 py-0.5 bg-[#61a8bd]/10 text-[#61a8bd] rounded-full">Administrator</span>
+            </div>
+            <div *ngIf="!(isAdmin$ | async)" class="flex items-center mt-1">
+                <span class="text-xs px-2 py-0.5 bg-[#8E8E93]/10 text-[#8E8E93] rounded-full">User</span>
+            </div>
+        </div>
+
         <!-- Navigation Links -->
-        <nav>
-            <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-100 hover:text-gray-900">Home</a>
-            <a routerLink="projects" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-100 hover:text-gray-900">Projects</a>
+        <nav class="space-y-1">
+            <!-- Dashboard -->
+            <a routerLink="./" 
+               routerLinkActive="bg-[#F9F9F9] text-[#0B0B0B]"
+               [routerLinkActiveOptions]="{exact: true}"
+               class="flex items-center px-4 py-3 text-[#8E8E93] rounded-lg transition-colors hover:bg-[#F9F9F9] hover:text-[#0B0B0B] group">
+                <i class="bi bi-grid-1x2 text-lg mr-3 transition-colors"></i>
+                <span class="text-sm">Dashboard</span>
+            </a>
+
+            <!-- Projects -->
+            <a routerLink="./projects" 
+               routerLinkActive="bg-[#F9F9F9] text-[#0B0B0B]"
+               class="flex items-center px-4 py-3 text-[#8E8E93] rounded-lg transition-colors hover:bg-[#F9F9F9] hover:text-[#0B0B0B] group">
+                <i class="bi bi-collection text-lg mr-3 transition-colors"></i>
+                <span class="text-sm">Projects</span>
+            </a>
+
+            <!-- Admin-only section -->
+            <ng-container *ngIf="isAdmin$ | async">
+                <!-- Public Authorities - Admin only -->
+                <a routerLink="./authorities" 
+                   routerLinkActive="bg-[#F9F9F9] text-[#0B0B0B]"
+                   class="flex items-center px-4 py-3 text-[#8E8E93] rounded-lg transition-colors hover:bg-[#F9F9F9] hover:text-[#0B0B0B] group">
+                    <i class="bi bi-building text-lg mr-3 transition-colors"></i>
+                    <span class="text-sm">Authorities</span>
+                </a>
+                
+                <!-- Users Management - Admin only -->
+                <a routerLink="./admin" 
+                   routerLinkActive="bg-[#F9F9F9] text-[#0B0B0B]"
+                   class="flex items-center px-4 py-3 text-[#8E8E93] rounded-lg transition-colors hover:bg-[#F9F9F9] hover:text-[#0B0B0B] group">
+                    <i class="bi bi-people text-lg mr-3 transition-colors"></i>
+                    <span class="text-sm">Users</span>
+                </a>
+            </ng-container>
+
+            <!-- Settings -->
+            <a routerLink="./settings" 
+               routerLinkActive="bg-[#F9F9F9] text-[#0B0B0B]"
+               class="flex items-center px-4 py-3 text-[#8E8E93] rounded-lg transition-colors hover:bg-[#F9F9F9] hover:text-[#0B0B0B] group">
+                <i class="bi bi-gear text-lg mr-3 transition-colors"></i>
+                <span class="text-sm">Settings</span>
+            </a>
+
+            <!-- Logout - Always visible -->
+            <button (click)="logout()" 
+                   class="flex items-center w-full px-4 py-3 text-[#D60000] rounded-lg transition-colors hover:bg-[#D60000]/5 text-left">
+                <i class="bi bi-box-arrow-right text-lg mr-3"></i>
+                <span class="text-sm">Logout</span>
+            </button>
         </nav>
     </div>
+
     <!-- User section -->
-    <div class="mt-auto relative">
-        <button (click)="toggleDropdown()" class="flex items-center px-4 py-2 w-full text-left hover:bg-gray-100" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-            <i class="bi bi-person-circle w-8 h-8 text-gray-900 mx-2" style="font-size: 2rem;"></i>
-            <span class="text-md font-semibold text-gray-900">{{ userName$ | async }}</span>
+    <div class="border-t border-[#D9D9D9] pt-4">
+        <button (click)="toggleDropdown()" 
+                class="flex items-center w-full px-4 py-3 text-[#0B0B0B] hover:bg-[#F9F9F9] rounded-lg transition-colors" 
+                id="user-menu-button" 
+                aria-expanded="false" 
+                aria-haspopup="true">
+            <div class="w-8 h-8 rounded-full bg-[#F9F9F9] border border-[#D9D9D9] flex items-center justify-center text-[#8E8E93] mr-3">
+                {{ getUserInitial(userName$ | async) }}
+            </div>
+            <div class="flex flex-col">
+                <span class="text-sm font-medium">{{ userName$ | async }}</span>
+                <span class="text-xs text-[#8E8E93]">{{ userEmail$ | async }}</span>
+            </div>
         </button>
 
         <!-- Dropdown menu -->
-        <div [class.hidden]="!showDropdown" class="hidden absolute right-0 bottom-full mb-2 w-48 origin-bottom-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button">
-            <div class="flex items-center px-4 py-2 text-sm text-gray-900">
-                <i class="bi bi-person-circle mr-2 text-gray-700" style="font-size: 1.5rem;"></i>
-                <span class="text-sm text-gray-600 truncate" style="max-width: 90%;">{{ userEmail$ | async }}</span>
+        <div [class.hidden]="!showDropdown" 
+             class="absolute bottom-full left-0 mb-2 w-64 bg-white rounded-lg shadow-lg border border-[#D9D9D9] overflow-hidden" 
+             role="menu" 
+             aria-orientation="vertical" 
+             aria-labelledby="user-menu-button">
+            <div class="px-4 py-3 border-b border-[#D9D9D9]">
+                <div class="text-sm font-medium text-[#0B0B0B]">{{ userName$ | async }}</div>
+                <div class="text-sm text-[#8E8E93] truncate">{{ userEmail$ | async }}</div>
+                <div class="mt-1">
+                    <span *ngIf="isAdmin$ | async" class="text-xs px-2 py-0.5 bg-[#61a8bd]/10 text-[#61a8bd] rounded-full">Administrator</span>
+                    <span *ngIf="!(isAdmin$ | async)" class="text-xs px-2 py-0.5 bg-[#8E8E93]/10 text-[#8E8E93] rounded-full">User</span>
+                </div>
             </div>
-            <a routerLink="settings" class="flex items-center px-4 py-2 text-sm text-gray-900 hover:bg-gray-100" role="menuitem">
-                <i class="bi bi-gear-fill mr-3"></i>Settings
-            </a>
-            <a href="#" (click)="logout()" class="flex items-center px-4 py-2 text-sm text-gray-900 hover:bg-gray-100" role="menuitem">
-                <i class="bi bi-box-arrow-right mr-3"></i>Logout
-            </a>
+            <div class="py-1">
+                <a routerLink="./settings" 
+                   class="flex items-center px-4 py-2 text-sm text-[#8E8E93] hover:bg-[#F9F9F9] hover:text-[#0B0B0B] transition-colors" 
+                   role="menuitem">
+                    <i class="bi bi-gear text-lg mr-3"></i>
+                    Settings
+                </a>
+                <a href="#" 
+                   (click)="logout()" 
+                   class="flex items-center px-4 py-2 text-sm text-[#D60000] hover:bg-[#D60000]/5 transition-colors" 
+                   role="menuitem">
+                    <i class="bi bi-box-arrow-right text-lg mr-3"></i>
+                    Logout
+                </a>
+            </div>
         </div>
     </div>
-
 </div>

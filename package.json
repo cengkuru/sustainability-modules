@@ -9,8 +9,10 @@
     "test": "ng test",
     "server": "node server/server.js",
     "dev": "concurrently \"npm run start\" \"npm run server\"",
-    "migrate": "node server/migration/migrate-firestore-to-mongodb.js",
-    "test-mongo": "node server/test-mongodb-connection.js"
+    "migrate": "node server/migration/run-migration.js",
+    "test-mongo": "node server/test-mongodb-connection.js",
+    "check-ip": "node scripts/check-mongodb-access.js",
+    "toggle-db": "node scripts/toggle-database.js"
   },
   "private": true,
   "dependencies": {
@@ -40,6 +42,7 @@
     "express": "^4.21.2",
     "file-saver": "^2.0.5",
     "firebase": "^10.11.1",
+    "firebase-admin": "^12.0.0",
     "heroicons": "^2.1.5",
     "jspdf": "^2.5.1",
     "leaflet": "^1.9.4",

@@ -6,21 +6,16 @@ import {IndexProjectComponent} from "./index-project/index-project.component";
 import {AddProjectComponent} from "./add-project/add-project.component";
 import {UpdateProjectComponent} from "./update-project/update-project.component";
 
-
-
 const routes: Routes = [
     {
-        path: 'projects',
+        path: '',
         component: IndexProjectComponent,
         children: [
             { path: '', component: ProjectsListComponent, pathMatch: 'full' },
             { path: 'add', component: AddProjectComponent },
             { path: 'edit-project/:id', component: UpdateProjectComponent }
-
         ]
-    },
-    { path: '', pathMatch: 'full', redirectTo: 'projects' },
-    { path: '**', redirectTo: 'projects' }
+    }
 ];
 
 @NgModule({

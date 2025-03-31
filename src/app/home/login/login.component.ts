@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
-import { AngularFireAuth } from "@angular/fire/compat/auth";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute, RouterModule } from "@angular/router";
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
@@ -18,13 +19,17 @@ export class LoginComponent {
   loginForm!: FormGroup;
   errorMessage: string | null = null;
   isLoading: boolean = false;
+  returnUrl: string = '/dashboard';
 
   constructor(
-    public auth: AngularFireAuth,
+    private authService: AuthService,
     private router: Router,
+    private route: ActivatedRoute,
     private fb: FormBuilder
   ) {
     this.initializeForm();
+    // Get return url from route parameters or default to '/dashboard'
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
   }
 
   private initializeForm(): void {
@@ -41,7 +46,7 @@ export class LoginComponent {
     });
   }
 
-  async login(): Promise<void> {
+  login(): void {
     if (this.loginForm.invalid) {
       this.markFormFieldsAsTouched();
       return;
@@ -50,15 +55,20 @@ export class LoginComponent {
     this.isLoading = true;
     this.errorMessage = null;
 
-    try {
-      const { email, password } = this.loginForm.value;
-      await this.auth.signInWithEmailAndPassword(email, password);
-      await this.router.navigate(['/dashboard']);
-    } catch (error: any) {
-      this.handleLoginError(error);
-    } finally {
-      this.isLoading = false;
-    }
+    const { email, password } = this.loginForm.value;
+    
+    this.authService.login(email, password).subscribe({
+      next: (user) => {
+        this.router.navigateByUrl(this.returnUrl);
+      },
+      error: (error) => {
+        this.handleLoginError(error);
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
+      }
+    });
   }
 
   private markFormFieldsAsTouched(): void {
@@ -71,21 +81,12 @@ export class LoginComponent {
   }
 
   private handleLoginError(error: any): void {
-    switch (error.code) {
-      case 'auth/wrong-password':
-        this.errorMessage = 'Incorrect password. Please try again.';
-        break;
-      case 'auth/user-not-found':
-        this.errorMessage = 'No account found with this email. Please check your email or sign up.';
-        break;
-      case 'auth/invalid-email':
-        this.errorMessage = 'Invalid email format. Please enter a valid email address.';
-        break;
-      case 'auth/too-many-requests':
-        this.errorMessage = 'Too many failed attempts. Please try again later.';
-        break;
-      default:
-        this.errorMessage = 'An error occurred during sign in. Please try again.';
+    if (error.status === 401) {
+      this.errorMessage = 'Invalid email or password. Please try again.';
+    } else if (error.status === 404) {
+      this.errorMessage = 'No account found with this email. Please check your email or sign up.';
+    } else {
+      this.errorMessage = 'An error occurred during sign in. Please try again.';
     }
   }
 

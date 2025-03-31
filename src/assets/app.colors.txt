@@ -1,0 +1,5 @@
+ **Color Usage**
+    - Use only the specified color palette: #ffffff (white),  #D60000, #D9D9D9 (light gray), #0B0B0B (black)
+    - Apply color psychology to enhance the message
+    - Use red (#D60000) to emphasize critical data, white (#ffffff) for contrast, light gray (#8E8E93) for subtle backgrounds. #1c1c1e (dark gray)
+    - other colors to be kept and sed very sparingly if we have to #ffce32 #61a8bd #d8d8cd

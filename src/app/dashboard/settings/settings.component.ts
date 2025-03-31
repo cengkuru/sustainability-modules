@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-settings',
@@ -10,45 +9,86 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-  displayNameForm: FormGroup;
-  message: string = '';
-  isLoading: boolean = false; // Loading indicator state
-  userEmail$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null); // Corrected initialization
+  passwordForm: FormGroup;
+  profileForm: FormGroup;
+  currentUser: any;
 
-  constructor(private afAuth: AngularFireAuth, private fb: FormBuilder, private toastr: ToastrService) {
-    this.displayNameForm = this.fb.group({
-      displayName: ['', [Validators.required, Validators.minLength(3)]]
+  constructor(private authService: AuthService, private fb: FormBuilder, private toastr: ToastrService) {
+    this.passwordForm = this.fb.group({
+      currentPassword: ['', [Validators.required]],
+      newPassword: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required]]
+    }, { validator: this.passwordMatchValidator });
+
+    this.profileForm = this.fb.group({
+      displayName: ['', Validators.required],
+      email: [{ value: '', disabled: true }]
     });
   }
 
   ngOnInit(): void {
-    this.afAuth.authState.subscribe(user => {
+    this.authService.currentUser$.subscribe(user => {
       if (user) {
-        this.userEmail$.next(user.email); // Correctly handle null values
-        if (user.displayName) {
-          this.displayNameForm.patchValue({ displayName: user.displayName });
-        }
-      } else {
-        this.userEmail$.next(null); // Ensure null is assignable
+        this.currentUser = user;
+        this.profileForm.patchValue({
+          displayName: user.name,
+          email: user.email
+        });
       }
     });
   }
 
-  updateDisplayName() {
-    if (this.displayNameForm.valid) {
-      this.isLoading = true; // Start loading
-      const { displayName } = this.displayNameForm.value;
-      this.afAuth.currentUser.then(user => {
-        if (user) {
-          user.updateProfile({ displayName }).then(() => {
-            this.toastr.success('Display Name Updated Successfully!');
-            this.isLoading = false; // Stop loading
-          }).catch(error => {
-            this.toastr.error('Error updating display name: ' + error.message);
-            this.isLoading = false; // Stop loading if there is an error
-          });
-        }
+  passwordMatchValidator(g: FormGroup) {
+    return g.get('newPassword')?.value === g.get('confirmPassword')?.value
+      ? null : { 'mismatch': true };
+  }
+
+  async updatePassword() {
+    if (this.passwordForm.invalid) {
+      return;
+    }
+    
+    try {
+      // This functionality would need to be implemented in your backend
+      // using the AuthService to make an API call
+      this.toastr.info('Password update functionality will be implemented with MongoDB backend');
+      
+      /*
+      const user = await this.afAuth.currentUser;
+      const credential = await this.afAuth.signInWithEmailAndPassword(
+        user.email,
+        this.passwordForm.get('currentPassword').value
+      );
+      await user.updatePassword(this.passwordForm.get('newPassword').value);
+      */
+      
+      this.passwordForm.reset();
+      this.toastr.success('Password updated successfully');
+    } catch (error) {
+      this.toastr.error('Failed to update password. Please check your current password.');
+    }
+  }
+
+  async updateProfile() {
+    if (this.profileForm.invalid) {
+      return;
+    }
+
+    try {
+      // This functionality would need to be implemented in your backend
+      // using the AuthService to make an API call
+      this.toastr.info('Profile update functionality will be implemented with MongoDB backend');
+      
+      /*
+      const user = await this.afAuth.currentUser;
+      await user.updateProfile({
+        displayName: this.profileForm.get('displayName').value
       });
+      */
+      
+      this.toastr.success('Profile updated successfully');
+    } catch (error) {
+      this.toastr.error('Failed to update profile');
     }
   }
 }

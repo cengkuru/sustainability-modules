@@ -1,31 +1,36 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {Router} from "@angular/router";
+import { Router, RouterLink, RouterLinkActive } from "@angular/router";
+import { AuthService } from '../../../services/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.scss']
+  styleUrls: ['./side-bar.component.scss'],
+  standalone: true,
+  imports: [CommonModule, RouterLink, RouterLinkActive]
 })
 export class SideBarComponent implements OnInit {
-  userName$!: Observable<string | null>;
-  userEmail$!: Observable<string | null>;
+  userName$!: Observable<string>;
+  userEmail$!: Observable<string>;
+  isAdmin$!: Observable<boolean>;
   showDropdown: boolean = false;
 
-  constructor(private afAuth: AngularFireAuth, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.userName$ = this.afAuth.authState.pipe(
-      map(user => {
-        console.log('Firebase User:', user); // Console log the firebase user object
-        return user ? user.displayName || 'No Name' : null;
-      })
+    this.userName$ = this.authService.currentUser$.pipe(
+      map(user => user?.name || 'User')
     );
 
-    this.userEmail$ = this.afAuth.authState.pipe(
-      map(user => user ? user.email : 'No Email')
+    this.userEmail$ = this.authService.currentUser$.pipe(
+      map(user => user?.email || '')
+    );
+
+    this.isAdmin$ = this.authService.currentUser$.pipe(
+      map(user => user?.role === 'admin')
     );
   }
 
@@ -34,11 +39,10 @@ export class SideBarComponent implements OnInit {
   }
 
   logout(): void {
-    this.afAuth.signOut().then(() => {
-      console.log('User logged out successfully');
-      this.router.navigate(['/login']);  // Redirect to login or home page after logout
-    }).catch(error => {
-      console.error('Logout error:', error);
-    });
+    this.authService.logout();
+  }
+
+  getUserInitial(name: string | null): string {
+    return name?.charAt(0).toUpperCase() || 'U';
   }
 }

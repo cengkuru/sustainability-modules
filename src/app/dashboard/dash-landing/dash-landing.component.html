@@ -1,1 +1,134 @@
-content here
+<!-- Dashboard Overview -->
+<div class="space-y-8">
+  <!-- Header Section -->
+  <header class="mb-12">
+    <h1 class="text-2xl font-light text-[#0B0B0B] mb-2">System Overview</h1>
+    <p class="text-[#8E8E93]">Monitor and manage system-wide metrics</p>
+  </header>
+
+  <!-- Quick Actions -->
+  <div class="flex gap-4 mb-8">
+    <button 
+      (click)="navigateToNewAuthority()"
+      class="flex items-center px-6 py-3 bg-[#0B0B0B] text-white rounded-lg hover:bg-[#1c1c1e] transition-colors"
+    >
+      <i class="bi bi-building-add mr-2"></i>
+      Add Public Authority
+    </button>
+    <button 
+      (click)="navigateToNewUser()"
+      class="flex items-center px-6 py-3 bg-[#0B0B0B] text-white rounded-lg hover:bg-[#1c1c1e] transition-colors"
+    >
+      <i class="bi bi-person-plus mr-2"></i>
+      Add User
+    </button>
+  </div>
+
+  <!-- System Metrics Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+    <!-- Total Users -->
+    <div class="bg-white border border-[#D9D9D9] rounded-lg p-6 transition-shadow hover:shadow-sm">
+      <div class="flex items-center justify-between mb-4">
+        <span class="text-[#8E8E93] text-sm">Total Users</span>
+        <i class="bi bi-people text-[#0B0B0B]"></i>
+      </div>
+      <p class="text-3xl font-light text-[#0B0B0B]">{{metrics.totalUsers || 0}}</p>
+    </div>
+
+    <!-- Total Public Authorities -->
+    <div class="bg-white border border-[#D9D9D9] rounded-lg p-6 transition-shadow hover:shadow-sm">
+      <div class="flex items-center justify-between mb-4">
+        <span class="text-[#8E8E93] text-sm">Public Authorities</span>
+        <i class="bi bi-building text-[#0B0B0B]"></i>
+      </div>
+      <p class="text-3xl font-light text-[#0B0B0B]">{{metrics.totalAuthorities || 0}}</p>
+    </div>
+
+    <!-- Total Projects -->
+    <div class="bg-white border border-[#D9D9D9] rounded-lg p-6 transition-shadow hover:shadow-sm">
+      <div class="flex items-center justify-between mb-4">
+        <span class="text-[#8E8E93] text-sm">Total Projects</span>
+        <i class="bi bi-collection text-[#0B0B0B]"></i>
+      </div>
+      <p class="text-3xl font-light text-[#0B0B0B]">{{metrics.totalProjects || 0}}</p>
+    </div>
+  </div>
+
+  <!-- Project Status Section -->
+  <section class="mb-12">
+    <h2 class="text-xl font-light text-[#0B0B0B] mb-6">Project Status Overview</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Active Projects -->
+      <div class="bg-white border border-[#D9D9D9] rounded-lg p-6 transition-shadow hover:shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-[#8E8E93] text-sm">Active Projects</span>
+          <i class="bi bi-play-circle text-[#61a8bd]"></i>
+        </div>
+        <p class="text-3xl font-light text-[#61a8bd]">{{metrics.activeProjects || 0}}</p>
+      </div>
+
+      <!-- Projects in Review -->
+      <div class="bg-white border border-[#D9D9D9] rounded-lg p-6 transition-shadow hover:shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-[#8E8E93] text-sm">In Review</span>
+          <i class="bi bi-eye text-[#ffce32]"></i>
+        </div>
+        <p class="text-3xl font-light text-[#ffce32]">{{metrics.reviewProjects || 0}}</p>
+      </div>
+
+      <!-- Completed Projects -->
+      <div class="bg-white border border-[#D9D9D9] rounded-lg p-6 transition-shadow hover:shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-[#8E8E93] text-sm">Completed</span>
+          <i class="bi bi-check-circle text-[#8E8E93]"></i>
+        </div>
+        <p class="text-3xl font-light text-[#8E8E93]">{{metrics.completedProjects || 0}}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Projects Section -->
+  <section>
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl font-light text-[#0B0B0B]">Recent Projects</h2>
+      <a routerLink="/projects" class="text-sm text-[#0B0B0B] hover:text-[#1c1c1e] transition-colors">
+        View All
+        <i class="bi bi-arrow-right ml-1"></i>
+      </a>
+    </div>
+
+    <!-- Projects Table -->
+    <div class="bg-white border border-[#D9D9D9] rounded-lg overflow-hidden">
+      <table class="w-full">
+        <thead>
+          <tr class="border-b border-[#D9D9D9] bg-[#ffffff]">
+            <th class="text-left py-4 px-6 text-sm font-medium text-[#8E8E93]">Project Name</th>
+            <th class="text-left py-4 px-6 text-sm font-medium text-[#8E8E93]">Status</th>
+            <th class="text-left py-4 px-6 text-sm font-medium text-[#8E8E93]">Type</th>
+            <th class="text-left py-4 px-6 text-sm font-medium text-[#8E8E93]">Last Updated</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-[#D9D9D9]">
+          <tr *ngFor="let project of recentProjects" class="hover:bg-[#F9F9F9] transition-colors">
+            <td class="py-4 px-6">
+              <a [routerLink]="['/projects', project._id]" class="text-[#0B0B0B] hover:text-[#1c1c1e]">
+                {{project.name}}
+              </a>
+            </td>
+            <td class="py-4 px-6">
+              <span [ngClass]="{
+                'bg-[#61a8bd]/10 text-[#61a8bd]': project.status === 'active',
+                'bg-[#D60000]/10 text-[#D60000]': project.status === 'delayed',
+                'bg-[#8E8E93]/10 text-[#8E8E93]': project.status === 'completed'
+              }" class="px-3 py-1 rounded-full text-xs font-medium">
+                {{project.status}}
+              </span>
+            </td>
+            <td class="py-4 px-6 text-sm text-[#8E8E93]">{{project.type}}</td>
+            <td class="py-4 px-6 text-sm text-[#8E8E93]">{{project.updatedAt | date:'mediumDate'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

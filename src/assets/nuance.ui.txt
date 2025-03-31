@@ -1,0 +1,525 @@
+**Core Philosophy:** *"Clarity, purpose, and timelessness. Less, but better—elevated by subtle sophistication."*
+
+This style guide embodies a blend of Dieter Rams' functional clarity and Jony Ive's premium, considered sensibility. It prioritizes:
+
+- **Reductive & Focused:** Ruthlessly eliminate the non-essential. Achieve clarity by removing clutter. Every element must serve a clear purpose.
+- **Intuitive & Effortless:** Interactions feel natural and expected, minimizing cognitive load. Design anticipates user needs.
+- **Precisely Crafted:** Meticulous attention to detail in alignment, spacing (8px grid basis), proportions, and pixel-perfect execution.
+- **Harmonious & Cohesive:** Elements work together seamlessly, creating visual balance and a unified, integrated language.
+- **Understated & Confident:** Avoids trends and flashiness. Aesthetics are restrained, relying on refinement and quality. The design communicates calmly and clearly.
+- **Considered & Deliberate:** Every choice feels intentional, directly supporting the user's goal or enhancing understanding.
+- **Honest & Clear:** Elements transparently communicate their function. Information (especially data) is presented with graphical integrity, avoiding distortion.
+- **Unobtrusive:** The interface recedes, allowing content and data to be the primary focus.
+- **Subtle Materiality & Dimension:** Hints of depth and texture through light, shadow, and transparency, used sparingly to enhance hierarchy without skeuomorphism.
+- **Timeless:** Grounded in lasting principles of utility, clarity, and refined aesthetics.
+
+*(This expanded intro sets the tone and incorporates key principles from your philosophy and Ive checklist)*
+
+## Color System
+
+The color system is designed for **adaptability and quiet confidence**. It relies on a structured neutral palette and a single, purposeful accent, ensuring consistency even when the specific palette is swapped.
+
+### Primary Colors (Example Palette - Swap as needed)
+
+`/* Core Neutrals - Choose subtle, sophisticated tones */
+--neutral-50:  #F9FAFB; /* Lightest Backgrounds - Aim for airy feel */
+--neutral-100: #F3F4F6; /* Subtle backgrounds, hover states */
+--neutral-200: #E5E7EB; /* Subtle Dividers, disabled elements */
+--neutral-300: #D1D5DB; /* Borders, UI element edges */
+--neutral-500: #6B7280; /* Secondary text, captions, placeholder text */
+--neutral-700: #374151; /* Primary body text */
+--neutral-800: #1F2937; /* Subtle hover/darker elements (Added for refinement) */
+--neutral-900: #111827; /* Headings, strong interactive elements, primary text contrast */
+
+/* Accent Color - Single, purposeful, swap for branding */
+--accent-600: #111827; /* Default: Neutral-900 - Primary actions, key highlights, active states */
+/* Optional: Darker Accent for hover/pressed states if needed */
+/* --accent-700: #000000; */ /* Example: Use only if subtle darkening/lightening of accent-600 isn't sufficient */`
+
+**content_copydownload**Use code [**with caution**](https://support.google.com/legal/answer/13505487).Css
+
+### Functional Colors (Use standard conventions unless brand dictates otherwise)
+
+- `-alert: #EF4444; /* Error states, critical warnings */
+--success: #10B981; /* Success confirmations */
+--warning: #F59E0B; /* Non-critical warnings (Optional but recommended) */
+--info: #3B82F6; /* Informational messages, highlights */`
+
+**content_copydownload**Use code [**with caution**](https://support.google.com/legal/answer/13505487).Css
+
+### Color Usage Principles
+
+- **Neutral Dominance:** Use neutrals for ~90% of the UI surface area to create a calm, focused backdrop.
+- **Purposeful Accent:** Reserve --accent-600 for primary calls-to-action, active states, key data highlights, and elements requiring focused attention. Use it sparingly.
+- **High Contrast & Readability:** Ensure text maintains WCAG AA minimum (4.5:1 against its background), especially --neutral-700 and --neutral-900. --neutral-500 requires careful checking.
+- **Subtlety in States:** Use subtle shifts (e.g., --neutral-100, --neutral-800, or slightly modified --accent-600) for hover and pressed states. Avoid jarring color changes.
+- **Luminous Feel:** Favor lighter neutral backgrounds (--neutral-50, --neutral-100) paired with strong text contrast to create an airy, open feeling.
+
+## Typography
+
+Typography is a **core aesthetic element**, treated with precision to enhance readability, establish clear hierarchy, and contribute to the refined feel.
+
+### Font Family
+
+`/* Prioritize clean, highly legible sans-serifs */
+--font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;`
+
+**content_copydownload**Use code [**with caution**](https://support.google.com/legal/answer/13505487).Css
+
+### Font Weights
+
+`/* Limit weights for clarity and elegance */
+--font-normal: 400;
+--font-medium: 500;
+--font-semibold: 600; /* Added for subtle emphasis (e.g., card titles, important labels) */`
+
+**content_copydownload**Use code [**with caution**](https://support.google.com/legal/answer/13505487).Css
+
+### Font Sizes & Line Heights (Based on 16px base)
+
+`/* Relative units (rem) ensure scalability */
+--text-xs: 0.75rem;  /* 12px */ --line-height-xs: 1rem;    /* 16px */
+--text-sm: 0.875rem; /* 14px */ --line-height-sm: 1.25rem; /* 20px */
+--text-base: 1rem;   /* 16px */ --line-height-base: 1.5rem;  /* 24px */ /* Body text */
+--text-lg: 1.125rem; /* 18px */ --line-height-lg: 1.75rem; /* 28px */
+--text-xl: 1.25rem;  /* 20px */ --line-height-xl: 1.75rem; /* 28px */
+--text-2xl: 1.5rem;  /* 24px */ --line-height-2xl: 2rem;   /* 32px */ /* Main headings */
+
+/* Letter Spacing (Optional but recommended for refinement) */
+--tracking-tight: -0.025em; /* Subtle tightening for larger headings */
+--tracking-normal: normal;`
+
+**content_copydownload**Use code [**with caution**](https://support.google.com/legal/answer/13505487).Css
+
+### Text Styles (Example Applications)
+
+| **Style** | **Use Case** | **Properties** | **Notes** |
+| --- | --- | --- | --- |
+| Heading 1 | Page Title | text-2xl font-semibold text-neutral-900 tracking-tight leading-tight | Strongest visual weight |
+| Heading 2 | Section Title | text-lg font-semibold text-neutral-900 tracking-tight leading-snug | Clear separation |
+| Heading 3 | Subsection Title, Card Title | text-base font-semibold text-neutral-900 leading-snug | Subtle emphasis |
+| Body | Regular Content Text | text-base font-normal text-neutral-700 leading-base | Primary reading text |
+| Small Body | Smaller Content Text | text-sm font-normal text-neutral-700 leading-sm | For denser areas, maintain readability |
+| Caption | Helper Text, Metadata | text-sm font-normal text-neutral-500 leading-sm | Secondary info, lower contrast |
+| Label | Form Labels, UI Controls | text-sm font-medium text-neutral-700 leading-sm | Slightly stronger than caption |
+| Button Text | Button Labels | text-sm font-medium (adjust color per button type) | Clear action text |
+
+*(Refined sizes, added line-heights, optional tracking, semibold weight, and clearer table)*
+
+## Spacing & Sizing
+
+Based on an **8px grid system** for precision and harmony. Use whitespace generously to enhance clarity, create a luminous feel, and guide the eye.
+
+### Scale (Based on 8px increments)
+
+- `-size-1: 0.25rem; /* 4px - Fine adjustments, icon padding */
+--size-2: 0.5rem; /* 8px - Base unit, small gaps, border radius */
+--size-3: 0.75rem; /* 12px - Input padding vertical */
+--size-4: 1rem; /* 16px - Input padding horizontal, icon sizes */
+--size-5: 1.25rem; /* 20px - Medium gaps, button padding vertical */
+--size-6: 1.5rem; /* 24px - Component internal spacing */
+--size-8: 2rem; /* 32px - Gaps between components, container padding */
+--size-10: 2.5rem; /* 40px - Section margins */
+--size-12: 3rem; /* 48px - Larger section margins */
+--size-16: 4rem; /* 64px - Page-level spacing */
+/* Add larger sizes as needed */
+/* Consistent Border Radius */
+--radius-sm: 2px; /* Subtle rounding for small elements */
+--radius-md: 4px; /* Standard rounding for inputs, buttons */
+--radius-lg: 8px; /* Container rounding (cards) */
+--radius-full: 9999px; /* Pills, circular elements */`
+
+**content_copydownload**Use code [**with caution**](https://support.google.com/legal/answer/13505487).Css
+
+### Usage Guidelines
+
+- **Consistency is Key:** Strictly adhere to the spacing scale for all margins, padding, and gaps.
+- **Breathing Room:** Don't crowd elements. Use ample whitespace (--size-8 to --size-16) between larger sections or unrelated groups.
+- **Related Elements:** Use smaller gaps (--size-2 to --size-6) between closely related items (e.g., label and input, icon and text).
+- **Padding:** Use consistent internal padding within containers (e.g., --size-6 or --size-8 for cards and inputs).
+- **8px Alignment:** Ensure all elements align to the conceptual 8px grid where feasible.
+
+*(Renamed to size, added border-radius, explicitly mentioned 8px grid, emphasized whitespace)*
+
+## Layout
+
+Layouts should be **balanced, harmonious, and adaptive**, prioritizing content clarity across devices.
+
+### Containers
+
+`/* Standard Content Width */
+.container {
+  max-width: 1200px; /* Adjust as needed */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--size-6); /* 24px */
+  padding-right: var(--size-6);
+}
+
+/* Narrower Content Width (e.g., for focused text) */
+.container-sm {
+  max-width: 768px; /* Adjust as needed */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--size-6);
+  padding-right: var(--size-6);
+}`
+
+**content_copydownload**Use code [**with caution**](https://support.google.com/legal/answer/13505487).Css
+
+### Grid System
+
+- Utilize CSS Grid or Flexbox for creating flexible, responsive layouts.
+- Maintain consistent gutters based on the spacing scale (e.g., --size-6 or --size-8).
+- Prioritize simple, understandable grid structures (1-4 columns typically).
+- Ensure layouts adapt gracefully to standard breakpoints (Mobile < 768px, Tablet 768px-1024px, Desktop > 1024px), often collapsing to a single column on mobile.
+
+*(Refined padding based on scale)*
+
+## UI Components
+
+Components should feel **precisely crafted, understated, intuitively functional,** and exhibit subtle **digital tactility**.
+
+### Buttons
+
+- **Clarity:** Button hierarchy (Primary, Secondary, Tertiary) must be visually distinct but harmonious.
+- **Precision:** Consistent padding, border radius (--radius-md), and text styles.
+- **Subtle Feedback:** Use smooth transitions (transition-colors) for hover/focus states. Hover states should be subtle changes in background or border color. Focus states must be clear (see Interactive States).
+- **Tactile Feel:** Ensure visual feedback on click/press (e.g., slight scale down or color shift).
+
+`/* Base Button Style (Apply common properties) */
+.btn {
+  display: inline-flex; /* Align text and potential icons */
+  align-items: center;
+  justify-content: center;
+  padding: var(--size-3) var(--size-5); /* 12px 20px */
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  border-radius: var(--radius-md); /* 4px */
+  border: 1px solid transparent; /* Base border */
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 150ms ease-out, border-color 150ms ease-out, color 150ms ease-out, box-shadow 150ms ease-out; /* Use defined transition */
+  user-select: none; /* Prevent text selection on click */
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Primary Button */
+.btn-primary {
+  background-color: var(--accent-600);
+  border-color: var(--accent-600);
+  color: white; /* Assumes accent is dark, adjust if accent is light */
+}
+.btn-primary:not(:disabled):hover {
+  /* background-color: var(--accent-700); */ /* Or slightly darker accent */
+  /* border-color: var(--accent-700); */
+  filter: brightness(90%); /* Example subtle hover */
+}
+.btn-primary:not(:disabled):active {
+ filter: brightness(80%); /* Example subtle active */
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background-color: transparent;
+  border-color: var(--accent-600); /* Use accent for outline */
+  color: var(--accent-600);
+}
+.btn-secondary:not(:disabled):hover {
+  background-color: var(--neutral-100); /* Subtle background fill */
+  border-color: var(--accent-600);
+}
+.btn-secondary:not(:disabled):active {
+  background-color: var(--neutral-200);
+}
+
+/* Tertiary Button (Less emphasis, often for neutral actions) */
+.btn-tertiary {
+  background-color: transparent;
+  border-color: var(--neutral-300);
+  color: var(--neutral-700);
+}
+.btn-tertiary:not(:disabled):hover {
+  background-color: var(--neutral-100);
+  border-color: var(--neutral-500); /* Slightly stronger border on hover */
+}
+.btn-tertiary:not(:disabled):active {
+  background-color: var(--neutral-200);
+}
+
+/* Action Button (Small, subtle) */
+.btn-action {
+  padding: var(--size-1) var(--size-3); /* 4px 12px */
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  border-radius: var(--radius-sm); /* 2px */
+  /* Style like tertiary or secondary based on context */
+  background-color: transparent;
+  border-color: var(--neutral-300);
+  color: var(--neutral-700);
+}
+.btn-action:not(:disabled):hover {
+  background-color: var(--neutral-100);
+  border-color: var(--neutral-500);
+}`
+
+**content_copydownload**Use code [**with caution**](https://support.google.com/legal/answer/13505487).Css
+
+*(Refined button styles for subtlety, consistency, added base class, used size vars, added active states)*
+
+### Form Elements
+
+- **Clarity & Low Load:** Forms should be simple, clearly labeled, and easy to scan. Minimize visual noise.
+- **Precision:** Consistent padding (--size-3, --size-4), border (1px solid --neutral-300), border radius (--radius-md), and typography.
+- **Responsive Feedback:** Clear focus states (see Interactive States) and validation states using functional colors.
+
+`/* Base Input Style */
+.input-base {
+  display: block;
+  width: 100%;
+  padding: var(--size-3) var(--size-4); /* 12px 16px */
+  font-size: var(--text-sm);
+  line-height: var(--line-height-sm);
+  color: var(--neutral-900); /* Input text color */
+  background-color: white;
+  border: 1px solid var(--neutral-300);
+  border-radius: var(--radius-md); /* 4px */
+  transition: border-color 150ms ease-out, box-shadow 150ms ease-out;
+}
+.input-base::placeholder {
+  color: var(--neutral-500);
+  opacity: 1; /* Override browser defaults */
+}
+.input-base:disabled {
+  background-color: var(--neutral-100);
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.input-base:focus {
+  /* Defined globally in Interactive States */
+  outline: none;
+}
+
+/* Text Input */
+.input {
+  composes: input-base;
+}
+
+/* Select */
+.select {
+  composes: input-base;
+  appearance: none; /* Remove default arrow */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); /* Use neutral-500 for arrow */
+  background-position: right var(--size-4) center;
+  background-repeat: no-repeat;
+  background-size: 1em;
+  padding-right: calc(var(--size-4) * 2.5); /* Ensure text doesn't overlap arrow */
+}
+
+/* Checkbox & Radio */
+.checkbox, .radio {
+  appearance: none;
+  display: inline-block;
+  vertical-align: middle; /* Align with label text */
+  width: var(--size-4); /* 16px */
+  height: var(--size-4);
+  margin: 0;
+  margin-right: var(--size-2); /* 8px space before label */
+  border: 1px solid var(--neutral-300);
+  background-color: white;
+  transition: border-color 150ms ease-out, background-color 150ms ease-out;
+  cursor: pointer;
+}
+.checkbox {
+  border-radius: var(--radius-sm); /* 2px */
+}
+.radio {
+  border-radius: var(--radius-full); /* Circle */
+}
+.checkbox:checked, .radio:checked {
+  border-color: var(--accent-600);
+  background-color: var(--accent-600);
+  background-size: 70%; /* Adjust check/dot size */
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.checkbox:checked {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3E%3Cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3E%3C/svg%3E"); /* Simpler check */
+}
+.radio:checked {
+   /* Use border/background or a subtle SVG dot */
+   /* Example: Inner dot using box-shadow */
+   box-shadow: inset 0 0 0 3px white; /* White inner circle creates dot effect */
+}
+.checkbox:focus, .radio:focus {
+  /* Defined globally in Interactive States */
+  outline: none;
+}
+
+/* Form Label */
+.label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--neutral-700);
+  margin-bottom: var(--size-2); /* 8px */
+}`
+
+**content_copydownload**Use code [**with caution**](https://support.google.com/legal/answer/13505487).Css
+
+*(Used composes for base styles, refined sizes/spacing, improved checkbox/radio visuals for subtlety, added placeholder style)*
+
+### Cards & Containers
+
+- **Subtle Dimension:** Use either a soft border (1px solid --neutral-200 or --neutral-300) OR a subtle box-shadow for separation, not both. Shadow often feels more "Ive".
+- **Contained Clarity:** Provide ample internal padding (--size-6 or --size-8).
+- **Hierarchy:** Use text styles and dividers (.divider-subtle) appropriately within cards.
+
+`.card {
+  background-color: white;
+  border-radius: var(--radius-lg); /* 8px */
+  padding: var(--size-8); /* 32px */
+
+  /* Choose ONE for separation: */
+  /* Option 1: Subtle Border */
+  border: 1px solid var(--neutral-200);
+
+  /* Option 2: Subtle Shadow (More Ive-like) */
+  /* box-shadow: 0 2px 4px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03); */
+  /* Tweak shadow values for desired subtlety */
+}
+
+.card-header {
+  padding-bottom: var(--size-6); /* 24px */
+  /* Optional: Add subtle border-bottom */
+  /* border-bottom: 1px solid var(--neutral-200); */
+  /* margin-bottom: var(--size-6); */ /* Adjust based on border use */
+}
+
+.card-title {
+  /* Use Heading 3 style */
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  color: var(--neutral-900);
+}`
+
+**content_copydownload**Use code [**with caution**](https://support.google.com/legal/answer/13505487).Css
+
+*(Added shadow option, refined spacing/border, used size vars, linked to text styles)*
+
+### Dividers
+
+- **Minimal Presence:** Use dividers sparingly. Prefer whitespace for separation where possible.
+- **Subtlety:** Keep dividers thin and light (--neutral-200). Use accent color only for deliberate emphasis.
+
+`/* Standard Subtle Divider */
+.divider {
+  height: 1px;
+  width: 100%;
+  background-color: var(--neutral-200); /* Lighter, more subtle */
+  border: none;
+  margin-top: var(--size-8);
+  margin-bottom: var(--size-8);
+}
+
+/* Accent Divider (Use very sparingly for emphasis) */
+.divider-accent {
+  height: 1px; /* Or 2px for stronger emphasis */
+  width: var(--size-16); /* Short width */
+  background-color: var(--accent-600);
+  border: none;
+  margin: var(--size-4) 0; /* Adjust spacing */
+}`
+
+**content_copydownload**Use code [**with caution**](https://support.google.com/legal/answer/13505487).Css
+
+*(Renamed small divider, made standard divider more subtle, emphasized sparing use)*
+
+## Interaction & Motion
+
+Interactions should be **responsive, seamless, and graceful**, providing clear feedback without being distracting. Motion should be **purposeful**, guiding the user or enhancing the feeling of **digital tactility**.
+
+### Interactive States (Global Application)
+
+- **Hover:** Subtle visual change (background color, border color, brightness) applied with transition-colors. Avoid drastic shifts.
+- **Focus:** CRITICAL for accessibility. Apply a consistent, visible focus indicator to ALL interactive elements (button, a, input, select, textarea, [tabindex]). A subtle outline or shadow using the accent color is recommended over just changing border color.
+    - `:focus-visible { /* Use focus-visible for smarter focus rings */ outline: none; /* Remove default */ /* Example: Subtle accent shadow */ box-shadow: 0 0 0 2px var(--neutral-50), 0 0 0 4px var(--accent-600); /* Adjust color/size */ /* Example: Accent Outline */ /* outline: 2px solid var(--accent-600); */ /* outline-offset: 2px; */
+    }`
+
+    **content_copydownload**Use code [**with caution**](https://support.google.com/legal/answer/13505487).Css
+
+- **Active:** Visual feedback during click/press (e.g., slightly darker background, scale effect).
+- **Disabled:** Reduced opacity (opacity: 0.5) and cursor: not-allowed. Ensure sufficient contrast remains if text is present.
+
+### Transitions & Micro-interactions
+
+- **Default Transition:** Apply a standard, quick transition to elements that change state on hover/focus/active.
+
+    `.transition-default {
+      transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform; /* Cover common properties */
+      transition-timing-function: ease-out; /* Smooth easing */
+      transition-duration: 150ms; /* Quick but noticeable */
+    }`
+
+    **content_copydownload**Use code [**with caution**](https://support.google.com/legal/answer/13505487).Css
+
+- **Purposeful Motion:** Use subtle animations (fade-in/out, slide-up/down) for appearing/disappearing elements (e.g., modals, tooltips) to guide the eye smoothly. Avoid overly complex or lengthy animations.
+- **Micro-interactions:** Small animations confirming actions (e.g., button press ripple, checkmark animation) should be extremely brief, subtle, and delightful, enhancing the tactile feel without delaying the user.
+
+*(Added section header, refined focus state globally using focus-visible, defined default transition, emphasized purposeful motion)*
+
+## Icons
+
+Icons should be **simple, clear, precise,** and **harmonious** with the typography and overall aesthetic.
+
+- **Style:** Prefer clean, simple **line icons** with consistent stroke weight (e.g., 1.5px or 2px). Match stroke weight conceptually to typographic weights if possible.
+- **Precision:** Use consistent corner radii (--radius-sm or slightly more) if applicable. Ensure pixel-perfect rendering (use SVG).
+- **Simplicity:** Icons should communicate function instantly. Avoid excessive detail.
+- **Color:** Typically inherit text color (currentColor) or use --neutral-500 / --neutral-700 / --accent-600 purposefully. Keep monochrome unless color has specific semantic meaning (like status indicators).
+- **Sizing:** Use the spacing scale (--size-4, --size-5, --size-6) for consistent sizing (16px, 20px, 24px). Ensure adequate padding around icons when used within buttons or standalone.
+
+*(Refined guidance on style, precision, and color)*
+
+## Data Visualization (Infographics, Charts, Reports)
+
+Apply the core principles rigorously to data visualization:
+
+- **Maximize Data-Ink:** Focus visual elements on conveying data. Remove redundant elements, backgrounds, grids, and decorations ('chartjunk'). (Tufte)
+- **Graphical Integrity:** Ensure visual representations are accurate, proportional, and avoid misleading distortions (e.g., truncated axes, inappropriate chart types). (Tufte)
+- **Clarity & Legibility:** Use clear typography (--text-xs, --text-sm) integrated closely with the data points. Ensure sufficient contrast.
+- **Purposeful Color:** Use the neutral palette for base elements (axes, gridlines if necessary). Use the --accent-600 and potentially functional colors purposefully to highlight key data series or findings. Avoid overly saturated or numerous colors.
+- **Simplicity:** Choose the simplest effective chart type. Avoid 3D effects, unnecessary gradients, or complex backgrounds.
+- **Integration:** Seamlessly integrate charts and text within reports or infographics using consistent spacing and typography.
+- **Small Multiples:** Use series of small, comparable charts for complex comparisons where appropriate. (Tufte)
+
+*(Added specific section for data visualization, incorporating Tufte's principles)*
+
+## Core Implementation Principles
+
+- **Meticulous Craft:** Strive for pixel-perfect alignment, consistent application of spacing/sizing rules, and flawless execution of details. Use the 8px grid.
+- **Harmony & Consistency:** Ensure all elements, components, and layouts feel part of a single, unified system. Reuse components rigorously.
+- **Intuitive Flow:** Structure pages and interactions logically, minimizing cognitive load and guiding users effortlessly.
+- **Understated Presence:** Prioritize content and data. The UI framework should support, not dominate.
+- **Accessibility as Foundation:** Build accessibility in from the start (contrast, keyboard navigation, focus states, semantic HTML, ARIA where needed). This aligns directly with clarity and usability.
+- **Responsiveness:** Design mobile-first and ensure graceful adaptation across breakpoints using relative units (rem) and flexible layouts.
+
+*(Renamed and rephrased to strongly reflect philosophy)*
+
+## Adapting Colors
+
+This style guide's strength lies in its **structure, not specific colors**. To adapt:
+
+1. **Neutrals:** Replace --neutral-* variables with your chosen brand neutrals. Aim for a sophisticated, low-saturation palette. Ensure sufficient steps for subtle UI states.
+2. **Accent:** Replace --accent-600 with your primary brand color. Check its contrast against white/light backgrounds for accessible button text.
+3. **Functional:** Update --alert, --success, etc., if your brand has specific colors for these states.
+4. **Verify:** Thoroughly test all components, text styles, and interactive states with the new palette. Pay close attention to:
+    - **Contrast Ratios:** Ensure all text meets accessibility requirements.
+    - **Hierarchy:** Confirm the accent color provides clear focus without overwhelming the neutrals.
+    - **Subtlety:** Check hover/focus/active states still feel refined and not jarring.
+    - **Overall Feel:** Does the new palette maintain the desired **quietly confident, premium, and sophisticated** aesthetic?
+
+The consistency in spacing, typography, interaction details, and adherence to the core principles will ensure the premium feel persists regardless of the specific color palette employed.

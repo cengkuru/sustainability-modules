@@ -42,5 +42,12 @@ testem.log
 Thumbs.db
 
 .firebase
-
 .firebasesrc/environments
+
+# Security
+firebase-service-account.json
+server/.env
+server/migration/exports/
+
+# MongoDB
+*.mongodb

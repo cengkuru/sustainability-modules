@@ -2,10 +2,9 @@
     <div class="sm:flex sm:items-center">
         <div class="sm:flex-auto">
             <h1 class="text-base font-semibold leading-6 text-gray-900">{{ pageTitle }}</h1>
-
         </div>
         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-            <button routerLink="add" type="button" class="block rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">Add Project</button>
+            <button (click)="navigateToProjectCreate()" type="button" class="block rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">Add Project</button>
         </div>
     </div>
     <div class="mt-8 flow-root">
@@ -16,39 +15,42 @@
                     <thead>
                     <tr>
                         <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Project Title</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Budget</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Description</th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
                         <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
-                            <span class="sr-only">Edit</span>
+                            <span class="sr-only">Actions</span>
                         </th>
                     </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
                     <tr *ngFor="let project of projects" class="hover:bg-gray-100">
                         <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                            <span class="font-bold">{{ project.oc4id_id }}</span>
-                            <span class="ml-2" [attr.title]="project.description">
-                                {{ project.title }}
-                                            <i class="bi bi-info-circle-fill" style="font-size: 0.75rem; color: gray;"></i>
-                            </span>
+                            {{ project.title }}
                         </td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ project.currency }} {{ project.budget }}</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            {{ project.description | slice:0:50 }}{{ project.description.length > 50 ? '...' : '' }}
+                        </td>
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-center">
                             <span class="inline-flex rounded-full px-3 py-1 text-xs font-semibold"
-                                  [ngClass]="{'bg-red-200 text-white': !project.publishStatus, 'bg-green-500 text-white': project.publishStatus}">
+                                  [ngClass]="{'bg-red-200 text-red-800': !project.publishStatus, 'bg-green-200 text-green-800': project.publishStatus}">
                                 {{ project.publishStatus ? 'Published' : 'Unpublished' }}
                             </span>
                             <button (click)="togglePublishStatus(project)" class="ml-2 text-xs text-gray-600 hover:text-gray-900">Toggle</button>
                         </td>
                         <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                            <a [routerLink]="['edit-project', project.key]" class="text-gray-600 hover:text-gray-900">
+                            <button (click)="navigateToProjectEdit(project.key)" class="text-gray-600 hover:text-gray-900 mr-4">
                                 <i class="bi bi-pencil-fill" style="font-size: 1rem;"></i>
-                                <span class="sr-only">Update, {{ project.title }}</span>
-                            </a>
-                            <button (click)="deleteProject(project.key)" class="ml-4 text-gray-600 hover:text-red-600">
-                                <i class="bi bi-trash-fill" style="font-size: 1rem;"></i>
-                                <span class="sr-only">Delete, {{ project.title }}</span>
+                                <span class="sr-only">Edit {{ project.title }}</span>
                             </button>
+                            <button (click)="deleteProject(project)" class="text-gray-600 hover:text-red-600">
+                                <i class="bi bi-trash-fill" style="font-size: 1rem;"></i>
+                                <span class="sr-only">Delete {{ project.title }}</span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr *ngIf="projects.length === 0 && !isLoading">
+                        <td colspan="4" class="px-3 py-4 text-sm text-center text-gray-500">
+                            No projects found. Click "Add Project" to create your first project.
                         </td>
                     </tr>
                     </tbody>
