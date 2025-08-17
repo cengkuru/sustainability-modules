@@ -23,13 +23,22 @@
             <!-- Section Header -->
             <div class="p-6 border-b border-[#D9D9D9] flex items-center justify-between">
                 <h2 class="text-xl font-light text-[#0B0B0B]">User Management</h2>
-                <button 
-                    (click)="fetchUsers()" 
-                    class="inline-flex items-center px-4 py-2 text-sm border border-[#D9D9D9] rounded-lg hover:bg-[#F9F9F9] transition-colors"
-                >
-                    <i class="bi bi-arrow-clockwise mr-2"></i>
-                    Refresh
-                </button>
+                <div class="flex items-center space-x-2">
+                    <button 
+                        (click)="showCreateUserModal = true" 
+                        class="inline-flex items-center px-4 py-2 text-sm bg-[#61a8bd] text-white rounded-lg hover:bg-[#5297ab] transition-colors"
+                    >
+                        <i class="bi bi-plus-circle mr-2"></i>
+                        Add User
+                    </button>
+                    <button 
+                        (click)="fetchUsers()" 
+                        class="inline-flex items-center px-4 py-2 text-sm border border-[#D9D9D9] rounded-lg hover:bg-[#F9F9F9] transition-colors"
+                    >
+                        <i class="bi bi-arrow-clockwise mr-2"></i>
+                        Refresh
+                    </button>
+                </div>
             </div>
 
             <!-- Loading State -->
@@ -81,17 +90,17 @@
                             </td>
                             <td class="px-6 py-4">
                                 <span [ngClass]="{
-                                    'bg-[#61a8bd]/10 text-[#61a8bd]': user.role === 'admin',
-                                    'bg-[#8E8E93]/10 text-[#8E8E93]': user.role === 'user'
+                                    'bg-[#61a8bd]/10 text-[#61a8bd]': getUserRole(user) === 'admin',
+                                    'bg-[#F59E0B]/10 text-[#F59E0B]': getUserRole(user) === 'hod',
+                                    'bg-[#8E8E93]/10 text-[#8E8E93]': getUserRole(user) === 'user'
                                 }" class="px-3 py-1 rounded-full text-xs font-medium">
-                                    {{ user.role }}
+                                    {{ getUserRole(user) }}
                                 </span>
                             </td>
                             <td class="px-6 py-4">
                                 <span [ngClass]="{
                                     'bg-[#61a8bd]/10 text-[#61a8bd]': user.status === 'active',
-                                    'bg-[#8E8E93]/10 text-[#8E8E93]': user.status === 'inactive',
-                                    'bg-[#D60000]/10 text-[#D60000]': user.status === 'suspended'
+                                    'bg-[#8E8E93]/10 text-[#8E8E93]': user.status === 'inactive'
                                 }" class="px-3 py-1 rounded-full text-xs font-medium">
                                     {{ user.status }}
                                 </span>
@@ -103,28 +112,28 @@
                                 <div class="flex items-center justify-end space-x-2">
                                     <!-- Role Dropdown -->
                                     <select 
-                                        [value]="user.role"
-                                        (change)="onRoleChange(user._id, $event)"
+                                        [value]="getUserRole(user)"
+                                        (change)="onRoleChange(user._id!, $event)"
                                         class="text-xs border border-[#D9D9D9] rounded-lg px-3 py-1.5 bg-white hover:bg-[#F9F9F9] transition-colors"
                                     >
                                         <option value="user">User</option>
+                                        <option value="hod">Head of Department</option>
                                         <option value="admin">Admin</option>
                                     </select>
                                     
                                     <!-- Status Dropdown -->
                                     <select 
                                         [value]="user.status"
-                                        (change)="onStatusChange(user._id, $event)"
+                                        (change)="onStatusChange(user._id!, $event)"
                                         class="text-xs border border-[#D9D9D9] rounded-lg px-3 py-1.5 bg-white hover:bg-[#F9F9F9] transition-colors"
                                     >
                                         <option value="active">Active</option>
                                         <option value="inactive">Inactive</option>
-                                        <option value="suspended">Suspended</option>
                                     </select>
                                     
                                     <!-- Delete Button -->
                                     <button 
-                                        (click)="deleteUser(user._id)" 
+                                        (click)="deleteUser(user._id!)" 
                                         class="text-[#D60000] hover:text-[#D60000]/80 transition-colors p-1.5"
                                         title="Delete User"
                                     >
@@ -145,6 +154,81 @@
                 </table>
             </div>
         </section>
+    </div>
+
+    <!-- Create User Modal -->
+    <div *ngIf="showCreateUserModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50" (click)="showCreateUserModal = false">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4" (click)="$event.stopPropagation()">
+            <div class="p-6 border-b border-[#D9D9D9]">
+                <h3 class="text-xl font-light text-[#0B0B0B]">Create New User</h3>
+            </div>
+            <div class="p-6 space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 after:content-['*'] after:text-red-500 after:ml-1">Name</label>
+                    <input 
+                        type="text" 
+                        [(ngModel)]="newUser.name"
+                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-accent-color-base focus:border-accent-color-base focus:z-10 sm:text-sm"
+                        placeholder="John Doe"
+                    >
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 after:content-['*'] after:text-red-500 after:ml-1">Email</label>
+                    <input 
+                        type="email" 
+                        [(ngModel)]="newUser.email"
+                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-accent-color-base focus:border-accent-color-base focus:z-10 sm:text-sm"
+                        placeholder="john@example.com"
+                    >
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 after:content-['*'] after:text-red-500 after:ml-1">Password</label>
+                    <input 
+                        type="password" 
+                        [(ngModel)]="newUser.password"
+                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-accent-color-base focus:border-accent-color-base focus:z-10 sm:text-sm"
+                        placeholder="Minimum 6 characters"
+                    >
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 after:content-['*'] after:text-red-500 after:ml-1">Role</label>
+                    <select 
+                        [(ngModel)]="newUser.roles[0]"
+                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-accent-color-base focus:border-accent-color-base focus:z-10 sm:text-sm"
+                    >
+                        <option value="user">User</option>
+                        <option value="hod">Head of Department</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div *ngIf="newUser.roles[0] !== 'admin'">
+                    <label class="block text-sm font-medium text-gray-700">Agency</label>
+                    <input 
+                        type="text" 
+                        [(ngModel)]="newUser.agency"
+                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-accent-color-base focus:border-accent-color-base focus:z-10 sm:text-sm"
+                        placeholder="Agency name (required for non-admin users)"
+                    >
+                </div>
+                <div *ngIf="error" class="text-[#D60000] text-sm">
+                    {{ error }}
+                </div>
+            </div>
+            <div class="p-6 border-t border-[#D9D9D9] flex justify-end space-x-2">
+                <button 
+                    (click)="showCreateUserModal = false; resetNewUserForm()"
+                    class="group relative flex justify-center py-2 px-4 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-color-base transition-colors w-auto"
+                >
+                    Cancel
+                </button>
+                <button 
+                    (click)="createUser()"
+                    class="group relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-accent-color-base hover:bg-accent-color-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-color-base transition-colors w-auto"
+                >
+                    Create User
+                </button>
+            </div>
+        </div>
     </div>
 </div>
 

@@ -59,9 +59,10 @@
 
             <!-- Logout - Always visible -->
             <button (click)="logout()" 
-                   class="flex items-center w-full px-4 py-3 text-[#D60000] rounded-lg transition-colors hover:bg-[#D60000]/5 text-left">
-                <i class="bi bi-box-arrow-right text-lg mr-3"></i>
-                <span class="text-sm">Logout</span>
+                   [disabled]="isLoggingOut"
+                   class="flex items-center w-full px-4 py-3 text-[#D60000] rounded-lg transition-colors hover:bg-[#D60000]/5 text-left disabled:opacity-50 disabled:cursor-not-allowed">
+                <i class="bi bi-box-arrow-right text-lg mr-3" [class.animate-pulse]="isLoggingOut"></i>
+                <span class="text-sm">{{ isLoggingOut ? 'Logging out...' : 'Logout' }}</span>
             </button>
         </nav>
     </div>
@@ -114,3 +115,70 @@
         </div>
     </div>
 </div>
+
+<!-- Logout Confirmation Modal -->
+<div *ngIf="showLogoutConfirm" 
+     class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-fade-in">
+    <div class="bg-white rounded-2xl shadow-xl max-w-sm w-full p-6 transform transition-all animate-scale-in">
+        <div class="flex items-start mb-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[#D60000]/10 flex items-center justify-center">
+                <i class="bi bi-box-arrow-right text-[#D60000] text-xl"></i>
+            </div>
+            <div class="ml-4">
+                <h3 class="text-lg font-medium text-[#0B0B0B]">Confirm Logout</h3>
+                <p class="mt-1 text-sm text-[#8E8E93]">Are you sure you want to logout?</p>
+            </div>
+        </div>
+        
+        <div class="flex gap-3 mt-6">
+            <button (click)="cancelLogout()" 
+                    [disabled]="isLoggingOut"
+                    class="flex-1 px-4 py-2 text-sm font-medium text-[#0B0B0B] bg-[#F9F9F9] rounded-lg hover:bg-[#EFEFEF] transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                Cancel
+            </button>
+            <button (click)="confirmLogout()" 
+                    [disabled]="isLoggingOut"
+                    class="flex-1 px-4 py-2 text-sm font-medium text-white bg-[#D60000] rounded-lg hover:bg-[#B50000] transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                <span class="flex items-center justify-center gap-2">
+                    <i *ngIf="isLoggingOut" class="bi bi-arrow-repeat animate-spin"></i>
+                    {{ isLoggingOut ? 'Logging out...' : 'Logout' }}
+                </span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<style>
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scale-in {
+    from { 
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to { 
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-fade-in {
+    animation: fade-in 0.2s ease-out;
+}
+
+.animate-scale-in {
+    animation: scale-in 0.2s ease-out;
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+</style>

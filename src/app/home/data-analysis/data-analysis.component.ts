@@ -18,9 +18,8 @@ import * as L from "leaflet";
 import 'leaflet.markercluster';
 import { ScriptLoaderService } from "../../services/scriptLoader.service";
 import { Project, ProjectUtils, CHART_COLORS, Region } from "../../models/vizprojects.model";
-import { AngularFirestore } from "@angular/fire/compat/firestore";
-import firebase from "firebase/compat";
-import DocumentData = firebase.firestore.DocumentData;
+import { AngularFirestore } from '../../services/firebase-compat.service';
+type DocumentData = Record<string, any>;
 import { CallbackDataParams, TooltipFormatterCallback, TopLevelFormatterParams } from "echarts/types/dist/shared";
 
 type ChartName =
@@ -46,12 +45,11 @@ interface ChartClickEventParams {
 }
 
 @Component({
-  selector: "app-data-analysis",
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  providers: [CurrencyPipe],
-  templateUrl: "./data-analysis.component.html",
-  styleUrls: ["./data-analysis.component.scss"],
+    selector: "app-data-analysis",
+    imports: [CommonModule, FormsModule],
+    providers: [CurrencyPipe],
+    templateUrl: "./data-analysis.component.html",
+    styleUrls: ["./data-analysis.component.scss"]
 })
 export class DataAnalysisComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild("mapContainer") mapContainer!: ElementRef;
@@ -635,7 +633,7 @@ export class DataAnalysisComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isLoading = true;
     try {
       const snapshot = await this.firestore
-        .collection<Project>("dataVizProjects")
+        .collection("dataVizProjects")
         .get()
         .toPromise();
       if (snapshot) {

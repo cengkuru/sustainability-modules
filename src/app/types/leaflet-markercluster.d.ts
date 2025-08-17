@@ -27,3 +27,6 @@ declare module 'leaflet' {
         getLayers(): L.Layer[];
     }
 } 
+
+// Provide module declaration to satisfy dynamic import typings
+declare module 'leaflet.markercluster';

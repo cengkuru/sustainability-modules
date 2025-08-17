@@ -16,14 +16,13 @@ interface SocialLink {
 }
 
 @Component({
-  selector: 'app-feedback',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule
-  ],
-  templateUrl: './feedback.component.html',
-  styleUrls: ['./feedback.component.scss']
+    selector: 'app-feedback',
+    imports: [
+        CommonModule,
+        ReactiveFormsModule
+    ],
+    templateUrl: './feedback.component.html',
+    styleUrls: ['./feedback.component.scss']
 })
 export class FeedbackComponent implements OnInit {
   feedbackForm!: FormGroup;

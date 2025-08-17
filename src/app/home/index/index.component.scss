@@ -1,6 +1,4 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+/* Tailwind is already included globally via styles.scss */
 
 .footer-link {
   @apply flex items-center justify-center sm:justify-start p-2 rounded-lg hover:bg-secondary hover:text-primary transition-colors duration-300;

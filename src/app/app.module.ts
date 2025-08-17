@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient, HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { CoreModule } from './core/core.module';
@@ -27,62 +27,58 @@ import {
   PROJECT_SERVICE_TOKEN, 
   projectServiceFactory 
 } from './services/mongodb/database-provider.service';
+import { TokenStorageService } from './services/token-storage.service';
 
 // Factory function for translate loader
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    FilterProjectsPipe,
-    FilterRolesPipe
-
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot({
-      timeOut: 3000,
-      positionClass: 'toast-bottom-right',
-      preventDuplicates: true
-    }),
-    AppRoutingModule,
-    HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      },
-      defaultLanguage: 'en'
-    }),
-    CoreModule,
-    SharedModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgxJsonViewerModule,
-  ],
-  providers: [
-    // Provider for MongoDB services
-    MongoProjectService,
-    MongoPolicyService,
-    // Factory provider to switch between Firebase and MongoDB
-    {
-      provide: PROJECT_SERVICE_TOKEN,
-      useFactory: projectServiceFactory,
-      deps: [ProjectService, MongoProjectService]
-    },
-    DatabaseProviderService,
-    // HTTP Interceptor for auth token
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        FilterProjectsPipe,
+        FilterRolesPipe
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot({
+            timeOut: 3000,
+            positionClass: 'toast-bottom-right',
+            preventDuplicates: true
+        }),
+        AppRoutingModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            },
+            defaultLanguage: 'en'
+        }),
+        CoreModule,
+        SharedModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgxJsonViewerModule], providers: [
+        // Provider for MongoDB services
+        MongoProjectService,
+        MongoPolicyService,
+        // Token storage service for authentication
+        TokenStorageService,
+        // Factory provider to switch between Firebase and MongoDB
+        {
+            provide: PROJECT_SERVICE_TOKEN,
+            useFactory: projectServiceFactory,
+            deps: [ProjectService, MongoProjectService]
+        },
+        DatabaseProviderService,
+        // HTTP Interceptor for auth token
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true
+        },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }
 

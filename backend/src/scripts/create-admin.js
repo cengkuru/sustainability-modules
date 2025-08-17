@@ -11,9 +11,10 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 
-const ADMIN_EMAIL = 'admin@example.com';
-const ADMIN_PASSWORD = 'admin123';  // Change to a secure password
-const ADMIN_NAME = 'Admin User';
+// Use the Firebase user's email
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'michael@cengkuru.com';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '12345678'; // This password won't be used for Firebase auth
+const ADMIN_NAME = process.env.ADMIN_NAME || 'Michael Cengkuru';
 
 async function createAdminUser() {
   try {
@@ -35,15 +36,11 @@ async function createAdminUser() {
       }
       
     } else {
-      // Hash password
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(ADMIN_PASSWORD, salt);
-      
-      // Create new admin user
+      // Create new admin user (password will be hashed by pre-save hook)
       const adminUser = new User({
         name: ADMIN_NAME,
         email: ADMIN_EMAIL,
-        password: hashedPassword,
+        password: ADMIN_PASSWORD,
         roles: ['admin'],
         status: 'active'
       });

@@ -6,17 +6,18 @@ import { AuthService } from '../../../services/auth.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-side-bar',
-  templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.scss'],
-  standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive]
+    selector: 'app-side-bar',
+    templateUrl: './side-bar.component.html',
+    styleUrls: ['./side-bar.component.scss'],
+    imports: [CommonModule, RouterLink, RouterLinkActive]
 })
 export class SideBarComponent implements OnInit {
   userName$!: Observable<string>;
   userEmail$!: Observable<string>;
   isAdmin$!: Observable<boolean>;
   showDropdown: boolean = false;
+  showLogoutConfirm: boolean = false;
+  isLoggingOut: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -30,7 +31,13 @@ export class SideBarComponent implements OnInit {
     );
 
     this.isAdmin$ = this.authService.currentUser$.pipe(
-      map(user => user?.role === 'admin')
+      map(user => {
+        // Check both roles array and legacy role field
+        if (user?.roles && Array.isArray(user.roles)) {
+          return user.roles.includes('admin');
+        }
+        return user?.role === 'admin';
+      })
     );
   }
 
@@ -39,7 +46,21 @@ export class SideBarComponent implements OnInit {
   }
 
   logout(): void {
-    this.authService.logout();
+    this.showLogoutConfirm = true;
+  }
+
+  confirmLogout(): void {
+    this.isLoggingOut = true;
+    // Add slight delay for better UX
+    setTimeout(() => {
+      this.authService.logout();
+      this.showLogoutConfirm = false;
+      this.isLoggingOut = false;
+    }, 500);
+  }
+
+  cancelLogout(): void {
+    this.showLogoutConfirm = false;
   }
 
   getUserInitial(name: string | null): string {

@@ -9,7 +9,7 @@ import {
   NgZone
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '../../services/firebase-compat.service';
 import {CommonModule} from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import projectsData from '../../../assets/data/projects.json';
@@ -30,72 +30,70 @@ interface ProjectStat {
 }
 
 @Component({
-  selector: 'app-landing',
-  templateUrl: './landing.component.html',
-  styleUrls: ['./landing.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink,
-    TranslateModule,
-    IntersectionObserverDirective,
-    NgIconComponent,
-  ],
-  animations: [
-    // Refined animations based on style guide's transition principles
-    trigger('slideInAnimation', [
-      transition(':enter', [
-        style({ transform: 'translateY(20px)', opacity: 0 }),
-        animate('500ms cubic-bezier(0.4, 0, 0.2, 1)', style({ transform: 'translateY(0)', opacity: 1 }))
-      ])
-    ]),
-    trigger('fadeInAnimation', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1 }))
-      ])
-    ]),
-    trigger('fadeInUp', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(20px)' }),
-        animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1, transform: 'translateY(0)' }))
-      ])
-    ]),
-    trigger('listAnimation', [
-      transition('* <=> *', [
-        query(':enter', [
-          style({ opacity: 0, transform: 'translateY(20px)' }),
-          stagger('50ms', animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1, transform: 'translateY(0)' })))
-        ], { optional: true })
-      ])
-    ]),
-    trigger('cardHover', [
-      state('initial', style({
-        transform: 'translateY(0)',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
-      })),
-      state('hovered', style({
-        transform: 'translateY(-4px)',
-        boxShadow: '0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01)'
-      })),
-      transition('initial <=> hovered', animate('200ms cubic-bezier(0.4, 0, 0.2, 1)'))
-    ]),
-    trigger('staggeredList', [
-      transition('* <=> *', [
-        query(':enter', [
-          style({ opacity: 0, transform: 'translateY(20px)' }),
-          stagger('50ms', animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1, transform: 'translateY(0)' })))
-        ], { optional: true })
-      ])
-    ]),
-    trigger('subtleFloat', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(20px)' }),
-        animate('400ms cubic-bezier(0.4, 0, 0.2, 1)', 
-          style({ opacity: 1, transform: 'translateY(0)' }))
-      ])
-    ])
-  ]
+    selector: 'app-landing',
+    templateUrl: './landing.component.html',
+    styleUrls: ['./landing.component.scss'],
+    imports: [
+        CommonModule,
+        RouterLink,
+        TranslateModule,
+        // IntersectionObserverDirective, // not used in template
+        // NgIconComponent, // not used in template
+    ],
+    animations: [
+        // Refined animations based on style guide's transition principles
+        trigger('slideInAnimation', [
+            transition(':enter', [
+                style({ transform: 'translateY(20px)', opacity: 0 }),
+                animate('500ms cubic-bezier(0.4, 0, 0.2, 1)', style({ transform: 'translateY(0)', opacity: 1 }))
+            ])
+        ]),
+        trigger('fadeInAnimation', [
+            transition(':enter', [
+                style({ opacity: 0 }),
+                animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1 }))
+            ])
+        ]),
+        trigger('fadeInUp', [
+            transition(':enter', [
+                style({ opacity: 0, transform: 'translateY(20px)' }),
+                animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1, transform: 'translateY(0)' }))
+            ])
+        ]),
+        trigger('listAnimation', [
+            transition('* <=> *', [
+                query(':enter', [
+                    style({ opacity: 0, transform: 'translateY(20px)' }),
+                    stagger('50ms', animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1, transform: 'translateY(0)' })))
+                ], { optional: true })
+            ])
+        ]),
+        trigger('cardHover', [
+            state('initial', style({
+                transform: 'translateY(0)',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
+            })),
+            state('hovered', style({
+                transform: 'translateY(-4px)',
+                boxShadow: '0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01)'
+            })),
+            transition('initial <=> hovered', animate('200ms cubic-bezier(0.4, 0, 0.2, 1)'))
+        ]),
+        trigger('staggeredList', [
+            transition('* <=> *', [
+                query(':enter', [
+                    style({ opacity: 0, transform: 'translateY(20px)' }),
+                    stagger('50ms', animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1, transform: 'translateY(0)' })))
+                ], { optional: true })
+            ])
+        ]),
+        trigger('subtleFloat', [
+            transition(':enter', [
+                style({ opacity: 0, transform: 'translateY(20px)' }),
+                animate('400ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1, transform: 'translateY(0)' }))
+            ])
+        ])
+    ]
 })
 export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('mapContainer') mapContainer!: ElementRef;
@@ -318,7 +316,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
         const projects: any[] = [];
         let totalBudget = 0;
         
-        querySnapshot.forEach((doc) => {
+        querySnapshot.forEach((doc: any) => {
           const project = doc.data() as any;
           project.id = doc.id;
           projects.push(project);

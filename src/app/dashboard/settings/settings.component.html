@@ -1,87 +1,527 @@
-<div class="border rounded shadow-sm mx-auto max-w-7xl pt-8 lg:flex lg:gap-x-16 lg:px-8 bg-white">
-   <div class="px-4 py-8 sm:px-6 lg:flex-auto lg:px-0 lg:py-10">
-        <div class="mx-auto max-w-2xl space-y-16 sm:space-y-10 lg:mx-0 lg:max-w-none">
-            
-            <!-- Profile Section -->
-            <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
-                <div class="space-y-12">
-                    <div class="border-b border-gray-900/10 pb-12">
-                        <h2 class="text-base font-semibold leading-7 text-gray-900">Profile Information</h2>
+<div class="bg-white py-8 px-4 shadow-lg sm:rounded-lg sm:px-10 mx-auto max-w-4xl">
+    <!-- Header with User Info -->
+    <div class="mb-8 pb-6 border-b border-gray-200">
+        <div class="flex items-center space-x-4">
+            <!-- User Avatar -->
+            <div class="h-20 w-20 rounded-full bg-accent-color-base text-white flex items-center justify-center text-2xl font-medium">
+                {{ getUserInitials() }}
+            </div>
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900">Settings</h1>
+                <p class="text-sm text-gray-500 mt-1">{{ currentUser?.email }}</p>
+                <p class="text-xs text-gray-400">{{ getUserRole() }}</p>
+            </div>
+        </div>
+    </div>
 
-                        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                            <div class="sm:col-span-4">
-                                <label for="displayName" class="block text-sm font-medium leading-6 text-gray-900">Display Name</label>
-                                <div class="mt-2">
-                                    <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                        <input type="text" name="displayName" id="displayName" formControlName="displayName" autocomplete="displayName" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="John Smith">
-                                    </div>
-                                </div>
-                            </div>
+    <!-- Tab Navigation -->
+    <div class="border-b border-gray-200 mb-6">
+        <nav class="-mb-px flex space-x-8">
+            <button 
+                (click)="switchTab('profile')"
+                [class.border-accent-color-base]="activeTab === 'profile'"
+                [class.text-accent-color-base]="activeTab === 'profile'"
+                [class.border-transparent]="activeTab !== 'profile'"
+                [class.text-gray-500]="activeTab !== 'profile'"
+                class="py-2 px-1 border-b-2 font-medium text-sm transition-colors"
+            >
+                <i class="bi bi-person-circle mr-2"></i>Profile
+            </button>
+            <button 
+                (click)="switchTab('security')"
+                [class.border-accent-color-base]="activeTab === 'security'"
+                [class.text-accent-color-base]="activeTab === 'security'"
+                [class.border-transparent]="activeTab !== 'security'"
+                [class.text-gray-500]="activeTab !== 'security'"
+                class="py-2 px-1 border-b-2 font-medium text-sm transition-colors"
+            >
+                <i class="bi bi-shield-lock mr-2"></i>Security
+            </button>
+            <button 
+                *ngIf="isAdmin"
+                (click)="switchTab('site')"
+                [class.border-accent-color-base]="activeTab === 'site'"
+                [class.text-accent-color-base]="activeTab === 'site'"
+                [class.border-transparent]="activeTab !== 'site'"
+                [class.text-gray-500]="activeTab !== 'site'"
+                class="py-2 px-1 border-b-2 font-medium text-sm transition-colors"
+            >
+                <i class="bi bi-gear mr-2"></i>Site Settings
+            </button>
+            <button 
+                *ngIf="isAdmin"
+                (click)="switchTab('contact')"
+                [class.border-accent-color-base]="activeTab === 'contact'"
+                [class.text-accent-color-base]="activeTab === 'contact'"
+                [class.border-transparent]="activeTab !== 'contact'"
+                [class.text-gray-500]="activeTab !== 'contact'"
+                class="py-2 px-1 border-b-2 font-medium text-sm transition-colors"
+            >
+                <i class="bi bi-envelope mr-2"></i>Contact Info
+            </button>
+        </nav>
+    </div>
 
-                            <div class="sm:col-span-4">
-                                <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email Address</label>
-                                <div class="mt-2">
-                                    <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 sm:max-w-md">
-                                        <input type="email" name="email" id="email" formControlName="email" autocomplete="email" readonly class="block flex-1 border-0 bg-gray-50 py-1.5 pl-1 text-gray-500 sm:text-sm sm:leading-6">
-                                    </div>
-                                </div>
+    <!-- Tab Content -->
+    <div class="space-y-8">
+        <!-- Profile Tab -->
+        <div *ngIf="activeTab === 'profile'">
+            <form [formGroup]="profileForm" (ngSubmit)="updateProfile()" class="space-y-6">
+                <div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Profile Information</h3>
+                    <p class="text-sm text-gray-500 mb-6">Update your personal information and profile details.</p>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700">
+                                Display Name <span class="text-red-500">*</span>
+                            </label>
+                            <div class="mt-1">
+                                <input 
+                                    type="text" 
+                                    id="name" 
+                                    formControlName="name"
+                                    class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-accent-color-base focus:border-accent-color-base focus:z-10 sm:text-sm"
+                                    placeholder="Enter your display name"
+                                >
                             </div>
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">
+                                Email Address
+                            </label>
+                            <div class="mt-1">
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    formControlName="email"
+                                    class="appearance-none relative block w-full px-3 py-2 border border-gray-300 bg-gray-50 text-gray-500 rounded-md sm:text-sm cursor-not-allowed"
+                                >
+                            </div>
+                            <p class="mt-1 text-xs text-gray-500">Email address cannot be changed</p>
+                        </div>
+
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700">
+                                Phone Number
+                            </label>
+                            <div class="mt-1">
+                                <input 
+                                    type="tel" 
+                                    id="phone" 
+                                    formControlName="phone"
+                                    class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-accent-color-base focus:border-accent-color-base focus:z-10 sm:text-sm"
+                                    placeholder="+1 (555) 000-0000"
+                                >
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="bio" class="block text-sm font-medium text-gray-700">
+                                Bio
+                            </label>
+                            <div class="mt-1">
+                                <textarea 
+                                    id="bio" 
+                                    formControlName="bio"
+                                    rows="4"
+                                    class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-accent-color-base focus:border-accent-color-base focus:z-10 sm:text-sm"
+                                    placeholder="Tell us about yourself..."
+                                ></textarea>
+                            </div>
+                            <p class="mt-1 text-xs text-gray-500">Maximum 500 characters</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="mt-6 flex items-center justify-end gap-x-6">
-                    <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
-                    <button type="submit" [disabled]="profileForm.invalid" class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">Save Profile</button>
+                <div class="flex items-center justify-end space-x-4 pt-4 border-t border-gray-200">
+                    <button 
+                        type="button" 
+                        (click)="cancelProfileChanges()"
+                        class="px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-color-base transition-colors"
+                    >
+                        Cancel
+                    </button>
+                    <button 
+                        type="submit" 
+                        [disabled]="profileForm.invalid || isLoadingProfile"
+                        class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-accent-color-base hover:bg-accent-color-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-color-base disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                    >
+                        <i *ngIf="isLoadingProfile" class="bi bi-arrow-repeat animate-spin mr-2"></i>
+                        {{ isLoadingProfile ? 'Saving...' : 'Save Profile' }}
+                    </button>
                 </div>
             </form>
+        </div>
 
-            <!-- Password Change Section -->
-            <form [formGroup]="passwordForm" (ngSubmit)="updatePassword()">
-                <div class="space-y-12">
-                    <div class="border-b border-gray-900/10 pb-12">
-                        <h2 class="text-base font-semibold leading-7 text-gray-900">Change Password</h2>
+        <!-- Security Tab -->
+        <div *ngIf="activeTab === 'security'">
+            <form [formGroup]="passwordForm" (ngSubmit)="updatePassword()" class="space-y-6">
+                <div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Change Password</h3>
+                    <p class="text-sm text-gray-500 mb-6">Ensure your account is using a strong password to stay secure.</p>
 
-                        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                            <div class="sm:col-span-4">
-                                <label for="currentPassword" class="block text-sm font-medium leading-6 text-gray-900">Current Password</label>
-                                <div class="mt-2">
-                                    <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                        <input type="password" name="currentPassword" id="currentPassword" formControlName="currentPassword" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
-                                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="currentPassword" class="block text-sm font-medium text-gray-700">
+                                Current Password <span class="text-red-500">*</span>
+                            </label>
+                            <div class="mt-1">
+                                <input 
+                                    type="password" 
+                                    id="currentPassword" 
+                                    formControlName="currentPassword"
+                                    class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-accent-color-base focus:border-accent-color-base focus:z-10 sm:text-sm"
+                                    placeholder="Enter current password"
+                                >
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="newPassword" class="block text-sm font-medium text-gray-700">
+                                New Password <span class="text-red-500">*</span>
+                            </label>
+                            <div class="mt-1">
+                                <input 
+                                    type="password" 
+                                    id="newPassword" 
+                                    formControlName="newPassword"
+                                    class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-accent-color-base focus:border-accent-color-base focus:z-10 sm:text-sm"
+                                    placeholder="Enter new password (min 6 characters)"
+                                >
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="confirmPassword" class="block text-sm font-medium text-gray-700">
+                                Confirm Password <span class="text-red-500">*</span>
+                            </label>
+                            <div class="mt-1">
+                                <input 
+                                    type="password" 
+                                    id="confirmPassword" 
+                                    formControlName="confirmPassword"
+                                    [class.border-red-300]="passwordForm.hasError('mismatch') && passwordForm.get('confirmPassword')?.touched"
+                                    class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-accent-color-base focus:border-accent-color-base focus:z-10 sm:text-sm"
+                                    placeholder="Confirm new password"
+                                >
+                            </div>
+                            <div *ngIf="passwordForm.hasError('mismatch') && passwordForm.get('confirmPassword')?.touched" class="text-xs text-red-600 mt-1">
+                                Passwords do not match
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-end space-x-4 pt-4 border-t border-gray-200">
+                    <button 
+                        type="button" 
+                        (click)="cancelPasswordChanges()"
+                        class="px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-color-base transition-colors"
+                    >
+                        Cancel
+                    </button>
+                    <button 
+                        type="submit" 
+                        [disabled]="passwordForm.invalid || isLoadingPassword"
+                        class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-accent-color-base hover:bg-accent-color-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-color-base disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                    >
+                        <i *ngIf="isLoadingPassword" class="bi bi-arrow-repeat animate-spin mr-2"></i>
+                        {{ isLoadingPassword ? 'Changing...' : 'Change Password' }}
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Site Settings Tab (Admin Only) -->
+        <div *ngIf="activeTab === 'site' && isAdmin">
+            <form [formGroup]="siteSettingsForm" (ngSubmit)="updateSiteSettings()" class="space-y-6">
+                <div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Site Configuration</h3>
+                    <p class="text-sm text-gray-500 mb-6">Manage site-wide settings and configuration.</p>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label for="siteTitle" class="block text-sm font-medium text-gray-700">
+                                Site Title <span class="text-red-500">*</span>
+                            </label>
+                            <div class="mt-1">
+                                <input 
+                                    type="text" 
+                                    id="siteTitle" 
+                                    formControlName="siteTitle"
+                                    class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-accent-color-base focus:border-accent-color-base focus:z-10 sm:text-sm"
+                                >
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="siteDescription" class="block text-sm font-medium text-gray-700">
+                                Site Description <span class="text-red-500">*</span>
+                            </label>
+                            <div class="mt-1">
+                                <textarea 
+                                    id="siteDescription" 
+                                    formControlName="siteDescription"
+                                    rows="3"
+                                    class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-accent-color-base focus:border-accent-color-base focus:z-10 sm:text-sm"
+                                ></textarea>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="defaultLanguage" class="block text-sm font-medium text-gray-700">
+                                Default Language
+                            </label>
+                            <div class="mt-1">
+                                <select 
+                                    id="defaultLanguage" 
+                                    formControlName="defaultLanguage"
+                                    class="appearance-none relative block w-full px-3 py-2 border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-accent-color-base focus:border-accent-color-base focus:z-10 sm:text-sm"
+                                >
+                                    <option value="en">English</option>
+                                    <option value="pt">Portuguese</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Toggle Switches -->
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <label for="maintenanceMode" class="text-sm font-medium text-gray-700">
+                                        Maintenance Mode
+                                    </label>
+                                    <p class="text-xs text-gray-500">Site will be inaccessible to users</p>
+                                </div>
+                                <input 
+                                    type="checkbox" 
+                                    id="maintenanceMode" 
+                                    formControlName="maintenanceMode"
+                                    class="h-4 w-4 text-accent-color-base focus:ring-accent-color-base border-gray-300 rounded"
+                                >
+                            </div>
+
+                            <div *ngIf="siteSettingsForm.get('maintenanceMode')?.value" class="ml-6">
+                                <label for="maintenanceMessage" class="block text-sm font-medium text-gray-700">
+                                    Maintenance Message
+                                </label>
+                                <div class="mt-1">
+                                    <input 
+                                        type="text" 
+                                        id="maintenanceMessage" 
+                                        formControlName="maintenanceMessage"
+                                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-accent-color-base focus:border-accent-color-base focus:z-10 sm:text-sm"
+                                        placeholder="Site is under maintenance..."
+                                    >
                                 </div>
                             </div>
 
-                            <div class="sm:col-span-4">
-                                <label for="newPassword" class="block text-sm font-medium leading-6 text-gray-900">New Password</label>
-                                <div class="mt-2">
-                                    <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                        <input type="password" name="newPassword" id="newPassword" formControlName="newPassword" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
-                                    </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <label for="enableRegistration" class="text-sm font-medium text-gray-700">
+                                        Enable Registration
+                                    </label>
+                                    <p class="text-xs text-gray-500">Allow new users to register</p>
                                 </div>
+                                <input 
+                                    type="checkbox" 
+                                    id="enableRegistration" 
+                                    formControlName="enableRegistration"
+                                    class="h-4 w-4 text-accent-color-base focus:ring-accent-color-base border-gray-300 rounded"
+                                >
                             </div>
 
-                            <div class="sm:col-span-4">
-                                <label for="confirmPassword" class="block text-sm font-medium leading-6 text-gray-900">Confirm Password</label>
-                                <div class="mt-2">
-                                    <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                        <input type="password" name="confirmPassword" id="confirmPassword" formControlName="confirmPassword" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <label for="enablePublicProjects" class="text-sm font-medium text-gray-700">
+                                        Public Projects
+                                    </label>
+                                    <p class="text-xs text-gray-500">Allow public access to projects</p>
+                                </div>
+                                <input 
+                                    type="checkbox" 
+                                    id="enablePublicProjects" 
+                                    formControlName="enablePublicProjects"
+                                    class="h-4 w-4 text-accent-color-base focus:ring-accent-color-base border-gray-300 rounded"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-end space-x-4 pt-4 border-t border-gray-200">
+                    <button 
+                        type="button" 
+                        (click)="cancelSettingsChanges()"
+                        class="px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-color-base transition-colors"
+                    >
+                        Cancel
+                    </button>
+                    <button 
+                        type="submit" 
+                        [disabled]="siteSettingsForm.invalid || isLoadingSettings"
+                        class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-accent-color-base hover:bg-accent-color-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-color-base disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                    >
+                        <i *ngIf="isLoadingSettings" class="bi bi-arrow-repeat animate-spin mr-2"></i>
+                        {{ isLoadingSettings ? 'Saving...' : 'Save Settings' }}
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Contact Info Tab (Admin Only) -->
+        <div *ngIf="activeTab === 'contact' && isAdmin">
+            <form [formGroup]="contactForm" (ngSubmit)="updateContactInfo()" class="space-y-6">
+                <div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Contact Information</h3>
+                    <p class="text-sm text-gray-500 mb-6">Manage site contact details and social media links.</p>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label for="contactEmail" class="block text-sm font-medium text-gray-700">
+                                Contact Email <span class="text-red-500">*</span>
+                            </label>
+                            <div class="mt-1">
+                                <input 
+                                    type="email" 
+                                    id="contactEmail" 
+                                    formControlName="contactEmail"
+                                    class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-accent-color-base focus:border-accent-color-base focus:z-10 sm:text-sm"
+                                    placeholder="info@example.com"
+                                >
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="contactPhone" class="block text-sm font-medium text-gray-700">
+                                Contact Phone
+                            </label>
+                            <div class="mt-1">
+                                <input 
+                                    type="tel" 
+                                    id="contactPhone" 
+                                    formControlName="contactPhone"
+                                    class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-accent-color-base focus:border-accent-color-base focus:z-10 sm:text-sm"
+                                    placeholder="+1 (555) 000-0000"
+                                >
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="contactAddress" class="block text-sm font-medium text-gray-700">
+                                Contact Address
+                            </label>
+                            <div class="mt-1">
+                                <textarea 
+                                    id="contactAddress" 
+                                    formControlName="contactAddress"
+                                    rows="3"
+                                    class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-accent-color-base focus:border-accent-color-base focus:z-10 sm:text-sm"
+                                    placeholder="123 Main St, City, State 12345"
+                                ></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Social Media Links -->
+                        <div class="pt-4">
+                            <h4 class="text-sm font-medium text-gray-900 mb-3">Social Media Links</h4>
+                            
+                            <div class="space-y-3">
+                                <div>
+                                    <label for="facebook" class="block text-sm font-medium text-gray-700">
+                                        <i class="bi bi-facebook mr-2"></i>Facebook
+                                    </label>
+                                    <div class="mt-1">
+                                        <input 
+                                            type="url" 
+                                            id="facebook" 
+                                            formControlName="facebook"
+                                            class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-accent-color-base focus:border-accent-color-base focus:z-10 sm:text-sm"
+                                            placeholder="https://facebook.com/yourpage"
+                                        >
                                     </div>
                                 </div>
-                                <div *ngIf="passwordForm.hasError('mismatch') && passwordForm.get('confirmPassword')?.touched" class="mt-1">
-                                    <small class="text-red-500">Passwords do not match</small>
+
+                                <div>
+                                    <label for="twitter" class="block text-sm font-medium text-gray-700">
+                                        <i class="bi bi-twitter mr-2"></i>Twitter
+                                    </label>
+                                    <div class="mt-1">
+                                        <input 
+                                            type="url" 
+                                            id="twitter" 
+                                            formControlName="twitter"
+                                            class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-accent-color-base focus:border-accent-color-base focus:z-10 sm:text-sm"
+                                            placeholder="https://twitter.com/yourhandle"
+                                        >
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="linkedin" class="block text-sm font-medium text-gray-700">
+                                        <i class="bi bi-linkedin mr-2"></i>LinkedIn
+                                    </label>
+                                    <div class="mt-1">
+                                        <input 
+                                            type="url" 
+                                            id="linkedin" 
+                                            formControlName="linkedin"
+                                            class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-accent-color-base focus:border-accent-color-base focus:z-10 sm:text-sm"
+                                            placeholder="https://linkedin.com/company/yourcompany"
+                                        >
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="youtube" class="block text-sm font-medium text-gray-700">
+                                        <i class="bi bi-youtube mr-2"></i>YouTube
+                                    </label>
+                                    <div class="mt-1">
+                                        <input 
+                                            type="url" 
+                                            id="youtube" 
+                                            formControlName="youtube"
+                                            class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-accent-color-base focus:border-accent-color-base focus:z-10 sm:text-sm"
+                                            placeholder="https://youtube.com/channel/yourchannel"
+                                        >
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="mt-6 flex items-center justify-end gap-x-6">
-                    <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
-                    <button type="submit" [disabled]="passwordForm.invalid" class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">Change Password</button>
+                <div class="flex items-center justify-end space-x-4 pt-4 border-t border-gray-200">
+                    <button 
+                        type="button" 
+                        (click)="cancelContactChanges()"
+                        class="px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-color-base transition-colors"
+                    >
+                        Cancel
+                    </button>
+                    <button 
+                        type="submit" 
+                        [disabled]="contactForm.invalid || isLoadingContact"
+                        class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-accent-color-base hover:bg-accent-color-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-color-base disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                    >
+                        <i *ngIf="isLoadingContact" class="bi bi-arrow-repeat animate-spin mr-2"></i>
+                        {{ isLoadingContact ? 'Saving...' : 'Save Contact Info' }}
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
+<style>
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+</style>

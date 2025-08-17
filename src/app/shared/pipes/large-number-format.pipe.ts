@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'largeNumberFormat'
+    name: 'largeNumberFormat',
+    standalone: false
 })
 export class LargeNumberFormatPipe implements PipeTransform {
   transform(value: number | string): string {

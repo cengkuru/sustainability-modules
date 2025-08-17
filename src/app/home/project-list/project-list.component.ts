@@ -1,7 +1,7 @@
 import { SharedModule } from './../../dashboard/shared/shared.module';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '../../services/firebase-compat.service';
 import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, map, catchError } from 'rxjs/operators';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
@@ -44,11 +44,10 @@ interface Project {
 
 @Component({
     selector: 'app-project-list',
-    standalone: true,
     imports: [
         CommonModule,
         RouterLink,
-        IntersectionObserverDirective,
+        // IntersectionObserverDirective, // not used in template
         SharedModule
     ],
     templateUrl: './project-list.component.html',
@@ -66,11 +65,8 @@ interface Project {
         ]),
         trigger('listAnimation', [
             transition('* <=> *', [
-                query(':enter',
-                    [style({ opacity: 0, transform: 'translateY(20px)' }),
-                        stagger('50ms', animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1, transform: 'translateY(0)' })))],
-                    { optional: true }
-                ),
+                query(':enter', [style({ opacity: 0, transform: 'translateY(20px)' }),
+                    stagger('50ms', animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1, transform: 'translateY(0)' })))], { optional: true }),
             ]),
         ]),
         trigger('fadeInAnimation', [
@@ -79,7 +75,7 @@ interface Project {
                 animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1 })),
             ]),
         ]),
-    ],
+    ]
 })
 export class ProjectListComponent implements OnInit {
     projects$!: Observable<Project[]>;
@@ -330,7 +326,7 @@ export class ProjectListComponent implements OnInit {
             const projects: any[] = [];
             let totalBudget = 0;
             
-            querySnapshot.forEach((doc) => {
+            querySnapshot.forEach((doc: any) => {
               const project = doc.data() as Project;
               project.id = doc.id;
               projects.push(project);

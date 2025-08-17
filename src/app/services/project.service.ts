@@ -1,14 +1,21 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
-import { map } from "rxjs/operators";
-import {FlattenedProject} from "../models/flattened-project.model";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, of, throwError } from 'rxjs';
+import { map, catchError, switchMap } from "rxjs/operators";
+import { FlattenedProject } from "../models/flattened-project.model";
+import { AuthService } from './auth.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ProjectService {
-    constructor(private firestore: AngularFirestore) {}
+    private functionsUrl = environment.functions?.baseUrl || 'https://us-central1-mozambique-reports.cloudfunctions.net';
+
+    constructor(
+        private http: HttpClient,
+        private authService: AuthService
+    ) {}
 
 
     flattenProject(project: any): FlattenedProject {
@@ -80,30 +87,45 @@ export class ProjectService {
     }
 
     getProjects(): Observable<FlattenedProject[]> {
-        return this.firestore.collection('projects', ref => ref.orderBy('id')).snapshotChanges().pipe(
-            map(actions => actions.map(a => {
-                const data = a.payload.doc.data() as { [key: string]: any };
-                const id = a.payload.doc.id;
-                return this.flattenProject({ id, ...data });
-            }))
+        return this.authService.getIdToken().pipe(
+            switchMap(token => {
+                const headers = token ? new HttpHeaders({ 'Authorization': `Bearer ${token}` }) : new HttpHeaders();
+                return this.http.get<{success: boolean, data: any[]}>(`${this.functionsUrl}/getProjects`, { headers });
+            }),
+            map(response => {
+                if (response.success && response.data) {
+                    return response.data.map((project: any) => this.flattenProject(project));
+                }
+                return [];
+            }),
+            catchError(error => {
+                console.error('Error fetching projects:', error);
+                return of([]);
+            })
         );
     }
 
     getProjectIds(): Observable<string[]> {
-        return this.firestore.collection('projects').snapshotChanges().pipe(
-            map(actions => actions.map(a => a.payload.doc.id))
+        return this.getProjects().pipe(
+            map(projects => projects.map(p => p.id))
         );
     }
 
     getProjectById(projectId: string): Observable<any> {
-        return this.firestore.collection('projects', ref => ref.where('id', '==', projectId)).snapshotChanges().pipe(
-            map(actions => {
-                if (actions.length > 0) {
-                    const data = actions[0].payload.doc.data() as { [key: string]: any };
-                    const id = actions[0].payload.doc.id;
-                    return { id, ...data };
+        return this.authService.getIdToken().pipe(
+            switchMap(token => {
+                const headers = token ? new HttpHeaders({ 'Authorization': `Bearer ${token}` }) : new HttpHeaders();
+                return this.http.get<{success: boolean, data: any}>(`${this.functionsUrl}/getProject?id=${projectId}`, { headers });
+            }),
+            map(response => {
+                if (response.success && response.data) {
+                    return response.data;
                 }
                 return null;
+            }),
+            catchError(error => {
+                console.error('Error fetching project:', error);
+                return of(null);
             })
         );
     }
@@ -128,8 +150,96 @@ export class ProjectService {
 
     // New method to get all project IDs
     getAllProjectIds(): Observable<string[]> {
-        return this.firestore.collection('projects').get().pipe(
-            map(snapshot => snapshot.docs.map(doc => doc.id))
+        return this.getProjectIds();
+    }
+
+    // Admin methods
+    createProject(project: any): Observable<any> {
+        return this.authService.getIdToken().pipe(
+            switchMap(token => {
+                if (!token) {
+                    return throwError(() => new Error('Authentication required'));
+                }
+                const headers = new HttpHeaders({ 
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                });
+                return this.http.post<any>(`${this.functionsUrl}/createProject`, project, { headers });
+            }),
+            catchError(error => {
+                console.error('Error creating project:', error);
+                return throwError(() => error);
+            })
+        );
+    }
+
+    updateProject(projectId: string, updates: any): Observable<any> {
+        return this.authService.getIdToken().pipe(
+            switchMap(token => {
+                if (!token) {
+                    return throwError(() => new Error('Authentication required'));
+                }
+                const headers = new HttpHeaders({ 
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                });
+                return this.http.put<any>(`${this.functionsUrl}/updateProject?id=${projectId}`, updates, { headers });
+            }),
+            catchError(error => {
+                console.error('Error updating project:', error);
+                return throwError(() => error);
+            })
+        );
+    }
+
+    deleteProject(projectId: string): Observable<any> {
+        return this.authService.getIdToken().pipe(
+            switchMap(token => {
+                if (!token) {
+                    return throwError(() => new Error('Authentication required'));
+                }
+                const headers = new HttpHeaders({ 
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                });
+                return this.http.delete<any>(`${this.functionsUrl}/deleteProject?id=${projectId}`, { headers });
+            }),
+            catchError(error => {
+                console.error('Error deleting project:', error);
+                return throwError(() => error);
+            })
+        );
+    }
+
+    publishProject(projectId: string): Observable<any> {
+        return this.authService.getIdToken().pipe(
+            switchMap(token => {
+                if (!token) {
+                    return throwError('Authentication required');
+                }
+                const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+                return this.http.post<any>(`${this.functionsUrl}/publishProject?id=${projectId}`, {}, { headers });
+            }),
+            catchError(error => {
+                console.error('Error publishing project:', error);
+                return throwError(error);
+            })
+        );
+    }
+
+    unpublishProject(projectId: string): Observable<any> {
+        return this.authService.getIdToken().pipe(
+            switchMap(token => {
+                if (!token) {
+                    return throwError('Authentication required');
+                }
+                const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+                return this.http.post<any>(`${this.functionsUrl}/unpublishProject?id=${projectId}`, {}, { headers });
+            }),
+            catchError(error => {
+                console.error('Error unpublishing project:', error);
+                return throwError(error);
+            })
         );
     }
 

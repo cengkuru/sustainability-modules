@@ -19,6 +19,10 @@ export const environment = {
     connectionString: 'mongodb+srv://michael:I8atyUtCA21b3Az2@prototype.ncqh9de.mongodb.net/?retryWrites=true&w=majority&appName=prototype',
     apiUrl: 'http://localhost:3000/api' // Local API endpoint
   },
+  // Cloud Functions base URL (update region/project if needed)
+  functions: {
+    baseUrl: 'https://us-central1-climatefinance-2dcc3.cloudfunctions.net'
+  },
   
   // Feature flag for database selection
   useMongoDb: true // Set to true to use MongoDB instead of Firebase

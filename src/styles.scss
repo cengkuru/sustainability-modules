@@ -1,7 +1,7 @@
-// Import Tailwind base styles
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+// Tailwind layers
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 // Custom variables
 :root {
@@ -16,6 +16,9 @@
   --neutral-800: #1F2937;
   --black: #000000;
   --accent-base: #61a8bd;
+  --accent-color-base: #61a8bd;
+  --accent-color-dark: #4a8399;
+  --accent-color-light: #7fbdd1;
 
   // Status colors
   --status-active: #61a8bd;

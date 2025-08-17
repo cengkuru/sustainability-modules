@@ -16,6 +16,11 @@ module.exports = {
         'neutral-700': '#111827',
         'neutral-800': '#1F2937',
         'accent-base': '#61a8bd',
+        'accent-color': {
+          'base': '#61a8bd',
+          'dark': '#4a8399',
+          'light': '#7fbdd1'
+        },
         'status-active': '#61a8bd',
         'status-completed': '#4CAF50',
         'status-in-progress': '#ffc107',

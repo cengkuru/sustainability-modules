@@ -1,6 +1,26 @@
-# Climate Finance Project - MongoDB Migration
+# MOZ Climate Finance Portal
 
-This project is migrating from Firebase/Firestore to MongoDB Atlas for better scalability and performance.
+A comprehensive platform for managing and visualizing climate finance projects in Mozambique. Currently migrating from Firebase/Firestore to MongoDB Atlas for better scalability and performance.
+
+## 🚀 Quick Start
+
+```bash
+# Install dependencies
+npm install --legacy-peer-deps
+
+# Run development environment (Angular + MongoDB API)
+npm run dev
+
+# Build for production
+npm run build:prod
+```
+
+## 📚 Documentation
+
+- **[DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md)** - Complete development guide
+- **[CONTEXT.md](./CLAUDE_CORE/CONTEXT.md)** - Application architecture and context
+- **[OPTIMIZATION_REPORT.md](./OPTIMIZATION_REPORT.md)** - Performance optimization details
+- **[FIREBASE_MIGRATION_CHECKLIST.md](./FIREBASE_MIGRATION_CHECKLIST.md)** - Migration progress
 
 ## Project Structure
 

@@ -7,7 +7,7 @@ import { animate, style, transition, trigger } from "@angular/animations";
 import { ProjectService } from "../../services/project.service";
 import { DatabaseProviderService } from "../../services/mongodb/database-provider.service";
 import { AttachmentListComponent } from "./attachment-list/attachment-list.component";
-import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { FormatSectionTitlePipe } from "../../pipes/format-section-title.pipe";
 import { JsonViewerComponent } from "../../shared/components/json-viewer/json-viewer.component";
 import { DataItemComponent } from "../../shared/components/data-item/data-item.component";
@@ -61,82 +61,58 @@ interface Stage {
 }
 
 @Component({
-  selector: "app-project-details",
-  standalone: true,
-  imports: [
-    DatePipe,
-    NgForOf,
-    CommonModule,
-    HttpClientModule,
-    AttachmentListComponent,
-    FormatSectionTitlePipe,
-    JsonViewerComponent,
-    DataItemComponent,
-    RouterLink,
-  ],
-  templateUrl: "./project-details.component.html",
-  styleUrls: ["./project-details.component.scss"],
-  animations: [
-    trigger("fadeSlideInOut", [
-      transition(":enter", [
-        style({ opacity: 0, transform: "translateY(10px)" }),
-        animate(
-          "300ms cubic-bezier(0.25, 0.1, 0.25, 1)",
-          style({ opacity: 1, transform: "translateY(0)" })
-        ),
-      ]),
-      transition(":leave", [
-        animate(
-          "300ms cubic-bezier(0.25, 0.1, 0.25, 1)",
-          style({ opacity: 0, transform: "translateY(10px)" })
-        ),
-      ]),
-    ]),
-    trigger("stageAnimation", [
-      transition(
-        ":enter",
-        [
-          style({ opacity: 0, transform: "translateY(20px)" }),
-          animate(
-            "300ms cubic-bezier(0.33, 1, 0.68, 1)",
-            style({ opacity: 1, transform: "translateY(0)" })
-          ),
-        ],
-        { delay: "{{ delay }}" }
-      ),
-    ]),
-    trigger("itemAnimation", [
-      // Example trigger for list items
-      transition(":enter", [
-        style({ opacity: 0, transform: "scale(0.9)" }),
-        animate("200ms ease-out", style({ opacity: 1, transform: "scale(1)" })),
-      ]),
-      transition(":leave", [
-        animate(
-          "200ms ease-in",
-          style({ opacity: 0, transform: "scale(0.9)" })
-        ),
-      ]),
-    ]),
-    trigger("modalAnimation", [
-      // Example trigger for modals
-      transition(":enter", [
-        style({ opacity: 0, transform: "translateY(-50%)" }),
-        animate(
-          "300ms ease-out",
-          style({ opacity: 1, transform: "translateY(0)" })
-        ),
-      ]),
-      transition(":leave", [
-        animate(
-          "300ms ease-in",
-          style({ opacity: 0, transform: "translateY(-50%)" })
-        ),
-      ]),
-    ]),
-    // Add more triggers as needed based on your HTML structure
-  ],
-  providers: [ProjectService, DatePipe, DatabaseProviderService],
+    selector: "app-project-details",
+    imports: [
+        DatePipe,
+        NgForOf,
+        CommonModule,
+        AttachmentListComponent,
+        // FormatSectionTitlePipe, // not used directly in template
+        // JsonViewerComponent, // not used directly in template
+        // DataItemComponent, // not used directly in template
+        RouterLink,
+    ],
+    templateUrl: "./project-details.component.html",
+    styleUrls: ["./project-details.component.scss"],
+    animations: [
+        trigger("fadeSlideInOut", [
+            transition(":enter", [
+                style({ opacity: 0, transform: "translateY(10px)" }),
+                animate("300ms cubic-bezier(0.25, 0.1, 0.25, 1)", style({ opacity: 1, transform: "translateY(0)" })),
+            ]),
+            transition(":leave", [
+                animate("300ms cubic-bezier(0.25, 0.1, 0.25, 1)", style({ opacity: 0, transform: "translateY(10px)" })),
+            ]),
+        ]),
+        trigger("stageAnimation", [
+            transition(":enter", [
+                style({ opacity: 0, transform: "translateY(20px)" }),
+                animate("300ms cubic-bezier(0.33, 1, 0.68, 1)", style({ opacity: 1, transform: "translateY(0)" })),
+            ], { delay: "{{ delay }}" }),
+        ]),
+        trigger("itemAnimation", [
+            // Example trigger for list items
+            transition(":enter", [
+                style({ opacity: 0, transform: "scale(0.9)" }),
+                animate("200ms ease-out", style({ opacity: 1, transform: "scale(1)" })),
+            ]),
+            transition(":leave", [
+                animate("200ms ease-in", style({ opacity: 0, transform: "scale(0.9)" })),
+            ]),
+        ]),
+        trigger("modalAnimation", [
+            // Example trigger for modals
+            transition(":enter", [
+                style({ opacity: 0, transform: "translateY(-50%)" }),
+                animate("300ms ease-out", style({ opacity: 1, transform: "translateY(0)" })),
+            ]),
+            transition(":leave", [
+                animate("300ms ease-in", style({ opacity: 0, transform: "translateY(-50%)" })),
+            ]),
+        ]),
+        // Add more triggers as needed based on your HTML structure
+    ],
+    providers: [ProjectService, DatePipe, DatabaseProviderService]
 })
 export class ProjectDetailsComponent implements OnInit {
     isOriginalMenuVisible = true;

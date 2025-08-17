@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Auth Test</title>
+</head>
+<body>
+    <h1>Authentication Test</h1>
+    <div id="status">Testing...</div>
+    <pre id="log"></pre>
+
+    <script>
+        const log = (msg) => {
+            const logEl = document.getElementById('log');
+            logEl.textContent += msg + '\n';
+            console.log(msg);
+        };
+
+        const statusEl = document.getElementById('status');
+
+        // Test localStorage for expired token
+        const testLocalStorage = () => {
+            log('Checking localStorage...');
+            const token = localStorage.getItem('auth_token');
+            const user = localStorage.getItem('current_user');
+            
+            if (token) {
+                log('Token found in localStorage');
+                // Try to decode and check expiry
+                try {
+                    const parts = token.split('.');
+                    if (parts.length === 3) {
+                        const payload = JSON.parse(atob(parts[1]));
+                        const exp = new Date(payload.exp * 1000);
+                        const now = new Date();
+                        log(`Token expires at: ${exp}`);
+                        log(`Current time: ${now}`);
+                        if (now >= exp) {
+                            log('❌ Token is EXPIRED');
+                            statusEl.textContent = 'Token is expired - should be cleared on next app load';
+                            statusEl.style.color = 'orange';
+                        } else {
+                            log('✅ Token is still valid');
+                            statusEl.textContent = 'Token is valid';
+                            statusEl.style.color = 'green';
+                        }
+                    }
+                } catch (e) {
+                    log('Could not parse token: ' + e.message);
+                }
+            } else {
+                log('No token in localStorage');
+                statusEl.textContent = 'No authentication token found';
+                statusEl.style.color = 'gray';
+            }
+            
+            if (user) {
+                try {
+                    const userData = JSON.parse(user);
+                    log('User found: ' + userData.email);
+                } catch (e) {
+                    log('Could not parse user data');
+                }
+            }
+        };
+
+        // Run test
+        testLocalStorage();
+
+        // Add button to clear auth
+        const clearBtn = document.createElement('button');
+        clearBtn.textContent = 'Clear Auth Data';
+        clearBtn.onclick = () => {
+            localStorage.removeItem('auth_token');
+            localStorage.removeItem('current_user');
+            localStorage.removeItem('user_role');
+            log('Cleared auth data from localStorage');
+            location.reload();
+        };
+        document.body.appendChild(clearBtn);
+    </script>
+</body>
+</html>

@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'filterProjects'
+    name: 'filterProjects',
+    standalone: false
 })
 export class FilterProjectsPipe implements PipeTransform {
   transform(projects: any[], phase: string | null): any[] {

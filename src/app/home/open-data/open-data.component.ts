@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '../../services/firebase-compat.service';
 import { Observable, firstValueFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ProjectService } from '../../services/project.service';
-import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
+import { LazyLoaderService } from '../../services/lazy-loader.service';
 
 type DownloadFormat = 'json' | 'csv' | 'xlsx';
 
@@ -20,11 +20,10 @@ interface DataFile {
 }
 
 @Component({
-  selector: 'app-open-data',
-  templateUrl: './open-data.component.html',
-  styleUrls: ['./open-data.component.scss'],
-  imports: [CommonModule],
-  standalone: true
+    selector: 'app-open-data',
+    templateUrl: './open-data.component.html',
+    styleUrls: ['./open-data.component.scss'],
+    imports: [CommonModule]
 })
 export class OpenDataComponent implements OnInit {
   flattenedProjects$!: Observable<any[]>;
@@ -53,7 +52,8 @@ export class OpenDataComponent implements OnInit {
 
   constructor(
     private firestore: AngularFirestore,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private lazyLoader: LazyLoaderService
   ) {}
 
   ngOnInit() {
@@ -88,7 +88,7 @@ export class OpenDataComponent implements OnInit {
           this.downloadData(this.convertToCSV(projects), `${fileId}.csv`, 'text/csv');
           break;
         case 'xlsx':
-          this.downloadExcel(projects, `${fileId}.xlsx`);
+          await this.downloadExcel(projects, `${fileId}.xlsx`);
           break;
         default:
           throw new Error('Unsupported format');
@@ -139,11 +139,12 @@ export class OpenDataComponent implements OnInit {
     window.URL.revokeObjectURL(url);
   }
 
-  private downloadExcel(data: any[], fileName: string): void {
-    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
-    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    const excelData: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  private async downloadExcel(data: any[], fileName: string): Promise<void> {
+    const XLSX = await this.lazyLoader.loadXLSX();
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    const excelData = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
     saveAs(excelData, fileName);
   }
 }

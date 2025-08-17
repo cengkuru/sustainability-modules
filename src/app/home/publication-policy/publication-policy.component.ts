@@ -6,40 +6,36 @@ import { PolicyService } from "../../core/services/policy.service";
 import { Policy, Section } from "../../core/models/polict.model";
 
 @Component({
-  selector: 'app-publication-policy',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './publication-policy.component.html',
-  styleUrls: ['./publication-policy.component.scss'],
-  animations: [
-    trigger('fadeInOut', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('300ms', style({ opacity: 1 })),
-      ]),
-      transition(':leave', [
-        animate('300ms', style({ opacity: 0 })),
-      ]),
-    ]),
-    trigger('listAnimation', [
-      transition('* <=> *', [
-        query(':enter',
-            [style({ opacity: 0, transform: 'translateY(50px)' }),
-              stagger('50ms', animate('500ms ease', style({ opacity: 1, transform: 'translateY(0)' })))],
-            { optional: true }
-        ),
-      ]),
-    ]),
-    trigger('sidebarAnimation', [
-      transition('closed => open', [
-        style({ transform: 'translateX(-100%)' }),
-        animate('300ms ease-in-out', style({ transform: 'translateX(0)' })),
-      ]),
-      transition('open => closed', [
-        animate('300ms ease-in-out', style({ transform: 'translateX(-100%)' })),
-      ]),
-    ]),
-  ],
+    selector: 'app-publication-policy',
+    imports: [CommonModule, FormsModule],
+    templateUrl: './publication-policy.component.html',
+    styleUrls: ['./publication-policy.component.scss'],
+    animations: [
+        trigger('fadeInOut', [
+            transition(':enter', [
+                style({ opacity: 0 }),
+                animate('300ms', style({ opacity: 1 })),
+            ]),
+            transition(':leave', [
+                animate('300ms', style({ opacity: 0 })),
+            ]),
+        ]),
+        trigger('listAnimation', [
+            transition('* <=> *', [
+                query(':enter', [style({ opacity: 0, transform: 'translateY(50px)' }),
+                    stagger('50ms', animate('500ms ease', style({ opacity: 1, transform: 'translateY(0)' })))], { optional: true }),
+            ]),
+        ]),
+        trigger('sidebarAnimation', [
+            transition('closed => open', [
+                style({ transform: 'translateX(-100%)' }),
+                animate('300ms ease-in-out', style({ transform: 'translateX(0)' })),
+            ]),
+            transition('open => closed', [
+                animate('300ms ease-in-out', style({ transform: 'translateX(-100%)' })),
+            ]),
+        ]),
+    ]
 })
 export class PublicationPolicyComponent implements OnInit {
   sections: Section[] = [];

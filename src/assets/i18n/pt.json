@@ -1,0 +1,75 @@
+{
+    "HEADER": {
+      "LOGIN": "Entrar",
+      "PROFILE": "Seu Perfil",
+      "SIGN_OUT": "Sair",
+      "OPEN_MENU": "Abrir menu do usuário",
+      "TOGGLE_MENU": "Alternar menu"
+    },
+    "NAV": {
+      "HOME": "Início",
+      "PROJECTS": "Projetos",
+      "ANALYTICS": "Análises",
+      "DOWNLOADS": "Downloads",
+      "FEEDBACK": "Feedback",
+      "API_DOCUMENTATION": "API",
+      "ABOUT": "Sobre"
+    },
+    "FOOTER": {
+      "NAVIGATION": "Navegação",
+      "LEGAL": "Legal",
+      "CONNECT": "Conectar",
+      "RIGHTS_RESERVED": "Todos os direitos reservados",
+      "SOCIAL": {
+        "TWITTER": "X (anteriormente Twitter)",
+        "LINKEDIN": "LinkedIn",
+        "FACEBOOK": "Facebook"
+      },
+      "LOGO_ALT": "Logo da Empresa",
+      "CC_LICENSE_ALT": "Licença Creative Commons",
+      "CC_LICENSE": "Licença Internacional Creative Commons Attribution 4.0",
+      "PUBLICATION_POLICY": "Política de Publicação",
+      "LANGUAGE": "Idioma"
+    },
+    "LANG": {
+      "EN": "Inglês",
+      "ES": "Espanhol",
+      "PT": "Português"
+    },
+    "LANDING": {
+      "LOADING": "Carregando...",
+      "MAIN_SECTION": {
+        "TITLE": "Promovendo transparência e responsabilidade em projetos de financiamento climático",
+        "DESCRIPTION": "Este protótipo, desenvolvido pela <a href='https://infrastructuretransparency.org/' target='_blank'>CoST – Iniciativa de Transparência em Infraestrutura</a>, demonstra como o <a href='https://standard.open-contracting.org/infrastructure/latest/en/reference/schema/' target='_blank'>Padrão de Dados de Contratação Aberta para Infraestrutura (OC4IDS)</a> pode ser aplicado aos esforços de financiamento climático e sustentabilidade. Ilustra o potencial para melhorar a transparência e responsabilidade em projetos de infraestrutura visando adaptação e mitigação das mudanças climáticas. Os dados apresentados baseiam-se parcialmente em projetos aprovados pelo <a href='https://www.greenclimate.fund/' target='_blank'>Fundo Verde para o Clima (GCF)</a> para a República da África do Sul, com valores fornecidos apenas para fins ilustrativos.",
+        "BUTTON_TEXT": "Explorar Projetos"
+      },
+      "FEATURED_PROJECTS_SECTION": {
+        "TITLE": "Projetos de infraestrutura em destaque",
+        "DESCRIPTION": "Descubra uma variedade de projetos de infraestrutura que estabelecem novos padrões em sustentabilidade, desde iniciativas de energia sustentável até sistemas de transporte modernos e gestão avançada de água, estes projetos exemplificam as melhores práticas em desenvolvimento.",
+        "BUTTON_TEXT": "Ver Projetos em Destaque →"
+      },
+      "PROJECT_HIGHLIGHTS": {
+        "TITLE": "Destaques do Projeto",
+        "RECENT_PROJECTS": "Projetos Recentes",
+        "HIGH_VALUE_PROJECTS": "Projetos de Alto Valor",
+        "TOTAL_VALUE": "Valor Total",
+        "VIEW_DETAILS": "Ver Detalhes",
+        "TOTAL_PROJECTS": "Total de Projetos",
+        "UNTITLED": "Projeto Sem Título",
+        "NO_DESCRIPTION": "Nenhuma descrição disponível"
+      },
+      "SPONSORS": {
+        "TITLE": "Apoiado por",
+        "VISIT_WEBSITE": "Visitar Site",
+        "GIZ_NAME": "Deutsche Gesellschaft für Internationale Zusammenarbeit (GIZ)",
+        "FCDO_NAME": "Foreign, Commonwealth & Development Office (FCDO)"
+      },
+      "QUICK_MENU": {
+        "TITLE": "Ações Rápidas",
+        "EXPLORE_PROJECTS": "Explorar Projetos",
+        "FEATURED_PROJECTS": "Projetos em Destaque",
+        "CONTACT_US": "Contate-nos",
+        "CLOSE": "Fechar"
+      }
+    }
+}

@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashLandingComponent } from './dash-landing/dash-landing.component';
 import {SettingsComponent} from "./settings/settings.component";
 import { AdminComponent } from './admin/admin.component';
+import { AuthoritiesComponent } from './authorities/authorities.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,12 @@ const routes: Routes = [
       { 
         path: 'admin', 
         component: AdminComponent, 
+        canActivate: [AuthGuard],
+        data: { requiresAdmin: true }
+      },
+      {
+        path: 'authorities',
+        component: AuthoritiesComponent,
         canActivate: [AuthGuard],
         data: { requiresAdmin: true }
       },

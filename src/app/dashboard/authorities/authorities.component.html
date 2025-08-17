@@ -1,0 +1,641 @@
+<div class="p-6">
+  <!-- Header -->
+  <div class="mb-6">
+    <h1 class="text-2xl font-semibold text-[#0B0B0B] mb-2">Public Authorities</h1>
+    <p class="text-sm text-[#8E8E93]">Manage public authorities and contracting agencies</p>
+  </div>
+
+  <!-- Error Alert -->
+  <div *ngIf="error" class="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+    <div class="flex items-center">
+      <i class="bi bi-exclamation-circle text-red-600 mr-2"></i>
+      <span class="text-sm text-red-800">{{ error }}</span>
+    </div>
+  </div>
+
+  <!-- Filters and Actions -->
+  <div class="bg-white rounded-lg shadow-sm border border-[#D9D9D9] mb-6">
+    <div class="p-4 border-b border-[#D9D9D9]">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <!-- Search -->
+        <div class="relative flex-1 max-w-md">
+          <i class="bi bi-search absolute left-3 top-1/2 transform -translate-y-1/2 text-[#8E8E93]"></i>
+          <input
+            type="text"
+            [(ngModel)]="searchTerm"
+            (ngModelChange)="onSearchChange()"
+            placeholder="Search authorities..."
+            class="w-full pl-10 pr-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd] focus:border-transparent"
+          />
+        </div>
+
+        <!-- Status Filter -->
+        <div class="flex items-center gap-4">
+          <select
+            [(ngModel)]="filterStatus"
+            (ngModelChange)="onStatusFilterChange()"
+            class="px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd] focus:border-transparent"
+          >
+            <option value="all">All Status</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+
+          <!-- Add Authority Button -->
+          <button
+            (click)="openCreateModal()"
+            class="px-4 py-2 bg-[#61a8bd] text-white rounded-lg hover:bg-[#4a8da1] transition-colors flex items-center gap-2"
+          >
+            <i class="bi bi-plus-lg"></i>
+            <span>Add Authority</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Authorities Table -->
+    <div class="overflow-x-auto">
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="p-8 text-center">
+        <div class="inline-flex items-center gap-2 text-[#8E8E93]">
+          <i class="bi bi-arrow-repeat animate-spin text-xl"></i>
+          <span>Loading authorities...</span>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="!isLoading && filteredAgencies.length === 0" class="p-8 text-center">
+        <i class="bi bi-building text-4xl text-[#D9D9D9] mb-3 block"></i>
+        <p class="text-[#8E8E93] mb-1">No authorities found</p>
+        <p class="text-sm text-[#8E8E93]">
+          {{ searchTerm || filterStatus !== 'all' ? 'Try adjusting your filters' : 'Click "Add Authority" to create the first one' }}
+        </p>
+      </div>
+
+      <!-- Table -->
+      <table *ngIf="!isLoading && filteredAgencies.length > 0" class="w-full">
+        <thead class="bg-[#F9F9F9]">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-[#8E8E93] uppercase tracking-wider">Name</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-[#8E8E93] uppercase tracking-wider">Code</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-[#8E8E93] uppercase tracking-wider">Status</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-[#8E8E93] uppercase tracking-wider">Contact</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-[#8E8E93] uppercase tracking-wider">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-[#D9D9D9]">
+          <tr *ngFor="let agency of filteredAgencies" class="hover:bg-[#F9F9F9] transition-colors">
+            <td class="px-6 py-4">
+              <div>
+                <div class="text-sm font-medium text-[#0B0B0B]">{{ agency.name }}</div>
+                <div *ngIf="agency.description" class="text-xs text-[#8E8E93] mt-1 line-clamp-2">{{ agency.description }}</div>
+              </div>
+            </td>
+            <td class="px-6 py-4">
+              <span class="text-sm text-[#0B0B0B] font-mono">{{ agency.code }}</span>
+            </td>
+            <td class="px-6 py-4">
+              <span [class]="'inline-flex px-2 py-1 text-xs font-medium rounded-full ' + getStatusBadgeClass(agency.status)">
+                {{ getStatusText(agency.status) }}
+              </span>
+            </td>
+            <td class="px-6 py-4">
+              <div class="text-sm">
+                <div *ngIf="agency.contactInfo?.email" class="flex items-center gap-1 text-[#8E8E93]">
+                  <i class="bi bi-envelope text-xs"></i>
+                  <span class="truncate">{{ agency.contactInfo?.email }}</span>
+                </div>
+                <div *ngIf="agency.contactInfo?.phone" class="flex items-center gap-1 text-[#8E8E93] mt-1">
+                  <i class="bi bi-telephone text-xs"></i>
+                  <span>{{ agency.contactInfo?.phone }}</span>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-2">
+                <button
+                  (click)="openDetailsModal(agency)"
+                  class="p-1.5 text-[#8E8E93] hover:text-[#61a8bd] hover:bg-[#61a8bd]/10 rounded transition-colors"
+                  title="View Details"
+                >
+                  <i class="bi bi-eye"></i>
+                </button>
+                <button
+                  (click)="openEditModal(agency)"
+                  class="p-1.5 text-[#8E8E93] hover:text-[#61a8bd] hover:bg-[#61a8bd]/10 rounded transition-colors"
+                  title="Edit"
+                >
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button
+                  (click)="openDeleteModal(agency)"
+                  class="p-1.5 text-[#8E8E93] hover:text-[#D60000] hover:bg-[#D60000]/10 rounded transition-colors"
+                  title="Delete"
+                >
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Create Modal -->
+<div *ngIf="showCreateModal" class="fixed inset-0 z-50 overflow-y-auto">
+  <div class="flex items-center justify-center min-h-screen px-4">
+    <div class="fixed inset-0 bg-black opacity-50" (click)="closeCreateModal()"></div>
+    <div class="relative bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <!-- Modal Header -->
+      <div class="sticky top-0 bg-white border-b border-[#D9D9D9] px-6 py-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xl font-semibold text-[#0B0B0B]">Add New Authority</h2>
+          <button (click)="closeCreateModal()" class="text-[#8E8E93] hover:text-[#0B0B0B]">
+            <i class="bi bi-x-lg text-xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6">
+        <!-- Basic Information -->
+        <div class="mb-6">
+          <h3 class="text-sm font-medium text-[#0B0B0B] mb-4">Basic Information</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-[#0B0B0B] mb-1">
+                Name <span class="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                [(ngModel)]="agencyForm.name"
+                class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+                placeholder="Authority name"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-[#0B0B0B] mb-1">
+                Code <span class="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                [(ngModel)]="agencyForm.code"
+                class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+                placeholder="Authority code"
+              />
+            </div>
+          </div>
+          <div class="mt-4">
+            <label class="block text-sm font-medium text-[#0B0B0B] mb-1">Description</label>
+            <textarea
+              [(ngModel)]="agencyForm.description"
+              rows="3"
+              class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+              placeholder="Brief description of the authority"
+            ></textarea>
+          </div>
+          <div class="mt-4">
+            <label class="block text-sm font-medium text-[#0B0B0B] mb-1">Status</label>
+            <select
+              [(ngModel)]="agencyForm.status"
+              class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+            >
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Address Information -->
+        <div class="mb-6">
+          <h3 class="text-sm font-medium text-[#0B0B0B] mb-4">Address</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="col-span-2">
+              <label class="block text-sm font-medium text-[#0B0B0B] mb-1">Street Address</label>
+              <input
+                type="text"
+                [(ngModel)]="agencyForm.address!.streetAddress"
+                class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+                placeholder="Street address"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-[#0B0B0B] mb-1">City</label>
+              <input
+                type="text"
+                [(ngModel)]="agencyForm.address!.locality"
+                class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+                placeholder="City"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-[#0B0B0B] mb-1">State/Region</label>
+              <input
+                type="text"
+                [(ngModel)]="agencyForm.address!.region"
+                class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+                placeholder="State or region"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-[#0B0B0B] mb-1">Postal Code</label>
+              <input
+                type="text"
+                [(ngModel)]="agencyForm.address!.postalCode"
+                class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+                placeholder="Postal code"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-[#0B0B0B] mb-1">Country</label>
+              <input
+                type="text"
+                [(ngModel)]="agencyForm.address!.countryName"
+                class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+                placeholder="Country"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="mb-6">
+          <h3 class="text-sm font-medium text-[#0B0B0B] mb-4">Contact Information</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-[#0B0B0B] mb-1">Email</label>
+              <input
+                type="email"
+                [(ngModel)]="agencyForm.contactInfo!.email"
+                class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+                placeholder="contact@example.com"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-[#0B0B0B] mb-1">Phone</label>
+              <input
+                type="tel"
+                [(ngModel)]="agencyForm.contactInfo!.phone"
+                class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+                placeholder="+1 234 567 8900"
+              />
+            </div>
+            <div class="col-span-2">
+              <label class="block text-sm font-medium text-[#0B0B0B] mb-1">Website</label>
+              <input
+                type="url"
+                [(ngModel)]="agencyForm.contactInfo!.website"
+                class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+                placeholder="https://example.com"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="sticky bottom-0 bg-white border-t border-[#D9D9D9] px-6 py-4">
+        <div class="flex justify-end gap-3">
+          <button
+            (click)="closeCreateModal()"
+            [disabled]="isCreating"
+            class="px-4 py-2 text-[#0B0B0B] bg-white border border-[#D9D9D9] rounded-lg hover:bg-[#F9F9F9] transition-colors disabled:opacity-50"
+          >
+            Cancel
+          </button>
+          <button
+            (click)="createAgency()"
+            [disabled]="isCreating"
+            class="px-4 py-2 bg-[#61a8bd] text-white rounded-lg hover:bg-[#4a8da1] transition-colors disabled:opacity-50 flex items-center gap-2"
+          >
+            <i *ngIf="isCreating" class="bi bi-arrow-repeat animate-spin"></i>
+            <span>{{ isCreating ? 'Creating...' : 'Create Authority' }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<div *ngIf="showEditModal" class="fixed inset-0 z-50 overflow-y-auto">
+  <div class="flex items-center justify-center min-h-screen px-4">
+    <div class="fixed inset-0 bg-black opacity-50" (click)="closeEditModal()"></div>
+    <div class="relative bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <!-- Modal Header -->
+      <div class="sticky top-0 bg-white border-b border-[#D9D9D9] px-6 py-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xl font-semibold text-[#0B0B0B]">Edit Authority</h2>
+          <button (click)="closeEditModal()" class="text-[#8E8E93] hover:text-[#0B0B0B]">
+            <i class="bi bi-x-lg text-xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Body (same as create modal) -->
+      <div class="p-6">
+        <!-- Basic Information -->
+        <div class="mb-6">
+          <h3 class="text-sm font-medium text-[#0B0B0B] mb-4">Basic Information</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-[#0B0B0B] mb-1">
+                Name <span class="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                [(ngModel)]="agencyForm.name"
+                class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+                placeholder="Authority name"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-[#0B0B0B] mb-1">
+                Code <span class="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                [(ngModel)]="agencyForm.code"
+                class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+                placeholder="Authority code"
+              />
+            </div>
+          </div>
+          <div class="mt-4">
+            <label class="block text-sm font-medium text-[#0B0B0B] mb-1">Description</label>
+            <textarea
+              [(ngModel)]="agencyForm.description"
+              rows="3"
+              class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+              placeholder="Brief description of the authority"
+            ></textarea>
+          </div>
+          <div class="mt-4">
+            <label class="block text-sm font-medium text-[#0B0B0B] mb-1">Status</label>
+            <select
+              [(ngModel)]="agencyForm.status"
+              class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+            >
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Address Information -->
+        <div class="mb-6">
+          <h3 class="text-sm font-medium text-[#0B0B0B] mb-4">Address</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="col-span-2">
+              <label class="block text-sm font-medium text-[#0B0B0B] mb-1">Street Address</label>
+              <input
+                type="text"
+                [(ngModel)]="agencyForm.address!.streetAddress"
+                class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+                placeholder="Street address"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-[#0B0B0B] mb-1">City</label>
+              <input
+                type="text"
+                [(ngModel)]="agencyForm.address!.locality"
+                class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+                placeholder="City"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-[#0B0B0B] mb-1">State/Region</label>
+              <input
+                type="text"
+                [(ngModel)]="agencyForm.address!.region"
+                class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+                placeholder="State or region"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-[#0B0B0B] mb-1">Postal Code</label>
+              <input
+                type="text"
+                [(ngModel)]="agencyForm.address!.postalCode"
+                class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+                placeholder="Postal code"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-[#0B0B0B] mb-1">Country</label>
+              <input
+                type="text"
+                [(ngModel)]="agencyForm.address!.countryName"
+                class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+                placeholder="Country"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="mb-6">
+          <h3 class="text-sm font-medium text-[#0B0B0B] mb-4">Contact Information</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-[#0B0B0B] mb-1">Email</label>
+              <input
+                type="email"
+                [(ngModel)]="agencyForm.contactInfo!.email"
+                class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+                placeholder="contact@example.com"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-[#0B0B0B] mb-1">Phone</label>
+              <input
+                type="tel"
+                [(ngModel)]="agencyForm.contactInfo!.phone"
+                class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+                placeholder="+1 234 567 8900"
+              />
+            </div>
+            <div class="col-span-2">
+              <label class="block text-sm font-medium text-[#0B0B0B] mb-1">Website</label>
+              <input
+                type="url"
+                [(ngModel)]="agencyForm.contactInfo!.website"
+                class="w-full px-3 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61a8bd]"
+                placeholder="https://example.com"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="sticky bottom-0 bg-white border-t border-[#D9D9D9] px-6 py-4">
+        <div class="flex justify-end gap-3">
+          <button
+            (click)="closeEditModal()"
+            [disabled]="isUpdating"
+            class="px-4 py-2 text-[#0B0B0B] bg-white border border-[#D9D9D9] rounded-lg hover:bg-[#F9F9F9] transition-colors disabled:opacity-50"
+          >
+            Cancel
+          </button>
+          <button
+            (click)="updateAgency()"
+            [disabled]="isUpdating"
+            class="px-4 py-2 bg-[#61a8bd] text-white rounded-lg hover:bg-[#4a8da1] transition-colors disabled:opacity-50 flex items-center gap-2"
+          >
+            <i *ngIf="isUpdating" class="bi bi-arrow-repeat animate-spin"></i>
+            <span>{{ isUpdating ? 'Updating...' : 'Update Authority' }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div *ngIf="showDeleteModal" class="fixed inset-0 z-50 flex items-center justify-center p-4">
+  <div class="fixed inset-0 bg-black opacity-50" (click)="closeDeleteModal()"></div>
+  <div class="relative bg-white rounded-lg max-w-md w-full p-6">
+    <div class="flex items-start mb-4">
+      <div class="flex-shrink-0 w-12 h-12 rounded-full bg-red-100 flex items-center justify-center">
+        <i class="bi bi-exclamation-triangle text-red-600 text-xl"></i>
+      </div>
+      <div class="ml-4">
+        <h3 class="text-lg font-medium text-[#0B0B0B]">Delete Authority</h3>
+        <p class="mt-2 text-sm text-[#8E8E93]">
+          Are you sure you want to delete <strong>{{ selectedAgency?.name }}</strong>? This action cannot be undone.
+        </p>
+      </div>
+    </div>
+    
+    <div class="flex justify-end gap-3 mt-6">
+      <button
+        (click)="closeDeleteModal()"
+        [disabled]="isDeleting"
+        class="px-4 py-2 text-[#0B0B0B] bg-white border border-[#D9D9D9] rounded-lg hover:bg-[#F9F9F9] transition-colors disabled:opacity-50"
+      >
+        Cancel
+      </button>
+      <button
+        (click)="deleteAgency()"
+        [disabled]="isDeleting"
+        class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 flex items-center gap-2"
+      >
+        <i *ngIf="isDeleting" class="bi bi-arrow-repeat animate-spin"></i>
+        <span>{{ isDeleting ? 'Deleting...' : 'Delete' }}</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Details Modal -->
+<div *ngIf="showDetailsModal && selectedAgency" class="fixed inset-0 z-50 overflow-y-auto">
+  <div class="flex items-center justify-center min-h-screen px-4">
+    <div class="fixed inset-0 bg-black opacity-50" (click)="closeDetailsModal()"></div>
+    <div class="relative bg-white rounded-lg max-w-2xl w-full">
+      <!-- Modal Header -->
+      <div class="border-b border-[#D9D9D9] px-6 py-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xl font-semibold text-[#0B0B0B]">Authority Details</h2>
+          <button (click)="closeDetailsModal()" class="text-[#8E8E93] hover:text-[#0B0B0B]">
+            <i class="bi bi-x-lg text-xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6">
+        <!-- Basic Information -->
+        <div class="mb-6">
+          <h3 class="text-sm font-medium text-[#8E8E93] mb-3">Basic Information</h3>
+          <div class="space-y-3">
+            <div class="flex">
+              <span class="text-sm text-[#8E8E93] w-32">Name:</span>
+              <span class="text-sm text-[#0B0B0B] font-medium">{{ selectedAgency.name }}</span>
+            </div>
+            <div class="flex">
+              <span class="text-sm text-[#8E8E93] w-32">Code:</span>
+              <span class="text-sm text-[#0B0B0B] font-mono">{{ selectedAgency.code }}</span>
+            </div>
+            <div class="flex">
+              <span class="text-sm text-[#8E8E93] w-32">Status:</span>
+              <span [class]="'inline-flex px-2 py-1 text-xs font-medium rounded-full ' + getStatusBadgeClass(selectedAgency.status)">
+                {{ getStatusText(selectedAgency.status) }}
+              </span>
+            </div>
+            <div *ngIf="selectedAgency.description" class="flex">
+              <span class="text-sm text-[#8E8E93] w-32">Description:</span>
+              <span class="text-sm text-[#0B0B0B] flex-1">{{ selectedAgency.description }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div *ngIf="selectedAgency.address && (selectedAgency.address.streetAddress || selectedAgency.address.locality || selectedAgency.address.region)" class="mb-6">
+          <h3 class="text-sm font-medium text-[#8E8E93] mb-3">Address</h3>
+          <div class="text-sm text-[#0B0B0B]">
+            <div *ngIf="selectedAgency.address.streetAddress">{{ selectedAgency.address.streetAddress }}</div>
+            <div>
+              <span *ngIf="selectedAgency.address.locality">{{ selectedAgency.address.locality }}</span>
+              <span *ngIf="selectedAgency.address.region">, {{ selectedAgency.address.region }}</span>
+              <span *ngIf="selectedAgency.address.postalCode"> {{ selectedAgency.address.postalCode }}</span>
+            </div>
+            <div *ngIf="selectedAgency.address.countryName">{{ selectedAgency.address.countryName }}</div>
+          </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div *ngIf="selectedAgency.contactInfo && (selectedAgency.contactInfo.email || selectedAgency.contactInfo.phone || selectedAgency.contactInfo.website)" class="mb-6">
+          <h3 class="text-sm font-medium text-[#8E8E93] mb-3">Contact Information</h3>
+          <div class="space-y-2">
+            <div *ngIf="selectedAgency.contactInfo.email" class="flex items-center gap-2">
+              <i class="bi bi-envelope text-[#8E8E93]"></i>
+              <a [href]="'mailto:' + selectedAgency.contactInfo.email" class="text-sm text-[#61a8bd] hover:underline">
+                {{ selectedAgency.contactInfo.email }}
+              </a>
+            </div>
+            <div *ngIf="selectedAgency.contactInfo.phone" class="flex items-center gap-2">
+              <i class="bi bi-telephone text-[#8E8E93]"></i>
+              <span class="text-sm text-[#0B0B0B]">{{ selectedAgency.contactInfo.phone }}</span>
+            </div>
+            <div *ngIf="selectedAgency.contactInfo.website" class="flex items-center gap-2">
+              <i class="bi bi-globe text-[#8E8E93]"></i>
+              <a [href]="selectedAgency.contactInfo.website" target="_blank" class="text-sm text-[#61a8bd] hover:underline">
+                {{ selectedAgency.contactInfo.website }}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timestamps -->
+        <div *ngIf="selectedAgency.createdAt || selectedAgency.updatedAt" class="pt-6 border-t border-[#D9D9D9]">
+          <div class="flex justify-between text-xs text-[#8E8E93]">
+            <span *ngIf="selectedAgency.createdAt">Created: {{ selectedAgency.createdAt | date:'medium' }}</span>
+            <span *ngIf="selectedAgency.updatedAt">Updated: {{ selectedAgency.updatedAt | date:'medium' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="border-t border-[#D9D9D9] px-6 py-4">
+        <div class="flex justify-end gap-3">
+          <button
+            (click)="closeDetailsModal()"
+            class="px-4 py-2 text-[#0B0B0B] bg-white border border-[#D9D9D9] rounded-lg hover:bg-[#F9F9F9] transition-colors"
+          >
+            Close
+          </button>
+          <button
+            (click)="closeDetailsModal(); openEditModal(selectedAgency)"
+            class="px-4 py-2 bg-[#61a8bd] text-white rounded-lg hover:bg-[#4a8da1] transition-colors"
+          >
+            Edit Authority
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

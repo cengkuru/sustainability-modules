@@ -23,9 +23,10 @@ interface SystemMetrics {
 }
 
 @Component({
-  selector: 'app-dash-landing',
-  templateUrl: './dash-landing.component.html',
-  styleUrl: './dash-landing.component.scss'
+    selector: 'app-dash-landing',
+    templateUrl: './dash-landing.component.html',
+    styleUrl: './dash-landing.component.scss',
+    standalone: false
 })
 export class DashLandingComponent implements OnInit {
   metrics: SystemMetrics = {

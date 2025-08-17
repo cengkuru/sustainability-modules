@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true
+    required: false // Not required for Firebase auth users
   },
   roles: [{
     type: String,

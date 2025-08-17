@@ -11,6 +11,8 @@ import {ProjectDetailsComponent} from "./project-details/project-details.compone
 import {PublicationPolicyComponent} from "./publication-policy/publication-policy.component";
 import {ApiDocsComponent} from "./api-docs/api-docs.component";
 import {RegisterComponent} from "./register/register.component";
+import {ForgotPasswordComponent} from "./forgot-password/forgot-password.component";
+import {ResetPasswordComponent} from "./reset-password/reset-password.component";
 
 const routes: Routes = [
     // public route with children
@@ -22,6 +24,8 @@ const routes: Routes = [
             { path: 'home', component: LandingComponent },
             { path: 'login', component: LoginComponent },
             { path: 'register', component: RegisterComponent },
+            { path: 'forgot-password', component: ForgotPasswordComponent },
+            { path: 'reset-password', component: ResetPasswordComponent },
             { path: 'projects', component: ProjectListComponent },
             // project details route
             { path: 'projects/:id', component: ProjectDetailsComponent },

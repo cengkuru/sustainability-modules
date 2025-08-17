@@ -4,11 +4,10 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-json-viewer',
-  standalone: true,
-  imports: [CommonModule, JsonFormatterPipe, FormsModule],
-  templateUrl: './json-viewer.component.html',
-  styleUrl: './json-viewer.component.scss'
+    selector: 'app-json-viewer',
+    imports: [CommonModule, FormsModule],
+    templateUrl: './json-viewer.component.html',
+    styleUrl: './json-viewer.component.scss'
 })
 export class JsonViewerComponent implements OnChanges, OnInit {
   @Input() json: any;

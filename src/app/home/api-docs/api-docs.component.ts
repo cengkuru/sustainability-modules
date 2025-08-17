@@ -7,7 +7,6 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
 
 @Component({
     selector: 'app-api-docs',
-    standalone: true,
     imports: [
         CommonModule,
         FormsModule
@@ -26,11 +25,8 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
         ]),
         trigger('listAnimation', [
             transition('* <=> *', [
-                query(':enter',
-                    [style({ opacity: 0, transform: 'translateY(50px)' }),
-                        stagger('50ms', animate('500ms ease', style({ opacity: 1, transform: 'translateY(0)' })))],
-                    { optional: true }
-                ),
+                query(':enter', [style({ opacity: 0, transform: 'translateY(50px)' }),
+                    stagger('50ms', animate('500ms ease', style({ opacity: 1, transform: 'translateY(0)' })))], { optional: true }),
             ]),
         ]),
     ]

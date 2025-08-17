@@ -6,36 +6,35 @@ import { filter } from 'rxjs/operators';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-index',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    RouterLink,
-    RouterLinkActive,
-    TranslateModule
-  ],
-  templateUrl: './index.component.html',
-  styleUrls: ['./index.component.scss'],
-  animations: [
-    trigger('fadeInOut', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1 })),
-      ]),
-      transition(':leave', [
-        animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 0 })),
-      ]),
-    ]),
-    trigger('staggerList', [
-      transition('* <=> *', [
-        query(':enter', [
-          style({ opacity: 0, transform: 'translateY(10px)' }),
-          stagger('50ms', animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1, transform: 'translateY(0)' })))
-        ], { optional: true }),
-      ])
-    ]),
-  ],
+    selector: 'app-index',
+    imports: [
+        CommonModule,
+        RouterOutlet,
+        RouterLink,
+        RouterLinkActive,
+        TranslateModule
+    ],
+    templateUrl: './index.component.html',
+    styleUrls: ['./index.component.scss'],
+    animations: [
+        trigger('fadeInOut', [
+            transition(':enter', [
+                style({ opacity: 0 }),
+                animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1 })),
+            ]),
+            transition(':leave', [
+                animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 0 })),
+            ]),
+        ]),
+        trigger('staggerList', [
+            transition('* <=> *', [
+                query(':enter', [
+                    style({ opacity: 0, transform: 'translateY(10px)' }),
+                    stagger('50ms', animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1, transform: 'translateY(0)' })))
+                ], { optional: true }),
+            ])
+        ]),
+    ]
 })
 export class IndexComponent implements OnInit {
   currentLang: string;

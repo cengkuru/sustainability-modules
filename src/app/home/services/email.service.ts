@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AngularFireFunctions} from "@angular/fire/compat/functions";
+import { AngularFireFunctions } from '../../services/firebase-compat.service';
 
 @Injectable({
   providedIn: 'root'

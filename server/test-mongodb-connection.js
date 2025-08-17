@@ -25,14 +25,14 @@ mongoose.connect(MONGODB_URI)
         }
         
         // Close the connection after listing collections
-        mongoose.connection.close(() => {
+        mongoose.connection.close().then(() => {
           console.log('\nMongoDB connection closed.');
           process.exit(0);
         });
       })
       .catch(err => {
         console.error('Error listing collections:', err);
-        mongoose.connection.close(() => process.exit(1));
+        mongoose.connection.close().then(() => process.exit(1));
       });
   })
   .catch(err => {

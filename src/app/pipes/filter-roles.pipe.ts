@@ -8,7 +8,8 @@ interface Party {
 }
 
 @Pipe({
-  name: 'filterRoles'
+    name: 'filterRoles',
+    standalone: false
 })
 export class FilterRolesPipe implements PipeTransform {
 
